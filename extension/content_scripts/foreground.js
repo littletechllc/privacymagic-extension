@@ -101,6 +101,7 @@ Object.defineProperty(window, "name", {
 })
 
 // window.fetch
+/*
 const BLOBS_IN_LOCALSTORAGE = "__privacymagic_blobs"
 const getBlobUrisInLocalStorage = () =>
   JSON.parse(localStorage.getItem(BLOBS_IN_LOCALSTORAGE) || '[]')
@@ -140,5 +141,5 @@ Object.defineProperty(URL, "createObjectURL", {
     })
   }
 })
-
+*/
 })()
