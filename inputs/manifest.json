@@ -10,7 +10,7 @@
     },
     "options_page": "options_page/settings.html",
     "action": {
-        "default_title": "PrivacyMan",
+        "default_title": "PrivacyMagic",
         "default_popup": "default_popup/popup.html"
     },
     "permissions": [
