@@ -9,16 +9,64 @@ const fetchJson = async (url) => {
 
 generateIcon()
 
+const listOfSubDomains = (domain) => {
+  const subDomains = [];
+  const parts = domain.split('.');
+  for (let i = 0; i < parts.length - 1; i++) {
+    subDomains.push(parts.slice(i).join('.'));
+  }
+  return subDomains;
+}
+
+const logNavigations = () => {
+  chrome.webNavigation.onCommitted.addListener(async (details) => {
+    const url = new URL(details.url);
+    const subDomains = listOfSubDomains(url.hostname);
+    for (const subDomain of subDomains) {
+      const cssFile = `content_scripts/adblock_css/${subDomain}_.css`;
+      const cssFileUrl = chrome.runtime.getURL(cssFile);
+      try {
+        const response = await fetch(cssFileUrl);
+        console.log("response", response);
+        if (response.ok) {
+          const cssText = await response.text();
+          chrome.scripting.insertCSS({
+            target: {
+              tabId: details.tabId
+            },
+            css: cssText
+          });
+          console.log("injected", cssFile);
+        }
+      } catch (error) {
+        // File doesn't exist, so ignore
+      }
+
+    }
+  }, {urls: ["<all_urls>"]});
+}
+
 chrome.runtime.onInstalled.addListener(async function (details) {
   chrome.runtime.openOptionsPage()
-  await initializeDynamicRules()
+  const t1 = performance.now();
+  await initializeDynamicRules();
+  const t2 = performance.now();
+  console.log(`initializeDynamicRules took ${t2 - t1} milliseconds`);
   await setChromePrivacyPrefs()
+  const t3 = performance.now();
+  console.log(`setChromePrivacyPrefs took ${t3 - t2} milliseconds`);
   const contentBlockingDefinitionsUrl = chrome.runtime.getURL('rules/content-blocking-definitions.json');
-  const contentBlockingDefinitions = await fetchJson(contentBlockingDefinitionsUrl);
-  console.log(contentBlockingDefinitions.length);
-  await chrome.scripting.registerContentScripts(contentBlockingDefinitions)
+  const t4 = performance.now();
+  console.log(`fetchJson took ${t4 - t3} milliseconds`);
+  logNavigations();
+  //const contentBlockingDefinitions = await fetchJson(contentBlockingDefinitionsUrl);
+  //console.log(contentBlockingDefinitions.length);
+  //await chrome.scripting.registerContentScripts(contentBlockingDefinitions);
+  const t5 = performance.now();
+  console.log(`logNavigations took ${t5 - t4} milliseconds`);
 });
 
 chrome.runtime.onStartup.addListener( () => {
   console.log(`onStartup()`);
+  logRequestDomains();
 });
