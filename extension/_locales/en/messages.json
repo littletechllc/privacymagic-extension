@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Make web browsing as private as possible",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Settings",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Hello, says Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Enable Do Not Track",
+    "description": "Label for the Do Not Track pref"
+  },
+  "disableThirdPartyCookies": {
+    "message": "Disable Third-Party Cookies",
+    "description": "Label for the third-party cookies pref"
+  },
+  "disableReferrers": {
+    "message": "Disable Referrers",
+    "description": "Label for the referrers pref"
+  },
+  "disableHyperlinkAuditing": {
+    "message": "Disable Hyperlink Auditing",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "disableTopics": {
+    "message": "Disable Topics API (locked)",
+    "description": "Label for the Topics API pref"
+  },
+  "disableFledge": {
+    "message": "Disable FLEDGE (locked)",
+    "description": "Label for the FLEDGE pref"
+  },
+  "disableAdMeasurement": {
+    "message": "Disable Ad Measurement (locked)",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "disableRelatedWebsiteSets": {
+    "message": "Disable Related Website Sets (locked)",
+    "description": "Label for the Related Website Sets pref"
+  }
+}

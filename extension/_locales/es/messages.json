@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "Privacidad Mágica",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Hacer la navegación web lo más privada posible",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Configuración",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacidad Mágica",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "¡Hola, dice Privacidad Mágica!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Activar No Rastrear",
+    "description": "Label for the Do Not Track setting"
+  },
+  "disableThirdPartyCookies": {
+    "message": "Desactivar Cookies de Terceros",
+    "description": "Label for the third-party cookies setting"
+  },
+  "disableReferrers": {
+    "message": "Desactivar Referrers",
+    "description": "Label for the referrers setting"
+  },
+  "disableHyperlinkAuditing": {
+    "message": "Desactivar Auditoría de Enlaces",
+    "description": "Label for the hyperlink auditing setting"
+  },
+  "disableTopics": {
+    "message": "Desactivar API de Temas (Siempre desactivado)",
+    "description": "Label for the Topics API setting"
+  },
+  "disableFledge": {
+    "message": "Desactivar FLEDGE (Siempre desactivado)",
+    "description": "Label for the FLEDGE setting"
+  },
+  "disableAdMeasurement": {
+    "message": "Desactivar Medición de Anuncios (Siempre desactivado)",
+    "description": "Label for the Ad Measurement setting"
+  },
+  "disableRelatedWebsiteSets": {
+    "message": "Desactivar Conjuntos de Sitios Relacionados (Siempre desactivado)",
+    "description": "Label for the Related Website Sets setting"
+  }
+}
