@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "Privacy Magic",
+  "description": "Make web browsing as private as possible",
+  "version": "0.0.1",
+  "icons": {
+    "16": "logo/logo-16.png",
+    "32": "logo/logo-32.png",
+    "48": "logo/logo-48.png",
+    "128": "logo/logo-128.png"
+  },
+  "options_page": "privacymagic/settings.html",
+  "action": {
+    "default_title": "Privacy Magic",
+    "default_popup": "default_popup/popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webNavigation",
+    "declarativeNetRequest",
+    "privacy",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "easylist_ruleset",
+        "enabled": true,
+        "path": "rules/easylist.json"
+      }
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content_scripts/foreground.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "js": [
+        "content_scripts/youtube.js"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_end",
+      "world": "MAIN"
+    }
+
+  ]
+}
