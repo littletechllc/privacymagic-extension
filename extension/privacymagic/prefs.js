@@ -1,56 +1,48 @@
 // Privacy prefs configuration
 const PRIVACY_PREFS_CONFIG = {
   doNotTrackEnabled: {
-    label: 'Enable Do Not Track',
     prefName: 'doNotTrackEnabled',
     inverted: false,
     locked: false,
     default: true
   },
   disableThirdPartyCookies: {
-    label: 'Disable Third-Party Cookies',
     prefName: 'thirdPartyCookiesAllowed',
     inverted: true,
     locked: false,
     default: false
   },
   disableReferrers: {
-    label: 'Disable Referrers',
     prefName: 'referrersEnabled',
     inverted: true,
     locked: false,
     default: false
   },
   disableHyperlinkAuditing: {
-    label: 'Disable Hyperlink Auditing',
     prefName: 'hyperlinkAuditingEnabled',
     inverted: true,
     locked: false,
     default: false
   },
   disableTopics: {
-    label: 'Disable Topics API (Always disabled)',
     prefName: 'topicsEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableFledge: {
-    label: 'Disable FLEDGE (Always disabled)',
     prefName: 'fledgeEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableAdMeasurement: {
-    label: 'Disable Ad Measurement (Always disabled)',
     prefName: 'adMeasurementEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableRelatedWebsiteSets: {
-    label: 'Disable Related Website Sets (Always disabled)',
     prefName: 'relatedWebsiteSetsEnabled',
     inverted: true,
     locked: true,
@@ -120,13 +112,23 @@ const resetAllPrefsToDefaults = async () => {
   }
 };
 
+const getLocalizedText = (key) => {
+  const message = chrome.i18n.getMessage(key);
+  console.log(`Getting localized text for key "${key}":`, message);
+  if (!message) {
+    console.warn(`No localized text found for key "${key}". Available keys:`, Object.keys(chrome.i18n.getAcceptLanguages ? {} : {}));
+  }
+  return message || key; // Fallback to key if message not found
+};
+
 const initializePrefsUI = () => {
   const prefsContainer = document.querySelector('.prefs');
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
   }
   prefsContainer.innerHTML = Object.entries(PRIVACY_PREFS_CONFIG)
-    .map(([checkboxId, { label, locked }]) => {
+    .map(([checkboxId, { locked }]) => {
+      const label = getLocalizedText(checkboxId);
       return `
         <label class='${locked ? 'locked' : ''}'>
           <input type="checkbox" id="${checkboxId}" ${locked ? 'disabled' : ''}>
