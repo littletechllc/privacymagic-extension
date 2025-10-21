@@ -1,57 +1,57 @@
-// Privacy settings configuration
+// Privacy prefs configuration
 const PRIVACY_PREFS_CONFIG = {
   doNotTrackEnabled: {
     label: 'Enable Do Not Track',
-    chromeSetting: 'doNotTrackEnabled',
+    prefName: 'doNotTrackEnabled',
     inverted: false,
     locked: false,
     default: true
   },
   disableThirdPartyCookies: {
     label: 'Disable Third-Party Cookies',
-    chromeSetting: 'thirdPartyCookiesAllowed',
+    prefName: 'thirdPartyCookiesAllowed',
     inverted: true,
     locked: false,
     default: false
   },
   disableReferrers: {
     label: 'Disable Referrers',
-    chromeSetting: 'referrersEnabled',
+    prefName: 'referrersEnabled',
     inverted: true,
     locked: false,
     default: false
   },
   disableHyperlinkAuditing: {
     label: 'Disable Hyperlink Auditing',
-    chromeSetting: 'hyperlinkAuditingEnabled',
+    prefName: 'hyperlinkAuditingEnabled',
     inverted: true,
     locked: false,
     default: false
   },
   disableTopics: {
     label: 'Disable Topics API (Always disabled)',
-    chromeSetting: 'topicsEnabled',
+    prefName: 'topicsEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableFledge: {
     label: 'Disable FLEDGE (Always disabled)',
-    chromeSetting: 'fledgeEnabled',
+    prefName: 'fledgeEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableAdMeasurement: {
     label: 'Disable Ad Measurement (Always disabled)',
-    chromeSetting: 'adMeasurementEnabled',
+    prefName: 'adMeasurementEnabled',
     inverted: true,
     locked: true,
     default: false
   },
   disableRelatedWebsiteSets: {
     label: 'Disable Related Website Sets (Always disabled)',
-    chromeSetting: 'relatedWebsiteSetsEnabled',
+    prefName: 'relatedWebsiteSetsEnabled',
     inverted: true,
     locked: true,
     default: false
@@ -63,7 +63,7 @@ const getPref = async (prefName) => {
     throw new Error(`Pref ${prefName} not found`);
   }
   const value = (await chrome.privacy.websites[prefName].get({})).value;
-  console.log(`Read setting ${prefName} with value ${value}`);
+  console.log(`Read pref ${prefName} with value ${value}`);
   return value;
 };
 
@@ -107,7 +107,7 @@ const listenForCheckboxChanges = (prefName, callback) => {
 };
 
 const listenForResetButtonClick = (callback) => {
-  const resetButton = document.getElementById('reset-settings');
+  const resetButton = document.getElementById('reset-prefs');
   if (!resetButton) {
     throw new Error('Reset button not found');
   }
@@ -116,11 +116,11 @@ const listenForResetButtonClick = (callback) => {
 
 const resetAllPrefsToDefaults = async () => {
   for (const config of Object.values(PRIVACY_PREFS_CONFIG)) {
-    await setPref(config.chromeSetting, config.default);
+    await setPref(config.prefName, config.default);
   }
 };
 
-const initializeSettingsUI = () => {
+const initializePrefsUI = () => {
   const prefsContainer = document.querySelector('.prefs');
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
@@ -135,7 +135,7 @@ const initializeSettingsUI = () => {
       `;
     })
     .join('\n') + `
-      <button type="button" id="reset-settings">Reset to Defaults</button>
+      <button type="button" id="reset-prefs">Reset to Defaults</button>
     `;
 };
 
@@ -147,13 +147,13 @@ const bindPrefToCheckbox = async (checkboxId, prefName, inverted) => {
 };
 
 const bindAllPrefsToCheckboxes = async () => {
-  for (const [checkboxId, { chromeSetting, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
-    await bindPrefToCheckbox(checkboxId, chromeSetting, inverted);
+  for (const [checkboxId, { prefName, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
+    await bindPrefToCheckbox(checkboxId, prefName, inverted);
   }
   listenForResetButtonClick(resetAllPrefsToDefaults);
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  initializeSettingsUI();
+  initializePrefsUI();
   await bindAllPrefsToCheckboxes();
 });
