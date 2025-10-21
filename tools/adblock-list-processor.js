@@ -84,9 +84,12 @@ const removeEmptyArrays = (obj) => {
 // - cspLine: the CSP line
 // - redirect
 const typeOptionsStringToLists = (typeOptionsString) => {
-  const resourceTypes = [], excludedResourceTypes = [],
-        excludedInitiatorDomains = [], initiatorDomains = [],
-        requestMethods = [], excludedRequestMethods = []
+  const resourceTypes = [],
+        excludedResourceTypes = [],
+        initiatorDomains = [],
+        excludedInitiatorDomains = [],
+        requestMethods = [],
+        excludedRequestMethods = []
   let domainType = ''
   let cspLine = ''
   let redirect = ''
@@ -143,7 +146,7 @@ const typeOptionsStringToLists = (typeOptionsString) => {
   return removeEmptyArrays(output)
 }
 
-// Parse the given line into a URL filter and a list of type options
+// Parse the given line into a URL filter and type options
 const lineToUrlFilter = (line) => {
   if (line.includes('$')) {
     const [urlFilter, typeOptionsString] = line.split('$')
@@ -164,30 +167,38 @@ const parseBlockingFilter = (line) => {
   return { priority: 1, action: { type }, condition }
 }
 
-const contentFilterSeparators = ['#?#', '#@#', '#S#', '##']
+const parseContentFilterBody = (body) => {
+  const matches = body.match(/(.*?):style\((.*?)\)/)
+  if (matches) {
+    return { selector: matches[1], style: matches[2] }
+  }
+  return { selector: body, style: "display: none !important;" }
+}
 
 const parseContentFilter = (line, separator) => {
   const [domainsString, body] = line.split(separator)
+  // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith("*"))
-  return { domains, body, separator }
+  const { selector, style } = parseContentFilterBody(body)
+  return { domains, selector, style, separator }
 }
 
+const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/
+
 const parseLine = (line) => {
+  let type
+  let parsed
   try {
-    for (const separator of contentFilterSeparators) {
-      if (line.includes(separator)) {
-        return {
-          type: "contentFilter",
-          parsed: parseContentFilter(line, separator),
-          line
-        }
-      }
+    // Check if the line is a content filter by looking for a separator
+    const separatorMatch = line.match(contentFilterSeparatorRegex)
+    if (separatorMatch) {
+      type = "contentFilter"
+      parsed = parseContentFilter(line, separatorMatch[0])
+    } else {
+      type = "blockingFilter"
+      parsed = parseBlockingFilter(line)
     }
-    return {
-      type: "blockingFilter",
-      parsed: parseBlockingFilter(line),
-      line
-    }
+    return { type, parsed, line }
   } catch (e) {
     e.message = `line '${line}':\n` + e.message
     throw e
@@ -195,8 +206,8 @@ const parseLine = (line) => {
 }
 
 export const process = (lines) => {
-  const cleanLines = removeComments(lines)
-  return cleanLines.filter(line => line.length > 0).map(parseLine)
+  const codingLines = removeComments(lines).filter(line => line.length > 0)
+  return codingLines.map(parseLine)
 }
 
 const generateBlockingRulesFile = (items) => {
@@ -212,38 +223,50 @@ const generateBlockingRulesFile = (items) => {
 }
 
 const generateContentRules = (items) => {
-  const selectorsForDomain = {}
+  const cssItemsForDomain = {}
   let id = 0;
   for (const item of items) {
     const parsed = item.parsed
-    if (item.type === 'contentFilter' && parsed.separator === "##") {
-      if (!parsed.body.includes('has-text') && !parsed.body.startsWith('+js(')) {
-        for (const domain of parsed.domains) {
-          selectorsForDomain[domain] ||= []
-          selectorsForDomain[domain].push(parsed.body)
-        }
-      }
+    if (item.type !== 'contentFilter') {
+      continue;
+    }
+    if (parsed.separator !== "##") {
+      // TODO: handle other separators
+      console.log("skipping non-## separator", parsed) 
+      continue;
+    }
+    if (parsed.selector.includes('has-text') || parsed.selector.startsWith('+js(')) {
+      console.log("skipping odd selector", parsed)
+      continue;
+    }
+    for (const domain of parsed.domains) {
+      cssItemsForDomain[domain] ||= []
+      cssItemsForDomain[domain][parsed.style] ||= []
+      cssItemsForDomain[domain][parsed.style].push(parsed.selector)
     }
   }
-  return selectorsForDomain
+  return cssItemsForDomain
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
 
-const generateContentRulesFiles = async (dir, selectorsForDomains) => {
+const generateContentRulesFiles = async (dir, cssItemsForDomain) => {
   const files = []
-  for (const [domain, selectors] of Object.entries(selectorsForDomains)) {
-    const selectorsSorted = selectors.sort()
-    const nChunks = Math.ceil(selectorsSorted.length / SELECTOR_CHUNK_SIZE)
-    for (let i = 0; i < nChunks; ++i) {
-      const file = domain === '' ?
-        `__default_${i}.css` :
-        `${domain}_${i === 0 ? '' : i}.css`
-      files.push(file)
-      const selected = selectorsSorted.slice(SELECTOR_CHUNK_SIZE * i, SELECTOR_CHUNK_SIZE * (i+1))
-      await fs.writeFile(path.join(dir, file),
-        `html {\n${selected.join(",\n")} { display: none !important; }\n}`)
+  for (const [domain, cssItems] of Object.entries(cssItemsForDomain)) {
+    let lines = []
+    for (const [style, selectors] of Object.entries(cssItems)) {
+      const selectorsSorted = selectors.sort()
+      const nChunks = Math.ceil(selectorsSorted.length / SELECTOR_CHUNK_SIZE)
+      for (let i = 0; i < nChunks; ++i) {
+        const selected = selectorsSorted.slice(SELECTOR_CHUNK_SIZE * i, SELECTOR_CHUNK_SIZE * (i+1))
+        const line = `html {\n${selected.join(",\n")} { ${style} }\n}`
+        lines.push(line)
+      }
     }
+    const filestem = domain === '' ? '_default' : domain;
+    const file = `${filestem}_.css`
+    files.push(file)
+    await fs.writeFile(path.join(dir, file), lines.join("\n"))
   }
   return files
 }
@@ -308,6 +331,8 @@ const isGoodLine = x => {
   return result
 }
 
+var contentRulesForDomains = null;
+
 export const processAndWrite = async () => {
   const lines = await getAllLines();
   const linesFiltered = lines.filter(isGoodLine)
@@ -318,6 +343,7 @@ export const processAndWrite = async () => {
   await fs.writeFile(ext('rules/easylist.json'),
                      blockingRulesFileContent)
   const contentRules = generateContentRules(results2)
+  contentRulesForDomains = contentRules;
   const adblock_css_dir = ext('content_scripts/adblock_css')
   await fs.mkdir(adblock_css_dir, {recursive: true})
   const cssFiles = await generateContentRulesFiles(adblock_css_dir, contentRules)
