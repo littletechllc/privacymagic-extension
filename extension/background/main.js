@@ -1,5 +1,5 @@
 import { generateIcon } from './icon-generator.js'
-import { initializeDynamicRules } from './rules-generator.js'
+import { initializeDynamicRules, clearDynamicRules } from './rules-generator.js'
 import { setChromePrivacyPrefs } from './chrome-privacy-prefs.js'
 
 const fetchJson = async (url) => {
@@ -7,7 +7,7 @@ const fetchJson = async (url) => {
   return response.json();
 }
 
-generateIcon()
+generateIcon('🥸')
 
 const listOfSubDomains = (domain) => {
   const subDomains = [];
@@ -32,13 +32,13 @@ const injectCssForCosmeticFilters = () => {
         const response = await fetch(cssFileUrl);
         console.log("response", response);
         if (response.ok) {
-          const cssText = await response.text();
+          const css = await response.text();
           chrome.scripting.insertCSS({
             target: {
               tabId: details.tabId,
               frameIds: [details.frameId]
             },
-            css: cssText + "\n" + defaultCssText
+            css
           });
           console.log(`injected ${cssFile} for ${details.url}, frameId: ${details.frameId}, tabId: ${details.tabId}, text: ${cssText}`);
         }
@@ -51,6 +51,7 @@ const injectCssForCosmeticFilters = () => {
 }
 
 chrome.runtime.onInstalled.addListener(async function (details) {
+  await clearDynamicRules();
   chrome.runtime.openOptionsPage()
   const t1 = performance.now();
   await initializeDynamicRules();
@@ -59,18 +60,33 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   await setChromePrivacyPrefs()
   const t3 = performance.now();
   console.log(`setChromePrivacyPrefs took ${t3 - t2} milliseconds`);
-  const contentBlockingDefinitionsUrl = chrome.runtime.getURL('rules/content-blocking-definitions.json');
+  //const contentBlockingDefinitionsUrl = chrome.runtime.getURL('rules/content-blocking-definitions.json');
   const t4 = performance.now();
-  console.log(`fetchJson took ${t4 - t3} milliseconds`);
+  //console.log(`fetchJson took ${t4 - t3} milliseconds`);
   injectCssForCosmeticFilters();
+  const t5 = performance.now();
+  console.log(`injectCssForCosmeticFilters took ${t5 - t4} milliseconds`);
+  const t6 = performance.now();
+  console.log('registering content scripts');
+  await chrome.scripting.registerContentScripts([
+    {
+      id: 'adblock_css_defaults',
+      css: ['content_scripts/adblock_css/_default_.css'],
+      matches: ['<all_urls>'],
+      allFrames: true,
+      runAt: 'document_start',
+      world: 'MAIN',
+      matchOriginAsFallback: true
+    }
+  ]);
+  const t7 = performance.now();
+  console.log(`registerContentScripts took ${t7 - t6} milliseconds`);
   //const contentBlockingDefinitions = await fetchJson(contentBlockingDefinitionsUrl);
   //console.log(contentBlockingDefinitions.length);
   //await chrome.scripting.registerContentScripts(contentBlockingDefinitions);
-  const t5 = performance.now();
-  console.log(`logNavigations took ${t5 - t4} milliseconds`);
 });
 
 chrome.runtime.onStartup.addListener( () => {
   console.log(`onStartup()`);
-  logRequestDomains();
+  //logRequestDomains();
 });
