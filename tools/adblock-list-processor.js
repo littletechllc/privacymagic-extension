@@ -293,24 +293,6 @@ const createContentBlockingDefinitions = (cssFiles) => {
   return definitions
 }
 
-const addContentBlockingRulesToManifest = (manifest, contentBlockingRules) => {
-  manifest.content_scripts.concat(contentBlockingRules)
-  return manifest
-}
-
-const readManifestFile = async () => {
-  const result = await fs.readFile(path.join(__dirname, '../inputs/', 'manifest.json'))
-  return JSON.parse(result)
-}
-
-const ext = (file) => path.join(__dirname, '../extension/', file)
-
-const writeManifestFile = async (manifest) => {
-  fs.writeFile(
-    ext('manifest.json'),
-    JSON.stringify(manifest, undefined, "  "))
-}
-
 const isGoodLine = x => {
   const result = !x.startsWith('$websocket,domain=') &&
   !x.startsWith('$popup') &&
