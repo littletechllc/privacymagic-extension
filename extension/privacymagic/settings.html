@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="settings.css">
     <title>Privacy Magic: Settings</title>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Slackey&display=swap');
     div.title {
         position: absolute;
         display: flex;
@@ -15,14 +15,33 @@
         font-size: 80px;
         height: 50%;
         width: 100%;
-        color: #2b366b;
-        font-family: "Modern Antiqua", serif;
+        color: #ffaa18;
+        font-family: "Slackey", serif;
         font-weight: 600;
         font-style: normal;
+    }
+    .prefs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width:max-content
+    }
+    input[type="checkbox"]:disabled, label.locked {
+        opacity: 0.5;
+        pointer-events: none;
     }
     </style>
 </head>
 <body>
-    <div class="title"><span style="font-size:larger; padding: 0.25em;">🪬</span> Privacy Magic</div>
+    <div class="title"><span style="font-size:larger; padding: 0.25em;">🥸</span>Secret Agent</div>
+
+    <div class="prefs">
+    </div>
+    
+    <script src="settings.js"></script>
 </body>
 </html>
