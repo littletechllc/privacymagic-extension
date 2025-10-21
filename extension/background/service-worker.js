@@ -18,10 +18,13 @@ const listOfSubDomains = (domain) => {
   return subDomains;
 }
 
-const logNavigations = () => {
+const injectCssForCosmeticFilters = () => {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
     const url = new URL(details.url);
     const subDomains = listOfSubDomains(url.hostname);
+    const defaultText = chrome.runtime.getURL('content_scripts/adblock_css/_default_.css');
+    const defaultResponse = await fetch(defaultText);
+    const defaultCssText = await defaultResponse.text();
     for (const subDomain of subDomains) {
       const cssFile = `content_scripts/adblock_css/${subDomain}_.css`;
       const cssFileUrl = chrome.runtime.getURL(cssFile);
@@ -32,11 +35,12 @@ const logNavigations = () => {
           const cssText = await response.text();
           chrome.scripting.insertCSS({
             target: {
-              tabId: details.tabId
+              tabId: details.tabId,
+              frameIds: [details.frameId]
             },
-            css: cssText
+            css: cssText + "\n" + defaultCssText
           });
-          console.log("injected", cssFile);
+          console.log(`injected ${cssFile} for ${details.url}, frameId: ${details.frameId}, tabId: ${details.tabId}, text: ${cssText}`);
         }
       } catch (error) {
         // File doesn't exist, so ignore
@@ -58,7 +62,7 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   const contentBlockingDefinitionsUrl = chrome.runtime.getURL('rules/content-blocking-definitions.json');
   const t4 = performance.now();
   console.log(`fetchJson took ${t4 - t3} milliseconds`);
-  logNavigations();
+  injectCssForCosmeticFilters();
   //const contentBlockingDefinitions = await fetchJson(contentBlockingDefinitionsUrl);
   //console.log(contentBlockingDefinitions.length);
   //await chrome.scripting.registerContentScripts(contentBlockingDefinitions);
