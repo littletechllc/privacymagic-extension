@@ -4,44 +4,12 @@ const PRIVACYMAGIC_IGNORE = "__privacymagic_ignore"
 
 console.log("Hello from content script", window.location.href, top.location?.href)
 
-const replaceScript = () => {
-  const observer = new MutationObserver((records, observer) => {
-    //console.log(records)
-    for (const record of records) {
-      if (record.type === "childList" && record.target && record.target.tagName === 'SCRIPT') {
-        if (!record.target.hasAttribute(PRIVACYMAGIC_IGNORE)) {
-          record.target.setAttribute(PRIVACYMAGIC_IGNORE, "1")
-          record.target.innerText = "console.log('replaced!!!')"
-        }
-      }
-    }
-  })
-  observer.observe(document.documentElement, { subtree: true, childList: true })
-}
-
-// navigator.globalPrivacyControl
-Object.defineProperty(Navigator.prototype, "globalPrivacyControl", {
-  value: true,
-  writable: true,
-  enumerable: true,
-})
-
-const defineStompableGetter = (obj, prop, get) => {
-  let stomped = false;
-  let stompValue = undefined
-  Object.defineProperty(obj, prop, {
-    get: () => stomped ? stompValue : get(),
-    set: (val) => {
-      stomped = true
-      stompValue = val
-    }
-  })
-}
-
-const defineStompableGetters = (arr) => {
-  for (const [obj, prop, get] of arr) {
-    defineStompableGetter(obj, prop, get)
+const redefinePropertyValues = (obj, propertyMap) => {
+  let properties = {}
+  for (const [prop, value] of Object.entries(propertyMap)) {
+    properties[prop] = { value, writable: true, enumerable: true }
   }
+  Object.defineProperties(obj, properties)
 }
 
 const oldMatchMedia = window.matchMedia
@@ -61,44 +29,88 @@ const allowedScreenSizes = [
 const spoofScreenSize = (minWidth, minHeight) => {
   for (const [width, height] of allowedScreenSizes) {
     if (width >= minWidth && height >= minHeight) {
-      return {width, height}
+      return [width, height]
     }
   }
   return allowedScreenSizes[allowedScreenSizes.length - 1]
 }
 
-const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize();
+const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight);
 
-// screen size
-defineStompableGetters([
-  [window, 'screenX', () => 0],
-  [window, 'screenY', () => 0],
-  [window, 'screenLeft', () => 0],
-  [window, 'screenTop', () => 0],
-  [window, 'outerWidth', () => window.innerWidth],
-  [window, 'outerHeight', () => window.innerHeight],
-  [Screen.prototype, 'width', () => spoofedScreenWidth],
-  [Screen.prototype, 'height', () => spoofedScreenHeight],
-  [Screen.prototype, 'availLeft', () => 0],
-  [Screen.prototype, 'availTop', () => 0],
-  [Screen.prototype, 'availWidth', () => spoofedScreenWidth],
-  [Screen.prototype, 'availHeight', () => spoofedScreenHeight],
-  [window, 'matchMedia', () => ((mediaQueryString) =>
-    oldMatchMedia(mediaDeviceToViewport(mediaQueryString)
-  ))]
-])
+redefinePropertyValues(Navigator.prototype, {
+  cookieEnabled: true,
+  cpuClass: undefined,
+  deviceMemory: 1,
+  doNotTrack: '1',
+  globalPrivacyControl: true,
+  hardwareConcurrency: 4,
+  languages: [navigator.language],
+  maxTouchPoints: 1,
+  onLine: true,
+  oscpu: undefined,
+  pdfViewerEnabled: true,
+  platform: 'Windows',
+  productSub: '20030107',
+  vendor: 'Google Inc.',
+  vendorSub: ''
+})
+redefinePropertyValues(Screen.prototype, {
+  availHeight: spoofedScreenHeight,
+  availLeft: 0,
+  availTop: 0,
+  availWidth: spoofedScreenWidth,
+  colorDepth: 24,
+  height: spoofedScreenHeight,
+  pixelDepth: 24,
+  width: spoofedScreenWidth
+})
+redefinePropertyValues(window, {
+  devicePixelRatio: 1,
+  matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
+  outerHeight: window.innerHeight,
+  outerWidth: window.innerWidth,
+  screenLeft: 0,
+  screenTop: 0,
+  screenX: 0,
+  screenY: 0
+})
 
 // window.name
 // TODO: hide item from page by modifying sessionStorage behavior
-const NAME_IN_SESSIONSTORAGE = "__privacymagic_name"
+const NAME_IN_SESSIONSTORAGE = `__PRIVACYMAGIC_${Math.random().toString(36).substring(2, 15)}_NAME`
 if (window.opener && window.name !== '') {
   sessionStorage.setItem(NAME_IN_SESSIONSTORAGE, window.name)
   window.name = ''
 }
+const oldGetItem = Storage.prototype.getItem
+const oldSetItem = Storage.prototype.setItem
+const oldKey = Storage.prototype.key
+Storage.prototype.key = (index) => {
+  if (index === 0) {
+    return NAME_IN_SESSIONSTORAGE
+  }
+  return oldKey.call(sessionStorage, index)
+}
+Storage.prototype.length.get = () => {
+  return oldLength.call(sessionStorage) - 1
+}
 Object.defineProperty(window, "name", {
-  get: () => (sessionStorage.getItem(NAME_IN_SESSIONSTORAGE) || ''),
-  set: (s) => sessionStorage.setItem(NAME_IN_SESSIONSTORAGE, s)
+  get: () => (oldGetItem.call(sessionStorage, NAME_IN_SESSIONSTORAGE) || ''),
+  set: (s) => oldSetItem.call(sessionStorage, NAME_IN_SESSIONSTORAGE, s)
 })
+Storage.prototype.setItem = (key, value) => {
+  if (key === NAME_IN_SESSIONSTORAGE) {
+    return
+  }
+  oldSetItem.call(sessionStorage, key, value)
+}
+Storage.prototype.getItem = (key) => {
+  if (key === NAME_IN_SESSIONSTORAGE) {
+    return null
+  }
+  return oldGetItem.call(sessionStorage, key)
+}
+
 
 // window.fetch
 /*
