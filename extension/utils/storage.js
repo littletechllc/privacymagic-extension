@@ -14,6 +14,15 @@ export const getStorage = async (keyPath) => {
   return (await chrome.storage.local.get(key))[key];
 };
 
+export const removeStorage = async (keyPath) => {
+  const key = keyPathToKey(keyPath)
+  return chrome.storage.local.remove(key);
+};
+
+export const clearStorage = () => {
+  return chrome.storage.local.clear();
+};
+
 export const getAllStorage = async () => {
   const values = await chrome.storage.local.get();
   return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
