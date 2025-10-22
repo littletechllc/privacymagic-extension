@@ -1,15 +1,13 @@
-export const generateIcon = async () => {
+export const generateIcon = async (emoji) => {
   const canvas = new OffscreenCanvas(128, 128)
   const ctx = canvas.getContext('2d')
 
   try {
-
-    const emoji = '🪬'
     // Draw emoji to fill canvas boundaries
     const canvasSize = 128
 
     // Set background color
-    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.fillStyle = 'rgb(255, 255, 255, 0)'
     ctx.fillRect(0, 0, canvasSize, canvasSize)
 
     // Calculate font size to fill the canvas

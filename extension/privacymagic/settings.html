@@ -20,7 +20,7 @@
         font-weight: 600;
         font-style: normal;
     }
-    .prefs {
+    .toggle-box {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -39,9 +39,10 @@
 <body>
     <div class="title"><span style="font-size:larger; padding: 0.25em;">🥸</span>Secret Agent</div>
 
-    <div class="prefs">
-    </div>
-    
-    <script src="prefs.js"></script>
+    <div id="prefs" class="toggle-box"></div>
+    <div id="rules" class="toggle-box"></div>
+    <script src="prefs.js" type="module"></script>   
+    <script src="rules.js" type="module"></script>
+
 </body>
 </html>
