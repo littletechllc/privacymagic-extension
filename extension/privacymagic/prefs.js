@@ -1,82 +1,4 @@
-// Privacy prefs configuration
-const PRIVACY_PREFS_CONFIG = {
-  doNotTrackEnabled: {
-    prefName: 'doNotTrackEnabled',
-    inverted: false,
-    locked: false,
-    default: true
-  },
-  disableThirdPartyCookies: {
-    prefName: 'thirdPartyCookiesAllowed',
-    inverted: true,
-    locked: false,
-    default: false
-  },
-  disableReferrers: {
-    prefName: 'referrersEnabled',
-    inverted: true,
-    locked: false,
-    default: false
-  },
-  disableHyperlinkAuditing: {
-    prefName: 'hyperlinkAuditingEnabled',
-    inverted: true,
-    locked: false,
-    default: false
-  },
-  disableTopics: {
-    prefName: 'topicsEnabled',
-    inverted: true,
-    locked: true,
-    default: false
-  },
-  disableFledge: {
-    prefName: 'fledgeEnabled',
-    inverted: true,
-    locked: true,
-    default: false
-  },
-  disableAdMeasurement: {
-    prefName: 'adMeasurementEnabled',
-    inverted: true,
-    locked: true,
-    default: false
-  },
-  disableRelatedWebsiteSets: {
-    prefName: 'relatedWebsiteSetsEnabled',
-    inverted: true,
-    locked: true,
-    default: false
-  }
-};
-
-const getPref = async (prefName) => {
-  if (!chrome.privacy.websites[prefName]) {
-    throw new Error(`Pref ${prefName} not found`);
-  }
-  const value = (await chrome.privacy.websites[prefName].get({})).value;
-  console.log(`Read pref ${prefName} with value ${value}`);
-  return value;
-};
-
-const setPref = async (prefName, value) => {
-  if (!chrome.privacy.websites[prefName]) {
-    throw new Error(`Pref ${prefName} not found`);
-  }
-  await chrome.privacy.websites[prefName].set({ value });
-  console.log(`Set pref ${prefName} to value ${value}`);
-  return true;
-};
-
-const listenForPrefChanges = (prefName, callback) => {
-  if (!chrome.privacy.websites[prefName]) {
-    throw new Error(`Pref ${prefName} not found`);
-  }
-  chrome.privacy.websites[prefName].onChange.addListener((details) => {
-    console.log(`Pref ${prefName} changed to ${details.value}`);
-    callback(details.value);
-  });
-};
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, resetAllPrefsToDefaults } from '../utils/prefs.js';
 
 const setCheckboxValue = (prefName, value) => {
   const checkbox = document.getElementById(prefName);
@@ -106,12 +28,6 @@ const listenForResetButtonClick = (callback) => {
   resetButton.addEventListener('click', callback);
 };
 
-const resetAllPrefsToDefaults = async () => {
-  for (const config of Object.values(PRIVACY_PREFS_CONFIG)) {
-    await setPref(config.prefName, config.default);
-  }
-};
-
 const getLocalizedText = (key) => {
   const message = chrome.i18n.getMessage(key);
   console.log(`Getting localized text for key "${key}":`, message);
@@ -122,7 +38,7 @@ const getLocalizedText = (key) => {
 };
 
 const initializePrefsUI = () => {
-  const prefsContainer = document.querySelector('.prefs');
+  const prefsContainer = document.getElementById('prefs');
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
   }
