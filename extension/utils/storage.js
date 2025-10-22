@@ -4,35 +4,71 @@ const keyPathToKey = (keyPath) => {
   return keyPath.join(KEY_SEPARATOR)
 }
 
-export const setStorage = async (keyPath, value) => {
-  const key = keyPathToKey(keyPath)
-  return chrome.storage.local.set({ [key]: value });
-};
+class StorageProxy {
+  constructor(storageType) {
+    this.storage = chrome.storage[storageType]
+  }
 
-export const getStorage = async (keyPath) => {
-  const key = keyPathToKey(keyPath)
-  return (await chrome.storage.local.get(key))[key];
-};
-
-export const removeStorage = async (keyPath) => {
-  const key = keyPathToKey(keyPath)
-  return chrome.storage.local.remove(key);
-};
-
-export const clearStorage = () => {
-  return chrome.storage.local.clear();
-};
-
-export const getAllStorage = async () => {
-  const values = await chrome.storage.local.get();
-  return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
-};
-
-export const listenForStorageChanges = async (keyPath, callback) => {
-  return chrome.storage.local.onChanged.addListener((changes) => {
+  async set(keyPath, value) {
     const key = keyPathToKey(keyPath)
-    if (changes[key]) {
-      callback(changes[key].newValue);
+    return this.storage.set({ [key]: value });
+  };
+
+  async get(keyPath) {
+    const key = keyPathToKey(keyPath)
+    return (await this.storage.get(key))[key];
+  };
+
+  async remove(keyPath) {
+    const key = keyPathToKey(keyPath)
+    return this.storage.remove(key);
+  };
+
+  async clear() {
+    return this.storage.clear();
+  };
+
+  async getAll() {
+    const values = await this.storage.get();
+    return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
+  };
+
+  async listenForChanges(keyPath, callback) {
+    this.storage.onChanged.addListener((changes) => {
+      const key = keyPathToKey(keyPath)
+      if (changes[key]) {
+        callback(changes[key].newValue);
+      }
+    });
+  };
+
+}
+
+let storageLocal_, storageSession_, storageSync_, storageManaged_
+
+export const storage = {
+  get local() {
+    if (!storageLocal_) {
+      storageLocal_ = new StorageProxy('local')
     }
-  });
-};
+    return storageLocal_
+  },
+  get sync() {
+    if (!storageSync_) {
+      storageSync_ = new StorageProxy('sync')
+    }
+    return storageSync_
+  },
+  get session() {
+    if (!storageSession_) {
+      storageSession_ = new StorageProxy('session')
+    }
+    return storageSession_
+  },
+  get managed() {
+    if (!storageManaged_) {
+      storageManaged_ = new StorageProxy('managed')
+    }
+    return storageManaged_
+  }
+}
