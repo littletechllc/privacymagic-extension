@@ -36,19 +36,19 @@
     "description": "Label for the hyperlink auditing setting"
   },
   "disableTopics": {
-    "message": "Topics API deaktivieren (gesperrt)",
+    "message": "Topics API deaktivieren (nicht änderbar)",
     "description": "Label for the Topics API setting"
   },
   "disableFledge": {
-    "message": "FLEDGE deaktivieren (gesperrt)",
+    "message": "FLEDGE deaktivieren (nicht änderbar)",
     "description": "Label for the FLEDGE setting"
   },
   "disableAdMeasurement": {
-    "message": "Anzeigenmessung deaktivieren (gesperrt)",
+    "message": "Anzeigenmessung deaktivieren (nicht änderbar)",
     "description": "Label for the Ad Measurement setting"
   },
   "disableRelatedWebsiteSets": {
-    "message": "Verwandte Website-Sets deaktivieren (gesperrt)",
+    "message": "Verwandte Website-Sets deaktivieren (nicht änderbar)",
     "description": "Label for the Related Website Sets setting"
   }
 }
