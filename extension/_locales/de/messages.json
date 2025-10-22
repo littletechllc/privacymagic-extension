@@ -1,54 +1,54 @@
 {
   "extensionName": {
-    "message": "Privacidad Mágica",
+    "message": "Privatsphäre Magie",
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Hacer la navegación web lo más privada posible",
+    "message": "Web-Browsing so privat wie möglich machen",
     "description": "The description of the extension"
   },
   "settingsButton": {
-    "message": "Configuración",
+    "message": "Einstellungen",
     "description": "Text for the settings button in the popup"
   },
   "popupTitle": {
-    "message": "Privacidad Mágica",
+    "message": "Privatsphäre Magie",
     "description": "Title shown in the popup"
   },
   "popupGreeting": {
-    "message": "¡Hola, dice Privacidad Mágica!",
+    "message": "Hallo, sagt Privatsphäre Magie!",
     "description": "Greeting message in the popup"
   },
   "doNotTrackEnabled": {
-    "message": "Activar No Rastrear",
+    "message": "Nicht verfolgen aktivieren",
     "description": "Label for the Do Not Track setting"
   },
   "disableThirdPartyCookies": {
-    "message": "Desactivar Cookies de Terceros",
+    "message": "Drittanbieter-Cookies deaktivieren",
     "description": "Label for the third-party cookies setting"
   },
   "disableReferrers": {
-    "message": "Desactivar Referrers",
+    "message": "Referrer deaktivieren",
     "description": "Label for the referrers setting"
   },
   "disableHyperlinkAuditing": {
-    "message": "Desactivar Auditoría de Enlaces",
+    "message": "Hyperlink-Überwachung deaktivieren",
     "description": "Label for the hyperlink auditing setting"
   },
   "disableTopics": {
-    "message": "Desactivar API de Temas (bloqueado)",
+    "message": "Topics API deaktivieren (gesperrt)",
     "description": "Label for the Topics API setting"
   },
   "disableFledge": {
-    "message": "Desactivar FLEDGE (bloqueado)",
+    "message": "FLEDGE deaktivieren (gesperrt)",
     "description": "Label for the FLEDGE setting"
   },
   "disableAdMeasurement": {
-    "message": "Desactivar Medición de Anuncios (bloqueado)",
+    "message": "Anzeigenmessung deaktivieren (gesperrt)",
     "description": "Label for the Ad Measurement setting"
   },
   "disableRelatedWebsiteSets": {
-    "message": "Desactivar Conjuntos de Sitios Relacionados (bloqueado)",
+    "message": "Verwandte Website-Sets deaktivieren (gesperrt)",
     "description": "Label for the Related Website Sets setting"
   }
 }
