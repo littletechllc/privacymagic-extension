@@ -1,13 +1,12 @@
-import { generateIcon } from './icon-generator.js'
+import { generateToolbarIcon } from './icon-generator.js'
 import { initializeDynamicRules, clearDynamicRules } from './rules-generator.js'
-import { setChromePrivacyPrefs } from './chrome-privacy-prefs.js'
-
+import { resetAllPrefsToDefaults} from '../utils/prefs.js'
 const fetchJson = async (url) => {
   const response = await fetch(url);
   return response.json();
 }
 
-generateIcon('🥸')
+await generateToolbarIcon('🅿️')
 
 const listOfSubDomains = (domain) => {
   const subDomains = [];
@@ -57,9 +56,6 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   await initializeDynamicRules();
   const t2 = performance.now();
   console.log(`initializeDynamicRules took ${t2 - t1} milliseconds`);
-  await setChromePrivacyPrefs()
-  const t3 = performance.now();
-  console.log(`setChromePrivacyPrefs took ${t3 - t2} milliseconds`);
   //const contentBlockingDefinitionsUrl = chrome.runtime.getURL('rules/content-blocking-definitions.json');
   const t4 = performance.now();
   //console.log(`fetchJson took ${t4 - t3} milliseconds`);
