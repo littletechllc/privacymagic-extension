@@ -16,11 +16,14 @@
     "default_popup": "default_popup/popup.html"
   },
   "permissions": [
-    "webRequest",
-    "webNavigation",
+    "activeTab",
     "declarativeNetRequest",
+    "favicon",
     "privacy",
-    "scripting"
+    "scripting",
+    "storage",
+    "webNavigation",
+    "webRequest"
   ],
   "host_permissions": [
     "*://*/*"
