@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css">
     <title>Privacy Magic</title>
 </head>
 <body>
-    Hello, says Privacy Magic!
-    <button id="settingsButton">Settings</button>
-    
-    <script src="popup.js"></script>
+    <div id="siteInfoContainer">
+        <img id="favicon" />
+        <h2 id="domain"></h2>
+    </div>
+    <div id="extensionNameContainer">
+        <h1 id="extensionName">Privacy Magic</h1>
+    </div>
+
+    <button id="settingsButton">Privacy Magic Settings</button>
+
+    <script src="i18n.js" type="module"></script>
+    <script src="popup.js" type="module"></script>
 </body>
 </html>

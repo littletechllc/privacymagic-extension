@@ -1,7 +1,26 @@
-body {
+html {
     background-color: #f7f7f7;
-    color: #641111;
+    color: #000000;
 
-    width: 16rem;
-    height: 4rem;
+    width: 300px;
+    height: 400px;
+}
+
+#extensionNameContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+#siteInfoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
 }
