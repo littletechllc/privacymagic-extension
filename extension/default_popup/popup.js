@@ -1,4 +1,5 @@
 import psl from '../thirdparty/psl.mjs';
+import { setupSettingsUI } from '../privacymagic/settings.js';
 
 document.getElementById('settingsButton').addEventListener('click', function() {
   console.log('settingsButton clicked');
@@ -12,13 +13,21 @@ const faviconURL = (pageUrl) => {
   return url.toString();
 }
 
-const updateSiteInfo = async () => {
+const getDomainForCurrentTab = async () => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tab = tabs[0];
   const url = tab.url;
-  const domain = psl.get(new URL(url).hostname);
+  return psl.get(new URL(url).hostname);
+}
+
+const updateSiteInfo = async (domain) => {
+  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+  const tab = tabs[0];
+  const url = tab.url;
   document.getElementById('domain').textContent = domain;
   document.getElementById('favicon').src = faviconURL(url);
 }
 
-await updateSiteInfo();
+const domain = await getDomainForCurrentTab();
+await updateSiteInfo(domain);
+await setupSettingsUI(domain);

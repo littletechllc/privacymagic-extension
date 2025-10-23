@@ -50,5 +50,49 @@
   "disableRelatedWebsiteSets": {
     "message": "Verwandte Website-Sets deaktivieren (nicht änderbar)",
     "description": "Label for the Related Website Sets setting"
+  },
+  "blocking": {
+    "message": "Inhalts-Blockierung",
+    "description": "Category for content blocking settings"
+  },
+  "connections": {
+    "message": "Netzwerk-Verbindungen",
+    "description": "Category for network connection settings"
+  },
+  "fingerprinting": {
+    "message": "Fingerprinting-Schutz",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Werbung",
+    "description": "Setting to block advertisements"
+  },
+  "client_hints": {
+    "message": "Client Hints",
+    "description": "Setting to block client hints"
+  },
+  "headers": {
+    "message": "Tracking-Header",
+    "description": "Setting to block tracking headers"
+  },
+  "query_parameters": {
+    "message": "Tracking-Parameter",
+    "description": "Setting to block tracking query parameters"
+  },
+  "do_not_track": {
+    "message": "Nicht verfolgen aktivieren",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "hardware": {
+    "message": "Hardware-Fingerprinting",
+    "description": "Setting to block hardware fingerprinting"
+  },
+  "screen": {
+    "message": "Bildschirm-Fingerprinting",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "window_name": {
+    "message": "Fenster-Name-Fingerprinting",
+    "description": "Setting to block window name fingerprinting"
   }
 }
