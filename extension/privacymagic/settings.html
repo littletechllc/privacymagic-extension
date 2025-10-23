@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="settings.css">
     <title>Privacy Magic: Settings</title>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Slackey&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
     div.title {
         position: absolute;
         display: flex;
@@ -15,8 +15,8 @@
         font-size: 80px;
         height: 50%;
         width: 100%;
-        color: #ffaa18;
-        font-family: "Slackey", serif;
+        color: #464646;
+        font-family: "Modern Antiqua", serif;
         font-weight: 600;
         font-style: normal;
     }
@@ -25,7 +25,7 @@
         flex-direction: column;
         gap: 10px;
         position: absolute;
-        top: 30%;
+        top: 50%;
         left: 50%;
         transform: translateX(-50%);
         width:max-content
@@ -37,12 +37,16 @@
     </style>
 </head>
 <body>
-    <div class="title"><span style="font-size:larger; padding: 0.25em;">🥸</span>Secret Agent</div>
+    <div class="title">
+        <span id="icon" style="font-size:larger; padding: 0.25em;">🔥</span>
+        Privacy Magic
+    </div>
 
     <div id="prefs" class="toggle-box"></div>
     <div id="rules" class="toggle-box"></div>
     <script src="prefs.js" type="module"></script>   
     <script src="rules.js" type="module"></script>
+    <script src="settings.js" type="module"></script>
 
 </body>
 </html>
