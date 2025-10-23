@@ -1,4 +1,4 @@
-export const generateIcon = async (emoji) => {
+export const generateToolbarIcon = async (emoji) => {
   const canvas = new OffscreenCanvas(128, 128)
   const ctx = canvas.getContext('2d')
 

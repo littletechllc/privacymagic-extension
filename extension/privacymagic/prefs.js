@@ -1,4 +1,5 @@
 import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, resetAllPrefsToDefaults } from '../utils/prefs.js';
+import { getLocalizedText } from '../utils/i18n.js';
 
 const setCheckboxValue = (prefName, value) => {
   const checkbox = document.getElementById(prefName);
@@ -28,16 +29,7 @@ const listenForResetButtonClick = (callback) => {
   resetButton.addEventListener('click', callback);
 };
 
-const getLocalizedText = (key) => {
-  const message = chrome.i18n.getMessage(key);
-  console.log(`Getting localized text for key "${key}":`, message);
-  if (!message) {
-    console.warn(`No localized text found for key "${key}". Available keys:`, Object.keys(chrome.i18n.getAcceptLanguages ? {} : {}));
-  }
-  return message || key; // Fallback to key if message not found
-};
-
-const initializePrefsUI = () => {
+const createPrefsUI = () => {
   const prefsContainer = document.getElementById('prefs');
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
@@ -71,7 +63,7 @@ const bindAllPrefsToCheckboxes = async () => {
   listenForResetButtonClick(resetAllPrefsToDefaults);
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  initializePrefsUI();
+export const setupPrefsUI = async () => {
+  createPrefsUI();
   await bindAllPrefsToCheckboxes();
-});
+};

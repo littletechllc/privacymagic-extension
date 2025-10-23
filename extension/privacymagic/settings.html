@@ -8,7 +8,7 @@
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
     div.title {
-        position: absolute;
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,11 +24,8 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%);
-        width:max-content
+        position: relative;
+        width:m ax-content
     }
     input[type="checkbox"]:disabled, label.locked {
         opacity: 0.5;
@@ -43,10 +40,9 @@
     </div>
 
     <div id="prefs" class="toggle-box"></div>
-    <div id="rules" class="toggle-box"></div>
-    <script src="prefs.js" type="module"></script>   
-    <script src="rules.js" type="module"></script>
-    <script src="settings.js" type="module"></script>
-
+    <div id="settings"></div>
+    
+    <script src="main.js" type="module"></script>
+    
 </body>
 </html>

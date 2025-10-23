@@ -50,5 +50,49 @@
   "disableRelatedWebsiteSets": {
     "message": "Disable Related Website Sets (locked)",
     "description": "Label for the Related Website Sets pref"
+  },
+  "blocking": {
+    "message": "Content Blocking",
+    "description": "Category for content blocking settings"
+  },
+  "connections": {
+    "message": "Network Connections",
+    "description": "Category for network connection settings"
+  },
+  "fingerprinting": {
+    "message": "Fingerprinting Protection",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Ads",
+    "description": "Setting to block advertisements"
+  },
+  "client_hints": {
+    "message": "Client Hints",
+    "description": "Setting to block client hints"
+  },
+  "headers": {
+    "message": "Tracking Headers",
+    "description": "Setting to block tracking headers"
+  },
+  "query_parameters": {
+    "message": "Tracking Parameters",
+    "description": "Setting to block tracking query parameters"
+  },
+  "do_not_track": {
+    "message": "Enable Do Not Track",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "hardware": {
+    "message": "Hardware Fingerprinting",
+    "description": "Setting to block hardware fingerprinting"
+  },
+  "screen": {
+    "message": "Screen Fingerprinting",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "window_name": {
+    "message": "Window Name Fingerprinting",
+    "description": "Setting to block window name fingerprinting"
   }
 }
