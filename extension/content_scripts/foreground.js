@@ -41,10 +41,10 @@ redefinePropertyValues(Navigator.prototype, {
   cookieEnabled: true,
   cpuClass: undefined,
   deviceMemory: 1,
-  doNotTrack: '1',
+//  doNotTrack: '1',
   globalPrivacyControl: true,
   hardwareConcurrency: 4,
-  languages: [navigator.language],
+//  languages: [navigator.language],
   maxTouchPoints: 1,
   onLine: true,
   oscpu: undefined,
@@ -52,7 +52,7 @@ redefinePropertyValues(Navigator.prototype, {
   platform: 'Windows',
   productSub: '20030107',
   vendor: 'Google Inc.',
-  vendorSub: ''
+ // vendorSub: ''
 })
 redefinePropertyValues(Screen.prototype, {
   availHeight: spoofedScreenHeight,
@@ -76,41 +76,27 @@ redefinePropertyValues(window, {
 })
 
 // window.name
-// TODO: hide item from page by modifying sessionStorage behavior
-const NAME_IN_SESSIONSTORAGE = `__PRIVACYMAGIC_${Math.random().toString(36).substring(2, 15)}_NAME`
-if (window.opener && window.name !== '') {
-  sessionStorage.setItem(NAME_IN_SESSIONSTORAGE, window.name)
-  window.name = ''
-}
-const oldGetItem = Storage.prototype.getItem
-const oldSetItem = Storage.prototype.setItem
-const oldKey = Storage.prototype.key
-Storage.prototype.key = (index) => {
-  if (index === 0) {
-    return NAME_IN_SESSIONSTORAGE
-  }
-  return oldKey.call(sessionStorage, index)
-}
-Storage.prototype.length.get = () => {
-  return oldLength.call(sessionStorage) - 1
-}
-Object.defineProperty(window, "name", {
-  get: () => (oldGetItem.call(sessionStorage, NAME_IN_SESSIONSTORAGE) || ''),
-  set: (s) => oldSetItem.call(sessionStorage, NAME_IN_SESSIONSTORAGE, s)
-})
-Storage.prototype.setItem = (key, value) => {
-  if (key === NAME_IN_SESSIONSTORAGE) {
-    return
-  }
-  oldSetItem.call(sessionStorage, key, value)
-}
-Storage.prototype.getItem = (key) => {
-  if (key === NAME_IN_SESSIONSTORAGE) {
-    return null
-  }
-  return oldGetItem.call(sessionStorage, key)
-}
-
+(() => {
+  const nameGetter = Object.getOwnPropertyDescriptor(window, 'name').get;
+  const nameSetter = Object.getOwnPropertyDescriptor(window, 'name').set;
+  Object.defineProperty(window, 'name', {
+    get() {
+      const value = nameGetter.call(this);
+      try {
+        const data = JSON.parse(value);
+        return (data.origin === window.location.origin) ? data.value : '';
+      } catch (error) {
+        return '';
+      }
+    },
+    set(value) {
+      if (!value.toString) return;
+      const newValue = JSON.stringify({ value: value.toString(), origin: window.location.origin });
+      nameSetter.call(this, newValue);
+    },
+    configurable: true
+});
+})();
 
 // window.fetch
 /*
