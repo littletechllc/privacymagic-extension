@@ -35,6 +35,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   }
 };
 
+export const ALL_DOMAINS = '_ALL_DOMAINS_';
+
+// TODO: Create settings functions: get, set, listenForChanges
+
 export const resetAllSettingsToDefaults = async (domain) => {
   const items = await storage.local.getAll();
   for (const [keyPath, value] of items) {

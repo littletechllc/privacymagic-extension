@@ -2,7 +2,7 @@ import { setupSettingsUI } from './settings.js';
 import { setupPrefsUI } from './prefs.js';
 import { generateToolbarIcon } from '../background/icon-generator.js';
 import { resetAllPrefsToDefaults } from '../utils/prefs.js';
-import { resetAllSettingsToDefaults } from '../utils/settings.js';
+import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../utils/settings.js';
 
 const setupIcon = async (iconString) => {
   await generateToolbarIcon(iconString);
@@ -12,9 +12,9 @@ const setupIcon = async (iconString) => {
 document.addEventListener('DOMContentLoaded', async () =>  {
   document.getElementById('reset-all').addEventListener('click', async () => {
     await resetAllPrefsToDefaults();
-    await resetAllSettingsToDefaults('_GLOBAL_');
+    await resetAllSettingsToDefaults(ALL_DOMAINS);
   });
   setupPrefsUI();
-  setupSettingsUI('_GLOBAL_');
+  setupSettingsUI(ALL_DOMAINS);
   await setupIcon('🪬');
 });
