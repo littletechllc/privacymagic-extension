@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="settings.css">
-    <title>Privacy Magic: Settings</title>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
-    div.title {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 80px;
-        height: 50%;
-        width: 100%;
-        color: #464646;
-        font-family: "Modern Antiqua", serif;
-        font-weight: 600;
-        font-style: normal;
-    }
-    .toggle-box {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        position: relative;
-        width:m ax-content
-    }
-    input[type="checkbox"]:disabled, label.locked {
-        opacity: 0.5;
-        pointer-events: none;
-    }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="settings.css">
+  <title>Privacy Magic: Settings</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+  @import url('../utils/main.css');
+  div.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  div.title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    height: 50%;
+    width: 100%;
+    color: #464646;
+    font-family: "Modern Antiqua", serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  </style>
 </head>
 <body>
+  <div class="main-container">
     <div class="title">
-        <span id="icon" style="font-size:larger; padding: 0.25em;">🔥</span>
-        Privacy Magic
+      <span id="icon" style="font-size:larger; padding: 0.25em;">🔥</span>
+      Privacy Magic
     </div>
-
     <div id="prefs" class="toggle-box"></div>
     <div id="settings"></div>
-    
-    <script src="main.js" type="module"></script>
-    
+    <button id="reset-all">Reset to Defaults</button>
+  </div>
+  <script src="main.js" type="module"></script>
+  
 </body>
 </html>

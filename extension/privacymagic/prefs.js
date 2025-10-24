@@ -21,14 +21,6 @@ const listenForCheckboxChanges = (prefName, callback) => {
   });
 };
 
-const listenForResetButtonClick = (callback) => {
-  const resetButton = document.getElementById('reset-prefs');
-  if (!resetButton) {
-    throw new Error('Reset button not found');
-  }
-  resetButton.addEventListener('click', callback);
-};
-
 const createPrefsUI = () => {
   const prefsContainer = document.getElementById('prefs');
   if (!prefsContainer) {
@@ -44,9 +36,7 @@ const createPrefsUI = () => {
         </label>
       `;
     })
-    .join('\n') + `
-      <button type="button" id="reset-prefs">Reset to Defaults</button>
-    `;
+    .join('\n');
 };
 
 const bindPrefToCheckbox = async (checkboxId, prefName, inverted) => {
@@ -60,7 +50,6 @@ const bindAllPrefsToCheckboxes = async () => {
   for (const [checkboxId, { prefName, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
     await bindPrefToCheckbox(checkboxId, prefName, inverted);
   }
-  listenForResetButtonClick(resetAllPrefsToDefaults);
 };
 
 export const setupPrefsUI = async () => {
