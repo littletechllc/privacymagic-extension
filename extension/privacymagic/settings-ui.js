@@ -29,7 +29,8 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   category.appendChild(categoryTitle);
   settingIds.forEach(async (settingId) => {
     const toggle = await createToggle(settingId);
-    await bindToggleToStorage(toggle, store, ["_SETTINGS_", domain, categoryId, settingId], true);
+    const keyPath = ["_SETTINGS_", domain, categoryId, settingId];
+    await bindToggleToStorage(toggle, store, keyPath, /*defaultValue*/ true);
     category.appendChild(toggle);
   });
   return category;
