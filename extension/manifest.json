@@ -10,7 +10,7 @@
     "48": "logo/logo-48.png",
     "128": "logo/logo-128.png"
   },
-  "options_page": "privacymagic/settings.html",
+  "options_page": "privacymagic/options.html",
   "action": {
     "default_title": "Privacy Magic",
     "default_popup": "default_popup/popup.html"
