@@ -2,3 +2,35 @@ body {
     background-color: #fffdfd;
     color: #1f1d1d;
 }
+
+div.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+div.title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    height: 50%;
+    width: 100%;
+    color: #464646;
+    font-family: "Modern Antiqua", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.global-toggles {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: top;
+    justify-content: center;
+    margin: auto;
+}
