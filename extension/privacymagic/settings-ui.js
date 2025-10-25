@@ -1,6 +1,6 @@
 import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
-import { createToggle } from '../common/checkbox.js';
+import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
 
 const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
@@ -8,7 +8,6 @@ const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
   const input = toggle.querySelector('input');
   input.checked = storageValue !== undefined ? storageValue : defaultValue;
   input.addEventListener('change', (event) => {
-    console.log(`Toggle ${keyPath} changed to ${event.target.checked}`);
     const value = event.target.checked;
     if (value === defaultValue) {
       store.remove(keyPath);
@@ -30,7 +29,6 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   category.appendChild(categoryTitle);
   settingIds.forEach(async (settingId) => {
     const toggle = await createToggle(settingId);
-    console.log(`Created toggle ${toggle}`);
     await bindToggleToStorage(toggle, store, ["_SETTINGS_", domain, categoryId, settingId], true);
     category.appendChild(toggle);
   });
