@@ -1,5 +1,5 @@
-import { setupSettingsUI } from './settings.js';
-import { setupPrefsUI } from './prefs.js';
+import { setupSettingsUI } from './settings-ui.js';
+import { setupPrefsUI } from './prefs-ui.js';
 import { generateToolbarIcon } from '../background/icon-generator.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings.js';
