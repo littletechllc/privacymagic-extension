@@ -1,61 +1,32 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, resetAllPrefsToDefaults } from '../common/prefs.js';
-import { getLocalizedText } from '../common/i18n.js';
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '../common/prefs.js';
+import { createToggle } from '../common/checkbox.js';
 
-const setCheckboxValue = (prefName, value) => {
-  const checkbox = document.getElementById(prefName);
-  if (!checkbox) {
-    console.log(`Checkbox ${prefName} not found`);
-    return;
-  }
-  checkbox.checked = value;
-  console.log(`Set checkbox ${prefName} to value ${value}`);
-};
-
-const listenForCheckboxChanges = (prefName, callback) => {
-  const checkbox = document.getElementById(prefName);
-  if (!checkbox) {
-    throw new Error(`Checkbox ${prefName} not found`);
-  }
-  checkbox.addEventListener('change', (event) => {
-    callback(event.target.checked);
+const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
+  const value = await getPref(prefName);
+  const input = toggle.querySelector('input');
+  input.checked = inverted ? !value : value;
+  input.addEventListener('change', (event) => {
+    const value = event.target.checked;
+    setPref(prefName, inverted ? !value : value);
+  });
+  listenForPrefChanges(prefName, (value) => {
+    input.checked = inverted ? !value : value;
   });
 };
 
-const createPrefsUI = () => {
+export const setupPrefsUI = async () => {
   const prefsContainer = document.getElementById('prefs');
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
   }
-  prefsContainer.innerHTML = `<h1>Browser Preferences</h1>` + Object.entries(PRIVACY_PREFS_CONFIG)
-    .map(([checkboxId, { locked }]) => {
-      const label = (locked ? '🔒 ' : '') + getLocalizedText(checkboxId);
-      return `<div class="toggle-outer">
-        <input type="checkbox" id="${checkboxId}" ${locked ? 'disabled' : ''}/>
-        <label for="${checkboxId}" class="box ${locked ? 'locked' : ''}">
-          <div class="switch" ></div>
-        </label>
-        </label>
-        <label for="${checkboxId}" class="text ${locked ? 'locked' : ''}">${label}</label>
-      </div>
-`
-    })
-    .join('\n');
-};
-
-const bindPrefToCheckbox = async (checkboxId, prefName, inverted) => {
-  const value = await getPref(prefName);
-  setCheckboxValue(checkboxId, inverted ? !value : value);
-  listenForCheckboxChanges(checkboxId, (newValue) => setPref(prefName, inverted ? !newValue : newValue));
-  listenForPrefChanges(prefName, (value) => setCheckboxValue(checkboxId, inverted ? !value : value));
-};
-
-const bindAllPrefsToCheckboxes = async () => {
-  for (const [checkboxId, { prefName, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
-    await bindPrefToCheckbox(checkboxId, prefName, inverted);
+  
+  // Clear container and add title
+  prefsContainer.innerHTML = '<h1>Browser Preferences</h1>';
+  
+  // Create toggles for each preference
+  for (const [checkboxId, { prefName, locked, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
+    const toggle = await createToggle(checkboxId, locked);
+    await bindPrefToCheckbox(toggle, prefName, inverted);    
+    prefsContainer.appendChild(toggle);
   }
-};
-
-export const setupPrefsUI = async () => {
-  createPrefsUI();
-  await bindAllPrefsToCheckboxes();
 };

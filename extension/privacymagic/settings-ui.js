@@ -1,19 +1,38 @@
 import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
-import { createCheckboxBoundToStorage } from '../common/checkbox.js';
+import { createToggle } from '../common/checkbox.js';
 import { storage } from '../common/storage.js';
 
-const createToggleCategory = async (storage, domain, categoryId, settingIds) => {
+const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
+  const storageValue = await store.get(keyPath);
+  const input = toggle.querySelector('input');
+  input.checked = storageValue !== undefined ? storageValue : defaultValue;
+  input.addEventListener('change', (event) => {
+    console.log(`Toggle ${keyPath} changed to ${event.target.checked}`);
+    const value = event.target.checked;
+    if (value === defaultValue) {
+      store.remove(keyPath);
+    } else {
+      store.set(keyPath, value);
+    }
+  });
+  store.listenForChanges(keyPath, (value) => {
+    input.checked = value !== undefined ? value : defaultValue;
+  });
+}
+
+const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   const category = document.createElement('div');
   category.id = categoryId;
   category.className = 'toggle-box';
   const categoryTitle = document.createElement('h2');
-  categoryTitle.textContent = getLocalizedText(categoryId); 
+  categoryTitle.textContent = getLocalizedText(categoryId);
   category.appendChild(categoryTitle);
   settingIds.forEach(async (settingId) => {
-    const checkbox = await createCheckboxBoundToStorage(
-      storage, ["_SETTINGS_", domain, categoryId, settingId], true);
-    category.appendChild(checkbox);
+    const toggle = await createToggle(settingId);
+    console.log(`Created toggle ${toggle}`);
+    await bindToggleToStorage(toggle, store, ["_SETTINGS_", domain, categoryId, settingId], true);
+    category.appendChild(toggle);
   });
   return category;
 };
