@@ -1,8 +1,8 @@
 import { setupSettingsUI } from './settings.js';
 import { setupPrefsUI } from './prefs.js';
 import { generateToolbarIcon } from '../background/icon-generator.js';
-import { resetAllPrefsToDefaults } from '../utils/prefs.js';
-import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../utils/settings.js';
+import { resetAllPrefsToDefaults } from '../common/prefs.js';
+import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings.js';
 
 const setupIcon = async (iconString) => {
   await generateToolbarIcon(iconString);

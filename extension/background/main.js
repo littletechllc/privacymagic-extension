@@ -1,6 +1,6 @@
 import { generateToolbarIcon } from './icon-generator.js'
 import { initializeDynamicRules, clearDynamicRules } from './rules-generator.js'
-import { resetAllPrefsToDefaults} from '../utils/prefs.js'
+import { resetAllPrefsToDefaults} from '../common/prefs.js'
 const fetchJson = async (url) => {
   const response = await fetch(url);
   return response.json();
