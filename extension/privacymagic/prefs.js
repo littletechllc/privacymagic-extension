@@ -26,15 +26,18 @@ const createPrefsUI = () => {
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
   }
-  prefsContainer.innerHTML = Object.entries(PRIVACY_PREFS_CONFIG)
+  prefsContainer.innerHTML = `<h1>Browser Preferences</h1>` + Object.entries(PRIVACY_PREFS_CONFIG)
     .map(([checkboxId, { locked }]) => {
       const label = getLocalizedText(checkboxId);
-      return `
-        <label class='${locked ? 'locked' : ''}'>
-          <input type="checkbox" id="${checkboxId}" ${locked ? 'disabled' : ''}>
-          ${label}
+      return `<div class="toggle-outer">
+        <input type="checkbox" id="${checkboxId}" ${locked ? 'disabled' : ''}/>
+        <label for="${checkboxId}" class="box ${locked ? 'locked' : ''}">
+          <div class="switch" ></div>
         </label>
-      `;
+        </label>
+        <label for="${checkboxId}" class="text ${locked ? 'locked' : ''}">${label}</label>
+      </div>
+`
     })
     .join('\n');
 };
