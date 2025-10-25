@@ -29,6 +29,14 @@
     font-weight: 600;
     font-style: normal;
   }
+  .global-toggles {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: top;
+    justify-content: center;
+    margin: auto;
+  }
 
   </style>
 </head>
@@ -39,8 +47,8 @@
       Privacy Magic
     </div>
     <div class="global-toggles">
-        <div id="prefs" class="toggle-box toggle-container"><h1>Browser Preferences</h1></div>
-        <div id="settings" class="toggle-container"><h1>Website Default Settings</h1></div>
+      <div id="settings" class="toggle-box toggle-container"><h1>Website Default Settings</h1></div>
+      <div id="prefs" class="toggle-box toggle-container"><h1>Browser Preferences</h1></div>
     </div>
     <button id="reset-all">Reset to Defaults</button>
   </div>

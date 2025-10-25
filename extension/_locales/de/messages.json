@@ -36,19 +36,19 @@
     "description": "Label for the hyperlink auditing setting"
   },
   "disableTopics": {
-    "message": "Topics API deaktivieren (nicht änderbar)",
+    "message": "Topics API deaktivieren",
     "description": "Label for the Topics API setting"
   },
   "disableFledge": {
-    "message": "FLEDGE deaktivieren (nicht änderbar)",
+    "message": "FLEDGE deaktivieren",
     "description": "Label for the FLEDGE setting"
   },
   "disableAdMeasurement": {
-    "message": "Anzeigenmessung deaktivieren (nicht änderbar)",
+    "message": "Anzeigenmessung deaktivieren",
     "description": "Label for the Ad Measurement setting"
   },
   "disableRelatedWebsiteSets": {
-    "message": "Verwandte Website-Sets deaktivieren (nicht änderbar)",
+    "message": "Verwandte Website-Sets deaktivieren",
     "description": "Label for the Related Website Sets setting"
   },
   "blocking": {
@@ -94,5 +94,17 @@
   "window_name": {
     "message": "Fenster-Name-Fingerprinting",
     "description": "Setting to block window name fingerprinting"
+  },
+  "browserPreferences": {
+    "message": "Browser-Einstellungen",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Standard-Website-Einstellungen",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Auf Standard zurücksetzen",
+    "description": "Text for the reset button"
   }
 }
