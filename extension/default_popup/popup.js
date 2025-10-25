@@ -1,5 +1,5 @@
 import psl from '../thirdparty/psl.mjs';
-import { setupSettingsUI } from '../privacymagic/settings.js';
+import { setupSettingsUI } from '../privacymagic/settings-ui.js';
 
 document.getElementById('settingsButton').addEventListener('click', function() {
   console.log('settingsButton clicked');
