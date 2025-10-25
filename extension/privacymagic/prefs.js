@@ -28,7 +28,7 @@ const createPrefsUI = () => {
   }
   prefsContainer.innerHTML = `<h1>Browser Preferences</h1>` + Object.entries(PRIVACY_PREFS_CONFIG)
     .map(([checkboxId, { locked }]) => {
-      const label = getLocalizedText(checkboxId);
+      const label = (locked ? '🔒 ' : '') + getLocalizedText(checkboxId);
       return `<div class="toggle-outer">
         <input type="checkbox" id="${checkboxId}" ${locked ? 'disabled' : ''}/>
         <label for="${checkboxId}" class="box ${locked ? 'locked' : ''}">

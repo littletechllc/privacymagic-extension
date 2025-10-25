@@ -36,19 +36,19 @@
     "description": "Label for the hyperlink auditing pref"
   },
   "disableTopics": {
-    "message": "Disable Topics API (locked)",
+    "message": "Disable Topics API",
     "description": "Label for the Topics API pref"
   },
   "disableFledge": {
-    "message": "Disable FLEDGE (locked)",
+    "message": "Disable FLEDGE",
     "description": "Label for the FLEDGE pref"
   },
   "disableAdMeasurement": {
-    "message": "Disable Ad Measurement (locked)",
+    "message": "Disable Ad Measurement",
     "description": "Label for the Ad Measurement pref"
   },
   "disableRelatedWebsiteSets": {
-    "message": "Disable Related Website Sets (locked)",
+    "message": "Disable Related Website Sets",
     "description": "Label for the Related Website Sets pref"
   },
   "blocking": {
@@ -94,5 +94,17 @@
   "window_name": {
     "message": "Window Name Fingerprinting",
     "description": "Setting to block window name fingerprinting"
+  },
+  "browserPreferences": {
+    "message": "Browser Preferences",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Website Default Settings",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Reset to Defaults",
+    "description": "Text for the reset button"
   }
 }

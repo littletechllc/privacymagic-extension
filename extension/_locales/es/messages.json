@@ -36,19 +36,19 @@
     "description": "Label for the hyperlink auditing setting"
   },
   "disableTopics": {
-    "message": "Desactivar API de Temas (no modificable)",
+    "message": "Desactivar API de Temas",
     "description": "Label for the Topics API setting"
   },
   "disableFledge": {
-    "message": "Desactivar FLEDGE (no modificable)",
+    "message": "Desactivar FLEDGE",
     "description": "Label for the FLEDGE setting"
   },
   "disableAdMeasurement": {
-    "message": "Desactivar Medición de Anuncios (no modificable)",
+    "message": "Desactivar Medición de Anuncios",
     "description": "Label for the Ad Measurement setting"
   },
   "disableRelatedWebsiteSets": {
-    "message": "Desactivar Conjuntos de Sitios Relacionados (no modificable)",
+    "message": "Desactivar Conjuntos de Sitios Relacionados",
     "description": "Label for the Related Website Sets setting"
   },
   "blocking": {
@@ -94,5 +94,17 @@
   "window_name": {
     "message": "Huella Digital de Nombre de Ventana",
     "description": "Setting to block window name fingerprinting"
+  },
+  "browserPreferences": {
+    "message": "Preferencias del Navegador",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Configuración Predeterminada del Sitio Web",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Restablecer a Predeterminados",
+    "description": "Text for the reset button"
   }
 }
