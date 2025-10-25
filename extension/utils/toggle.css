@@ -1,0 +1,112 @@
+/* adapted from https://codepen.io/harishrajora/pen/ByNNWMv */
+
+.toggle-outer {
+  --height: 20px;
+  --checked-color: rgba(63,158,58,1);
+  --unchecked-color: rgb(200, 11, 11);
+  
+  height: var(--height);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  flex-direction: row;
+  cursor: pointer;
+
+  *,
+  *::before,
+  *::after {
+    transition: 100ms all;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+  
+  .text {
+    font-family: sans-serif;
+    font-size: 16px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+  }
+
+
+  .box, .switch {
+    border-radius: calc(0.5 * var(--height));
+  }
+
+  /* unchecked state */
+
+  .box {
+    display: inline-block;
+    height: var(--height);
+    width: calc(2 * var(--height));
+    background: #252525;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .switch {
+    height: calc(0.8 * var(--height));
+    width: calc(0.8 * var(--height));
+    background: rgba(255, 255, 255, 1);
+    position: relative;
+    top: calc(0.1 * var(--height));
+    left: calc(0.1 * var(--height));
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      transform: rotate(-45deg);
+      background: var(--unchecked-color);
+    }
+    
+    &::before {
+      height: calc(0.6 * var(--height));
+      width: calc(0.1 * var(--height));
+      top: calc(50% - calc(0.3 * var(--height)));
+      left: calc(50% - calc(0.05 * var(--height)));
+    }
+
+    &::after {
+      height: calc(0.1 * var(--height));
+      width: calc(0.6 * var(--height));
+      top: calc(50% - 0.05 * var(--height));
+      left: calc(50% - 0.30 * var(--height));
+    }
+  }
+
+
+  /* checked state */
+
+  input[type="checkbox"]:checked ~ .box {
+    background: var(--checked-color);
+  }
+
+  input[type="checkbox"]:checked ~ .box .switch {
+    left: calc(1.1 * var(--height));
+
+    &::before, &::after {
+      transform: rotate(45deg); 
+      background: var(--checked-color);
+    }
+    
+    &::before{
+      height: calc(0.5 * var(--height));
+      top: calc(50% - 0.24 * var(--height));
+      left: calc(60% - 0.07 * var(--height));
+    }
+
+    &::after{
+      width: calc(0.25 * var(--height));
+      top: calc(95% - 0.315 * var(--height));
+      left: calc(22.5% - 0.06 * var(--height));
+    }
+  }
+}

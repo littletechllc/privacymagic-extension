@@ -23,6 +23,7 @@ export const setupSettingsUI = async (domain) => {
   if (!settingsContainer) {
     throw new Error('Settings container not found');
   }
+  settingsContainer.innerHTML = `<h1>Privacy Magic Protections</h1>`;
   for (const [categoryId, settingConfigs] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(storage.local, domain, categoryId, Object.keys(settingConfigs));
     settingsContainer.appendChild(toggleCategory);

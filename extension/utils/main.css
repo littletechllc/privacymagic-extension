@@ -1,0 +1,45 @@
+@import url('./toggle.css');
+
+.toggle-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  width: 100%;
+  label {
+    font-size: 14px;
+  }
+}
+
+.toggle-container {
+  margin: 24px 8px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 20px 0px 0px 0px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0px 0px 0px;
+  }
+  
+}
+
+
+input[type="checkbox"]:disabled, label.locked {
+  opacity: 0.5;
+  pointer-events: none;
+}
+#settingsButton {
+  margin: 16px 0px 8px 0px;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  background-color: #aeffe5;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}

@@ -18,8 +18,26 @@ export const createCheckboxBoundToStorage = async (storage, keyPath, defaultValu
   storage.listenForChanges(keyPath, (value) => {
     input.checked = value !== undefined ? value : defaultValue;
   });
-  const label = document.createElement('label');
-  label.appendChild(input);
-  label.appendChild(document.createTextNode(getLocalizedText(id)));
-  return label;
+
+  const toggleOuter = document.createElement('div');
+  toggleOuter.className = 'toggle-outer';
+
+  const switchLabel = document.createElement('label');
+  switchLabel.htmlFor = id;
+  switchLabel.className = 'box';
+
+  const switchDiv = document.createElement('div');
+  switchDiv.className = 'switch';
+  switchLabel.appendChild(switchDiv);
+
+  const textLabel = document.createElement('label');
+  textLabel.htmlFor = id;
+  textLabel.className = 'text';
+  textLabel.textContent = getLocalizedText(id);
+
+  toggleOuter.appendChild(input);
+  toggleOuter.appendChild(switchLabel);
+  toggleOuter.appendChild(textLabel);
+
+  return toggleOuter;
 }
