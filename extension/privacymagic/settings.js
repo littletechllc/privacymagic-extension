@@ -1,7 +1,7 @@
-import { PRIVACY_SETTINGS_CONFIG } from '../utils/settings.js';
-import { getLocalizedText } from '../utils/i18n.js';
-import { createCheckboxBoundToStorage } from '../utils/checkbox.js';
-import { storage } from '../utils/storage.js';
+import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
+import { getLocalizedText } from '../common/i18n.js';
+import { createCheckboxBoundToStorage } from '../common/checkbox.js';
+import { storage } from '../common/storage.js';
 
 const createToggleCategory = async (storage, domain, categoryId, settingIds) => {
   const category = document.createElement('div');

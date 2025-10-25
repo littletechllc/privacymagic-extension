@@ -1,5 +1,5 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, resetAllPrefsToDefaults } from '../utils/prefs.js';
-import { getLocalizedText } from '../utils/i18n.js';
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, resetAllPrefsToDefaults } from '../common/prefs.js';
+import { getLocalizedText } from '../common/i18n.js';
 
 const setCheckboxValue = (prefName, value) => {
   const checkbox = document.getElementById(prefName);
