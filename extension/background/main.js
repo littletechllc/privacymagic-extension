@@ -17,7 +17,7 @@ const injectCssForCosmeticFilters = () => {
         tabId: details.tabId,
         frameIds: [details.frameId]
       },
-      [
+      files: [
         'content_scripts/adblock_css/_default_.css',
         `content_scripts/adblock_css/${registrableDomain}_.css`
       ]
