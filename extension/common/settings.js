@@ -35,6 +35,12 @@ export const PRIVACY_SETTINGS_CONFIG = {
   }
 };
 
+export const getSetting = async (domain, categoryId, settingId, defaultValue) => {
+  const keyPath = ["_SETTINGS_", domain, categoryId, settingId];
+  const result = await storage.local.get(keyPath);
+  return result === undefined ? defaultValue : result;
+};
+
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
 
 // TODO: Create settings functions: get, set, listenForChanges
