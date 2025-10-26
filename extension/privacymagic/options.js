@@ -1,11 +1,10 @@
 import { setupSettingsUI } from '../common/settings-ui.js';
 import { setupPrefsUI } from './prefs-ui.js';
-import { generateToolbarIcon } from '../background/icon-generator.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings.js';
+import { THEME_CONFIG } from '../common/theme.js';
 
 const setupIcon = async (iconString) => {
-  await generateToolbarIcon(iconString);
   document.getElementById('icon').textContent = iconString;
 };
 
@@ -16,5 +15,5 @@ document.addEventListener('DOMContentLoaded', async () =>  {
   });
   setupPrefsUI();
   setupSettingsUI(ALL_DOMAINS);
-  await setupIcon('🪬');
+  await setupIcon(THEME_CONFIG.toolbarIcon);
 });
