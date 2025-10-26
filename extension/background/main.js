@@ -1,17 +1,21 @@
-import { generateToolbarIcon } from './icon-generator.js'
+import { setToolbarIcon } from '../common/toolbar-icon.js'
 import { initializeDynamicRules, clearDynamicRules } from './rules-generator.js'
-
 import psl from '../thirdparty/psl.mjs';
 import { getSetting } from '../common/settings.js';
+import { THEME_CONFIG } from '../common/theme.js';
 
 const injectCssForCosmeticFilters = () => {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
     const url = new URL(details.url);
     const registrableDomain = psl.get(url.hostname);
+    if (registrableDomain === null) {
+      return;
+    }
     const setting = await getSetting(registrableDomain, 'blocking', 'ads', true);
     if (!setting) {
       return;
     }
+    console.log(`insertCSS for ${registrableDomain}`);
     chrome.scripting.insertCSS({
       target: {
         tabId: details.tabId,
@@ -26,7 +30,7 @@ const injectCssForCosmeticFilters = () => {
 }
 
 chrome.runtime.onInstalled.addListener(async function (details) {
-  await generateToolbarIcon('🅿️')
+  await setToolbarIcon(THEME_CONFIG.toolbarIcon)
   await clearDynamicRules();
   //await chrome.runtime.openOptionsPage()
   const t1 = performance.now();

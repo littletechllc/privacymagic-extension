@@ -1,4 +1,4 @@
-export const generateToolbarIcon = async (emoji) => {
+export const setToolbarIcon = async (emoji) => {
   const canvas = new OffscreenCanvas(128, 128)
   const ctx = canvas.getContext('2d')
 
@@ -12,20 +12,14 @@ export const generateToolbarIcon = async (emoji) => {
 
     // Calculate font size to fill the canvas
     let fontSize = canvasSize
-    ctx.font = `${fontSize}px "Modern Antiqua", serif`
+    ctx.font = `${fontSize}px serif`
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-
-
-
-    // Measure text and adjust font size if needed
     const metrics = ctx.measureText(emoji)
-    console.log(metrics)
     const textWidth = metrics.actualBoundingBoxRight + metrics.actualBoundingBoxLeft
     const textHeight = metrics.actualBoundingBoxDescent + metrics.actualBoundingBoxAscent
-    console.log({textWidth, textHeight})
     fontSize = fontSize * canvasSize / textHeight
-    ctx.font = `${fontSize}px "Modern Antiqua", serif`
+    ctx.font = `${fontSize}px serif`
 
     // Draw the emoji
     ctx.fillStyle = '#ffffff'
