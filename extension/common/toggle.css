@@ -44,7 +44,7 @@
     display: inline-block;
     height: var(--height);
     width: calc(2 * var(--height));
-    background: #252525;
+    background: #810707;
     position: relative;
     cursor: pointer;
     &:hover {

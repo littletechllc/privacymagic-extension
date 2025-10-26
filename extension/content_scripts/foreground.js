@@ -2,7 +2,7 @@
 
 const PRIVACYMAGIC_IGNORE = "__privacymagic_ignore"
 
-console.log("Hello from content script", window.location.href, top.location?.href)
+//console.log("Hello from content script", window.location.href, top.location?.href)
 
 const redefinePropertyValues = (obj, propertyMap) => {
   let properties = {}
@@ -11,6 +11,7 @@ const redefinePropertyValues = (obj, propertyMap) => {
   }
   Object.defineProperties(obj, properties)
 }
+console.log("redefinePropertyValues", redefinePropertyValues, typeof redefinePropertyValues)
 
 const oldMatchMedia = window.matchMedia
 
@@ -37,6 +38,7 @@ const spoofScreenSize = (minWidth, minHeight) => {
 
 const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight);
 
+console.log("41: redefinePropertyValues", redefinePropertyValues, typeof redefinePropertyValues)
 redefinePropertyValues(Navigator.prototype, {
   cookieEnabled: true,
   cpuClass: undefined,
@@ -53,7 +55,7 @@ redefinePropertyValues(Navigator.prototype, {
   productSub: '20030107',
   vendor: 'Google Inc.',
  // vendorSub: ''
-})
+});
 redefinePropertyValues(Screen.prototype, {
   availHeight: spoofedScreenHeight,
   availLeft: 0,
@@ -63,7 +65,7 @@ redefinePropertyValues(Screen.prototype, {
   height: spoofedScreenHeight,
   pixelDepth: 24,
   width: spoofedScreenWidth
-})
+});
 redefinePropertyValues(window, {
   devicePixelRatio: 1,
   matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
@@ -73,7 +75,7 @@ redefinePropertyValues(window, {
   screenTop: 0,
   screenX: 0,
   screenY: 0
-})
+});
 
 // window.name
 (() => {
@@ -95,7 +97,7 @@ redefinePropertyValues(window, {
       nameSetter.call(this, newValue);
     },
     configurable: true
-});
+  });
 })();
 
 // window.fetch

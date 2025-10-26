@@ -115,3 +115,9 @@ export const generateRules = () => {
 export const initializeDynamicRules = async () => {
   await chrome.declarativeNetRequest.updateDynamicRules(generateRules())
 }
+
+export const clearDynamicRules = async () => {
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: [1, 2]
+  })
+}
