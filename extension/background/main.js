@@ -4,6 +4,22 @@ import psl from '../thirdparty/psl.mjs';
 import { getSetting } from '../common/settings.js';
 import { THEME_CONFIG } from '../common/theme.js';
 
+const addContentScripts = () => {
+  chrome.scripting.registerContentScripts(
+    [
+      {
+        id: 'window_name',
+        js: ['content_scripts/window_name.js'],
+        matches: ['<all_urls>'],
+        allFrames: true,
+        matchOriginAsFallback: true,
+        runAt: 'document_start',
+        world: 'MAIN'
+      }
+    ]
+  );
+};
+
 const injectCssForCosmeticFilters = () => {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
     const url = new URL(details.url);
@@ -43,6 +59,9 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   injectCssForCosmeticFilters();
   const t5 = performance.now();
   console.log(`injectCssForCosmeticFilters took ${t5 - t4} milliseconds`);
+  addContentScripts();
+  const t6 = performance.now();
+  console.log(`addContentScripts took ${t6 - t5} milliseconds`);
 });
 
 chrome.runtime.onStartup.addListener( () => {
