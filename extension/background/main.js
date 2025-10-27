@@ -1,7 +1,6 @@
 import { setToolbarIcon } from '../common/toolbar-icon.js'
 import { initializeDynamicRules, clearDynamicRules } from './rules-generator.js'
-import psl from '../thirdparty/psl.mjs';
-import { getSetting } from '../common/settings.js';
+import { injectCssForCosmeticFilters } from './cosmetic-filter-manager.js';
 import { THEME_CONFIG } from '../common/theme.js';
 
 const addContentScripts = () => {
@@ -19,45 +18,6 @@ const addContentScripts = () => {
     ]
   );
 };
-
-const fileExists = async (path) => {
-  try {
-    const url = chrome.runtime.getURL(path);
-    const response = await fetch(url);
-    return response.ok;
-  } catch (error) {
-    return false;
-  }
-};
-
-const injectCssForCosmeticFilters = () => {
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
-    const url = new URL(details.url);
-    const registrableDomain = psl.get(url.hostname);
-    if (registrableDomain === null) {
-      return;
-    }
-    const setting = await getSetting(registrableDomain, 'blocking', 'ads', true);
-    if (!setting) {
-      return;
-    }
-    const files = [
-      'content_scripts/adblock_css/_default_.css',
-    ];
-    const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
-    if (await fileExists(domainSpecificFile)) {
-      files.push(domainSpecificFile);
-    }
-    console.log(`insertCSS for ${registrableDomain}`);
-    chrome.scripting.insertCSS({
-      target: {
-        tabId: details.tabId,
-        frameIds: [details.frameId]
-      },
-      files
-    });
-  }, {urls: ["<all_urls>"]});
-}
 
 chrome.runtime.onInstalled.addListener(async function (details) {
   await setToolbarIcon(THEME_CONFIG.toolbarIcon)
