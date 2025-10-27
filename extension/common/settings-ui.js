@@ -1,4 +1,4 @@
-import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
+import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
@@ -29,7 +29,7 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   category.appendChild(categoryTitle);
   settingIds.forEach(async (settingId) => {
     const toggle = await createToggle(settingId);
-    const keyPath = ["_SETTINGS_", domain, categoryId, settingId];
+    const keyPath = [SETTINGS_KEY_PREFIX, domain, categoryId, settingId];
     await bindToggleToStorage(toggle, store, keyPath, /*defaultValue*/ true);
     category.appendChild(toggle);
   });
