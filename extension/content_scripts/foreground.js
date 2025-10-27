@@ -11,7 +11,6 @@ const redefinePropertyValues = (obj, propertyMap) => {
   }
   Object.defineProperties(obj, properties)
 }
-console.log("redefinePropertyValues", redefinePropertyValues, typeof redefinePropertyValues)
 
 const oldMatchMedia = window.matchMedia
 
@@ -38,7 +37,6 @@ const spoofScreenSize = (minWidth, minHeight) => {
 
 const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight);
 
-console.log("41: redefinePropertyValues", redefinePropertyValues, typeof redefinePropertyValues)
 redefinePropertyValues(Navigator.prototype, {
   cookieEnabled: true,
   cpuClass: undefined,
