@@ -1,4 +1,4 @@
-import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX } from '../common/settings.js';
+import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
@@ -27,13 +27,24 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   const categoryTitle = document.createElement('h2');
   categoryTitle.textContent = getLocalizedText(categoryId);
   category.appendChild(categoryTitle);
-  settingIds.forEach(async (settingId) => {
+  for (const settingId of settingIds) {
     const toggle = await createToggle(settingId);
     const keyPath = [SETTINGS_KEY_PREFIX, domain, categoryId, settingId];
     await bindToggleToStorage(toggle, store, keyPath, /*defaultValue*/ true);
     category.appendChild(toggle);
-  });
+  }
   return category;
+};
+
+// Add a listener that reloads the tab when a per-site toggle is clicked.
+const setupInputListeners = () => {
+  document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
+    input.addEventListener('change', async () => {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const tabId = tabs[0].id;
+      await chrome.tabs.reload(tabId);
+    });
+  });
 };
 
 export const setupSettingsUI = async (domain) => {
@@ -45,6 +56,9 @@ export const setupSettingsUI = async (domain) => {
   for (const [categoryId, settingConfigs] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(storage.local, domain, categoryId, Object.keys(settingConfigs));
     settingsContainer.appendChild(toggleCategory);
+  }
+  if (domain !== ALL_DOMAINS) {
+    setupInputListeners();
   }
 };
 

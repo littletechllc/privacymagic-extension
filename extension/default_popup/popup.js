@@ -1,10 +1,12 @@
 import psl from '../thirdparty/psl.mjs';
 import { setupSettingsUI } from '../common/settings-ui.js';
 
-document.getElementById('settingsButton').addEventListener('click', function() {
-  console.log('settingsButton clicked');
-  chrome.runtime.openOptionsPage();
-});
+const setupOptionsButton = () => {
+  document.getElementById('optionsButton').addEventListener('click', function() {
+    console.log('optionsButton clicked');
+    chrome.runtime.openOptionsPage();
+  });
+}
 
 const faviconURL = (pageUrl) => {
   const url = new URL(chrome.runtime.getURL("/_favicon/"));
@@ -28,6 +30,9 @@ const updateSiteInfo = async (domain) => {
   document.getElementById('favicon').src = faviconURL(url);
 }
 
-const domain = await getDomainForCurrentTab();
-await updateSiteInfo(domain);
-await setupSettingsUI(domain);
+document.addEventListener('DOMContentLoaded', async () => {
+  const domain = await getDomainForCurrentTab();
+  setupOptionsButton();
+  await updateSiteInfo(domain);
+  await setupSettingsUI(domain);
+});
