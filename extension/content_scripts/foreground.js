@@ -1,8 +1,4 @@
-const redefineAPIs = function (exemptions = []) {
-
-//console.log("Hello from content script", window.location.href, top.location?.href)
-
-
+(() => {
 const redefinePropertyValues = (obj, propertyMap) => {
   let properties = {}
   for (const [prop, value] of Object.entries(propertyMap)) {
@@ -11,7 +7,28 @@ const redefinePropertyValues = (obj, propertyMap) => {
   Object.defineProperties(obj, properties)
 };
 
-if (!exemptions.includes('screen')) {
+window.redefineNavigator = () => {
+  redefinePropertyValues(Navigator.prototype, {
+    cookieEnabled: true,
+    cpuClass: undefined,
+    deviceMemory: 1,
+  //  doNotTrack: '1',
+    globalPrivacyControl: true,
+    hardwareConcurrency: 4,
+  //  languages: [navigator.language],
+    maxTouchPoints: 1,
+    onLine: true,
+    //oscpu: undefined,
+    pdfViewerEnabled: true,
+    platform: 'Windows',
+    productSub: '20030107',
+    vendor: 'Google Inc.',
+   // vendorSub: ''
+  });
+};
+
+window.redefineScreen = () => {
+  console.log('redefineScreen');
 
 const oldMatchMedia = window.matchMedia;
 
@@ -38,23 +55,6 @@ const spoofScreenSize = (minWidth, minHeight) => {
 
 const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight);
 
-redefinePropertyValues(Navigator.prototype, {
-  cookieEnabled: true,
-  cpuClass: undefined,
-  deviceMemory: 1,
-//  doNotTrack: '1',
-  globalPrivacyControl: true,
-  hardwareConcurrency: 4,
-//  languages: [navigator.language],
-  maxTouchPoints: 1,
-  onLine: true,
-  oscpu: undefined,
-  pdfViewerEnabled: true,
-  platform: 'Windows',
-  productSub: '20030107',
-  vendor: 'Google Inc.',
- // vendorSub: ''
-});
 redefinePropertyValues(Screen.prototype, {
   availHeight: spoofedScreenHeight,
   availLeft: 0,
@@ -75,10 +75,10 @@ redefinePropertyValues(window, {
   screenX: 0,
   screenY: 0
 });
-}
+};
 
-if (!exemptions.includes('window_name')) {
-
+window.redefineWindowName = () => {
+  console.log('redefineWindowName');
   const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
   if (!propDescriptor) {
     return;
@@ -123,6 +123,6 @@ if (!exemptions.includes('window_name')) {
     },
     configurable: true
   });
-}
-
 };
+
+})();
