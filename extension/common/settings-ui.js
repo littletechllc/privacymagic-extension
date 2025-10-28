@@ -7,20 +7,12 @@ const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
   const storageValue = await store.get(keyPath);
   const input = toggle.querySelector('input');
   input.checked = storageValue !== undefined ? storageValue : defaultValue;
-  input.addEventListener('change', (event) => {
-    const value = event.target.checked;
-    if (value === defaultValue) {
-      store.remove(keyPath);
-    } else {
-      store.set(keyPath, value);
-    }
-  });
   store.listenForChanges(keyPath, (value) => {
     input.checked = value !== undefined ? value : defaultValue;
   });
 }
 
-const createToggleCategory = async (store, domain, categoryId, settingIds) => {
+const createToggleCategory = async (store, domain, settingIds, categoryId) => {
   const category = document.createElement('div');
   category.id = categoryId;
   category.className = 'toggle-box';
@@ -29,7 +21,7 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
   category.appendChild(categoryTitle);
   for (const settingId of settingIds) {
     const toggle = await createToggle(settingId);
-    const keyPath = [SETTINGS_KEY_PREFIX, domain, categoryId, settingId];
+    const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId];
     await bindToggleToStorage(toggle, store, keyPath, /*defaultValue*/ true);
     category.appendChild(toggle);
   }
@@ -37,9 +29,16 @@ const createToggleCategory = async (store, domain, categoryId, settingIds) => {
 };
 
 // Add a listener that reloads the tab when a per-site toggle is clicked.
-const setupInputListeners = () => {
+const setupInputListeners = (domain) => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
-    input.addEventListener('change', async () => {
+    input.addEventListener('change', async (event) => {
+      const settingId = event.target.id;
+      await chrome.runtime.sendMessage({
+        type: 'updateSetting',
+        domain,
+        settingId,
+        value: event.target.checked,
+      });
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
       const tabId = tabs[0].id;
       await chrome.tabs.reload(tabId);
@@ -53,12 +52,17 @@ export const setupSettingsUI = async (domain) => {
     throw new Error('Settings container not found');
   }
   settingsContainer.innerHTML = `<h1>Privacy Magic Protections</h1>`;
-  for (const [categoryId, settingConfigs] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
-    const toggleCategory = await createToggleCategory(storage.local, domain, categoryId, Object.keys(settingConfigs));
+  const settingsForCategory = {};
+  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
+    settingsForCategory[settingConfig.category] ||= [];
+    settingsForCategory[settingConfig.category].push(settingId);
+  }
+  for (const [categoryId, settingIds] of Object.entries(settingsForCategory)) {
+    const toggleCategory = await createToggleCategory(storage.local, domain, settingIds, categoryId);
     settingsContainer.appendChild(toggleCategory);
   }
   if (domain !== ALL_DOMAINS) {
-    setupInputListeners();
+    setupInputListeners(domain);
   }
 };
 

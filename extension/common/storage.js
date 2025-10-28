@@ -11,7 +11,7 @@ class StorageProxy {
 
   async set(keyPath, value) {
     const key = keyPathToKey(keyPath)
-    return this.storage.set({ [key]: value });
+    return (await this.storage.set({ [key]: value }));
   };
 
   async get(keyPath) {
@@ -21,11 +21,11 @@ class StorageProxy {
 
   async remove(keyPath) {
     const key = keyPathToKey(keyPath)
-    return this.storage.remove(key);
+    return (await this.storage.remove(key));
   };
 
   async clear() {
-    return this.storage.clear();
+    return (await this.storage.clear());
   };
 
   async getAll() {
@@ -33,7 +33,7 @@ class StorageProxy {
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
   };
 
-  async listenForChanges(keyPath, callback) {
+  listenForChanges(keyPath, callback) {
     this.storage.onChanged.addListener((changes) => {
       const key = keyPathToKey(keyPath)
       if (changes[key]) {
@@ -42,9 +42,9 @@ class StorageProxy {
     });
   };
 
-  async listenForAnyChanges(callback) {
-    this.storage.onChanged.addListener(change => {
-      callback(Object.entries(change).map(
+  listenForAnyChanges(callback) {
+    this.storage.onChanged.addListener(async (change) => {
+      await callback(Object.entries(change).map(
         ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
     });
   };

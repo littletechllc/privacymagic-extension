@@ -1,44 +1,46 @@
 import { storage } from './storage.js';
 
 export const PRIVACY_SETTINGS_CONFIG = {
-  blocking: {
-    ads: {
-      dnr: true,
-    }
+  ads: {
+    dnr: true,
+    category: 'blocking',
   },
-  connections: {
-    client_hints: {
-      dnr: true
-    },
-    headers: {
-      dnr: true
-    },
-    query_parameters: {
-      dnr: true
-    },
-    gpc: {
-      script: true,
-      headers: true
-    }
+  client_hints: {
+    dnr: true,
+    category: 'connections'
   },
-  fingerprinting: {
-    hardware: {
-      script: true
-    },
-    screen: {
-      script: true
-    },
-    window_name: {
-      script: true
-    },
-  }
+  headers: {
+    dnr: true,
+    category: 'connections'
+  },
+  query_parameters: {
+    dnr: true,
+    category: 'connections'
+  },
+  gpc: {
+    script: true,
+    headers: true,
+    category: 'connections'
+  },  
+  hardware: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  screen: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  window_name: {
+    script: true,
+    category: 'fingerprinting'
+  },
 };
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
 export const SETTINGS_KEY_PREFIX = "_SETTINGS_";
 
-export const getSetting = async (domain, categoryId, settingId) => {
-  const default_setting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, categoryId, settingId]);
+export const getSetting = async (domain, settingId) => {
+  const default_setting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId]);
   // If a setting has been set to false for the default settings,
   // then it overrides the domain-specific setting and we return
   // false regardless of the domain-specific value.
@@ -46,7 +48,7 @@ export const getSetting = async (domain, categoryId, settingId) => {
     return false;
   }
   const domain_specific_setting = await storage.local.get(
-    [SETTINGS_KEY_PREFIX, domain, categoryId, settingId]
+    [SETTINGS_KEY_PREFIX, domain, settingId]
   );
   // If a domain-specific setting has been set to false, then we
   // return false.
@@ -58,7 +60,7 @@ export const getSetting = async (domain, categoryId, settingId) => {
   return true;
 };
 
-export const setSetting = async (domain, categoryId, settingId, value) => {
+export const setSetting = async (domain, settingId, value) => {
   if (value !== true && value !== false) {
     throw new Error(`Invalid setting value: ${value}`);
   }
@@ -67,20 +69,20 @@ export const setSetting = async (domain, categoryId, settingId, value) => {
   // the default value is true.
   if (domain === ALL_DOMAINS) {
     if (value === true) {
-      await storage.local.remove([SETTINGS_KEY_PREFIX, ALL_DOMAINS, categoryId, settingId]);
+      await storage.local.remove([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId]);
     } else {
-      await storage.local.set([SETTINGS_KEY_PREFIX, ALL_DOMAINS, categoryId, settingId], false);
+      await storage.local.set([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId], false);
     }
     return;
   }
   // If the setting value is the same as the default value, then we remove the domain-specific setting.
-  const default_setting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, categoryId, settingId]);
+  const default_setting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId]);
   if (default_setting === value) {
-    await storage.local.remove([SETTINGS_KEY_PREFIX, domain, categoryId, settingId]);
+    await storage.local.remove([SETTINGS_KEY_PREFIX, domain, settingId]);
     return;
   }
   // Otherwise, we set the domain-specific setting value.
-  await storage.local.set([SETTINGS_KEY_PREFIX, domain, categoryId, settingId], value);
+  await storage.local.set([SETTINGS_KEY_PREFIX, domain, settingId], value);
 };
 
 export const getAllSettings = async () => {
@@ -90,21 +92,19 @@ export const getAllSettings = async () => {
 
 export const getSettingsForProtectionType = (protection_type) => {
   const settings = [];
-  for (const [categoryId, categoryConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
-    for (const [settingId, settingConfig] of Object.entries(categoryConfig)) {
-      if (settingConfig[protection_type]) {
-        settings.push(settingId);
-      }
+  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
+    if (settingConfig[protection_type]) {
+      settings.push(settingId);
     }
   }
   return settings;
 }
 
 export const listenForSettingsChanges = (callback) => {
-  storage.local.listenForAnyChanges((changes) => {
+  storage.local.listenForAnyChanges(async (changes) => {
     const settingsChanges = changes.filter(([keypath, value]) => keypath[0] === SETTINGS_KEY_PREFIX)
            .map(([keyPath, value]) => [keyPath, value === undefined ? true : value]);
-    callback(settingsChanges);
+    await callback(settingsChanges);
   });
 }
 
