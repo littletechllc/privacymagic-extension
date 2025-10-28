@@ -11,7 +11,6 @@ window.redefineNavigator = () => {
   redefinePropertyValues(Navigator.prototype, {
     cookieEnabled: true,
   //  doNotTrack: '1',
-    globalPrivacyControl: true,
   //  languages: [navigator.language],
     maxTouchPoints: 1,
     onLine: true,
@@ -21,6 +20,12 @@ window.redefineNavigator = () => {
     productSub: '20030107',
     vendor: 'Google Inc.',
    // vendorSub: ''
+  });
+};
+
+window.redefineGlobalPrivacyControl = () => {
+  redefinePropertyValues(Navigator.prototype, {
+    globalPrivacyControl: true,
   });
 };
 

@@ -106,5 +106,9 @@
   "resetToDefaults": {
     "message": "Reset to Defaults",
     "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "Global Privacy Control",
+    "description": "Setting to enable global privacy control"
   }
 }

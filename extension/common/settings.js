@@ -16,11 +16,12 @@ export const PRIVACY_SETTINGS_CONFIG = {
     query_parameters: {
       dnr: true
     },
+    gpc: {
+      script: true,
+      headers: true
+    }
   },
   fingerprinting: {
-    do_not_track: {
-
-    },
     hardware: {
       script: true
     },
