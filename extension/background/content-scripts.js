@@ -1,65 +1,63 @@
-import { SETTINGS_KEY_PREFIX, ALL_DOMAINS, getAllSettings, getSettingsForProtectionType, listenForSettingsChanges } from '../common/settings.js';
-
-const getExemptions = (allSettings) => {
-  const exemptions = {};
-  for (const [[type, domain, categoryId, settingId], value] of allSettings) {
-    exemptions[settingId] ||= [];
-    if (type === SETTINGS_KEY_PREFIX) {
-      if (domain === ALL_DOMAINS) {
-        exemptions[settingId] = ["<all_urls>"];
-      } else if (exemptions[settingId].length === 0 || exemptions[settingId][0] !== "<all_urls>") {
-        exemptions[settingId].push(`*://${domain}/*`);
-        exemptions[settingId].push(`*://*.${domain}/*`);
-      }
-    }
-  }
-  return exemptions;
+const initRuleOptions = {
+  allFrames: true,
+  matchOriginAsFallback: true,
+  runAt: 'document_start',
+  world: 'MAIN',
 }
 
-self.getExemptions = getExemptions;
-
-let contentScriptsCreated = false;
-
-const addContentScripts = async () => {
-  const settings = await getAllSettings();
-  const exemptions = getExemptions(settings);
-  const rules = []
-  rules.push({
-    id: 'foreground',
-    js: ['content_scripts/foreground.js'],
-    matches: ['<all_urls>'],
-  });
-  for (const settingId of getSettingsForProtectionType('script')) {
-    const excludeMatches = exemptions[settingId] || [];
-    rules.push({
-      id: `toplevel_${settingId}`,
-      js: [`content_scripts/toplevel/${settingId}.js`],
-      matches: ['<all_urls>'],
-      excludeMatches,
-    });
-    rules.push({
-      id: `sublevel_${settingId}`,
-      js: [`content_scripts/sublevel/${settingId}.js`],
-      matches: ['<all_urls>'],        
-      // excludeMatches not used because cross-origin subframes aren't exempted
-    });
-  }
-  const rules_full = rules.map(rule => ({
-    ...rule,
-    allFrames: true,
-    matchOriginAsFallback: true,
-    runAt: 'document_start',
-    world: 'MAIN',
-  }));
-  if (!contentScriptsCreated) {
-    await chrome.scripting.registerContentScripts(rules_full);
-    contentScriptsCreated = true;
-  } else {
-    await chrome.scripting.updateContentScripts(rules_full);
-  }
+const foregroundRule = {
+  id: 'foreground',
+  js: ['content_scripts/foreground.js'],
+  matches: ['<all_urls>'],
+  ...initRuleOptions,
 };
 
-export const setupContentScripts = () => {
-  addContentScripts();
-  listenForSettingsChanges(addContentScripts);
+const toplevelRule = (settingId) => ({
+  id: `toplevel_${settingId}`,
+  js: [`content_scripts/toplevel/${settingId}.js`],
+  matches: ['<all_urls>'],
+  excludeMatches: [],
+  ...initRuleOptions,
+});
+
+const sublevelRule = (settingId) => ({
+  id: `sublevel_${settingId}`,
+  js: [`content_scripts/sublevel/${settingId}.js`],
+  matches: ['<all_urls>'],        
+  // excludeMatches not used because cross-origin subframes aren't exempted
+  ...initRuleOptions,
+});
+
+export const updateContentScripts = async (domain, settingId, value) => {
+  const currentToplevelRules = await chrome.scripting.getRegisteredContentScripts({
+    ids: [toplevelRule(settingId).id],
+  });
+  const currentToplevelRule = currentToplevelRules[0];
+  if (!currentToplevelRule) {
+    return;
+  }
+  const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
+  const excludeMatches = currentToplevelRule.excludeMatches || [];
+  if (value === false) {
+    // Protection is disabled, so we add the matches to the exclude matches.
+    currentToplevelRule.excludeMatches = [...excludeMatches, ...matchStrings];
+  } else {
+    currentToplevelRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
+  }
+  const rules = [
+    foregroundRule,
+    currentToplevelRule,
+    sublevelRule(settingId),
+  ];
+  await chrome.scripting.updateContentScripts(rules);
+  const totalContentRules =await chrome.scripting.getRegisteredContentScripts();
+}
+
+export const createContentScripts = async (settingId) => {
+  const rules = [
+    foregroundRule,
+    toplevelRule(settingId),
+    sublevelRule(settingId),
+  ];
+  await chrome.scripting.registerContentScripts(rules);
 }
