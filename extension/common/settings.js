@@ -22,7 +22,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
 
     },
     hardware: {
-
+      script: true
     },
     screen: {
       script: true
