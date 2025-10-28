@@ -10,11 +10,8 @@ const redefinePropertyValues = (obj, propertyMap) => {
 window.redefineNavigator = () => {
   redefinePropertyValues(Navigator.prototype, {
     cookieEnabled: true,
-    cpuClass: undefined,
-    deviceMemory: 1,
   //  doNotTrack: '1',
     globalPrivacyControl: true,
-    hardwareConcurrency: 4,
   //  languages: [navigator.language],
     maxTouchPoints: 1,
     onLine: true,
@@ -24,6 +21,15 @@ window.redefineNavigator = () => {
     productSub: '20030107',
     vendor: 'Google Inc.',
    // vendorSub: ''
+  });
+};
+
+window.redefineHardware = () => {
+  redefinePropertyValues(Navigator.prototype, {
+    cpuClass: undefined,
+    deviceMemory: 1,
+    hardwareConcurrency: 4,
+    maxTouchPoints: 1,
   });
 };
 
