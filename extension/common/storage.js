@@ -42,6 +42,13 @@ class StorageProxy {
     });
   };
 
+  async listenForAnyChanges(callback) {
+    this.storage.onChanged.addListener(change => {
+      callback(Object.entries(change).map(
+        ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
+    });
+  };
+
 }
 
 let storageLocal_, storageSession_, storageSync_, storageManaged_

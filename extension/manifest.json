@@ -44,26 +44,13 @@
   "content_scripts": [
     {
       "js": [
-        "content_scripts/foreground.js"
-      ],
-      "matches": [
-        "*://*/*"
-      ],
-      "all_frames": true,
-      "match_about_blank": true,
-      "match_origin_as_fallback": true,
-      "run_at": "document_start",
-      "world": "MAIN"
-    },
-    {
-      "js": [
         "content_scripts/youtube.js"
       ],
       "matches": [
         "*://*.youtube.com/*",
         "*://youtube.com/*"
       ],
-      "all_frames": true,
+      "all_frames": false,
       "match_about_blank": true,
       "match_origin_as_fallback": true,
       "run_at": "document_end",
