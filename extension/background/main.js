@@ -56,8 +56,7 @@ const createTopLevelHeaderRule = async (settingId) => {
 };
 
 // Add or remove a domain from the excluded request domains for the top level header rule.
-const updateHeaderRule = async (domain, settingId, value) => {
-  console.log(`updateHeaderRule(${domain}, ${settingId}, ${value})`);
+const updateTopLevelHeaderRule = async (domain, settingId, value) => {
   if (!settingId in PRIVACY_MAGIC_HEADERS) {
     return;
   }
@@ -77,7 +76,6 @@ const updateHeaderRule = async (domain, settingId, value) => {
       }
     }
   }
-  console.log("rules:", rules);
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules,
@@ -130,21 +128,6 @@ const toggleExcludedTabIdsForSubresourceHeader = async (settingId, tabId, value)
   });
 };
 
-
-
-const getExcludedRequestDomains = async (allSettings) => {
-  const excludedRequestDomains = {};
-  for (const [[type, domain, settingId], value] of allSettings) {
-    if (type === SETTINGS_KEY_PREFIX && settingId in PRIVACY_MAGIC_HEADERS) {
-      if (value === false) {
-        excludedRequestDomains[settingId] ||= [];
-        excludedRequestDomains[settingId].push(domain);
-      }
-    }
-  }
-  return excludedRequestDomains;
-}
-
 const setupTopLevelHeaders = async () => {
   // Create the top level header rule, without any excluded request domains.
   const allSettings = await getAllSettings();
@@ -154,7 +137,7 @@ const setupTopLevelHeaders = async () => {
   // Add necessary excluded request domains for the top level header rule.
   for (const [[type, domain, settingId], value] of allSettings) {
     if (type === SETTINGS_KEY_PREFIX && settingId in PRIVACY_MAGIC_HEADERS) {
-      await updateHeaderRule(domain, settingId, value);
+      await updateTopLevelHeaderRule(domain, settingId, value);
     }
   }
 };
@@ -195,16 +178,24 @@ const setupHeaders = async () => {
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
   await updateContentScripts(domain, settingId, value);
-  //await updateHeaderRule(domain, settingId, value);
+  await updateHeaderRule(domain, settingId, value);
 }
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'updateSetting') {
+    updateSetting(message.domain, message.settingId, message.value)
+      .then(() => {
+        sendResponse({ success: true });
+      })
+      .catch((error) => {
+        sendResponse({ success: false, error: error.message });
+      });
+    return true; // Indicates we will send a response asynchronously
+  }
+  return false;
+});
+
 chrome.runtime.onInstalled.addListener(async function (details) {
-  chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    if (message.type === 'updateSetting') {
-      await updateSetting(message.domain, message.settingId, message.value);
-    }
-    return true;
-  });
   await setToolbarIcon(THEME_CONFIG.toolbarIcon)
   await clearDynamicRules();
   //await chrome.runtime.openOptionsPage()

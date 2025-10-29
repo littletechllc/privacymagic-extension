@@ -39,9 +39,10 @@ export const updateContentScripts = async (domain, settingId, value) => {
   const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
   const excludeMatches = currentToplevelRule.excludeMatches || [];
   if (value === false) {
-    // Protection is disabled, so we add the matches to the exclude matches.
+    // Protection is disabled, so we add the matches to the exclusion list.
     currentToplevelRule.excludeMatches = [...excludeMatches, ...matchStrings];
   } else {
+    // Protection is enabled, so we remove the matches from the exclusion list.
     currentToplevelRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
   }
   const rules = [
