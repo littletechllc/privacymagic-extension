@@ -15,22 +15,6 @@ const PRIVACY_MAGIC_HEADERS = {
   },
 }
 
-const ALL_RESOURCE_TYPES = [
-  "main_frame",
-  "sub_frame",
-  "stylesheet",
-  "script",
-  "image",
-  "font",
-  "object",
-  "xmlhttprequest",
-  "ping",
-  "csp_report",
-  "media",
-  "websocket",
-  "other"
-]
-
 // Create the top level header rule, without any excluded request domains.
 const createTopLevelHeaderRule = async (settingId) => {
   const { headers, id } = PRIVACY_MAGIC_HEADERS[settingId];
@@ -60,7 +44,7 @@ const updateTopLevelHeaderRule = async (domain, settingId, value) => {
   if (!settingId in PRIVACY_MAGIC_HEADERS) {
     return;
   }
-  const { headers, id } = PRIVACY_MAGIC_HEADERS[settingId];
+  const { id } = PRIVACY_MAGIC_HEADERS[settingId];
   const rules = await chrome.declarativeNetRequest.getDynamicRules({
     ruleIds: [id],
   });
