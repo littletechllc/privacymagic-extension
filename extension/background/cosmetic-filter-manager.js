@@ -18,7 +18,7 @@ export const injectCssForCosmeticFilters = () => {
     if (registrableDomain === null) {
       return;
     }
-    const setting = await getSetting(registrableDomain, 'blocking', 'ads', true);
+    const setting = await getSetting(registrableDomain, 'ads');
     if (!setting) {
       return;
     }
