@@ -1,3 +1,5 @@
+/* global chrome */
+
 import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';
@@ -10,7 +12,7 @@ const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
   store.listenForChanges(keyPath, (value) => {
     input.checked = value !== undefined ? value : defaultValue;
   });
-}
+};
 
 const createToggleCategory = async (store, domain, settingIds, categoryId) => {
   const category = document.createElement('div');
@@ -22,7 +24,7 @@ const createToggleCategory = async (store, domain, settingIds, categoryId) => {
   for (const settingId of settingIds) {
     const toggle = await createToggle(settingId);
     const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId];
-    await bindToggleToStorage(toggle, store, keyPath, /*defaultValue*/ true);
+    await bindToggleToStorage(toggle, store, keyPath, /* defaultValue */ true);
     category.appendChild(toggle);
   }
   return category;
@@ -38,7 +40,7 @@ const setupInputListeners = (domain) => {
           type: 'updateSetting',
           domain,
           settingId,
-          value: event.target.checked,
+          value: event.target.checked
         });
         console.log('sendMessage response:', response);
       } catch (error) {
@@ -56,7 +58,7 @@ export const setupSettingsUI = async (domain) => {
   if (!settingsContainer) {
     throw new Error('Settings container not found');
   }
-  settingsContainer.innerHTML = `<h1>Privacy Magic Protections</h1>`;
+  settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>';
   const settingsForCategory = {};
   for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     settingsForCategory[settingConfig.category] ||= [];
@@ -70,4 +72,3 @@ export const setupSettingsUI = async (domain) => {
     setupInputListeners(domain);
   }
 };
-

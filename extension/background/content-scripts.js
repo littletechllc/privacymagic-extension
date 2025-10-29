@@ -1,15 +1,17 @@
+/* global chrome */
+
 const initRuleOptions = {
   allFrames: true,
   matchOriginAsFallback: true,
   runAt: 'document_start',
-  world: 'MAIN',
-}
+  world: 'MAIN'
+};
 
 const foregroundRule = {
   id: 'foreground',
   js: ['content_scripts/foreground.js'],
   matches: ['<all_urls>'],
-  ...initRuleOptions,
+  ...initRuleOptions
 };
 
 const toplevelRule = (settingId) => ({
@@ -17,20 +19,20 @@ const toplevelRule = (settingId) => ({
   js: [`content_scripts/toplevel/${settingId}.js`],
   matches: ['<all_urls>'],
   excludeMatches: [],
-  ...initRuleOptions,
+  ...initRuleOptions
 });
 
 const sublevelRule = (settingId) => ({
   id: `sublevel_${settingId}`,
   js: [`content_scripts/sublevel/${settingId}.js`],
-  matches: ['<all_urls>'],        
+  matches: ['<all_urls>'],
   // excludeMatches not used because cross-origin subframes aren't exempted
-  ...initRuleOptions,
+  ...initRuleOptions
 });
 
 export const updateContentScripts = async (domain, settingId, value) => {
   const currentToplevelRules = await chrome.scripting.getRegisteredContentScripts({
-    ids: [toplevelRule(settingId).id],
+    ids: [toplevelRule(settingId).id]
   });
   const currentToplevelRule = currentToplevelRules[0];
   if (!currentToplevelRule) {
@@ -48,17 +50,16 @@ export const updateContentScripts = async (domain, settingId, value) => {
   const rules = [
     foregroundRule,
     currentToplevelRule,
-    sublevelRule(settingId),
+    sublevelRule(settingId)
   ];
   await chrome.scripting.updateContentScripts(rules);
-  const totalContentRules =await chrome.scripting.getRegisteredContentScripts();
-}
+};
 
 export const createContentScripts = async (settingId) => {
   const rules = [
     foregroundRule,
     toplevelRule(settingId),
-    sublevelRule(settingId),
+    sublevelRule(settingId)
   ];
   await chrome.scripting.registerContentScripts(rules);
-}
+};

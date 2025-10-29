@@ -19,14 +19,12 @@ export const setupPrefsUI = async () => {
   if (!prefsContainer) {
     throw new Error('Prefs container not found');
   }
-  
   // Clear container and add title
   prefsContainer.innerHTML = '<h1>Browser Preferences</h1>';
-  
   // Create toggles for each preference
   for (const [checkboxId, { prefName, locked, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
     const toggle = await createToggle(checkboxId, locked);
-    await bindPrefToCheckbox(toggle, prefName, inverted);    
+    await bindPrefToCheckbox(toggle, prefName, inverted);
     prefsContainer.appendChild(toggle);
   }
 };
