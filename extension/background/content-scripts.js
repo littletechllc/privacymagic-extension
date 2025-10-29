@@ -1,5 +1,7 @@
 /* global chrome */
 
+import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
+
 const initRuleOptions = {
   allFrames: true,
   matchOriginAsFallback: true,
@@ -48,18 +50,20 @@ export const updateContentScripts = async (domain, settingId, value) => {
     currentToplevelRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
   }
   const rules = [
-    foregroundRule,
     currentToplevelRule,
     sublevelRule(settingId)
   ];
   await chrome.scripting.updateContentScripts(rules);
 };
 
-export const createContentScripts = async (settingId) => {
+export const setupContentScripts = async () => {
   const rules = [
     foregroundRule,
-    toplevelRule(settingId),
-    sublevelRule(settingId)
   ];
+  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
+    if (settingConfig.script) {
+      rules.push(toplevelRule(settingId), sublevelRule(settingId));
+    }
+  }
   await chrome.scripting.registerContentScripts(rules);
 };
