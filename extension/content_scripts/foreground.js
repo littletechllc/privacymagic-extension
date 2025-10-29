@@ -20,8 +20,9 @@
       pdfViewerEnabled: true,
       platform: 'Windows',
       productSub: '20030107',
-      vendor: 'Google Inc.'
+      vendor: 'Google Inc.',
       // vendorSub: ''
+      webdriver: false,
     });
   };
 
@@ -37,6 +38,21 @@
       deviceMemory: 1,
       hardwareConcurrency: 4,
       maxTouchPoints: 1
+    });
+    redefinePropertyValues(DevicePosture.prototype, {
+      type: 'continuous',
+      addEventListener: ( /* ignore */) => { /* do nothing */ },
+      removeEventListener: ( /* ignore */) => { /* do nothing */ },
+      dispatchEvent: ( /* ignore */) => { /* do nothing */ },
+    });
+    redefinePropertyValues(DevicePosture.prototype, {
+      change: {
+        get: () => { return null; },
+        set: (value) => { /* do nothing */ },
+        configurable: false,
+        enumerable: true,
+        writable: true
+      },
     });
   };
 
