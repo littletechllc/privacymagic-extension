@@ -90,6 +90,64 @@
     });
   };
 
+  window.redefineUserAgent = () => {
+    console.log('redefineUserAgent');
+    const ChromeVersion = '141.0.0.0';
+    const ShortChromeVersion = ChromeVersion.split('.')[0];
+    redefinePropertyValues(Navigator.prototype, {
+      userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ChromeVersion} Safari/537.36`,
+      appVersion: `	5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ChromeVersion} Safari/537.36`,
+    });
+    redefinePropertyValues(NavigatorUAData.prototype, {
+      brands: [
+        { brand: 'Google Chrome', version: ShortChromeVersion },
+        { brand: 'Not?A_Brand', version: '8' },
+        { brand: 'Chromium', version: ShortChromeVersion }
+      ],
+      uaFullVersion: ChromeVersion,
+      fullVersionList: [
+        { brand: 'Google Chrome', version: ChromeVersion },
+        { brand: 'Not?A_Brand', version: '8.0.0.0' },
+        { brand: 'Chromium', version: ChromeVersion }
+      ],
+      wow64: false,
+      bitness: 64,
+      platform: 'Windows',
+      architecture: 'arm',
+      mobile: false,
+      formFactors: ['Desktop'],
+      platformVersion: '26.0.0',
+      mobile: false,
+      model: '',
+    });
+  };
+
+  window.redefineBattery = () => {
+    console.log('redefineBattery');
+    redefinePropertyValues(BatteryManager.prototype, {
+      charging: true,
+      chargingTime: 0,
+      dischargingTime: Infinity,
+      level: 1,
+      addEventListener: ( /* ignore */) => { /* do nothing */ },
+      removeEventListener: ( /* ignore */) => { /* do nothing */ },
+      dispatchEvent: ( /* ignore */) => { /* do nothing */ },
+    });
+    const silencedEventProperty = {
+      get: () => { return null; },
+      set: (value) => { /* do nothing */ },
+      configurable: false,
+      enumerable: true,
+      writable: true
+    }
+    Object.defineProperties(BatterManager.prototype, {
+      onchargingchange: silencedEventProperty,
+      onchargingtimechange: silencedEventProperty,
+      ondischargingtimechange: silencedEventProperty,
+      onlevelchange: silencedEventProperty,
+    });
+  };
+
   window.redefineWindowName = () => {
     console.log('redefineWindowName');
     const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
