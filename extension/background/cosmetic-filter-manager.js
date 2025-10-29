@@ -29,7 +29,6 @@ export const injectCssForCosmeticFilters = () => {
     if (await fileExists(domainSpecificFile)) {
       files.push(domainSpecificFile);
     }
-    console.log(`insertCSS for ${registrableDomain}`);
     chrome.scripting.insertCSS({
       target: {
         tabId: details.tabId,
