@@ -126,11 +126,13 @@ const updateSubresourceHeaderRule = async (settingId, tabId, value) => {
 };
 
 const setupSubresourceHeaderRules = async () => {
-  // Create the subresource header rules, without any excluded tab ids.
+  // Create the subresource header rules, initially without any excluded tab ids.
   for (const settingId of Object.keys(PRIVACY_MAGIC_HEADERS)) {
     await createSubresourceHeaderRule(settingId);
   }
-  // Wait for a top-level request or navigation and exclude the tabId from the subresource header rule.
+  // Wait for a top-level request or navigation and, if the setting is enabled for the
+  // top-level domain, update the subresource header rule to exclude the tabId from the
+  // rule for that setting.
   const listener = async ({ url, tabId }) => {
     const domain = psl.get(new URL(url).hostname);
     if (domain === null) {
@@ -146,6 +148,11 @@ const setupSubresourceHeaderRules = async () => {
 };
 
 export const setupHeaderRules = async () => {
+  // We take a two-part approach to header protections:
+  // 1. Protected headers on top-level requests are exempted on domains for whch the user
+  // has disabled protection.
+  // 2. Protected headers on subresource requests are exempted for tabs where the latest
+  // top-level request or navigation was to a domain for which the user has disabled protection.
   await setupTopLevelHeaderRules();
   await setupSubresourceHeaderRules();
 };

@@ -17,6 +17,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'connections'
   },
+  battery: {
+    script: true,
+    category: 'fingerprinting'
+  },
   gpc: {
     script: true,
     headers: true,
@@ -27,6 +31,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
     category: 'fingerprinting'
   },
   screen: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  useragent: {
     script: true,
     category: 'fingerprinting'
   },
