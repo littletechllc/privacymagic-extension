@@ -33,12 +33,17 @@ const setupInputListeners = (domain) => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
     input.addEventListener('change', async (event) => {
       const settingId = event.target.id;
-      await chrome.runtime.sendMessage({
-        type: 'updateSetting',
-        domain,
-        settingId,
-        value: event.target.checked,
-      });
+      try {
+        const response = await chrome.runtime.sendMessage({
+          type: 'updateSetting',
+          domain,
+          settingId,
+          value: event.target.checked,
+        });
+        console.log('sendMessage response:', response);
+      } catch (error) {
+        console.error('sendMessage error:', error);
+      }
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
       const tabId = tabs[0].id;
       await chrome.tabs.reload(tabId);
