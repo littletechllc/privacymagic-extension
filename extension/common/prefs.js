@@ -1,3 +1,5 @@
+/* global chrome */
+
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG = {
   doNotTrackEnabled: {

@@ -1,3 +1,5 @@
+/* global chrome */
+
 import psl from '../thirdparty/psl.mjs';
 import { getSetting } from '../common/settings.js';
 
@@ -23,7 +25,7 @@ export const injectCssForCosmeticFilters = () => {
       return;
     }
     const files = [
-      'content_scripts/adblock_css/_default_.css',
+      'content_scripts/adblock_css/_default_.css'
     ];
     const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
     if (await fileExists(domainSpecificFile)) {
@@ -36,5 +38,5 @@ export const injectCssForCosmeticFilters = () => {
       },
       files
     });
-  }, {urls: ["<all_urls>"]});
-}
+  }, { urls: ['<all_urls>'] });
+};

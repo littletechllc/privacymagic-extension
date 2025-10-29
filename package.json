@@ -8,5 +8,15 @@
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "semistandard": "^17.0.0"
+  },
+  "semistandard": {
+    "ignore": [
+      "extension/thirdparty/**",
+      "extension/content_scripts/sublevel/**",
+      "extension/content_scripts/toplevel/**"
+    ]
+  }
 }

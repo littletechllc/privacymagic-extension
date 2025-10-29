@@ -31,4 +31,4 @@ export const createToggle = async (id, locked = false) => {
   }
 
   return toggleOuter;
-}
+};

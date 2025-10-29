@@ -8,7 +8,7 @@ const setupIcon = async (iconString) => {
   document.getElementById('icon').textContent = iconString;
 };
 
-document.addEventListener('DOMContentLoaded', async () =>  {
+document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('reset-all').addEventListener('click', async () => {
     await resetAllPrefsToDefaults();
     await resetAllSettingsToDefaults(ALL_DOMAINS);
