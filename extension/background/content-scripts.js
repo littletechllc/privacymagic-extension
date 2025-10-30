@@ -26,11 +26,12 @@ export const updateContentScripts = async (domain, settingId, value) => {
   const excludeMatches = enabledRule.excludeMatches || [];
   const matches = disabledRule.matches || [];
   if (value === false) {
-    // Protection is disabled, so we add the matches to the exclusion list.
+    // Protection is disabled, so we exclude from enabled and add to disabled.
     enabledRule.excludeMatches = [...excludeMatches, ...matchStrings];
     disabledRule.matches = [...matches, ...matchStrings];
   } else {
-    // Protection is enabled, so we remove the matches from the exclusion list.
+    // Protection is enabled, so we remove the exclusions from enabled
+    // and add the matches from disabled.
     enabledRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
     disabledRule.matches = matches.filter(match => !matchStrings.includes(match));
   }
@@ -42,7 +43,7 @@ export const updateContentScripts = async (domain, settingId, value) => {
 
 export const setupContentScripts = async () => {
   const currentRules = await chrome.scripting.getRegisteredContentScripts({});
-  await chrome.scripting.unregisterContentScripts({ids: currentRules.map(rule => rule.id)});
+  await chrome.scripting.unregisterContentScripts({ ids: currentRules.map(rule => rule.id) });
   const allRules = [];
   allRules.push({
     id: 'foreground',

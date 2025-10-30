@@ -1,7 +1,6 @@
-/* global window, Navigator, Screen, innerWidth, innerHeight */
+/* global window, Navigator, Screen, innerWidth, innerHeight, BatteryManager, DevicePosture, NavigatorUAData */
 
 (() => {
-
   const redefinePropertyValues = (obj, propertyMap) => {
     const properties = {};
     for (const [prop, value] of Object.entries(propertyMap)) {
@@ -43,9 +42,9 @@
       });
       redefinePropertyValues(DevicePosture.prototype, {
         type: 'continuous',
-        addEventListener: ( /* ignore */) => { /* do nothing */ },
-        removeEventListener: ( /* ignore */) => { /* do nothing */ },
-        dispatchEvent: ( /* ignore */) => { /* do nothing */ },
+        addEventListener: (/* ignore */) => { /* do nothing */ },
+        removeEventListener: (/* ignore */) => { /* do nothing */ },
+        dispatchEvent: (/* ignore */) => { /* do nothing */ }
       });
       redefinePropertyValues(DevicePosture.prototype, {
         change: {
@@ -54,7 +53,7 @@
           configurable: false,
           enumerable: true,
           writable: true
-        },
+        }
       });
     },
     screen: () => {
@@ -104,7 +103,7 @@
       const ShortChromeVersion = ChromeVersion.split('.')[0];
       redefinePropertyValues(Navigator.prototype, {
         userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ChromeVersion} Safari/537.36`,
-        appVersion: `	5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ChromeVersion} Safari/537.36`,
+        appVersion: `5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${ChromeVersion} Safari/537.36`
       });
       redefinePropertyValues(NavigatorUAData.prototype, {
         brands: [
@@ -125,8 +124,7 @@
         mobile: false,
         formFactors: ['Desktop'],
         platformVersion: '26.0.0',
-        mobile: false,
-        model: '',
+        model: ''
       });
     },
     battery: () => {
@@ -135,21 +133,21 @@
         chargingTime: 0,
         dischargingTime: Infinity,
         level: 1,
-        addEventListener: ( /* ignore */) => { /* do nothing */ },
-        removeEventListener: ( /* ignore */) => { /* do nothing */ },
-        dispatchEvent: ( /* ignore */) => { /* do nothing */ },
+        addEventListener: (/* ignore */) => { /* do nothing */ },
+        removeEventListener: (/* ignore */) => { /* do nothing */ },
+        dispatchEvent: (/* ignore */) => { /* do nothing */ }
       });
       const silencedEventProperty = {
         get: () => { return null; },
         set: (value) => { /* do nothing */ },
         configurable: false,
-        enumerable: true,
-      }
+        enumerable: true
+      };
       Object.defineProperties(BatteryManager.prototype, {
         onchargingchange: silencedEventProperty,
         onchargingtimechange: silencedEventProperty,
         ondischargingtimechange: silencedEventProperty,
-        onlevelchange: silencedEventProperty,
+        onlevelchange: silencedEventProperty
       });
     },
     window_name: () => {
@@ -160,7 +158,7 @@
       const nameGetter = propDescriptor.get;
       const nameSetter = propDescriptor.set;
       Object.defineProperty(window, 'name', {
-        get() {
+        get () {
           const nameStr = nameGetter.call(this);
           try {
             const data = JSON.parse(nameStr);
@@ -176,7 +174,7 @@
             return '';
           }
         },
-        set(value) {
+        set (value) {
           const nameStr = nameGetter.call(this);
           let data;
           try {
@@ -197,12 +195,12 @@
         },
         configurable: true
       });
-    },
+    }
   };
-
 
   const isTopLevel = () => {
     try {
+      // eslint-disable-next-line no-unused-expressions
       window.top.location.href;
       return true;
     } catch (_) {
@@ -224,11 +222,9 @@
         }
       }
     }
-  }
+  };
 
   window.__inject_if_ready__();
-
-
 })();
 
 console.log('foreground.js loaded', Date.now());
