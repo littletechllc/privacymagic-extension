@@ -34,6 +34,9 @@
       });
     },
     hardware: () => {
+      console.log('beforehardware patched: navigator.hardwareConcurrency = ', navigator.hardwareConcurrency);
+      console.log('before hardware patched: navigator.deviceMemory =', navigator.deviceMemory);
+      console.log('before hardware patched: navigator.maxTouchPoints =', navigator.maxTouchPoints);
       redefinePropertyValues(Navigator.prototype, {
         cpuClass: undefined,
         deviceMemory: 1,
@@ -55,6 +58,9 @@
           writable: true
         }
       });
+      console.log('after hardware patched: navigator.hardwareConcurrency = ', navigator.hardwareConcurrency);
+      console.log('after hardware patched: navigator.deviceMemory =', navigator.deviceMemory);
+      console.log('after hardware patched: navigator.maxTouchPoints =', navigator.maxTouchPoints);
     },
     screen: () => {
       const oldMatchMedia = window.matchMedia;
@@ -140,7 +146,7 @@
       const silencedEventProperty = {
         get: () => { return null; },
         set: (value) => { /* do nothing */ },
-        configurable: false,
+        configurable: true,
         enumerable: true
       };
       Object.defineProperties(BatteryManager.prototype, {
@@ -195,6 +201,7 @@
         },
         configurable: true
       });
+      console.log('window.name patched');
     }
   };
 
@@ -208,19 +215,71 @@
     }
   };
 
+
+  const injectPatchesInPage = () => {
+    const topLevel = isTopLevel();
+    for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
+      if (decision || !topLevel) {
+        console.log('injecting patch', patcherId);
+        patches[patcherId]();
+      }
+    }
+  };
+
+  const bundleActivePatches = () => {
+    const topLevel = isTopLevel();
+    const preamble = `// helper function\nconst redefinePropertyValues = ${redefinePropertyValues.toString()};`;
+    const bundleItems = [preamble];
+    for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
+      if (decision || !topLevel) {
+        bundleItems.push(`// ${patcherId}\n(${patches[patcherId]})();`);
+      }
+    }
+    return `(() => {\n${bundleItems.join('\n\n')}\n})();`;
+  }
+
+  const injectIframeWithCode = (iframe, code) => {
+    try {
+      iframe.contentWindow.eval(code);
+      console.log('injected code into iframe', iframe);
+    } catch (error) {
+      console.error('error evaluating code in iframe', error);
+    }
+  };
+
+  const originalAddEventListener = EventTarget.prototype.addEventListener;
+
+  const prepareInjectionForIframes = (bundle) => {
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'childList') {
+          for (const node of mutation.addedNodes) {
+            if (node instanceof HTMLIFrameElement) {
+              injectIframeWithCode(node, bundle);
+              originalAddEventListener.call(node, 'load', () => {
+                injectIframeWithCode(node, bundle);
+              });
+            }
+          }
+        }
+      }
+    });
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
   window.__patch_decisions__ ||= {};
 
   window.__inject_if_ready__ = () => {
-    const topLevel = isTopLevel();
     console.log('inject if ready', window.__patch_decisions__);
     if (Object.keys(window.__patch_decisions__).length === Object.keys(patches).length) {
       console.log('injecting patches', window.__patch_decisions__);
-      for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
-        if (decision || !topLevel) {
-          console.log('injecting patch', patcherId);
-          patches[patcherId]();
-        }
-      }
+      injectPatchesInPage();
+      const bundle = bundleActivePatches();
+      console.log('bundle:', bundle);
+      prepareInjectionForIframes(bundle);
       delete window.__patch_decisions__;
       delete window.__inject_if_ready__;
     }
