@@ -5,65 +5,67 @@ import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 const initRuleOptions = {
   allFrames: true,
   matchOriginAsFallback: true,
+  persistAcrossSessions: false,
   runAt: 'document_start',
   world: 'MAIN'
 };
 
-const foregroundRule = {
-  id: 'foreground',
-  js: ['content_scripts/foreground.js'],
-  matches: ['<all_urls>'],
-  ...initRuleOptions
+const logRules = async () => {
+  const rules = await chrome.scripting.getRegisteredContentScripts({});
+  console.log('rules:', rules);
 };
 
-const toplevelRule = (settingId) => ({
-  id: `toplevel_${settingId}`,
-  js: [`content_scripts/toplevel/${settingId}.js`],
-  matches: ['<all_urls>'],
-  excludeMatches: [],
-  ...initRuleOptions
-});
-
-const sublevelRule = (settingId) => ({
-  id: `sublevel_${settingId}`,
-  js: [`content_scripts/sublevel/${settingId}.js`],
-  matches: ['<all_urls>'],
-  // excludeMatches not used because cross-origin subframes aren't exempted
-  ...initRuleOptions
-});
-
 export const updateContentScripts = async (domain, settingId, value) => {
-  const currentToplevelRules = await chrome.scripting.getRegisteredContentScripts({
-    ids: [toplevelRule(settingId).id]
-  });
-  const currentToplevelRule = currentToplevelRules[0];
-  if (!currentToplevelRule) {
+  const rules = await chrome.scripting.getRegisteredContentScripts({});
+  const enabledRule = rules.find(rule => rule.id === `enable_${settingId}`);
+  const disabledRule = rules.find(rule => rule.id === `disable_${settingId}`);
+  if (!enabledRule || !disabledRule) {
     return;
   }
   const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
-  const excludeMatches = currentToplevelRule.excludeMatches || [];
+  const excludeMatches = enabledRule.excludeMatches || [];
+  const matches = disabledRule.matches || [];
   if (value === false) {
     // Protection is disabled, so we add the matches to the exclusion list.
-    currentToplevelRule.excludeMatches = [...excludeMatches, ...matchStrings];
+    enabledRule.excludeMatches = [...excludeMatches, ...matchStrings];
+    disabledRule.matches = [...matches, ...matchStrings];
   } else {
     // Protection is enabled, so we remove the matches from the exclusion list.
-    currentToplevelRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
+    enabledRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
+    disabledRule.matches = matches.filter(match => !matchStrings.includes(match));
   }
-  const rules = [
-    currentToplevelRule,
-    sublevelRule(settingId)
-  ];
-  await chrome.scripting.updateContentScripts(rules);
+  console.log('enabledRule:', enabledRule);
+  console.log('disabledRule:', disabledRule);
+  await chrome.scripting.updateContentScripts([enabledRule, disabledRule]);
+  await logRules();
 };
 
 export const setupContentScripts = async () => {
-  const rules = [
-    foregroundRule,
-  ];
+  const currentRules = await chrome.scripting.getRegisteredContentScripts({});
+  await chrome.scripting.unregisterContentScripts({ids: currentRules.map(rule => rule.id)});
+  const allRules = [];
+  allRules.push({
+    id: 'foreground',
+    js: ['content_scripts/foreground.js'],
+    matches: ['<all_urls>'],
+    ...initRuleOptions
+  });
   for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     if (settingConfig.script) {
-      rules.push(toplevelRule(settingId), sublevelRule(settingId));
+      allRules.push({
+        id: `enable_${settingId}`,
+        js: [`content_scripts/enable/${settingId}.js`],
+        matches: ['<all_urls>'],
+        excludeMatches: [],
+        ...initRuleOptions
+      }, {
+        id: `disable_${settingId}`,
+        js: [`content_scripts/disable/${settingId}.js`],
+        matches: ['*://dummy/*'],
+        ...initRuleOptions
+      });
     }
   }
-  await chrome.scripting.registerContentScripts(rules);
+  await chrome.scripting.registerContentScripts(allRules);
+  await logRules();
 };
