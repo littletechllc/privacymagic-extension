@@ -244,6 +244,21 @@
   const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
   const contentWindowGetterSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
 
+  // Don't allow iframe.contentWindow.eval to be altered.
+  Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {
+    get() {
+      const win = contentWindowGetterSafe(this);
+      if (!win) {
+        return win;
+      }
+      const descriptor = Object.getOwnPropertyDescriptor(win, 'eval');
+      descriptor.writable = false;
+      descriptor.configurable = false;
+      Object.defineProperty(win, 'eval', descriptor);
+      return win;
+    }
+  });
+
   const injectIframeWithCode = (iframe, code) => {
     try {
       contentWindowGetterSafe(iframe).eval(code);
