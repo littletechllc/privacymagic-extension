@@ -110,5 +110,13 @@
   "gpc": {
     "message": "Global Privacy Control",
     "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Battery API fingerprinting",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "User-Agent fingerprinting",
+    "description": "Setting to enable user-agent fingerprinting protection"
   }
 }

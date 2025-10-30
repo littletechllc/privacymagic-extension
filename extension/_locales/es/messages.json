@@ -110,5 +110,13 @@
   "gpc": {
     "message": "Control de Privacidad Global",
     "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Huella Digital de la API de Batería",
+    "description": "Configuración para habilitar la protección contra huella digital de la API de batería"
+  },
+  "useragent": {
+    "message": "Huella Digital de User-Agent",
+    "description": "Configuración para habilitar la protección contra huella digital de User-Agent"
   }
 }
