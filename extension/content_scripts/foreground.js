@@ -221,6 +221,8 @@
           patches[patcherId]();
         }
       }
+      delete window.__patch_decisions__;
+      delete window.__inject_if_ready__;
     }
   };
 
