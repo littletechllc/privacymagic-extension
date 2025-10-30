@@ -247,7 +247,10 @@
     }
   };
 
-  const originalAddEventListener = EventTarget.prototype.addEventListener;
+  const addEventListener = EventTarget.prototype.addEventListener;
+  const reflectApply = Reflect.apply;
+  const addEventListenerSafe = (target, type, listener, options) =>
+    reflectApply(addEventListener, target, [type, listener, options]);
 
   const prepareInjectionForIframes = (bundle) => {
     const observer = new MutationObserver((mutations) => {
@@ -256,7 +259,7 @@
           for (const node of mutation.addedNodes) {
             if (node instanceof HTMLIFrameElement) {
               injectIframeWithCode(node, bundle);
-              originalAddEventListener.call(node, 'load', () => {
+              addEventListenerSafe(node, 'load', () => {
                 injectIframeWithCode(node, bundle);
               });
             }
