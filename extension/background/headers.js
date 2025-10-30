@@ -96,9 +96,9 @@ const createSubresourceHeaderRule = async (settingId) => {
       }
     }
   ];
-  await chrome.declarativeNetRequest.updateSessionRules({ 
+  await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [2500 + id],
-    addRules: rules 
+    addRules: rules
   });
   return rules;
 };
