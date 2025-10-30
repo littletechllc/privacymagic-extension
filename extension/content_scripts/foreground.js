@@ -238,9 +238,15 @@
     return `(() => {\n${bundleItems.join('\n\n')}\n})();`;
   }
 
+
+  const reflectApply = Reflect.apply;
+
+  const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
+  const contentWindowGetterSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
+
   const injectIframeWithCode = (iframe, code) => {
     try {
-      iframe.contentWindow.eval(code);
+      contentWindowGetterSafe(iframe).eval(code);
       console.log('injected code into iframe', iframe);
     } catch (error) {
       console.error('error evaluating code in iframe', error);
@@ -248,7 +254,6 @@
   };
 
   const addEventListener = EventTarget.prototype.addEventListener;
-  const reflectApply = Reflect.apply;
   const addEventListenerSafe = (target, type, listener, options) =>
     reflectApply(addEventListener, target, [type, listener, options]);
 
