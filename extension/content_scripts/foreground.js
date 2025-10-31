@@ -1,4 +1,4 @@
-/* global window, Navigator, Screen, innerWidth, innerHeight, BatteryManager, DevicePosture, NavigatorUAData */
+/* global window, Navigator, Screen, innerWidth, innerHeight, BatteryManager, DevicePosture, HTMLIFrameElement, NavigatorUAData */
 
 (() => {
   const redefinePropertyValues = (obj, propertyMap) => {
@@ -215,7 +215,6 @@
     }
   };
 
-
   const injectPatchesInPage = () => {
     const topLevel = isTopLevel();
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
@@ -236,7 +235,7 @@
       }
     }
     return `(() => {\n${bundleItems.join('\n\n')}\n})();`;
-  }
+  };
 
   // ## Sandboxed Iframes hardening ##
   //
@@ -259,10 +258,10 @@
 
   const reflectApply = Reflect.apply;
   const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
-  const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, "has").value
-  const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, "add").value
+  const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has').value;
+  const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add').value;
 
-  /****************** VULNERABLE FUNCTIONS SECTION **********************/
+  /** **************** VULNERABLE FUNCTIONS SECTION **********************/
   // Function bodies here need to be carefully crafted to prevent invoking
   // anything that might have been monkey patched by pre-evaluated scripts.
   // Main vulnerabilities to avoid are:
@@ -272,9 +271,9 @@
   // - Evaluating globally-defined functions or Objects
 
   const getContentWindowSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
-  const weakSetHasSafe = (s, v) => reflectApply(weakSetHas, s, [v])
-  const weakSetAddSafe = (s, v) => reflectApply(weakSetAdd, s, [v])
-  
+  const weakSetHasSafe = (s, v) => reflectApply(weakSetHas, s, [v]);
+  const weakSetAddSafe = (s, v) => reflectApply(weakSetAdd, s, [v]);
+
   const getContentWindowAfterHardening = (iframe, hardeningCode) => {
     const contentWin = getContentWindowSafe(iframe);
     // Accesing contentWin.eval is safe because, in order to monkey patch it,
@@ -289,12 +288,12 @@
     return contentWin;
   };
 
-  /****************** VULNERABLE FUNCTIONS SECTION END ******************/
+  /** **************** VULNERABLE FUNCTIONS SECTION END ******************/
 
   // Ensure eval is primed with hardening code before it is used.
   const prepareInjectionForIframes = (hardeningCode) => {
-    Object.defineProperty(HTMLIFrameElement.prototype, "contentWindow", {
-      get() { return getContentWindowAfterHardening(this, hardeningCode); }
+    Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {
+      get () { return getContentWindowAfterHardening(this, hardeningCode); }
     });
   };
 
