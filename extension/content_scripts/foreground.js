@@ -238,60 +238,44 @@
     return `(() => {\n${bundleItems.join('\n\n')}\n})();`;
   }
 
+  const evalSet = new WeakSet();
 
   const reflectApply = Reflect.apply;
-
   const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
-  const contentWindowGetterSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
+  const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, "has").value
+  const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, "add").value
 
-  // Don't allow iframe.contentWindow.eval to be altered.
-  Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {
-    get() {
-      const win = contentWindowGetterSafe(this);
-      if (!win) {
-        return win;
-      }
-      const descriptor = Object.getOwnPropertyDescriptor(win, 'eval');
-      descriptor.writable = false;
-      descriptor.configurable = false;
-      Object.defineProperty(win, 'eval', descriptor);
-      return win;
-    }
-  });
+  /****************** VULNERABLE FUNCTIONS SECTION **********************/
+  // Function bodies here need to be carefully crafted to prevent invoking
+  // anything that might have been monkey patched by pre-evaluated scripts.
+  // Main vulnerabilities to avoid are:
+  // - Accessing properties of global objects (e.g. console, window, document,
+  //   vars, etc.)
+  // - Accessing properties of objects that have a global prototype
+  // - Evaluating globally-defined functions or Objects
 
-  const injectIframeWithCode = (iframe, code) => {
-    try {
-      contentWindowGetterSafe(iframe).eval(code);
-      console.log('injected code into iframe', iframe);
-    } catch (error) {
-      console.error('error evaluating code in iframe', error);
+  const getContentWindowSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
+  const weakSetHasSafe = (s, v) => reflectApply(weakSetHas, s, [v])
+  const weakSetAddSafe = (s, v) => reflectApply(weakSetAdd, s, [v])
+  
+  const getContentWindowAfterHardening = (iframe, hardeningCode) => {
+    const contentWin = getContentWindowSafe(iframe);
+    const evalFunction = contentWin.eval;
+    if (!weakSetHasSafe(evalSet, evalFunction)) {
+      evalFunction(hardeningCode);
+      weakSetAddSafe(evalSet, evalFunction);
     }
+    return contentWin;
   };
 
-  const addEventListener = EventTarget.prototype.addEventListener;
-  const addEventListenerSafe = (target, type, listener, options) =>
-    reflectApply(addEventListener, target, [type, listener, options]);
+  /****************** VULNERABLE FUNCTIONS SECTION END ******************/
 
-  const prepareInjectionForIframes = (bundle) => {
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList') {
-          for (const node of mutation.addedNodes) {
-            if (node instanceof HTMLIFrameElement) {
-              injectIframeWithCode(node, bundle);
-              addEventListenerSafe(node, 'load', () => {
-                injectIframeWithCode(node, bundle);
-              });
-            }
-          }
-        }
-      }
+  // Ensure eval is primed with hardening code before it is used.
+  const prepareInjectionForIframes = (hardeningCode) => {
+    Object.defineProperty(HTMLIFrameElement.prototype, "contentWindow", {
+      get() { return getContentWindowAfterHardening(this, hardeningCode); }
     });
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-    });
-  }
+  };
 
   window.__patch_decisions__ ||= {};
 
