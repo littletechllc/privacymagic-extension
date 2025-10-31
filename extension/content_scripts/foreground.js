@@ -277,6 +277,10 @@
   
   const getContentWindowAfterHardening = (iframe, hardeningCode) => {
     const contentWin = getContentWindowSafe(iframe);
+    // Accesing contentWin.eval is safe because, in order to monkey patch it,
+    // the pre-evaluated script would need to access contentWin, which would
+    // trigger our hardening code injection first. Note we are assuming here
+    // that the sandboxed iframe does not have 'allow-scripts'.
     const evalFunction = contentWin.eval;
     if (!weakSetHasSafe(evalSet, evalFunction)) {
       evalFunction(hardeningCode);
