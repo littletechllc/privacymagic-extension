@@ -4,7 +4,12 @@
   const redefinePropertyValues = (obj, propertyMap) => {
     const properties = {};
     for (const [prop, value] of Object.entries(propertyMap)) {
-      properties[prop] = { value, writable: true, enumerable: true };
+      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      if (descriptor && descriptor.get) {
+        properties[prop] = { ...descriptor, get: () => value };
+      } else {
+        properties[prop] = { ...descriptor, value };
+      }
     }
     Object.defineProperties(obj, properties);
   };
