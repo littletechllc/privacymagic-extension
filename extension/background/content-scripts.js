@@ -5,7 +5,7 @@ import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 const initRuleOptions = {
   allFrames: true,
   matchOriginAsFallback: true,
-  persistAcrossSessions: false,
+  persistAcrossSessions: true,
   runAt: 'document_start',
   world: 'MAIN'
 };
@@ -42,8 +42,6 @@ export const updateContentScripts = async (domain, settingId, value) => {
 };
 
 export const setupContentScripts = async () => {
-  const currentRules = await chrome.scripting.getRegisteredContentScripts({});
-  await chrome.scripting.unregisterContentScripts({ ids: currentRules.map(rule => rule.id) });
   const allRules = [];
   allRules.push({
     id: 'foreground',
