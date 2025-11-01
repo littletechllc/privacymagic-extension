@@ -1,0 +1,4 @@
+extension/content_scripts/adblock_css/*
+extension/node_modules/*
+extension/thirdparty/*
+extension/rules/*
