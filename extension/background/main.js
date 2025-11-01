@@ -28,7 +28,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return false;
 });
 
-chrome.runtime.onInstalled.addListener(async function (details) {
+let initialized = false;
+
+const initializeExtension = async () => {
+  if (initialized) {
+    return;
+  }
   await setToolbarIcon(THEME_CONFIG.toolbarIcon);
   await clearDynamicRules();
   // await chrome.runtime.openOptionsPage()
@@ -46,8 +51,16 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   const t6 = performance.now();
   console.log(`setupContentScripts took ${t6 - t5} milliseconds`);
   await setupHeaderRules();
+  console.log('Extension initialized');
+  initialized = true;
+};
+
+chrome.runtime.onInstalled.addListener(async function (details) {
+  console.log('onInstalled details:', details);
+  await initializeExtension();
 });
 
-chrome.runtime.onStartup.addListener(() => {
-  console.log('onStartup()');
+chrome.runtime.onStartup.addListener(async (details) => {
+  console.log('onStartup details:', details);
+  await initializeExtension();
 });
