@@ -1,5 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import process from 'node:process';
+
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
 
 const BLOCKLISTS = [
   'https://easylist.to/easylist/easylist.txt',
@@ -210,7 +214,7 @@ const parseLine = (line) => {
   }
 };
 
-export const process = (lines) => {
+export const processLines = (lines) => {
   const codingLines = removeComments(lines).filter(line => line.length > 0);
   return codingLines.map(parseLine);
 };
@@ -317,14 +321,14 @@ const isGoodLine = x => {
   return result;
 };
 
-const ext = (path) => {
-  return path.join('../extension/', path);
+const ext = (localPath) => {
+  return path.join('../extension/', localPath);
 };
 
 export const processAndWrite = async () => {
   const lines = await getAllLines();
   const linesFiltered = lines.filter(isGoodLine);
-  const results = process(linesFiltered);
+  const results = processLines(linesFiltered);
   const results2 = results.filter(x => !x.parsed?.condition?.resourceTypes?.includes('popup'));
   const blockingRulesFileContent = generateBlockingRulesFile(results2);
   await fs.mkdir(ext('rules'), { recursive: true });
@@ -345,3 +349,8 @@ export const processAndWrite = async () => {
     'export const contentBlockingDefinitions = ' + JSON.stringify(contentBlockingDefintions, undefined, '  ')
   );
 };
+
+if (isMain) {
+  console.log(path);
+  processAndWrite();
+}
