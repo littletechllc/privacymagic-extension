@@ -5,28 +5,82 @@ import { getAllSettings, SETTINGS_KEY_PREFIX, getSetting } from '../common/setti
 
 const PRIVACY_MAGIC_HEADERS = {
   gpc: {
-    headers: {
+    id: 1,
+    addHeaders: {
       'Sec-GPC': '1'
-    },
-    id: 1
+    }
+  },
+  useragent: {
+    id: 2,
+    addHeaders: {
+      'Sec-CH-UA-Arch': 'arm',
+      'Sec-CH-UA-Bitness': '64',
+      'Sec-CH-UA-Form-Factors-List': 'Desktop',
+      'Sec-CH-UA-Form-Factors': 'Desktop',
+      'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="141.0.0.0", Not?A_Brand;v="8.0.0.0", Chromium;v="141.0.0.0"',
+      'Sec-CH-UA-Full-Version': '141.0.0.0'
+    }
+  },
+  query_parameters: {
+    id: 3,
+    removeParams: [
+      '__hsfp',
+      '__hssc',
+      '__hstc',
+      '__s',
+      '_hsenc',
+      '_openstat',
+      'dclid',
+      'fbclid',
+      'gclid',
+      'hsCtaTracking',
+      'mc_eid',
+      'mkt_tok',
+      'ml_subscriber',
+      'ml_subscriber_hash',
+      'msclkid',
+      'oly_anon_id',
+      'oly_enc_id',
+      'rb_clickid',
+      's_cid',
+      'vero_conv',
+      'vero_id',
+      'wickedid',
+      'yclid'
+    ]
   }
 };
 
+const createHeaderAction = (addHeaders) => {
+  const requestHeaders = Object.entries(addHeaders).map(
+    ([header, value]) => ({ operation: 'set', header, value }));
+  return { type: 'modifyHeaders', requestHeaders };
+};
+
+const createParamAction = (removeParams) => ({
+  type: 'redirect',
+  redirect: {
+    transform: { queryTransform: { removeParams } }
+  }
+});
+
 // Create the top level header rule, without any excluded request domains.
 const createTopLevelHeaderRule = async (settingId) => {
-  const { headers, id } = PRIVACY_MAGIC_HEADERS[settingId];
-  const requestHeaders = Object.entries(headers).map(
-    ([header, value]) => ({ operation: 'set', header, value }));
+  const { addHeaders, removeParams, id } = PRIVACY_MAGIC_HEADERS[settingId];
+  let action;
+  if (addHeaders) {
+    action = createHeaderAction(addHeaders);
+  }
+  if (removeParams) {
+    action = createParamAction(removeParams);
+  }
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: [id],
     addRules: [
       {
-        id,
         priority: 1,
-        action: {
-          type: 'modifyHeaders',
-          requestHeaders
-        },
+        action,
+        id,
         condition: {
           excludedRequestDomains: [],
           resourceTypes: ['main_frame']
@@ -79,28 +133,28 @@ const setupTopLevelHeaderRules = async () => {
 
 // Create the subresource header rule, without any excluded tab ids.
 const createSubresourceHeaderRule = async (settingId) => {
-  const { headers, id } = PRIVACY_MAGIC_HEADERS[settingId];
-  const requestHeaders = Object.entries(headers).map(
-    ([header, value]) => ({ operation: 'set', header, value }));
-  const rules = [
-    {
-      id: 2500 + id,
-      priority: 1,
-      action: {
-        type: 'modifyHeaders',
-        requestHeaders
-      },
-      condition: {
-        excludedTabIds: [],
-        excludedResourceTypes: ['main_frame']
-      }
-    }
-  ];
+  const { addHeaders, removeParams, id } = PRIVACY_MAGIC_HEADERS[settingId];
+  let action;
+  if (addHeaders) {
+    action = createHeaderAction(addHeaders);
+  }
+  if (removeParams) {
+    action = createParamAction(removeParams);
+  }
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [2500 + id],
-    addRules: rules
+    removeRuleIds: [id],
+    addRules: [
+      {
+        action,
+        priority: 1,
+        id: 2500 + id,
+        condition: {
+          excludedTabIds: [],
+          excludedResourceTypes: ['main_frame']
+        }
+      }
+    ]
   });
-  return rules;
 };
 
 // Add or remove a tab id from the excluded tab ids for the subresource header rule.
