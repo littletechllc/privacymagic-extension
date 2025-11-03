@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { setToolbarIcon } from '../common/toolbar-icon.js';
-import { injectCssForCosmeticFilters } from './cosmetic-filter-manager.js';
+import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
 import { THEME_CONFIG } from '../common/theme.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
 import { setSetting } from '../common/settings.js';
