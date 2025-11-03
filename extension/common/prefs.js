@@ -48,6 +48,21 @@ export const PRIVACY_PREFS_CONFIG = {
     category: 'network',
     onValue: 'default',
     offValue: 'disable_non_proxied_udp'
+  },
+  alternateErrorPagesEnabled: {
+    inverted: true,
+    locked: false,
+    category: 'services'
+  },
+  safeBrowsingExtendedReportingEnabled: {
+    inverted: true,
+    locked: false,
+    category: 'services'
+  },
+  spellingServiceEnabled: {
+    inverted: true,
+    locked: false,
+    category: 'services'
   }
 };
 
