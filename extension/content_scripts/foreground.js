@@ -39,9 +39,15 @@
       });
     },
     hardware: () => {
-      console.log('beforehardware patched: navigator.hardwareConcurrency = ', navigator.hardwareConcurrency);
-      console.log('before hardware patched: navigator.deviceMemory =', navigator.deviceMemory);
-      console.log('before hardware patched: navigator.maxTouchPoints =', navigator.maxTouchPoints);
+      // Match (color-gamut: srgb)
+      const oldMatchMedia = window.matchMedia;
+      const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi;
+      const matchMediaClean = (mediaQueryString) =>
+        mediaQueryString.replace(regex, (_, value) =>
+          value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
+      redefinePropertyValues(window, {
+        matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
+      });
       redefinePropertyValues(Navigator.prototype, {
         cpuClass: undefined,
         deviceMemory: 1,
@@ -63,9 +69,6 @@
           writable: true
         }
       });
-      console.log('after hardware patched: navigator.hardwareConcurrency = ', navigator.hardwareConcurrency);
-      console.log('after hardware patched: navigator.deviceMemory =', navigator.deviceMemory);
-      console.log('after hardware patched: navigator.maxTouchPoints =', navigator.maxTouchPoints);
     },
     screen: () => {
       const oldMatchMedia = window.matchMedia;
