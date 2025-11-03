@@ -20,7 +20,7 @@ div.title {
     font-size: 80px;
     height: 50%;
     width: 100%;
-    color: #464646;
+    color: #091276;
     font-family: "Modern Antiqua", serif;
     font-weight: 600;
     font-style: normal;
@@ -33,4 +33,10 @@ div.title {
     align-items: top;
     justify-content: center;
     margin: auto;
+}
+
+#logo {
+    padding: 0px 20px;
+    height: 100px;
+    width: auto;
 }

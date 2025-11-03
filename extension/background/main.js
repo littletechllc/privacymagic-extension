@@ -1,8 +1,6 @@
 /* global chrome */
 
-import { setToolbarIcon } from '../common/toolbar-icon.js';
 import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
-import { THEME_CONFIG } from '../common/theme.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
 import { setSetting } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
@@ -34,7 +32,6 @@ const initializeExtension = async () => {
   if (initialized) {
     return;
   }
-  await setToolbarIcon(THEME_CONFIG.toolbarIcon);
   injectCssForCosmeticFilters();
   await setupContentScripts();
   await setupNetworkRules();
