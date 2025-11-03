@@ -1,6 +1,6 @@
 /* global chrome, OffscreenCanvas, btoa */
 
-export const setToolbarIcon = async (emoji) => {
+export const generateToolbarIcon = async (emoji) => {
   const canvas = new OffscreenCanvas(128, 128);
   const ctx = canvas.getContext('2d');
 
@@ -30,18 +30,13 @@ export const setToolbarIcon = async (emoji) => {
     const arrayBuffer = await blob.arrayBuffer();
     const uint8Array = new Uint8Array(arrayBuffer);
     const base64 = btoa(String.fromCharCode.apply(null, uint8Array));
-    const dataURL = `data:image/png;base64,${base64}`;
-    chrome.action.setIcon({ path: dataURL });
+    return `data:image/png;base64,${base64}`;
   } catch (error) {
     console.error('Failed to create icon from canvas:', error);
-    // Fallback: just use the existing PNG files
-    chrome.action.setIcon({
-      path: {
-        16: 'logo/logo-16.png',
-        32: 'logo/logo-32.png',
-        48: 'logo/logo-48.png',
-        128: 'logo/logo-128.png'
-      }
-    });
   }
+};
+
+export const setToolbarIcon = async (emoji) => {
+  const dataURL = await generateToolbarIcon(emoji);
+  chrome.action.setIcon({ path: dataURL });
 };
