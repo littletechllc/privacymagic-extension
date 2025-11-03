@@ -5,13 +5,13 @@ import { injectCssForCosmeticFilters } from './cosmetic-filter-manager.js';
 import { THEME_CONFIG } from '../common/theme.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
 import { setSetting } from '../common/settings.js';
-import { setupHeaderRules, updateTopLevelHeaderRule } from './headers.js';
+import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
   await updateContentScripts(domain, settingId, value);
-  await updateTopLevelHeaderRule(domain, settingId, value);
+  await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -37,7 +37,7 @@ const initializeExtension = async () => {
   await setToolbarIcon(THEME_CONFIG.toolbarIcon);
   injectCssForCosmeticFilters();
   await setupContentScripts();
-  await setupHeaderRules();
+  await setupNetworkRules();
   console.log('Extension initialized');
   initialized = true;
 };
