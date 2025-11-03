@@ -5,7 +5,7 @@ import { getAllSettings, SETTINGS_KEY_PREFIX, getSetting } from '../common/setti
 
 const SUBRESOURCE_RULE_ID_OFFSET = 2500;
 
-const PRIVACY_MAGIC_HEADERS = {
+const NETWORK_PROTECTION_DEFS = {
   gpc: {
     id: 1,
     addHeaders: {
@@ -91,9 +91,9 @@ const createRemoveHeaderAction = (removeHeaders) => ({
   requestHeaders: removeHeaders.map(header => ({ operation: 'remove', header }))
 });
 
-// Create the top level header rule, without any excluded request domains.
-const createTopLevelHeaderRule = async (settingId) => {
-  const { addHeaders, removeParams, removeHeaders, id } = PRIVACY_MAGIC_HEADERS[settingId];
+// Create the top level network rule, without any excluded request domains.
+const createTopLevelNetworkRule = async (settingId) => {
+  const { addHeaders, removeParams, removeHeaders, id } = NETWORK_PROTECTION_DEFS[settingId];
   let action;
   if (addHeaders) {
     action = createAddHeaderAction(addHeaders);
@@ -120,12 +120,12 @@ const createTopLevelHeaderRule = async (settingId) => {
   });
 };
 
-// Add or remove a domain from the excluded request domains for the top level header rule.
-export const updateTopLevelHeaderRule = async (domain, settingId, value) => {
-  if (!(settingId in PRIVACY_MAGIC_HEADERS)) {
+// Add or remove a domain from the excluded request domains for the top level network rule.
+export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
+  if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return;
   }
-  const { id } = PRIVACY_MAGIC_HEADERS[settingId];
+  const { id } = NETWORK_PROTECTION_DEFS[settingId];
   const rules = await chrome.declarativeNetRequest.getDynamicRules({
     ruleIds: [id]
   });
@@ -147,23 +147,23 @@ export const updateTopLevelHeaderRule = async (domain, settingId, value) => {
   });
 };
 
-const setupTopLevelHeaderRules = async () => {
-  // Create the top level header rule, without any excluded request domains.
+const setupTopLevelNetworkRules = async () => {
+  // Create the top level network rule, without any excluded request domains.
   const allSettings = await getAllSettings();
-  for (const settingId of Object.keys(PRIVACY_MAGIC_HEADERS)) {
-    await createTopLevelHeaderRule(settingId);
+  for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
+    await createTopLevelNetworkRule(settingId);
   }
-  // Add necessary excluded request domains for the top level header rule.
+  // Add necessary excluded request domains for the top level network rule.
   for (const [[type, domain, settingId], value] of allSettings) {
-    if (type === SETTINGS_KEY_PREFIX && settingId in PRIVACY_MAGIC_HEADERS) {
-      await updateTopLevelHeaderRule(domain, settingId, value);
+    if (type === SETTINGS_KEY_PREFIX && settingId in NETWORK_PROTECTION_DEFS) {
+      await updateTopLevelNetworkRule(domain, settingId, value);
     }
   }
 };
 
-// Create the subresource header rule, without any excluded tab ids.
-const createSubresourceHeaderRule = async (settingId) => {
-  const { addHeaders, removeParams, removeHeaders, id } = PRIVACY_MAGIC_HEADERS[settingId];
+// Create the subresource network rule, without any excluded tab ids.
+const createSubresourceNetworkRule = async (settingId) => {
+  const { addHeaders, removeParams, removeHeaders, id } = NETWORK_PROTECTION_DEFS[settingId];
   let action;
   if (addHeaders) {
     action = createAddHeaderAction(addHeaders);
@@ -190,9 +190,9 @@ const createSubresourceHeaderRule = async (settingId) => {
   });
 };
 
-// Add or remove a tab id from the excluded tab ids for the subresource header rule.
-const updateSubresourceHeaderRule = async (settingId, tabId, value) => {
-  const { id } = PRIVACY_MAGIC_HEADERS[settingId];
+// Add or remove a tab id from the excluded tab ids for the subresource network rule.
+const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
+  const { id } = NETWORK_PROTECTION_DEFS[settingId];
   const rules = await chrome.declarativeNetRequest.getSessionRules({
     ruleIds: [SUBRESOURCE_RULE_ID_OFFSET + id]
   });
@@ -212,34 +212,35 @@ const updateSubresourceHeaderRule = async (settingId, tabId, value) => {
   });
 };
 
-const setupSubresourceHeaderRules = async () => {
-  // Create the subresource header rules, initially without any excluded tab ids.
-  for (const settingId of Object.keys(PRIVACY_MAGIC_HEADERS)) {
-    await createSubresourceHeaderRule(settingId);
+const setupSubresourceNetworkRules = async () => {
+  // Create the subresource network rules, initially without any excluded tab ids.
+  for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
+    await createSubresourceNetworkRule(settingId);
   }
   // Wait for a top-level request or navigation and, if the setting is enabled for the
-  // top-level domain, update the subresource header rule to exclude the tabId from the
+  // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
   const listener = async ({ url, tabId }) => {
     const domain = psl.get(new URL(url).hostname);
     if (domain === null) {
       return;
     }
-    for (const settingId of Object.keys(PRIVACY_MAGIC_HEADERS)) {
+    for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
       const setting = await getSetting(domain, settingId);
-      await updateSubresourceHeaderRule(settingId, tabId, setting);
+      await updateSubresourceNetworkRule(settingId, tabId, setting);
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
   chrome.webNavigation.onCommitted.addListener(listener, { urls: ['<all_urls>'] });
 };
 
-export const setupHeaderRules = async () => {
-  // We take a two-part approach to header protections:
-  // 1. Protected headers on top-level requests are exempted on domains for whch the user
+export const setupNetworkRules = async () => {
+  // We take a two-part approach to network protections:
+  // 1. Protected top-level requests are exempted on domains for whch the user
   // has disabled protection.
-  // 2. Protected headers on subresource requests are exempted for tabs where the latest
-  // top-level request or navigation was to a domain for which the user has disabled protection.
-  await setupTopLevelHeaderRules();
-  await setupSubresourceHeaderRules();
+  // 2. Protected subresource requests are exempted for tabs where the latest
+  // top-level request or navigation was to a domain for which the user has
+  // disabled protection.
+  await setupTopLevelNetworkRules();
+  await setupSubresourceNetworkRules();
 };
