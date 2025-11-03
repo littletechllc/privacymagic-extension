@@ -23,33 +23,37 @@
     "message": "Activar No Rastrear",
     "description": "Label for the Do Not Track setting"
   },
-  "disableThirdPartyCookies": {
+  "thirdPartyCookiesAllowed": {
     "message": "Desactivar Cookies de Terceros",
     "description": "Label for the third-party cookies setting"
   },
-  "disableReferrers": {
+  "referrersEnabled": {
     "message": "Desactivar Referrers",
     "description": "Label for the referrers setting"
   },
-  "disableHyperlinkAuditing": {
+  "hyperlinkAuditingEnabled": {
     "message": "Desactivar Auditoría de Enlaces",
     "description": "Label for the hyperlink auditing setting"
   },
-  "disableTopics": {
+  "topicsEnabled": {
     "message": "Desactivar API de Temas",
     "description": "Label for the Topics API setting"
   },
-  "disableFledge": {
+  "fledgeEnabled": {
     "message": "Desactivar FLEDGE",
     "description": "Label for the FLEDGE setting"
   },
-  "disableAdMeasurement": {
+  "adMeasurementEnabled": {
     "message": "Desactivar Medición de Anuncios",
     "description": "Label for the Ad Measurement setting"
   },
-  "disableRelatedWebsiteSets": {
+  "relatedWebsiteSetsEnabled": {
     "message": "Desactivar Conjuntos de Sitios Relacionados",
     "description": "Label for the Related Website Sets setting"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Política de Manejo de IP de WebRTC",
+    "description": "Label for the WebRTC IP handling policy setting"
   },
   "blocking": {
     "message": "Bloqueo de Contenido",
@@ -70,10 +74,6 @@
   "client_hints": {
     "message": "Client Hints",
     "description": "Setting to block client hints"
-  },
-  "headers": {
-    "message": "Headers de Rastreo",
-    "description": "Setting to block tracking headers"
   },
   "query_parameters": {
     "message": "Parámetros de Rastreo",

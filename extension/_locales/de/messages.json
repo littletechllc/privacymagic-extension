@@ -23,33 +23,37 @@
     "message": "Nicht verfolgen aktivieren",
     "description": "Label for the Do Not Track setting"
   },
-  "disableThirdPartyCookies": {
+  "thirdPartyCookiesAllowed": {
     "message": "Drittanbieter-Cookies deaktivieren",
     "description": "Label for the third-party cookies setting"
   },
-  "disableReferrers": {
+  "referrersEnabled": {
     "message": "Referrer deaktivieren",
     "description": "Label for the referrers setting"
   },
-  "disableHyperlinkAuditing": {
+  "hyperlinkAuditingEnabled": {
     "message": "Hyperlink-Überwachung deaktivieren",
     "description": "Label for the hyperlink auditing setting"
   },
-  "disableTopics": {
+  "topicsEnabled": {
     "message": "Topics API deaktivieren",
     "description": "Label for the Topics API setting"
   },
-  "disableFledge": {
+  "fledgeEnabled": {
     "message": "FLEDGE deaktivieren",
     "description": "Label for the FLEDGE setting"
   },
-  "disableAdMeasurement": {
+  "adMeasurementEnabled": {
     "message": "Anzeigenmessung deaktivieren",
     "description": "Label for the Ad Measurement setting"
   },
-  "disableRelatedWebsiteSets": {
+  "relatedWebsiteSetsEnabled": {
     "message": "Verwandte Website-Sets deaktivieren",
     "description": "Label for the Related Website Sets setting"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC-IP-Behandlung-Richtlinie",
+    "description": "Label for the WebRTC IP handling policy setting"
   },
   "blocking": {
     "message": "Inhalts-Blockierung",
@@ -70,10 +74,6 @@
   "client_hints": {
     "message": "Client Hints",
     "description": "Setting to block client hints"
-  },
-  "headers": {
-    "message": "Tracking-Header",
-    "description": "Setting to block tracking headers"
   },
   "query_parameters": {
     "message": "Tracking-Parameter",
