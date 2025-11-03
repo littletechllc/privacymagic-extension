@@ -9,10 +9,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'connections'
   },
-  headers: {
-    dnr: true,
-    category: 'connections'
-  },
   query_parameters: {
     dnr: true,
     category: 'connections'

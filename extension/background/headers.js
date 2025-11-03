@@ -48,10 +48,30 @@ const PRIVACY_MAGIC_HEADERS = {
       'wickedid',
       'yclid'
     ]
+  },
+  client_hints: {
+    id: 4,
+    removeHeaders: [
+      'Device-Memory',
+      'Downlink',
+      'DPR',
+      'ECT',
+      'RTT',
+      'Sec-CH-Device-Memory',
+      'Sec-CH-DPR',
+      'Sec-CH-ECT',
+      'Sec-CH-Prefers-Color-Scheme',
+      'Sec-CH-Prefers-Reduced-Motion',
+      'Sec-CH-Prefers-Reduced-Transparency',
+      'Sec-CH-UA-Form-Factors',
+      'Sec-CH-Viewport-Height',
+      'Sec-CH-Viewport-Width',
+      'Viewport-Width'
+    ]
   }
 };
 
-const createHeaderAction = (addHeaders) => {
+const createAddHeaderAction = (addHeaders) => {
   const requestHeaders = Object.entries(addHeaders).map(
     ([header, value]) => ({ operation: 'set', header, value }));
   return { type: 'modifyHeaders', requestHeaders };
@@ -64,12 +84,20 @@ const createParamAction = (removeParams) => ({
   }
 });
 
+const createRemoveHeaderAction = (removeHeaders) => ({
+  type: 'modifyHeaders',
+  requestHeaders: removeHeaders.map(header => ({ operation: 'remove', header }))
+});
+
 // Create the top level header rule, without any excluded request domains.
 const createTopLevelHeaderRule = async (settingId) => {
-  const { addHeaders, removeParams, id } = PRIVACY_MAGIC_HEADERS[settingId];
+  const { addHeaders, removeParams, removeHeaders, id } = PRIVACY_MAGIC_HEADERS[settingId];
   let action;
   if (addHeaders) {
-    action = createHeaderAction(addHeaders);
+    action = createAddHeaderAction(addHeaders);
+  }
+  if (removeHeaders) {
+    action = createRemoveHeaderAction(removeHeaders);
   }
   if (removeParams) {
     action = createParamAction(removeParams);
@@ -133,13 +161,16 @@ const setupTopLevelHeaderRules = async () => {
 
 // Create the subresource header rule, without any excluded tab ids.
 const createSubresourceHeaderRule = async (settingId) => {
-  const { addHeaders, removeParams, id } = PRIVACY_MAGIC_HEADERS[settingId];
+  const { addHeaders, removeParams, removeHeaders, id } = PRIVACY_MAGIC_HEADERS[settingId];
   let action;
   if (addHeaders) {
-    action = createHeaderAction(addHeaders);
+    action = createAddHeaderAction(addHeaders);
   }
   if (removeParams) {
     action = createParamAction(removeParams);
+  }
+  if (removeHeaders) {
+    action = createRemoveHeaderAction(removeHeaders);
   }
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [id],
