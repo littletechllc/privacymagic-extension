@@ -1,4 +1,6 @@
 extension/content_scripts/adblock_css/*
+extension/content_scripts/enable/*
+extension/content_scripts/disable/*
 extension/node_modules/*
 extension/thirdparty/*
 extension/rules/*

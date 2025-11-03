@@ -20,5 +20,9 @@
       "extension/content_scripts/sublevel/**",
       "extension/content_scripts/toplevel/**"
     ]
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "esquery": "^1.6.0"
   }
 }
