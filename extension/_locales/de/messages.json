@@ -52,7 +52,7 @@
     "description": "Label for the Related Website Sets setting"
   },
   "webRTCIPHandlingPolicy": {
-    "message": "WebRTC-IP-Behandlung-Richtlinie",
+    "message": "WebRTC-nicht-proxy-UDP deaktivieren",
     "description": "Label for the WebRTC IP handling policy setting"
   },
   "blocking": {
@@ -118,5 +118,17 @@
   "useragent": {
     "message": "User-Agent-Fingerprinting",
     "description": "Einstellung zum Schutz vor User-Agent-Fingerprinting"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Alternative Fehlerseiten deaktivieren",
+    "description": "Einstellung zum Aktivieren alternativer Fehlerseiten"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Erweiterte Safe-Browsing-Berichte deaktivieren",
+    "description": "Einstellung zum Aktivieren erweiterter Safe-Browsing-Berichte"
+  },
+  "spellingServiceEnabled": {
+    "message": "Rechtschreibprüfung deaktivieren",
+    "description": "Einstellung zum Aktivieren der Rechtschreibprüfung"
   }
 }
