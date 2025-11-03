@@ -2,8 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import process from 'node:process';
-
-const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+import { isMain } from './util.js';
 
 const BLOCKLISTS = [
   'https://easylist.to/easylist/easylist.txt',
@@ -350,7 +349,7 @@ export const processAndWrite = async () => {
   );
 };
 
-if (isMain) {
+if (isMain(import.meta)) {
   console.log(path);
   processAndWrite();
 }

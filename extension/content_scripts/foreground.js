@@ -14,7 +14,7 @@
     Object.defineProperties(obj, properties);
   };
 
-  const patches = {
+  const privacyMagicPatches = {
     /*
     navigator: () => {
       redefinePropertyValues(Navigator.prototype, {
@@ -243,7 +243,7 @@
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
       if (decision || !topLevel) {
         console.log('injecting patch', patcherId);
-        patches[patcherId]();
+        privacyMagicPatches[patcherId]();
       }
     }
   };
@@ -254,7 +254,7 @@
     const bundleItems = [preamble];
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
       if (decision || !topLevel) {
-        bundleItems.push(`// ${patcherId}\n(${patches[patcherId]})();`);
+        bundleItems.push(`// ${patcherId}\n(${privacyMagicPatches[patcherId]})();`);
       }
     }
     return `(() => {\n${bundleItems.join('\n\n')}\n})();`;
@@ -324,7 +324,7 @@
 
   window.__inject_if_ready__ = () => {
     console.log('inject if ready', window.__patch_decisions__);
-    if (Object.keys(window.__patch_decisions__).length === Object.keys(patches).length) {
+    if (Object.keys(window.__patch_decisions__).length === Object.keys(privacyMagicPatches).length) {
       console.log('injecting patches', window.__patch_decisions__);
       injectPatchesInPage();
       const bundle = bundleActivePatches();
