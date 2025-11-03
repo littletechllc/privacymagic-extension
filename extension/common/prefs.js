@@ -3,85 +3,104 @@
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG = {
   doNotTrackEnabled: {
-    prefName: 'doNotTrackEnabled',
     inverted: false,
     locked: false,
-    default: true
+    category: 'websites'
   },
-  disableThirdPartyCookies: {
-    prefName: 'thirdPartyCookiesAllowed',
+  thirdPartyCookiesAllowed: {
     inverted: true,
     locked: false,
-    default: false
+    category: 'websites'
   },
-  disableReferrers: {
-    prefName: 'referrersEnabled',
+  referrersEnabled: {
     inverted: true,
     locked: false,
-    default: false
+    category: 'websites'
   },
-  disableHyperlinkAuditing: {
-    prefName: 'hyperlinkAuditingEnabled',
+  hyperlinkAuditingEnabled: {
     inverted: true,
     locked: false,
-    default: false
+    category: 'websites'
   },
-  disableTopics: {
-    prefName: 'topicsEnabled',
+  topicsEnabled: {
     inverted: true,
     locked: true,
-    default: false
+    category: 'websites'
   },
-  disableFledge: {
-    prefName: 'fledgeEnabled',
+  fledgeEnabled: {
     inverted: true,
     locked: true,
-    default: false
+    category: 'websites'
   },
-  disableAdMeasurement: {
-    prefName: 'adMeasurementEnabled',
+  adMeasurementEnabled: {
     inverted: true,
     locked: true,
-    default: false
+    category: 'websites'
   },
-  disableRelatedWebsiteSets: {
-    prefName: 'relatedWebsiteSetsEnabled',
+  relatedWebsiteSetsEnabled: {
     inverted: true,
     locked: true,
-    default: false
+    category: 'websites'
+  },
+  webRTCIPHandlingPolicy: {
+    inverted: true,
+    locked: false,
+    category: 'network',
+    onValue: 'default',
+    offValue: 'disable_non_proxied_udp'
   }
 };
 
 export const getPref = async (prefName) => {
-  if (!chrome.privacy.websites[prefName]) {
+  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  const value = (await chrome.privacy.websites[prefName].get({})).value;
+  if (!PRIVACY_PREFS_CONFIG[prefName]) {
+    throw new Error(`Pref ${prefName} not found in config`);
+  }
+  const value = (await chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].get({})).value;
   console.log(`Read pref ${prefName} with value ${value}`);
+  if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
+    return value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+  }
   return value;
 };
 
 export const setPref = async (prefName, value) => {
-  if (!chrome.privacy.websites[prefName]) {
+  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  await chrome.privacy.websites[prefName].set({ value });
-  console.log(`Set pref ${prefName} to value ${value}`);
+  if (!PRIVACY_PREFS_CONFIG[prefName]) {
+    throw new Error(`Pref ${prefName} not found in config`);
+  }
+  let nativeValue = value;
+  if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
+    nativeValue = value ? PRIVACY_PREFS_CONFIG[prefName].onValue : PRIVACY_PREFS_CONFIG[prefName].offValue;
+  }
+  await chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].set({ value: nativeValue });
+  console.log(`Set pref ${prefName} to value ${nativeValue}`);
   return true;
 };
 
 export const listenForPrefChanges = (prefName, callback) => {
-  if (!chrome.privacy.websites[prefName]) {
+  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  chrome.privacy.websites[prefName].onChange.addListener((details) => {
+  if (!PRIVACY_PREFS_CONFIG[prefName]) {
+    throw new Error(`Pref ${prefName} not found in config`);
+  }
+  chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].onChange.addListener((details) => {
     console.log(`Pref ${prefName} changed to ${details.value}`);
-    callback(details.value);
+    let outValue = details.value;
+    if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
+      outValue = details.value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+    }
+    callback(outValue);
   });
 };
 
 export const resetAllPrefsToDefaults = async () => {
-  for (const config of Object.values(PRIVACY_PREFS_CONFIG)) {
-    await setPref(config.prefName, config.default);
+  for (const [prefName, config] of Object.entries(PRIVACY_PREFS_CONFIG)) {
+    await setPref(prefName, !config.inverted);
   }
 };

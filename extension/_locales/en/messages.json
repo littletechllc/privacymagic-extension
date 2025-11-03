@@ -23,33 +23,37 @@
     "message": "Enable Do Not Track",
     "description": "Label for the Do Not Track pref"
   },
-  "disableThirdPartyCookies": {
+  "thirdPartyCookiesAllowed": {
     "message": "Disable Third-Party Cookies",
     "description": "Label for the third-party cookies pref"
   },
-  "disableReferrers": {
+  "referrersEnabled": {
     "message": "Disable Referrers",
     "description": "Label for the referrers pref"
   },
-  "disableHyperlinkAuditing": {
+  "hyperlinkAuditingEnabled": {
     "message": "Disable Hyperlink Auditing",
     "description": "Label for the hyperlink auditing pref"
   },
-  "disableTopics": {
+  "topicsEnabled": {
     "message": "Disable Topics API",
     "description": "Label for the Topics API pref"
   },
-  "disableFledge": {
+  "fledgeEnabled": {
     "message": "Disable FLEDGE",
     "description": "Label for the FLEDGE pref"
   },
-  "disableAdMeasurement": {
+  "adMeasurementEnabled": {
     "message": "Disable Ad Measurement",
     "description": "Label for the Ad Measurement pref"
   },
-  "disableRelatedWebsiteSets": {
+  "relatedWebsiteSetsEnabled": {
     "message": "Disable Related Website Sets",
     "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC IP Handling Policy",
+    "description": "Label for the WebRTC IP handling policy pref"
   },
   "blocking": {
     "message": "Content Blocking",
@@ -70,10 +74,6 @@
   "client_hints": {
     "message": "Client Hints",
     "description": "Setting to block client hints"
-  },
-  "headers": {
-    "message": "Tracking Headers",
-    "description": "Setting to block tracking headers"
   },
   "query_parameters": {
     "message": "Tracking Parameters",

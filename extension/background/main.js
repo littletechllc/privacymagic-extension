@@ -7,6 +7,7 @@ import { THEME_CONFIG } from '../common/theme.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
 import { setSetting } from '../common/settings.js';
 import { setupHeaderRules, updateTopLevelHeaderRule } from './headers.js';
+import { resetAllPrefsToDefaults } from '../common/prefs.js';
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
@@ -58,6 +59,7 @@ const initializeExtension = async () => {
 chrome.runtime.onInstalled.addListener(async function (details) {
   console.log('onInstalled details:', details);
   await initializeExtension();
+  await resetAllPrefsToDefaults();
 });
 
 chrome.runtime.onStartup.addListener(async (details) => {
