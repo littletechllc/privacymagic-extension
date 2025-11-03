@@ -22,26 +22,6 @@ export const PRIVACY_PREFS_CONFIG = {
     locked: false,
     category: 'websites'
   },
-  topicsEnabled: {
-    inverted: true,
-    locked: true,
-    category: 'websites'
-  },
-  fledgeEnabled: {
-    inverted: true,
-    locked: true,
-    category: 'websites'
-  },
-  adMeasurementEnabled: {
-    inverted: true,
-    locked: true,
-    category: 'websites'
-  },
-  relatedWebsiteSetsEnabled: {
-    inverted: true,
-    locked: true,
-    category: 'websites'
-  },
   webRTCIPHandlingPolicy: {
     inverted: true,
     locked: false,
@@ -63,6 +43,26 @@ export const PRIVACY_PREFS_CONFIG = {
     inverted: true,
     locked: false,
     category: 'services'
+  },
+  topicsEnabled: {
+    inverted: true,
+    locked: true,
+    category: 'websites'
+  },
+  fledgeEnabled: {
+    inverted: true,
+    locked: true,
+    category: 'websites'
+  },
+  adMeasurementEnabled: {
+    inverted: true,
+    locked: true,
+    category: 'websites'
+  },
+  relatedWebsiteSetsEnabled: {
+    inverted: true,
+    locked: true,
+    category: 'websites'
   }
 };
 
