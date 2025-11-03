@@ -1,4 +1,6 @@
-/* global window, Navigator, Screen, innerWidth, innerHeight, BatteryManager, DevicePosture, HTMLIFrameElement, NavigatorUAData */
+/* global BatteryManager, DevicePosture, DOMTokenList, Element,
+          HTMLIFrameElement, innerHeight, innerWidth, Navigator,
+          NavigatorUAData, Screen, window */
 
 (() => {
   const redefinePropertyValues = (obj, propertyMap) => {
@@ -281,6 +283,10 @@
 
   const reflectApply = Reflect.apply;
   const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
+  const sandboxGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'sandbox').get;
+  const attributeGetter = Object.getOwnPropertyDescriptor(Element.prototype, 'getAttribute').value;
+  const domTokenIncludes = Object.getOwnPropertyDescriptor(DOMTokenList.prototype, 'contains').value;
+
   const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has').value;
   const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add').value;
 
@@ -294,19 +300,28 @@
   // - Evaluating globally-defined functions or Objects
 
   const getContentWindowSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
+  const getSandboxSafe = (iframe) => reflectApply(sandboxGetter, iframe, []);
+  const getDomTokenIncludesSafe = (list, token) => reflectApply(domTokenIncludes, list, [token]);
+  const getAttributeSafe = (element, attribute) => reflectApply(attributeGetter, element, [attribute]);
+
   const weakSetHasSafe = (s, v) => reflectApply(weakSetHas, s, [v]);
   const weakSetAddSafe = (s, v) => reflectApply(weakSetAdd, s, [v]);
 
+  const isSandboxedIframe = (iframe) => getAttributeSafe(iframe, 'sandbox') !== null;
+  const hasAllowScriptsSandboxToken = (iframe) => getDomTokenIncludesSafe(getSandboxSafe(iframe), 'allow-scripts');
+
   const getContentWindowAfterHardening = (iframe, hardeningCode) => {
     const contentWin = getContentWindowSafe(iframe);
-    // Accesing contentWin.eval is safe because, in order to monkey patch it,
-    // the pre-evaluated script would need to access contentWin, which would
-    // trigger our hardening code injection first. Note we are assuming here
-    // that the sandboxed iframe does not have 'allow-scripts'.
-    const evalFunction = contentWin.eval;
-    if (!weakSetHasSafe(evalSet, evalFunction)) {
-      evalFunction(hardeningCode);
-      weakSetAddSafe(evalSet, evalFunction);
+    if (isSandboxedIframe(iframe) && !hasAllowScriptsSandboxToken(iframe)) {
+      // Accesing contentWin.eval is safe because, in order to monkey patch it,
+      // the pre-evaluated script would need to access contentWin, which would
+      // trigger our hardening code injection first. Note we are assuming here
+      // that the sandboxed iframe does not have 'allow-scripts'.
+      const evalFunction = contentWin.eval;
+      if (!weakSetHasSafe(evalSet, evalFunction)) {
+        evalFunction(hardeningCode);
+        weakSetAddSafe(evalSet, evalFunction);
+      }
     }
     return contentWin;
   };
