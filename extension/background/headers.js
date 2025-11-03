@@ -3,6 +3,8 @@
 import psl from '../thirdparty/psl.mjs';
 import { getAllSettings, SETTINGS_KEY_PREFIX, getSetting } from '../common/settings.js';
 
+const SUBRESOURCE_RULE_ID_OFFSET = 2500;
+
 const PRIVACY_MAGIC_HEADERS = {
   gpc: {
     id: 1,
@@ -173,12 +175,12 @@ const createSubresourceHeaderRule = async (settingId) => {
     action = createRemoveHeaderAction(removeHeaders);
   }
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [id],
+    removeRuleIds: [SUBRESOURCE_RULE_ID_OFFSET + id],
     addRules: [
       {
         action,
         priority: 1,
-        id: 2500 + id,
+        id: SUBRESOURCE_RULE_ID_OFFSET + id,
         condition: {
           excludedTabIds: [],
           excludedResourceTypes: ['main_frame']
@@ -192,7 +194,7 @@ const createSubresourceHeaderRule = async (settingId) => {
 const updateSubresourceHeaderRule = async (settingId, tabId, value) => {
   const { id } = PRIVACY_MAGIC_HEADERS[settingId];
   const rules = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: [2500 + id]
+    ruleIds: [SUBRESOURCE_RULE_ID_OFFSET + id]
   });
   const rule = rules[0];
   if (value === false) {
