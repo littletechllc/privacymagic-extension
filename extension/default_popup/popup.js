@@ -4,9 +4,13 @@ import psl from '../thirdparty/psl.mjs';
 import { setupSettingsUI } from '../common/settings-ui.js';
 
 const setupOptionsButton = () => {
-  document.getElementById('optionsButton').addEventListener('click', function () {
-    console.log('optionsButton clicked');
-    chrome.runtime.openOptionsPage();
+  document.getElementById('optionsButton').addEventListener('click', () => {
+    try {
+      console.log('optionsButton clicked');
+      chrome.runtime.openOptionsPage();
+    } catch (error) {
+      console.error('error opening options page', error);
+    }
   });
 };
 
@@ -33,8 +37,12 @@ const updateSiteInfo = async (domain) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const domain = await getDomainForCurrentTab();
-  setupOptionsButton();
-  await updateSiteInfo(domain);
-  await setupSettingsUI(domain);
+  try {
+    const domain = await getDomainForCurrentTab();
+    setupOptionsButton();
+    await updateSiteInfo(domain);
+    await setupSettingsUI(domain);
+  } catch (error) {
+    console.error('error responding to DOMContentLoaded on current tab', error);
+  }
 });

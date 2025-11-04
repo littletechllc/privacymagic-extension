@@ -105,12 +105,16 @@ export const listenForPrefChanges = (prefName, callback) => {
     throw new Error(`Pref ${prefName} not found in config`);
   }
   chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].onChange.addListener((details) => {
-    console.log(`Pref ${prefName} changed to ${details.value}`);
-    let outValue = details.value;
-    if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
-      outValue = details.value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+    try {
+      console.log(`Pref ${prefName} changed to ${details.value}`);
+      let outValue = details.value;
+      if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
+        outValue = details.value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+      }
+      callback(outValue);
+    } catch (error) {
+      console.error('error responding to pref change', prefName, details, error);
     }
-    callback(outValue);
   });
 };
 

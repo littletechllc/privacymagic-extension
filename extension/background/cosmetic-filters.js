@@ -15,28 +15,33 @@ const fileExists = async (path) => {
 
 export const injectCssForCosmeticFilters = () => {
   chrome.webNavigation.onCommitted.addListener(async (details) => {
-    const url = new URL(details.url);
-    const registrableDomain = psl.get(url.hostname);
-    if (registrableDomain === null) {
-      return;
+    try {
+      const url = new URL(details.url);
+      const registrableDomain = psl.get(url.hostname);
+      if (registrableDomain === null) {
+        return;
+      }
+      const setting = await getSetting(registrableDomain, 'ads');
+      if (!setting) {
+        return;
+      }
+      const files = [
+        'content_scripts/adblock_css/_default_.css'
+      ];
+      const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
+      if (await fileExists(domainSpecificFile)) {
+        files.push(domainSpecificFile);
+      }
+      chrome.scripting.insertCSS({
+        target: {
+          tabId: details.tabId,
+          frameIds: [details.frameId]
+        },
+        files
+      });
+      console.log('injected CSS for cosmetic filters for', registrableDomain, files);
+    } catch (error) {
+      console.error('error injecting CSS for cosmetic filters for', details, error);
     }
-    const setting = await getSetting(registrableDomain, 'ads');
-    if (!setting) {
-      return;
-    }
-    const files = [
-      'content_scripts/adblock_css/_default_.css'
-    ];
-    const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
-    if (await fileExists(domainSpecificFile)) {
-      files.push(domainSpecificFile);
-    }
-    chrome.scripting.insertCSS({
-      target: {
-        tabId: details.tabId,
-        frameIds: [details.frameId]
-      },
-      files
-    });
   }, { urls: ['<all_urls>'] });
 };

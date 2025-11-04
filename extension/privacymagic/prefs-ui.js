@@ -6,8 +6,12 @@ const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
   const input = toggle.querySelector('input');
   input.checked = inverted ? !value : value;
   input.addEventListener('change', (event) => {
-    const value = event.target.checked;
-    setPref(prefName, inverted ? !value : value);
+    try {
+      const value = event.target.checked;
+      setPref(prefName, inverted ? !value : value);
+    } catch (error) {
+      console.error('error responding to click on pref checkbox', prefName, event?.target?.checked, error);
+    }
   });
   listenForPrefChanges(prefName, (value) => {
     input.checked = inverted ? !value : value;

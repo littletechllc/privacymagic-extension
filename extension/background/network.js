@@ -221,13 +221,17 @@ const setupSubresourceNetworkRules = async () => {
   // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
   const listener = async ({ url, tabId }) => {
-    const domain = psl.get(new URL(url).hostname);
-    if (domain === null) {
-      return;
-    }
-    for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
-      const setting = await getSetting(domain, settingId);
-      await updateSubresourceNetworkRule(settingId, tabId, setting);
+    try {
+      const domain = psl.get(new URL(url).hostname);
+      if (domain === null) {
+        return;
+      }
+      for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
+        const setting = await getSetting(domain, settingId);
+        await updateSubresourceNetworkRule(settingId, tabId, setting);
+      }
+    } catch (error) {
+      console.error('error updating subresource network rule for top-level navigation or request', url, tabId, error);
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
