@@ -1,7 +1,5 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import process from 'node:process';
 import { isMain } from './util.js';
 
 const BLOCKLISTS = [

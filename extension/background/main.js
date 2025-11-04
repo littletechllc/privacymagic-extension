@@ -12,18 +12,18 @@ const updateSetting = async (domain, settingId, value) => {
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'updateSetting') {
-    updateSetting(message.domain, message.settingId, message.value)
-      .then(() => {
-        sendResponse({ success: true });
-      })
-      .catch((error) => {
-        sendResponse({ success: false, error: error.message });
-      });
-    return true; // Indicates we will send a response asynchronously
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  try {
+    if (message.type === 'updateSetting') {
+      await updateSetting(message.domain, message.settingId, message.value);
+      sendResponse({ success: true });
+      return true; // Indicates we will send a response asynchronously
+    }
+    return false;
+  } catch (error) {
+    console.error('error onMessage', message, sender, error);
+    sendResponse({ success: false, error: error.message });
   }
-  return false;
 });
 
 let initialized = false;
@@ -40,12 +40,22 @@ const initializeExtension = async () => {
 };
 
 chrome.runtime.onInstalled.addListener(async function (details) {
-  console.log('onInstalled details:', details);
-  await initializeExtension();
-  await resetAllPrefsToDefaults();
+  try {
+    console.log('onInstalled details:', details);
+    await initializeExtension();
+    await resetAllPrefsToDefaults();
+  } catch (error) {
+    // TODO: Show user a notification that the extension failed to install.
+    console.error('error onInstalled', details, error);
+  }
 });
 
 chrome.runtime.onStartup.addListener(async (details) => {
-  console.log('onStartup details:', details);
-  await initializeExtension();
+  try {
+    console.log('onStartup details:', details);
+    await initializeExtension();
+  } catch (error) {
+    // TODO: Show user a notification that the extension failed to start.
+    console.error('error onStartup', details, error);
+  }
 });

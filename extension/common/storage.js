@@ -37,17 +37,25 @@ class StorageProxy {
 
   listenForChanges (keyPath, callback) {
     this.storage.onChanged.addListener((changes) => {
-      const key = keyPathToKey(keyPath);
-      if (changes[key]) {
-        callback(changes[key].newValue);
+      try {
+        const key = keyPathToKey(keyPath);
+        if (changes[key]) {
+          callback(changes[key].newValue);
+        }
+      } catch (error) {
+        console.error('error responsding to storage changes', keyPath, changes, error);
       }
     });
   }
 
   listenForAnyChanges (callback) {
     this.storage.onChanged.addListener(async (change) => {
-      await callback(Object.entries(change).map(
-        ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
+      try {
+        await callback(Object.entries(change).map(
+          ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
+      } catch (error) {
+        console.error('error responding to any storage changes', change, error);
+      }
     });
   }
 }

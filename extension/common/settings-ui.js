@@ -34,8 +34,8 @@ const createToggleCategory = async (store, domain, settingIds, categoryId) => {
 const setupInputListeners = (domain) => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
     input.addEventListener('change', async (event) => {
-      const settingId = event.target.id;
       try {
+        const settingId = event.target.id;
         const response = await chrome.runtime.sendMessage({
           type: 'updateSetting',
           domain,
@@ -43,12 +43,12 @@ const setupInputListeners = (domain) => {
           value: event.target.checked
         });
         console.log('sendMessage response:', response);
+        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        const tabId = tabs[0].id;
+        await chrome.tabs.reload(tabId);
       } catch (error) {
-        console.error('sendMessage error:', error);
+        console.error('error updating setting', domain, event?.target?.id, event?.target?.checked, error);
       }
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-      const tabId = tabs[0].id;
-      await chrome.tabs.reload(tabId);
     });
   });
 };
