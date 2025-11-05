@@ -43,7 +43,7 @@ export const PRIVACY_PREFS_CONFIG = {
     inverted: true,
     locked: false,
     category: 'services'
-  }
+  },
   topicsEnabled: {
     inverted: true,
     locked: true,
