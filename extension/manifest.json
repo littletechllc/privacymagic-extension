@@ -38,15 +38,6 @@
     "service_worker": "background/main.js",
     "type": "module"
   },
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "easylist_ruleset",
-        "enabled": true,
-        "path": "rules/easylist.json"
-      }
-    ]
-  },
   "content_scripts": [
     {
       "js": [

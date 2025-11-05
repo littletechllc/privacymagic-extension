@@ -5,7 +5,7 @@ import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 const initRuleOptions = {
   allFrames: true,
   matchOriginAsFallback: true,
-  persistAcrossSessions: true,
+  persistAcrossSessions: false,
   runAt: 'document_start',
   world: 'MAIN'
 };

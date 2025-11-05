@@ -1,7 +1,7 @@
 /* global chrome */
 
-import psl from '../thirdparty/psl.mjs';
 import { setupSettingsUI } from '../common/settings-ui.js';
+import { registrableDomainFromUrl } from '../common/util.js';
 
 const setupOptionsButton = () => {
   document.getElementById('optionsButton').addEventListener('click', () => {
@@ -25,7 +25,7 @@ const getDomainForCurrentTab = async () => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tab = tabs[0];
   const url = tab.url;
-  return psl.get(new URL(url).hostname);
+  return registrableDomainFromUrl(url);
 };
 
 const updateSiteInfo = async (domain) => {

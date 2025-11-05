@@ -2,6 +2,7 @@
 
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG = {
+  /*
   doNotTrackEnabled: {
     inverted: false,
     locked: false,
@@ -43,7 +44,7 @@ export const PRIVACY_PREFS_CONFIG = {
     inverted: true,
     locked: false,
     category: 'services'
-  },
+  }
   topicsEnabled: {
     inverted: true,
     locked: true,
@@ -63,7 +64,7 @@ export const PRIVACY_PREFS_CONFIG = {
     inverted: true,
     locked: true,
     category: 'websites'
-  }
+  } */
 };
 
 export const getPref = async (prefName) => {
