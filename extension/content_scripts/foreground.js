@@ -54,7 +54,7 @@
         cpuClass: undefined,
         deviceMemory: 1,
         hardwareConcurrency: 4,
-        maxTouchPoints: 1
+        maxTouchPoints: 0
       });
       redefinePropertyValues(DevicePosture.prototype, {
         type: 'continuous',

@@ -1,7 +1,26 @@
 /* global chrome */
 
-import psl from '../thirdparty/psl.mjs';
+import { registrableDomainFromUrl } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
+
+const tabIdToDomain = new Map();
+
+const monitorDomainForTab = () => {
+  const listener = async ({ url, tabId, frameId }) => {
+    try {
+      if (frameId !== 0 && frameId !== undefined) {
+        return;
+      }
+      const domain = registrableDomainFromUrl(url);
+      tabIdToDomain.set(tabId, domain);
+      console.log('tabIdToDomain:', tabIdToDomain.entries());
+    } catch (error) {
+      console.error('error monitoring domain for tab', url, tabId, error);
+    }
+  };
+  chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webNavigation.onCommitted.addListener(listener);
+};
 
 const fileExists = async (path) => {
   try {
@@ -14,20 +33,21 @@ const fileExists = async (path) => {
 };
 
 export const injectCssForCosmeticFilters = () => {
+  monitorDomainForTab();
   chrome.webNavigation.onCommitted.addListener(async (details) => {
     try {
-      const url = new URL(details.url);
-      const registrableDomain = psl.get(url.hostname);
-      if (registrableDomain === null) {
-        return;
-      }
-      const setting = await getSetting(registrableDomain, 'ads');
-      if (!setting) {
+      const topLevelDomain = tabIdToDomain.get(details.tabId);
+      const setting = await getSetting(topLevelDomain, 'ads');
+      if (setting === false) {
         return;
       }
       const files = [
         'content_scripts/adblock_css/_default_.css'
       ];
+      const registrableDomain = registrableDomainFromUrl(details.url);
+      if (registrableDomain === null) {
+        return;
+      }
       const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
       if (await fileExists(domainSpecificFile)) {
         files.push(domainSpecificFile);
