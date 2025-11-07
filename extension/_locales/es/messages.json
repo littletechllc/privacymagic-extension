@@ -68,15 +68,15 @@
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
-    "message": "Anuncios",
+    "message": "Bloquear Anuncios",
     "description": "Setting to block advertisements"
   },
   "client_hints": {
-    "message": "Client Hints",
+    "message": "Bloquear Client Hints",
     "description": "Setting to block client hints"
   },
   "query_parameters": {
-    "message": "Parámetros de Rastreo",
+    "message": "Eliminar Parámetros de Consulta de Rastreo",
     "description": "Setting to block tracking query parameters"
   },
   "do_not_track": {
@@ -84,16 +84,16 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Huella Digital de Hardware",
+    "message": "Bloquear Huella Digital de Hardware",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
-    "message": "Huella Digital de Pantalla",
+    "message": "Bloquear Huella Digital de Pantalla",
     "description": "Setting to block screen fingerprinting"
   },
   "window_name": {
-    "message": "Huella Digital de Nombre de Ventana",
-    "description": "Setting to block window name fingerprinting"
+    "message": "Bloquear Rastreo de Nombre de Ventana",
+    "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
     "message": "Preferencias del Navegador",
@@ -108,16 +108,16 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Control de Privacidad Global",
+    "message": "Activar Control de Privacidad Global",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Huella Digital de la API de Batería",
-    "description": "Configuración para habilitar la protección contra huella digital de la API de batería"
+    "message": "Bloquear Huella Digital de la API de Batería",
+    "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Huella Digital de User-Agent",
-    "description": "Configuración para habilitar la protección contra huella digital de User-Agent"
+    "message": "Bloquear Huella Digital de User-Agent",
+    "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
     "message": "Desactivar Páginas de Error Alternativas",
