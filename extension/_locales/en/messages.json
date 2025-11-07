@@ -68,15 +68,15 @@
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
-    "message": "Ads",
+    "message": "Block Ads",
     "description": "Setting to block advertisements"
   },
   "client_hints": {
-    "message": "Client Hints",
+    "message": "Block Client Hints",
     "description": "Setting to block client hints"
   },
   "query_parameters": {
-    "message": "Tracking Parameters",
+    "message": "Remove Tracking Query Parameters",
     "description": "Setting to block tracking query parameters"
   },
   "do_not_track": {
@@ -84,16 +84,16 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Hardware Fingerprinting",
+    "message": "Block Hardware Fingerprinting",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
-    "message": "Screen Fingerprinting",
+    "message": "Block Screen Fingerprinting",
     "description": "Setting to block screen fingerprinting"
   },
   "window_name": {
-    "message": "Window Name Fingerprinting",
-    "description": "Setting to block window name fingerprinting"
+    "message": "Block Window Name Tracking",
+    "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
     "message": "Browser Preferences",
@@ -108,15 +108,15 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Global Privacy Control",
+    "message": "Enable Global Privacy Control",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Battery API fingerprinting",
+    "message": "Block Battery API fingerprinting",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "User-Agent fingerprinting",
+    "message": "Block User-Agent fingerprinting",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {

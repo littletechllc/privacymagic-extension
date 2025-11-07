@@ -68,15 +68,15 @@
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
-    "message": "Werbung",
+    "message": "Werbung blockieren",
     "description": "Setting to block advertisements"
   },
   "client_hints": {
-    "message": "Client Hints",
+    "message": "Client Hints blockieren",
     "description": "Setting to block client hints"
   },
   "query_parameters": {
-    "message": "Tracking-Parameter",
+    "message": "Tracking-Abfrageparameter entfernen",
     "description": "Setting to block tracking query parameters"
   },
   "do_not_track": {
@@ -84,16 +84,16 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Hardware-Fingerprinting",
+    "message": "Hardware-Fingerprinting blockieren",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
-    "message": "Bildschirm-Fingerprinting",
+    "message": "Bildschirm-Fingerprinting blockieren",
     "description": "Setting to block screen fingerprinting"
   },
   "window_name": {
-    "message": "Fenster-Name-Fingerprinting",
-    "description": "Setting to block window name fingerprinting"
+    "message": "Fenster-Name-Tracking blockieren",
+    "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
     "message": "Browser-Einstellungen",
@@ -108,16 +108,16 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Globaler Datenschutz",
+    "message": "Globalen Datenschutz aktivieren",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Battery-API-Fingerprinting",
-    "description": "Einstellung zum Schutz vor Fingerprinting über die Battery-API"
+    "message": "Battery-API-Fingerprinting blockieren",
+    "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "User-Agent-Fingerprinting",
-    "description": "Einstellung zum Schutz vor User-Agent-Fingerprinting"
+    "message": "User-Agent-Fingerprinting blockieren",
+    "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
     "message": "Alternative Fehlerseiten deaktivieren",
