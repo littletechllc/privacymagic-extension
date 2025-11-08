@@ -17,7 +17,6 @@
     }
   })();
 
-  const definePropertiesSafe = Object.defineProperties;
   const redefinePropertyValues = (obj, propertyMap) => {
     const properties = {};
     const originalProperties = {};
@@ -37,6 +36,7 @@
     // We use definePropertiesSafe to avoid invoking Object.defineProperties
     // because the original function might be monkey patched by pre-evaluated
     // scripts.
+    const definePropertiesSafe = Object.defineProperties;
     return () => {
       definePropertiesSafe(obj, originalProperties);
       console.log('restored properties', obj, originalProperties);
