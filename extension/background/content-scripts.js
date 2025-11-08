@@ -1,13 +1,12 @@
 /* global chrome */
 
-import { PRIVACY_SETTINGS_CONFIG, getAllSettings, SETTINGS_KEY_PREFIX } from '../common/settings.js';
+import { PRIVACY_SETTINGS_CONFIG, getAllSettings } from '../common/settings.js';
 
 const initRuleOptions = {
-  allFrames: true,
   matchOriginAsFallback: true,
   persistAcrossSessions: false,
   runAt: 'document_start',
-  world: 'MAIN'
+  allFrames: true
 };
 
 const logRules = async () => {
@@ -67,30 +66,33 @@ const initializeContentScripts = async () => {
 export const setupContentScripts = async () => {
   const allRules = [];
   allRules.push({
+    ...initRuleOptions,
     id: 'foreground',
     js: ['content_scripts/foreground.js'],
     matches: ['<all_urls>'],
-    ...initRuleOptions
+    world: 'MAIN'
   });
   allRules.push({
+    ...initRuleOptions,
     id: 'isolated',
     js: ['content_scripts/isolated.js'],
     matches: ['<all_urls>'],
-    ...initRuleOptions,
     world: 'ISOLATED'
   });
   for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     if (settingConfig.script) {
       allRules.push({
+        ...initRuleOptions,
         id: `enable_${settingId}`,
         js: [`content_scripts/enable/${settingId}.js`],
         matches: ['<all_urls>'],
-        ...initRuleOptions
+        world: 'MAIN'
       }, {
+        ...initRuleOptions,
         id: `disable_${settingId}`,
         js: [`content_scripts/disable/${settingId}.js`],
         matches: ['*://dummy/*'],
-        ...initRuleOptions
+        world: 'MAIN'
       });
     }
   }
