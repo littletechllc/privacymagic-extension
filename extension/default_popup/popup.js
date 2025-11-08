@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, punycode */
 
 import { setupSettingsUI } from '../common/settings-ui.js';
 import { registrableDomainFromUrl } from '../common/util.js';
@@ -32,7 +32,7 @@ const updateSiteInfo = async (domain) => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tab = tabs[0];
   const url = tab.url;
-  document.getElementById('domain').textContent = domain;
+  document.getElementById('domain').textContent = punycode.toUnicode(domain);
   document.getElementById('favicon').src = faviconURL(url);
 };
 
