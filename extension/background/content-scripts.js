@@ -1,6 +1,6 @@
 /* global chrome */
 
-import { PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
+import { PRIVACY_SETTINGS_CONFIG, getAllSettings, SETTINGS_KEY_PREFIX } from '../common/settings.js';
 
 const initRuleOptions = {
   allFrames: true,
@@ -41,6 +41,29 @@ export const updateContentScripts = async (domain, settingId, value) => {
   await logRules();
 };
 
+const initializeContentScripts = async () => {
+  const rulesById = {};
+  const rules = await chrome.scripting.getRegisteredContentScripts({});
+  for (const rule of rules) {
+    if (rule.id.startsWith('enable_') || rule.id.startsWith('disable_')) {
+      rule.excludeMatches ||= [];
+      rule.matches ||= [];
+      rulesById[rule.id] = rule;
+    }
+  }
+  const allSettings = await getAllSettings();
+  for (const [domain, settingId, value] of allSettings) {
+    const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
+    if (PRIVACY_SETTINGS_CONFIG[settingId] &&
+        PRIVACY_SETTINGS_CONFIG[settingId].script && value === false) {
+      rulesById[`enable_${settingId}`].excludeMatches.push(...matchStrings);
+      rulesById[`disable_${settingId}`].matches.push(...matchStrings);
+    }
+  }
+  await chrome.scripting.updateContentScripts(Object.values(rulesById));
+  await logRules();
+};
+
 export const setupContentScripts = async () => {
   const allRules = [];
   allRules.push({
@@ -49,13 +72,19 @@ export const setupContentScripts = async () => {
     matches: ['<all_urls>'],
     ...initRuleOptions
   });
+  allRules.push({
+    id: 'isolated',
+    js: ['content_scripts/isolated.js'],
+    matches: ['<all_urls>'],
+    ...initRuleOptions,
+    world: 'ISOLATED'
+  });
   for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     if (settingConfig.script) {
       allRules.push({
         id: `enable_${settingId}`,
         js: [`content_scripts/enable/${settingId}.js`],
         matches: ['<all_urls>'],
-        excludeMatches: [],
         ...initRuleOptions
       }, {
         id: `disable_${settingId}`,
@@ -66,5 +95,5 @@ export const setupContentScripts = async () => {
     }
   }
   await chrome.scripting.registerContentScripts(allRules);
-  await logRules();
+  await initializeContentScripts();
 };
