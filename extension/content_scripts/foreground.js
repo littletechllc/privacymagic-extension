@@ -11,7 +11,12 @@
       documentElement.removeAttribute(DATA_SECRET_ATTRIBUTE);
       return existingSecret;
     } else {
-      const newSecret = crypto.randomUUID();
+      let newSecret;
+      try {
+        newSecret = crypto.randomUUID();
+      } catch (error) {
+        newSecret = Math.random().toString(16).substring(2);
+      }
       documentElement.setAttribute(DATA_SECRET_ATTRIBUTE, newSecret);
       return newSecret;
     }
@@ -415,4 +420,3 @@
   window.__inject_if_ready__();
   console.log('foreground.js loaded at document_start with secret:', sharedSecret, Date.now());
 })();
-

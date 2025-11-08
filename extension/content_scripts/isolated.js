@@ -9,7 +9,12 @@
       documentElement.removeAttribute(DATA_SECRET_ATTRIBUTE);
       return existingSecret;
     } else {
-      const newSecret = crypto.randomUUID();
+      let newSecret;
+      try {
+        newSecret = crypto.randomUUID();
+      } catch (error) {
+        newSecret = Math.random().toString(16).substring(2);
+      }
       documentElement.setAttribute(DATA_SECRET_ATTRIBUTE, newSecret);
       return newSecret;
     }
