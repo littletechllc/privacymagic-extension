@@ -211,15 +211,18 @@
       };
     },
     battery: () => {
-      const restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
-        charging: true,
-        chargingTime: 0,
-        dischargingTime: Infinity,
-        level: 1,
-        addEventListener: (/* ignore */) => { /* do nothing */ },
-        removeEventListener: (/* ignore */) => { /* do nothing */ },
-        dispatchEvent: (/* ignore */) => { /* do nothing */ }
-      });
+      let restoreBatteryManager;
+      if (window.BatteryManager) {
+        restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
+          charging: true,
+          chargingTime: 0,
+          dischargingTime: Infinity,
+          level: 1,
+          addEventListener: (/* ignore */) => { /* do nothing */ },
+          removeEventListener: (/* ignore */) => { /* do nothing */ },
+          dispatchEvent: (/* ignore */) => { /* do nothing */ }
+        });
+      }
       const silencedEventProperty = {
         get: () => { return null; },
         set: (value) => { /* do nothing */ },
