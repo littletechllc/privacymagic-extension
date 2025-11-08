@@ -94,26 +94,28 @@
         hardwareConcurrency: 4,
         maxTouchPoints: 0
       });
-      const restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
-        type: 'continuous',
-        addEventListener: (/* ignore */) => { /* do nothing */ },
-        removeEventListener: (/* ignore */) => { /* do nothing */ },
-        dispatchEvent: (/* ignore */) => { /* do nothing */ }
-      });
-      const restoreDevicePostureChange = redefinePropertyValues(DevicePosture.prototype, {
-        change: {
-          get: () => { return null; },
-          set: (value) => { /* do nothing */ },
-          configurable: false,
-          enumerable: true,
-          writable: true
-        }
-      });
+      let restoreDevicePosture;
+      if (window.DevicePosture) {
+        restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
+          type: 'continuous',
+          addEventListener: (/* ignore */) => { /* do nothing */ },
+          removeEventListener: (/* ignore */) => { /* do nothing */ },
+          dispatchEvent: (/* ignore */) => { /* do nothing */ },
+          change: {
+            get: () => { return null; },
+            set: (value) => { /* do nothing */ },
+            configurable: false,
+            enumerable: true,
+            writable: true
+          }
+        });
+      }
       return () => {
         restoreMatchMedia();
         restoreNavigator();
-        restoreDevicePosture();
-        restoreDevicePostureChange();
+        if (restoreDevicePosture) {
+          restoreDevicePosture();
+        }
       };
     },
     screen: () => {
@@ -213,6 +215,12 @@
     battery: () => {
       let restoreBatteryManager;
       if (window.BatteryManager) {
+        const silencedEventProperty = {
+          get: () => { return null; },
+          set: (value) => { /* do nothing */ },
+          configurable: true,
+          enumerable: true
+        };
         restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
           charging: true,
           chargingTime: 0,
@@ -220,24 +228,17 @@
           level: 1,
           addEventListener: (/* ignore */) => { /* do nothing */ },
           removeEventListener: (/* ignore */) => { /* do nothing */ },
-          dispatchEvent: (/* ignore */) => { /* do nothing */ }
+          dispatchEvent: (/* ignore */) => { /* do nothing */ },
+          onchargingchange: silencedEventProperty,
+          onchargingtimechange: silencedEventProperty,
+          ondischargingtimechange: silencedEventProperty,
+          onlevelchange: silencedEventProperty
         });
       }
-      const silencedEventProperty = {
-        get: () => { return null; },
-        set: (value) => { /* do nothing */ },
-        configurable: true,
-        enumerable: true
-      };
-      const restoreBatteryManagerEvents = redefinePropertyValues(BatteryManager.prototype, {
-        onchargingchange: silencedEventProperty,
-        onchargingtimechange: silencedEventProperty,
-        ondischargingtimechange: silencedEventProperty,
-        onlevelchange: silencedEventProperty
-      });
       return () => {
-        restoreBatteryManager();
-        restoreBatteryManagerEvents();
+        if (restoreBatteryManager) {
+          restoreBatteryManager();
+        }
       };
     },
     window_name: () => {
