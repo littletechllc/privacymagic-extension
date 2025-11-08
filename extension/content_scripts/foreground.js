@@ -1,21 +1,54 @@
-/* global BatteryManager, DevicePosture, DOMTokenList, Element,
+/* global BatteryManager, chrome, DevicePosture, DOMTokenList, Element,
           HTMLIFrameElement, innerHeight, innerWidth, Navigator,
           NavigatorUAData, Screen, window */
 
 (() => {
+  const DATA_SECRET_ATTRIBUTE = "data-privacy-magic-secret";
+  const sharedSecret = (() => {
+    const documentElement = document.documentElement;
+    const existingSecret = documentElement.getAttribute(DATA_SECRET_ATTRIBUTE);
+    if (existingSecret !== null) {
+      documentElement.removeAttribute(DATA_SECRET_ATTRIBUTE);
+      return existingSecret;
+    } else {
+      const newSecret = crypto.randomUUID();
+      documentElement.setAttribute(DATA_SECRET_ATTRIBUTE, newSecret);
+      return newSecret;
+    }
+  })();
+
+  const definePropertiesSafe = Object.defineProperties;
   const redefinePropertyValues = (obj, propertyMap) => {
     const properties = {};
+    const originalProperties = {};
     for (const [prop, value] of Object.entries(propertyMap)) {
       const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-      if (descriptor && descriptor.get) {
-        properties[prop] = { ...descriptor, get: () => value };
-      } else {
+      originalProperties[prop] = descriptor || { get: undefined, set: undefined, configurable: true };
+      if (!descriptor) {
+        properties[prop] = { configurable: true, get: () => value };
+      } else if (descriptor.value) {
         properties[prop] = { ...descriptor, value };
+      } else {
+        properties[prop] = { ...descriptor, get: () => value };
       }
     }
     Object.defineProperties(obj, properties);
+    // Return a function that restores the original properties.
+    // We use definePropertiesSafe to avoid invoking Object.defineProperties
+    // because the original function might be monkey patched by pre-evaluated
+    // scripts.
+    return () => {
+      definePropertiesSafe(obj, originalProperties);
+      console.log('restored properties', obj, originalProperties);
+    };
   };
 
+  // The privacyMagicPatches object contains a series of patches. Each patch
+  // has a name (the key) and a corresponding function that monkey patches
+  // one or more Web APIs to harden them against fingerprinting or other
+  // privacy-invasive attacks. Each patch function returns an "undo" function
+  // that restores the original properties. We need the undo function for any
+  // tab for which protections have been disabled.
   const privacyMagicPatches = {
     /*
     navigator: () => {
@@ -36,7 +69,8 @@
     },
     */
     gpc: () => {
-      redefinePropertyValues(Navigator.prototype, {
+      console.log('gpc patch', window.location.href);
+      return redefinePropertyValues(Navigator.prototype, {
         globalPrivacyControl: true
       });
     },
@@ -47,22 +81,22 @@
       const matchMediaClean = (mediaQueryString) =>
         mediaQueryString.replace(regex, (_, value) =>
           value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
-      redefinePropertyValues(window, {
+      const restoreMatchMedia = redefinePropertyValues(window, {
         matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
       });
-      redefinePropertyValues(Navigator.prototype, {
+      const restoreNavigator = redefinePropertyValues(Navigator.prototype, {
         cpuClass: undefined,
         deviceMemory: 1,
         hardwareConcurrency: 4,
         maxTouchPoints: 0
       });
-      redefinePropertyValues(DevicePosture.prototype, {
+      const restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
         type: 'continuous',
         addEventListener: (/* ignore */) => { /* do nothing */ },
         removeEventListener: (/* ignore */) => { /* do nothing */ },
         dispatchEvent: (/* ignore */) => { /* do nothing */ }
       });
-      redefinePropertyValues(DevicePosture.prototype, {
+      const restoreDevicePostureChange = redefinePropertyValues(DevicePosture.prototype, {
         change: {
           get: () => { return null; },
           set: (value) => { /* do nothing */ },
@@ -71,6 +105,12 @@
           writable: true
         }
       });
+      return () => {
+        restoreMatchMedia();
+        restoreNavigator();
+        restoreDevicePosture();
+        restoreDevicePostureChange();
+      };
     },
     screen: () => {
       const oldMatchMedia = window.matchMedia;
@@ -93,7 +133,7 @@
         return allowedScreenSizes[allowedScreenSizes.length - 1];
       };
       const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight);
-      redefinePropertyValues(Screen.prototype, {
+      const restoreScreen = redefinePropertyValues(Screen.prototype, {
         availHeight: spoofedScreenHeight,
         availLeft: 0,
         availTop: 0,
@@ -103,7 +143,7 @@
         pixelDepth: 24,
         width: spoofedScreenWidth
       });
-      redefinePropertyValues(window, {
+      const restoreWindow = redefinePropertyValues(window, {
         devicePixelRatio: 1,
         matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
         outerHeight: window.innerHeight,
@@ -113,6 +153,10 @@
         screenX: 0,
         screenY: 0
       });
+      return () => {
+        restoreScreen();
+        restoreWindow();
+      };
     },
     useragent: () => {
       const CHROME_VERSION = '141.0.0.0';
@@ -120,11 +164,11 @@
       const PLATFORM_VERSION = '26.0.0';
       const BRAND_VERSION = '8.0.0.0';
       const SHORT_BRAND_VERSION = BRAND_VERSION.split('.')[0];
-      redefinePropertyValues(Navigator.prototype, {
+      const restoreNavigator = redefinePropertyValues(Navigator.prototype, {
         userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`,
         appVersion: `5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`
       });
-      redefinePropertyValues(NavigatorUAData.prototype, {
+      const restoreNavigatorUAData = redefinePropertyValues(NavigatorUAData.prototype, {
         brands: [
           { brand: 'Google Chrome', version: SHORT_CHROME_VERSION },
           { brand: 'Not?A_Brand', version: SHORT_BRAND_VERSION },
@@ -157,9 +201,13 @@
             wow64: false
           })
       });
+      return () => {
+        restoreNavigator();
+        restoreNavigatorUAData();
+      };
     },
     battery: () => {
-      redefinePropertyValues(BatteryManager.prototype, {
+      const restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
         charging: true,
         chargingTime: 0,
         dischargingTime: Infinity,
@@ -174,12 +222,16 @@
         configurable: true,
         enumerable: true
       };
-      Object.defineProperties(BatteryManager.prototype, {
+      const restoreBatteryManagerEvents = redefinePropertyValues(BatteryManager.prototype, {
         onchargingchange: silencedEventProperty,
         onchargingtimechange: silencedEventProperty,
         ondischargingtimechange: silencedEventProperty,
         onlevelchange: silencedEventProperty
       });
+      return () => {
+        restoreBatteryManager();
+        restoreBatteryManagerEvents();
+      };
     },
     window_name: () => {
       const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
@@ -230,32 +282,24 @@
     }
   };
 
-  const isTopLevel = () => {
-    try {
-      // eslint-disable-next-line no-unused-expressions
-      window.top.location.href;
-      return true;
-    } catch (_) {
-      return false;
-    }
-  };
+  const isTopLevel = window.top === window;
 
   const injectPatchesInPage = () => {
-    const topLevel = isTopLevel();
+    const undoFunctions = {};
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
-      if (decision || !topLevel) {
+      if (decision || !isTopLevel) {
         console.log('injecting patch', patcherId);
-        privacyMagicPatches[patcherId]();
+        undoFunctions[patcherId] = privacyMagicPatches[patcherId]();
       }
     }
+    return undoFunctions;
   };
 
   const bundleActivePatches = () => {
-    const topLevel = isTopLevel();
     const preamble = `// helper function\nconst redefinePropertyValues = ${redefinePropertyValues.toString()};`;
     const bundleItems = [preamble];
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
-      if (decision || !topLevel) {
+      if (decision || !isTopLevel) {
         bundleItems.push(`// ${patcherId}\n(${privacyMagicPatches[patcherId]})();`);
       }
     }
@@ -338,19 +382,38 @@
   window.__patch_decisions__ ||= {};
 
   window.__inject_if_ready__ = () => {
-    console.log('inject if ready', window.__patch_decisions__);
     if (Object.keys(window.__patch_decisions__).length === Object.keys(privacyMagicPatches).length) {
       console.log('injecting patches', window.__patch_decisions__);
-      injectPatchesInPage();
+      window.__chrome = chrome;
+      const undoFunctions = injectPatchesInPage();
       const bundle = bundleActivePatches();
-      console.log('bundle:', bundle);
       prepareInjectionForIframes(bundle);
       delete window.__patch_decisions__;
       delete window.__inject_if_ready__;
+      console.log('isTopLevel', isTopLevel);
+      if (isTopLevel) {
+        return;
+      }
+      console.log('listening for message events on foreground.js');
+      // TODO: Make the following event-listener safe against monkey patching.
+      document.documentElement.addEventListener(`message-${sharedSecret}`, ({ detail }) => {
+        console.log('message event received on foreground.js', detail);
+        if (detail.type === 'getDisabledSettingsResponse') {
+          console.log('getDisabledSettingsResponse received on foreground.js', detail);
+          const { disabledSettings } = detail;
+          console.log('disabledSettings', disabledSettings);
+          for (const settingId of disabledSettings) {
+            console.log('undoing patch', settingId);
+            const undoFunction = undoFunctions[settingId];
+            if (undoFunction) {
+              undoFunction();
+            }
+          }
+        }
+      });
     }
   };
-
   window.__inject_if_ready__();
+  console.log('foreground.js loaded at document_start with secret:', sharedSecret, Date.now());
 })();
 
-console.log('foreground.js loaded', Date.now());

@@ -90,11 +90,17 @@ export const setSetting = async (domain, settingId, value) => {
 };
 
 export const getAllSettings = async () => {
-  const settings = await storage.local.getAll();
-  return settings;
+  const storedSettings = await storage.local.getAll();
+  const allSettings = [];
+  for (const [[type, domain, settingId], value] of storedSettings) {
+    if (type === SETTINGS_KEY_PREFIX && settingId in PRIVACY_SETTINGS_CONFIG) {
+      allSettings.push([domain, settingId, value]);
+    }
+  }
+  return allSettings;
 };
 
-export const getSettingsForProtectionType = (protectionType) => {
+export const getSettingIdsForProtectionType = (protectionType) => {
   const settings = [];
   for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
     if (settingConfig[protectionType]) {

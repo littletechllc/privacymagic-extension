@@ -149,13 +149,13 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
 
 const setupTopLevelNetworkRules = async () => {
   // Create the top level network rule, without any excluded request domains.
-  const allSettings = await getAllSettings();
   for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
     await createTopLevelNetworkRule(settingId);
   }
   // Add necessary excluded request domains for the top level network rule.
-  for (const [[type, domain, settingId], value] of allSettings) {
-    if (type === SETTINGS_KEY_PREFIX && settingId in NETWORK_PROTECTION_DEFS) {
+  const allSettings = await getAllSettings();
+  for (const [domain, settingId, value] of allSettings) {
+    if (settingId in NETWORK_PROTECTION_DEFS) {
       await updateTopLevelNetworkRule(domain, settingId, value);
     }
   }

@@ -2,9 +2,10 @@
 
 import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
-import { setSetting } from '../common/settings.js';
+import { setSetting, getSetting, PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
+import { registrableDomainFromUrl } from '../common/util.js';
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
@@ -12,17 +13,45 @@ const updateSetting = async (domain, settingId, value) => {
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+const getDisabledSettings = async (domain) => {
+  const disabledSettings = [];
+  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
+    if (settingConfig.script) {
+      const value = await getSetting(domain, settingId);
+      if (value === false) {
+        disabledSettings.push(settingId);
+      }
+    }
+  }
+  return disabledSettings;
+};
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   try {
+    if (message.type === 'getDisabledSettings') {
+      const domain = registrableDomainFromUrl(sender.tab.url);
+      getDisabledSettings(domain).then((disabledSettings) => {
+        sendResponse({ success: true, disabledSettings });
+      }).catch((error) => {
+        console.error('error getting disabled settings', sender, error);
+        sendResponse({ success: false, error: error.message });
+      });
+      return true; // Indicates we will send a response asynchronously
+    }
     if (message.type === 'updateSetting') {
-      await updateSetting(message.domain, message.settingId, message.value);
-      sendResponse({ success: true });
+      updateSetting(message.domain, message.settingId, message.value).then(() => {
+        sendResponse({ success: true });
+      }).catch((error) => {
+        console.error('error updating setting', message.domain, message.settingId, message.value, error);
+        sendResponse({ success: false, error: error.message });
+      });
       return true; // Indicates we will send a response asynchronously
     }
     return false;
   } catch (error) {
     console.error('error onMessage', message, sender, error);
     sendResponse({ success: false, error: error.message });
+    return true;
   }
 });
 
