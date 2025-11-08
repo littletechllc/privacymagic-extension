@@ -39,7 +39,6 @@
     const definePropertiesSafe = Object.defineProperties;
     return () => {
       definePropertiesSafe(obj, originalProperties);
-      console.log('restored properties', obj, originalProperties);
     };
   };
 
