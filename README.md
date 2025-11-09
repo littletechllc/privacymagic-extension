@@ -26,5 +26,5 @@ Third-party libraries are stored in the directory extension/thirdparty
 ### punycode
 * Copyright Mathias Bynens <https://mathiasbynens.be/>
 * License: MIT
-* https://raw.githubusercontent.com/mathiasbynens/punycode.js/refs/tags/v2.3.1/punycode.js
+* Source: https://raw.githubusercontent.com/mathiasbynens/punycode.js/refs/tags/v2.3.1/punycode.js
 * Converts punycode domains to unicode.
