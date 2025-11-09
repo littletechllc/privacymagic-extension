@@ -6,6 +6,7 @@ import { setSetting, getSetting, PRIVACY_SETTINGS_CONFIG } from '../common/setti
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { registrableDomainFromUrl } from '../common/util.js';
+import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
@@ -47,6 +48,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
       return true; // Indicates we will send a response asynchronously
     }
+    if (message.type === 'addHttpWarningNetworkRuleException') {
+      const domain = registrableDomainFromUrl(message.url);
+      console.log('adding exception to http warning network rule for domain:', domain, 'value:', message.value);
+      updateHttpWarningNetworkRuleException(domain, message.value).then(() => {
+        sendResponse({ success: true });
+      }).catch((error) => {
+        console.error('error adding exception to http warning network rule', message.url, error);
+        sendResponse({ success: false, error: error.message });
+      });
+      sendResponse({ success: true });
+    }
     return false;
   } catch (error) {
     console.error('error onMessage', message, sender, error);
@@ -64,6 +76,7 @@ const initializeExtension = async () => {
   injectCssForCosmeticFilters();
   await setupContentScripts();
   await setupNetworkRules();
+  await createHttpWarningNetworkRule();
   console.log('Extension initialized');
   initialized = true;
 };
