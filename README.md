@@ -12,6 +12,11 @@
 * Blocks insecure HTTP connections
 * Blocks window.name tracking
 * Enables Global Privacy Control
+* Disables WebRTC IP address leaks
+* Disables browser "spy" features
+* Disables Related Website Sets
+* Disables Hyperlink Auditing
+* Disables remote Spell Check Service
 
 ## Third-party libraries
 
