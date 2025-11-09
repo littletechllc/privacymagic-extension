@@ -1,3 +1,18 @@
+# Privacy Magic browser extension
+
+## Features
+
+* Blocks ads
+* Blocks tracking scripts
+* Blocks annoyances
+* Removes tracking headers
+* Blocks third-party cookies
+* Blocks fingerprinting leaks
+* Removes tracking query parameters
+* Blocks insecure HTTP connections
+* Blocks window.name tracking
+* Enables Global Privacy Control
+
 ## Third-party libraries
 
 Third-party libraries are stored in the directory extension/thirdparty
