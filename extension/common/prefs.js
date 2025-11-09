@@ -44,6 +44,10 @@ export const PRIVACY_PREFS_CONFIG = {
     locked: false,
     category: 'services'
   },
+  searchSuggestEnabled: {
+    inverted: true,
+    category: 'services'
+  },
   topicsEnabled: {
     inverted: true,
     locked: true,
