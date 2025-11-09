@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTTP Warning</title>
+  <style>
+    @import url('../common/main.css');
+    @import url('../privacymagic/options.css');
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: auto;
+      h1 {
+        font-size: 40px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.5;
+        max-width: 32em;
+      }
+      h2 {
+        font-size: 32px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.5;
+        max-width: 32em;
+      }
+      p {
+        font-size: 20px;
+        font-weight: 400;
+        text-align: left;
+        padding: 1em;
+        line-height: 1.5;
+        margin: 0px;
+        max-width: 32em;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        justify-content: center;
+      }
+      button {
+        background-color:rgb(101,161,248);
+        padding: 1em;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 20px;
+      }
+      .default-button {
+        background-color: rgb(57, 114, 185);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">
+      <img src="../logo/logo.svg" class="logo" alt="Privacy Magic Warning">
+      Privacy Magic Warning
+    </div>
+    <div class="content">
+      <h2>⚠️ <span id="domain"></span> is insecure ⚠️</h1>
+      <p>The website you are trying to access does not support a secure connection using HTTPS.
+        That makes your information vulnerable to eavesdropping.
+        You can continue to the site or you can go back to the previous page.
+      </p>
+      <div class="buttons">
+        <button id="goBack" class="default-button">◀ Go back</button>
+        <button id="addException">⚠️ Continue to site anyway ▶</button>
+      </div>
+    </div>
+  </div>
+  <script src="http-warning.js" type="module"></script>
+</body>
+</html>

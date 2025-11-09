@@ -1,6 +1,15 @@
+
 body {
     background-color: #fffdfd;
     color: #1f1d1d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 div.main-container {
@@ -10,20 +19,7 @@ div.main-container {
     align-items: center;
     justify-content: center;
     margin: auto;
-}
-
-div.title {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    height: 50%;
-    width: 100%;
-    color: #091276;
-    font-family: "Modern Antiqua", serif;
-    font-weight: 600;
-    font-style: normal;
+    padding: 30px;
 }
 
 .global-toggles {
@@ -33,10 +29,4 @@ div.title {
     align-items: top;
     justify-content: center;
     margin: auto;
-}
-
-#logo {
-    padding: 0px 20px;
-    height: 100px;
-    width: auto;
 }

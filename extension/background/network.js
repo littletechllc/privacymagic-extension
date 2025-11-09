@@ -250,6 +250,7 @@ const createExceptionToStaticRules = async () => {
     id: 100,
     condition: {
       // urlFilter: '<all_urls>'
+      // dummy tab id
       tabIds: [1]
     }
   };
@@ -302,7 +303,7 @@ const setupExceptionsToStaticRules = async () => {
       console.error('error updating exception to static rules for top-level navigation or request', url, tabId, error);
     }
   };
-  chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['http://*/*', 'https://*/*'], types: ['main_frame'] });
   chrome.webNavigation.onCommitted.addListener(listener);
 };
 

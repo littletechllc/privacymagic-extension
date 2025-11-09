@@ -1,4 +1,5 @@
 @import url('./toggle.css');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
 
 .toggle-box {
   display: flex;
@@ -28,7 +29,6 @@
   
 }
 
-
 input[type="checkbox"]:disabled, label.locked {
   opacity: 0.5;
   pointer-events: none;
@@ -43,4 +43,24 @@ input[type="checkbox"]:disabled, label.locked {
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;
+}
+
+div.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  height: 50%;
+  width: 100%;
+  color: #091276;
+  font-family: "Modern Antiqua", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.logo {
+  padding: 0px 20px;
+  height: 50px;
+  width: auto;
 }
