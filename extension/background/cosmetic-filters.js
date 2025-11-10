@@ -1,6 +1,6 @@
 /* global chrome */
 
-import { registrableDomainFromUrl } from '../common/util.js';
+import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
 
 const tabIdToDomain = new Map();
@@ -15,7 +15,7 @@ const monitorDomainForTab = () => {
       tabIdToDomain.set(tabId, domain);
       console.log('tabIdToDomain:', tabIdToDomain.entries());
     } catch (error) {
-      console.error('error monitoring domain for tab', url, tabId, error);
+      logError(error, 'error monitoring domain for tab', {url, tabId});
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
@@ -61,7 +61,7 @@ export const injectCssForCosmeticFilters = () => {
       });
       console.log('injected CSS for cosmetic filters for', registrableDomain, files);
     } catch (error) {
-      console.error('error injecting CSS for cosmetic filters for', details, error);
+      logError(error, 'error injecting CSS for cosmetic filters for', details);
     }
   }, { urls: ['<all_urls>'] });
 };

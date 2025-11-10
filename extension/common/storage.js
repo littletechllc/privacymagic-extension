@@ -1,5 +1,7 @@
 /* global chrome */
 
+import { logError } from '../common/util.js';
+
 const KEY_SEPARATOR = ':';
 
 const keyPathToKey = (keyPath) => {
@@ -43,7 +45,7 @@ class StorageProxy {
           callback(changes[key].newValue);
         }
       } catch (error) {
-        console.error('error responsding to storage changes', keyPath, changes, error);
+        logError(error, 'error responsding to storage changes', { keyPath, changes });
       }
     });
   }
@@ -54,7 +56,7 @@ class StorageProxy {
         await callback(Object.entries(change).map(
           ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
       } catch (error) {
-        console.error('error responding to any storage changes', change, error);
+        logError(error, 'error responding to any storage changes', change);
       }
     });
   }

@@ -5,7 +5,7 @@ import { updateContentScripts, setupContentScripts } from './content-scripts.js'
 import { setSetting, getSetting, PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
-import { registrableDomainFromUrl } from '../common/util.js';
+import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 import { setupExceptionsToStaticRules } from './blocker-exceptions.js';
 
@@ -46,14 +46,15 @@ const getDisabledSettings = async (domain) => {
   return disabledSettings;
 };
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener() => {
   try {
+    const {message, sender, sendResponse} = details;
     if (message.type === 'getDisabledSettings') {
       const domain = registrableDomainFromUrl(sender.tab.url);
       getDisabledSettings(domain).then((disabledSettings) => {
         sendResponse({ success: true, disabledSettings });
       }).catch((error) => {
-        console.error('error getting disabled settings', sender, error);
+        logError(error, 'error getting disabled settings', details);
         sendResponse({ success: false, error: error.message });
       });
       return true; // Indicates we will send a response asynchronously
@@ -62,7 +63,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       updateSetting(message.domain, message.settingId, message.value).then(() => {
         sendResponse({ success: true });
       }).catch((error) => {
-        console.error('error updating setting', message.domain, message.settingId, message.value, error);
+        logError(error, 'error updating setting', details);
         sendResponse({ success: false, error: error.message });
       });
       return true; // Indicates we will send a response asynchronously
@@ -73,14 +74,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       updateHttpWarningNetworkRuleException(domain, message.value).then(() => {
         sendResponse({ success: true });
       }).catch((error) => {
-        console.error('error adding exception to http warning network rule', message.url, error);
+        logError(error, 'error adding exception to http warning network rule', details);
         sendResponse({ success: false, error: error.message });
       });
       sendResponse({ success: true });
     }
     return false;
   } catch (error) {
-    console.error('error onMessage', message, sender, error);
+    logError(error, 'error onMessage', details);
     sendResponse({ success: false, error: error.message });
     return true;
   }
@@ -109,7 +110,7 @@ chrome.runtime.onInstalled.addListener(async function (details) {
     await resetAllPrefsToDefaults();
   } catch (error) {
     // TODO: Show user a notification that the extension failed to install.
-    console.error('error onInstalled', details, error, error.stack);
+    logError(error, 'error onInstalled', details);
   }
 });
 
@@ -119,6 +120,6 @@ chrome.runtime.onStartup.addListener(async (details) => {
     await initializeExtension();
   } catch (error) {
     // TODO: Show user a notification that the extension failed to start.
-    console.error('error onStartup', details, error, error.stack);
+    logError(error, 'error onStartup', details);
   }
 });

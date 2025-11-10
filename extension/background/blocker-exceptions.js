@@ -1,6 +1,6 @@
 /* global chrome */
 
-import { registrableDomainFromUrl } from '../common/util.js';
+import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
 
 export const createExceptionToStaticRules = async () => {
@@ -45,8 +45,9 @@ const updateExceptionToStaticRules = async (tabId, setting) => {
 
 export const setupExceptionsToStaticRules = async () => {
   await createExceptionToStaticRules();
-  const listener = async ({ url, tabId, frameId }) => {
+  const listener = async (details) => {
     try {
+      const { url, tabId, frameId } = details;
       // For requests, frameId is undefined.
       // For navigations, frameId is 0 for the main frame.
       if (frameId !== 0 && frameId !== undefined) {
@@ -60,7 +61,7 @@ export const setupExceptionsToStaticRules = async () => {
       console.log(`setting: ${setting} for domain: ${domain}`);
       await updateExceptionToStaticRules(tabId, setting);
     } catch (error) {
-      console.error('error updating exception to static rules for top-level navigation or request', url, tabId, error);
+      logError(error, 'error updating exception to static rules for top-level navigation or request', details);
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, {

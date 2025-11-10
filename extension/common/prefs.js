@@ -1,5 +1,7 @@
 /* global chrome */
 
+import { logError } from './util.js';
+
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG = {
   doNotTrackEnabled: {
@@ -112,7 +114,7 @@ export const listenForPrefChanges = (prefName, callback) => {
       }
       callback(outValue);
     } catch (error) {
-      console.error('error responding to pref change', prefName, details, error);
+      logError(error, 'error responding to pref change', { prefName, details });
     }
   });
 };

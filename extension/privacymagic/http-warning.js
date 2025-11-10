@@ -1,9 +1,11 @@
 /* global chrome */
 
+import { logError } from '../common/util.js';
+
 const url = URL.parse(window.location.href).searchParams.get('url');
 const domain = URL.parse(url).hostname;
 document.getElementById('domain').textContent = domain;
-document.getElementById('addException').addEventListener('click', async () => {
+document.getElementById('addException').addEventListener('click', async (event) => {
   try {
     await chrome.runtime.sendMessage({
       type: 'addHttpWarningNetworkRuleException',
@@ -12,7 +14,7 @@ document.getElementById('addException').addEventListener('click', async () => {
     });
     window.location.replace(url);
   } catch (error) {
-    console.error('error adding exception to http warning network rule', error);
+    logError(error, 'error adding exception to http warning network rule', { url, event });
   }
 });
 

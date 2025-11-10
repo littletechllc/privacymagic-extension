@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { registrableDomainFromUrl } from '../common/util.js';
+import { logError, registrableDomainFromUrl } from '../common/util.js';
 
 const NETWORK_PROTECTION_DEFS = {
   gpc: {
@@ -252,8 +252,9 @@ const setupSubresourceNetworkRules = async () => {
   // Wait for a top-level request or navigation and, if the setting is enabled for the
   // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
-  const listener = async ({ url, tabId, frameId }) => {
+  const listener = async (details) => {
     try {
+      const { url, tabId, frameId } = details;
       // For requests, frameId is undefined.
       // For navigations, frameId is 0 for the main frame.
       if (frameId !== 0 && frameId !== undefined) {
@@ -268,7 +269,7 @@ const setupSubresourceNetworkRules = async () => {
         await updateSubresourceNetworkRule(settingId, tabId, setting);
       }
     } catch (error) {
-      console.error('error updating subresource network rule for top-level navigation or request', url, tabId, error);
+      logError(error, 'error updating subresource network rule for top-level navigation or request', details);
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
