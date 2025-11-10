@@ -65,9 +65,11 @@ export const createHttpWarningNetworkRule = async () => {
     addRules: [mainRule, exceptionRule]
   });
 
-  chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-    (callback) => {
-      console.log('rule matched debug:', callback);
-    }
-  );
+  if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
+      (callback) => {
+        console.log('rule matched debug:', callback);
+      }
+    );
+  }
 };
