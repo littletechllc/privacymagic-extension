@@ -1,15 +1,15 @@
 /* global chrome, punycode */
 
 import { setupSettingsUI } from '../common/settings-ui.js';
-import { registrableDomainFromUrl } from '../common/util.js';
+import { registrableDomainFromUrl, logError } from '../common/util.js';
 
 const setupOptionsButton = () => {
-  document.getElementById('optionsButton').addEventListener('click', () => {
+  document.getElementById('optionsButton').addEventListener('click', (event) => {
     try {
       console.log('optionsButton clicked');
       chrome.runtime.openOptionsPage();
     } catch (error) {
-      console.error('error opening options page', error);
+      logError(error, 'error opening options page', event);
     }
   });
 };
@@ -36,13 +36,13 @@ const updateSiteInfo = async (domain) => {
   document.getElementById('favicon').src = faviconURL(url);
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async (event) => {
   try {
     const domain = await getDomainForCurrentTab();
     setupOptionsButton();
     await updateSiteInfo(domain);
     await setupSettingsUI(domain);
   } catch (error) {
-    console.error('error responding to DOMContentLoaded on current tab', error);
+    logError(error, 'error responding to DOMContentLoaded on current tab', event);
   }
 });

@@ -1,5 +1,6 @@
 import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '../common/prefs.js';
 import { createToggle } from '../common/toggle.js';
+import { logError } from '../common/util.js';
 
 const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
   const value = await getPref(prefName);
@@ -10,7 +11,7 @@ const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
       const value = event.target.checked;
       setPref(prefName, inverted ? !value : value);
     } catch (error) {
-      console.error('error responding to click on pref checkbox', prefName, event?.target?.checked, error);
+      logError(error, 'error responding to click on pref checkbox', event);
     }
   });
   listenForPrefChanges(prefName, (value) => {

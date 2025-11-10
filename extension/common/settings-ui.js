@@ -4,6 +4,7 @@ import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../co
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
+import { logError } from '../common/util.js';
 
 const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
   const storageValue = await store.get(keyPath);
@@ -47,7 +48,7 @@ const setupInputListeners = (domain) => {
         const tabId = tabs[0].id;
         await chrome.tabs.reload(tabId);
       } catch (error) {
-        console.error('error updating setting', domain, event?.target?.id, event?.target?.checked, error);
+        logError(error, 'error updating setting', event);
       }
     });
   });
