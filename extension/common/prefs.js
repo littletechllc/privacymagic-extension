@@ -12,11 +12,6 @@ export const PRIVACY_PREFS_CONFIG = {
     locked: false,
     category: 'websites'
   },
-  referrersEnabled: {
-    inverted: true,
-    locked: false,
-    category: 'websites'
-  },
   hyperlinkAuditingEnabled: {
     inverted: true,
     locked: false,
