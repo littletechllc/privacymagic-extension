@@ -46,9 +46,9 @@ const getDisabledSettings = async (domain) => {
   return disabledSettings;
 };
 
-chrome.runtime.onMessage.addListener() => {
+chrome.runtime.onMessage.addListener((details) => {
+  const { message, sender, sendResponse } = details;
   try {
-    const {message, sender, sendResponse} = details;
     if (message.type === 'getDisabledSettings') {
       const domain = registrableDomainFromUrl(sender.tab.url);
       getDisabledSettings(domain).then((disabledSettings) => {
