@@ -26,6 +26,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
+  referrer_policy: {
+    dnr: true,
+    category: 'connections'
+  },
   screen: {
     script: true,
     category: 'fingerprinting'

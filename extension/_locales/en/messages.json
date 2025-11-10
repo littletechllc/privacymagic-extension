@@ -27,10 +27,6 @@
     "message": "Disable Third-Party Cookies",
     "description": "Label for the third-party cookies pref"
   },
-  "referrersEnabled": {
-    "message": "Disable Referrers",
-    "description": "Label for the referrers pref"
-  },
   "hyperlinkAuditingEnabled": {
     "message": "Disable Hyperlink Auditing",
     "description": "Label for the hyperlink auditing pref"
@@ -68,7 +64,7 @@
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
-    "message": "Block Ads",
+    "message": "Block Ads & Trackers",
     "description": "Setting to block advertisements"
   },
   "client_hints": {
@@ -134,5 +130,9 @@
   "searchSuggestEnabled": {
     "message": "Disable Search Suggest",
     "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Tighten Referrer Policy",
+    "description": "Setting to tighten referrer policy"
   }
 }

@@ -27,10 +27,6 @@
     "message": "Desactivar Cookies de Terceros",
     "description": "Label for the third-party cookies setting"
   },
-  "referrersEnabled": {
-    "message": "Desactivar Referrers",
-    "description": "Label for the referrers setting"
-  },
   "hyperlinkAuditingEnabled": {
     "message": "Desactivar Auditoría de Enlaces",
     "description": "Label for the hyperlink auditing setting"
@@ -130,5 +126,13 @@
   "spellingServiceEnabled": {
     "message": "Desactivar Servicio de Corrección Ortográfica",
     "description": "Configuración para habilitar el servicio de corrección ortográfica"
+  },
+  "searchSuggestEnabled": {
+    "message": "Desactivar Sugerencias de Búsqueda",
+    "description": "Configuración para habilitar sugerencias de búsqueda"
+  },
+  "referrerPolicy": {
+    "message": "Ajustar Política de Referrer",
+    "description": "Configuración para ajustar la política de referrer"
   }
 }
