@@ -130,5 +130,9 @@
   "spellingServiceEnabled": {
     "message": "Disable Spelling Service",
     "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Disable Search Suggest",
+    "description": "Setting to enable search suggest"
   }
 }
