@@ -9,6 +9,7 @@
 * Blocks third-party cookies
 * Blocks fingerprinting leaks
 * Removes tracking query parameters
+* Caps Referrer-Policy
 * Blocks insecure HTTP connections
 * Blocks window.name tracking
 * Enables Global Privacy Control
