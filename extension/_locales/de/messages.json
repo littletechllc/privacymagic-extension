@@ -27,10 +27,6 @@
     "message": "Drittanbieter-Cookies deaktivieren",
     "description": "Label for the third-party cookies setting"
   },
-  "referrersEnabled": {
-    "message": "Referrer deaktivieren",
-    "description": "Label for the referrers setting"
-  },
   "hyperlinkAuditingEnabled": {
     "message": "Hyperlink-Überwachung deaktivieren",
     "description": "Label for the hyperlink auditing setting"
@@ -130,5 +126,13 @@
   "spellingServiceEnabled": {
     "message": "Rechtschreibprüfung deaktivieren",
     "description": "Einstellung zum Aktivieren der Rechtschreibprüfung"
+  },
+  "searchSuggestEnabled": {
+    "message": "Suchvorschläge deaktivieren",
+    "description": "Einstellung zum Aktivieren von Suchvorschlägen"
+  },
+  "referrerPolicy": {
+    "message": "Referrer-Richtlinie verschärfen",
+    "description": "Einstellung zum Verschärfen der Referrer-Richtlinie"
   }
 }
