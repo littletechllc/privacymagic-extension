@@ -27,7 +27,7 @@
     }
   })();
 
-  const reflectApply = Reflect.apply;
+  const reflectApply = (...args) => Reflect.apply(...args);
   const reflectApplySafe = (func, thisArg, args) => {
     try {
       return reflectApply(func, thisArg, args);
@@ -35,9 +35,7 @@
       return undefined;
     }
   };
-  const definePropertiesSafe = Object.defineProperties;
-
-
+  const definePropertiesSafe = (...args) => Object.defineProperties(...args);
   const nonProperty = { get: undefined, set: undefined, configurable: true };
   const redefinePropertyValues = (obj, propertyMap) => {
     const originalProperties = {};
@@ -58,10 +56,6 @@
       }
     }
     Object.defineProperties(obj, newProperties);
-    // Return a function that restores the original properties.
-    // We use definePropertiesSafe to avoid invoking Object.defineProperties
-    // because the original function might be monkey patched by pre-evaluated
-    // scripts.
     return () => {
       definePropertiesSafe(obj, originalProperties);
     };
@@ -439,7 +433,14 @@
   };
 
   const bundleActivePatches = () => {
-    const preamble = `// helper function\nconst redefinePropertyValues = ${redefinePropertyValues.toString()};`;
+    const preamble = `// helper function
+    const reflectApply = ${reflectApply.toString()};
+    const reflectApplySafe = ${reflectApplySafe.toString()};
+    const definePropertiesSafe = ${definePropertiesSafe.toString()};
+    const nonProperty = { get: undefined, set: undefined, configurable: true };
+    const redefinePropertyValues = ${redefinePropertyValues.toString()};
+    `;
+    console.log({ preamble });
     const bundleItems = [preamble];
     for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
       if (decision || !isTopLevel) {
@@ -485,13 +486,13 @@
   // - Accessing properties of objects that have a global prototype
   // - Evaluating globally-defined functions or Objects
 
-  const getContentWindowSafe = (iframe) => reflectApply(contentWindowGetter, iframe, []);
-  const getSandboxSafe = (iframe) => reflectApply(sandboxGetter, iframe, []);
-  const getDomTokenIncludesSafe = (list, token) => reflectApply(domTokenIncludes, list, [token]);
-  const getAttributeSafe = (element, attribute) => reflectApply(attributeGetter, element, [attribute]);
+  const getContentWindowSafe = (iframe) => reflectApplySafe(contentWindowGetter, iframe, []);
+  const getSandboxSafe = (iframe) => reflectApplySafe(sandboxGetter, iframe, []);
+  const getDomTokenIncludesSafe = (list, token) => reflectApplySafe(domTokenIncludes, list, [token]);
+  const getAttributeSafe = (element, attribute) => reflectApplySafe(attributeGetter, element, [attribute]);
 
-  const weakSetHasSafe = (s, v) => reflectApply(weakSetHas, s, [v]);
-  const weakSetAddSafe = (s, v) => reflectApply(weakSetAdd, s, [v]);
+  const weakSetHasSafe = (s, v) => reflectApplySafe(weakSetHas, s, [v]);
+  const weakSetAddSafe = (s, v) => reflectApplySafe(weakSetAdd, s, [v]);
 
   const isSandboxedIframe = (iframe) => getAttributeSafe(iframe, 'sandbox') !== null;
   const hasAllowScriptsSandboxToken = (iframe) => getDomTokenIncludesSafe(getSandboxSafe(iframe), 'allow-scripts');
