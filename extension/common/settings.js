@@ -45,6 +45,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   keyboard: {
     script: true,
     category: 'fingerprinting'
+  },
+  timer: {
+    script: true,
+    category: 'fingerprinting'
   }
 };
 
