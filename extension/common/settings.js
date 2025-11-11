@@ -7,7 +7,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   clientHints: {
     dnr: true,
-    category: 'connections'
+    category: 'fingerprinting'
   },
   queryParameters: {
     dnr: true,
