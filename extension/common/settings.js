@@ -40,7 +40,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   windowName: {
     script: true,
-    category: 'fingerprinting'
+    category: 'connections'
   }
 };
 
