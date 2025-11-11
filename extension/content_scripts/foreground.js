@@ -8,8 +8,6 @@
           Screen, window */
 
 (() => {
-  const reflectApply = Reflect.apply;
-
   const DATA_SECRET_ATTRIBUTE = "data-privacy-magic-secret";
   const sharedSecret = (() => {
     const documentElement = document.documentElement;
@@ -28,6 +26,17 @@
       return newSecret;
     }
   })();
+
+  const reflectApply = Reflect.apply;
+  const reflectApplySafe = (func, thisArg, args) => {
+    try {
+      return reflectApply(func, thisArg, args);
+    } catch (error) {
+      return undefined;
+    }
+  };
+  const definePropertiesSafe = Object.defineProperties;
+
 
   const nonProperty = { get: undefined, set: undefined, configurable: true };
   const redefinePropertyValues = (obj, propertyMap) => {
@@ -53,7 +62,6 @@
     // We use definePropertiesSafe to avoid invoking Object.defineProperties
     // because the original function might be monkey patched by pre-evaluated
     // scripts.
-    const definePropertiesSafe = Object.defineProperties;
     return () => {
       definePropertiesSafe(obj, originalProperties);
     };
@@ -309,21 +317,47 @@
       const mathRoundSafe = Math.round;
       const originalNow = Object.getOwnPropertyDescriptor(Performance.prototype, 'now').value;
       const restoreNow = redefinePropertyValues(Performance.prototype, {
-        now: function (...args) { return mathRoundSafe(reflectApply(originalNow, this, args)); }
+        now: function (...args) { return mathRoundSafe(reflectApplySafe(originalNow, this, args)); }
       });
-      const makeRoundedGetters = (object, properties) => {
+      const objectKeysSafe = Object.keys;
+      const objectFromEntriesSafe = Object.fromEntries;
+      const arrayMapValue = Object.getOwnPropertyDescriptor(Array.prototype, 'map').value;
+      const arrayMapSafe = (array, callback) => reflectApplySafe(arrayMapValue, array, [callback]);
+      const getPropertyValueSafe = (object, property) => {
+        try {
+          return object[property];
+        } catch (error) {
+          return undefined;
+        }
+      };
+      const makeRoundedGetters = (objectPrototype, properties) => {
         const originalDescriptors = {};
         for (const property of properties) {
-          const descriptor = Object.getOwnPropertyDescriptor(object, property);
+          const descriptor = Object.getOwnPropertyDescriptor(objectPrototype, property);
           originalDescriptors[property] = descriptor ?? nonProperty;
           if (descriptor) {
             const originalGetter = descriptor.get;
-            descriptor.get = function (...args) { return mathRoundSafe(reflectApply(originalGetter, this, args)); };
-            Object.defineProperty(object, property, descriptor);
+            descriptor.get = function (...args) { return mathRoundSafe(reflectApplySafe(originalGetter, this, args)); };
+            Object.defineProperty(objectPrototype, property, descriptor);
           }
         }
+        const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(objectPrototype, 'toJSON');
+        if (toJsonOriginalDescriptor) {
+          const toJsonOriginalValue = toJsonOriginalDescriptor.value;
+          const toJsonNewDescriptor = { ...toJsonOriginalDescriptor };
+          const toJsonOriginalSafe = (object) => reflectApplySafe(toJsonOriginalValue, object, []);
+          toJsonNewDescriptor.value = function () {
+            const originalJson = toJsonOriginalSafe(this);
+            if (originalJson === undefined) {
+              return undefined;
+            }
+            return objectFromEntriesSafe(arrayMapSafe(objectKeysSafe(originalJson), k => ([k, getPropertyValueSafe(this, k)])));
+          };
+          Object.defineProperty(objectPrototype, 'toJSON', toJsonNewDescriptor);
+        }
         return () => {
-          Object.defineProperties(object, originalDescriptors);
+          definePropertiesSafe(objectPrototype,
+            { ...originalDescriptors, toJSON: toJsonOriginalDescriptor });
         };
       };
       const batchMakeRoundedGetters = (objectsWithProperties) => {
