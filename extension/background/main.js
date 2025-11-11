@@ -9,8 +9,6 @@ import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 import { setupExceptionsToStaticRules } from './blocker-exceptions.js';
 
-//import { blockTelemetryWithNullProxy } from './proxy.js';
-
 const blockAutocomplete = async () => {
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [400],
@@ -24,8 +22,7 @@ const blockAutocomplete = async () => {
       }
     ]
   });
-
-}
+};
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
@@ -46,15 +43,14 @@ const getDisabledSettings = async (domain) => {
   return disabledSettings;
 };
 
-chrome.runtime.onMessage.addListener((details) => {
-  const { message, sender, sendResponse } = details;
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   try {
     if (message.type === 'getDisabledSettings') {
       const domain = registrableDomainFromUrl(sender.tab.url);
       getDisabledSettings(domain).then((disabledSettings) => {
         sendResponse({ success: true, disabledSettings });
       }).catch((error) => {
-        logError(error, 'error getting disabled settings', details);
+        logError(error, 'error getting disabled settings', message);
         sendResponse({ success: false, error: error.message });
       });
       return true; // Indicates we will send a response asynchronously
@@ -63,7 +59,7 @@ chrome.runtime.onMessage.addListener((details) => {
       updateSetting(message.domain, message.settingId, message.value).then(() => {
         sendResponse({ success: true });
       }).catch((error) => {
-        logError(error, 'error updating setting', details);
+        logError(error, 'error updating setting', message);
         sendResponse({ success: false, error: error.message });
       });
       return true; // Indicates we will send a response asynchronously
@@ -74,14 +70,14 @@ chrome.runtime.onMessage.addListener((details) => {
       updateHttpWarningNetworkRuleException(domain, message.value).then(() => {
         sendResponse({ success: true });
       }).catch((error) => {
-        logError(error, 'error adding exception to http warning network rule', details);
+        logError(error, 'error adding exception to http warning network rule', message);
         sendResponse({ success: false, error: error.message });
       });
       sendResponse({ success: true });
     }
     return false;
   } catch (error) {
-    logError(error, 'error onMessage', details);
+    logError(error, 'error onMessage', message);
     sendResponse({ success: false, error: error.message });
     return true;
   }
