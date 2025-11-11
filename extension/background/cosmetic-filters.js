@@ -61,7 +61,7 @@ export const injectCssForCosmeticFilters = () => {
       });
       console.log('injected CSS for cosmetic filters for', registrableDomain, files);
     } catch (error) {
-      logError(error, 'error injecting CSS for cosmetic filters for', details);
+      logError(error, 'error injecting CSS for cosmetic filters', details);
     }
   }, { urls: ['<all_urls>'] });
 };

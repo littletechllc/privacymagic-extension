@@ -19,7 +19,7 @@ const NETWORK_PROTECTION_DEFS = {
       'Sec-CH-UA-Full-Version': '141.0.0.0'
     }
   },
-  query_parameters: {
+  queryParameters: {
     removeParams: [
       '__hsfp',
       '__hssc',
@@ -46,7 +46,7 @@ const NETWORK_PROTECTION_DEFS = {
       'yclid'
     ]
   },
-  client_hints: {
+  clientHints: {
     removeRequestHeaders: [
       'Device-Memory',
       'Downlink',
@@ -65,7 +65,7 @@ const NETWORK_PROTECTION_DEFS = {
       'Viewport-Width'
     ]
   },
-  referrer_policy: {
+  referrerPolicy: {
     capReferrerPolicy: true
   }
 };

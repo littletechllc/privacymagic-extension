@@ -67,15 +67,15 @@
     "message": "Block Ads & Trackers",
     "description": "Setting to block advertisements"
   },
-  "client_hints": {
+  "clientHints": {
     "message": "Block Client Hints",
     "description": "Setting to block client hints"
   },
-  "query_parameters": {
+  "queryParameters": {
     "message": "Remove Tracking Query Parameters",
     "description": "Setting to block tracking query parameters"
   },
-  "do_not_track": {
+  "doNotTrack": {
     "message": "Enable Do Not Track",
     "description": "Setting to enable Do Not Track header"
   },
@@ -87,7 +87,7 @@
     "message": "Block Screen Fingerprinting",
     "description": "Setting to block screen fingerprinting"
   },
-  "window_name": {
+  "windowName": {
     "message": "Block Window Name Tracking",
     "description": "Setting to block window name tracking"
   },

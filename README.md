@@ -8,6 +8,10 @@
 * Removes tracking headers
 * Blocks third-party cookies
 * Blocks fingerprinting leaks
+  * hardware
+  * screen
+  * useragent
+  * battery
 * Removes tracking query parameters
 * Caps Referrer-Policy
 * Blocks insecure HTTP connections

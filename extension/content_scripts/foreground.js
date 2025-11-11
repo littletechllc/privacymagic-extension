@@ -241,7 +241,7 @@
         }
       };
     },
-    window_name: () => {
+    windowName: () => {
       const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
       if (!propDescriptor) {
         return;
