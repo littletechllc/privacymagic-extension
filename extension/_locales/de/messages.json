@@ -67,15 +67,15 @@
     "message": "Werbung blockieren",
     "description": "Setting to block advertisements"
   },
-  "client_hints": {
+  "clientHints": {
     "message": "Client Hints blockieren",
     "description": "Setting to block client hints"
   },
-  "query_parameters": {
+  "queryParameters": {
     "message": "Tracking-Abfrageparameter entfernen",
     "description": "Setting to block tracking query parameters"
   },
-  "do_not_track": {
+  "doNotTrack": {
     "message": "Nicht verfolgen aktivieren",
     "description": "Setting to enable Do Not Track header"
   },
@@ -87,7 +87,7 @@
     "message": "Bildschirm-Fingerprinting blockieren",
     "description": "Setting to block screen fingerprinting"
   },
-  "window_name": {
+  "windowName": {
     "message": "Fenster-Name-Tracking blockieren",
     "description": "Setting to block window name tracking"
   },

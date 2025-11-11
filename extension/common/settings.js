@@ -5,11 +5,11 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'blocking'
   },
-  client_hints: {
+  clientHints: {
     dnr: true,
     category: 'connections'
   },
-  query_parameters: {
+  queryParameters: {
     dnr: true,
     category: 'connections'
   },
@@ -26,7 +26,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-  referrer_policy: {
+  referrerPolicy: {
     dnr: true,
     category: 'connections'
   },
@@ -38,7 +38,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-  window_name: {
+  windowName: {
     script: true,
     category: 'fingerprinting'
   }
