@@ -134,5 +134,9 @@
   "referrerPolicy": {
     "message": "Ajustar Política de Referrer",
     "description": "Configuración para ajustar la política de referrer"
+  },
+  "keyboard": {
+    "message": "Bloquear Huella Digital de Teclado",
+    "description": "Setting to block keyboard fingerprinting"
   }
 }

@@ -22,21 +22,26 @@
     }
   })();
 
+  const nonProperty = { get: undefined, set: undefined, configurable: true };
   const redefinePropertyValues = (obj, propertyMap) => {
-    const properties = {};
     const originalProperties = {};
+    const newProperties = {};
     for (const [prop, value] of Object.entries(propertyMap)) {
-      const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
-      originalProperties[prop] = descriptor || { get: undefined, set: undefined, configurable: true };
-      if (!descriptor) {
-        properties[prop] = { configurable: true, get: () => value };
-      } else if (descriptor.value) {
-        properties[prop] = { ...descriptor, value };
+      const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop);
+      originalProperties[prop] = originalDescriptor || nonProperty;
+      if (value === undefined) {
+        newProperties[prop] = nonProperty;
       } else {
-        properties[prop] = { ...descriptor, get: () => value };
+        if (!originalDescriptor) {
+          newProperties[prop] = { configurable: true, get: () => value };
+        } else if (originalDescriptor.value) {
+          newProperties[prop] = { ...originalDescriptor, value };
+        } else {
+          newProperties[prop] = { ...originalDescriptor, get: () => value };
+        }
       }
     }
-    Object.defineProperties(obj, properties);
+    Object.defineProperties(obj, newProperties);
     // Return a function that restores the original properties.
     // We use definePropertiesSafe to avoid invoking Object.defineProperties
     // because the original function might be monkey patched by pre-evaluated
@@ -240,6 +245,11 @@
           restoreBatteryManager();
         }
       };
+    },
+    keyboard: () => {
+      return redefinePropertyValues(Navigator.prototype, {
+        keyboard: undefined
+      });
     },
     windowName: () => {
       const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');

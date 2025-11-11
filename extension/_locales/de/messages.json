@@ -134,5 +134,9 @@
   "referrerPolicy": {
     "message": "Referrer-Richtlinie verschärfen",
     "description": "Einstellung zum Verschärfen der Referrer-Richtlinie"
+  },
+  "keyboard": {
+    "message": "Tastatur-Fingerprinting blockieren",
+    "description": "Setting to block keyboard fingerprinting"
   }
 }

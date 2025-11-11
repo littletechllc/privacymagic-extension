@@ -12,6 +12,7 @@
   * screen
   * useragent
   * battery
+  * keyboard
 * Removes tracking query parameters
 * Caps Referrer-Policy
 * Blocks insecure HTTP connections

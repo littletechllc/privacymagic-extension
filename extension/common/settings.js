@@ -41,6 +41,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   windowName: {
     script: true,
     category: 'connections'
+  },
+  keyboard: {
+    script: true,
+    category: 'fingerprinting'
   }
 };
 
