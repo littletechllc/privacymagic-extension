@@ -138,5 +138,9 @@
   "keyboard": {
     "message": "Block Keyboard Fingerprinting",
     "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Round Timers",
+    "description": "Setting to inhibit timing-based fingerprinting"
   }
 }

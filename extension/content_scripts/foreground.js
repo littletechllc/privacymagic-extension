@@ -1,8 +1,15 @@
 /* global BatteryManager, chrome, DevicePosture, DOMTokenList, Element,
           HTMLIFrameElement, innerHeight, innerWidth, Navigator,
-          NavigatorUAData, Screen, window */
+          NavigatorUAData, Performance, PerformanceEntry,
+          LargestContentfulPaint, LayoutShift, PerformanceEventTiming,
+          PerformanceLongAnimationFrameTiming, PerformanceLongTaskTiming,
+          PerformanceNavigationTiming, PerformanceResourceTiming,
+          PerformanceScriptTiming, PerformanceServerTiming,
+          Screen, window */
 
 (() => {
+  const reflectApply = Reflect.apply;
+
   const DATA_SECRET_ATTRIBUTE = "data-privacy-magic-secret";
   const sharedSecret = (() => {
     const documentElement = document.documentElement;
@@ -297,6 +304,90 @@
         configurable: true
       });
       console.log('window.name patched');
+    },
+    timer: () => {
+      const mathRoundSafe = Math.round;
+      const originalNow = Object.getOwnPropertyDescriptor(Performance.prototype, 'now').value;
+      const restoreNow = redefinePropertyValues(Performance.prototype, {
+        now: function (...args) { return mathRoundSafe(reflectApply(originalNow, this, args)); }
+      });
+      const makeRoundedGetters = (object, properties) => {
+        const originalDescriptors = {};
+        for (const property of properties) {
+          const descriptor = Object.getOwnPropertyDescriptor(object, property);
+          originalDescriptors[property] = descriptor ?? nonProperty;
+          if (descriptor) {
+            const originalGetter = descriptor.get;
+            descriptor.get = function (...args) { return mathRoundSafe(reflectApply(originalGetter, this, args)); };
+            Object.defineProperty(object, property, descriptor);
+          }
+        }
+        return () => {
+          Object.defineProperties(object, originalDescriptors);
+        };
+      };
+      const batchMakeRoundedGetters = (objectsWithProperties) => {
+        const restoreFunctions = objectsWithProperties.map(([object, properties]) =>
+          makeRoundedGetters(object.prototype, properties));
+        return () => {
+          for (const restoreFunction of restoreFunctions) {
+            restoreFunction();
+          }
+        };
+      };
+      const restorePerformance = batchMakeRoundedGetters([
+        [Performance, ['timeOrigin']],
+        [PerformanceEntry, ['duration', 'startTime']],
+        [LargestContentfulPaint, ['loadTime', 'renderTime']],
+        [LayoutShift, ['lastInputTime']],
+        [PerformanceEventTiming, ['processingEnd', 'processingStart']],
+        [PerformanceLongAnimationFrameTiming, [
+          'blockingDuration',
+          'firstUIEventTimestamp',
+          'renderStart',
+          'styleAndLayoutStart'
+        ]],
+        [PerformanceLongTaskTiming, []],
+        [PerformanceResourceTiming, [
+          'connectEnd',
+          'connectStart',
+          'domainLookupEnd',
+          'domainLookupStart',
+          'fetchStart',
+          'finalResponseHeadersStart',
+          'firstInterimResponseEnd',
+          'firstInterimResponseStart',
+          'redirectEnd',
+          'redirectStart',
+          'requestStart',
+          'responseEnd',
+          'responseStart',
+          'secureConnectionStart',
+          'workerStart'
+        ]],
+        [PerformanceNavigationTiming, [
+          'activationStart',
+          'criticalCHRestart',
+          'domComplete',
+          'domContentLoadedEventEnd',
+          'domContentLoadedEventStart',
+          'domInteractive',
+          'loadEventEnd',
+          'loadEventStart',
+          'unloadEventEnd',
+          'unloadEventStart'
+        ]],
+        [PerformanceScriptTiming, [
+          'executionStart',
+          'forcedStyleAndLayoutDuration',
+          'pauseDuration'
+        ]],
+        [PerformanceServerTiming, ['duration']]
+      ]);
+      return () => {
+        restoreNow();
+        restorePerformance();
+      };
     }
   };
 
@@ -343,7 +434,6 @@
 
   const evalSet = new WeakSet();
 
-  const reflectApply = Reflect.apply;
   const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
   const sandboxGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'sandbox').get;
   const attributeGetter = Object.getOwnPropertyDescriptor(Element.prototype, 'getAttribute').value;
