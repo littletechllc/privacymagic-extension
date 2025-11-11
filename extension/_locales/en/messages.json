@@ -134,5 +134,9 @@
   "referrerPolicy": {
     "message": "Tighten Referrer Policy",
     "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Block Keyboard Fingerprinting",
+    "description": "Setting to block keyboard fingerprinting"
   }
 }
