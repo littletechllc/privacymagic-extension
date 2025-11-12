@@ -61,8 +61,9 @@ export const injectCssForCosmeticFilters = () => {
       });
       console.log('injected CSS for cosmetic filters for', registrableDomain, files);
     } catch (error) {
-      if (error.message === `Frame with ID ${details.frameId} was removed.`) {
-        // Ignore this error.
+      if (error.message === `Frame with ID ${details.frameId} was removed.` ||
+          error.message === `No tab with id: ${details.tabId}`) {
+        // Ignore these errors.
         return;
       }
       logError(error, 'error injecting CSS for cosmetic filters', details);
