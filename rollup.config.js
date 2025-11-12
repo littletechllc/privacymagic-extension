@@ -10,7 +10,17 @@ export default {
     sourcemap: isProduction ? false : 'inline'
   },
   plugins: [
-    terser()
+    terser({
+      // Don't compress; we dont want inlining of helper functions
+      // because it could make us vulnerable to monkey patching.
+      compress: false,
+      // Mangle variable names to reduce the size of the bundle.
+      mangle: true,
+      // Remove comments from the output.
+      output: {
+        comments: false
+      }
+    })
   ],
   treeshake: {
     moduleSideEffects: false,
