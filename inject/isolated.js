@@ -19,7 +19,6 @@ const sendGetDisabledSettingsResponse = async () => {
     document.documentElement.dispatchEvent(new CustomEvent(`message-${sharedSecret}`, { detail }));
   } catch (error) {
     console.error('error sending getDisabledSettings response', error);
-    return;
   }
 };
 
