@@ -98,10 +98,13 @@ const weakSetAddSafe = (s, v) => reflectApplySafe(weakSetAdd, s, [v]);
 
 const isSandboxedIframe = (iframe) => getAttributeSafe(iframe, 'sandbox') !== null;
 const hasAllowScriptsSandboxToken = (iframe) => getDomTokenIncludesSafe(getSandboxSafe(iframe), 'allow-scripts');
+const hasAllowSameOriginSandboxToken = (iframe) => getDomTokenIncludesSafe(getSandboxSafe(iframe), 'allow-same-origin');
 
 const getContentWindowAfterHardening = (iframe, hardeningCode) => {
   const contentWin = getContentWindowSafe(iframe);
-  if (isSandboxedIframe(iframe) && !hasAllowScriptsSandboxToken(iframe)) {
+  if (isSandboxedIframe(iframe) &&
+      !hasAllowScriptsSandboxToken(iframe) &&
+      hasAllowSameOriginSandboxToken(iframe)) {
     // Accesing contentWin.eval is safe because, in order to monkey patch it,
     // the pre-evaluated script would need to access contentWin, which would
     // trigger our hardening code injection first. Note we are assuming here
