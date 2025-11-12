@@ -2,10 +2,10 @@ import terser from '@rollup/plugin-terser';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-export default {
-  input: 'monkey-patch/main.js',
+const createPolicy = (inputFile, outputFile) => ({
+  input: inputFile,
   output: {
-    file: 'extension/content_scripts/foreground.js',
+    file: outputFile,
     format: 'iife',
     sourcemap: isProduction ? false : 'inline'
   },
@@ -24,8 +24,11 @@ export default {
   ],
   treeshake: {
     moduleSideEffects: false,
-    propertyReadSideEffects: false,
-    tryCatchDeoptimization: false
+    propertyReadSideEffects: false
   }
-};
+});
 
+export default [
+  createPolicy('inject/main.js', 'extension/content_scripts/foreground.js'),
+  createPolicy('inject/isolated.js', 'extension/content_scripts/isolated.js')
+];

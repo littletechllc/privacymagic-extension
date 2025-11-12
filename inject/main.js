@@ -1,5 +1,6 @@
 /* global HTMLIFrameElement, Element, DOMTokenList, WeakSet, chrome */
 
+import { sharedSecret } from './secret.js';
 import { reflectApplySafe, definePropertiesSafe, redefinePropertyValues } from './helpers.js';
 import battery from './patches/battery.js';
 import gpc from './patches/gpc.js';
@@ -9,25 +10,6 @@ import screen from './patches/screen.js';
 import timer from './patches/timer.js';
 import useragent from './patches/useragent.js';
 import windowName from './patches/windowName.js';
-
-const DATA_SECRET_ATTRIBUTE = 'data-privacy-magic-secret';
-const sharedSecret = (() => {
-  const documentElement = document.documentElement;
-  const existingSecret = documentElement.getAttribute(DATA_SECRET_ATTRIBUTE);
-  if (existingSecret !== null) {
-    documentElement.removeAttribute(DATA_SECRET_ATTRIBUTE);
-    return existingSecret;
-  } else {
-    let newSecret;
-    try {
-      newSecret = crypto.randomUUID();
-    } catch (error) {
-      newSecret = Math.random().toString(16).substring(2);
-    }
-    documentElement.setAttribute(DATA_SECRET_ATTRIBUTE, newSecret);
-    return newSecret;
-  }
-})();
 
 const privacyMagicPatches = {
   battery,
