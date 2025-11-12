@@ -3,6 +3,9 @@
 import { definePropertiesSafe } from '../helpers.js';
 
 const windowName = () => {
+  if (window.top !== window) {
+    return;
+  }
   const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
   if (!propDescriptor) {
     return;
