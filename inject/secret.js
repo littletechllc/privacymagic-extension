@@ -1,4 +1,4 @@
-const DATA_SECRET_ATTRIBUTE = "data-privacy-magic-secret";
+const DATA_SECRET_ATTRIBUTE = 'data-privacy-magic-secret';
 
 export const sharedSecret = (() => {
   const documentElement = document.documentElement;

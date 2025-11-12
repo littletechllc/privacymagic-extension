@@ -15,7 +15,7 @@ export const updateHttpWarningNetworkRuleException = async (domain, value) => {
   const rule = rules[0];
   const requestDomains = rule.condition.requestDomains || [];
   console.log('requestDomains:', requestDomains);
-  if (value === false || value === "exception") {
+  if (value === false || value === 'exception') {
     if (!requestDomains.includes(domain)) {
       requestDomains.push(domain);
     }

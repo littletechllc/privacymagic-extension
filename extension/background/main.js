@@ -17,7 +17,7 @@ const blockAutocomplete = async () => {
         id: 400,
         action: { type: 'block' },
         condition: {
-          urlFilter: 'https://www.google.com/complete/*',
+          urlFilter: 'https://www.google.com/complete/*'
         }
       }
     ]
