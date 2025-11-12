@@ -7,8 +7,9 @@
     "lint": "semistandard",
     "format": "semistandard --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx rollup monkey-patch/main.js --file extension/content_scripts/foreground.js --format iife",
-    "dev": "npx rollup monkey-patch/main.js --file extension/content_scripts/foreground.js --format iife --watch"
+    "build": "NODE_ENV=production rollup -c",
+    "build:watch": "NODE_ENV=development rollup -c --watch",
+    "dev": "NODE_ENV=development rollup -c --watch"
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
@@ -24,6 +25,7 @@
     ]
   },
   "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "acorn": "^8.15.0",
     "esquery": "^1.6.0",
     "rollup": "^4.53.2"
