@@ -2,6 +2,20 @@ import terser from '@rollup/plugin-terser';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const createTerserPolicy = () => (
+  terser({
+    // Don't compress; we dont want inlining of helper functions
+    // because it could make us vulnerable to monkey patching.
+    compress: false,
+    // Mangle variable names to reduce the size of the bundle in production.
+    mangle: isProduction,
+    // Remove comments from the output.
+    output: {
+      comments: false
+    }
+  })
+);
+
 const createPolicy = (inputFile, outputFile) => ({
   input: inputFile,
   output: {
@@ -9,19 +23,7 @@ const createPolicy = (inputFile, outputFile) => ({
     format: 'iife',
     sourcemap: isProduction ? false : 'inline'
   },
-  plugins: [
-    terser({
-      // Don't compress; we dont want inlining of helper functions
-      // because it could make us vulnerable to monkey patching.
-      compress: false,
-      // Mangle variable names to reduce the size of the bundle.
-      mangle: true,
-      // Remove comments from the output.
-      output: {
-        comments: false
-      }
-    })
-  ],
+  plugins: isProduction ? [createTerserPolicy()] : [],
   treeshake: {
     moduleSideEffects: false,
     propertyReadSideEffects: false
