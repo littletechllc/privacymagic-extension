@@ -27,12 +27,10 @@
     console.log('result:', result);
     const disabledSettings = result.disabledSettings;
     console.log('getDisabledSettings response received', disabledSettings);
-    document.documentElement.dispatchEvent(
-      new CustomEvent(`message-${sharedSecret}`, {
-        detail: {
-          type: 'getDisabledSettingsResponse',
-          disabledSettings
-        }
-      }));
+    // Use a null-prototype object for the detail to avoid monkey patching.
+    const detail = Object.create(null);
+    detail.type = 'getDisabledSettingsResponse';
+    detail.disabledSettings = disabledSettings;
+    document.documentElement.dispatchEvent(new CustomEvent(`message-${sharedSecret}`, { detail }));
   })();
 })();

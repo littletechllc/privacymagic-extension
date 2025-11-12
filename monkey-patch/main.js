@@ -43,7 +43,7 @@ const privacyMagicPatches = {
 const isTopLevel = window.top === window;
 
 const injectPatchesInPage = () => {
-  const undoFunctions = {};
+  const undoFunctions = Object.create(null);
   for (const [patcherId, decision] of Object.entries(window.__patch_decisions__)) {
     if (decision || !isTopLevel) {
       console.log('injecting patch', patcherId);
@@ -142,7 +142,7 @@ const prepareInjectionForIframes = (hardeningCode) => {
   });
 };
 
-window.__patch_decisions__ ||= {};
+window.__patch_decisions__ ||= Object.create(null);
 
 window.__inject_if_ready__ = () => {
   if (Object.keys(window.__patch_decisions__).length === Object.keys(privacyMagicPatches).length) {
@@ -157,21 +157,22 @@ window.__inject_if_ready__ = () => {
     if (isTopLevel) {
       return;
     }
-    console.log('listening for message events on foreground.js');
-    // TODO: Make the following event-listener safe against monkey patching.
     document.documentElement.addEventListener(`message-${sharedSecret}`, ({ detail }) => {
-      console.log('message event received on foreground.js', detail);
-      if (detail.type === 'getDisabledSettingsResponse') {
-        console.log('getDisabledSettingsResponse received on foreground.js', detail);
-        const { disabledSettings } = detail;
-        console.log('disabledSettings', disabledSettings);
-        for (const settingId of disabledSettings) {
-          console.log('undoing patch', settingId);
-          const undoFunction = undoFunctions[settingId];
-          if (undoFunction) {
-            undoFunction();
+      try {
+        // detail.type should be safe because detail is a null-prototype object.
+        if (detail.type === 'getDisabledSettingsResponse') {
+          const { disabledSettings } = detail;
+          for (const settingId of disabledSettings) {
+            // Should be safe because settingId is a string and
+            // undoFunctions is a null-prototype object.
+            const undoFunction = undoFunctions[settingId];
+            if (undoFunction) {
+              undoFunction();
+            }
           }
         }
+      } catch (error) {
+        console.error('unexpected error');
       }
     });
   }
