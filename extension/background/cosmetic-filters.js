@@ -15,7 +15,7 @@ const monitorDomainForTab = () => {
       tabIdToDomain.set(tabId, domain);
       console.log('tabIdToDomain:', tabIdToDomain.entries());
     } catch (error) {
-      logError(error, 'error monitoring domain for tab', {url, tabId});
+      logError(error, 'error monitoring domain for tab', { url, tabId });
     }
   };
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
