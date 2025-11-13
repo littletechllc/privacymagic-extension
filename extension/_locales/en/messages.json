@@ -142,5 +142,9 @@
   "timer": {
     "message": "Round Timers",
     "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "canvas": {
+    "message": "Block Canvas Fingerprinting",
+    "description": "Setting to block canvas fingerprinting"
   }
 }

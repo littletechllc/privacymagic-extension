@@ -138,5 +138,13 @@
   "keyboard": {
     "message": "Tastatur-Fingerprinting blockieren",
     "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Timer runden",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "canvas": {
+    "message": "Canvas-Fingerprinting blockieren",
+    "description": "Setting to block canvas fingerprinting"
   }
 }
