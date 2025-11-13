@@ -83,12 +83,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-let initialized = false;
+let initializedCalled = false;
 
 const initializeExtension = async () => {
-  if (initialized) {
+  if (initializedCalled) {
     return;
   }
+  initializedCalled = true;
   injectCssForCosmeticFilters();
   await setupContentScripts();
   await setupNetworkRules();
@@ -96,7 +97,6 @@ const initializeExtension = async () => {
   await createHttpWarningNetworkRule();
   await blockAutocomplete();
   console.log('Extension initialized');
-  initialized = true;
 };
 
 chrome.runtime.onInstalled.addListener(async function (details) {
@@ -120,8 +120,9 @@ chrome.runtime.onStartup.addListener(async (details) => {
   }
 });
 
-try {
-  await initializeExtension();
-} catch (error) {
+
+initializeExtension().then(() => {
+  console.log('main.js loaded');
+}).catch((error) => {
   logError(error, 'error initializing extension');
-}
+});
