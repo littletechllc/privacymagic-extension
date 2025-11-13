@@ -123,5 +123,5 @@ chrome.runtime.onStartup.addListener(async (details) => {
 try {
   await initializeExtension();
 } catch (error) {
-  logError(error, 'error initializing extension', details);
+  logError(error, 'error initializing extension');
 }
