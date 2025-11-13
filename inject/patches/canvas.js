@@ -11,13 +11,13 @@ const originalCanvasToDataURLSafe = (canvas, type, quality) => reflectApplySafe(
 const originalCanvasToBlob = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'toBlob').value;
 const originalCanvasToBlobSafe = (canvas, callback, type, quality) => reflectApplySafe(originalCanvasToBlob, canvas, [callback, type, quality]);
 const originalContextGetImageData = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'getImageData').value;
-const originalContextGetImageDataSafe = (context, x, y, width, height) => reflectApplySafe(originalContextGetImageData, context, [x, y, width, height]);
+const originalContextGetImageDataSafe = (context, ...args) => reflectApplySafe(originalContextGetImageData, context, args);
 const originalContextMeasureText = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'measureText').value;
-const originalContextMeasureTextSafe = (context, text) => reflectApplySafe(originalContextMeasureText, context, [text]);
+const originalContextMeasureTextSafe = (context, ...args) => reflectApplySafe(originalContextMeasureText, context, args);
 const originalContextIsPointInPath = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'isPointInPath').value;
-const originalContextIsPointInPathSafe = (context, x, y) => reflectApplySafe(originalContextIsPointInPath, context, [x, y]);
+const originalContextIsPointInPathSafe = (context, ...args) => reflectApplySafe(originalContextIsPointInPath, context, args);
 const originalContextIsPointInStroke = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'isPointInStroke').value;
-const originalContextIsPointInStrokeSafe = (context, x, y) => reflectApplySafe(originalContextIsPointInStroke, context, [x, y]);
+const originalContextIsPointInStrokeSafe = (context, ...args) => reflectApplySafe(originalContextIsPointInStroke, context, args);
 const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width').set;
 const originalCanvasSetWidthSafe = (canvas, value) => reflectApplySafe(originalCanvasSetWidth, canvas, [value]);
 const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height').set;
@@ -82,20 +82,20 @@ class CommandRecorder {
     }
   }
 
-  context2dGetImageData (x, y, width, height) {
-    return originalContextGetImageDataSafe(this.replayCommands(), x, y, width, height);
+  context2dGetImageData (...args) {
+    return originalContextGetImageDataSafe(this.replayCommands(), ...args);
   }
 
-  context2dMeasureText (text) {
-    return originalContextMeasureTextSafe(this.replayCommands(), text);
+  context2dMeasureText (...args) {
+    return originalContextMeasureTextSafe(this.replayCommands(), ...args);
   }
 
-  context2dIsPointInPath (x, y) {
-    return originalContextIsPointInPathSafe(this.replayCommands(), x, y);
+  context2dIsPointInPath (...args) {
+    return originalContextIsPointInPathSafe(this.replayCommands(), ...args);
   }
 
-  context2dIsPointInStroke (x, y) {
-    return originalContextIsPointInStrokeSafe(this.replayCommands(), x, y);
+  context2dIsPointInStroke (...args) {
+    return originalContextIsPointInStrokeSafe(this.replayCommands(), ...args);
   }
 
   canvasToDataURL (type, quality) {
@@ -177,19 +177,19 @@ const enableContext2dCommandRecording = () => {
 
 const enableReadingFromContext2dCommandRecorder = () => {
   const restore = redefinePropertyValues(CanvasRenderingContext2D.prototype, {
-    getImageData: function (x, y, width, height) {
+    getImageData: function (sx, sy, sw, sh, settings) {
       const commandRecorder = getCommandRecorderForContext(this);
       if (commandRecorder) {
-        return commandRecorder.context2dGetImageData(x, y, width, height);
+        return commandRecorder.context2dGetImageData(sx, sy, sw, sh, settings);
       } else {
-        const data = new Uint8ClampedArray(width * height * 4);
-        return new ImageData(data, width, height);
+        const data = new Uint8ClampedArray(sw * sh * 4);
+        return new ImageData(data, sw, sh);
       }
     },
-    measureText: function (text) {
+    measureText: function (...args) {
       const commandRecorder = getCommandRecorderForContext(this);
       if (commandRecorder) {
-        return commandRecorder.context2dMeasureText(text);
+        return commandRecorder.context2dMeasureText(...args);
       } else {
         // Return a dummy value to prevent the native method from being called.
         return {
@@ -205,19 +205,19 @@ const enableReadingFromContext2dCommandRecorder = () => {
         };
       }
     },
-    isPointInPath: function (x, y) {
+    isPointInPath: function (...args) {
       const commandRecorder = getCommandRecorderForContext(this);
       if (commandRecorder) {
-        return commandRecorder.context2dIsPointInPath(x, y);
+        return commandRecorder.context2dIsPointInPath(...args);
       } else {
         // Return a dummy value to prevent the native method from being called.
         return false;
       }
     },
-    isPointInStroke: function (x, y) {
+    isPointInStroke: function (...args) {
       const commandRecorder = getCommandRecorderForContext(this);
       if (commandRecorder) {
-        return commandRecorder.context2dIsPointInStroke(x, y);
+        return commandRecorder.context2dIsPointInStroke(...args);
       } else {
         // Return a dummy value to prevent the native method from being called.
         return false;
