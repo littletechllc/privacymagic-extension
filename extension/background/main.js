@@ -120,7 +120,6 @@ chrome.runtime.onStartup.addListener(async (details) => {
   }
 });
 
-
 initializeExtension().then(() => {
   console.log('main.js loaded');
 }).catch((error) => {
