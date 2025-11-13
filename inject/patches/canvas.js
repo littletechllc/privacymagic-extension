@@ -29,20 +29,6 @@ const createInvisibleCanvas = (width, height) => {
   const shadowCanvas = document.createElement('canvas');
   shadowCanvas.width = width;
   shadowCanvas.height = height;
-  shadowCanvas.style.border = '1px solid red';
-  shadowCanvas.style.display = 'none';
-
-  /*
-  shadowCanvas.style.position = 'absolute';
-  shadowCanvas.style.left = '-9999px';
-  shadowCanvas.style.top = '-9999px';
-  shadowCanvas.style.width = '0';
-  shadowCanvas.style.height = '0';
-  shadowCanvas.style.opacity = '0';
-  shadowCanvas.style.pointerEvents = 'none';
-  shadowCanvas.style.visibility = 'hidden';
-  shadowCanvas.style.userSelect = 'none';
-  */
   return shadowCanvas;
 }
 
@@ -67,13 +53,16 @@ class CommandRecorder {
     this.commands.push({ name, args, type, timestamp });
   }
   replayCommands() {
-    //console.log('replayCommands ->', this.commands);
     if (!this.shadowContext) {
       this.createShadowContext();
     }
     for (const command of this.commands) {
       const property = command.type === "call" ? "value" : "set";
-      reflectApplySafe(originalContextDescriptors[command.name][property], this.shadowContext, command.args);
+      try {
+        reflectApplySafe(originalContextDescriptors[command.name][property], this.shadowContext, command.args);
+      } catch (error) {
+        console.error('Error replaying command:', command.name, command.args, error);
+      }
     }
     this.commands = [];
     return this.shadowContext;
@@ -81,7 +70,7 @@ class CommandRecorder {
   createShadowContext() {
     this.shadowCanvas = createInvisibleCanvas(this.width, this.height);
     this.shadowContext = this.shadowCanvas.getContext('2d', { ...this.contextAttributes, willReadFrequently: true });
-    document.documentElement.appendChild(this.shadowCanvas);
+    // We don't need to append the shadow canvas to the document: it still gets rendered, but it's invisible.
   }
   wipeShadowCanvas() {
     if (this.shadowContext) {
@@ -149,9 +138,10 @@ const enableContext2dCommandRecording = () => {
       continue;
     }
     originalDescriptors[name] = descriptor;
+    const newDescriptor = { ...descriptor };
     if (descriptor.value) {
       const originalMethod = descriptor.value;
-      descriptor.value = function(...args) {
+      newDescriptor.value = function(...args) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           commandRecorder.recordCommand(name, args, "call");
@@ -160,7 +150,7 @@ const enableContext2dCommandRecording = () => {
       };
     } else if (descriptor.set) {
       const originalSet = descriptor.set;
-      descriptor.set = function(...args) {
+      newDescriptor.set = function(...args) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           commandRecorder.recordCommand(name, args, "set");
@@ -168,7 +158,7 @@ const enableContext2dCommandRecording = () => {
         return reflectApplySafe(originalSet, this, args);
       };
     }
-    Object.defineProperty(CanvasRenderingContext2D.prototype, name, descriptor);
+    Object.defineProperty(CanvasRenderingContext2D.prototype, name, newDescriptor);
   }
   return () => definePropertiesSafe(CanvasRenderingContext2D.prototype, originalDescriptors);
 };
@@ -246,8 +236,9 @@ const enableCanvasCommandRecording = () => {
       if (weakMapHasSafe(canvasToCommandRecorder, this)) {
         return weakMapGetSafe(canvasToCommandRecorder, this).canvasToBlob(callback, type, quality);
       }
-      // Return null to prevent the native method from being called.
-      callback(null);
+      // Call callback with null to prevent the native method from being called.
+      // Use setTimeout to avoid blocking the main thread.
+      setTimeout(() => callback(null), 0);
     }
   });
   const restoreDimensions = definePropertiesSafe(HTMLCanvasElement.prototype, {
