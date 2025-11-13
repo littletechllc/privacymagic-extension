@@ -3,6 +3,7 @@
 import { sharedSecret } from './secret.js';
 import { reflectApplySafe, definePropertiesSafe, redefinePropertyValues } from './helpers.js';
 import battery from './patches/battery.js';
+import canvas from './patches/canvas.js';
 import gpc from './patches/gpc.js';
 import hardware from './patches/hardware.js';
 import keyboard from './patches/keyboard.js';
@@ -13,6 +14,7 @@ import windowName from './patches/windowName.js';
 
 const privacyMagicPatches = {
   battery,
+  canvas,
   gpc,
   hardware,
   keyboard,

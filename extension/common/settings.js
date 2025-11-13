@@ -49,6 +49,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   timer: {
     script: true,
     category: 'fingerprinting'
+  },
+  canvas: {
+    script: true,
+    category: 'fingerprinting'
   }
 };
 

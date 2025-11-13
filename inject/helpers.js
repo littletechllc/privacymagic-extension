@@ -35,3 +35,12 @@ export const redefinePropertyValues = (obj, propertyMap) => {
     definePropertiesSafe(obj, originalProperties);
   };
 };
+
+const weakMapGet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'get').value;
+const weakMapHas = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'has').value;
+const weakMapSet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'set').value;
+export const weakMapGetSafe = (weakMap, key) => reflectApplySafe(weakMapGet, weakMap, [key]);
+export const weakMapHasSafe = (weakMap, key) => reflectApplySafe(weakMapHas, weakMap, [key]);
+export const weakMapSetSafe = (weakMap, key, value) => reflectApplySafe(weakMapSet, weakMap, [key, value]);
+
+export const reflectConstructSafe = Reflect.construct;
