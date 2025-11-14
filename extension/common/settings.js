@@ -11,7 +11,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   queryParameters: {
     dnr: true,
-    category: 'connections'
+    category: 'navigation'
   },
   battery: {
     script: true,
@@ -20,7 +20,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   gpc: {
     script: true,
     headers: true,
-    category: 'connections'
+    category: 'navigation'
   },
   hardware: {
     script: true,
@@ -28,7 +28,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   referrerPolicy: {
     dnr: true,
-    category: 'connections'
+    category: 'navigation'
   },
   screen: {
     script: true,
@@ -40,7 +40,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   windowName: {
     script: true,
-    category: 'connections'
+    category: 'navigation'
   },
   keyboard: {
     script: true,

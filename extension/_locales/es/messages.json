@@ -55,8 +55,8 @@
     "message": "Bloqueo de Contenido",
     "description": "Category for content blocking settings"
   },
-  "connections": {
-    "message": "Conexiones de Red",
+  "navigation": {
+    "message": "Protección de Navegación",
     "description": "Category for network connection settings"
   },
   "fingerprinting": {
