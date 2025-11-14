@@ -36,6 +36,11 @@ export const redefinePropertyValues = (obj, propertyMap) => {
   };
 };
 
+export const createSafeMethod = (globalInterface, methodName) => {
+  const originalMethod = Object.getOwnPropertyDescriptor(globalInterface.prototype, methodName).value;
+  return (instance, ...args) => reflectApplySafe(originalMethod, instance, args);
+};
+
 const weakMapGet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'get').value;
 const weakMapHas = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'has').value;
 const weakMapSet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'set').value;

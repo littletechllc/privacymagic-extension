@@ -1,23 +1,17 @@
 /* global HTMLCanvasElement, CanvasRenderingContext2D, ImageData */
 
-import { redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, definePropertiesSafe, reflectConstructSafe } from '../helpers.js';
+import { redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, definePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers.js';
 
 const originalCanvasFromContext = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas').get;
 const originalCanvasFromContextSafe = (context) => reflectApplySafe(originalCanvasFromContext, context, []);
-const originalGetContext = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'getContext').value;
-const originalGetContextSafe = (canvas, contextType, contextAttributes) => reflectApplySafe(originalGetContext, canvas, [contextType, contextAttributes]);
-const originalCanvasToDataURL = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'toDataURL').value;
-const originalCanvasToDataURLSafe = (canvas, type, quality) => reflectApplySafe(originalCanvasToDataURL, canvas, [type, quality]);
-const originalCanvasToBlob = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'toBlob').value;
-const originalCanvasToBlobSafe = (canvas, callback, type, quality) => reflectApplySafe(originalCanvasToBlob, canvas, [callback, type, quality]);
-const originalContextGetImageData = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'getImageData').value;
-const originalContextGetImageDataSafe = (context, ...args) => reflectApplySafe(originalContextGetImageData, context, args);
-const originalContextMeasureText = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'measureText').value;
-const originalContextMeasureTextSafe = (context, ...args) => reflectApplySafe(originalContextMeasureText, context, args);
-const originalContextIsPointInPath = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'isPointInPath').value;
-const originalContextIsPointInPathSafe = (context, ...args) => reflectApplySafe(originalContextIsPointInPath, context, args);
-const originalContextIsPointInStroke = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'isPointInStroke').value;
-const originalContextIsPointInStrokeSafe = (context, ...args) => reflectApplySafe(originalContextIsPointInStroke, context, args);
+const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext');
+const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL');
+const originalCanvasToBlobSafe = createSafeMethod(HTMLCanvasElement, 'toBlob');
+const originalContextGetImageDataSafe = createSafeMethod(CanvasRenderingContext2D, 'getImageData');
+const originalContextMeasureTextSafe = createSafeMethod(CanvasRenderingContext2D, 'measureText');
+const originalContextIsPointInPathSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInPath');
+const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke');
+
 const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width').set;
 const originalCanvasSetWidthSafe = (canvas, value) => reflectApplySafe(originalCanvasSetWidth, canvas, [value]);
 const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height').set;
@@ -277,14 +271,38 @@ const enableCanvasCommandRecording = () => {
   };
 };
 
+const hideWebGLVendorAndRenderer = () => {
+  const originalGetParameterSafe = createSafeMethod(WebGLRenderingContext, 'getParameter');
+  const platform = navigator.userAgentData.platform;
+  if (platform === 'macOS') {
+    return redefinePropertyValues(WebGLRenderingContext.prototype, {
+      getParameter: function (constant) {
+        console.log('getParameter', constant);
+        const originalValue = originalGetParameterSafe(this, constant);
+        switch (constant) {
+          case 37445: // UNMASKED_VENDOR_WEBGL
+            return 'Apple Inc.';
+          case 37446: // UNMASKED_RENDERER_WEBGL
+            return 'Apple GPU';
+          default:
+            return originalValue;
+        }
+      }
+    });
+  }
+  return () => {};
+};
+
 const canvas = () => {
   const restoreContext2dPart1 = enableContext2dCommandRecording();
   const restoreContext2dPart2 = enableReadingFromContext2dCommandRecorder();
   const restoreCanvas = enableCanvasCommandRecording();
+  const restoreWebGLVendorAndRenderer = hideWebGLVendorAndRenderer();
   return () => {
     restoreContext2dPart1();
     restoreContext2dPart2();
     restoreCanvas();
+    restoreWebGLVendorAndRenderer();
   };
 };
 
