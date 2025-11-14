@@ -1,6 +1,6 @@
 # Privacy Magic browser extension
 
-## Features
+## Protections
 
 * Blocks ads
 * Blocks tracking scripts
@@ -24,6 +24,12 @@
 * Disables Related Website Sets
 * Disables Hyperlink Auditing
 * Disables remote Spell Check Service
+
+## Features
+
+* Advanced: Enable and disable protections globally in options page
+* Advanced: Enable and disable protections per-site in popup
+* Protections are applied to top-level documents and iframes (including nested, sandboxed iframes)
 
 ## Third-party libraries
 
