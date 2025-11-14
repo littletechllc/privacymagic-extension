@@ -57,7 +57,7 @@
   },
   "navigation": {
     "message": "Protección de Navegación",
-    "description": "Category for network connection settings"
+    "description": "Category for navigation protection settings"
   },
   "fingerprinting": {
     "message": "Protección contra Huellas Digitales",

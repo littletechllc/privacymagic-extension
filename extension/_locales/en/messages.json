@@ -55,7 +55,7 @@
     "message": "Content Blocking",
     "description": "Category for content blocking settings"
   },
-  "connections": {
+  "navigation": {
     "message": "Navigation Protections",
     "description": "Category for navigation protection settings"
   },
