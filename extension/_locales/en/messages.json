@@ -56,11 +56,11 @@
     "description": "Category for content blocking settings"
   },
   "connections": {
-    "message": "Network Connections",
-    "description": "Category for network connection settings"
+    "message": "Navigation Protections",
+    "description": "Category for navigation protection settings"
   },
   "fingerprinting": {
-    "message": "Fingerprinting Protection",
+    "message": "Anti-Fingerprinting Protections",
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
