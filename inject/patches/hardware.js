@@ -14,8 +14,10 @@ const hardware = () => {
   });
   const restoreNavigator = redefinePropertyValues(Navigator.prototype, {
     cpuClass: undefined,
-    deviceMemory: 1,
+    // Cover Your Tracks says 1 in 1.93 browsers have this value:
+    deviceMemory: undefined,
     hardwareConcurrency: 4,
+    // Cover Your Tracks: 1 in 1.74:
     maxTouchPoints: 0
   });
   let restoreDevicePosture;
