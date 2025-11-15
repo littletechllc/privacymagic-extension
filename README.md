@@ -8,16 +8,21 @@
 * Removes tracking headers
 * Blocks third-party cookies
 * Blocks fingerprinting leaks
-  * hardware
-  * screen
-  * useragent
   * battery
+  * canvas
+  * hardware
   * keyboard
+  * screen
   * timer
+  * useragent
 * Removes tracking query parameters
 * Caps Referrer-Policy
 * Blocks insecure HTTP connections
 * Blocks window.name tracking
+* Sanitize IFrames
+* Sanitize Web Workers
+* Disable SharedStorage
+* Disable ServiceWorkers
 * Enables Global Privacy Control
 * Disables WebRTC IP address leaks
 * Disables browser "spy" features
