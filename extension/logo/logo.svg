@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
-   width="56"
-   height="56"
-   viewBox="0 0 56 56"
-   aria-labelledby="title desc"
-   role="img"
+   width="115mm"
+   height="115mm"
+   viewBox="0 0 115 115"
    version="1.1"
-   id="svg4"
-   sodipodi:docname="nazar.svg"
-   inkscape:export-filename="nazar-128.png"
-   inkscape:export-xdpi="192"
-   inkscape:export-ydpi="192"
+   id="svg1"
    inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   sodipodi:docname="hamsa-flat.svg"
+   inkscape:export-filename="hamsa-flat-128.png"
+   inkscape:export-xdpi="28.271305"
+   inkscape:export-ydpi="28.271305"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <defs
-     id="defs4" />
+   xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
-     id="namedview4"
+     id="namedview1"
      pagecolor="#ffffff"
      bordercolor="#000000"
      borderopacity="0.25"
@@ -30,61 +25,42 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="4.5961941"
-     inkscape:cx="11.640065"
-     inkscape:cy="43.405478"
-     inkscape:window-width="1512"
-     inkscape:window-height="862"
-     inkscape:window-x="0"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.37059484"
+     inkscape:cx="245.55118"
+     inkscape:cy="184.83798"
+     inkscape:window-width="888"
+     inkscape:window-height="920"
+     inkscape:window-x="625"
      inkscape:window-y="34"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg4" />
-  <title
-     id="title">Privacy Magic - Nazar</title>
-  <desc
-     id="desc">Simple evil-eye style icon: blue concentric rings with dark pupil.</desc>
-  <rect
-     width="100%"
-     height="100%"
-     fill="none"
-     id="rect1"
-     x="-4"
-     y="-4" />
-  <!-- outer ring -->
-  <circle
-     cx="28"
-     cy="28"
-     r="28"
-     fill="#1e73be"
-     id="circle1" />
-  <!-- middle ring -->
-  <circle
-     cx="28"
-     cy="28"
-     r="18"
-     fill="#ffffff"
-     id="circle2" />
-  <!-- inner ring -->
-  <circle
-     cx="28"
-     cy="28"
-     r="10"
-     fill="#4fa3ff"
-     id="circle3" />
-  <!-- pupil -->
-  <circle
-     cx="28"
-     cy="28"
-     r="5"
-     fill="#0b223b"
-     id="circle4" />
-  <metadata
-     id="metadata4">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:title>Privacy Magic - Nazar</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(17.4625,-99.483333)">
+    <g
+       id="g1"
+       transform="translate(6.60056,0.6882665)">
+      <path
+         id="path56"
+         style="fill:#1818c0;stroke:none;stroke-width:0.865;stroke-opacity:1"
+         d="m 33.69642,99.483523 c -7.67476,-0.002 -7.35765,8.160267 -7.30244,12.641607 -0.18534,12.94585 -0.21633,26.0355 -0.38189,38.9816 -1.36617,0.0384 -1.93514,0.0345 -3.11249,0.0165 -0.0326,-12.38815 -0.0781,-27.55861 -0.51987,-39.94072 -0.48834,-3.70581 -2.59806,-5.13258 -6.33453,-5.11545 -4.39162,0.0201 -5.81078,2.45532 -6.27717,5.48597 -0.81609,10.79484 -0.29735,21.63493 -0.7519,32.44557 -0.0734,5.41556 -0.1493,10.83127 -0.24133,16.24655 -2.84676,-4.67192 -8.70217,-10.69061 -14.86687,-11.32644 -5.09657,-0.58843 -6.94072,1.42229 -11.37043,3.65146 8.08098,0.22217 11.85647,7.36039 14.33098,16.04036 4.05089,11.87787 7.25503,23.7197 14.01732,34.53019 5.13548,6.05692 13.31801,10.05135 21.36884,9.93658 v 0.0295 c 0.0128,-4.2e-4 0.0248,-5.9e-4 0.0362,-0.001 8.96231,-0.055 17.89265,-2.45427 23.6974,-9.91668 6.76224,-10.81049 9.96638,-22.65232 14.01723,-34.53019 2.47451,-8.67997 6.24997,-15.8182 14.33091,-16.04037 -4.42969,-2.22917 -6.27383,-4.23988 -11.37036,-3.65145 -6.16468,0.63583 -12.02005,6.65452 -14.8668,11.32644 -0.092,-5.41528 -0.16792,-10.831 -0.24133,-16.24656 -0.45455,-10.81064 0.0642,-21.65074 -0.75189,-32.44556 -0.46638,-3.03064 -1.88556,-5.46588 -6.27717,-5.48598 -3.73647,-0.0171 -5.84619,1.40967 -6.33453,5.11546 -0.44176,12.38209 -0.48727,27.55256 -0.51987,39.94071 -1.17736,0.018 -1.74631,0.0219 -3.11249,-0.0165 -0.16555,-12.9461 -0.19655,-26.03577 -0.38189,-38.98161 0.0552,-4.48131 0.40738,-12.615667 -6.7836,-12.690177 z"
+         sodipodi:nodetypes="cccccscccccccccccccccccccccccc" />
+      <path
+         id="path57"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.526;stroke-dasharray:none;stroke-opacity:1"
+         d="M 33.6507,168.39516 A 25.265235,14.055989 0 0 0 9.27822,178.74699 25.265235,14.055989 0 0 0 33.6507,189.09881 25.265235,14.055989 0 0 0 58.02235,178.74699 25.265235,14.055989 0 0 0 33.6507,168.39516 Z" />
+      <ellipse
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.20941;stroke-dasharray:none;stroke-opacity:1"
+         id="ellipse57"
+         cx="33.650284"
+         cy="178.74698"
+         rx="8.6858778"
+         ry="8.4226685" />
+    </g>
+  </g>
 </svg>
