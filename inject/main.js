@@ -50,6 +50,7 @@ const makeBundleForInjection = () => `
   `;
 
 // Run hardening code in workers before they are executed.
+// TODO: Do we need to worry about module blobs with relative imports?
 const prepareInjectionForWorkers = (hardeningCode) => {
   const originalWorker = self.Worker;
   self.Worker = new Proxy(originalWorker, {
