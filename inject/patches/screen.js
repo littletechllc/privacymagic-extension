@@ -6,13 +6,10 @@ const screen = () => {
   if (!self.Screen) {
     return () => {};
   }
-  if (self.matchMedia) {
-    const oldMatchMedia = self.matchMedia;
-    const mediaDeviceToViewport = (mediaQueryString) =>
-      mediaQueryString
-        ?.replaceAll('device-width', 'width')
-        ?.replaceAll('device-height', 'height');
-  }
+  const oldMatchMedia = self.matchMedia;
+  const mediaDeviceToViewport = (mediaQueryString) => mediaQueryString
+      ?.replaceAll('device-width', 'width')
+      ?.replaceAll('device-height', 'height');
   const allowedScreenSizes = [
     [1366, 768],
     [1920, 1080],
