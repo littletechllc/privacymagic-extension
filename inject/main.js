@@ -56,10 +56,10 @@ const URLtoStringSafe = (url, base) => reflectApplySafe(URLtoString, new URLSafe
 
 // Run hardening code in workers before they are executed.
 // TODO: Do we need to worry about module blobs with relative imports?
-const prepareInjectionForWorkers = (hardeningCode) => {
-  const originalWorker = self.Worker;
+const prepareInjectionForWorkerType = (workerType, hardeningCode) => {
+  const originalWorker = self[workerType];
   const locationHref = self.location.href;
-  self.Worker = new Proxy(originalWorker, {
+  self[workerType] = new Proxy(originalWorker, {
     construct(target, [url, options]) {
       const absoluteUrl = URLtoStringSafe(new URLSafe(url, locationHref));
       options = options ?? {};
@@ -70,6 +70,11 @@ const prepareInjectionForWorkers = (hardeningCode) => {
       return new target(dataUrl, options);
     }
   });
+};
+
+const prepareInjectionForWorkers = (hardeningCode) => {
+  prepareInjectionForWorkerType('Worker', hardeningCode);
+  prepareInjectionForWorkerType('SharedWorker', hardeningCode);
 };
 
 const prepareInjectionForIframes = (hardeningCode) => {
