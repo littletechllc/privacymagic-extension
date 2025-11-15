@@ -53,6 +53,14 @@ export const PRIVACY_SETTINGS_CONFIG = {
   canvas: {
     script: true,
     category: 'fingerprinting'
+  },
+  serviceWorker: {
+    script: true,
+    category: 'leakyFeatures'
+  },
+  sharedStorage: {
+    script: true,
+    category: 'leakyFeatures'
   }
 };
 
