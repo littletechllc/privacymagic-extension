@@ -54,8 +54,12 @@ const timer = () => {
     };
   };
   const batchMakeRoundedGetters = (objectsWithProperties) => {
-    const restoreFunctions = objectsWithProperties.map(([object, properties]) =>
-      makeRoundedGetters(object.prototype, properties));
+    const restoreFunctions = objectsWithProperties.map(([object, properties]) => {
+      if (!object) {
+        return () => {};
+      }
+      return makeRoundedGetters(object.prototype, properties);
+    });
     return () => {
       for (const restoreFunction of restoreFunctions) {
         restoreFunction();
@@ -63,18 +67,18 @@ const timer = () => {
     };
   };
   const restorePerformance = batchMakeRoundedGetters([
-    [Performance, ['timeOrigin']],
-    [PerformanceEntry, ['duration', 'startTime']],
-    [LargestContentfulPaint, ['loadTime', 'renderTime']],
-    [LayoutShift, ['lastInputTime']],
-    [PerformanceEventTiming, ['processingEnd', 'processingStart']],
-    [PerformanceLongAnimationFrameTiming, [
+    [self.Performance, ['timeOrigin']],
+    [self.PerformanceEntry, ['duration', 'startTime']],
+    [self.LargestContentfulPaint, ['loadTime', 'renderTime']],
+    [self.LayoutShift, ['lastInputTime']],
+    [self.PerformanceEventTiming, ['processingEnd', 'processingStart']],
+    [self.PerformanceLongAnimationFrameTiming, [
       'blockingDuration',
       'firstUIEventTimestamp',
       'renderStart',
       'styleAndLayoutStart'
     ]],
-    [PerformanceLongTaskTiming, []],
+    [self.PerformanceLongTaskTiming, []],
     [PerformanceResourceTiming, [
       'connectEnd',
       'connectStart',
@@ -92,7 +96,7 @@ const timer = () => {
       'secureConnectionStart',
       'workerStart'
     ]],
-    [PerformanceNavigationTiming, [
+    [self.PerformanceNavigationTiming, [
       'activationStart',
       'criticalCHRestart',
       'domComplete',
@@ -104,12 +108,12 @@ const timer = () => {
       'unloadEventEnd',
       'unloadEventStart'
     ]],
-    [PerformanceScriptTiming, [
+    [self.PerformanceScriptTiming, [
       'executionStart',
       'forcedStyleAndLayoutDuration',
       'pauseDuration'
     ]],
-    [PerformanceServerTiming, ['duration']]
+    [self.PerformanceServerTiming, ['duration']]
   ]);
   return () => {
     restoreNow();

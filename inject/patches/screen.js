@@ -3,11 +3,16 @@
 import { redefinePropertyValues } from '../helpers.js';
 
 const screen = () => {
-  const oldMatchMedia = window.matchMedia;
-  const mediaDeviceToViewport = (mediaQueryString) =>
-    mediaQueryString
-      ?.replaceAll('device-width', 'width')
-      ?.replaceAll('device-height', 'height');
+  if (!self.Screen) {
+    return () => {};
+  }
+  if (self.matchMedia) {
+    const oldMatchMedia = self.matchMedia;
+    const mediaDeviceToViewport = (mediaQueryString) =>
+      mediaQueryString
+        ?.replaceAll('device-width', 'width')
+        ?.replaceAll('device-height', 'height');
+  }
   const allowedScreenSizes = [
     [1366, 768],
     [1920, 1080],
@@ -33,11 +38,11 @@ const screen = () => {
     pixelDepth: 24,
     width: spoofedScreenWidth
   });
-  const restoreWindow = redefinePropertyValues(window, {
+  const restoreWindow = redefinePropertyValues(self, {
     devicePixelRatio: 1,
     matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
-    outerHeight: window.innerHeight,
-    outerWidth: window.innerWidth,
+    outerHeight: self.innerHeight,
+    outerWidth: self.innerWidth,
     screenLeft: 0,
     screenTop: 0,
     screenX: 0,
