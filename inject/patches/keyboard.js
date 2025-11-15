@@ -3,7 +3,8 @@
 import { redefinePropertyValues } from '../helpers.js';
 
 const keyboard = () => {
-  return redefinePropertyValues(Navigator.prototype, {
+  const navigatorPrototype = self.Navigator || self.WorkerNavigator;
+  return redefinePropertyValues(navigatorPrototype.prototype, {
     keyboard: undefined
   });
 };

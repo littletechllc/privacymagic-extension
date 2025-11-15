@@ -26,10 +26,10 @@ const getObjectKeys = (ast, variableName) => {
 
 const composePatchControlFile = (patchName, enable) => `
   console.log('${enable ? 'enable' : 'disable'}/${patchName}.js loaded', Date.now());
-  window.__patch_decisions__ ||= {};
-  window.__patch_decisions__.${patchName} = ${enable};
-  if (window.__inject_if_ready__) {
-    window.__inject_if_ready__();
+  self.__patch_decisions__ ||= {};
+  self.__patch_decisions__.${patchName} = ${enable};
+  if (self.__inject_if_ready__) {
+    self.__inject_if_ready__();
   }`.replace(/^\s\s/gm, '').trim() + '\n';
 
 const writePatchControlFile = async (patchName, enable) => {

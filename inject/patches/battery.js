@@ -4,7 +4,7 @@ import { redefinePropertyValues } from '../helpers.js';
 
 const battery = () => {
   let restoreBatteryManager;
-  if (window.BatteryManager) {
+  if (self.BatteryManager) {
     const silencedEventProperty = {
       get: () => { return null; },
       set: (value) => { /* do nothing */ },

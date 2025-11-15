@@ -4,15 +4,16 @@ import { redefinePropertyValues } from '../helpers.js';
 
 const hardware = () => {
   // Match (color-gamut: srgb)
-  const oldMatchMedia = window.matchMedia;
+  const oldMatchMedia = self.matchMedia;
   const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi;
   const matchMediaClean = (mediaQueryString) =>
     mediaQueryString.replace(regex, (_, value) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
-  const restoreMatchMedia = redefinePropertyValues(window, {
+  const restoreMatchMedia = redefinePropertyValues(self, {
     matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
   });
-  const restoreNavigator = redefinePropertyValues(Navigator.prototype, {
+  const navigatorPrototype = self.Navigator || self.WorkerNavigator;
+  const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
     cpuClass: undefined,
     // Cover Your Tracks says 1 in 1.93 browsers have this value:
     deviceMemory: undefined,
@@ -21,7 +22,7 @@ const hardware = () => {
     maxTouchPoints: 0
   });
   let restoreDevicePosture;
-  if (window.DevicePosture) {
+  if (self.DevicePosture) {
     restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
       type: 'continuous',
       addEventListener: (/* ignore */) => { /* do nothing */ },

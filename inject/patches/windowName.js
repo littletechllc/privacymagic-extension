@@ -1,18 +1,18 @@
-/* global window */
+/* global self */
 
 import { definePropertiesSafe } from '../helpers.js';
 
 const windowName = () => {
-  if (window.top !== window) {
+  if (self.top !== self) {
     return;
   }
-  const propDescriptor = Object.getOwnPropertyDescriptor(window, 'name');
+  const propDescriptor = Object.getOwnPropertyDescriptor(self, 'name');
   if (!propDescriptor) {
     return;
   }
   const nameGetter = propDescriptor.get;
   const nameSetter = propDescriptor.set;
-  Object.defineProperty(window, 'name', {
+  Object.defineProperty(self, 'name', {
     get () {
       const nameStr = nameGetter.call(this);
       try {
@@ -20,7 +20,7 @@ const windowName = () => {
         if (typeof data !== 'object' || data === null) {
           return '';
         }
-        const origin = window.location.origin;
+        const origin = self.location.origin;
         if (typeof data[origin] !== 'string') {
           return '';
         }
@@ -40,19 +40,19 @@ const windowName = () => {
       } catch (error) {
         data = {};
       }
-      const origin = window.location.origin;
+      const origin = self.location.origin;
       if (!origin || origin.length === 0) {
         return;
       }
-      // String(value) matches window.name native behavior
+      // String(value) matches self.name native behavior
       data[origin] = String(value);
       nameSetter.call(this, JSON.stringify(data));
     },
     configurable: true
   });
-  console.log('window.name patched');
+  console.log('self.name patched');
   return () => {
-    definePropertiesSafe(window, { name: propDescriptor });
+    definePropertiesSafe(self, { name: propDescriptor });
   };
 };
 
