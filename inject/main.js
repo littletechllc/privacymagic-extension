@@ -49,18 +49,17 @@ const makeBundleForInjection = () => `
   })();
   `;
 
-  // Run hardening code in workers before they are executed.
+// Run hardening code in workers before they are executed.
 const prepareInjectionForWorkers = (hardeningCode) => {
   const originalWorker = self.Worker;
   self.Worker = new Proxy(originalWorker, {
     construct(target, [url, options]) {
       const absoluteUrl = new URL(url, location.href).toString();
-      return new target(
-        URL.createObjectURL(
-          new Blob([
-            `${hardeningCode}
-             importScripts('${absoluteUrl}');`])
-        ), options);
+      options = options ?? {};
+      const importCommand = ('type' in options && options.type === 'module') ?
+        'await import' : 'importScripts';
+      const bundle = `${hardeningCode}\n${importCommand}(${JSON.stringify(absoluteUrl)});\n`;
+      return new target(URL.createObjectURL(new Blob([bundle], { type: "application/javascript" })), options);
     }
   });
 };
