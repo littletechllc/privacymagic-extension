@@ -10,6 +10,8 @@ import keyboard from './patches/keyboard.js';
 import screen from './patches/screen.js';
 import timer from './patches/timer.js';
 import useragent from './patches/useragent.js';
+import serviceWorker from './patches/serviceWorker.js';
+import sharedStorage from './patches/sharedStorage.js';
 import windowName from './patches/windowName.js';
 
 const privacyMagicPatches = {
@@ -21,6 +23,8 @@ const privacyMagicPatches = {
   screen,
   timer,
   useragent,
+  serviceWorker,
+  sharedStorage,
   windowName
 };
 
@@ -31,7 +35,11 @@ const runPatchesInPage = () => {
   for (const [patcherId, decision] of Object.entries(self.__patch_decisions__)) {
     if (decision || !isTopLevel) {
       console.log('running patch', patcherId);
-      undoFunctions[patcherId] = privacyMagicPatches[patcherId]();
+      try {
+        undoFunctions[patcherId] = privacyMagicPatches[patcherId]();
+      } catch (error) {
+        console.error('error running patch', patcherId, error);
+      }
     }
   }
   return undoFunctions;
@@ -49,32 +57,35 @@ const makeBundleForInjection = () => `
   })();
   `;
 
-const btoaSafe = self.btoa;
 const URLSafe = self.URL;
-const URLtoString = Object.getOwnPropertyDescriptor(URL.__proto__, "toString").value
-const URLtoStringSafe = (url, base) => reflectApplySafe(URLtoString, new URLSafe(url, base), []);
+const BlobSafe = self.Blob;
+const URLcreateObjectURLSafe = URL.createObjectURL;
+const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, "href").get;
+const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
 
 // Run hardening code in workers before they are executed.
 // TODO: Do we need to worry about module blobs with relative imports?
-const prepareInjectionForWorkerType = (workerType, hardeningCode) => {
-  const originalWorker = self[workerType];
+const prepareInjectionForWorker = (hardeningCode) => {
   const locationHref = self.location.href;
-  self[workerType] = new Proxy(originalWorker, {
+  self.Worker = new Proxy(self.Worker, {
     construct(target, [url, options]) {
-      const absoluteUrl = URLtoStringSafe(new URLSafe(url, locationHref));
+      console.log(locationHref);
+      console.log(url);
+      const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref));
+      console.log('absoluteUrl', absoluteUrl);
       options = options ?? {};
       const importCommand = ('type' in options && options.type === 'module') ?
         'await import' : 'importScripts';
       const bundle = `${hardeningCode}\n${importCommand}(${JSON.stringify(absoluteUrl)});\n`;
-      const dataUrl = `data:text/javascript;base64,${btoaSafe(bundle)}`;
-      return new target(dataUrl, options);
+      const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], {"type": "text/javascript"}));
+      return new target(blobUrl, options);
     }
   });
 };
 
 const prepareInjectionForWorkers = (hardeningCode) => {
-  prepareInjectionForWorkerType('Worker', hardeningCode);
-  prepareInjectionForWorkerType('SharedWorker', hardeningCode);
+  prepareInjectionForWorker(hardeningCode);
+  //prepareInjectionForWorkerType('SharedWorker', hardeningCode);
 };
 
 const prepareInjectionForIframes = (hardeningCode) => {
@@ -194,4 +205,4 @@ self.__inject_if_ready__ = () => {
   }
 };
 self.__inject_if_ready__();
-console.log('foreground.js loaded at document_start with secret:', sharedSecret, Date.now());
+console.log('foreground.js loaded with secret:', sharedSecret, Date.now());

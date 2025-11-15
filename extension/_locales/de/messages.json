@@ -146,5 +146,17 @@
   "canvas": {
     "message": "Canvas-Fingerprinting blockieren",
     "description": "Setting to block canvas fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers blockieren",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage blockieren",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Leckende Web-Funktionen deaktivieren",
+    "description": "Category for leaky web features settings"
   }
 }
