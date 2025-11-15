@@ -36,7 +36,7 @@ const screen = () => {
     width: spoofedScreenWidth
   });
   const restoreWindow = redefinePropertyValues(self, {
-    devicePixelRatio: 1,
+    devicePixelRatio: 2,
     matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
     outerHeight: self.innerHeight,
     outerWidth: self.innerWidth,
