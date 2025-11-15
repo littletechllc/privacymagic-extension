@@ -123,6 +123,21 @@ const prepareInjectionForIframes = (hardeningCode) => {
   });
 };
 
+// Run hardening code in workers before they are executed.
+const prepareInjectionForWorkers = (hardeningCode) => {
+  const originalWorker = self.Worker;
+  self.Worker = new Proxy(originalWorker, {
+    construct(target, [url, options]) {
+      return new target(
+        URL.createObjectURL(
+          new Blob([
+            `${hardeningCode}
+             importScripts('${url}');`])
+        ), options);
+    }
+  });
+};
+
 window.__patch_decisions__ ||= Object.create(null);
 
 window.__inject_if_ready__ = () => {
@@ -132,6 +147,7 @@ window.__inject_if_ready__ = () => {
     const undoFunctions = runPatchesInPage();
     const bundle = makeBundleForInjection();
     prepareInjectionForIframes(bundle);
+    prepareInjectionForWorkers(bundle);
     delete window.__patch_decisions__;
     delete window.__inject_if_ready__;
     console.log('isTopLevel', isTopLevel);
