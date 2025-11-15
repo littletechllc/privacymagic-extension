@@ -49,18 +49,25 @@ const makeBundleForInjection = () => `
   })();
   `;
 
+const btoaSafe = self.btoa;
+const URLSafe = self.URL;
+const URLtoString = Object.getOwnPropertyDescriptor(URL.__proto__, "toString").value
+const URLtoStringSafe = (url, base) => reflectApplySafe(URLtoString, new URLSafe(url, base), []);
+
 // Run hardening code in workers before they are executed.
 // TODO: Do we need to worry about module blobs with relative imports?
 const prepareInjectionForWorkers = (hardeningCode) => {
   const originalWorker = self.Worker;
+  const locationHref = self.location.href;
   self.Worker = new Proxy(originalWorker, {
     construct(target, [url, options]) {
-      const absoluteUrl = new URL(url, location.href).toString();
+      const absoluteUrl = URLtoStringSafe(new URLSafe(url, locationHref));
       options = options ?? {};
       const importCommand = ('type' in options && options.type === 'module') ?
         'await import' : 'importScripts';
       const bundle = `${hardeningCode}\n${importCommand}(${JSON.stringify(absoluteUrl)});\n`;
-      return new target(URL.createObjectURL(new Blob([bundle], { type: "application/javascript" })), options);
+      const dataUrl = `data:text/javascript;base64,${btoaSafe(bundle)}`;
+      return new target(dataUrl, options);
     }
   });
 };
