@@ -1,7 +1,7 @@
 /* adapted from https://codepen.io/harishrajora/pen/ByNNWMv */
 
 .toggle-outer {
-  --height: 20px;
+  --height: 16px;
   --checked-color: rgba(63,158,58,1);
   --unchecked-color: rgb(200, 11, 11);
   
@@ -27,7 +27,7 @@
   
   .text {
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     display: block;
     position: relative;
     cursor: pointer;
