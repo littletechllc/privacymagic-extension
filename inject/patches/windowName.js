@@ -1,6 +1,6 @@
 /* global self */
 
-import { definePropertiesSafe } from '../helpers.js';
+import { objectDefinePropertiesSafe } from '../helpers.js';
 
 const windowName = () => {
   if (self.top !== self) {
@@ -52,7 +52,7 @@ const windowName = () => {
   });
   console.log('self.name patched');
   return () => {
-    definePropertiesSafe(self, { name: propDescriptor });
+    objectDefinePropertiesSafe(self, { name: propDescriptor });
   };
 };
 

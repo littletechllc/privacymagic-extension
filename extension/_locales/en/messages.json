@@ -68,7 +68,7 @@
     "description": "Setting to block advertisements"
   },
   "clientHints": {
-    "message": "Block Client Hints",
+    "message": "Block Client Hint Fingerprinting",
     "description": "Setting to block client hints"
   },
   "queryParameters": {
@@ -108,7 +108,7 @@
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Block Battery API fingerprinting",
+    "message": "Block Battery status fingerprinting",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
@@ -140,12 +140,8 @@
     "description": "Setting to block keyboard fingerprinting"
   },
   "timer": {
-    "message": "Round Timers",
+    "message": "Block Timer-based Fingerprinting",
     "description": "Setting to inhibit timing-based fingerprinting"
-  },
-  "canvas": {
-    "message": "Block Canvas Fingerprinting",
-    "description": "Setting to block canvas fingerprinting"
   },
   "serviceWorker": {
     "message": "Disable Service Workers",
@@ -158,5 +154,57 @@
   "leakyFeatures": {
     "message": "Disable Leaky Web Features",
     "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Block Audio Fingerprinting",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "browser": {
+    "message": "Block Browser Version Fingerprinting",
+    "description": "Setting to block browser version fingerprinting"
+  },
+  "display": {
+    "message": "Block Display Prefs Fingerprinting",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Block Device Version Fingerprinting",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Block Device Memory Fingerprinting",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Block Disk Space Fingerprinting",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Block Graphics Chip Fingerprinting",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Block Installed Fonts Fingerprinting",
+    "description": "Setting to block installed fonts fingerprinting"
+  },
+  "language": {
+    "message": "Block Language Fingerprinting",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Block Main Chip Fingerprinting",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Block Math Fingerprinting",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Block Time-Zone Fingerprinting",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Block Touch Support Fingerprinting",
+    "description": "Setting to block touch support fingerprinting"
   }
 }

@@ -50,7 +50,55 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-  canvas: {
+  gpu: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  audio: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  browser: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  display: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  device: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  memory: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  disk: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  fonts: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  language: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  cpu: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  math: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  timezone: {
+    script: true,
+    category: 'fingerprinting'
+  },
+  touch: {
     script: true,
     category: 'fingerprinting'
   },

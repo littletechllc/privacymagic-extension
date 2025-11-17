@@ -158,5 +158,57 @@
   "leakyFeatures": {
     "message": "Desactivar Funciones Web con Fugas",
     "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Bloquear Huella Digital de Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "browser": {
+    "message": "Bloquear Huella Digital de Versión del Navegador",
+    "description": "Setting to block browser version fingerprinting"
+  },
+  "display": {
+    "message": "Bloquear Huella Digital de Preferencias de Pantalla",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Bloquear Huella Digital de Versión del Dispositivo",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Bloquear Huella Digital de Memoria del Dispositivo",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Bloquear Huella Digital de Espacio en Disco",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Bloquear Huella Digital del Chip de Gráficos",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Bloquear Huella Digital de Fuentes Instaladas",
+    "description": "Setting to block installed fonts fingerprinting"
+  },
+  "language": {
+    "message": "Bloquear Huella Digital de Idioma",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Bloquear Huella Digital del Chip Principal",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Bloquear Huella Digital de Procesamiento Matemático",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Bloquear Huella Digital de Zona Horaria",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Bloquear Huella Digital de Soporte Táctil",
+    "description": "Setting to block touch support fingerprinting"
   }
 }

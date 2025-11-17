@@ -1,9 +1,9 @@
-/* global __PRIVACY_MAGIC_INJECT__, HTMLIFrameElement, Element, DOMTokenList, WeakSet, chrome */
+/* global __PRIVACY_MAGIC_INJECT__, WorkerLocation, HTMLIFrameElement, Element, DOMTokenList, WeakSet, self, trustedTypes */
 
 import { sharedSecret } from './secret.js';
-import { reflectApplySafe, definePropertiesSafe, redefinePropertyValues } from './helpers.js';
+import { reflectApplySafe } from './helpers.js';
 import battery from './patches/battery.js';
-import canvas from './patches/canvas.js';
+import gpu from './patches/gpu.js';
 import gpc from './patches/gpc.js';
 import hardware from './patches/hardware.js';
 import keyboard from './patches/keyboard.js';
@@ -16,8 +16,8 @@ import windowName from './patches/windowName.js';
 
 const privacyMagicPatches = {
   battery,
-  canvas,
   gpc,
+  gpu,
   hardware,
   keyboard,
   screen,
@@ -60,32 +60,86 @@ const makeBundleForInjection = () => `
 const URLSafe = self.URL;
 const BlobSafe = self.Blob;
 const URLcreateObjectURLSafe = URL.createObjectURL;
-const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, "href").get;
+const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
 const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
+
+const spoofLocationInsideWorker = (absoluteUrl) => {
+  const reflectApply = (...args) => Reflect.apply(...args);
+  const reflectApplySafe = (func, thisArg, args) => {
+    try {
+      return reflectApply(func, thisArg, args);
+    } catch (error) {
+      return undefined;
+    }
+  };
+  const URLSafe = self.URL;
+  const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
+  const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
+  // Spoof the self.location object to return the original URL.
+  const absoluteUrlObject = new URL(absoluteUrl);
+  const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype, 'hash').get = () => absoluteUrlObject.hash;
+  for (const [key, descriptor] of Object.entries(descriptors)) {
+    descriptor.get = () => absoluteUrlObject[key];
+  }
+  Object.defineProperties(WorkerLocation.prototype, descriptors);
+  // Modify the self.Request object to be relative to the original URL.
+  const originalUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url').get;
+  const originalUrlSafe = (request) => reflectApplySafe(originalUrlGetter, request, []);
+  Object.defineProperty(Request.prototype, 'url', {
+    get () {
+      return URLhrefSafe(new URLSafe(originalUrlSafe(this), absoluteUrl));
+    }
+  });
+  // Modify the self.fetch function to be relative to the original URL.
+  const originalFetch = self.fetch;
+  self.fetch = (firstArg, ...args) => {
+    const resolvedFirstArg = firstArg instanceof Request
+      ? firstArg
+      : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl));
+    return originalFetch(resolvedFirstArg, ...args);
+  };
+};
 
 // Run hardening code in workers before they are executed.
 // TODO: Do we need to worry about module blobs with relative imports?
 const prepareInjectionForWorker = (hardeningCode) => {
   const locationHref = self.location.href;
+  const policy = trustedTypes.createPolicy('sanitized-worker-policy', {
+    createHTML: (unsafeHTML) => unsafeHTML,
+    createScript: (unsafeScript) => unsafeScript,
+    createScriptURL: (unsafeScriptURL) => unsafeScriptURL
+  });
   self.Worker = new Proxy(self.Worker, {
-    construct(target, [url, options]) {
-      console.log(locationHref);
-      console.log(url);
+    construct (Target, [url, options]) {
       const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref));
-      console.log('absoluteUrl', absoluteUrl);
       options = options ?? {};
-      const importCommand = ('type' in options && options.type === 'module') ?
-        'await import' : 'importScripts';
-      const bundle = `${hardeningCode}\n${importCommand}(${JSON.stringify(absoluteUrl)});\n`;
-      const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], {"type": "text/javascript"}));
-      return new target(blobUrl, options);
+      const importCommand = ('type' in options && options.type === 'module')
+        ? 'await import'
+        : 'importScripts';
+      const bundle = `${hardeningCode}
+        const policy = trustedTypes.createPolicy('sanitized-worker-policy', {
+          createHTML: (unsafeHTML) => unsafeHTML,
+          createScript: (unsafeScript) => unsafeScript,
+          createScriptURL: (unsafeScriptURL) => unsafeScriptURL
+        });
+        const sanitizedAbsoluteUrl = policy.createScriptURL(${JSON.stringify(absoluteUrl)});
+        (${spoofLocationInsideWorker.toString()})(${JSON.stringify(absoluteUrl)});
+        try {
+          ${importCommand}(sanitizedAbsoluteUrl);
+        } catch (error) {
+          console.error("error in importing: ", error);
+        }
+        console.log("finished importing");`;
+      const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }));
+      const sanitizedBlobUrl = policy.createScriptURL(blobUrl);
+      return new Target(sanitizedBlobUrl, options);
     }
   });
 };
 
 const prepareInjectionForWorkers = (hardeningCode) => {
   prepareInjectionForWorker(hardeningCode);
-  //prepareInjectionForWorkerType('SharedWorker', hardeningCode);
+  // prepareInjectionForWorkerType('SharedWorker', hardeningCode);
 };
 
 const prepareInjectionForIframes = (hardeningCode) => {
@@ -165,8 +219,7 @@ const prepareInjectionForIframes = (hardeningCode) => {
   Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {
     get () { return getContentWindowAfterHardening(this, hardeningCode); }
   });
-}
-
+};
 
 self.__patch_decisions__ ||= Object.create(null);
 
@@ -199,7 +252,7 @@ self.__inject_if_ready__ = () => {
           }
         }
       } catch (error) {
-        console.error('unexpected error');
+        console.error('unexpected error', error, detail);
       }
     });
   }

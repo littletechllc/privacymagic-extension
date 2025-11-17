@@ -1,10 +1,6 @@
-/* global Performance, PerformanceEntry, LargestContentfulPaint, LayoutShift,
-          PerformanceEventTiming, PerformanceLongAnimationFrameTiming,
-          PerformanceLongTaskTiming, PerformanceResourceTiming,
-          PerformanceNavigationTiming, PerformanceScriptTiming,
-          PerformanceServerTiming */
+/* global Performance, self */
 
-import { redefinePropertyValues, reflectApplySafe, definePropertiesSafe, nonProperty } from '../helpers.js';
+import { redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, nonProperty } from '../helpers.js';
 
 const timer = () => {
   const mathRoundSafe = Math.round;
@@ -49,7 +45,7 @@ const timer = () => {
       Object.defineProperty(objectPrototype, 'toJSON', toJsonNewDescriptor);
     }
     return () => {
-      definePropertiesSafe(objectPrototype,
+      objectDefinePropertiesSafe(objectPrototype,
         { ...originalDescriptors, toJSON: toJsonOriginalDescriptor });
     };
   };
@@ -79,7 +75,7 @@ const timer = () => {
       'styleAndLayoutStart'
     ]],
     [self.PerformanceLongTaskTiming, []],
-    [PerformanceResourceTiming, [
+    [self.PerformanceResourceTiming, [
       'connectEnd',
       'connectStart',
       'domainLookupEnd',
