@@ -54,6 +54,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
+  /*
   audio: {
     script: true,
     category: 'fingerprinting'
@@ -101,7 +102,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   touch: {
     script: true,
     category: 'fingerprinting'
-  },
+  }, */
   serviceWorker: {
     script: true,
     category: 'leakyFeatures'
