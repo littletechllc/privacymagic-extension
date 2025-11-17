@@ -81,9 +81,11 @@ const createAddRequestHeaderRule = (settingId, addRequestHeaders) => {
 
 const createRemoveParamsRule = (settingId, removeParams) => ({
   stringId: `${settingId}_removeParams`,
-  type: 'redirect',
-  redirect: {
-    transform: { queryTransform: { removeParams } }
+  action: {
+    type: 'redirect',
+    redirect: {
+      transform: { queryTransform: { removeParams } }
+    }
   }
 });
 
