@@ -8,7 +8,14 @@ export const reflectApplySafe = (func, thisArg, args) => {
   }
 };
 
-export const definePropertiesSafe = (...args) => Object.defineProperties(...args);
+export const objectDefinePropertiesSafe = Object.defineProperties;
+const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors;
+
+export const redefinePropertiesSafe = (obj, propertyMap) => {
+  const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj);
+  objectDefinePropertiesSafe(obj, propertyMap);
+  return () => objectDefinePropertiesSafe(obj, originalDescriptors);
+};
 
 export const nonProperty = { get: undefined, set: undefined, configurable: true };
 
@@ -32,7 +39,7 @@ export const redefinePropertyValues = (obj, propertyMap) => {
   }
   Object.defineProperties(obj, newProperties);
   return () => {
-    definePropertiesSafe(obj, originalProperties);
+    objectDefinePropertiesSafe(obj, originalProperties);
   };
 };
 

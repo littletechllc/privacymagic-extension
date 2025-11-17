@@ -158,5 +158,57 @@
   "leakyFeatures": {
     "message": "Leckende Web-Funktionen deaktivieren",
     "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio-Fingerprinting blockieren",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "browser": {
+    "message": "Browser-Version-Fingerprinting blockieren",
+    "description": "Setting to block browser version fingerprinting"
+  },
+  "display": {
+    "message": "Anzeigepräferenzen-Fingerprinting blockieren",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Geräteversion-Fingerprinting blockieren",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Gerätespeicher-Fingerprinting blockieren",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Festplattenspeicher-Fingerprinting blockieren",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafikchip-Fingerprinting blockieren",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Installierte Schriftarten-Fingerprinting blockieren",
+    "description": "Setting to block installed fonts fingerprinting"
+  },
+  "language": {
+    "message": "Sprach-Fingerprinting blockieren",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Hauptchip-Fingerprinting blockieren",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Mathematikverarbeitungs-Fingerprinting blockieren",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Zeitzonen-Fingerprinting blockieren",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Touch-Unterstützung-Fingerprinting blockieren",
+    "description": "Setting to block touch support fingerprinting"
   }
 }

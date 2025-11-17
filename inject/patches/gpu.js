@@ -1,8 +1,8 @@
-/* global HTMLCanvasElement, CanvasRenderingContext2D, ImageData */
+/* global HTMLCanvasElement, CanvasRenderingContext2D, ImageData, self */
 
-import { redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, definePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers.js';
+import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers.js';
 
-const canvas = () => {
+const gpu = () => {
   if (!self.HTMLCanvasElement) {
     return () => {};
   }
@@ -171,7 +171,7 @@ const canvas = () => {
       }
       Object.defineProperty(CanvasRenderingContext2D.prototype, name, newDescriptor);
     }
-    return () => definePropertiesSafe(CanvasRenderingContext2D.prototype, originalDescriptors);
+    return () => objectDefinePropertiesSafe(CanvasRenderingContext2D.prototype, originalDescriptors);
   };
 
   const enableReadingFromContext2dCommandRecorder = () => {
@@ -252,7 +252,7 @@ const canvas = () => {
         setTimeout(() => callback(null), 0);
       }
     });
-    const restoreDimensions = definePropertiesSafe(HTMLCanvasElement.prototype, {
+    const restoreDimensions = redefinePropertiesSafe(HTMLCanvasElement.prototype, {
       width: {
         set: function (value) {
           originalCanvasSetWidthSafe(this, value);
@@ -310,4 +310,4 @@ const canvas = () => {
   };
 };
 
-export default canvas;
+export default gpu;

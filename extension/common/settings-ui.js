@@ -22,7 +22,8 @@ const createToggleCategory = async (store, domain, settingIds, categoryId) => {
   const categoryTitle = document.createElement('h2');
   categoryTitle.textContent = getLocalizedText(categoryId);
   category.appendChild(categoryTitle);
-  for (const settingId of settingIds) {
+  const sortedSettingIds = settingIds.sort();
+  for (const settingId of sortedSettingIds) {
     const toggle = await createToggle(settingId);
     const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId];
     await bindToggleToStorage(toggle, store, keyPath, /* defaultValue */ true);
