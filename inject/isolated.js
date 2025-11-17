@@ -1,8 +1,8 @@
 /* global chrome */
 
-import { sharedSecret } from './secret.js';
+import { getSharedSecret } from './secret.js';
 
-console.log('isolated.js loaded with secret:', sharedSecret);
+console.log('isolated.js loaded with secret:', getSharedSecret());
 
 const sendGetDisabledSettingsResponse = async () => {
   try {
@@ -16,7 +16,7 @@ const sendGetDisabledSettingsResponse = async () => {
     const detail = Object.create(null);
     detail.type = 'getDisabledSettingsResponse';
     detail.disabledSettings = disabledSettings;
-    document.documentElement.dispatchEvent(new CustomEvent(`message-${sharedSecret}`, { detail }));
+    document.documentElement.dispatchEvent(new CustomEvent(`message-${getSharedSecret()}`, { detail }));
   } catch (error) {
     console.error('error sending getDisabledSettings response', error);
   }

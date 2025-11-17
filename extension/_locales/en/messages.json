@@ -206,5 +206,9 @@
   "touch": {
     "message": "Block Touch Support Fingerprinting",
     "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Harden Web Workers",
+    "description": "Setting to harden web workers"
   }
 }

@@ -1,6 +1,8 @@
+/* global self */
+
 const DATA_SECRET_ATTRIBUTE = 'data-privacy-magic-secret';
 
-export const sharedSecret = (() => {
+export const createOrRetrieveSharedSecret = () => {
   if (self.__existing_secret__) {
     const existingSecret = self.__existing_secret__;
     delete self.__existing_secret__;
@@ -21,4 +23,15 @@ export const sharedSecret = (() => {
     documentElement.setAttribute(DATA_SECRET_ATTRIBUTE, newSecret);
     return newSecret;
   }
-})();
+};
+
+let sharedSecret;
+
+export const getSharedSecret = () => {
+  if (!sharedSecret) {
+    sharedSecret = createOrRetrieveSharedSecret();
+  }
+  return sharedSecret;
+};
+
+export default getSharedSecret;

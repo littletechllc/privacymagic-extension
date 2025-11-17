@@ -110,6 +110,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   sharedStorage: {
     script: true,
     category: 'leakyFeatures'
+  },
+  worker: {
+    script: true,
+    category: 'leakyFeatures'
   }
 };
 
