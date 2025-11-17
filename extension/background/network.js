@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl } from '../common/util.js';
+import { logError, registrableDomainFromUrl, getDnrIdForKey } from '../common/util.js';
 
 const NETWORK_PROTECTION_DEFS = {
   gpc: {
@@ -70,39 +70,33 @@ const NETWORK_PROTECTION_DEFS = {
   }
 };
 
-const idManager = {
-  settingToIdInteger: {},
-  idCounter: 0,
-  addIdForSetting (setting) {
-    this.settingToIdInteger[setting] = this.settingToIdInteger[setting] || [];
-    this.settingToIdInteger[setting].push(this.idCounter + 1);
-    this.idCounter++;
-    return this.idCounter;
-  },
-  getIdsForSetting (setting) {
-    return this.settingToIdInteger[setting] || [];
-  }
-};
-
-const createAddRequestHeaderAction = (addRequestHeaders) => {
+const createAddRequestHeaderRule = (settingId, addRequestHeaders) => {
   const requestHeaders = Object.entries(addRequestHeaders).map(
     ([header, value]) => ({ operation: 'set', header, value }));
-  return { type: 'modifyHeaders', requestHeaders };
+  return {
+    stringId: `${settingId}_addRequestHeaders`,
+    action: { type: 'modifyHeaders', requestHeaders }
+  };
 };
 
-const createParamAction = (removeParams) => ({
+const createRemoveParamsRule = (settingId, removeParams) => ({
+  stringId: `${settingId}_removeParams`,
   type: 'redirect',
   redirect: {
     transform: { queryTransform: { removeParams } }
   }
 });
 
-const createRemoveRequestHeaderAction = (removeRequestHeaders) => ({
-  type: 'modifyHeaders',
-  requestHeaders: removeRequestHeaders.map(header => ({ operation: 'remove', header }))
+const createRemoveRequestHeaderRule = (settingId, removeRequestHeaders) => ({
+  stringId: `${settingId}_removeRequestHeaders`,
+  action: {
+    type: 'modifyHeaders',
+    requestHeaders: removeRequestHeaders.map(header => ({ operation: 'remove', header }))
+  }
 });
 
-const createCapReferrerPolicyRules = () => ([{
+const createCapReferrerPolicyRules = (settingId) => ([{
+  stringId: `${settingId}_capReferrerPolicy_1`,
   condition: {
     excludedResponseHeaders: [{
       header: 'referrer-policy',
@@ -118,6 +112,7 @@ const createCapReferrerPolicyRules = () => ([{
     }]
   }
 }, {
+  stringId: `${settingId}_capReferrerPolicy_2`,
   condition: {
     responseHeaders: [{
       header: 'referrer-policy',
@@ -139,19 +134,18 @@ const createPartialRules = (settingId, condition) => {
   const { addRequestHeaders, removeParams, removeRequestHeaders, capReferrerPolicy } = config;
   const rules = [];
   if (capReferrerPolicy) {
-    rules.push(...createCapReferrerPolicyRules());
+    rules.push(...createCapReferrerPolicyRules(settingId));
   }
   if (addRequestHeaders) {
-    rules.push({ action: createAddRequestHeaderAction(addRequestHeaders) });
+    rules.push(createAddRequestHeaderRule(settingId, addRequestHeaders));
   }
   if (removeParams) {
-    rules.push({ action: createParamAction(removeParams) });
+    rules.push(createRemoveParamsRule(settingId, removeParams));
   }
   if (removeRequestHeaders) {
-    rules.push({ action: createRemoveRequestHeaderAction(removeRequestHeaders) });
+    rules.push(createRemoveRequestHeaderRule(settingId, removeRequestHeaders));
   }
   for (const rule of rules) {
-    rule.id = idManager.addIdForSetting(settingId);
     rule.priority = 1;
     rule.condition = {
       ...rule.condition,
@@ -162,10 +156,40 @@ const createPartialRules = (settingId, condition) => {
 };
 
 const updateSessionRules = async (rules) => {
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: rules.map(rule => rule.id),
-    addRules: rules
+  const rulesWithIntegerIds = rules.map(rule => {
+    const { stringId, ...rest } = rule;
+    return { ...rest, id: getDnrIdForKey(stringId) };
   });
+  await chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: rulesWithIntegerIds.map(rule => rule.id),
+    addRules: rulesWithIntegerIds
+  });
+};
+
+const relevantStringIds = new Set();
+
+const getSessionRulesForSetting = async (settingId) => {
+  const ids = [...relevantStringIds]
+    .filter(stringId => stringId.startsWith(`${settingId}_`))
+    .map(stringId => getDnrIdForKey(stringId));
+  return await chrome.declarativeNetRequest.getSessionRules({
+    ruleIds: ids
+  });
+};
+
+// Add an item to an array if it is not present.
+const addIfMissing = (array, item) => {
+  if (!array.includes(item)) {
+    array.push(item);
+  }
+};
+
+// Remove an item from an array if it is present.
+const removeIfPresent = (array, item) => {
+  const index = array.indexOf(item);
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
 };
 
 // Create the top level network rule, without any excluded request domains.
@@ -174,6 +198,7 @@ const createTopLevelNetworkRule = async (settingId) => {
     excludedRequestDomains: [],
     resourceTypes: ['main_frame']
   });
+  rules.forEach(rule => relevantStringIds.add(rule.stringId));
   await updateSessionRules(rules);
 };
 
@@ -182,20 +207,13 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return;
   }
-  const rules = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: idManager.getIdsForSetting(settingId)
-  });
+  const rules = await getSessionRulesForSetting(settingId);
   for (const rule of rules) {
-    const excludedRequestDomains = rule.condition.excludedRequestDomains || [];
+    rule.condition.excludedRequestDomains ||= [];
     if (value === false) {
-      if (!excludedRequestDomains.includes(domain)) {
-        excludedRequestDomains.push(domain);
-      }
+      addIfMissing(rule.condition.excludedRequestDomains, domain);
     } else {
-      if (excludedRequestDomains.includes(domain)) {
-        rule.condition.excludedRequestDomains =
-          excludedRequestDomains.filter(d => d !== domain);
-      }
+      removeIfPresent(rule.condition.excludedRequestDomains, domain);
     }
   }
   await updateSessionRules(rules);
@@ -226,19 +244,13 @@ const createSubresourceNetworkRule = async (settingId) => {
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
-  const rules = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: idManager.getIdsForSetting(settingId)
-  });
+  const rules = await getSessionRulesForSetting(settingId);
   for (const rule of rules) {
-    const excludedTabIds = rule.condition.excludedTabIds || [];
+    rule.condition.excludedTabIds ||= [];
     if (value === false) {
-      if (!excludedTabIds.includes(tabId)) {
-        excludedTabIds.push(tabId);
-      }
+      addIfMissing(rule.condition.excludedTabIds, tabId);
     } else {
-      if (excludedTabIds.includes(tabId)) {
-        rule.condition.excludedTabIds = excludedTabIds.filter(t => t !== tabId);
-      }
+      removeIfPresent(rule.condition.excludedTabIds, tabId);
     }
   }
   await updateSessionRules(rules);

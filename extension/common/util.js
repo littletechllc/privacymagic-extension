@@ -6,3 +6,23 @@ export const registrableDomainFromUrl = (url) =>
 export const logError = (error, message, details) => {
   console.error('Error:', `'${message}'`, `'${error.name}'`, `'${error.message}'`, details, error.stack);
 };
+
+const dnrIdManager = {
+  settingToIdInteger: {},
+  // this is a global counter for the DNR IDs >= 1.
+  idCounter: 0,
+  getIntegerForKey (key) {
+    const existingInteger = this.keyToIdInteger[key];
+    if (existingInteger === undefined) {
+      this.idCounter++;
+      const newInteger = this.idCounter;
+      this.keyToIdInteger[key] = newInteger;
+      return newInteger;
+    }
+    return existingInteger;
+  }
+};
+
+export const getDnrIdForKey = (key) => {
+  return dnrIdManager.getIntegerForKey(key);
+};
