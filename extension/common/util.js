@@ -8,7 +8,7 @@ export const logError = (error, message, details) => {
 };
 
 const dnrIdManager = {
-  settingToIdInteger: {},
+  keyToIdInteger: {},
   // this is a global counter for the DNR IDs >= 1.
   idCounter: 0,
   getIntegerForKey (key) {
