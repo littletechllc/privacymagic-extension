@@ -26,3 +26,5 @@ const dnrIdManager = {
 export const getDnrIdForKey = (key) => {
   return dnrIdManager.getIntegerForKey(key);
 };
+
+export const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
