@@ -60,7 +60,7 @@
     "description": "Category for navigation protection settings"
   },
   "fingerprinting": {
-    "message": "Anti-Fingerprinting Protections",
+    "message": "Protect System Information",
     "description": "Category for fingerprinting protection settings"
   },
   "ads": {
@@ -68,7 +68,7 @@
     "description": "Setting to block advertisements"
   },
   "clientHints": {
-    "message": "Block Client Hint Fingerprinting",
+    "message": "Client Hints",
     "description": "Setting to block client hints"
   },
   "queryParameters": {
@@ -80,11 +80,11 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Block Hardware Fingerprinting",
+    "message": "Hardware Specs",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
-    "message": "Block Screen Fingerprinting",
+    "message": "Screen Details",
     "description": "Setting to block screen fingerprinting"
   },
   "windowName": {
@@ -108,11 +108,11 @@
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Block Battery status fingerprinting",
+    "message": "Battery Status",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Block User-Agent fingerprinting",
+    "message": "Browser Version",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
@@ -136,11 +136,11 @@
     "description": "Setting to tighten referrer policy"
   },
   "keyboard": {
-    "message": "Block Keyboard Fingerprinting",
+    "message": "Keyboard Layout",
     "description": "Setting to block keyboard fingerprinting"
   },
   "timer": {
-    "message": "Block Timer-based Fingerprinting",
+    "message": "System Performance",
     "description": "Setting to inhibit timing-based fingerprinting"
   },
   "serviceWorker": {
@@ -156,55 +156,55 @@
     "description": "Category for leaky web features settings"
   },
   "audio": {
-    "message": "Block Audio Fingerprinting",
+    "message": "Audio Processing",
     "description": "Setting to block audio fingerprinting"
   },
   "browser": {
-    "message": "Block Browser Version Fingerprinting",
+    "message": "Browser Version",
     "description": "Setting to block browser version fingerprinting"
   },
   "display": {
-    "message": "Block Display Prefs Fingerprinting",
+    "message": "Display Settings",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {
-    "message": "Block Device Version Fingerprinting",
+    "message": "Device Version",
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
-    "message": "Block Device Memory Fingerprinting",
+    "message": "Device Memory Usage",
     "description": "Setting to block device memory fingerprinting"
   },
   "disk": {
-    "message": "Block Disk Space Fingerprinting",
+    "message": "Disk Space Usage",
     "description": "Setting to block disk space fingerprinting"
   },
   "gpu": {
-    "message": "Block Graphics Chip Fingerprinting",
+    "message": "Graphics Card Specs",
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {
-    "message": "Block Installed Fonts Fingerprinting",
+    "message": "Installed Fonts",
     "description": "Setting to block installed fonts fingerprinting"
   },
   "language": {
-    "message": "Block Language Fingerprinting",
+    "message": "Language Settings",
     "description": "Setting to block language fingerprinting"
   },
   "cpu": {
-    "message": "Block Main Chip Fingerprinting",
+    "message": "CPU Specs",
     "description": "Setting to block main chip fingerprinting"
   },
   "math": {
-    "message": "Block Math Fingerprinting",
+    "message": "Math Processing",
     "description": "Setting to block math processing fingerprinting"
   },
   "timezone": {
-    "message": "Block Time-Zone Fingerprinting",
+    "message": "Time-Zone Settings",
     "description": "Setting to block time-zone fingerprinting"
   },
   "touch": {
-    "message": "Block Touch Support Fingerprinting",
+    "message": "Touch Support Status",
     "description": "Setting to block touch support fingerprinting"
   },
   "worker": {
