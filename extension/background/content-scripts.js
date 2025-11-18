@@ -1,101 +1,103 @@
 /* global chrome */
 
-import { PRIVACY_SETTINGS_CONFIG, getAllSettings } from '../common/settings.js';
+import { getDnrIdForKey, TOP_LEVEL_RULE_PREFIX, SUBRESOURCE_RULE_PREFIX, registrableDomainFromUrl, logError } from '../common/util.js';
+import { getAllSettings } from '../common/settings.js';
 
-const initRuleOptions = {
-  matchOriginAsFallback: true,
-  persistAcrossSessions: false,
-  runAt: 'document_start',
-  allFrames: true
+const disabledSettingsForDomain = {};
+
+const cacheDisabledSettingsForDomain = (domain, settingId, value) => {
+  disabledSettingsForDomain[domain] ||= [];
+  if (value === false) {
+    disabledSettingsForDomain[domain].push(settingId);
+  } else {
+    disabledSettingsForDomain[domain] = disabledSettingsForDomain[domain].filter(s => s !== settingId);
+    if (disabledSettingsForDomain[domain].length === 0) {
+      delete disabledSettingsForDomain[domain];
+    }
+  }
 };
 
-const logRules = async () => {
-  const rules = await chrome.scripting.getRegisteredContentScripts({});
-  console.log('rules:', rules);
+const getDisabledSettingsForDomain = (domain) => {
+  return disabledSettingsForDomain[domain] || [];
+};
+
+const createActionForSettings = (disabledSettings) => {
+  const cookieKeyVal = `__pm__disabled_settings = ${disabledSettings.join(',')}`;
+  const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`;
+  return {
+    type: 'modifyHeaders',
+    responseHeaders: [
+      { operation: 'append', header: 'Set-Cookie', value: headerValue }
+    ]
+  };
+};
+
+const createRuleForDomain = (domain, disabledSettings) => {
+  const action = createActionForSettings(disabledSettings);
+  const id = getDnrIdForKey(`${TOP_LEVEL_RULE_PREFIX}_domain_${domain}`);
+  return {
+    id,
+    priority: 5,
+    action,
+    condition: {
+      urlFilter: `||${domain}/`,
+      resourceTypes: ['main_frame']
+    }
+  };
+};
+
+const createRuleForTab = (tabId, disabledSettings) => {
+  const action = createActionForSettings(disabledSettings);
+  const id = getDnrIdForKey(`${SUBRESOURCE_RULE_PREFIX}_tab_${tabId}`);
+  return {
+    id,
+    priority: 5,
+    action,
+    condition: {
+      tabIds: [tabId],
+      resourceTypes: ['sub_frame']
+    }
+  };
+};
+
+const applyDisabledSettingsForTabs = () => {
+  chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+    try {
+      const domain = registrableDomainFromUrl(details.url);
+      const disabledSettings = getDisabledSettingsForDomain(domain);
+      const rule = createRuleForTab(details.tabId, disabledSettings);
+      await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
+    } catch (error) {
+      logError(error, 'error applying disabled settings for tabs', details);
+    }
+  });
 };
 
 export const updateContentScripts = async (domain, settingId, value) => {
-  const rules = await chrome.scripting.getRegisteredContentScripts({});
-  const enabledRule = rules.find(rule => rule.id === `enable_${settingId}`);
-  const disabledRule = rules.find(rule => rule.id === `disable_${settingId}`);
-  if (!enabledRule || !disabledRule) {
-    return;
-  }
-  const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
-  const excludeMatches = enabledRule.excludeMatches || [];
-  const matches = disabledRule.matches || [];
-  if (value === false) {
-    // Protection is disabled, so we exclude from enabled and add to disabled.
-    enabledRule.excludeMatches = [...excludeMatches, ...matchStrings];
-    disabledRule.matches = [...matches, ...matchStrings];
-  } else {
-    // Protection is enabled, so we remove the exclusions from enabled
-    // and add the matches from disabled.
-    enabledRule.excludeMatches = excludeMatches.filter(match => !matchStrings.includes(match));
-    disabledRule.matches = matches.filter(match => !matchStrings.includes(match));
-  }
-  console.log('enabledRule:', enabledRule);
-  console.log('disabledRule:', disabledRule);
-  await chrome.scripting.updateContentScripts([enabledRule, disabledRule]);
-  await logRules();
+  cacheDisabledSettingsForDomain(domain, settingId, value);
+  const rule = createRuleForDomain(domain, getDisabledSettingsForDomain(domain));
+  await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
 };
 
 const initializeContentScripts = async () => {
-  const rulesById = {};
-  const rules = await chrome.scripting.getRegisteredContentScripts({});
-  for (const rule of rules) {
-    if (rule.id.startsWith('enable_') || rule.id.startsWith('disable_')) {
-      rule.excludeMatches ||= [];
-      rule.matches ||= [];
-      rulesById[rule.id] = rule;
-    }
+  const settings = await getAllSettings();
+  for (const [domain, settingId, value] of settings) {
+    await updateContentScripts(domain, settingId, value);
   }
-  const allSettings = await getAllSettings();
-  for (const [domain, settingId, value] of allSettings) {
-    const matchStrings = [`*://${domain}/*`, `*://*.${domain}/*`];
-    if (PRIVACY_SETTINGS_CONFIG[settingId] &&
-        PRIVACY_SETTINGS_CONFIG[settingId].script && value === false) {
-      rulesById[`enable_${settingId}`].excludeMatches.push(...matchStrings);
-      rulesById[`disable_${settingId}`].matches.push(...matchStrings);
-    }
-  }
-  await chrome.scripting.updateContentScripts(Object.values(rulesById));
-  await logRules();
 };
 
 export const setupContentScripts = async () => {
-  const allRules = [];
-  allRules.push({
-    ...initRuleOptions,
+  const mainForegroundRule = {
+    matchOriginAsFallback: true,
+    persistAcrossSessions: false,
+    runAt: 'document_start',
+    allFrames: true,
     id: 'foreground',
     js: ['content_scripts/foreground.js'],
     matches: ['<all_urls>'],
     world: 'MAIN'
-  });
-  allRules.push({
-    ...initRuleOptions,
-    id: 'isolated',
-    js: ['content_scripts/isolated.js'],
-    matches: ['<all_urls>'],
-    world: 'ISOLATED'
-  });
-  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
-    if (settingConfig.script) {
-      allRules.push({
-        ...initRuleOptions,
-        id: `enable_${settingId}`,
-        js: [`content_scripts/enable/${settingId}.js`],
-        matches: ['<all_urls>'],
-        world: 'MAIN'
-      }, {
-        ...initRuleOptions,
-        id: `disable_${settingId}`,
-        js: [`content_scripts/disable/${settingId}.js`],
-        matches: ['*://dummy/*'],
-        world: 'MAIN'
-      });
-    }
-  }
-  await chrome.scripting.registerContentScripts(allRules);
+  };
+  await chrome.scripting.registerContentScripts([mainForegroundRule]);
   await initializeContentScripts();
+  applyDisabledSettingsForTabs();
 };
