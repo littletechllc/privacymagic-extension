@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy } from '../common/util.js';
+import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy , SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX } from '../common/util.js';
 
 const setHeaders = (headers) =>
   Object.entries(headers).map(
@@ -9,9 +9,6 @@ const setHeaders = (headers) =>
 
 const removeHeaders = (list) =>
   list.map(header => ({ operation: 'remove', header }));
-
-const SUBRESOURCE_RULE_PREFIX = 'subresource';
-const TOP_LEVEL_RULE_PREFIX = 'top-level';
 
 const NETWORK_PROTECTION_DEFS = {
   gpc: [{

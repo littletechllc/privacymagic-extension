@@ -1,7 +1,5 @@
 extension/content_scripts/adblock_css/*
 extension/content_scripts/foreground.js
 extension/content_scripts/isolated.js
-extension/content_scripts/enable/*
-extension/content_scripts/disable/*
 extension/node_modules/*
 extension/rules/*

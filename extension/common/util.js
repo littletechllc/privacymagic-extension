@@ -28,3 +28,6 @@ export const getDnrIdForKey = (key) => {
 };
 
 export const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
+
+export const SUBRESOURCE_RULE_PREFIX = 'subresource';
+export const TOP_LEVEL_RULE_PREFIX = 'top-level';
