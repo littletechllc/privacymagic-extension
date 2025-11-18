@@ -133,7 +133,7 @@ const createPartialRules = (type, condition) => {
     for (const rule of rules) {
       const newRule = deepCopy(rule);
       newRule.stringId = `${type}_${settingId}_${i}`;
-      newRule.priority = 1;
+      newRule.priority = 5;
       newRule.condition = {
         ...newRule.condition,
         ...condition
@@ -145,16 +145,17 @@ const createPartialRules = (type, condition) => {
   return newRules;
 };
 
-const updateSessionRules = async (rules) => {
-  console.log('rules:', rules);
-  const rulesWithIntegerIds = rules.map(rule => {
+const rulesWithIntegerIds = (rulesWithStringIds) => {
+  return rulesWithStringIds.map(rule => {
     const { stringId, ...rest } = rule;
     return { ...rest, id: getDnrIdForKey(stringId) };
   });
-  console.trace('rulesWithIntegerIds:', rulesWithIntegerIds);
+};
+
+const updateSessionRules = async (rules) => {
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: rulesWithIntegerIds.map(rule => rule.id),
-    addRules: rulesWithIntegerIds
+    removeRuleIds: rules.map(rule => rule.id),
+    addRules: rules
   });
 };
 
@@ -184,16 +185,6 @@ const removeIfPresent = (array, item) => {
   }
 };
 
-// Create the top level network rule, without any excluded request domains.
-const createTopLevelNetworkRules = async () => {
-  const rules = createPartialRules(TOP_LEVEL_RULE_PREFIX, {
-    excludedRequestDomains: [],
-    resourceTypes: ['main_frame']
-  });
-  rules.forEach(rule => relevantStringIds.add(rule.stringId));
-  await updateSessionRules(rules);
-};
-
 // Add or remove a domain from the excluded request domains for the top level network rule.
 export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
@@ -213,7 +204,12 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
 
 const setupTopLevelNetworkRules = async () => {
   // Create the top level network rule, without any excluded request domains.
-  await createTopLevelNetworkRules();
+  const rules = createPartialRules(TOP_LEVEL_RULE_PREFIX, {
+    excludedRequestDomains: [],
+    resourceTypes: ['main_frame']
+  });
+  rules.forEach(rule => relevantStringIds.add(rule.stringId));
+  await updateSessionRules(rulesWithIntegerIds(rules));
   // Add necessary excluded request domains for the top level network rule.
   const allSettings = await getAllSettings();
   for (const [domain, settingId, value] of allSettings) {
@@ -221,16 +217,6 @@ const setupTopLevelNetworkRules = async () => {
       await updateTopLevelNetworkRule(domain, settingId, value);
     }
   }
-};
-
-// Create the subresource network rule, without any excluded tab ids.
-const createSubresourceNetworkRules = async () => {
-  const rules = createPartialRules(SUBRESOURCE_RULE_PREFIX, {
-    excludedTabIds: [],
-    excludedResourceTypes: ['main_frame']
-  });
-  rules.forEach(rule => relevantStringIds.add(rule.stringId));
-  await updateSessionRules(rules);
 };
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
@@ -249,7 +235,12 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
 
 const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.
-  await createSubresourceNetworkRules();
+  const rules = createPartialRules(SUBRESOURCE_RULE_PREFIX, {
+    excludedTabIds: [],
+    excludedResourceTypes: ['main_frame']
+  });
+  rules.forEach(rule => relevantStringIds.add(rule.stringId));
+  await updateSessionRules(rulesWithIntegerIds(rules));
   // Wait for a top-level request or navigation and, if the setting is enabled for the
   // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
