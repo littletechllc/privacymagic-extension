@@ -2,7 +2,7 @@
 
 import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
-import { setSetting, getSetting, PRIVACY_SETTINGS_CONFIG } from '../common/settings.js';
+import { setSetting } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { registrableDomainFromUrl, logError } from '../common/util.js';
@@ -30,31 +30,8 @@ const updateSetting = async (domain, settingId, value) => {
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
-const getDisabledSettings = async (domain) => {
-  const disabledSettings = [];
-  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
-    if (settingConfig.script) {
-      const value = await getSetting(domain, settingId);
-      if (value === false) {
-        disabledSettings.push(settingId);
-      }
-    }
-  }
-  return disabledSettings;
-};
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   try {
-    if (message.type === 'getDisabledSettings') {
-      const domain = registrableDomainFromUrl(sender.tab.url);
-      getDisabledSettings(domain).then((disabledSettings) => {
-        sendResponse({ success: true, disabledSettings });
-      }).catch((error) => {
-        logError(error, 'error getting disabled settings', message);
-        sendResponse({ success: false, error: error.message });
-      });
-      return true; // Indicates we will send a response asynchronously
-    }
     if (message.type === 'updateSetting') {
       updateSetting(message.domain, message.settingId, message.value).then(() => {
         sendResponse({ success: true });

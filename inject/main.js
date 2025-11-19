@@ -48,7 +48,8 @@ const runPatchesInPageExcept = (disabledPatches) => {
 };
 
 const mainFunction = () => {
-  runPatchesInPageExcept(getDisabledSettings());
+  const relevantSettings = Object.keys(privacyMagicPatches);
+  runPatchesInPageExcept(getDisabledSettings(relevantSettings));
 };
 mainFunction();
 console.log('foreground.js loaded', Date.now());
