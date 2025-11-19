@@ -2,13 +2,9 @@
 
 import { redefinePropertyValues } from '../helpers.js';
 
-const hardware = () => {
+const device = () => {
   const navigatorPrototype = self.Navigator || self.WorkerNavigator;
   const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
-    cpuClass: undefined,
-    // Cover Your Tracks says 1 in 1.93 browsers have this value:
-    deviceMemory: undefined,
-    hardwareConcurrency: 4,
     // Cover Your Tracks: 1 in 1.74:
     maxTouchPoints: 0
   });
@@ -36,4 +32,4 @@ const hardware = () => {
   };
 };
 
-export default hardware;
+export default device;

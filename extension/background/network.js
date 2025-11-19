@@ -23,10 +23,6 @@ const NETWORK_PROTECTION_DEFS = {
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
-        'Sec-CH-UA-Arch': 'arm',
-        'Sec-CH-UA-Bitness': '64',
-        'Sec-CH-UA-Form-Factors-List': 'Desktop',
-        'Sec-CH-UA-Form-Factors': 'Desktop',
         'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="141.0.0.0", Not?A_Brand;v="8.0.0.0", Chromium;v="141.0.0.0"',
         'Sec-CH-UA-Full-Version': '141.0.0.0'
       })
@@ -71,9 +67,10 @@ const NETWORK_PROTECTION_DEFS = {
   device: [{
     action: {
       type: 'modifyHeaders',
-      requestHeaders: removeHeaders([
-        'Sec-CH-UA-Form-Factors'
-      ])
+      requestHeaders: setHeaders({
+        'Sec-CH-UA-Form-Factors-List': 'Desktop',
+        'Sec-CH-UA-Form-Factors': 'Desktop'
+      })
     }
   }],
   network: [{
@@ -86,6 +83,15 @@ const NETWORK_PROTECTION_DEFS = {
         'Save-Data',
         'Sec-CH-ECT'
       ])
+    }
+  }],
+  cpu: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: setHeaders({
+        'Sec-CH-UA-Arch': 'arm',
+        'Sec-CH-UA-Bitness': '64'
+      })
     }
   }],
   screen: [{

@@ -75,10 +75,6 @@
     "message": "Enable Do Not Track",
     "description": "Setting to enable Do Not Track header"
   },
-  "hardware": {
-    "message": "Main Chip Specs",
-    "description": "Setting to block hardware fingerprinting"
-  },
   "screen": {
     "message": "Screen Details",
     "description": "Setting to block screen fingerprinting"
@@ -188,7 +184,7 @@
     "description": "Setting to block language fingerprinting"
   },
   "cpu": {
-    "message": "CPU Specs",
+    "message": "Main Chip Specs",
     "description": "Setting to block main chip fingerprinting"
   },
   "math": {
