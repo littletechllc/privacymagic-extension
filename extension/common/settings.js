@@ -2,122 +2,88 @@ import { storage } from './storage.js';
 
 export const PRIVACY_SETTINGS_CONFIG = {
   ads: {
-    dnr: true,
     category: 'blocking'
   },
   battery: {
-    script: true,
     category: 'fingerprinting'
   },
   screen: {
-    script: true,
-    dnr: true,
     category: 'fingerprinting'
   },
   useragent: {
-    script: true,
-    dnr: true,
     category: 'fingerprinting'
   },
   windowName: {
-    script: true,
     category: 'navigation'
   },
   keyboard: {
-    script: true,
     category: 'fingerprinting'
   },
   timer: {
-    script: true,
     category: 'fingerprinting'
   },
   gpu: {
-    script: true,
     category: 'fingerprinting'
   },
   display: {
-    dnr: true,
     category: 'fingerprinting'
   },
   memory: {
-    script: true,
-    dnr: true,
     category: 'fingerprinting'
   },
   network: {
-    dnr: true,
     category: 'fingerprinting'
   },
   device: {
-    dnr: true,
-    script: true,
     category: 'fingerprinting'
   },
   cpu: {
-    dnr: true,
-    script: true,
     category: 'fingerprinting'
   },
   /*
   audio: {
-    script: true,
     category: 'fingerprinting'
   },
   browser: {
-    script: true,
     category: 'fingerprinting'
   },
   disk: {
-    script: true,
     category: 'fingerprinting'
   },
   fonts: {
-    script: true,
     category: 'fingerprinting'
   },
   language: {
-    script: true,
     category: 'fingerprinting'
   },
   math: {
-    script: true,
     category: 'fingerprinting'
   },
   timezone: {
-    script: true,
     category: 'fingerprinting'
   },
   touch: {
-    script: true,
     category: 'fingerprinting'
   }, */
   queryParameters: {
-    dnr: true,
     category: 'navigation'
   },
   referrerPolicy: {
-    dnr: true,
     category: 'navigation'
   },
   gpc: {
-    script: true,
-    dnr: true,
     category: 'navigation'
   },
   serviceWorker: {
-    script: true,
     category: 'leakyFeatures'
   },
   sharedStorage: {
-    script: true,
     category: 'leakyFeatures'
   },
   worker: {
-    script: true,
     category: 'leakyFeatures'
   },
   iframe: {
-    script: true,
     category: 'leakyFeatures'
   }
 };

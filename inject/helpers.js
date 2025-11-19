@@ -77,7 +77,7 @@ export const makeBundleForInjection = (disabledSettings) => {
   return bundleForInjection;
 };
 
-export const getDisabledSettings = () => {
+export const getDisabledSettings = (relevantSettings) => {
   if (__disabledSettings !== undefined && __disabledSettings.length > 0) {
     return __disabledSettings;
   }
@@ -92,6 +92,9 @@ export const getDisabledSettings = () => {
     document.cookie = '__pm__disabled_settings=; Secure; SameSite=None; Path=/; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT';
     if (result.length === 1 && result[0] === '') {
       result = [];
+    }
+    if (relevantSettings) {
+      result = result.filter(setting => relevantSettings.includes(setting));
     }
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error);
