@@ -7,7 +7,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
   fingerprinting: [
     // 'audio',
     'battery',
-    // 'browser',
     'cpu',
     'device',
     // 'disk',

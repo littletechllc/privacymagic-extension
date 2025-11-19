@@ -151,10 +151,6 @@
     "message": "Audio Processing",
     "description": "Setting to block audio fingerprinting"
   },
-  "browser": {
-    "message": "Browser Version",
-    "description": "Setting to block browser version fingerprinting"
-  },
   "display": {
     "message": "Display Settings",
     "description": "Setting to block display preferences fingerprinting"
