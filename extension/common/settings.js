@@ -32,6 +32,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   screen: {
     script: true,
+    dnr: true,
     category: 'fingerprinting'
   },
   useragent: {
@@ -54,16 +55,17 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
+  display: {
+    script: true,
+    dnr: true,
+    category: 'fingerprinting'
+  },
   /*
   audio: {
     script: true,
     category: 'fingerprinting'
   },
   browser: {
-    script: true,
-    category: 'fingerprinting'
-  },
-  display: {
     script: true,
     category: 'fingerprinting'
   },

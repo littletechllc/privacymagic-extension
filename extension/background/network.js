@@ -74,19 +74,33 @@ const NETWORK_PROTECTION_DEFS = {
       requestHeaders: removeHeaders([
         'Device-Memory',
         'Downlink',
-        'DPR',
         'ECT',
         'RTT',
         'Sec-CH-Device-Memory',
-        'Sec-CH-DPR',
         'Sec-CH-ECT',
-        'Sec-CH-Prefers-Color-Scheme',
-        'Sec-CH-Prefers-Reduced-Motion',
-        'Sec-CH-Prefers-Reduced-Transparency',
-        'Sec-CH-UA-Form-Factors',
+        'Sec-CH-UA-Form-Factors'
+      ])
+    }
+  }],
+  screen: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'DPR',
         'Sec-CH-Viewport-Height',
         'Sec-CH-Viewport-Width',
+        'Sec-CH-DPR',
         'Viewport-Width'
+      ])
+    }
+  }],
+  display: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Sec-CH-Prefers-Color-Scheme',
+        'Sec-CH-Prefers-Reduced-Motion',
+        'Sec-CH-Prefers-Reduced-Transparency'
       ])
     }
   }],

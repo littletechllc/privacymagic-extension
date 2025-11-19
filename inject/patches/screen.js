@@ -45,9 +45,18 @@ const screen = () => {
     screenX: 0,
     screenY: 0
   });
+  // Match (color-gamut: srgb)
+  const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi;
+  const matchMediaClean = (mediaQueryString) =>
+    mediaQueryString.replace(regex, (_, value) =>
+      value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
+  const restoreMatchMedia = redefinePropertyValues(self, {
+    matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
+  });
   return () => {
     restoreScreen();
     restoreWindow();
+    restoreMatchMedia();
   };
 };
 
