@@ -67,7 +67,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-
   disk: {
     script: true,
     category: 'fingerprinting'
@@ -77,10 +76,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     category: 'fingerprinting'
   },
   language: {
-    script: true,
-    category: 'fingerprinting'
-  },
-  cpu: {
     script: true,
     category: 'fingerprinting'
   },
