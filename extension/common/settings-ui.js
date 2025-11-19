@@ -6,6 +6,14 @@ import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
 import { logError } from '../common/util.js';
 
+const sortBy = (array, keyFn) => {
+  return array.sort((a, b) => {
+    const aKey = keyFn(a);
+    const bKey = keyFn(b);
+    return aKey.localeCompare(bKey);
+  });
+};
+
 const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
   const storageValue = await store.get(keyPath);
   const input = toggle.querySelector('input');
@@ -22,7 +30,7 @@ const createToggleCategory = async (store, domain, settingIds, categoryId) => {
   const categoryTitle = document.createElement('h2');
   categoryTitle.textContent = getLocalizedText(categoryId);
   category.appendChild(categoryTitle);
-  const sortedSettingIds = settingIds.sort();
+  const sortedSettingIds = sortBy(settingIds, (settingId) => getLocalizedText(settingId));
   for (const settingId of sortedSettingIds) {
     const toggle = await createToggle(settingId);
     const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId];
