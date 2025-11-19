@@ -26,8 +26,6 @@
   },
   "dependencies": {
     "@rollup/plugin-terser": "^0.4.4",
-    "acorn": "^8.15.0",
-    "esquery": "^1.6.0",
     "rollup": "^4.53.2"
   }
 }
