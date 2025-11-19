@@ -1,90 +1,42 @@
 import { storage } from './storage.js';
 
 export const PRIVACY_SETTINGS_CONFIG = {
-  ads: {
-    category: 'blocking'
-  },
-  // audio: {
-  //   category: 'fingerprinting'
-  // },
-  battery: {
-    category: 'fingerprinting'
-  },
-  // browser: {
-  //   category: 'fingerprinting'
-  // },
-  cpu: {
-    category: 'fingerprinting'
-  },
-  device: {
-    category: 'fingerprinting'
-  },
-  // disk: {
-  //   category: 'fingerprinting'
-  // },
-  display: {
-    category: 'fingerprinting'
-  },
-  // fonts: {
-  //   category: 'fingerprinting'
-  // },
-  gpu: {
-    category: 'fingerprinting'
-  },
-  keyboard: {
-    category: 'fingerprinting'
-  },
-  // language: {
-  //   category: 'fingerprinting'
-  // },
-  // math: {
-  //   category: 'fingerprinting'
-  // },
-  memory: {
-    category: 'fingerprinting'
-  },
-  network: {
-    category: 'fingerprinting'
-  },
-  screen: {
-    category: 'fingerprinting'
-  },
-  // timezone: {
-  //   category: 'fingerprinting'
-  // },
-  timer: {
-    category: 'fingerprinting'
-  },
-  // touch: {
-  //   category: 'fingerprinting'
-  // },
-  useragent: {
-    category: 'fingerprinting'
-  },
-  gpc: {
-    category: 'navigation'
-  },
-  queryParameters: {
-    category: 'navigation'
-  },
-  referrerPolicy: {
-    category: 'navigation'
-  },
-  windowName: {
-    category: 'navigation'
-  },
-  iframe: {
-    category: 'leakyFeatures'
-  },
-  serviceWorker: {
-    category: 'leakyFeatures'
-  },
-  sharedStorage: {
-    category: 'leakyFeatures'
-  },
-  worker: {
-    category: 'leakyFeatures'
-  }
+  blocking: [
+    'ads'
+  ],
+  fingerprinting: [
+    // 'audio',
+    'battery',
+    // 'browser',
+    'cpu',
+    'device',
+    // 'disk',
+    'display',
+    // 'fonts',
+    'gpu',
+    'keyboard',
+    // 'language',
+    // 'math',
+    'memory',
+    'network',
+    'screen',
+    // 'timezone',
+    'timer',
+    // 'touch',
+    'useragent'
+  ],
+  navigation: [
+    'gpc',
+    'queryParameters',
+    'referrerPolicy',
+    'windowName'
+  ],
+  leakyFeatures: [
+    'iframe',
+    'serviceWorker',
+    'sharedStorage',
+    'worker'
+  ]
 };
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
@@ -140,7 +92,7 @@ export const getAllSettings = async () => {
   const storedSettings = await storage.local.getAll();
   const allSettings = [];
   for (const [[type, domain, settingId], value] of storedSettings) {
-    if (type === SETTINGS_KEY_PREFIX && settingId in PRIVACY_SETTINGS_CONFIG) {
+    if (type === SETTINGS_KEY_PREFIX) {
       allSettings.push([domain, settingId, value]);
     }
   }
