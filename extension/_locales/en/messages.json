@@ -80,7 +80,7 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Hardware Specs",
+    "message": "Main Chip Specs",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
@@ -180,7 +180,7 @@
     "description": "Setting to block disk space fingerprinting"
   },
   "gpu": {
-    "message": "Graphics Card Specs",
+    "message": "Graphics Chip Specs",
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {

@@ -3,15 +3,6 @@
 import { redefinePropertyValues } from '../helpers.js';
 
 const hardware = () => {
-  // Match (color-gamut: srgb)
-  const oldMatchMedia = self.matchMedia;
-  const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi;
-  const matchMediaClean = (mediaQueryString) =>
-    mediaQueryString.replace(regex, (_, value) =>
-      value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
-  const restoreMatchMedia = redefinePropertyValues(self, {
-    matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
-  });
   const navigatorPrototype = self.Navigator || self.WorkerNavigator;
   const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
     cpuClass: undefined,
@@ -38,7 +29,6 @@ const hardware = () => {
     });
   }
   return () => {
-    restoreMatchMedia();
     restoreNavigator();
     if (restoreDevicePosture) {
       restoreDevicePosture();
