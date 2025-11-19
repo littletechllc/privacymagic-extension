@@ -67,10 +67,6 @@
     "message": "Block Ads & Trackers",
     "description": "Setting to block advertisements"
   },
-  "clientHints": {
-    "message": "Client Hints",
-    "description": "Setting to block client hints"
-  },
   "queryParameters": {
     "message": "Remove Tracking Query Parameters",
     "description": "Setting to block tracking query parameters"
@@ -168,7 +164,7 @@
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {
-    "message": "Device Version",
+    "message": "Device Information",
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
