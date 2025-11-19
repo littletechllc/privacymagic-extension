@@ -1,11 +1,13 @@
 import { getDisabledSettings } from './helpers.js';
 
 import battery from './patches/battery.js';
+import cpu from './patches/cpu.js';
+import device from './patches/device.js';
 import gpc from './patches/gpc.js';
 import gpu from './patches/gpu.js';
-import hardware from './patches/hardware.js';
 import iframe from './patches/iframe.js';
 import keyboard from './patches/keyboard.js';
+import memory from './patches/memory.js';
 import screen from './patches/screen.js';
 import serviceWorker from './patches/serviceWorker.js';
 import sharedStorage from './patches/sharedStorage.js';
@@ -16,16 +18,18 @@ import worker from './patches/worker.js';
 
 const privacyMagicPatches = {
   battery,
+  cpu,
+  device,
   gpc,
   gpu,
-  hardware,
   iframe,
   keyboard,
+  memory,
   screen,
-  timer,
-  useragent,
   serviceWorker,
   sharedStorage,
+  timer,
+  useragent,
   windowName,
   worker
 };

@@ -9,10 +9,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-  hardware: {
-    script: true,
-    category: 'fingerprinting'
-  },
   screen: {
     script: true,
     dnr: true,
@@ -20,6 +16,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   useragent: {
     script: true,
+    dnr: true,
     category: 'fingerprinting'
   },
   windowName: {
@@ -39,7 +36,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     category: 'fingerprinting'
   },
   display: {
-    script: true,
     dnr: true,
     category: 'fingerprinting'
   },
@@ -54,6 +50,12 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   device: {
     dnr: true,
+    script: true,
+    category: 'fingerprinting'
+  },
+  cpu: {
+    dnr: true,
+    script: true,
     category: 'fingerprinting'
   },
   /*
@@ -104,7 +106,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
   },
   gpc: {
     script: true,
-    headers: true,
+    dnr: true,
     category: 'navigation'
   },
   serviceWorker: {

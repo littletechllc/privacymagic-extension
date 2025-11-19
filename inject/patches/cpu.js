@@ -2,12 +2,12 @@
 
 import { redefinePropertyValues } from '../helpers.js';
 
-const memory = () => {
+const cpu = () => {
   const navigatorPrototype = self.Navigator || self.WorkerNavigator;
   return redefinePropertyValues(navigatorPrototype.prototype, {
-    // Cover Your Tracks: 1 in 1.93 browsers have this value:
-    deviceMemory: undefined
+    cpuClass: undefined,
+    hardwareConcurrency: 4
   });
 };
 
-export default memory;
+export default cpu;
