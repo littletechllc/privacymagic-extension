@@ -65,6 +65,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'fingerprinting'
   },
+  network: {
+    dnr: true,
+    category: 'fingerprinting'
+  },
   /*
   audio: {
     script: true,
