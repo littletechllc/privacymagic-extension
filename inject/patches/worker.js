@@ -38,7 +38,14 @@ const worker = () => {
     const originalRequestUrlSafe = (request) => reflectApplySafe(originalRequestUrlGetter, request, []);
     Object.defineProperty(Request.prototype, 'url', {
       get () {
-        return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this)));
+        return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this), absoluteUrl));
+      }
+    });
+    const originalResponseUrlGetter = Object.getOwnPropertyDescriptor(Response.prototype, 'url').get;
+    const originalResponseUrlSafe = (response) => reflectApplySafe(originalResponseUrlGetter, response, []);
+    Object.defineProperty(Response.prototype, 'url', {
+      get () {
+        return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl));
       }
     });
     // Modify the self.fetch function to be relative to the original URL.
@@ -49,13 +56,23 @@ const worker = () => {
         : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl));
       return originalFetch(resolvedFirstArg, ...args);
     };
-    // Modify the self.XMLHttpRequest object to be relative to the original URL.
-    self.XMLHttpRequest = new Proxy(self.XMLHttpRequest, {
-      construct (Target, [url, options]) {
-        const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl));
-        return new Target(resolvedUrl, options);
+    const originalImportScripts = self.importScripts;
+    self.importScripts = (...paths) => {
+      const resolvedPaths = [];
+      for (const path of paths) {
+        const resolvedPath = URLhrefSafe(new URLSafe(path, absoluteUrl));
+        resolvedPaths.push(resolvedPath);
       }
-    });
+      return originalImportScripts(...resolvedPaths);
+    };
+    for (const objectName of ['XMLHttpRequest', 'EventSource', 'WebSocket']) {
+      self[objectName] = new Proxy(self[objectName], {
+        construct (Target, [url, options]) {
+          const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl));
+          return new Target(resolvedUrl, options);
+        }
+      });
+    }
   };
 
   // Run hardening code in workers before they are executed.
