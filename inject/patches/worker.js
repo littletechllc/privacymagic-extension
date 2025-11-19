@@ -1,6 +1,6 @@
 /* global self, WorkerLocation */
 
-import { reflectApplySafe, makeBundleForInjection } from '../helpers.js';
+import { reflectApplySafe, makeBundleForInjection, getDisabledSettings } from '../helpers.js';
 
 const URLSafe = self.URL;
 const BlobSafe = self.Blob;
@@ -83,7 +83,7 @@ const worker = () => {
     });
   };
 
-  return prepareInjectionForWorker(makeBundleForInjection());
+  return prepareInjectionForWorker(makeBundleForInjection(getDisabledSettings()));
 };
 
 export default worker;

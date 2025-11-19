@@ -210,5 +210,9 @@
   "worker": {
     "message": "Harden Web Workers",
     "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Harden Sandboxed Iframes",
+    "description": "Setting to harden sandboxed iframes"
   }
 }
