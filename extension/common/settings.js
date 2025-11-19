@@ -4,75 +4,77 @@ export const PRIVACY_SETTINGS_CONFIG = {
   ads: {
     category: 'blocking'
   },
+  // audio: {
+  //   category: 'fingerprinting'
+  // },
   battery: {
     category: 'fingerprinting'
   },
-  screen: {
+  // browser: {
+  //   category: 'fingerprinting'
+  // },
+  cpu: {
     category: 'fingerprinting'
   },
-  useragent: {
+  device: {
     category: 'fingerprinting'
   },
-  windowName: {
-    category: 'navigation'
+  // disk: {
+  //   category: 'fingerprinting'
+  // },
+  display: {
+    category: 'fingerprinting'
+  },
+  // fonts: {
+  //   category: 'fingerprinting'
+  // },
+  gpu: {
+    category: 'fingerprinting'
   },
   keyboard: {
     category: 'fingerprinting'
   },
-  timer: {
-    category: 'fingerprinting'
-  },
-  gpu: {
-    category: 'fingerprinting'
-  },
-  display: {
-    category: 'fingerprinting'
-  },
+  // language: {
+  //   category: 'fingerprinting'
+  // },
+  // math: {
+  //   category: 'fingerprinting'
+  // },
   memory: {
     category: 'fingerprinting'
   },
   network: {
     category: 'fingerprinting'
   },
-  device: {
+  screen: {
     category: 'fingerprinting'
   },
-  cpu: {
+  // timezone: {
+  //   category: 'fingerprinting'
+  // },
+  timer: {
     category: 'fingerprinting'
   },
-  /*
-  audio: {
+  // touch: {
+  //   category: 'fingerprinting'
+  // },
+  useragent: {
     category: 'fingerprinting'
   },
-  browser: {
-    category: 'fingerprinting'
+  gpc: {
+    category: 'navigation'
   },
-  disk: {
-    category: 'fingerprinting'
-  },
-  fonts: {
-    category: 'fingerprinting'
-  },
-  language: {
-    category: 'fingerprinting'
-  },
-  math: {
-    category: 'fingerprinting'
-  },
-  timezone: {
-    category: 'fingerprinting'
-  },
-  touch: {
-    category: 'fingerprinting'
-  }, */
   queryParameters: {
     category: 'navigation'
   },
   referrerPolicy: {
     category: 'navigation'
   },
-  gpc: {
+  windowName: {
     category: 'navigation'
+  },
+  iframe: {
+    category: 'leakyFeatures'
   },
   serviceWorker: {
     category: 'leakyFeatures'
@@ -81,9 +83,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     category: 'leakyFeatures'
   },
   worker: {
-    category: 'leakyFeatures'
-  },
-  iframe: {
     category: 'leakyFeatures'
   }
 };
