@@ -1,10 +1,48 @@
 /* global chrome */
 
-import { PRIVACY_SETTINGS_CONFIG, SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
+import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';
 import { storage } from '../common/storage.js';
 import { logError } from '../common/util.js';
+
+const PRIVACY_SETTINGS_CONFIG = {
+  blocking: [
+    'ads'
+  ],
+  fingerprinting: [
+    // 'audio',
+    'battery',
+    'cpu',
+    'device',
+    // 'disk',
+    'display',
+    // 'fonts',
+    'gpu',
+    'keyboard',
+    // 'language',
+    // 'math',
+    'memory',
+    'network',
+    'screen',
+    // 'timezone',
+    'timer',
+    // 'touch',
+    'useragent'
+  ],
+  navigation: [
+    'gpc',
+    'queryParameters',
+    'referrerPolicy',
+    'windowName'
+  ],
+  leakyFeatures: [
+    'iframe',
+    'serviceWorker',
+    'sharedStorage',
+    'worker'
+  ]
+};
 
 const sortBy = (array, keyFn) => {
   return array.sort((a, b) => {
