@@ -72,11 +72,19 @@ const NETWORK_PROTECTION_DEFS = {
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
+        'Sec-CH-UA-Form-Factors'
+      ])
+    }
+  }],
+  network: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
         'Downlink',
         'ECT',
         'RTT',
-        'Sec-CH-ECT',
-        'Sec-CH-UA-Form-Factors'
+        'Save-Data',
+        'Sec-CH-ECT'
       ])
     }
   }],

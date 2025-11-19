@@ -214,5 +214,9 @@
   "iframe": {
     "message": "Harden Sandboxed Iframes",
     "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Network Profile",
+    "description": "Setting to block network information fingerprinting"
   }
 }
