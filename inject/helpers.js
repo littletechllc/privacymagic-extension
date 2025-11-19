@@ -1,4 +1,4 @@
-/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings */
+/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings, self */
 
 const reflectApply = (...args) => Reflect.apply(...args);
 
@@ -75,6 +75,19 @@ export const makeBundleForInjection = (disabledSettings) => {
     `;
   }
   return bundleForInjection;
+};
+
+let trustedTypesPolicy;
+
+export const getTrustedTypesPolicy = () => {
+  if (!trustedTypesPolicy) {
+    trustedTypesPolicy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
+      createHTML: (unsafeHTML) => unsafeHTML,
+      createScript: (unsafeScript) => unsafeScript,
+      createScriptURL: (unsafeScriptURL) => unsafeScriptURL
+    });
+  }
+  return trustedTypesPolicy;
 };
 
 export const getDisabledSettings = (relevantSettings) => {

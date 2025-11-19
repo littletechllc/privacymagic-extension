@@ -1,6 +1,6 @@
 /* global self, WorkerLocation */
 
-import { reflectApplySafe, makeBundleForInjection, getDisabledSettings } from '../helpers.js';
+import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
 const URLSafe = self.URL;
 const BlobSafe = self.Blob;
@@ -50,11 +50,7 @@ const worker = () => {
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode) => {
     const locationHref = self.location.href;
-    const policy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
-      createHTML: (unsafeHTML) => unsafeHTML,
-      createScript: (unsafeScript) => unsafeScript,
-      createScriptURL: (unsafeScriptURL) => unsafeScriptURL
-    });
+    const policy = getTrustedTypesPolicy();
     self.Worker = new Proxy(self.Worker, {
       construct (Target, [url, options]) {
         const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref));
