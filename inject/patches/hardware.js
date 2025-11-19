@@ -1,4 +1,4 @@
-/* global DevicePosture, Navigator */
+/* global DevicePosture, self */
 
 import { redefinePropertyValues } from '../helpers.js';
 

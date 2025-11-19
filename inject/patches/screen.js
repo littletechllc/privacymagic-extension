@@ -1,4 +1,4 @@
-/* global innerWidth, innerHeight, Screen */
+/* global innerWidth, innerHeight, Screen, self */
 
 import { redefinePropertyValues } from '../helpers.js';
 
@@ -8,8 +8,8 @@ const screen = () => {
   }
   const oldMatchMedia = self.matchMedia;
   const mediaDeviceToViewport = (mediaQueryString) => mediaQueryString
-      ?.replaceAll('device-width', 'width')
-      ?.replaceAll('device-height', 'height');
+    ?.replaceAll('device-width', 'width')
+    ?.replaceAll('device-height', 'height');
   const allowedScreenSizes = [
     [1366, 768],
     [1920, 1080],

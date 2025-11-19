@@ -1,4 +1,4 @@
-/* global self */
+/* global self, WorkerLocation */
 
 import { reflectApplySafe, makeBundleForInjection } from '../helpers.js';
 

@@ -1,3 +1,5 @@
+/* global self */
+
 import { redefinePropertyValues } from '../helpers.js';
 
 const serviceWorker = () => {
@@ -6,10 +8,10 @@ const serviceWorker = () => {
   }
 
   const DOMExceptionSafe = self.DOMException;
-  return redefinePropertyValues(ServiceWorkerContainer.prototype, {
-    register: ( /* ignore */ ) => { 
+  return redefinePropertyValues(self.ServiceWorkerContainer.prototype, {
+    register: (/* ignore */) => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError');
-    },
+    }
   });
 };
 

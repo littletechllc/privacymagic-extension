@@ -1,4 +1,4 @@
-/* global Navigator */
+/* global self */
 
 import { redefinePropertyValues } from '../helpers.js';
 
