@@ -114,6 +114,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
   worker: {
     script: true,
     category: 'leakyFeatures'
+  },
+  iframe: {
+    script: true,
+    category: 'leakyFeatures'
   }
 };
 

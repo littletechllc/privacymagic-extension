@@ -1,4 +1,4 @@
-/* global __PRIVACY_MAGIC_INJECT__ */
+/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings */
 
 const reflectApply = (...args) => Reflect.apply(...args);
 
@@ -75,4 +75,28 @@ export const makeBundleForInjection = (disabledSettings) => {
     `;
   }
   return bundleForInjection;
+};
+
+export const getDisabledSettings = () => {
+  if (__disabledSettings !== undefined && __disabledSettings.length > 0) {
+    return __disabledSettings;
+  }
+  let result = [];
+  try {
+    document.cookie.split(';').forEach(cookie => {
+      const [key, value] = cookie.trim().split('=');
+      if (key === '__pm__disabled_settings') {
+        result = value.split(',');
+      }
+    });
+    document.cookie = '__pm__disabled_settings=; Secure; SameSite=None; Path=/; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    if (result.length === 1 && result[0] === '') {
+      result = [];
+    }
+  } catch (error) {
+    console.error('error getting disabled settings from cookie:', error);
+  }
+  // eslint-disable-next-line no-global-assign
+  __disabledSettings = result;
+  return result;
 };
