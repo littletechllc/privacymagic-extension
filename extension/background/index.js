@@ -98,7 +98,8 @@ chrome.runtime.onStartup.addListener(async (details) => {
 });
 
 initializeExtension().then(() => {
-  console.log('main.js loaded');
+  console.log('background script loaded');
 }).catch((error) => {
   logError(error, 'error initializing extension');
 });
+
