@@ -1,5 +1,5 @@
 /* global self, HTMLIFrameElement, Element, DOMTokenList, WeakSet */
-import { reflectApplySafe, makeBundleForInjection, getDisabledSettings } from '../helpers.js';
+import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
 const iframe = () => {
   const prepareInjectionForIframes = (hardeningCode) => {
@@ -66,7 +66,8 @@ const iframe = () => {
         // that the sandboxed iframe does not have 'allow-scripts'.
         const evalFunction = contentWin.eval;
         if (!weakSetHasSafe(evalSet, evalFunction)) {
-          evalFunction(hardeningCode);
+          const policy = getTrustedTypesPolicy();
+          evalFunction(policy.createScript(hardeningCode));
           weakSetAddSafe(evalSet, evalFunction);
         }
       }
