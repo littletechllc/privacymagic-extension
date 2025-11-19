@@ -27,7 +27,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     'screen',
     // 'timezone',
     'timer',
-    // 'touch',
+    'touch',
     'useragent'
   ],
   navigation: [

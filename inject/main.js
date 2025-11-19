@@ -15,6 +15,7 @@ import timer from './patches/timer.js';
 import useragent from './patches/useragent.js';
 import windowName from './patches/windowName.js';
 import worker from './patches/worker.js';
+import touch from './patches/touch.js';
 
 const privacyMagicPatches = {
   battery,
@@ -29,6 +30,7 @@ const privacyMagicPatches = {
   serviceWorker,
   sharedStorage,
   timer,
+  touch,
   useragent,
   windowName,
   worker
