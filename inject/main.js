@@ -1,4 +1,4 @@
-/* global HTMLIFrameElement, Element, DOMTokenList, WeakSet, self, trustedTypes, __disabledSettings */
+/* global HTMLIFrameElement, Element, DOMTokenList, WeakSet, self, __disabledSettings */
 
 import { reflectApplySafe, makeBundleForInjection } from './helpers.js';
 import battery from './patches/battery.js';

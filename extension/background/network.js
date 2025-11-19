@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy , SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX } from '../common/util.js';
+import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy, SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX } from '../common/util.js';
 
 const setHeaders = (headers) =>
   Object.entries(headers).map(

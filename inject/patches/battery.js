@@ -1,4 +1,4 @@
-/* global BatteryManager */
+/* global BatteryManager, self */
 
 import { redefinePropertyValues } from '../helpers.js';
 
