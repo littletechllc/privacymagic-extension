@@ -9,7 +9,21 @@ const worker = () => {
   const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
   const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
 
+  // Spoof the self.location object to return the original URL, and modify various
+  // other objects to be relative to the original URL. This function is serialized
+  // and injected into the worker context.
   const spoofLocationInsideWorker = (absoluteUrl) => {
+    // We need to define these functions here because they are not available in the worker context.
+    const reflectApplySafe = (func, thisArg, args) => {
+      try {
+        return Reflect.apply(func, thisArg, args);
+      } catch (error) {
+        return undefined;
+      }
+    };
+    const URLSafe = self.URL;
+    const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
+    const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl);
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype);
