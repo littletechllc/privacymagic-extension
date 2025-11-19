@@ -72,11 +72,9 @@ const NETWORK_PROTECTION_DEFS = {
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
-        'Device-Memory',
         'Downlink',
         'ECT',
         'RTT',
-        'Sec-CH-Device-Memory',
         'Sec-CH-ECT',
         'Sec-CH-UA-Form-Factors'
       ])
@@ -101,6 +99,15 @@ const NETWORK_PROTECTION_DEFS = {
         'Sec-CH-Prefers-Color-Scheme',
         'Sec-CH-Prefers-Reduced-Motion',
         'Sec-CH-Prefers-Reduced-Transparency'
+      ])
+    }
+  }],
+  memory: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Device-Memory',
+        'Sec-CH-Device-Memory'
       ])
     }
   }],

@@ -172,7 +172,7 @@
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
-    "message": "Device Memory Usage",
+    "message": "Memory Usage",
     "description": "Setting to block device memory fingerprinting"
   },
   "disk": {

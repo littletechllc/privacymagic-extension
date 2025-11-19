@@ -60,6 +60,11 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'fingerprinting'
   },
+  memory: {
+    script: true,
+    dnr: true,
+    category: 'fingerprinting'
+  },
   /*
   audio: {
     script: true,
@@ -70,10 +75,6 @@ export const PRIVACY_SETTINGS_CONFIG = {
     category: 'fingerprinting'
   },
   device: {
-    script: true,
-    category: 'fingerprinting'
-  },
-  memory: {
     script: true,
     category: 'fingerprinting'
   },
