@@ -5,30 +5,13 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'blocking'
   },
-  clientHints: {
-    dnr: true,
-    category: 'fingerprinting'
-  },
-  queryParameters: {
-    dnr: true,
-    category: 'navigation'
-  },
   battery: {
     script: true,
     category: 'fingerprinting'
   },
-  gpc: {
-    script: true,
-    headers: true,
-    category: 'navigation'
-  },
   hardware: {
     script: true,
     category: 'fingerprinting'
-  },
-  referrerPolicy: {
-    dnr: true,
-    category: 'navigation'
   },
   screen: {
     script: true,
@@ -69,6 +52,10 @@ export const PRIVACY_SETTINGS_CONFIG = {
     dnr: true,
     category: 'fingerprinting'
   },
+  device: {
+    dnr: true,
+    category: 'fingerprinting'
+  },
   /*
   audio: {
     script: true,
@@ -78,10 +65,7 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   },
-  device: {
-    script: true,
-    category: 'fingerprinting'
-  },
+
   disk: {
     script: true,
     category: 'fingerprinting'
@@ -110,6 +94,19 @@ export const PRIVACY_SETTINGS_CONFIG = {
     script: true,
     category: 'fingerprinting'
   }, */
+  queryParameters: {
+    dnr: true,
+    category: 'navigation'
+  },
+  referrerPolicy: {
+    dnr: true,
+    category: 'navigation'
+  },
+  gpc: {
+    script: true,
+    headers: true,
+    category: 'navigation'
+  },
   serviceWorker: {
     script: true,
     category: 'leakyFeatures'

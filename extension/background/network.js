@@ -68,7 +68,7 @@ const NETWORK_PROTECTION_DEFS = {
       }
     }
   }],
-  clientHints: [{
+  device: [{
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
