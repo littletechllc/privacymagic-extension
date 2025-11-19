@@ -93,7 +93,7 @@ export const setupContentScripts = async () => {
     runAt: 'document_start',
     allFrames: true,
     id: 'foreground',
-    js: ['content_scripts/foreground.js'],
+    js: ['content_scripts/content.js'],
     matches: ['<all_urls>'],
     world: 'MAIN'
   };

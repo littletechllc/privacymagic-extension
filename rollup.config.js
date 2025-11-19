@@ -32,7 +32,7 @@ const createPolicy = (inputFile, outputFile, additionalOutputSettings) => ({
 });
 
 export default [
-  createPolicy('inject/main.js', 'extension/content_scripts/foreground.js', {
+  createPolicy('inject/main.js', 'extension/content_scripts/content.js', {
     intro: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {',
     outro: '};\n__PRIVACY_MAGIC_INJECT__();'
   })

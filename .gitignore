@@ -1,4 +1,4 @@
 extension/content_scripts/adblock_css/*
-extension/content_scripts/foreground.js
+extension/content_scripts/content.js
 extension/node_modules/*
 extension/rules/*
