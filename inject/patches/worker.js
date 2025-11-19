@@ -2,25 +2,14 @@
 
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
-const URLSafe = self.URL;
-const BlobSafe = self.Blob;
-const URLcreateObjectURLSafe = URL.createObjectURL;
-const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
-const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
-
 const worker = () => {
+  const URLSafe = self.URL;
+  const BlobSafe = self.Blob;
+  const URLcreateObjectURLSafe = URL.createObjectURL;
+  const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
+  const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
+
   const spoofLocationInsideWorker = (absoluteUrl) => {
-    const reflectApply = (...args) => Reflect.apply(...args);
-    const reflectApplySafe = (func, thisArg, args) => {
-      try {
-        return reflectApply(func, thisArg, args);
-      } catch (error) {
-        return undefined;
-      }
-    };
-    const URLSafe = self.URL;
-    const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
-    const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl);
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype, 'hash').get = () => absoluteUrlObject.hash;
@@ -29,11 +18,11 @@ const worker = () => {
     }
     Object.defineProperties(self.WorkerLocation.prototype, descriptors);
     // Modify the self.Request object to be relative to the original URL.
-    const originalUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url').get;
-    const originalUrlSafe = (request) => reflectApplySafe(originalUrlGetter, request, []);
+    const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url').get;
+    const originalRequestUrlSafe = (request) => reflectApplySafe(originalRequestUrlGetter, request, []);
     Object.defineProperty(Request.prototype, 'url', {
       get () {
-        return URLhrefSafe(new URLSafe(originalUrlSafe(this), absoluteUrl));
+        return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this)));
       }
     });
     // Modify the self.fetch function to be relative to the original URL.
@@ -44,6 +33,13 @@ const worker = () => {
         : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl));
       return originalFetch(resolvedFirstArg, ...args);
     };
+    // Modify the self.XMLHttpRequest object to be relative to the original URL.
+    self.XMLHttpRequest = new Proxy(self.XMLHttpRequest, {
+      construct (Target, [url, options]) {
+        const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl));
+        return new Target(resolvedUrl, options);
+      }
+    });
   };
 
   // Run hardening code in workers before they are executed.
