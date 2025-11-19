@@ -1,43 +1,5 @@
 import { storage } from './storage.js';
 
-export const PRIVACY_SETTINGS_CONFIG = {
-  blocking: [
-    'ads'
-  ],
-  fingerprinting: [
-    // 'audio',
-    'battery',
-    'cpu',
-    'device',
-    // 'disk',
-    'display',
-    // 'fonts',
-    'gpu',
-    'keyboard',
-    // 'language',
-    // 'math',
-    'memory',
-    'network',
-    'screen',
-    // 'timezone',
-    'timer',
-    // 'touch',
-    'useragent'
-  ],
-  navigation: [
-    'gpc',
-    'queryParameters',
-    'referrerPolicy',
-    'windowName'
-  ],
-  leakyFeatures: [
-    'iframe',
-    'serviceWorker',
-    'sharedStorage',
-    'worker'
-  ]
-};
-
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
 export const SETTINGS_KEY_PREFIX = '_SETTINGS_';
 
