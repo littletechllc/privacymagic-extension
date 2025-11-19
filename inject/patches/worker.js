@@ -12,9 +12,11 @@ const worker = () => {
   const spoofLocationInsideWorker = (absoluteUrl) => {
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl);
-    const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype, 'hash').get = () => absoluteUrlObject.hash;
+    const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype);
     for (const [key, descriptor] of Object.entries(descriptors)) {
-      descriptor.get = () => absoluteUrlObject[key];
+      if (descriptor.get) {
+        descriptor.get = () => absoluteUrlObject[key];
+      }
     }
     Object.defineProperties(self.WorkerLocation.prototype, descriptors);
     // Modify the self.Request object to be relative to the original URL.
