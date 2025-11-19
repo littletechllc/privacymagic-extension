@@ -35,6 +35,5 @@ export default [
   createPolicy('inject/main.js', 'extension/content_scripts/foreground.js', {
     intro: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {',
     outro: '};\n__PRIVACY_MAGIC_INJECT__();'
-  }),
-  createPolicy('inject/isolated.js', 'extension/content_scripts/isolated.js')
+  })
 ];
