@@ -182,16 +182,6 @@ export const getAllSettings = async () => {
   return allSettings;
 };
 
-export const getSettingIdsForProtectionType = (protectionType) => {
-  const settings = [];
-  for (const [settingId, settingConfig] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
-    if (settingConfig[protectionType]) {
-      settings.push(settingId);
-    }
-  }
-  return settings;
-};
-
 export const listenForSettingsChanges = (callback) => {
   storage.local.listenForAnyChanges(async (changes) => {
     const settingsChanges = changes.filter(([keypath, value]) => keypath[0] === SETTINGS_KEY_PREFIX)
