@@ -102,4 +102,3 @@ initializeExtension().then(() => {
 }).catch((error) => {
   logError(error, 'error initializing extension');
 });
-
