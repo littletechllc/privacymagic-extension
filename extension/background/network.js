@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy, SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX } from '../common/util.js';
+import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy, SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX, addIfMissing, removeIfPresent } from '../common/util.js';
 
 const setHeaders = (headers) =>
   Object.entries(headers).map(
@@ -200,21 +200,6 @@ const getSessionRulesForSetting = async (type, settingId) => {
   return await chrome.declarativeNetRequest.getSessionRules({
     ruleIds: ids
   });
-};
-
-// Add an item to an array if it is not present.
-const addIfMissing = (array, item) => {
-  if (!array.includes(item)) {
-    array.push(item);
-  }
-};
-
-// Remove an item from an array if it is present.
-const removeIfPresent = (array, item) => {
-  const index = array.indexOf(item);
-  if (index !== -1) {
-    array.splice(index, 1);
-  }
 };
 
 // Add or remove a domain from the excluded request domains for the top level network rule.

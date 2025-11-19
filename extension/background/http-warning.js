@@ -1,34 +1,31 @@
 /* global chrome */
 
+import { addIfMissing, removeIfPresent } from '../common/util.js';
+
 const HTTP_WARNING_MAIN_RULE_ID = 300;
-const HTTP_WARNING_EXCEPTION_RULE_ID = 301;
 
 export const updateHttpWarningNetworkRuleException = async (domain, value) => {
   console.log('updating http warning network rule exception for domain:', domain, 'value:', value);
   const rules = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: [HTTP_WARNING_EXCEPTION_RULE_ID]
+    ruleIds: [HTTP_WARNING_MAIN_RULE_ID]
   });
   console.log('rules:', rules);
   if (rules.length === 0) {
     return;
   }
   const rule = rules[0];
-  const requestDomains = rule.condition.requestDomains || [];
-  console.log('requestDomains:', requestDomains);
+  const excludedRequestDomains = rule.condition.excludedRequestDomains || [];
+  console.log('excludedRequestDomains:', excludedRequestDomains);
   if (value === false || value === 'exception') {
-    if (!requestDomains.includes(domain)) {
-      requestDomains.push(domain);
-    }
+    addIfMissing(excludedRequestDomains, domain);
   } else {
-    if (requestDomains.includes(domain)) {
-      requestDomains.splice(requestDomains.indexOf(domain), 1);
-    }
+    removeIfPresent(excludedRequestDomains, domain);
   }
-  rule.condition.requestDomains = requestDomains;
-  console.log('new rule:', rule);
+  rule.condition.excludedRequestDomains = excludedRequestDomains;
+  console.log('new http warning main rule:', rule);
   await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
   const rules2 = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: [HTTP_WARNING_EXCEPTION_RULE_ID]
+    ruleIds: [HTTP_WARNING_MAIN_RULE_ID]
   });
   console.log('rules2:', rules2);
 };
@@ -49,20 +46,9 @@ export const createHttpWarningNetworkRule = async () => {
       resourceTypes: ['main_frame']
     }
   };
-  const exceptionRule = {
-    id: HTTP_WARNING_EXCEPTION_RULE_ID,
-    priority: 3,
-    action: {
-      type: 'allow'
-    },
-    condition: {
-      requestDomains: ['dummy'],
-      resourceTypes: ['main_frame']
-    }
-  };
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [HTTP_WARNING_MAIN_RULE_ID, HTTP_WARNING_EXCEPTION_RULE_ID],
-    addRules: [mainRule, exceptionRule]
+    removeRuleIds: [HTTP_WARNING_MAIN_RULE_ID],
+    addRules: [mainRule]
   });
 
   if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
