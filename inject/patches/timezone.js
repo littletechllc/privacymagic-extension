@@ -131,7 +131,7 @@ const timezone = () => {
       // negative to match ISO 8061 sign convention:
       const offsetMinutes = -now.getTimezoneOffset();
       const hours = Math.trunc(offsetMinutes / 60);
-      const minutes = Math.abs(offsetMinutes % 60);
+      const minutes = offsetMinutes % 60;
       // If the time zone has a minute offset, return the coalesced time zone.
       if (minutes !== 0) {
         const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone;
