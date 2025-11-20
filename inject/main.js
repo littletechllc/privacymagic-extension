@@ -9,16 +9,17 @@ import gpu from './patches/gpu.js';
 import iframe from './patches/iframe.js';
 import keyboard from './patches/keyboard.js';
 import language from './patches/language.js';
+import math from './patches/math.js';
 import memory from './patches/memory.js';
 import screen from './patches/screen.js';
 import serviceWorker from './patches/serviceWorker.js';
 import sharedStorage from './patches/sharedStorage.js';
 import timer from './patches/timer.js';
+import timezone from './patches/timezone.js';
+import touch from './patches/touch.js';
 import useragent from './patches/useragent.js';
 import windowName from './patches/windowName.js';
 import worker from './patches/worker.js';
-import touch from './patches/touch.js';
-import timezone from './patches/timezone.js';
 
 const privacyMagicPatches = {
   battery,
@@ -30,6 +31,7 @@ const privacyMagicPatches = {
   iframe,
   keyboard,
   language,
+  math,
   memory,
   screen,
   serviceWorker,
