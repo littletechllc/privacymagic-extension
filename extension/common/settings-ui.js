@@ -25,7 +25,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     'memory',
     'network',
     'screen',
-    // 'timezone',
+    'timezone',
     'timer',
     'touch',
     'useragent'
