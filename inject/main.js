@@ -7,6 +7,7 @@ import gpc from './patches/gpc.js';
 import gpu from './patches/gpu.js';
 import iframe from './patches/iframe.js';
 import keyboard from './patches/keyboard.js';
+import language from './patches/language.js';
 import memory from './patches/memory.js';
 import screen from './patches/screen.js';
 import serviceWorker from './patches/serviceWorker.js';
@@ -25,6 +26,7 @@ const privacyMagicPatches = {
   gpu,
   iframe,
   keyboard,
+  language,
   memory,
   screen,
   serviceWorker,

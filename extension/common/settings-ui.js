@@ -20,7 +20,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     // 'fonts',
     'gpu',
     'keyboard',
-    // 'language',
+    'language',
     // 'math',
     'memory',
     'network',
