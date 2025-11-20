@@ -8,7 +8,6 @@ const timezone = () => {
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
   const fractionHourTimeZoneMappings = {
-
     'Asia/Calcutta': 'Asia/Kolkata',
     'Asia/Colombo': 'Asia/Kolkata',
     'Asia/Kathmandu': 'Asia/Kathmandu',
@@ -22,7 +21,8 @@ const timezone = () => {
     'Indian/Cocos': 'Asia/Yangon',
     'Iran': 'Asia/Tehran',
     'NZ-CHAT': 'Pacific/Chatham',
-    'Pacific/Chatham': 'Pacific/Chatham'
+    'Pacific/Chatham': 'Pacific/Chatham',
+    'Pacific/Marquesas': 'Pacific/Marquesas'
   };
 
   // Time zones that use DST can be coalesced to a
@@ -70,14 +70,14 @@ const timezone = () => {
     'US/Mountain': 'America/Denver',
 
     // -6 -> -5
-    'Pacific/Easter': 'Pacific/Easter',
     'Chile/EasterIsland': 'Pacific/Easter',
+    'Pacific/Easter': 'Pacific/Easter',
 
     // CST -> CDT
+    'America/Chicago': 'America/Chicago',
     'America/Indiana/Knox': 'America/Chicago',
     'America/Indiana/Tell_City': 'America/Chicago',
     'America/Knox_IN': 'America/Chicago',
-    'America/Chicago': 'America/Chicago',
     'America/Matamoros': 'America/Chicago',
     'America/Menominee': 'America/Chicago',
     'America/North_Dakota/Beulah': 'America/Chicago',
@@ -168,8 +168,8 @@ const timezone = () => {
     'Europe/Isle_of_Man': 'Europe/London',
     'Europe/Jersey': 'Europe/London',
     'Europe/London': 'Europe/London',
-    'GB': 'Europe/London',
     'GB-Eire': 'Europe/London',
+    'GB': 'Europe/London',
 
     // GMT -> IST (equivalent to GMT -> BST)
     'Eire': 'Europe/London',
@@ -219,10 +219,10 @@ const timezone = () => {
     'Poland': 'Europe/Berlin',
 
     // Nonconforming EET -> EEST
-    'Asia/Hebron': 'Asia/Gaza',
-    'Asia/Gaza': 'Asia/Gaza',
-    'Egypt': 'Africa/Cairo',
     'Africa/Cairo': 'Africa/Cairo',
+    'Asia/Gaza': 'Asia/Gaza',
+    'Asia/Hebron': 'Asia/Gaza',
+    'Egypt': 'Africa/Cairo',
 
     // EET -> EEST
     'Asia/Beirut': 'Europe/Athens',
@@ -269,8 +269,8 @@ const timezone = () => {
     'Australia/Victoria': 'Australia/Sydney',
 
     // +10:30 -> +11:30
-    'Australia/Lord_Howe': 'Australia/Lord_Howe',
     'Australia/LHI': 'Australia/Lord_Howe',
+    'Australia/Lord_Howe': 'Australia/Lord_Howe',
 
     // +11 -> +12
     'Pacific/Norfolk': 'Pacific/Norfolk',
@@ -278,13 +278,44 @@ const timezone = () => {
     // NZST -> NZDT
     'Antarctica/McMurdo': 'Pacific/Auckland',
     'Antarctica/South_Pole': 'Pacific/Auckland',
-    'Pacific/Auckland': 'Pacific/Auckland',
     'NZ': 'Pacific/Auckland',
+    'Pacific/Auckland': 'Pacific/Auckland',
 
     // +12:45 -> +13:45
     'NZ-CHAT': 'Pacific/Chatham',
     'Pacific/Chatham': 'Pacific/Chatham'
   };
+
+  const roundTimeZoneRepresentatives = {
+    '-12': 'Etc/GMT+12',
+    '-11': 'Pacific/Pago_Pago',
+    '-10': 'Pacific/Honolulu',
+    '-9': 'Pacific/Gambier',
+    '-8': 'Pacific/Pitcairn',
+    '-7': 'America/Phoenix',
+    '-6': 'America/Guatemala',
+    '-5': 'America/Panama',
+    '-4': 'America/Puerto_Rico',
+    '-3': 'America/Argentina/Buenos_Aires',
+    '-2': 'Atlantic/South_Georgia',
+    '-1': 'Africa/Cape_Verde',
+    '0': 'Africa/Abidjan',
+    '1': 'Africa/Lagos',
+    '2': 'Africa/Maputo',
+    '3': 'Africa/Nairobi',
+    '4': 'Asia/Dubai',
+    '5': 'Asia/Ashgabat',
+    '6': 'Asia/Dhaka',
+    '7': 'Asia/Bangkok',
+    '8': 'Asia/Shanghai',
+    '9': 'Asia/Tokyo',
+    '10': 'Pacific/Port_Moresby',
+    '11': 'Pacific/Guadalcanal',
+    '12': 'Pacific/Tarawa',
+    '13': 'Pacific/Kanton',
+    '14': 'Pacific/Kiritimati'
+  };
+
   const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
   const originalResolvedOptionsSafe = (intlDateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
   const originalMathTrunc = Math.trunc;
@@ -299,19 +330,20 @@ const timezone = () => {
       const offsetMinutes = -originalDateGetTimezoneOffsetSafe(now);
       const hours = originalMathTrunc(offsetMinutes / 60);
       const minutes = offsetMinutes % 60;
-      // If the time zone has a minute offset, return the coalesced time zone.
-      if (minutes !== 0) {
-        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone;
-        return { ...options, timeZone: fractionalHourRepresentativeTimeZone };
-      }
       // If the time zone uses DST, return the DST representative time zone.
       const dstRepresentativeTimeZone = dstTimeZoneMappings[options.timeZone];
       if (dstRepresentativeTimeZone) {
         return { ...options, timeZone: dstRepresentativeTimeZone };
       }
-      // If the time zone is UTC, return the UTC representative time zone.
-      if (hours === 0) {
-        return { ...options, timeZone: 'Etc/GMT' };
+      // If the time zone has a minute offset, return the coalesced time zone.
+      if (minutes !== 0) {
+        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone;
+        return { ...options, timeZone: fractionalHourRepresentativeTimeZone };
+      }
+      // If the time zone is a round number of hours, return a representative time zone.
+      const roundTimeZoneRepresentative = roundTimeZoneRepresentatives[hours.toString()];
+      if (roundTimeZoneRepresentative) {
+        return { ...options, timeZone: roundTimeZoneRepresentative };
       }
       // Otherwise, return the Etc/GMT+n or Etc/GMT-n representative time zone.
       // Negative to match the Etc/ sign convention.
