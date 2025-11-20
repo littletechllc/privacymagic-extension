@@ -15,7 +15,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     'battery',
     'cpu',
     'device',
-    // 'disk',
+    'disk',
     'display',
     // 'fonts',
     'gpu',
