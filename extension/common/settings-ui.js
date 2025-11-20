@@ -21,7 +21,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     'gpu',
     'keyboard',
     'language',
-    // 'math',
+    'math',
     'memory',
     'network',
     'screen',
