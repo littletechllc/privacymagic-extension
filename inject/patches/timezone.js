@@ -8,7 +8,7 @@ const timezone = () => {
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
   const fractionHourTimeZoneMappings = {
-    'America/St_Johns': 'America/St_Johns',
+
     'Asia/Calcutta': 'Asia/Kolkata',
     'Asia/Colombo': 'Asia/Kolkata',
     'Asia/Kathmandu': 'Asia/Kathmandu',
@@ -17,15 +17,8 @@ const timezone = () => {
     'Asia/Rangoon': 'Asia/Yangon',
     'Asia/Tehran': 'Asia/Tehran',
     'Asia/Yangon': 'Asia/Yangon',
-    'Australia/Adelaide': 'Australia/Adelaide',
-    'Australia/Broken_Hill': 'Australia/Adelaide',
     'Australia/Darwin': 'Australia/Darwin',
-    'Australia/LHI': 'Australia/Lord_Howe',
-    'Australia/Lord_Howe': 'Australia/Lord_Howe',
     'Australia/North': 'Australia/Darwin',
-    'Australia/South': 'Australia/Adelaide',
-    'Australia/Yancowinna': 'Australia/Adelaide',
-    'Canada/Newfoundland': 'America/St_Johns',
     'Indian/Cocos': 'Asia/Yangon',
     'Iran': 'Asia/Tehran',
     'NZ-CHAT': 'Pacific/Chatham',
@@ -76,6 +69,10 @@ const timezone = () => {
     'Navajo': 'America/Denver',
     'US/Mountain': 'America/Denver',
 
+    // -6 -> -5
+    'Pacific/Easter': 'Pacific/Easter',
+    'Chile/EasterIsland': 'Pacific/Easter',
+
     // CST -> CDT
     'America/Indiana/Knox': 'America/Chicago',
     'America/Indiana/Tell_City': 'America/Chicago',
@@ -96,10 +93,6 @@ const timezone = () => {
     'US/Central': 'America/Chicago',
     'US/Indiana-Starke': 'America/Chicago',
 
-    // -6 -> -5
-    'Pacific/Easter': 'Pacific/Easter',
-    'Chile/EasterIsland': 'Pacific/Easter',
-
     // EST -> EDT
     'America/Detroit': 'America/New_York',
     'America/Fort_Wayne': 'America/New_York',
@@ -119,7 +112,6 @@ const timezone = () => {
     'America/New_York': 'America/New_York',
     'America/Nipigon': 'America/New_York',
     'America/Pangnirtung': 'America/New_York',
-    'America/Paramaribo': 'America/New_York',
     'America/Port-au-Prince': 'America/New_York',
     'America/Thunder_Bay': 'America/New_York',
     'America/Toronto': 'America/New_York',
@@ -130,6 +122,10 @@ const timezone = () => {
     'US/Michigan': 'America/New_York',
     'US/Northwest-Indiana': 'America/New_York',
 
+    // -04 -> -03
+    'America/Santiago': 'America/Santiago',
+    'Chile/Continental': 'America/Santiago',
+
     // AST -> ADT
     'America/Glace_Bay': 'America/Halifax',
     'America/Goose_Bay': 'America/Halifax',
@@ -139,9 +135,9 @@ const timezone = () => {
     'Atlantic/Bermuda': 'America/Halifax',
     'Canada/Atlantic': 'America/Halifax',
 
-    // -04 -> -03
-    'America/Santiago': 'America/Santiago',
-    'Chile/Continental': 'America/Santiago',
+    // NST -> NDT
+    'America/St_Johns': 'America/St_Johns',
+    'Canada/Newfoundland': 'America/St_Johns',
 
     // -03 -> -02
     'America/Miquelon': 'America/Miquelon',
@@ -150,6 +146,21 @@ const timezone = () => {
     'America/Godthab': 'America/Nuuk',
     'America/Nuuk': 'America/Nuuk',
     'America/Scoresbysund': 'America/Nuuk',
+
+    // -01 -> +00
+    'Atlantic/Azores': 'Atlantic/Azores',
+
+    // +00 -> +02
+    'Antarctica/Troll': 'Antarctica/Troll',
+
+    // WET -> WEST (equivalent to GMT -> BST)
+    'Atlantic/Canary': 'Europe/London',
+    'Atlantic/Faeroe': 'Europe/London',
+    'Atlantic/Faroe': 'Europe/London',
+    'Atlantic/Madeira': 'Europe/London',
+    'Europe/Lisbon': 'Europe/London',
+    'Portugal': 'Europe/London',
+    'WET': 'Europe/London',
 
     // GMT -> BST
     'Europe/Belfast': 'Europe/London',
@@ -160,17 +171,13 @@ const timezone = () => {
     'GB': 'Europe/London',
     'GB-Eire': 'Europe/London',
 
-    // WET -> WEST (equivalent to GMT -> BST)
-    'Atlantic/Faeroe': 'Europe/London',
-    'Atlantic/Faroe': 'Europe/London',
-    'Atlantic/Madeira': 'Europe/London',
-    'Europe/Lisbon': 'Europe/London',
-    'Portugal': 'Europe/London',
-    'WET': 'Europe/London',
-
     // GMT -> IST (equivalent to GMT -> BST)
     'Eire': 'Europe/London',
     'Europe/Dublin': 'Europe/London',
+
+    // +1 -> +00
+    'Africa/Casablanca': 'Africa/Casablanca',
+    'Africa/El_Aaiun': 'Africa/Casablanca',
 
     // CET -> CEST
     'Africa/Ceuta': 'Europe/Berlin',
@@ -211,6 +218,12 @@ const timezone = () => {
     'MET': 'Europe/Berlin',
     'Poland': 'Europe/Berlin',
 
+    // Nonconforming EET -> EEST
+    'Asia/Hebron': 'Asia/Gaza',
+    'Asia/Gaza': 'Asia/Gaza',
+    'Egypt': 'Africa/Cairo',
+    'Africa/Cairo': 'Africa/Cairo',
+
     // EET -> EEST
     'Asia/Beirut': 'Europe/Athens',
     'Asia/Famagusta': 'Europe/Athens',
@@ -232,16 +245,45 @@ const timezone = () => {
     'Europe/Vilnius': 'Europe/Athens',
     'Europe/Zaporozhye': 'Europe/Athens',
 
-    // Nonconforming EET -> EEST
-    'Asia/Hebron': 'Asia/Gaza',
-    'Asia/Gaza': 'Asia/Gaza',
-    'Egypt': 'Africa/Cairo',
-    'Africa/Cairo': 'Africa/Cairo',
-
     // Israel
     'Asia/Jerusalem': 'Asia/Jerusalem',
     'Asia/Tel_Aviv': 'Asia/Jerusalem',
-    'Israel': 'Asia/Jerusalem'
+    'Israel': 'Asia/Jerusalem',
+
+    // ACST -> ACDT
+    'Australia/Adelaide': 'Australia/Adelaide',
+    'Australia/Broken_Hill': 'Australia/Adelaide',
+    'Australia/South': 'Australia/Adelaide',
+    'Australia/Yancowinna': 'Australia/Adelaide',
+
+    // AEST -> AEDT
+    'Antarctica/Macquarie': 'Australia/Sydney',
+    'Australia/ACT': 'Australia/Sydney',
+    'Australia/Canberra': 'Australia/Sydney',
+    'Australia/Currie': 'Australia/Sydney',
+    'Australia/Hobart': 'Australia/Sydney',
+    'Australia/Melbourne': 'Australia/Sydney',
+    'Australia/NSW': 'Australia/Sydney',
+    'Australia/Sydney': 'Australia/Sydney',
+    'Australia/Tasmania': 'Australia/Sydney',
+    'Australia/Victoria': 'Australia/Sydney',
+
+    // +10:30 -> +11:30
+    'Australia/Lord_Howe': 'Australia/Lord_Howe',
+    'Australia/LHI': 'Australia/Lord_Howe',
+
+    // +11 -> +12
+    'Pacific/Norfolk': 'Pacific/Norfolk',
+
+    // NZST -> NZDT
+    'Antarctica/McMurdo': 'Pacific/Auckland',
+    'Antarctica/South_Pole': 'Pacific/Auckland',
+    'Pacific/Auckland': 'Pacific/Auckland',
+    'NZ': 'Pacific/Auckland',
+
+    // +12:45 -> +13:45
+    'NZ-CHAT': 'Pacific/Chatham',
+    'Pacific/Chatham': 'Pacific/Chatham'
   };
   const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
   const originalResolvedOptionsSafe = (intlDateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
