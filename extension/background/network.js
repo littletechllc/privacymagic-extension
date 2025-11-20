@@ -116,6 +116,14 @@ const NETWORK_PROTECTION_DEFS = {
       ])
     }
   }],
+  language: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: setHeaders({
+        'Accept-Language': navigator.language
+      })
+    }
+  }],
   memory: [{
     action: {
       type: 'modifyHeaders',
