@@ -114,7 +114,12 @@ const timezone = () => {
     'Asia/Hebron': 'Asia/Gaza',
     'Asia/Gaza': 'Asia/Gaza',
     'Egypt': 'Africa/Cairo',
-    'Africa/Cairo': 'Africa/Cairo'
+    'Africa/Cairo': 'Africa/Cairo',
+
+    // Israel
+    'Asia/Jerusalem': 'Asia/Jerusalem',
+    'Asia/Tel_Aviv': 'Asia/Jerusalem',
+    'Israel': 'Asia/Jerusalem'
   };
   const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
   const originalResolvedOptionsSafe = (intlDateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
