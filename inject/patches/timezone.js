@@ -5,19 +5,28 @@ import { reflectApplySafe, redefinePropertyValues } from '../helpers.js';
 
 const timezone = () => {
   const fractionHourTimeZoneMappings = {
+    'America/St_Johns': 'America/St_Johns',
     'Asia/Calcutta': 'Asia/Kolkata',
     'Asia/Colombo': 'Asia/Kolkata',
+    'Asia/Kathmandu': 'Asia/Kathmandu',
     'Asia/Katmandu': 'Asia/Kathmandu',
+    'Asia/Kolkata': 'Asia/Kolkata',
     'Asia/Rangoon': 'Asia/Yangon',
+    'Asia/Tehran': 'Asia/Tehran',
+    'Asia/Yangon': 'Asia/Yangon',
+    'Australia/Adelaide': 'Australia/Adelaide',
     'Australia/Broken_Hill': 'Australia/Adelaide',
+    'Australia/Darwin': 'Australia/Darwin',
     'Australia/LHI': 'Australia/Lord_Howe',
+    'Australia/Lord_Howe': 'Australia/Lord_Howe',
     'Australia/North': 'Australia/Darwin',
     'Australia/South': 'Australia/Adelaide',
     'Australia/Yancowinna': 'Australia/Adelaide',
     'Canada/Newfoundland': 'America/St_Johns',
     'Indian/Cocos': 'Asia/Yangon',
     'Iran': 'Asia/Tehran',
-    'NZ-CHAT': 'Pacific/Chatham'
+    'NZ-CHAT': 'Pacific/Chatham',
+    'Pacific/Chatham': 'Pacific/Chatham'
   };
   const dstTimeZoneMappings = {
     // GMT -> BST
@@ -25,6 +34,7 @@ const timezone = () => {
     'Europe/Guernsey': 'Europe/London',
     'Europe/Isle_of_Man': 'Europe/London',
     'Europe/Jersey': 'Europe/London',
+    'Europe/London': 'Europe/London',
     'GB': 'Europe/London',
     'GB-Eire': 'Europe/London',
 
@@ -48,6 +58,7 @@ const timezone = () => {
     'Europe/Amsterdam': 'Europe/Berlin',
     'Europe/Andorra': 'Europe/Berlin',
     'Europe/Belgrade': 'Europe/Berlin',
+    'Europe/Berlin': 'Europe/Berlin',
     'Europe/Bratislava': 'Europe/Berlin',
     'Europe/Brussels': 'Europe/Berlin',
     'Europe/Budapest': 'Europe/Berlin',
@@ -83,6 +94,7 @@ const timezone = () => {
     'Asia/Famagusta': 'Europe/Athens',
     'Asia/Nicosia': 'Europe/Athens',
     'EET': 'Europe/Athens',
+    'Europe/Athens': 'Europe/Athens',
     'Europe/Bucharest': 'Europe/Athens',
     'Europe/Chisinau': 'Europe/Athens',
     'Europe/Helsinki': 'Europe/Athens',
@@ -100,13 +112,16 @@ const timezone = () => {
 
     // Nonconforming EET -> EEST
     'Asia/Hebron': 'Asia/Gaza',
-    'Egypt': 'Africa/Cairo' // eslint-disable-line quote-props
+    'Asia/Gaza': 'Asia/Gaza',
+    'Egypt': 'Africa/Cairo',
+    'Africa/Cairo': 'Africa/Cairo'
   };
   const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
   const originalResolvedOptionsSafe = (intlDateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
   return redefinePropertyValues(Intl.DateTimeFormat.prototype, {
     resolvedOptions: function () {
       const options = originalResolvedOptionsSafe(this);
+      console.log('original time zone: ', options.timeZone);
       const now = new Date();
       // negative to match ISO 8061 sign convention:
       const offsetMinutes = -now.getTimezoneOffset();
