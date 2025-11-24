@@ -75,6 +75,66 @@ const worker = () => {
     }
   };
 
+  const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
+    const originalRevokeObjectURL = self.URL.revokeObjectURL;
+
+    const pendingRevocations = new Set();
+    const lockedUrls = new Map();
+
+    const isLockedObjectUrl = (url) => {
+      return (lockedUrls.get(url) ?? 0) > 0;
+    };
+
+    const requestToRevokeObjectUrl = (url) => {
+      if (!isLockedObjectUrl(url)) {
+        originalRevokeObjectURL(url);
+      } else {
+        pendingRevocations.add(url);
+      }
+    };
+
+    const unlockObjectUrl = (url) => {
+      if (!isLockedObjectUrl(url)) {
+        return;
+      }
+      const lockCount = lockedUrls.get(url);
+      if (lockCount <= 1) {
+        lockedUrls.delete(url);
+        if (pendingRevocations.has(url)) {
+          originalRevokeObjectURL(url);
+          pendingRevocations.delete(url);
+        }
+      } else {
+        lockedUrls.set(url, lockCount - 1);
+      }
+    };
+
+    const lockObjectUrl = (url) => {
+      const lockCount = lockedUrls.get(url) ?? 0;
+      lockedUrls.set(url, lockCount + 1);
+    };
+
+    return { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl };
+  })();
+
+  self.URL.revokeObjectURL = (url) => {
+    requestToRevokeObjectUrl(url);
+  };
+
+  const onCompletionInAnotherContext = (callback) => {
+    const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID();
+    const broadcastChannel = new BroadcastChannel(broadcastChannelName);
+    broadcastChannel.onmessage = (message) => {
+      if (message.data.type === 'completion') {
+        callback();
+      }
+    };
+    return `(() => {
+      const broadcastChannel = new BroadcastChannel(${JSON.stringify(broadcastChannelName)});
+      broadcastChannel.postMessage({ type: 'completion' });
+    })();`;
+  };
+
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode) => {
@@ -83,6 +143,13 @@ const worker = () => {
     self.Worker = new Proxy(self.Worker, {
       construct (Target, [url, options]) {
         const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref));
+        let completionCallbackCode = '';
+        if (absoluteUrl.startsWith('blob:')) {
+          completionCallbackCode = onCompletionInAnotherContext(() => {
+            unlockObjectUrl(absoluteUrl);
+          });
+          lockObjectUrl(absoluteUrl);
+        }
         options = options ?? {};
         const importCommand = ('type' in options && options.type === 'module')
           ? 'await import'
@@ -100,6 +167,7 @@ const worker = () => {
         } catch (error) {
           console.error("error in importing: ", error);
         }
+        ${completionCallbackCode}
         console.log("finished importing");`;
         const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }));
         const sanitizedBlobUrl = policy.createScriptURL(blobUrl);
