@@ -133,6 +133,18 @@ const NETWORK_PROTECTION_DEFS = {
       ])
     }
   }],
+  css: [{
+    action: {
+      type: 'modifyHeaders',
+      responseHeaders: [{
+        operation: 'append',
+        header: 'Content-Security-Policy',
+        // value: "style-src-elem 'none';"
+        value: 'style-src-elem https:;'
+        // value: "style-src-elem 'unsafe-inline';"
+      }]
+    }
+  }],
   referrerPolicy: [{
     action: {
       type: 'modifyHeaders',
