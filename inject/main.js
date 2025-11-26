@@ -2,6 +2,7 @@ import { getDisabledSettings } from './helpers.js';
 
 import battery from './patches/battery.js';
 import cpu from './patches/cpu.js';
+import css from './patches/css.js';
 import device from './patches/device.js';
 import disk from './patches/disk.js';
 import gpc from './patches/gpc.js';
@@ -24,6 +25,7 @@ import worker from './patches/worker.js';
 const privacyMagicPatches = {
   battery,
   cpu,
+  css,
   device,
   disk,
   gpc,

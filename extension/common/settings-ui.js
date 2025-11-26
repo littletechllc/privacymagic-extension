@@ -37,6 +37,7 @@ const PRIVACY_SETTINGS_CONFIG = {
     'windowName'
   ],
   leakyFeatures: [
+    'css',
     'iframe',
     'serviceWorker',
     'sharedStorage',
