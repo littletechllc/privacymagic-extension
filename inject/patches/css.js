@@ -93,8 +93,12 @@ const css = () => {
   const addNewStyleElementsToAdoptedStyleSheets = () => {
     const styleElements = getLatestStyleElements();
     styleElements.forEach(styleElement => {
-      const styleSheet = createStyleSheetForStyleElement(styleElement);
-      document.adoptedStyleSheets.push(styleSheet);
+      const styleSheet = getStyleSheetForStyleElement(styleElement);
+      if (!styleSheet.disabled) {
+        if (!document.adoptedStyleSheets.includes(styleSheet)) {
+          document.adoptedStyleSheets.push(styleSheet);
+        }
+      }
     });
     self.requestAnimationFrame(addNewStyleElementsToAdoptedStyleSheets);
   };
