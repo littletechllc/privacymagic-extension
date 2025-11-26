@@ -206,5 +206,9 @@
   "network": {
     "message": "Network Profile",
     "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Harden Stylesheets",
+    "description": "Setting to harden stylesheets"
   }
 }
