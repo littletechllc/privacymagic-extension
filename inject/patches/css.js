@@ -1,8 +1,16 @@
-/* global CSSStyleSheet, HTMLStyleElement, Node, self */
+/* global CSSStyleSheet, HTMLStyleElement, MutationObserver, Node, self */
 
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
 const css = () => {
+  // Remove an item from an array if it is present.
+  const removeIfPresent = (array, item) => {
+    const index = array.indexOf(item);
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+  };
+
   if (self.HTMLStyleElement === undefined) {
     return () => {};
   }
@@ -90,6 +98,10 @@ const css = () => {
   };
   */
 
+  // Watch for new style elements, create a style sheet for
+  // the CSS content, and add it to the document's adopted style sheets.
+  // We don't use a MutationObserver for the addition of new style
+  // elements because it would be too slow and cause a FOUC.
   const addNewStyleElementsToAdoptedStyleSheets = () => {
     const styleElements = getLatestStyleElements();
     styleElements.forEach(styleElement => {
@@ -103,6 +115,49 @@ const css = () => {
     self.requestAnimationFrame(addNewStyleElementsToAdoptedStyleSheets);
   };
   addNewStyleElementsToAdoptedStyleSheets();
+
+  // Use a MutationObserver to watch for changes to existing style elements,
+  // including removal, attribute changes, and textContent (CSS content) changes.
+  const mutationObserver = new MutationObserver((records) => {
+    for (const record of records) {
+      const el = record.target;
+      if (el instanceof HTMLStyleElement && record.type === 'attributes') {
+        if (record.attributeName === 'disabled') {
+          const styleSheet = getStyleSheetForStyleElement(el);
+          if (styleSheet.disabled) {
+            removeIfPresent(document.adoptedStyleSheets, styleSheet);
+          } else {
+            if (!document.adoptedStyleSheets.includes(styleSheet)) {
+              document.adoptedStyleSheets.push(styleSheet);
+            }
+          }
+        }
+      } else if (record.type === 'characterData') {
+        const el = record.target;
+        if (el.parentNode instanceof HTMLStyleElement) {
+          const style = el.parentNode;
+          const styleSheet = getStyleSheetForStyleElement(style);
+          styleSheet.replaceSync(style.textContent);
+        }
+      } else if (record.removedNodes.length > 0) {
+        for (const removedNode of Array.from(record.removedNodes)) {
+          if (removedNode instanceof HTMLStyleElement) {
+            if (!document.contains(removedNode)) {
+              const styleSheet = getStyleSheetForStyleElement(removedNode);
+              removeIfPresent(document.adoptedStyleSheets, styleSheet);
+            }
+          }
+        }
+      }
+    }
+  });
+  mutationObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['disabled'],
+    characterData: true
+  });
 };
 
 export default css;
