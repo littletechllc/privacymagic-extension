@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "noEmit": true,
+    "lib": ["ES2020", "DOM"],
+    "types": ["chrome"]
+  },
+  "include": ["extension/**/*", "inject/**/*"],
+  "exclude": ["node_modules", "extension/thirdparty/**"]
+}
