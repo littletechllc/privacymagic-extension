@@ -71,10 +71,10 @@ const css = () => {
   };
   updateAdoptedStyleSheetsToMatchStyleElements();
 
-  // Use a MutationObserver to watch for changes to the CSS content of
-  // existing style elements. Whenever a change is observed, update the
-  // corresponding adopted style sheet to match the new CSS content.
-  // content of the style element.
+  // Use a MutationObserver to watch for changes to the CSS content or
+  // media attribute of existing style elements. Whenever a change is
+  // observed, update the corresponding adopted style sheet to match
+  // the new CSS content or media attribute.
   const mutationObserver = new MutationObserver((records) => {
     for (const record of records) {
       const el = record.target;
