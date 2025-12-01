@@ -3,24 +3,28 @@
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
 const css = () => {
-  // Remove an item from an array if it is present.
-  const removeIfPresent = (array, item) => {
-    const index = array.indexOf(item);
-    if (index !== -1) {
-      array.splice(index, 1);
-    }
-  };
-
   if (self.HTMLStyleElement === undefined) {
     return () => {};
   }
-  const alreadySeenStyleElements = new Set();
 
-  const getLatestStyleElements = () => {
-    const styleElements = Array.from(document.getElementsByTagName('style'));
-    const latestStyleElements = styleElements.filter(styleElement => !alreadySeenStyleElements.has(styleElement));
-    latestStyleElements.forEach(styleElement => alreadySeenStyleElements.add(styleElement));
-    return latestStyleElements;
+  /*
+  const getAllRules = (styleSheet) => {
+    const rulesFound = [];
+    const getAllRulesInner = (rules) => {
+      rules.forEach(rule => {
+        rulesFound.push(rule);
+        if (rule.cssRules) {
+          getAllRulesInner(rule.cssRules);
+        }
+      });
+    };
+    getAllRulesInner(styleSheet.cssRules);
+    return rulesFound;
+  };
+  */
+
+  const getStyleElements = () => {
+    return Array.from(document.getElementsByTagName('style'));
   };
 
   const maybeWrapWithMediaQuery = (css, mediaAttribute) => {
@@ -37,6 +41,7 @@ const css = () => {
 
   const styleSheetsForStyleElements = new Map();
 
+  // Create a style sheet containing the CSS content of a style element.
   const createStyleSheetForStyleElement = (styleElement) => {
     const content = maybeWrapWithMediaQuery(styleElement.textContent, styleElement.media);
     const styleSheet = new CSSStyleSheet();
@@ -45,6 +50,7 @@ const css = () => {
     return styleSheet;
   };
 
+  // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForStyleElement = (styleElement) => {
     const sheet = mapGetSafe(styleSheetsForStyleElements, styleElement);
     if (sheet) {
@@ -52,6 +58,37 @@ const css = () => {
     }
     return createStyleSheetForStyleElement(styleElement);
   };
+
+  // Ensure there is a style sheet for each non-disabled style element
+  // in the document's adopted style sheets.
+  // We don't use a MutationObserver for the addition of new style
+  // elements because it would be too slow and cause a FOUC.
+  const updateAdoptedStyleSheetsToMatchStyleElements = () => {
+    const styleElements = getStyleElements();
+    const activeStyleElements = styleElements.filter(styleElement => !styleElement.disabled);
+    document.adoptedStyleSheets = activeStyleElements.map(getStyleSheetForStyleElement);
+    self.requestAnimationFrame(updateAdoptedStyleSheetsToMatchStyleElements);
+  };
+  updateAdoptedStyleSheetsToMatchStyleElements();
+
+  // Use a MutationObserver to watch for changes to the CSS content of
+  // existing style elements.
+  const mutationObserver = new MutationObserver((records) => {
+    for (const record of records) {
+      const el = record.target;
+      if (el instanceof HTMLStyleElement && record.type === 'characterData') {
+        const styleSheet = getStyleSheetForStyleElement(el);
+        styleSheet.replaceSync(el.textContent);
+      }
+    }
+  });
+  mutationObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['disabled'],
+    characterData: true
+  });
 
   redefinePropertiesSafe(HTMLStyleElement.prototype, {
     sheet: {
@@ -80,83 +117,6 @@ const css = () => {
         return nodeTextContentSetterSafe(this, value);
       }
     }
-  });
-
-  /*
-  const getAllRules = (styleSheet) => {
-    const rulesFound = [];
-    const getAllRulesInner = (rules) => {
-      rules.forEach(rule => {
-        rulesFound.push(rule);
-        if (rule.cssRules) {
-          getAllRulesInner(rule.cssRules);
-        }
-      });
-    };
-    getAllRulesInner(styleSheet.cssRules);
-    return rulesFound;
-  };
-  */
-
-  // Watch for new style elements, create a style sheet for
-  // the CSS content, and add it to the document's adopted style sheets.
-  // We don't use a MutationObserver for the addition of new style
-  // elements because it would be too slow and cause a FOUC.
-  const addNewStyleElementsToAdoptedStyleSheets = () => {
-    const styleElements = getLatestStyleElements();
-    styleElements.forEach(styleElement => {
-      const styleSheet = getStyleSheetForStyleElement(styleElement);
-      if (!styleSheet.disabled) {
-        if (!document.adoptedStyleSheets.includes(styleSheet)) {
-          document.adoptedStyleSheets.push(styleSheet);
-        }
-      }
-    });
-    self.requestAnimationFrame(addNewStyleElementsToAdoptedStyleSheets);
-  };
-  addNewStyleElementsToAdoptedStyleSheets();
-
-  // Use a MutationObserver to watch for changes to existing style elements,
-  // including removal, attribute changes, and textContent (CSS content) changes.
-  const mutationObserver = new MutationObserver((records) => {
-    for (const record of records) {
-      const el = record.target;
-      if (el instanceof HTMLStyleElement && record.type === 'attributes') {
-        if (record.attributeName === 'disabled') {
-          const styleSheet = getStyleSheetForStyleElement(el);
-          if (styleSheet.disabled) {
-            removeIfPresent(document.adoptedStyleSheets, styleSheet);
-          } else {
-            if (!document.adoptedStyleSheets.includes(styleSheet)) {
-              document.adoptedStyleSheets.push(styleSheet);
-            }
-          }
-        }
-      } else if (record.type === 'characterData') {
-        const el = record.target;
-        if (el.parentNode instanceof HTMLStyleElement) {
-          const style = el.parentNode;
-          const styleSheet = getStyleSheetForStyleElement(style);
-          styleSheet.replaceSync(style.textContent);
-        }
-      } else if (record.removedNodes.length > 0) {
-        for (const removedNode of Array.from(record.removedNodes)) {
-          if (removedNode instanceof HTMLStyleElement) {
-            if (!document.contains(removedNode)) {
-              const styleSheet = getStyleSheetForStyleElement(removedNode);
-              removeIfPresent(document.adoptedStyleSheets, styleSheet);
-            }
-          }
-        }
-      }
-    }
-  });
-  mutationObserver.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['disabled'],
-    characterData: true
   });
 };
 
