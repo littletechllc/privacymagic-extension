@@ -2,8 +2,9 @@
   "compilerOptions": {
     "checkJs": true,
     "noEmit": true,
-    "lib": ["ES2020", "DOM"],
-    "types": ["chrome"]
+    "lib": ["ES2020", "dom", "webworker"],
+    "types": ["chrome"],
+    "target": "ES2020"
   },
   "include": ["extension/**/*", "inject/**/*"],
   "exclude": ["node_modules", "extension/thirdparty/**"]
