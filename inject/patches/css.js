@@ -72,49 +72,35 @@ const css = () => {
   updateAdoptedStyleSheetsToMatchStyleElements();
 
   // Use a MutationObserver to watch for changes to the CSS content of
-  // existing style elements.
+  // existing style elements. Whenever a change is observed, update the
+  // corresponding adopted style sheet to match the new CSS content.
+  // content of the style element.
   const mutationObserver = new MutationObserver((records) => {
     for (const record of records) {
       const el = record.target;
-      if (el instanceof HTMLStyleElement && record.type === 'characterData') {
+      if (el instanceof HTMLStyleElement &&
+        (record.type === 'characterData' ||
+          (record.type === 'attributes' && record.attributeName === 'media'))) {
         const styleSheet = getStyleSheetForStyleElement(el);
-        styleSheet.replaceSync(el.textContent);
+        const content = maybeWrapWithMediaQuery(el.textContent, el.media);
+        styleSheet.replaceSync(content);
       }
     }
   });
   mutationObserver.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
+    childList: false,
+    subtree: false,
     attributes: true,
-    attributeFilter: ['disabled'],
+    attributeFilter: ['disabled', 'media'],
     characterData: true
   });
 
+  // HTMLStyleElement.sheet should return the adopted style
+  // sheet we have created for the style element.
   redefinePropertiesSafe(HTMLStyleElement.prototype, {
     sheet: {
       get: function () {
         return getStyleSheetForStyleElement(this);
-      }
-    }
-  });
-
-  const originalNodeTextContentGetter = Object.getOwnPropertyDescriptor(Node.prototype, 'textContent').get;
-  const nodeTextContentGetterSafe = (node) => reflectApplySafe(originalNodeTextContentGetter, node, []);
-
-  const originalNodeTextContentSetter = Object.getOwnPropertyDescriptor(Node.prototype, 'textContent').set;
-  const nodeTextContentSetterSafe = (node, value) => reflectApplySafe(originalNodeTextContentSetter, node, [value]);
-
-  redefinePropertiesSafe(Node.prototype, {
-    textContent: {
-      get: function () {
-        return nodeTextContentGetterSafe(this);
-      },
-      set: function (value) {
-        if (this instanceof HTMLStyleElement) {
-          const sheet = getStyleSheetForStyleElement(this);
-          sheet.replaceSync(value);
-        }
-        return nodeTextContentSetterSafe(this, value);
       }
     }
   });
