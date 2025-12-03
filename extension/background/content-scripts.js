@@ -21,6 +21,11 @@ const getDisabledSettingsForDomain = (domain) => {
   return disabledSettingsForDomain[domain] || [];
 };
 
+// Create a rule that adds a Set-Cookie header to the response
+// that contains the disabled settings for the domain. The content
+// script will then read the Set-Cookie header, apply the disabled
+// settings in the frame context, and delete the cookie so it is
+// not visible to page scripts or sent to the server.
 const createActionForSettings = (disabledSettings) => {
   const cookieKeyVal = `__pm__disabled_settings = ${disabledSettings.join(',')}`;
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`;
@@ -97,7 +102,17 @@ export const setupContentScripts = async () => {
     matches: ['<all_urls>'],
     world: 'MAIN'
   };
-  await chrome.scripting.registerContentScripts([mainForegroundRule]);
+  const isolatedContentScript = {
+    matchOriginAsFallback: true,
+    persistAcrossSessions: false,
+    runAt: 'document_start',
+    allFrames: true,
+    id: 'isolated',
+    js: ['content_scripts/isolated.js'],
+    matches: ['<all_urls>'],
+    world: 'ISOLATED'
+  };
+  await chrome.scripting.registerContentScripts([mainForegroundRule, isolatedContentScript]);
   await initializeContentScripts();
   applyDisabledSettingsForTabs();
 };

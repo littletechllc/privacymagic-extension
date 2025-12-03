@@ -5,6 +5,7 @@ import cpu from './patches/cpu.js';
 import css from './patches/css.js';
 import device from './patches/device.js';
 import disk from './patches/disk.js';
+import display from './patches/display.js';
 import gpc from './patches/gpc.js';
 import gpu from './patches/gpu.js';
 import iframe from './patches/iframe.js';
@@ -27,6 +28,7 @@ const privacyMagicPatches = {
   cpu,
   css,
   device,
+  display,
   disk,
   gpc,
   gpu,
