@@ -2,13 +2,13 @@
 
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
-document.documentElement.style.visibility = 'hidden';
-
 const css = () => {
+  console.log('css patch');
   if (self.HTMLStyleElement === undefined) {
+    // We are likely in a worker context.
     return () => {};
   }
-
+  document.documentElement.style.visibility = 'hidden';
   /*
   const getAllRules = (styleSheet) => {
     const rulesFound = [];
@@ -59,13 +59,18 @@ const css = () => {
       */
     pendingRemoteStyleSheets++;
     console.log('fetching remote style sheet content for href:', href);
-    const response = await fetch(href);
-    if (response.ok) {
-      return await response.text();
+    try {
+      const response = await fetch(href);
+      if (response.ok) {
+        return await response.text();
+      } else {
+        throw new Error(`failed to fetch remote style sheet content for href: ${href}, status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('error getting remote style sheet content for href:', href, 'error:', error);
+      pendingRemoteStyleSheets--;
+      return undefined;
     }
-    console.error('error getting remote style sheet content for href:', href, 'error:', response.error);
-    pendingRemoteStyleSheets--;
-    return undefined;
   };
 
   const styleSheetsForCssElements = new Map();
@@ -83,13 +88,10 @@ const css = () => {
     });
   };
 
-  const elementsSeen = new WeakSet();
-
   // Create a style sheet containing the CSS content of a link element.
   const createStyleSheetForLinkElement = (linkElement) => {
     const styleSheet = new CSSStyleSheet();
     applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media);
-    elementsSeen.add(linkElement);
     return styleSheet;
   };
 
@@ -98,7 +100,6 @@ const css = () => {
     const styleSheet = new CSSStyleSheet();
     applyContentToStyleSheet(styleSheet, styleElement.textContent, styleElement.media);
     styleSheet.disabled = styleElement.disabled;
-    elementsSeen.add(styleElement);
     return styleSheet;
   };
 
@@ -122,6 +123,8 @@ const css = () => {
       throw new Error(`unknown CSS element type: ${cssElement}`);
     }
     styleSheetsForCssElements.set(cssElement, styleSheet);
+    // TODO: Make sure the style element is inserted in the correct position in the adopted style sheets.
+    document.adoptedStyleSheets.push(styleSheet);
     return styleSheet;
   };
 
@@ -133,20 +136,20 @@ const css = () => {
   // elements because it would be too slow and cause a FOUC.
   const updateAdoptedStyleSheetsToMatchCssElements = () => {
     const cssElements = getCssElements();
-    if (cssElements.some(element => !elementsSeen.has(element))) {
+    if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
       const currentStyleSheets = cssElements.map(getStyleSheetForCssElement).filter(sheet => sheet !== undefined);
       const adopted = document.adoptedStyleSheets;
       if (currentStyleSheets.length !== adopted.length ||
           currentStyleSheets.some((sheet, index) => sheet !== adopted[index])) {
         document.adoptedStyleSheets = currentStyleSheets;
       }
-      if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
-           frameCount === 10) {
-        document.documentElement.style.visibility = 'visible';
-      }
+    }
+    if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
+      frameCount === 10) {
+      document.documentElement.style.visibility = 'visible';
     }
     frameCount++;
-    self.requestAnimationFrame(updateAdoptedStyleSheetsToMatchCssElements); // document.documentElement.style.visibility = 'visible';
+    self.requestAnimationFrame(updateAdoptedStyleSheetsToMatchCssElements);
   };
   updateAdoptedStyleSheetsToMatchCssElements();
 
@@ -160,6 +163,7 @@ const css = () => {
       if (record.type === 'characterData' &&
         el.parentElement instanceof HTMLStyleElement &&
         record.oldValue !== el.parentElement.textContent) {
+        console.log('characterData mutation for style element', el.parentElement, 'oldValue:', record.oldValue, 'textContent:', el.parentElement.textContent);
         const styleSheet = getStyleSheetForCssElement(el.parentElement);
         applyContentToStyleSheet(styleSheet, el.parentElement.textContent, el.parentElement.media);
       } else if (el instanceof HTMLStyleElement &&
