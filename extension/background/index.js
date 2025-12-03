@@ -30,35 +30,51 @@ const updateSetting = async (domain, settingId, value) => {
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+const handleMessage = async (message, sender, sendResponse) => {
   try {
     if (message.type === 'updateSetting') {
-      updateSetting(message.domain, message.settingId, message.value).then(() => {
-        sendResponse({ success: true });
-      }).catch((error) => {
-        logError(error, 'error updating setting', message);
-        sendResponse({ success: false, error: error.message });
-      });
-      return true; // Indicates we will send a response asynchronously
-    }
-    if (message.type === 'addHttpWarningNetworkRuleException') {
-      const domain = registrableDomainFromUrl(message.url);
-      console.log('adding exception to http warning network rule for domain:', domain, 'value:', message.value);
-      updateHttpWarningNetworkRuleException(domain, message.value).then(() => {
-        sendResponse({ success: true });
-      }).catch((error) => {
-        logError(error, 'error adding exception to http warning network rule', message);
-        sendResponse({ success: false, error: error.message });
-      });
+      await updateSetting(message.domain, message.settingId, message.value);
       sendResponse({ success: true });
+    } else if (message.type === 'addHttpWarningNetworkRuleException') {
+      await updateHttpWarningNetworkRuleException(message.url, message.value);
+      sendResponse({ success: true });
+    } else if (message.type === 'getRemoteStyleSheetContent') {
+      const response = await fetch(message.href);
+      const content = await response.text();
+      sendResponse({ success: true, content });
+    } else {
+      throw new Error('unknown message type: ' + message.type);
     }
-    return false;
   } catch (error) {
-    logError(error, 'error onMessage', message);
+    logError(error, 'error handling message', message);
     sendResponse({ success: false, error: error.message });
-    return true;
   }
+};
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Asynchronously handle the message. We ignore the returned Promise of handleMessage.
+  handleMessage(message, sender, sendResponse);
+  // Return true to indicate that handleMessage will send a response asynchronously.
+  return true;
 });
+
+const blockCssRequests = async () => {
+  return chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: [600],
+    addRules: [
+      {
+        id: 600,
+        priority: 10,
+        action: {
+          type: 'block'
+        },
+        condition: {
+          resourceTypes: ['stylesheet']
+        }
+      }
+    ]
+  });
+};
 
 let initializedCalled = false;
 
@@ -73,6 +89,7 @@ const initializeExtension = async () => {
   await setupExceptionsToStaticRules();
   await createHttpWarningNetworkRule();
   await blockAutocomplete();
+  await blockCssRequests();
   console.log('Extension initialized');
 };
 

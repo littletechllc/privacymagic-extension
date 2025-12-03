@@ -59,6 +59,23 @@ export const weakMapSetSafe = (weakMap, key, value) => reflectApplySafe(weakMapS
 
 export const reflectConstructSafe = Reflect.construct;
 
+export const spoofMediaQuery = (key, spoofValue, targetDefault = false) => {
+  const oldMatchMedia = self.matchMedia;
+  const targetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*${spoofValue}\\s*\\)`, 'ig');
+  const nonTargetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*[^)]+\\s*\\)`, 'ig');
+  const defaultRegex = new RegExp(`\\(\\s*${key}\\s*\\)`, 'ig');
+  const defaultReplacement = targetDefault ? 'all' : 'not all';
+  const spoof = (mediaQueryString) =>
+    mediaQueryString
+      .replace(targetRegex, 'all')
+      .replace(nonTargetRegex, 'not all')
+      .replace(defaultRegex, defaultReplacement);
+  self.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString));
+  return () => {
+    self.matchMedia = oldMatchMedia;
+  };
+};
+
 // Cache the bundle for injection to avoid re-creating it on every call.
 let bundleForInjection;
 
