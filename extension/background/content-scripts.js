@@ -102,17 +102,7 @@ export const setupContentScripts = async () => {
     matches: ['<all_urls>'],
     world: 'MAIN'
   };
-  const isolatedContentScript = {
-    matchOriginAsFallback: true,
-    persistAcrossSessions: false,
-    runAt: 'document_start',
-    allFrames: true,
-    id: 'isolated',
-    js: ['content_scripts/isolated.js'],
-    matches: ['<all_urls>'],
-    world: 'ISOLATED'
-  };
-  await chrome.scripting.registerContentScripts([mainForegroundRule, isolatedContentScript]);
+  await chrome.scripting.registerContentScripts([mainForegroundRule]);
   await initializeContentScripts();
   applyDisabledSettingsForTabs();
 };
