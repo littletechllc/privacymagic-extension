@@ -58,7 +58,6 @@ const css = () => {
     }
       */
     pendingRemoteStyleSheets++;
-    console.log('fetching remote style sheet content for href:', href);
     try {
       const response = await fetch(href);
       if (response.ok) {
@@ -79,7 +78,6 @@ const css = () => {
     // Initialize the style sheet with the remote content when it becomes available.
     getRemoteStyleSheetContent(href).then(content => {
       if (content) {
-        // console.log('applying remote content to style sheet for href:', href, 'content.length:', content.length);
         applyContentToStyleSheet(styleSheet, content, mediaAttribute);
         document.documentElement.style.visibility = 'visible';
       }
@@ -163,7 +161,6 @@ const css = () => {
       if (record.type === 'characterData' &&
         el.parentElement instanceof HTMLStyleElement &&
         record.oldValue !== el.parentElement.textContent) {
-        console.log('characterData mutation for style element', el.parentElement, 'oldValue:', record.oldValue, 'textContent:', el.parentElement.textContent);
         const styleSheet = getStyleSheetForCssElement(el.parentElement);
         applyContentToStyleSheet(styleSheet, el.parentElement.textContent, el.parentElement.media);
       } else if (el instanceof HTMLStyleElement &&
