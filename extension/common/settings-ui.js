@@ -31,7 +31,6 @@ const PRIVACY_SETTINGS_CONFIG = {
     'useragent'
   ],
   navigation: [
-    'gpc',
     'queryParameters',
     'referrerPolicy',
     'windowName'
@@ -42,6 +41,9 @@ const PRIVACY_SETTINGS_CONFIG = {
     'serviceWorker',
     'sharedStorage',
     'worker'
+  ],
+  policy: [
+    'gpc'
   ]
 };
 
