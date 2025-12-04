@@ -9,6 +9,13 @@ const css = () => {
     return () => {};
   }
   document.documentElement.style.visibility = 'hidden';
+  const noTransitionsStyleElement = document.createElement('style');
+  noTransitionsStyleElement.textContent = `
+    * {
+      transition: none !important;
+    }
+  `;
+  document.documentElement.appendChild(noTransitionsStyleElement);
   /*
   const getAllRules = (styleSheet) => {
     const rulesFound = [];
@@ -145,6 +152,7 @@ const css = () => {
     if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
       frameCount === 10) {
       document.documentElement.style.visibility = 'visible';
+      noTransitionsStyleElement.remove();
     }
     frameCount++;
     self.requestAnimationFrame(updateAdoptedStyleSheetsToMatchCssElements);
@@ -184,11 +192,17 @@ const css = () => {
         if (styleSheet.disabled !== el.disabled) {
           styleSheet.disabled = el.disabled;
         }
+      } else if (record.type === 'childList' && record.removedNodes.length > 0) {
+        const removedNodes = Array.from(record.removedNodes)
+          .filter(node => node instanceof HTMLStyleElement || node instanceof HTMLLinkElement);
+        const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined);
+        document.adoptedStyleSheets = document.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
+        styleSheets.forEach(sheet => sheet.remove());
       }
     }
   });
   mutationObserver.observe(document.documentElement, {
-    childList: false,
+    childList: true,
     subtree: true,
     attributes: true,
     attributeFilter: ['disabled', 'media', 'href'],
