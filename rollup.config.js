@@ -28,6 +28,9 @@ const createPolicy = (inputFile, outputFile, additionalOutputSettings) => ({
   treeshake: {
     moduleSideEffects: false,
     propertyReadSideEffects: false
+  },
+  watch: {
+    clearScreen: false
   }
 });
 
