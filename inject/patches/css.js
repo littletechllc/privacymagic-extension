@@ -195,9 +195,9 @@ const css = () => {
       } else if (record.type === 'childList' && record.removedNodes.length > 0) {
         const removedNodes = Array.from(record.removedNodes)
           .filter(node => node instanceof HTMLStyleElement || node instanceof HTMLLinkElement);
+        removedNodes.forEach(node => styleSheetsForCssElements.delete(node));
         const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined);
         document.adoptedStyleSheets = document.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
-        styleSheets.forEach(sheet => sheet.remove());
       }
     }
   });
