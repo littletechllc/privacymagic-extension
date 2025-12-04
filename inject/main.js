@@ -66,4 +66,3 @@ const mainFunction = () => {
   runPatchesInPageExcept(getDisabledSettings(relevantSettings));
 };
 mainFunction();
-console.log('content.js loaded', Date.now());
