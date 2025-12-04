@@ -52,11 +52,11 @@
     "description": "Label for the WebRTC IP handling policy pref"
   },
   "blocking": {
-    "message": "Content Blocking",
+    "message": "Blocking tracking content",
     "description": "Category for content blocking settings"
   },
   "navigation": {
-    "message": "Navigation Protections",
+    "message": "Remove Tracking Breadcrumbs",
     "description": "Category for navigation protection settings"
   },
   "fingerprinting": {
@@ -144,7 +144,7 @@
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
-    "message": "Disable Leaky Web Features",
+    "message": "Stop Web Leaks",
     "description": "Category for leaky web features settings"
   },
   "audio": {
@@ -210,5 +210,9 @@
   "css": {
     "message": "Harden Stylesheets",
     "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Send Privacy Signals",
+    "description": "Category for privacy policy protection settings"
   }
 }
