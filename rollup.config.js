@@ -48,7 +48,6 @@ const createPolicy = (inputFile, outputFile, additionalOutputSettings) => ({
   },
   plugins: [
     commonjs(),
-    ...commonPlugins,
     ...(isProduction ? [createTerserPolicy()] : [])
   ],
   treeshake: {
@@ -60,6 +59,16 @@ const createPolicy = (inputFile, outputFile, additionalOutputSettings) => ({
   }
 });
 
+// copy step as a separate config
+const copyStep = {
+  // dummy input/output to satisfy rollup
+  input: 'src/common/util.js',
+  output: 'dist/common/util.js',
+  plugins: [
+    ...commonPlugins
+  ]
+};
+
 export default [
   createPolicy('src/content_scripts/content.js', 'dist/content_scripts/content.js', {
     intro: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {',
@@ -68,5 +77,6 @@ export default [
   createPolicy('src/background/index.js', 'dist/background/index.js'),
   createPolicy('src/privacymagic/options.js', 'dist/privacymagic/options.js'),
   createPolicy('src/privacymagic/http-warning.js', 'dist/privacymagic/http-warning.js'),
-  createPolicy('src/default_popup/popup.js', 'dist/default_popup/popup.js')
+  createPolicy('src/default_popup/popup.js', 'dist/default_popup/popup.js'),
+  copyStep
 ];
