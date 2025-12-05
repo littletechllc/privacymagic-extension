@@ -1,7 +1,8 @@
-/* global chrome, punycode */
+/* global chrome */
 
 import { setupSettingsUI } from '../common/settings-ui.js';
 import { registrableDomainFromUrl, logError } from '../common/util.js';
+import punycode from '../thirdparty/punycode.js';
 
 const setupOptionsButton = () => {
   document.getElementById('optionsButton').addEventListener('click', (event) => {

@@ -1,4 +1,3 @@
-extension/content_scripts/adblock_css/*
-extension/content_scripts/content.js
-extension/node_modules/*
-extension/rules/*
+dist/*
+node_modules/*
+src/rules/*
