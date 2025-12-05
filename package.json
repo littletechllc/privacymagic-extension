@@ -7,8 +7,7 @@
     "lint": "semistandard",
     "format": "semistandard --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production rollup -c",
-    "build:watch": "NODE_ENV=development rollup -c --watch",
+    "build": "NODE_ENV=production rollup -c && web-ext build --source-dir dist --overwrite-dest",
     "dev": "concurrently \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist\""
   },
   "author": "Arthur Edelstein",
