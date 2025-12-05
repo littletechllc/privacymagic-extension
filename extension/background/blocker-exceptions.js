@@ -58,7 +58,6 @@ export const setupExceptionsToStaticRules = async () => {
         return;
       }
       const setting = await getSetting(domain, 'ads');
-      console.log(`setting: ${setting} for domain: ${domain}`);
       await updateExceptionToStaticRules(tabId, setting);
     } catch (error) {
       logError(error, 'error updating exception to static rules for top-level navigation or request', details);

@@ -5,9 +5,10 @@ import { updateContentScripts, setupContentScripts } from './content-scripts.js'
 import { setSetting } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
-import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 import { setupExceptionsToStaticRules } from './blocker-exceptions.js';
+import { handleRemoteCssRequests } from './remote-css.js';
+import { logError } from '../common/util.js';
 
 const blockAutocomplete = async () => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -58,24 +59,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true;
 });
 
-const blockCssRequests = async () => {
-  return chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [600],
-    addRules: [
-      {
-        id: 600,
-        priority: 10,
-        action: {
-          type: 'block'
-        },
-        condition: {
-          resourceTypes: ['stylesheet']
-        }
-      }
-    ]
-  });
-};
-
 let initializedCalled = false;
 
 const initializeExtension = async () => {
@@ -89,7 +72,7 @@ const initializeExtension = async () => {
   await setupExceptionsToStaticRules();
   await createHttpWarningNetworkRule();
   await blockAutocomplete();
-  await blockCssRequests();
+  await handleRemoteCssRequests();
   console.log('Extension initialized');
 };
 
