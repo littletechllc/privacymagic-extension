@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production rollup -c",
     "build:watch": "NODE_ENV=development rollup -c --watch",
-    "dev": "NODE_ENV=development rollup -c --watch & web-ext run -t chromium --source-dir extension --reload"
+    "dev": "NODE_ENV=development rollup -c --watch & web-ext run -t chromium --source-dir extension"
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
