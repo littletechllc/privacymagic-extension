@@ -9,21 +9,22 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production rollup -c",
     "build:watch": "NODE_ENV=development rollup -c --watch",
-    "dev": "NODE_ENV=development rollup -c --watch & web-ext run -t chromium --source-dir extension"
+    "dev": "concurrently \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist\""
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
   "type": "module",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@types/chrome": "^0.1.31",
+    "concurrently": "^9.2.1",
+    "rollup-plugin-copy": "^3.5.0",
     "semistandard": "^17.0.0",
     "web-ext": "^9.2.0"
   },
   "semistandard": {
     "ignore": [
-      "extension/thirdparty/**",
-      "extension/content_scripts/sublevel/**",
-      "extension/content_scripts/toplevel/**"
+      "dist/**"
     ]
   },
   "dependencies": {
