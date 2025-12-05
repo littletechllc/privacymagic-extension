@@ -1,4 +1,4 @@
-/* global self, HTMLIFrameElement, Element, DOMTokenList, WeakSet */
+/* global self, HTMLIFrameElement, WeakSet */
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
 const iframe = () => {
@@ -7,28 +7,36 @@ const iframe = () => {
       return;
     }
 
-    // ## Sandboxed Iframes hardening ##
+    // ## iframe hardening ##
     //
-    // Here we handle sandboxed iframes. See for example,
-    // https://browserleaks.com/javascript,
-    // which has an <iframe sandbox="allow-same-origin">.
-    // Because this iframe doesn't have 'allow-scripts', the extension's
-    // content script doesn't run in the iframe's context.
-    // Nonetheless, the parent frame can evaluate code in the sandboxed iframe
-    // using the iframe's contentWindow property, e.g.
-    // iframe.contentWindow.eval('navigator.hardwareConcurrency'),
-    // and retrieve unhardened values.
-    // To prevent this bypass, we need to inject our hardening code
-    // from the parent frame into the sandboxed iframe before the parent
+    // In a couple of cases, the iframe's contentWindow property is accessed
+    // before the iframe has been hardened. We need to harden it first.
+    //
+    // Case #1: https://browserleaks.com/javascript has an
+    // <iframe sandbox="allow-same-origin">. Because this iframe doesn't have
+    // 'allow-scripts', the extension's content script doesn't run in the iframe's
+    // context. Nonetheless, the parent frame can evaluate code in the sandboxed
+    // iframe using the iframe's contentWindow property, e.g.
+    // iframe.contentWindow.eval('navigator.hardwareConcurrency'), and retrieve
+    // unhardened values.
+    //
+    // Case #2: In https://abrahamjuliot.github.io/creepjs/tests/iframes.html,
+    // a same-origin iframe is created and immediately accessed in the same
+    // task as the iframe creation. In this case, the iframe remains unhardened.
+    //
+    // To prevent this bypass, we need to inject our hardening
+    // code from the parent frame into the any iframe before the parent
     // frame evaluates code in the sandboxed iframe.
     // We do this by overriding the iframe's contentWindow property with a
     // getter that injects our hardening code the first time it is accessed.
+    //
+    // TODO: Can we prevent the hardening code from running a second time?
 
     const evalSet = new WeakSet();
 
-    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow').get;
-    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has').value;
-    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add').value;
+    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')?.get;
+    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')?.value;
+    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')?.value;
 
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/
     // Function bodies here need to be carefully crafted to prevent invoking
