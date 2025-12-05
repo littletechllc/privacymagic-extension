@@ -10,7 +10,7 @@ const useragent = () => {
   const SHORT_BRAND_VERSION = BRAND_VERSION.split('.')[0];
   const navigatorPrototype = self.Navigator || self.WorkerNavigator;
   const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
-    platform: 'macOS',
+    platform: 'MacIntel',
     userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`,
     appVersion: `5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`
   });
@@ -21,7 +21,7 @@ const useragent = () => {
       { brand: 'Chromium', version: SHORT_CHROME_VERSION }
     ],
     mobile: false,
-    platform: 'macOS',
+    platform: 'MacIntel',
     getHighEntropyValues: async () => (
       {
         architecture: 'arm',
@@ -41,7 +41,7 @@ const useragent = () => {
         ],
         mobile: false,
         model: '',
-        platform: 'macOS',
+        platform: 'MacIntel',
         platformVersion: PLATFORM_VERSION,
         uaFullVersion: CHROME_VERSION,
         wow64: false
