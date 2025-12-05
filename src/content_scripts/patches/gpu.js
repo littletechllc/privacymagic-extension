@@ -279,7 +279,7 @@ const gpu = () => {
   const hideWebGLVendorAndRenderer = () => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter');
     const platform = navigator.userAgentData.platform;
-    if (platform === 'macOS') {
+    if (platform === 'MacIntel') {
       return redefinePropertyValues(self.WebGLRenderingContext.prototype, {
         getParameter: function (constant) {
           console.log('getParameter', constant);
