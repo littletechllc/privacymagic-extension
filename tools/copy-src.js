@@ -6,7 +6,7 @@ const srcDir = process.argv[2] || 'src';
 const distDir = process.argv[3] || 'dist';
 const watchMode = process.argv.includes('--watch');
 
-const isExcluded = file => /\.(js|ts)$/.test(file);
+const isExcluded = file => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.');
 
 const copyOne = async (filePath) => {
   if (isExcluded(filePath)) return;
