@@ -1,6 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { isMain } from './util.js';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const BLOCKLISTS = [
   'https://easylist.to/easylist/easylist.txt',
@@ -95,6 +99,7 @@ const typeOptionsStringToLists = (typeOptionsString) => {
   let cspLine = '';
   let redirect = '';
   let badFilter = false;
+  let redirectRule = false;
   const items = typeOptionsString.split(',');
   for (const item of items) {
     if (item.startsWith('domain=')) {
@@ -123,6 +128,12 @@ const typeOptionsStringToLists = (typeOptionsString) => {
       }
     } else if (item.startsWith('redirect=')) {
       redirect = item.split('=')[1];
+    } else if (item.startsWith('redirect-rule')) {
+      if (item.startsWith('redirect-rule=')) {
+        redirectRule = item.split('=')[1];
+      } else {
+        redirectRule = true;
+      }
     } else if (item.startsWith('~')) {
       if (item === '~third-party') {
         domainType = 'firstParty';
@@ -147,6 +158,7 @@ const typeOptionsStringToLists = (typeOptionsString) => {
     excludedRequestMethods,
     cspLine,
     redirect,
+    redirectRule,
     badFilter
   };
   return removeEmptyArrays(output);
@@ -256,6 +268,7 @@ const generateContentRules = (items) => {
 const SELECTOR_CHUNK_SIZE = 1024;
 
 const generateContentRulesFiles = async (dir, cssItemsForDomain) => {
+  await fs.mkdir(dir, { recursive: true });
   const files = [];
   for (const [domain, cssItems] of Object.entries(cssItemsForDomain)) {
     const lines = [];
