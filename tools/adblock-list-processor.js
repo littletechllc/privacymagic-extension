@@ -318,8 +318,8 @@ const isGoodLine = x => {
   return result;
 };
 
-const ext = (localPath) => {
-  return path.join('../extension/', localPath);
+const dist = (localPath) => {
+  return path.join(__dirname, '../dist/', localPath);
 };
 
 export const processAndWrite = async () => {
@@ -328,23 +328,22 @@ export const processAndWrite = async () => {
   const results = processLines(linesFiltered);
   const results2 = results.filter(x => !x.parsed?.condition?.resourceTypes?.includes('popup'));
   const blockingRulesFileContent = generateBlockingRulesFile(results2);
-  await fs.mkdir(ext('rules'), { recursive: true });
-  await fs.writeFile(ext('rules/easylist.json'),
+  await fs.mkdir(dist('rules'), { recursive: true });
+  await fs.writeFile(dist('rules/easylist.json'),
     blockingRulesFileContent);
   const contentRules = generateContentRules(results2);
-  const adblockCssDir = ext('content_scripts/adblock_css');
-  await fs.mkdir(adblockCssDir, { recursive: true });
-  const cssFiles = await generateContentRulesFiles(adblockCssDir, contentRules);
+  const adblockCssDir = dist('content_scripts/adblock_css');
+  /* const cssFiles = */await generateContentRulesFiles(adblockCssDir, contentRules);
   // const manifest = await readManifestFile()
   // console.log(cssFiles)
   // const manifest_final = addContentBlockingRulesToManifest(manifest, cssFiles)
   // await writeManifestFile(manifest_final)
   // console.log(contentRules)
-  const contentBlockingDefintions = createContentBlockingDefinitions(cssFiles);
-  await fs.writeFile(
-    ext('background/content-blocking-definitions.js'),
-    'export const contentBlockingDefinitions = ' + JSON.stringify(contentBlockingDefintions, undefined, '  ')
-  );
+  // const contentBlockingDefintions = createContentBlockingDefinitions(cssFiles);
+  // await fs.writeFile(
+  //  dist('background/content-blocking-definitions.js'),
+  //  'export const contentBlockingDefinitions = ' + JSON.stringify(contentBlockingDefintions, undefined, '  ')
+  // );
 };
 
 if (isMain(import.meta)) {
