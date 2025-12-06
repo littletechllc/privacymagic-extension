@@ -276,28 +276,6 @@ const generateContentRulesFiles = async (dir, cssItemsForDomain) => {
   return files;
 };
 
-const createContentBlockingDefinitions = (cssFiles) => {
-  const definitions = [];
-  for (const cssFile of cssFiles.sort()) {
-    const isDefault = cssFile.startsWith('__default_');
-    const domain = isDefault ? 'default' : cssFile.replace(/_[0-9]*?\.css$/, '');
-    const id = cssFile.replace(/.css$/, '').replaceAll('_', '');
-    const matches = isDefault
-      ? ['*://*/*']
-      : [`*://${domain}/*`, `*://*.${domain}/*`];
-    definitions.push({
-      id,
-      css: [`content_scripts/adblock_css/${cssFile}`],
-      matches,
-      allFrames: true,
-      world: 'MAIN',
-      runAt: 'document_start',
-      matchOriginAsFallback: true
-    });
-  }
-  return definitions;
-};
-
 const isGoodLine = x => {
   const result = !x.startsWith('$websocket,domain=') &&
   !x.startsWith('$popup') &&
@@ -334,16 +312,6 @@ export const processAndWrite = async () => {
   const contentRules = generateContentRules(results2);
   const adblockCssDir = dist('content_scripts/adblock_css');
   /* const cssFiles = */await generateContentRulesFiles(adblockCssDir, contentRules);
-  // const manifest = await readManifestFile()
-  // console.log(cssFiles)
-  // const manifest_final = addContentBlockingRulesToManifest(manifest, cssFiles)
-  // await writeManifestFile(manifest_final)
-  // console.log(contentRules)
-  // const contentBlockingDefintions = createContentBlockingDefinitions(cssFiles);
-  // await fs.writeFile(
-  //  dist('background/content-blocking-definitions.js'),
-  //  'export const contentBlockingDefinitions = ' + JSON.stringify(contentBlockingDefintions, undefined, '  ')
-  // );
 };
 
 if (isMain(import.meta)) {

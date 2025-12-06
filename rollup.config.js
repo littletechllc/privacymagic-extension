@@ -1,5 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs';
-import terser from '@rollup/plugin-terser'; import copy from 'rollup-plugin-copy';
+import terser from '@rollup/plugin-terser';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
