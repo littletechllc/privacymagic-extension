@@ -10,7 +10,7 @@
     "copy": "node tools/copy-src src dist",
     "copy:watch": "npm run copy -- --watch",
     "build": "npm run copy && NODE_ENV=production rollup -c && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts",
-    "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist\""
+    "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist --ignore-files _metadata _metadata/**\""
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
