@@ -8,7 +8,7 @@ const watchMode = process.argv.includes('--watch');
 
 const isExcluded = file => /\.(js|ts)$/.test(file);
 
-async function copyOne(filePath) {
+const copyOne = async (filePath) => {
   if (isExcluded(filePath)) return;
 
   const rel = path.relative(srcDir, filePath);
@@ -16,9 +16,10 @@ async function copyOne(filePath) {
 
   await mkdir(path.dirname(dest), { recursive: true });
   await copyFile(filePath, dest);
-}
+  console.log(`copied ${filePath} to ${dest}`);
+};
 
-async function copyAll(dir) {
+const copyAll = async (dir) => {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
@@ -28,14 +29,14 @@ async function copyAll(dir) {
       await copyOne(full);
     }
   }
-}
+};
 
 await copyAll(srcDir);
 
 if (watchMode) {
   const watcher = chokidar.watch(srcDir, {
     ignored: /\.(js|ts)$/,
-    ignoreInitial: true,
+    ignoreInitial: true
   });
 
   watcher.on('add', copyOne);
