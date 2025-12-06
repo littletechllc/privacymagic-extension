@@ -37,6 +37,15 @@
     "service_worker": "background/index.js",
     "type": "module"
   },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules/easylist.json"
+      }
+    ]
+  },
   "content_scripts": [
     {
       "js": [
