@@ -7,8 +7,10 @@
     "lint": "semistandard",
     "format": "semistandard --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production rollup -c && web-ext build --source-dir dist --overwrite-dest",
-    "dev": "concurrently \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist\""
+    "copy": "node tools/copy-src src dist",
+    "copy:watch": "npm run copy -- --watch",
+    "build": "npm run copy && NODE_ENV=production rollup -c && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts",
+    "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development rollup -c --watch\" \"web-ext run -t chromium --source-dir dist\""
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",
@@ -16,6 +18,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.0",
     "@types/chrome": "^0.1.31",
+    "chokidar": "^5.0.0",
     "concurrently": "^9.2.1",
     "rollup-plugin-copy": "^3.5.0",
     "semistandard": "^17.0.0",
