@@ -23,6 +23,7 @@
   },
   "permissions": [
     "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
     "favicon",
     "privacy",
     "scripting",

@@ -59,6 +59,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true;
 });
 
+const logMatchingRulesInDevMode = () => {
+  if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
+      (callback) => {
+        console.log('rule matched debug:', callback);
+      }
+    );
+  }
+};
+
 let initializedCalled = false;
 
 const initializeExtension = async () => {
@@ -73,6 +83,7 @@ const initializeExtension = async () => {
   await createHttpWarningNetworkRule();
   await blockAutocomplete();
   await handleRemoteCssRequests();
+  logMatchingRulesInDevMode();
   console.log('Extension initialized');
 };
 
