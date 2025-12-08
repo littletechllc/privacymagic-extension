@@ -1,54 +1,45 @@
 /* global chrome */
 
-import { registrableDomainFromUrl, logError } from '../common/util.js';
+import { registrableDomainFromUrl, logError, addIfMissing, removeIfPresent } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
 
-export const createExceptionToStaticRules = async () => {
-  const exceptionToStaticRules = {
-    priority: 2,
-    action: { type: 'allow' },
-    id: 100,
-    condition: {
-      // urlFilter: '<all_urls>'
-      // dummy tab id
-      tabIds: [1]
-    }
-  };
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [100],
-    addRules: [exceptionToStaticRules]
-  });
-  console.log('created exception to static rules');
-  console.log('exceptionToStaticRules:', exceptionToStaticRules);
+/** @type {chrome.declarativeNetRequest.Rule} */
+const exceptionToStaticRules = {
+  priority: 2,
+  action: { type: 'allow' },
+  id: 200000,
+  condition: {
+    urlFilter: '*://*/*',
+    tabIds: []
+  }
 };
 
-const updateExceptionToStaticRules = async (tabId, setting) => {
-  const rules = await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: [100]
-  });
-  const rule = rules[0];
-  if (setting === false) {
-    if (!rule.condition.tabIds.includes(tabId)) {
-      console.log(`adding tabId ${tabId} to exception to static rules`);
-      rule.condition.tabIds.push(tabId);
-    }
-  } else {
-    console.log(`removing tabId ${tabId} from exception to static rules`);
-    rule.condition.tabIds = rule.condition.tabIds.filter(t => t !== tabId);
+export const updateExceptionToStaticRules = async () => {
+  const rulesToAdd = [];
+  if (exceptionToStaticRules?.condition?.tabIds &&
+      exceptionToStaticRules.condition.tabIds.length > 0) {
+    rulesToAdd.push(exceptionToStaticRules);
   }
-  console.log(`rule.condition.tabIds: ${rule.condition.tabIds}, setting: ${setting}`);
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [rule.id],
-    addRules: [rule]
+    removeRuleIds: [exceptionToStaticRules.id],
+    addRules: rulesToAdd
   });
+};
+
+const adjustExceptionToStaticRules = async (tabId, setting) => {
+  if (setting === false) {
+    addIfMissing(exceptionToStaticRules.condition.tabIds, tabId);
+  } else {
+    removeIfPresent(exceptionToStaticRules.condition.tabIds, tabId);
+  }
+  await updateExceptionToStaticRules();
 };
 
 export const setupExceptionsToStaticRules = async () => {
-  await createExceptionToStaticRules();
+  await updateExceptionToStaticRules();
   const listener = async (details) => {
     try {
       const { url, tabId, frameId } = details;
-      // For requests, frameId is undefined.
       // For navigations, frameId is 0 for the main frame.
       if (frameId !== 0 && frameId !== undefined) {
         return;
@@ -58,14 +49,10 @@ export const setupExceptionsToStaticRules = async () => {
         return;
       }
       const setting = await getSetting(domain, 'ads');
-      await updateExceptionToStaticRules(tabId, setting);
+      await adjustExceptionToStaticRules(tabId, setting);
     } catch (error) {
       logError(error, 'error updating exception to static rules for top-level navigation or request', details);
     }
   };
-  chrome.webRequest.onBeforeRequest.addListener(listener, {
-    urls: ['http://*/*', 'https://*/*'],
-    types: ['main_frame']
-  });
   chrome.webNavigation.onCommitted.addListener(listener);
 };
