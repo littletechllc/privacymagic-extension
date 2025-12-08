@@ -62,8 +62,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 const logMatchingRulesInDevMode = () => {
   if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-      (callback) => {
-        console.log('rule matched debug:', callback);
+      async ({ request, rule }) => {
+        let ruleContent;
+        if (rule.rulesetId === '_session') {
+          const rules = await chrome.declarativeNetRequest.getSessionRules({
+            ruleIds: [rule.ruleId]
+          });
+          ruleContent = rules[0];
+        }
+        if (rule.rulesetId === '_dynamic') {
+          const rules = await chrome.declarativeNetRequest.getDynamicRules({
+            ruleIds: [rule.ruleId]
+          });
+          ruleContent = rules[0];
+        }
+        console.log('rule matched debug:', { request, rule, ruleContent });
       }
     );
   }
@@ -87,11 +100,24 @@ const initializeExtension = async () => {
   console.log('Extension initialized');
 };
 
+const clearRules = async () => {
+  const sessionRules = await chrome.declarativeNetRequest.getSessionRules();
+  await chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: sessionRules.map(rule => rule.id)
+  });
+  const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: dynamicRules.map(rule => rule.id)
+  });
+  console.log('cleared rules');
+};
+
 chrome.runtime.onInstalled.addListener(async function (details) {
   try {
     console.log('onInstalled details:', details);
-    await initializeExtension();
     await resetAllPrefsToDefaults();
+    await clearRules();
+    await initializeExtension();
   } catch (error) {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details);
