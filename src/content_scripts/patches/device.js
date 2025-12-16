@@ -3,11 +3,6 @@
 import { redefinePropertyValues } from '../helpers.js';
 
 const device = () => {
-  const navigatorPrototype = self.Navigator || self.WorkerNavigator;
-  const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
-    // Cover Your Tracks: 1 in 1.74:
-    maxTouchPoints: 0
-  });
   let restoreDevicePosture;
   if (self.DevicePosture) {
     restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
@@ -25,7 +20,6 @@ const device = () => {
     });
   }
   return () => {
-    restoreNavigator();
     if (restoreDevicePosture) {
       restoreDevicePosture();
     }
