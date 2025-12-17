@@ -34,7 +34,10 @@ const updateSiteInfo = async (domain) => {
   const tab = tabs[0];
   const url = tab.url;
   document.getElementById('domain').textContent = punycode.toUnicode(domain);
-  document.getElementById('favicon').src = faviconURL(url);
+  const favicon = /** @type {HTMLImageElement | null} */ (document.getElementById('favicon'));
+  if (favicon) {
+    favicon.src = faviconURL(url);
+  }
 };
 
 document.addEventListener('DOMContentLoaded', async (event) => {
