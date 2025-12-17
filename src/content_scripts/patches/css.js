@@ -8,14 +8,17 @@ const css = () => {
     // We are likely in a worker context.
     return () => {};
   }
-  document.documentElement.style.visibility = 'hidden';
-  const noTransitionsStyleElement = document.createElement('style');
-  noTransitionsStyleElement.textContent = `
-    * {
-      transition: none !important;
-    }
-  `;
-  document.documentElement.appendChild(noTransitionsStyleElement);
+
+  const preventFOUC = () => {
+    document.documentElement.style.visibility = 'hidden';
+    const noTransitionsStyleElement = document.createElement('style');
+    noTransitionsStyleElement.textContent = `
+      * {
+        transition: none !important;
+      }
+    `;
+    document.documentElement.appendChild(noTransitionsStyleElement);
+  };
   /*
   const getAllRules = (styleSheet) => {
     const rulesFound = [];
@@ -70,6 +73,7 @@ const css = () => {
       if (response.ok) {
         return await response.text();
       } else {
+        // TODO: Handle CORS case. We may need to fetch the content from the background script.
         throw new Error(`failed to fetch remote style sheet content for href: ${href}, status: ${response.status}`);
       }
     } catch (error) {
@@ -108,6 +112,9 @@ const css = () => {
     return styleSheet;
   };
 
+  // Create a style sheet containing the CSS content of a SVG style element.
+  // The style sheet has a root CSS selector scoping the CSS content to the
+  // SVG element.
   const createStyleSheetForSvgStyleElement = (svgStyleElement) => {
     const styleSheet = new CSSStyleSheet();
     const svg = svgStyleElement.closest('svg');
@@ -244,6 +251,8 @@ const css = () => {
       }
     }
   });
+
+  preventFOUC();
 };
 
 export default css;
