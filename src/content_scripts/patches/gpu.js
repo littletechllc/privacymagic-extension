@@ -143,6 +143,7 @@ const gpu = () => {
   const nonDrawingCommands = ['canvas', 'getImageData', 'measureText', 'isPointInPath', 'isPointInStroke'];
 
   const enableContext2dCommandRecording = () => {
+    /** @type {Record<string, PropertyDescriptor>} */
     const originalDescriptors = {};
     for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype))) {
       if (nonDrawingCommands.includes(name)) {
@@ -278,22 +279,25 @@ const gpu = () => {
 
   const hideWebGLVendorAndRenderer = () => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter');
-    const platform = navigator.userAgentData.platform;
-    if (platform === 'MacIntel') {
-      return redefinePropertyValues(self.WebGLRenderingContext.prototype, {
-        getParameter: function (constant) {
-          console.log('getParameter', constant);
-          const originalValue = originalGetParameterSafe(this, constant);
-          switch (constant) {
-            case 37445: // UNMASKED_VENDOR_WEBGL
-              return 'Apple Inc.';
-            case 37446: // UNMASKED_RENDERER_WEBGL
-              return 'Apple GPU';
-            default:
-              return originalValue;
+    if ('userAgentData' in navigator) {
+      const userAgentData = /** @type {NavigatorUAData} */ (navigator.userAgentData);
+      const platform = userAgentData.platform;
+      if (platform === 'MacIntel') {
+        return redefinePropertyValues(self.WebGLRenderingContext.prototype, {
+          getParameter: function (constant) {
+            console.log('getParameter', constant);
+            const originalValue = originalGetParameterSafe(this, constant);
+            switch (constant) {
+              case 37445: // UNMASKED_VENDOR_WEBGL
+                return 'Apple Inc.';
+              case 37446: // UNMASKED_RENDERER_WEBGL
+                return 'Apple GPU';
+              default:
+                return originalValue;
+            }
           }
-        }
-      });
+        });
+      }
     }
     return () => {};
   };
