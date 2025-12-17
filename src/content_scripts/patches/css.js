@@ -108,6 +108,20 @@ const css = () => {
     return styleSheet;
   };
 
+  const createStyleSheetForSvgStyleElement = (svgStyleElement) => {
+    const styleSheet = new CSSStyleSheet();
+    const svg = svgStyleElement.closest('svg');
+    if (svg === null) {
+      throw new Error('svg style element does not have an ancestor svg element');
+    }
+    const svgId = crypto.randomUUID();
+    svg.setAttribute('data-svg-id', svgId);
+    const text = `[data-svg-id="${svgId}"] { ${svgStyleElement.textContent} }`;
+    applyContentToStyleSheet(styleSheet, text, svgStyleElement.media);
+    styleSheet.disabled = svgStyleElement.disabled;
+    return styleSheet;
+  };
+
   const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get').value;
   const mapGetSafe = (map, key) => reflectApplySafe(originalMapGetter, map, [key]);
 
@@ -123,7 +137,7 @@ const css = () => {
     } else if (cssElement instanceof HTMLStyleElement) {
       styleSheet = createStyleSheetForStyleElement(cssElement);
     } else if (cssElement instanceof SVGStyleElement) {
-      // TODO: Handle SVG style elements.
+      styleSheet = createStyleSheetForSvgStyleElement(cssElement);
     } else {
       throw new Error(`unknown CSS element type: ${cssElement}`);
     }
