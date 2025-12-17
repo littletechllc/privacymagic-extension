@@ -22,7 +22,10 @@ const mainRule = {
 };
 
 const updateMainRule = async () => {
-  await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [HTTP_WARNING_MAIN_RULE_ID], addRules: [mainRule] });
+  await chrome.declarativeNetRequest.updateSessionRules({
+    removeRuleIds: [HTTP_WARNING_MAIN_RULE_ID],
+    addRules: [mainRule]
+  });
 };
 
 export const updateHttpWarningNetworkRuleException = async (domain, value) => {
