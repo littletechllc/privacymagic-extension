@@ -82,22 +82,71 @@ const logMatchingRulesInDevMode = () => {
   }
 };
 
-let initializedCalled = false;
-
-const initializeExtension = async () => {
-  if (initializedCalled) {
-    return;
-  }
-  initializedCalled = true;
-  injectCssForCosmeticFilters();
-  await setupContentScripts();
-  await setupNetworkRules();
-  await setupExceptionsToStaticRules();
-  await createHttpWarningNetworkRule();
-  await blockAutocomplete();
-  await handleRemoteCssRequests();
-  logMatchingRulesInDevMode();
-  console.log('Extension initialized');
+const testHttpBehavior = async () => {
+  chrome.webRequest.onBeforeRequest.addListener(async (details) => {
+    console.log('onBeforeRequest debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onBeforeSendHeaders.addListener(async (details) => {
+    console.log('onBeforeSendHeaders debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onSendHeaders.addListener(async (details) => {
+    console.log('onSendHeaders debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onHeadersReceived.addListener(async (details) => {
+    console.log('onHeadersReceived debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onAuthRequired.addListener(async (details) => {
+    console.log('onAuthRequired debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onBeforeRedirect.addListener(async (details) => {
+    console.log('onBeforeRedirect debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onResponseStarted.addListener(async (details) => {
+    console.log('onResponseStarted debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onCompleted.addListener(async (details) => {
+    console.log('onCompleted debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webRequest.onErrorOccurred.addListener(async (details) => {
+    console.log('onErrorOccurred debug:', details);
+    return { cancel: false };
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
+  chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+    console.log('onBeforeNavigate debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onCommitted.addListener(async (details) => {
+    console.log('onCommitted debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onDOMContentLoaded.addListener(async (details) => {
+    console.log('onDOMContentLoaded debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onCompleted.addListener(async (details) => {
+    console.log('onCompleted debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onErrorOccurred.addListener(async (details) => {
+    console.log('onErrorOccurred debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onHistoryStateUpdated.addListener(async (details) => {
+    console.log('onHistoryStateUpdated debug:', details);
+    return { cancel: false };
+  });
+  chrome.webNavigation.onReferenceFragmentUpdated.addListener(async (details) => {
+    console.log('onReferenceFragmentUpdated debug:', details);
+    return { cancel: false };
+  });
 };
 
 const clearRules = async () => {
@@ -112,11 +161,24 @@ const clearRules = async () => {
   console.log('cleared rules');
 };
 
+const initializeExtension = async () => {
+  await clearRules();
+  injectCssForCosmeticFilters();
+  await setupContentScripts();
+  await setupNetworkRules();
+  await setupExceptionsToStaticRules();
+  await createHttpWarningNetworkRule();
+  await blockAutocomplete();
+  await handleRemoteCssRequests();
+  logMatchingRulesInDevMode();
+  await testHttpBehavior();
+  console.log('Extension initialized');
+};
+
 chrome.runtime.onInstalled.addListener(async function (details) {
   try {
     console.log('onInstalled details:', details);
     await resetAllPrefsToDefaults();
-    await clearRules();
     await initializeExtension();
   } catch (error) {
     // TODO: Show user a notification that the extension failed to install.
