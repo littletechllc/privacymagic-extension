@@ -51,6 +51,20 @@ declare global {
     clear: () => void;
   }
 
+  interface TrustedTypePolicy {
+    createHTML: (input: string) => string;
+    createScript: (input: string) => string;
+    createScriptURL: (input: string) => string;
+  }
+
+  interface TrustedTypePolicyFactory {
+    createPolicy: (name: string, policy: {
+      createHTML?: (input: string) => string;
+      createScript?: (input: string) => string;
+      createScriptURL?: (input: string) => string;
+    }) => TrustedTypePolicy;
+  }
+
   interface Window {
     BatteryManager?: typeof BatteryManager;
     DevicePosture?: typeof DevicePosture;
@@ -60,5 +74,10 @@ declare global {
     PerformanceScriptTiming?: typeof PerformanceScriptTiming;
     NavigatorUAData?: typeof NavigatorUAData;
     SharedStorage?: typeof SharedStorage;
+    trustedTypes?: TrustedTypePolicyFactory;
+  }
+
+  interface WorkerGlobalScope {
+    trustedTypes?: TrustedTypePolicyFactory;
   }
 }
