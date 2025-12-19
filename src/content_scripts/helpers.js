@@ -25,7 +25,7 @@ export const redefinePropertiesSafe = (obj, propertyMap) => {
 /** @type { PropertyDescriptor } */
 export const nonProperty = { get: undefined, set: undefined, configurable: true };
 
-/** @type { <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }) => () => void } */
+/** @type { <T>(obj: T, propertyMap: { [key: string]: any }) => () => void } */
 export const redefinePropertyValues = (obj, propertyMap) => {
   /** @type {PropertyDescriptorMap} */
   const originalProperties = {};
