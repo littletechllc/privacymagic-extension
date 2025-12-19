@@ -1,7 +1,9 @@
 /* global __PRIVACY_MAGIC_INJECT__, __disabledSettings, self */
 
-const reflectApply = (...args) => Reflect.apply(...args);
+/** @type { (func: Function, thisArg: any, args: any[]) => any } */
+const reflectApply = (func, thisArg, args) => Reflect.apply(func, thisArg, args);
 
+/** @type { (func: Function, thisArg: any, args: any[]) => any } */
 export const reflectApplySafe = (func, thisArg, args) => {
   try {
     return reflectApply(func, thisArg, args);
@@ -13,16 +15,21 @@ export const reflectApplySafe = (func, thisArg, args) => {
 export const objectDefinePropertiesSafe = Object.defineProperties;
 const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors;
 
+/** @type { <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }) => () => void } */
 export const redefinePropertiesSafe = (obj, propertyMap) => {
   const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj);
   objectDefinePropertiesSafe(obj, propertyMap);
   return () => objectDefinePropertiesSafe(obj, originalDescriptors);
 };
 
+/** @type { PropertyDescriptor } */
 export const nonProperty = { get: undefined, set: undefined, configurable: true };
 
+/** @type { <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }) => () => void } */
 export const redefinePropertyValues = (obj, propertyMap) => {
+  /** @type {PropertyDescriptorMap} */
   const originalProperties = {};
+  /** @type {PropertyDescriptorMap} */
   const newProperties = {};
   for (const [prop, value] of Object.entries(propertyMap)) {
     const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop);
