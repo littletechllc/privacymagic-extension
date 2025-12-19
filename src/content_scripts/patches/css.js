@@ -38,6 +38,7 @@ const css = () => {
     return { urls, cssTextWithoutImports };
   };
 
+  /** @type { (css: string, mediaAttribute: string) => string } */
   const maybeWrapWithMediaQuery = (css, mediaAttribute) => {
     if (css === undefined ||
       css === null ||
@@ -74,7 +75,7 @@ const css = () => {
     } catch (error) {
       console.error('error getting remote style sheet content for href:', href, 'error:', error);
       pendingRemoteStyleSheets--;
-      return undefined;
+      return '';
     }
   };
 
@@ -143,7 +144,9 @@ const css = () => {
     return styleSheet;
   };
 
+  /** @type { (map: Map<any, any>, key: any) => any } */
   const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get').value;
+  /** @type { (map: Map<any, any>, key: any) => any } */
   const mapGetSafe = (map, key) => reflectApplySafe(originalMapGetter, map, [key]);
 
   /** Get the style sheet for a style element, creating it if it doesn't exist.
@@ -270,9 +273,12 @@ const css = () => {
     }
   });
 
+  /** @type { (styleSheet: CSSStyleSheet, css: string) => void } */
   const originalReplaceSync = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync').value;
+  /** @type { (styleSheet: CSSStyleSheet, css: string) => void } */
   const originalReplaceSyncSafe = (styleSheet, css) => reflectApplySafe(originalReplaceSync, styleSheet, [css]);
 
+  /** @type { (rule: CSSRule) => CSSRule } */
   const sanitizeRule = (rule) => {
     if (rule instanceof CSSMediaRule) {
       rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height');
@@ -285,6 +291,7 @@ const css = () => {
     return rule;
   };
 
+  /** @type { (css: string) => string } */
   const sanitizeCss = (css) => {
     const tempStyleSheet = new CSSStyleSheet();
     originalReplaceSyncSafe(tempStyleSheet, css);
@@ -294,6 +301,8 @@ const css = () => {
 
   redefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
+      /** @this {CSSStyleSheet} */
+      /** @param {string} css */
       value: function (css) {
         originalReplaceSyncSafe(this, sanitizeCss(css));
       }
