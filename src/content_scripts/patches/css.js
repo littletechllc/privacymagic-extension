@@ -301,8 +301,7 @@ const css = () => {
 
   redefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
-      /** @this {CSSStyleSheet} */
-      /** @param {string} css */
+      /** @this {CSSStyleSheet} @param {string} css */
       value: function (css) {
         originalReplaceSyncSafe(this, sanitizeCss(css));
       }
