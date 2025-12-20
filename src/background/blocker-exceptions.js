@@ -10,9 +10,6 @@ const topDomainAllowList = new Set();
 /** @type {Set<number>} */
 const tabExceptions = new Set();
 
-/** @type {() => string[]} */
-export const getTopDomainAllowList = () => Array.from(topDomainAllowList);
-
 /** @type {() => Promise<void>} */
 export const updateExceptionToStaticRules = async () => {
   const addRules = [];
