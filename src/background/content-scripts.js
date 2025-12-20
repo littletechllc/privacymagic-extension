@@ -93,6 +93,12 @@ const initializeContentScripts = async () => {
 };
 
 export const setupContentScripts = async () => {
+  // Unregister any existing content script with this ID to avoid duplicates
+  try {
+    await chrome.scripting.unregisterContentScripts({ ids: ['foreground'] });
+  } catch (error) {
+    // Ignore error if script doesn't exist
+  }
   /** @type {chrome.scripting.RegisteredContentScript} */
   const mainForegroundRule = {
     matchOriginAsFallback: true,
