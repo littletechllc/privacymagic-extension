@@ -163,13 +163,13 @@ const clearRules = async () => {
 const initializeExtension = async () => {
   await clearRules();
   injectCssForCosmeticFilters();
-  // await setupContentScripts();
-  // await setupNetworkRules();
+  await setupContentScripts();
+  await setupNetworkRules();
   await setupExceptionsToStaticRules();
   // await createHttpWarningNetworkRule();
   await blockAutocomplete();
-  // await handleRemoteCssRequests();
-  logMatchingRulesInDevMode();
+  await handleRemoteCssRequests();
+  // logMatchingRulesInDevMode();
   // await testHttpBehavior();
   console.log('Extension initialized');
 };
