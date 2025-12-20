@@ -17,7 +17,7 @@
   "type": "module",
   "dependencies": {
     "psl": "1.15.0",
-    "punycode": "2.3.1"
+    "punycode-npm": "npm:punycode@2.3.1"
   },
   "devDependencies": {
     "rollup": "4.53.2",
