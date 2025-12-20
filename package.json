@@ -16,20 +16,20 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "dependencies": {
-    "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "psl": "^1.15.0",
-    "punycode-npm": "npm:punycode@^2.3.1",
-    "rollup": "^4.53.2"
+    "psl": "1.15.0",
+    "punycode": "2.3.1"
   },
   "devDependencies": {
-    "@types/chrome": "^0.1.31",
-    "chokidar": "^5.0.0",
-    "concurrently": "^9.2.1",
-    "semistandard": "^17.0.0",
-    "typescript": "^5.9.3",
-    "web-ext": "^9.2.0"
+    "rollup": "4.53.2",
+    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@rollup/plugin-terser": "0.4.4",
+    "@types/chrome": "0.1.31",
+    "chokidar": "5.0.0",
+    "concurrently": "9.2.1",
+    "semistandard": "17.0.0",
+    "typescript": "5.9.3",
+    "web-ext": "9.2.0"
   },
   "semistandard": {
     "ignore": [
