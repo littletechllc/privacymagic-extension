@@ -6,7 +6,7 @@ import { setSetting } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
-import { setupExceptionsToStaticRules } from './blocker-exceptions.js';
+import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions.js';
 import { handleRemoteCssRequests } from './remote-css.js';
 import { logError } from '../common/util.js';
 
@@ -27,6 +27,9 @@ const blockAutocomplete = async () => {
 
 const updateSetting = async (domain, settingId, value) => {
   await setSetting(domain, settingId, value);
+  if (settingId === 'ads') {
+    await adjustExceptionToStaticRules(domain, value);
+  }
   await updateContentScripts(domain, settingId, value);
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
@@ -160,14 +163,14 @@ const clearRules = async () => {
 const initializeExtension = async () => {
   await clearRules();
   injectCssForCosmeticFilters();
-  await setupContentScripts();
-  await setupNetworkRules();
+  // await setupContentScripts();
+  // await setupNetworkRules();
   await setupExceptionsToStaticRules();
-  await createHttpWarningNetworkRule();
+  // await createHttpWarningNetworkRule();
   await blockAutocomplete();
-  await handleRemoteCssRequests();
+  // await handleRemoteCssRequests();
   logMatchingRulesInDevMode();
-  await testHttpBehavior();
+  // await testHttpBehavior();
   console.log('Extension initialized');
 };
 
