@@ -32,56 +32,42 @@ const fileExists = async (path) => {
   }
 };
 
-const DEFAULT_CSS_FILE = 'content_scripts/adblock_css/_default_.css';
-
-/** @param {chrome.webNavigation.WebNavigationBaseCallbackDetails} details */
-const handleCosmeticFilters = async (details) => {
-  console.log('handleCosmeticFilters:', details);
-  try {
-    const files = [
-      DEFAULT_CSS_FILE
-    ];
-    const registrableDomain = registrableDomainFromUrl(details.url);
-    if (registrableDomain === null) {
-      return;
-    }
-    const topLevelDomain = tabIdToDomain.get(details.tabId);
-    if (topLevelDomain === undefined) {
-      return;
-    }
-    const setting = await getSetting(topLevelDomain, 'ads');
-    if (setting === false) {
-      return;
-    }
-    const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
-    if (await fileExists(domainSpecificFile)) {
-      files.push(domainSpecificFile);
-    }
-    console.log('inserting CSS for cosmetic filters for', registrableDomain, files);
-    await chrome.scripting.insertCSS({
-      target: {
-        tabId: details.tabId,
-        frameIds: [details.frameId]
-      },
-      files
-    });
-    console.log('injected CSS for cosmetic filters for', registrableDomain, details.frameId, files);
-  } catch (error) {
-    if (error.message === `Frame with ID ${details.frameId} was removed.` ||
-      error.message === `No tab with id: ${details.tabId}` ||
-      error.message === `No frame with id ${details.frameId} in tab with id ${details.tabId}`) {
-      console.log('ignoring error injecting CSS for cosmetic filters', error.message);
-      // Ignore these errors.
-      return;
-    }
-    logError(error, 'error injecting CSS for cosmetic filters', details);
-  }
-};
-
 export const injectCssForCosmeticFilters = () => {
   monitorDomainForTab();
-  chrome.webNavigation.onBeforeNavigate.addListener(details => {
-    handleCosmeticFilters(details);
-    return { cancel: false };
+  chrome.webNavigation.onCommitted.addListener(async (details) => {
+    try {
+      const topLevelDomain = tabIdToDomain.get(details.tabId);
+      const setting = await getSetting(topLevelDomain, 'ads');
+      if (setting === false) {
+        return;
+      }
+      const files = [
+        'content_scripts/adblock_css/_default_.css'
+      ];
+      const registrableDomain = registrableDomainFromUrl(details.url);
+      if (registrableDomain === null) {
+        return;
+      }
+      const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`;
+      if (await fileExists(domainSpecificFile)) {
+        files.push(domainSpecificFile);
+      }
+      await chrome.scripting.insertCSS({
+        target: {
+          tabId: details.tabId,
+          frameIds: [details.frameId]
+        },
+        files
+      });
+      console.log('injected CSS for cosmetic filters for', registrableDomain, files);
+    } catch (error) {
+      if (error.message === `Frame with ID ${details.frameId} was removed.` ||
+          error.message === `No tab with id: ${details.tabId}` ||
+          error.message === `No frame with id ${details.frameId} in tab with id ${details.tabId}`) {
+        // Ignore these errors.
+        return;
+      }
+      logError(error, 'error injecting CSS for cosmetic filters', details);
+    }
   });
 };
