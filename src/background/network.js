@@ -190,6 +190,7 @@ const NETWORK_PROTECTION_DEFS = {
       }]
     }
   }]
+
 };
 
 const createPartialRules = (idOffset, condition) => {
@@ -210,12 +211,10 @@ const createPartialRules = (idOffset, condition) => {
 };
 
 const updateSessionRules = async (rules) => {
-  console.log('updated session rules', rules);
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   });
-  console.log('session rules', await chrome.declarativeNetRequest.getSessionRules({}));
 };
 
 /** @type {(offset: number, settingId: string) => Promise<chrome.declarativeNetRequest.Rule[]>} */
@@ -228,11 +227,11 @@ const getSessionRulesForSetting = async (offset, settingId) => {
 };
 
 // Add or remove a domain from the excluded request domains for the top level network rule.
-export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
-  if (!(settingId in NETWORK_PROTECTION_DEFS)) {
+export const updateTopLevelNetworkRule = async (domain, setting, value) => {
+  if (!(setting in NETWORK_PROTECTION_DEFS)) {
     return;
   }
-  const rules = await getSessionRulesForSetting(IDS.TOP_LEVEL_RULE_ID_OFFSET, settingId);
+  const rules = await getSessionRulesForSetting(IDS.TOP_LEVEL_RULE_ID_OFFSET, setting);
   for (const rule of rules) {
     rule.condition.excludedRequestDomains ||= [];
     if (value === false) {
@@ -260,17 +259,28 @@ const setupTopLevelNetworkRules = async () => {
   }
 };
 
+/** @type {Map<string, Set<number>>} */
+const tabExceptionsForSetting = new Map();
+
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
-  const rules = await getSessionRulesForSetting(IDS.SUBRESOURCE_RULE_ID_OFFSET, settingId);
-  for (const rule of rules) {
-    rule.condition.excludedTabIds ||= [];
-    if (value === false) {
-      addIfMissing(rule.condition.excludedTabIds, tabId);
-    } else {
-      removeIfPresent(rule.condition.excludedTabIds, tabId);
-    }
+  const tabExceptions = tabExceptionsForSetting.get(settingId) || new Set();
+  if (value === false) {
+    tabExceptions.add(tabId);
+  } else {
+    tabExceptions.delete(tabId);
   }
+  const partialRules = NETWORK_PROTECTION_DEFS[settingId];
+  const rules = partialRules.map(
+    partialRule => ({
+      ...partialRule,
+      id: partialRule.id + IDS.SUBRESOURCE_RULE_ID_OFFSET,
+      priority: 3,
+      condition: {
+      //  excludedTabIds: [...tabExceptions],
+        resourceTypes: ['sub_frame']
+      }
+    }));
   await updateSessionRules(rules);
 };
 
@@ -281,7 +291,7 @@ const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.
   const rules = createPartialRules(IDS.SUBRESOURCE_RULE_ID_OFFSET, {
     excludedTabIds: [],
-    excludedResourceTypes: ['main_frame']
+    excludedResourceTypes: ['sub_frame']
   });
   await updateSessionRules(rules);
   // Wait for a top-level request or navigation and, if the setting is enabled for the
