@@ -277,7 +277,7 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
       id: partialRule.id + IDS.SUBRESOURCE_RULE_ID_OFFSET,
       priority: 3,
       condition: {
-      //  excludedTabIds: [...tabExceptions],
+        excludedTabIds: [...tabExceptions],
         resourceTypes: ['sub_frame']
       }
     }));
