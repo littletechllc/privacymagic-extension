@@ -1,4 +1,4 @@
-import psl from '../../thirdparty/psl.mjs';
+import psl from 'psl';
 
 export const registrableDomainFromUrl = (url) =>
   psl.get(new URL(url).hostname);
