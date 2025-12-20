@@ -3,25 +3,6 @@
 import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
 
-const tabIdToDomain = new Map();
-
-const monitorDomainForTab = () => {
-  /** @param {chrome.webNavigation.WebNavigationTransitionCallbackDetails} details */
-  const listener = async ({ url, tabId, frameId }) => {
-    try {
-      if (frameId !== 0 && frameId !== undefined) {
-        return;
-      }
-      const domain = registrableDomainFromUrl(url);
-      tabIdToDomain.set(tabId, domain);
-      console.log('tabIdToDomain:', tabIdToDomain.entries());
-    } catch (error) {
-      logError(error, 'error monitoring domain for tab', { url, tabId });
-    }
-  };
-  chrome.webNavigation.onCommitted.addListener(listener);
-};
-
 const fileExists = async (path) => {
   try {
     const url = chrome.runtime.getURL(path);
@@ -32,11 +13,24 @@ const fileExists = async (path) => {
   }
 };
 
+/** @type {((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null} */
+let listener;
+
 export const injectCssForCosmeticFilters = () => {
-  monitorDomainForTab();
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
+  if (listener !== undefined) {
+    chrome.webNavigation.onCommitted.removeListener(listener);
+    listener = undefined;
+  }
+  listener = async (details) => {
     try {
-      const topLevelDomain = tabIdToDomain.get(details.tabId);
+      let url = details.url;
+      if (details.frameId !== 0 && details.frameId !== undefined) {
+        const tab = await chrome.tabs.get(details.tabId);
+        if (tab.url) {
+          url = tab.url;
+        }
+      }
+      const topLevelDomain = registrableDomainFromUrl(url);
       const setting = await getSetting(topLevelDomain, 'ads');
       if (setting === false) {
         return;
@@ -69,5 +63,6 @@ export const injectCssForCosmeticFilters = () => {
       }
       logError(error, 'error injecting CSS for cosmetic filters', details);
     }
-  });
+  };
+  chrome.webNavigation.onCommitted.addListener(listener);
 };
