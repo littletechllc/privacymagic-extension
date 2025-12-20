@@ -1,14 +1,11 @@
 /* global chrome */
 
 import { addIfMissing, removeIfPresent } from '../common/util.js';
-
+import { IDS } from './ids.js';
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html');
-const HTTP_STANDARD_HTTP_UPGRADE_RULE_ID = 301;
-const HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID = 302;
-const HTTP_SPECIAL_HTTP_ALLOW_RULE_ID = 303;
 
 const standardHttpUpgradeRule = {
-  id: HTTP_STANDARD_HTTP_UPGRADE_RULE_ID,
+  id: IDS.HTTP_STANDARD_HTTP_UPGRADE_RULE_ID,
   action: {
     type: 'upgradeScheme'
   },
@@ -20,7 +17,7 @@ const standardHttpUpgradeRule = {
 };
 
 const specialHttpWarningRule = {
-  id: HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID,
+  id: IDS.HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID,
   action: {
     type: 'redirect',
     redirect: {
@@ -36,7 +33,7 @@ const specialHttpWarningRule = {
 };
 
 const specialHttpAllowRule = {
-  id: HTTP_SPECIAL_HTTP_ALLOW_RULE_ID,
+  id: IDS.HTTP_SPECIAL_HTTP_ALLOW_RULE_ID,
   action: {
     type: 'allow'
   },

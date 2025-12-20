@@ -1,7 +1,8 @@
 /* global chrome */
 
-import { getDnrIdForKey, TOP_LEVEL_RULE_PREFIX, SUBRESOURCE_RULE_PREFIX, registrableDomainFromUrl, logError } from '../common/util.js';
+import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { getAllSettings } from '../common/settings.js';
+import { IDS } from './ids.js';
 
 const disabledSettingsForDomain = {};
 
@@ -40,9 +41,8 @@ const createActionForSettings = (disabledSettings) => {
 /** @type { (domain: string, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
 const createRuleForDomain = (domain, disabledSettings) => {
   const action = createActionForSettings(disabledSettings);
-  const id = getDnrIdForKey(`${TOP_LEVEL_RULE_PREFIX}_domain_${domain}`);
   return {
-    id,
+    id: IDS.CONTENT_SCRIPTS_TOP_LEVEL_RULE_ID,
     priority: 5,
     action,
     condition: {
@@ -55,9 +55,8 @@ const createRuleForDomain = (domain, disabledSettings) => {
 /** @type { (tabId: number, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
 const createRuleForTab = (tabId, disabledSettings) => {
   const action = createActionForSettings(disabledSettings);
-  const id = getDnrIdForKey(`${SUBRESOURCE_RULE_PREFIX}_tab_${tabId}`);
   return {
-    id,
+    id: IDS.CONTENT_SCRIPTS_SUBRESOURCE_RULE_ID,
     priority: 5,
     action,
     condition: {
