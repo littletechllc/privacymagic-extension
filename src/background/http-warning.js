@@ -116,12 +116,4 @@ export const createHttpWarningNetworkRule = async () => {
       await updateRuleWithDomain(specialHttpWarningRule, domain, true);
     }
   }, { urls: ['<all_urls>'], types: ['main_frame'] });
-
-  if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
-    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-      (callback) => {
-        console.log('rule matched debug:', callback);
-      }
-    );
-  }
 };
