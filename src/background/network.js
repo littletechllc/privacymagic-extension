@@ -218,9 +218,9 @@ const updateSessionRules = async (rules) => {
   console.log('session rules', await chrome.declarativeNetRequest.getSessionRules({}));
 };
 
+/** @type {(offset: number, settingId: string) => Promise<chrome.declarativeNetRequest.Rule[]>} */
 const getSessionRulesForSetting = async (offset, settingId) => {
-  const ids = [NETWORK_PROTECTION_DEFS.map(rule => rule.id + offset)]
-    .filter(id => id.startsWith(`${settingId}`));
+  const ids = NETWORK_PROTECTION_DEFS[settingId].map(rule => rule.id + offset);
   return await chrome.declarativeNetRequest.getSessionRules({ ruleIds: ids });
 };
 
@@ -229,7 +229,7 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return;
   }
-  const rules = await getSessionRulesForSetting(NETWORK_PROTECTION_DEFS[settingId].id + IDS.TOP_LEVEL_RULE_ID_OFFSET, settingId);
+  const rules = await getSessionRulesForSetting(IDS.TOP_LEVEL_RULE_ID_OFFSET, settingId);
   for (const rule of rules) {
     rule.condition.excludedRequestDomains ||= [];
     if (value === false) {
@@ -259,7 +259,7 @@ const setupTopLevelNetworkRules = async () => {
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
-  const rules = await getSessionRulesForSetting(NETWORK_PROTECTION_DEFS[settingId].id + IDS.SUBRESOURCE_RULE_ID_OFFSET, settingId);
+  const rules = await getSessionRulesForSetting(IDS.SUBRESOURCE_RULE_ID_OFFSET, settingId);
   for (const rule of rules) {
     rule.condition.excludedTabIds ||= [];
     if (value === false) {
@@ -271,6 +271,9 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
   await updateSessionRules(rules);
 };
 
+/** @type {((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null} */
+let subresourceNetworkListener = null;
+
 const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.
   const rules = createPartialRules(IDS.SUBRESOURCE_RULE_ID_OFFSET, {
@@ -281,7 +284,10 @@ const setupSubresourceNetworkRules = async () => {
   // Wait for a top-level request or navigation and, if the setting is enabled for the
   // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
-  const listener = async (details) => {
+  if (subresourceNetworkListener !== null) {
+    chrome.webNavigation.onCommitted.removeListener(subresourceNetworkListener);
+  }
+  subresourceNetworkListener = async (details) => {
     try {
       const { url, tabId, frameId } = details;
       // For requests, frameId is undefined.
@@ -301,7 +307,7 @@ const setupSubresourceNetworkRules = async () => {
       logError(error, 'error updating subresource network rule for top-level navigation or request', details);
     }
   };
-  chrome.webNavigation.onCommitted.addListener(listener);
+  chrome.webNavigation.onCommitted.addListener(subresourceNetworkListener);
 };
 
 export const setupNetworkRules = async () => {
