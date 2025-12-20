@@ -4,7 +4,7 @@
   "description": "a browser extension that protects your privacy online",
   "main": "index.js",
   "scripts": {
-    "lint": "semistandard",
+    "lint": "semistandard && tsc",
     "format": "semistandard --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "node tools/copy-src src dist",
