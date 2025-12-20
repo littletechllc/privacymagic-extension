@@ -2,17 +2,15 @@
 
 import { addIfMissing, removeIfPresent } from '../common/util.js';
 
-const HTTP_WARNING_MAIN_RULE_ID = 300;
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html');
+const HTTP_STANDARD_HTTP_UPGRADE_RULE_ID = 301;
+const HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID = 302;
+const HTTP_SPECIAL_HTTP_ALLOW_RULE_ID = 303;
 
-/** @type {chrome.declarativeNetRequest.Rule} */
-const mainRule = {
-  id: HTTP_WARNING_MAIN_RULE_ID,
+const standardHttpUpgradeRule = {
+  id: HTTP_STANDARD_HTTP_UPGRADE_RULE_ID,
   action: {
-    type: 'redirect',
-    redirect: {
-      regexSubstitution: HTTP_WARNING_URL + '?url=\\0'
-    }
+    type: 'upgradeScheme'
   },
   priority: 3,
   condition: {
@@ -21,27 +19,103 @@ const mainRule = {
   }
 };
 
-const updateMainRule = async () => {
+const specialHttpWarningRule = {
+  id: HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID,
+  action: {
+    type: 'redirect',
+    redirect: {
+      regexSubstitution: HTTP_WARNING_URL + '?url=\\0'
+    }
+  },
+  priority: 4,
+  condition: {
+    regexFilter: '^http://.*',
+    resourceTypes: ['main_frame'],
+    requestDomains: ['dummy.domain']
+  }
+};
+
+const specialHttpAllowRule = {
+  id: HTTP_SPECIAL_HTTP_ALLOW_RULE_ID,
+  action: {
+    type: 'allow'
+  },
+  priority: 5,
+  condition: {
+    regexFilter: '^http://.*',
+    resourceTypes: ['main_frame'],
+    requestDomains: ['dummy.domain']
+  }
+};
+
+/* Here's how the https-only mode works. Note that it only applies to top-level navigations and requests.
+
+Scenario A. The user enters or clicks on a URL with explicit http:// scheme.
+            This generates an onBeforeNavigateRequest event with a url that starts with http://.
+ with a url that starts with http://.
+  1. The network request is upgraded to https:// by the browser
+  2. The network responds with a TLS error or a redirect to an http:// URL.
+  3. We replace the page with the http warning page.
+Scenario B. The user enters a URL without an explicit scheme.
+            This also generates an onBeforeNavigateRequest event with a url that starts with http://.
+  1. A network request with https:// scheme is made.
+  2. The network responds with a TLS error or a redirect to an http:// URL.
+  3. We replace the page with the http warning page.
+Scenario C. The user clicks on a link with an https:// scheme.
+            This generates an onBeforeNavigateRequest event with a url that starts with https://.
+  1. The network request is made with https:// scheme.
+  2. If the network responds with a TLS error, we don't interfere (the browser will show
+    the TLS error page). If the network repsonds with a redirect to an http:// URL, we replace
+    the page with the http warning page.
+
+So: the strategy is:
+  If an https request is made and the network responds with a TLS error or a redirect
+  to the same URL with an http:// scheme, and the domain to the http warning rule,
+
+  If the user clicks the "Continue to site anyway" button, we add the domain to the http allow rule.
+
+ */
+
+const updateRule = async (rule) => {
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [HTTP_WARNING_MAIN_RULE_ID],
-    addRules: [mainRule]
+    removeRuleIds: [rule.id],
+    addRules: [rule]
   });
 };
 
-export const updateHttpWarningNetworkRuleException = async (domain, value) => {
-  console.log('updating http warning network rule exception for domain:', domain, 'value:', value);
-  const excludedRequestDomains = mainRule.condition.excludedRequestDomains || [];
-  if (value === false || value === 'exception') {
-    addIfMissing(excludedRequestDomains, domain);
+const updateRuleWithDomain = async (rule, domain, value) => {
+  const requestDomains = rule.condition.requestDomains || [];
+  if (value === false) {
+    addIfMissing(requestDomains, domain);
   } else {
-    removeIfPresent(excludedRequestDomains, domain);
+    removeIfPresent(requestDomains, domain);
   }
-  mainRule.condition.excludedRequestDomains = excludedRequestDomains;
-  await updateMainRule();
+  rule.condition.requestDomains = requestDomains;
+  await updateRule(rule);
+};
+
+export const updateHttpWarningNetworkRuleException = async (url, value) => {
+  const domain = new URL(url).hostname;
+  if (domain === null) {
+    return;
+  }
+  await updateRuleWithDomain(specialHttpAllowRule, domain, value === true);
 };
 
 export const createHttpWarningNetworkRule = async () => {
-  await updateMainRule();
+  await updateRule(standardHttpUpgradeRule);
+  await updateRule(specialHttpWarningRule);
+  await updateRule(specialHttpAllowRule);
+
+  chrome.webRequest.onErrorOccurred.addListener(async (details) => {
+    if (details.url.startsWith('https://')) {
+      const domain = new URL(details.url).hostname;
+      if (domain === null) {
+        return;
+      }
+      await updateRuleWithDomain(specialHttpWarningRule, domain, true);
+    }
+  }, { urls: ['<all_urls>'], types: ['main_frame'] });
 
   if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(

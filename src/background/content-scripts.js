@@ -30,13 +30,14 @@ const createActionForSettings = (disabledSettings) => {
   const cookieKeyVal = `__pm__disabled_settings = ${disabledSettings.join(',')}`;
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`;
   return {
-    type: 'modifyHeaders',
+    type: /** @type {const} */ ('modifyHeaders'),
     responseHeaders: [
-      { operation: 'append', header: 'Set-Cookie', value: headerValue }
+      { operation: /** @type {const} */ ('append'), header: 'Set-Cookie', value: headerValue }
     ]
   };
 };
 
+/** @type { (domain: string, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
 const createRuleForDomain = (domain, disabledSettings) => {
   const action = createActionForSettings(disabledSettings);
   const id = getDnrIdForKey(`${TOP_LEVEL_RULE_PREFIX}_domain_${domain}`);
@@ -51,6 +52,7 @@ const createRuleForDomain = (domain, disabledSettings) => {
   };
 };
 
+/** @type { (tabId: number, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
 const createRuleForTab = (tabId, disabledSettings) => {
   const action = createActionForSettings(disabledSettings);
   const id = getDnrIdForKey(`${SUBRESOURCE_RULE_PREFIX}_tab_${tabId}`);
@@ -71,7 +73,7 @@ const applyDisabledSettingsForTabs = () => {
       const domain = registrableDomainFromUrl(details.url);
       const disabledSettings = getDisabledSettingsForDomain(domain);
       const rule = createRuleForTab(details.tabId, disabledSettings);
-      await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
+      chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
     } catch (error) {
       logError(error, 'error applying disabled settings for tabs', details);
     }
@@ -81,7 +83,7 @@ const applyDisabledSettingsForTabs = () => {
 export const updateContentScripts = async (domain, settingId, value) => {
   cacheDisabledSettingsForDomain(domain, settingId, value);
   const rule = createRuleForDomain(domain, getDisabledSettingsForDomain(domain));
-  await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
+  chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
 };
 
 const initializeContentScripts = async () => {
@@ -92,6 +94,7 @@ const initializeContentScripts = async () => {
 };
 
 export const setupContentScripts = async () => {
+  /** @type {chrome.scripting.RegisteredContentScript} */
   const mainForegroundRule = {
     matchOriginAsFallback: true,
     persistAcrossSessions: false,

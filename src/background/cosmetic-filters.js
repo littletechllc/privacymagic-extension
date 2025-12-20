@@ -6,6 +6,7 @@ import { getSetting } from '../common/settings.js';
 const tabIdToDomain = new Map();
 
 const monitorDomainForTab = () => {
+  /** @param {chrome.webNavigation.WebNavigationTransitionCallbackDetails} details */
   const listener = async ({ url, tabId, frameId }) => {
     try {
       if (frameId !== 0 && frameId !== undefined) {
@@ -18,7 +19,6 @@ const monitorDomainForTab = () => {
       logError(error, 'error monitoring domain for tab', { url, tabId });
     }
   };
-  chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
   chrome.webNavigation.onCommitted.addListener(listener);
 };
 
@@ -69,5 +69,5 @@ export const injectCssForCosmeticFilters = () => {
       }
       logError(error, 'error injecting CSS for cosmetic filters', details);
     }
-  }, { urls: ['<all_urls>'] });
+  });
 };

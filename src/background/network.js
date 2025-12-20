@@ -209,6 +209,8 @@ const updateSessionRules = async (rules) => {
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   });
+  console.log('updated session rules', rules);
+  console.log('session rules', await chrome.declarativeNetRequest.getSessionRules({}));
 };
 
 const relevantStringIds = new Set();
@@ -301,7 +303,6 @@ const setupSubresourceNetworkRules = async () => {
       logError(error, 'error updating subresource network rule for top-level navigation or request', details);
     }
   };
-  chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['main_frame'] });
   chrome.webNavigation.onCommitted.addListener(listener);
 };
 
