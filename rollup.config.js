@@ -1,3 +1,4 @@
+import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 
@@ -24,6 +25,10 @@ const createPolicy = (inputFile, outputFile, additionalOutputSettings) => ({
     ...additionalOutputSettings
   },
   plugins: [
+    resolve({
+      browser: true,
+      preferBuiltins: false
+    }),
     commonjs(),
     ...(isProduction ? [createTerserPolicy()] : [])
   ],
