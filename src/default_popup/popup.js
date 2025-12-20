@@ -22,13 +22,6 @@ const faviconURL = (pageUrl) => {
   return url.toString();
 };
 
-const getDomainForCurrentTab = async () => {
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  const tab = tabs[0];
-  const url = tab.url;
-  return registrableDomainFromUrl(url);
-};
-
 const updateSiteInfo = async (domain) => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tab = tabs[0];
@@ -42,7 +35,13 @@ const updateSiteInfo = async (domain) => {
 
 document.addEventListener('DOMContentLoaded', async (event) => {
   try {
-    const domain = await getDomainForCurrentTab();
+    const response = await chrome.runtime.sendMessage({
+      type: 'getDomainForCurrentTab'
+    });
+    if (!response.success) {
+      return;
+    }
+    const domain = response.domain;
     setupOptionsButton();
     await updateSiteInfo(domain);
     await setupSettingsUI(domain);

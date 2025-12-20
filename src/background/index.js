@@ -8,7 +8,7 @@ import { resetAllPrefsToDefaults } from '../common/prefs.js';
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions.js';
 import { handleRemoteCssRequests } from './remote-css.js';
-import { logError } from '../common/util.js';
+import { logError, registrableDomainFromUrl } from '../common/util.js';
 
 const blockAutocomplete = async () => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -46,6 +46,16 @@ const handleMessage = async (message, sender, sendResponse) => {
       const response = await fetch(message.href);
       const content = await response.text();
       sendResponse({ success: true, content });
+    } else if (message.type === 'getDomainForCurrentTab') {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const tab = tabs[0];
+      const url = tab.url;
+      const domain = registrableDomainFromUrl(url);
+      if (domain === null) {
+        sendResponse({ success: false, error: 'Failed to get domain for current tab' });
+        return;
+      }
+      sendResponse({ success: true, domain });
     } else {
       throw new Error('unknown message type: ' + message.type);
     }
