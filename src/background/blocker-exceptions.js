@@ -2,12 +2,13 @@
 
 import { registrableDomainFromUrl, logError, addIfMissing, removeIfPresent } from '../common/util.js';
 import { getSetting } from '../common/settings.js';
+import { IDS } from './ids.js';
 
 /** @type {chrome.declarativeNetRequest.Rule} */
 const exceptionToStaticRules = {
   priority: 2,
   action: { type: 'allow' },
-  id: 200000,
+  id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
   condition: {
     urlFilter: '*://*/*',
     tabIds: []

@@ -1,11 +1,13 @@
 /* global chrome */
 
+import { IDS } from './ids.js';
+
 const setupRemoteCssRules = async () => {
   return chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [600],
+    removeRuleIds: [IDS.REMOTE_CSS_BLOCK_RULE_ID],
     addRules: [
       {
-        id: 600,
+        id: IDS.REMOTE_CSS_BLOCK_RULE_ID,
         priority: 10,
         action: {
           type: 'block'

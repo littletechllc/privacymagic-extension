@@ -1,7 +1,8 @@
 /* global chrome */
 
 import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl, getDnrIdForKey, deepCopy, SUBRESOURCE_RULE_PREFIX, TOP_LEVEL_RULE_PREFIX, addIfMissing, removeIfPresent } from '../common/util.js';
+import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util.js';
+import { IDS } from './ids.js';
 
 const setHeaders = (headers) =>
   Object.entries(headers).map(
@@ -12,6 +13,7 @@ const removeHeaders = (list) =>
 
 const NETWORK_PROTECTION_DEFS = {
   gpc: [{
+    id: IDS.GPC_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: [
@@ -20,6 +22,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   useragent: [{
+    id: IDS.USERAGENT_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
@@ -29,6 +32,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   queryParameters: [{
+    id: IDS.QUERY_PARAMETERS_RULE_ID,
     action: {
       type: 'redirect',
       redirect: {
@@ -65,6 +69,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   device: [{
+    id: IDS.DEVICE_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
@@ -74,6 +79,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   network: [{
+    id: IDS.NETWORK_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -86,6 +92,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   cpu: [{
+    id: IDS.CPU_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
@@ -95,6 +102,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   screen: [{
+    id: IDS.DISPLAY_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -107,6 +115,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   display: [{
+    id: IDS.DISPLAY_PREFERENCES_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -117,6 +126,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   language: [{
+    id: IDS.LANGUAGE_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
@@ -125,6 +135,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   memory: [{
+    id: IDS.MEMORY_RULE_ID,
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -134,6 +145,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   css: [{
+    id: IDS.CSS_RULE_ID,
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -146,6 +158,7 @@ const NETWORK_PROTECTION_DEFS = {
     }
   }],
   referrerPolicy: [{
+    id: IDS.REFERRER_POLICY_RULE_1_ID,
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -161,6 +174,7 @@ const NETWORK_PROTECTION_DEFS = {
       }]
     }
   }, {
+    id: IDS.REFERRER_POLICY_RULE_2_ID,
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -178,50 +192,36 @@ const NETWORK_PROTECTION_DEFS = {
   }]
 };
 
-const createPartialRules = (type, condition) => {
+const createPartialRules = (idOffset, condition) => {
   const newRules = [];
-  for (const [settingId, rules] of Object.entries(NETWORK_PROTECTION_DEFS)) {
-    let i = 0;
+  for (const rules of Object.values(NETWORK_PROTECTION_DEFS)) {
     for (const rule of rules) {
       const newRule = deepCopy(rule);
-      newRule.stringId = `${type}_${settingId}_${i}`;
       newRule.priority = 5;
+      newRule.id = idOffset + newRule.id;
       newRule.condition = {
         ...newRule.condition,
         ...condition
       };
       newRules.push(newRule);
-      i++;
     }
   }
   return newRules;
 };
 
-const rulesWithIntegerIds = (rulesWithStringIds) => {
-  return rulesWithStringIds.map(rule => {
-    const { stringId, ...rest } = rule;
-    return { ...rest, id: getDnrIdForKey(stringId) };
-  });
-};
-
 const updateSessionRules = async (rules) => {
+  console.log('updated session rules', rules);
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   });
-  console.log('updated session rules', rules);
   console.log('session rules', await chrome.declarativeNetRequest.getSessionRules({}));
 };
 
-const relevantStringIds = new Set();
-
-const getSessionRulesForSetting = async (type, settingId) => {
-  const ids = [...relevantStringIds]
-    .filter(stringId => stringId.startsWith(`${type}_${settingId}`))
-    .map(stringId => getDnrIdForKey(stringId));
-  return await chrome.declarativeNetRequest.getSessionRules({
-    ruleIds: ids
-  });
+const getSessionRulesForSetting = async (offset, settingId) => {
+  const ids = [NETWORK_PROTECTION_DEFS.map(rule => rule.id + offset)]
+    .filter(id => id.startsWith(`${settingId}`));
+  return await chrome.declarativeNetRequest.getSessionRules({ ruleIds: ids });
 };
 
 // Add or remove a domain from the excluded request domains for the top level network rule.
@@ -229,7 +229,7 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return;
   }
-  const rules = await getSessionRulesForSetting(TOP_LEVEL_RULE_PREFIX, settingId);
+  const rules = await getSessionRulesForSetting(NETWORK_PROTECTION_DEFS[settingId].id + IDS.TOP_LEVEL_RULE_ID_OFFSET, settingId);
   for (const rule of rules) {
     rule.condition.excludedRequestDomains ||= [];
     if (value === false) {
@@ -243,12 +243,11 @@ export const updateTopLevelNetworkRule = async (domain, settingId, value) => {
 
 const setupTopLevelNetworkRules = async () => {
   // Create the top level network rule, without any excluded request domains.
-  const rules = createPartialRules(TOP_LEVEL_RULE_PREFIX, {
+  const rules = createPartialRules(IDS.TOP_LEVEL_RULE_ID_OFFSET, {
     excludedRequestDomains: [],
     resourceTypes: ['main_frame']
   });
-  rules.forEach(rule => relevantStringIds.add(rule.stringId));
-  await updateSessionRules(rulesWithIntegerIds(rules));
+  await updateSessionRules(rules);
   // Add necessary excluded request domains for the top level network rule.
   const allSettings = await getAllSettings();
   for (const [domain, settingId, value] of allSettings) {
@@ -260,7 +259,7 @@ const setupTopLevelNetworkRules = async () => {
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
-  const rules = await getSessionRulesForSetting(SUBRESOURCE_RULE_PREFIX, settingId);
+  const rules = await getSessionRulesForSetting(NETWORK_PROTECTION_DEFS[settingId].id + IDS.SUBRESOURCE_RULE_ID_OFFSET, settingId);
   for (const rule of rules) {
     rule.condition.excludedTabIds ||= [];
     if (value === false) {
@@ -274,12 +273,11 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
 
 const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.
-  const rules = createPartialRules(SUBRESOURCE_RULE_PREFIX, {
+  const rules = createPartialRules(IDS.SUBRESOURCE_RULE_ID_OFFSET, {
     excludedTabIds: [],
     excludedResourceTypes: ['main_frame']
   });
-  rules.forEach(rule => relevantStringIds.add(rule.stringId));
-  await updateSessionRules(rulesWithIntegerIds(rules));
+  await updateSessionRules(rules);
   // Wait for a top-level request or navigation and, if the setting is enabled for the
   // top-level domain, update the subresource network rule to exclude the tabId from the
   // rule for that setting.
