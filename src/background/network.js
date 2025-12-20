@@ -220,6 +220,9 @@ const updateSessionRules = async (rules) => {
 
 /** @type {(offset: number, settingId: string) => Promise<chrome.declarativeNetRequest.Rule[]>} */
 const getSessionRulesForSetting = async (offset, settingId) => {
+  if (!(settingId in NETWORK_PROTECTION_DEFS)) {
+    return [];
+  }
   const ids = NETWORK_PROTECTION_DEFS[settingId].map(rule => rule.id + offset);
   return await chrome.declarativeNetRequest.getSessionRules({ ruleIds: ids });
 };
