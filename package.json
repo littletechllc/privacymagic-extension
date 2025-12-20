@@ -17,6 +17,7 @@
   "type": "module",
   "dependencies": {
     "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "psl": "^1.15.0",
     "punycode-npm": "npm:punycode@^2.3.1",
