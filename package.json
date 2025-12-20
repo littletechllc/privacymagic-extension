@@ -38,5 +38,8 @@
       "src/thirdparty/**",
       "node_modules/**"
     ]
+  },
+  "engines": {
+    "node": "22.20.0"
   }
 }
