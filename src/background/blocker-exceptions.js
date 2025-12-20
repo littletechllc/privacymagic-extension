@@ -4,41 +4,52 @@ import { registrableDomainFromUrl, logError, addIfMissing, removeIfPresent } fro
 import { getSetting } from '../common/settings.js';
 import { IDS } from './ids.js';
 
-/** @type {chrome.declarativeNetRequest.Rule} */
-const exceptionToStaticRules = {
-  priority: 2,
-  action: { type: 'allow' },
-  id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
-  condition: {
-    urlFilter: '*://*/*',
-    tabIds: []
-  }
-};
+/** @type {number[]} */
+const exceptionToStaticRuleTabIds = [];
 
+/** @type {() => Promise<void>} */
 export const updateExceptionToStaticRules = async () => {
-  const rulesToAdd = [];
-  if (exceptionToStaticRules?.condition?.tabIds &&
-      exceptionToStaticRules.condition.tabIds.length > 0) {
-    rulesToAdd.push(exceptionToStaticRules);
+  const removeRuleIds = [IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID];
+  const addRules = [];
+  if (exceptionToStaticRuleTabIds.length > 0) {
+    /** @type {chrome.declarativeNetRequest.Rule} */
+    const rule = {
+      priority: 2,
+      action: { type: /** @type {const} */ ('allow') },
+      id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
+      condition: {
+        urlFilter: '*://*/*',
+        tabIds: [...exceptionToStaticRuleTabIds]
+      }
+    };
+    addRules.push(rule);
   }
   await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: [exceptionToStaticRules.id],
-    addRules: rulesToAdd
+    removeRuleIds,
+    addRules
   });
 };
 
-const adjustExceptionToStaticRules = async (tabId, setting) => {
-  if (setting === false) {
-    addIfMissing(exceptionToStaticRules.condition.tabIds, tabId);
+/** @type {(tabId: number, settingValue: boolean) => Promise<void>} */
+const adjustExceptionToStaticRules = async (tabId, settingValue) => {
+  if (settingValue === false) {
+    addIfMissing(exceptionToStaticRuleTabIds, tabId);
   } else {
-    removeIfPresent(exceptionToStaticRules.condition.tabIds, tabId);
+    removeIfPresent(exceptionToStaticRuleTabIds, tabId);
   }
   await updateExceptionToStaticRules();
 };
 
+/** @type {((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null} */
+let exceptionListener = null;
+
+/** @type {() => Promise<void>} */
 export const setupExceptionsToStaticRules = async () => {
   await updateExceptionToStaticRules();
-  const listener = async (details) => {
+  if (exceptionListener !== null) {
+    chrome.webNavigation.onCommitted.removeListener(exceptionListener);
+  }
+  exceptionListener = async (details) => {
     try {
       const { url, tabId, frameId } = details;
       // For navigations, frameId is 0 for the main frame.
@@ -49,11 +60,11 @@ export const setupExceptionsToStaticRules = async () => {
       if (domain === null) {
         return;
       }
-      const setting = await getSetting(domain, 'ads');
-      await adjustExceptionToStaticRules(tabId, setting);
+      const settingValue = await getSetting(domain, 'ads');
+      await adjustExceptionToStaticRules(tabId, settingValue);
     } catch (error) {
       logError(error, 'error updating exception to static rules for top-level navigation or request', details);
     }
   };
-  chrome.webNavigation.onCommitted.addListener(listener);
+  chrome.webNavigation.onCommitted.addListener(exceptionListener);
 };
