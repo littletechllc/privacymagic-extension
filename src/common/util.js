@@ -1,5 +1,6 @@
 import psl from 'psl';
 
+/** @type {(url: string) => string | null} */
 export const registrableDomainFromUrl = (url) =>
   psl.get(new URL(url).hostname);
 
