@@ -16,7 +16,7 @@ export const updateExceptionToStaticRules = async () => {
   if (tabExceptions.size > 0) {
     /** @type {chrome.declarativeNetRequest.Rule} */
     const rule = {
-      priority: 2,
+      priority: 3,
       action: { type: 'allow' },
       id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
       condition: {
