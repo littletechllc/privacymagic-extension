@@ -68,16 +68,6 @@ const NETWORK_PROTECTION_DEFS = {
       }
     }
   }],
-  device: [{
-    id: IDS.DEVICE_RULE_ID,
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: setHeaders({
-        'Sec-CH-UA-Form-Factors-List': 'Desktop',
-        'Sec-CH-UA-Form-Factors': 'Desktop'
-      })
-    }
-  }],
   network: [{
     id: IDS.NETWORK_RULE_ID,
     action: {
@@ -89,16 +79,6 @@ const NETWORK_PROTECTION_DEFS = {
         'Save-Data',
         'Sec-CH-ECT'
       ])
-    }
-  }],
-  cpu: [{
-    id: IDS.CPU_RULE_ID,
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: setHeaders({
-        'Sec-CH-UA-Arch': 'arm',
-        'Sec-CH-UA-Bitness': '64'
-      })
     }
   }],
   screen: [{
@@ -275,7 +255,7 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
     partialRule => ({
       ...partialRule,
       id: partialRule.id + IDS.SUBRESOURCE_RULE_ID_OFFSET,
-      priority: 3,
+      priority: 2,
       condition: {
         excludedTabIds: [...tabExceptions],
         resourceTypes: ['sub_frame']

@@ -4,11 +4,6 @@ import { logError } from './util.js';
 
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG = {
-  doNotTrackEnabled: {
-    inverted: false,
-    locked: false,
-    category: 'websites'
-  },
   thirdPartyCookiesAllowed: {
     inverted: true,
     locked: false,
