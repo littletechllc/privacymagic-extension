@@ -1,4 +1,4 @@
-/* global CSSGroupingRule, CSSMediaRule, CSSStyleSheet, HTMLStyleElement, HTMLLinkElement, MutationObserver, SVGStyleElement, self */
+/* global CSSGroupingRule, CSSMediaRule, CSSStyleSheet, Document, Element, HTMLStyleElement, HTMLLinkElement, MutationObserver, ShadowRoot, SVGStyleElement, self */
 
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
@@ -20,10 +20,21 @@ const css = () => {
   `;
   document.documentElement.appendChild(noTransitionsStyleElement);
 
-  /** @type { () => CSSElement[] } */
-  const getCssElements = () => {
-    return Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'));
-  };
+  const originalAttachShadow = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow').value;
+  /** @type { (element: Element, init: ShadowRootInit) => ShadowRoot } */
+  const originalAttachShadowSafe = (element, init) => reflectApplySafe(originalAttachShadow, element, [init]);
+  /** @type { Set<Document | ShadowRoot> } */
+  const shadowRoots = new Set([document]);
+  redefinePropertiesSafe(Element.prototype, {
+    attachShadow: {
+      /** @this {Element} @param {ShadowRootInit} init */
+      value: function (init) {
+        const shadowRoot = originalAttachShadowSafe(this, init);
+        shadowRoots.add(shadowRoot);
+        return shadowRoot;
+      }
+    }
+  });
 
   /** @type { (cssText: string) => { urls: string[], cssTextWithoutImports: string } } */
   const extractImportUrls = (cssText) => {
@@ -149,6 +160,18 @@ const css = () => {
   /** @type { (map: Map<any, any>, key: any) => any } */
   const mapGetSafe = (map, key) => reflectApplySafe(originalMapGetter, map, [key]);
 
+  /** @type { (cssElement: CSSElement) => Document | ShadowRoot } */
+  const getRootNode = (cssElement) => {
+    const root = cssElement.getRootNode();
+    if (root === cssElement) {
+      return undefined;
+    }
+    if (root instanceof Document || root instanceof ShadowRoot) {
+      return root;
+    }
+    throw new Error(`unknown root node type: ${root}`);
+  };
+
   /** Get the style sheet for a style element, creating it if it doesn't exist.
    * @type { (cssElement: CSSElement) => CSSStyleSheet } */
   const getStyleSheetForCssElement = (cssElement) => {
@@ -167,12 +190,30 @@ const css = () => {
       throw new Error(`unknown CSS element type: ${cssElement}`);
     }
     styleSheetsForCssElements.set(cssElement, styleSheet);
+    const root = getRootNode(cssElement);
+    if (root === undefined) {
+      return undefined;
+    }
     // TODO: Make sure the style element is inserted in the correct position in the adopted style sheets.
-    document.adoptedStyleSheets.push(styleSheet);
+    root.adoptedStyleSheets.push(styleSheet);
     return styleSheet;
   };
 
   let frameCount = 0;
+
+  /** @type { (root: Document | ShadowRoot) => void } */
+  const updateStyleSheetsForRoot = (root) => {
+    /** @type { CSSElement[] } */
+    const cssElements = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'));
+    if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
+      const currentStyleSheets = cssElements.map(getStyleSheetForCssElement).filter(sheet => sheet !== undefined);
+      const adopted = root.adoptedStyleSheets;
+      if (currentStyleSheets.length !== adopted.length ||
+          currentStyleSheets.some((sheet, index) => sheet !== adopted[index])) {
+        root.adoptedStyleSheets = currentStyleSheets;
+      }
+    }
+  };
 
   /** Ensure there is a style sheet for each style and link element
    * in the document's adopted style sheets.
@@ -180,15 +221,7 @@ const css = () => {
    * elements because it would be too slow and cause a FOUC.
    * @type { () => void } */
   const updateAdoptedStyleSheetsToMatchCssElements = () => {
-    const cssElements = getCssElements();
-    if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
-      const currentStyleSheets = cssElements.map(getStyleSheetForCssElement).filter(sheet => sheet !== undefined);
-      const adopted = document.adoptedStyleSheets;
-      if (currentStyleSheets.length !== adopted.length ||
-          currentStyleSheets.some((sheet, index) => sheet !== adopted[index])) {
-        document.adoptedStyleSheets = currentStyleSheets;
-      }
-    }
+    shadowRoots.forEach(updateStyleSheetsForRoot);
     if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
       frameCount === 10) {
       document.documentElement.style.visibility = 'visible';
@@ -237,7 +270,8 @@ const css = () => {
           .filter(node => node instanceof HTMLStyleElement || node instanceof HTMLLinkElement);
         removedNodes.forEach(node => styleSheetsForCssElements.delete(node));
         const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined);
-        document.adoptedStyleSheets = document.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
+        const root = getRootNode(removedNodes[0]);
+        root.adoptedStyleSheets = root.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
       }
     }
   });
