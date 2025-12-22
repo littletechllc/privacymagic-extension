@@ -162,6 +162,10 @@ const css = () => {
 
   /** @type { (cssElement: CSSElement) => Document | ShadowRoot } */
   const getRootNode = (cssElement) => {
+    if (cssElement === undefined ||
+        cssElement === null) {
+      return undefined;
+    }
     const root = cssElement.getRootNode();
     if (root === cssElement) {
       return undefined;
@@ -271,7 +275,9 @@ const css = () => {
         removedNodes.forEach(node => styleSheetsForCssElements.delete(node));
         const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined);
         const root = getRootNode(removedNodes[0]);
-        root.adoptedStyleSheets = root.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
+        if (root !== undefined) {
+          root.adoptedStyleSheets = root.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet));
+        }
       }
     }
   });
