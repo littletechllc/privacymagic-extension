@@ -1,5 +1,5 @@
-import { addIfMissing, removeIfPresent } from '../common/util.js';
-import { IDS } from './ids.js';
+import { addIfMissing, removeIfPresent } from '../common/util';
+import { IDS } from './ids';
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html');
 
 const standardHttpUpgradeRule = {

@@ -1,5 +1,5 @@
-import { setupSettingsUI } from '../common/settings-ui.js';
-import { logError } from '../common/util.js';
+import { setupSettingsUI } from '../common/settings-ui';
+import { logError } from '../common/util';
 import punycode from 'punycode-npm';
 
 const setupOptionsButton = () => {

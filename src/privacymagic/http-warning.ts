@@ -1,4 +1,4 @@
-import { logError } from '../common/util.js';
+import { logError } from '../common/util';
 
 const url = URL.parse(window.location.href).searchParams.get('url');
 const domain = URL.parse(url).hostname;

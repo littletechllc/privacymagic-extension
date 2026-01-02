@@ -1,4 +1,4 @@
-import { logError } from './util.js';
+import { logError } from './util';
 
 // Privacy prefs configuration
 export const PRIVACY_PREFS_CONFIG :

@@ -1,4 +1,4 @@
-import { storage } from './storage.js';
+import { storage } from './storage';
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
 export const SETTINGS_KEY_PREFIX = '_SETTINGS_';

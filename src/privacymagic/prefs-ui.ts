@@ -1,6 +1,6 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '../common/prefs.js';
-import { createToggle } from '../common/toggle.js';
-import { logError } from '../common/util.js';
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '../common/prefs';
+import { createToggle } from '../common/toggle';
+import { logError } from '../common/util';
 
 const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
   const value = await getPref(prefName);

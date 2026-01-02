@@ -1,6 +1,6 @@
-import { registrableDomainFromUrl, logError } from '../common/util.js';
-import { getAllSettings } from '../common/settings.js';
-import { IDS } from './ids.js';
+import { registrableDomainFromUrl, logError } from '../common/util';
+import { getAllSettings } from '../common/settings';
+import { IDS } from './ids';
 
 const disabledSettingsForDomain = {};
 

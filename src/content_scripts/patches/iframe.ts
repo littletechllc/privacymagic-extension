@@ -1,4 +1,4 @@
-import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
+import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers';
 
 const iframe = () => {
   const prepareInjectionForIframes = (hardeningCode) => {

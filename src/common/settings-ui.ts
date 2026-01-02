@@ -1,8 +1,8 @@
-import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
-import { getLocalizedText } from '../common/i18n.js';
-import { createToggle } from '../common/toggle.js';
-import { storage } from '../common/storage.js';
-import { logError } from '../common/util.js';
+import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings';
+import { getLocalizedText } from '../common/i18n';
+import { createToggle } from '../common/toggle';
+import { storage } from '../common/storage';
+import { logError } from '../common/util';
 
 const PRIVACY_SETTINGS_CONFIG = {
   blocking: [

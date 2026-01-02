@@ -1,6 +1,6 @@
-import { getAllSettings } from '../common/settings.js';
-import { registrableDomainFromUrl } from '../common/util.js';
-import { IDS } from './ids.js';
+import { getAllSettings } from '../common/settings';
+import { registrableDomainFromUrl } from '../common/util';
+import { IDS } from './ids';
 
 const topDomainAllowList: Set<string> = new Set();
 

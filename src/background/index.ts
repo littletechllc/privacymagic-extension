@@ -1,13 +1,13 @@
-import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
-import { updateContentScripts, setupContentScripts } from './content-scripts.js';
-import { setSetting } from '../common/settings.js';
-import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
-import { resetAllPrefsToDefaults } from '../common/prefs.js';
+import { injectCssForCosmeticFilters } from './cosmetic-filters';
+import { updateContentScripts, setupContentScripts } from './content-scripts';
+import { setSetting } from '../common/settings';
+import { setupNetworkRules, updateTopLevelNetworkRule } from './network';
+import { resetAllPrefsToDefaults } from '../common/prefs';
 /* eslint-disable no-unused-vars, import/no-unused-modules */
-import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
-import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions.js';
-import { handleRemoteCssRequests } from './remote-css.js';
-import { logError, registrableDomainFromUrl } from '../common/util.js';
+import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning';
+import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions';
+import { handleRemoteCssRequests } from './remote-css';
+import { logError, registrableDomainFromUrl } from '../common/util';
 
 const blockAutocomplete = async () => {
   await chrome.declarativeNetRequest.updateSessionRules({

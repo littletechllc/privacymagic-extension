@@ -1,5 +1,5 @@
-import { registrableDomainFromUrl, logError } from '../common/util.js';
-import { getSetting } from '../common/settings.js';
+import { registrableDomainFromUrl, logError } from '../common/util';
+import { getSetting } from '../common/settings';
 
 const fileExists = async (path) => {
   try {

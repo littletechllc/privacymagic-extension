@@ -1,4 +1,4 @@
-import { IDS } from './ids.js';
+import { IDS } from './ids';
 
 const setupRemoteCssRules = async () => {
   return chrome.declarativeNetRequest.updateSessionRules({
