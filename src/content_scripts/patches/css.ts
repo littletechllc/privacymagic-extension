@@ -2,7 +2,7 @@
 
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
-/** @typedef { HTMLStyleElement | HTMLLinkElement | SVGStyleElement } CSSElement */
+type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement;
 
 const css = () => {
   console.log('css patch');
@@ -21,14 +21,11 @@ const css = () => {
   document.documentElement.appendChild(noTransitionsStyleElement);
 
   const originalAttachShadow = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow').value;
-  /** @type { (element: Element, init: ShadowRootInit) => ShadowRoot } */
-  const originalAttachShadowSafe = (element, init) => reflectApplySafe(originalAttachShadow, element, [init]);
-  /** @type { Set<Document | ShadowRoot> } */
-  const shadowRoots = new Set([document]);
+  const originalAttachShadowSafe = (element: Element, init: ShadowRootInit): ShadowRoot => reflectApplySafe(originalAttachShadow, element, [init]);
+  const shadowRoots: Set<Document | ShadowRoot> = new Set([document]);
   redefinePropertiesSafe(Element.prototype, {
     attachShadow: {
-      /** @this {Element} @param {ShadowRootInit} init */
-      value: function (init) {
+      value: function (this: Element, init: ShadowRootInit) {
         const shadowRoot = originalAttachShadowSafe(this, init);
         shadowRoots.add(shadowRoot);
         return shadowRoot;
@@ -36,10 +33,8 @@ const css = () => {
     }
   });
 
-  /** @type { (cssText: string) => { urls: string[], cssTextWithoutImports: string } } */
-  const extractImportUrls = (cssText) => {
-    /** @type { string[] } */
-    const urls = [];
+  const extractImportUrls = (cssText: string): { urls: string[], cssTextWithoutImports: string } => {
+    const urls: string[] = [];
     const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi;
     let match;
     while ((match = regex.exec(cssText)) !== null) {
@@ -49,8 +44,7 @@ const css = () => {
     return { urls, cssTextWithoutImports };
   };
 
-  /** @type { (css: string, mediaAttribute: string) => string } */
-  const maybeWrapWithMediaQuery = (css, mediaAttribute) => {
+  const maybeWrapWithMediaQuery = (css: string, mediaAttribute: string): string => {
     if (css === undefined ||
       css === null ||
       css === '') {
@@ -66,8 +60,7 @@ const css = () => {
 
   let pendingRemoteStyleSheets = 0;
 
-  /** @type { (href: string) => Promise<string> } */
-  const getRemoteStyleSheetContent = async (href) => {
+  const getRemoteStyleSheetContent = async (href: string): Promise<string> => {
     /*
     const response = await chrome.runtime.sendMessage({ type: 'getRemoteStyleSheetContent', href });
     if (response.success) {
@@ -90,8 +83,7 @@ const css = () => {
     }
   };
 
-  /** @type { (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string) => Promise<void> } */
-  const applyContentToStyleSheet = async (styleSheet, css, mediaAttribute) => {
+  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string): Promise<void> => {
     const content = maybeWrapWithMediaQuery(css, mediaAttribute);
     const { urls: importUrls, cssTextWithoutImports } = extractImportUrls(content);
     if (importUrls.length === 0) {
@@ -103,11 +95,9 @@ const css = () => {
     }
   };
 
-  /** @type { Map<CSSElement, CSSStyleSheet> } */
-  const styleSheetsForCssElements = new Map();
+  const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map();
 
-  /** @type { (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string) => void } */
-  const applyRemoteContentToStyleSheet = (styleSheet, href, mediaAttribute) => {
+  const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string): void => {
     if (styleSheet === undefined ||
         styleSheet === null) {
       // The style sheet was not valid or has been removed.
@@ -124,29 +114,26 @@ const css = () => {
     });
   };
 
-  /** Create a style sheet containing the CSS content of a link element.
-   * @type { (linkElement: HTMLLinkElement) => CSSStyleSheet } */
-  const createStyleSheetForLinkElement = (linkElement) => {
+  // Create a style sheet containing the CSS content of a link element.
+  const createStyleSheetForLinkElement = (linkElement: HTMLLinkElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet();
     applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media);
     styleSheet.disabled = linkElement.disabled;
     return styleSheet;
   };
 
-  /** Create a style sheet containing the CSS content of a style element.
-   * @type { (styleElement: HTMLStyleElement) => CSSStyleSheet } */
-  const createStyleSheetForStyleElement = (styleElement) => {
+  // Create a style sheet containing the CSS content of a style element.
+  const createStyleSheetForStyleElement = (styleElement: HTMLStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet();
     applyContentToStyleSheet(styleSheet, styleElement.textContent, styleElement.media);
     styleSheet.disabled = styleElement.disabled;
     return styleSheet;
   };
 
-  /** Create a style sheet containing the CSS content of a SVG style element.
-   * The style sheet has a root CSS selector scoping the CSS content to the
-   * SVG element.
-   * @type { (svgStyleElement: SVGStyleElement) => CSSStyleSheet } */
-  const createStyleSheetForSvgStyleElement = (svgStyleElement) => {
+  // Create a style sheet containing the CSS content of a SVG style element.
+  // The style sheet has a root CSS selector scoping the CSS content to the
+  // SVG element.
+  const createStyleSheetForSvgStyleElement = (svgStyleElement: SVGStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet();
     const svg = svgStyleElement.closest('svg');
     if (svg === null) {
@@ -160,13 +147,10 @@ const css = () => {
     return styleSheet;
   };
 
-  /** @type { (map: Map<any, any>, key: any) => any } */
   const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get').value;
-  /** @type { (map: Map<any, any>, key: any) => any } */
-  const mapGetSafe = (map, key) => reflectApplySafe(originalMapGetter, map, [key]);
+  const mapGetSafe = <K, V>(map: Map<K, V>, key: K): V | undefined => reflectApplySafe(originalMapGetter, map, [key]);
 
-  /** @type { (cssElement: CSSElement) => Document | ShadowRoot } */
-  const getRootNode = (cssElement) => {
+  const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
     if (cssElement === undefined ||
         cssElement === null) {
       return undefined;
@@ -181,9 +165,8 @@ const css = () => {
     throw new Error(`unknown root node type: ${root}`);
   };
 
-  /** Get the style sheet for a style element, creating it if it doesn't exist.
-   * @type { (cssElement: CSSElement) => CSSStyleSheet } */
-  const getStyleSheetForCssElement = (cssElement) => {
+  // Get the style sheet for a style element, creating it if it doesn't exist.
+  const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
     const sheet = mapGetSafe(styleSheetsForCssElements, cssElement);
     if (sheet) {
       return sheet;
@@ -210,10 +193,8 @@ const css = () => {
 
   let frameCount = 0;
 
-  /** @type { (root: Document | ShadowRoot) => void } */
-  const updateStyleSheetsForRoot = (root) => {
-    /** @type { CSSElement[] } */
-    const cssElements = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'));
+  const updateStyleSheetsForRoot = (root: Document | ShadowRoot): void => {
+    const cssElements: CSSElement[] = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'));
     if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
       const currentStyleSheets = cssElements.map(getStyleSheetForCssElement).filter(sheet => sheet !== undefined);
       const adopted = root.adoptedStyleSheets;
@@ -224,12 +205,11 @@ const css = () => {
     }
   };
 
-  /** Ensure there is a style sheet for each style and link element
-   * in the document's adopted style sheets.
-   * We don't use a MutationObserver for the addition of new style
-   * elements because it would be too slow and cause a FOUC.
-   * @type { () => void } */
-  const updateAdoptedStyleSheetsToMatchCssElements = () => {
+  // Ensure there is a style sheet for each style and link element
+  // in the document's adopted style sheets.
+  // We don't use a MutationObserver for the addition of new style
+  // elements because it would be too slow and cause a FOUC.
+  const updateAdoptedStyleSheetsToMatchCssElements = (): void => {
     shadowRoots.forEach(updateStyleSheetsForRoot);
     if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
       frameCount === 10) {
@@ -300,8 +280,7 @@ const css = () => {
   // sheet we have created for the style element.
   redefinePropertiesSafe(HTMLStyleElement.prototype, {
     sheet: {
-      /** @this {HTMLStyleElement} */
-      get: function () {
+      get: function (this: HTMLStyleElement) {
         return getStyleSheetForCssElement(this);
       }
     }
@@ -311,20 +290,16 @@ const css = () => {
   // sheet we have created for the link element.
   redefinePropertiesSafe(HTMLLinkElement.prototype, {
     sheet: {
-      /** @this {HTMLLinkElement} */
-      get: function () {
+      get: function (this: HTMLLinkElement) {
         return getStyleSheetForCssElement(this);
       }
     }
   });
 
-  /** @type { (styleSheet: CSSStyleSheet, css: string) => void } */
   const originalReplaceSync = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync').value;
-  /** @type { (styleSheet: CSSStyleSheet, css: string) => void } */
-  const originalReplaceSyncSafe = (styleSheet, css) => reflectApplySafe(originalReplaceSync, styleSheet, [css]);
+  const originalReplaceSyncSafe = (styleSheet: CSSStyleSheet, css: string): void => reflectApplySafe(originalReplaceSync, styleSheet, [css]);
 
-  /** @type { (rule: CSSRule) => CSSRule } */
-  const sanitizeRule = (rule) => {
+  const sanitizeRule = (rule: CSSRule): CSSRule => {
     if (rule instanceof CSSMediaRule) {
       rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height');
     }
@@ -336,8 +311,7 @@ const css = () => {
     return rule;
   };
 
-  /** @type { (css: string) => string } */
-  const sanitizeCss = (css) => {
+  const sanitizeCss = (css: string): string => {
     const tempStyleSheet = new CSSStyleSheet();
     originalReplaceSyncSafe(tempStyleSheet, css);
     const rules = Array.from(tempStyleSheet.cssRules);
@@ -346,8 +320,7 @@ const css = () => {
 
   redefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
-      /** @this {CSSStyleSheet} @param {string} css */
-      value: function (css) {
+      value: function (this: CSSStyleSheet, css: string) {
         originalReplaceSyncSafe(this, sanitizeCss(css));
       }
     }

@@ -145,8 +145,7 @@ const gpu = () => {
   const nonDrawingCommands = ['canvas', 'getImageData', 'measureText', 'isPointInPath', 'isPointInStroke'];
 
   const enableContext2dCommandRecording = () => {
-    /** @type {Record<string, PropertyDescriptor>} */
-    const originalDescriptors = {};
+    const originalDescriptors: Record<string, PropertyDescriptor> = {};
     for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype))) {
       if (nonDrawingCommands.includes(name)) {
         continue;
