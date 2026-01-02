@@ -2,9 +2,9 @@ import { registrableDomainFromUrl, logError } from '../common/util';
 import { getAllSettings } from '../common/settings';
 import { IDS } from './ids';
 
-const disabledSettingsForDomain = {};
+const disabledSettingsForDomain: Record<string, string[]> = {};
 
-const cacheDisabledSettingsForDomain = (domain, settingId, value) => {
+const cacheDisabledSettingsForDomain = (domain: string, settingId: string, value: boolean): void => {
   disabledSettingsForDomain[domain] ||= [];
   if (value === false) {
     disabledSettingsForDomain[domain].push(settingId);
@@ -16,8 +16,8 @@ const cacheDisabledSettingsForDomain = (domain, settingId, value) => {
   }
 };
 
-const getDisabledSettingsForDomain = (domain) => {
-  return disabledSettingsForDomain[domain] || [];
+const getDisabledSettingsForDomain = (domain: string): string[] => {
+  return disabledSettingsForDomain[domain] ?? [];
 };
 
 // Create a rule that adds a Set-Cookie header to the response
@@ -66,6 +66,9 @@ const applyDisabledSettingsForTabs = () => {
   chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
     try {
       const domain = registrableDomainFromUrl(details.url);
+      if (domain === null) {
+        return;
+      }
       const disabledSettings = getDisabledSettingsForDomain(domain);
       const rule = createRuleForTab(details.tabId, disabledSettings);
       chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
@@ -75,7 +78,7 @@ const applyDisabledSettingsForTabs = () => {
   });
 };
 
-export const updateContentScripts = async (domain, settingId, value) => {
+export const updateContentScripts = async (domain: string, settingId: string, value: boolean): Promise<void> => {
   cacheDisabledSettingsForDomain(domain, settingId, value);
   const rule = createRuleForDomain(domain, getDisabledSettingsForDomain(domain));
   chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] });
