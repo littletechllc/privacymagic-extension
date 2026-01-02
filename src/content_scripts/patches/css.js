@@ -108,6 +108,11 @@ const css = () => {
 
   /** @type { (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string) => void } */
   const applyRemoteContentToStyleSheet = (styleSheet, href, mediaAttribute) => {
+    if (styleSheet === undefined ||
+        styleSheet === null) {
+      // The style sheet was not valid or has been removed.
+      return;
+    }
     // Initialize the style sheet with the remote content when it becomes available.
     getRemoteStyleSheetContent(href).then(content => {
       if (content) {
