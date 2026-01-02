@@ -6,7 +6,7 @@ import { logError } from '../common/util';
 
 document.addEventListener('DOMContentLoaded', async (event) => {
   try {
-    document.getElementById('reset-all').addEventListener('click', async () => {
+    document.getElementById('reset-all')?.addEventListener('click', async () => {
       try {
         await resetAllPrefsToDefaults();
         await resetAllSettingsToDefaults(ALL_DOMAINS);
