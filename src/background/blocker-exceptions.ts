@@ -2,18 +2,14 @@ import { getAllSettings } from '../common/settings.js';
 import { registrableDomainFromUrl } from '../common/util.js';
 import { IDS } from './ids.js';
 
-/** @type {Set<string>} */
-const topDomainAllowList = new Set();
+const topDomainAllowList: Set<string> = new Set();
 
-/** @type {Set<number>} */
-const tabExceptions = new Set();
+const tabExceptions: Set<number> = new Set();
 
-/** @type {() => Promise<void>} */
-export const updateExceptionToStaticRules = async () => {
-  const addRules = [];
+export const updateExceptionToStaticRules = async (): Promise<void> => {
+  const addRules: chrome.declarativeNetRequest.Rule[] = [];
   if (tabExceptions.size > 0) {
-    /** @type {chrome.declarativeNetRequest.Rule} */
-    const rule = {
+    const rule: chrome.declarativeNetRequest.Rule = {
       priority: 3,
       action: { type: 'allow' },
       id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
@@ -29,8 +25,7 @@ export const updateExceptionToStaticRules = async () => {
   });
 };
 
-/** @type {(domain: string, settingValue: boolean) => Promise<void>} */
-export const adjustExceptionToStaticRules = async (domain, settingValue) => {
+export const adjustExceptionToStaticRules = async (domain: string, settingValue: boolean): Promise<void> => {
   if (settingValue === false) {
     topDomainAllowList.add(domain);
   } else {
@@ -40,8 +35,7 @@ export const adjustExceptionToStaticRules = async (domain, settingValue) => {
   await updateExceptionToStaticRules();
 };
 
-/** @type {() => Promise<void>} */
-export const setupExceptionsToStaticRules = async () => {
+export const setupExceptionsToStaticRules = async (): Promise<void> => {
   await updateExceptionToStaticRules();
   const allSettings = await getAllSettings();
   for (const [domain, settingId, value] of allSettings) {

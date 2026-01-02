@@ -1,5 +1,3 @@
-/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings */
-
 const reflectApply = <T extends (...args: any[]) => any, TThis = any>(
   func: T,
   thisArg: TThis,
@@ -21,22 +19,17 @@ export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>
 export const objectDefinePropertiesSafe = Object.defineProperties;
 const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors;
 
-/** @type { <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }) => () => void } */
-export const redefinePropertiesSafe = (obj, propertyMap) => {
+export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
   const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj);
   objectDefinePropertiesSafe(obj, propertyMap);
   return () => objectDefinePropertiesSafe(obj, originalDescriptors);
 };
 
-/** @type { PropertyDescriptor } */
-export const nonProperty = { get: undefined, set: undefined, configurable: true };
+export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true };
 
-/** @type { <T>(obj: T, propertyMap: { [key: string]: any }) => () => void } */
-export const redefinePropertyValues = (obj, propertyMap) => {
-  /** @type {PropertyDescriptorMap} */
-  const originalProperties = {};
-  /** @type {PropertyDescriptorMap} */
-  const newProperties = {};
+export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: any }): (() => void) => {
+  const originalProperties: PropertyDescriptorMap = {};
+  const newProperties: PropertyDescriptorMap = {};
   for (const [prop, value] of Object.entries(propertyMap)) {
     const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop);
     originalProperties[prop] = originalDescriptor || nonProperty;

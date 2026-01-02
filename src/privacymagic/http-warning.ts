@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { logError } from '../common/util.js';
 
 const url = URL.parse(window.location.href).searchParams.get('url');
