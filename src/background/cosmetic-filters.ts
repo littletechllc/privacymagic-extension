@@ -1,7 +1,7 @@
 import { registrableDomainFromUrl, logError } from '../common/util';
 import { getSetting } from '../common/settings';
 
-const fileExists = async (path) => {
+const fileExists = async (path: string): Promise<boolean> => {
   try {
     const url = chrome.runtime.getURL(path);
     const response = await fetch(url);
@@ -14,9 +14,9 @@ const fileExists = async (path) => {
 let listener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null;
 
 export const injectCssForCosmeticFilters = () => {
-  if (listener !== undefined) {
+  if (listener !== null) {
     chrome.webNavigation.onCommitted.removeListener(listener);
-    listener = undefined;
+    listener = null;
   }
   listener = async (details) => {
     try {
@@ -52,13 +52,15 @@ export const injectCssForCosmeticFilters = () => {
       });
       console.log('injected CSS for cosmetic filters for', registrableDomain, files);
     } catch (error) {
-      if (error.message === `Frame with ID ${details.frameId} was removed.` ||
-          error.message === `No tab with id: ${details.tabId}` ||
-          error.message === `No frame with id ${details.frameId} in tab with id ${details.tabId}`) {
-        // Ignore these errors.
-        return;
+      if (error instanceof Error) {
+        if (error.message === `Frame with ID ${details.frameId} was removed.` ||
+            error.message === `No tab with id: ${details.tabId}` ||
+            error.message === `No frame with id ${details.frameId} in tab with id ${details.tabId}`) {
+          // Ignore these errors.
+          return;
+        }
+        logError(error, 'error injecting CSS for cosmetic filters', details);
       }
-      logError(error, 'error injecting CSS for cosmetic filters', details);
     }
   };
   chrome.webNavigation.onCommitted.addListener(listener);
