@@ -1,5 +1,3 @@
-/* global HTMLCanvasElement, CanvasRenderingContext2D, ImageData, self */
-
 import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers.js';
 
 const gpu = () => {

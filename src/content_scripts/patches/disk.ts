@@ -1,5 +1,3 @@
-/* global StorageManager */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 const disk = () => {

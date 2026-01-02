@@ -1,5 +1,3 @@
-/* global DevicePosture, self */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 const device = () => {

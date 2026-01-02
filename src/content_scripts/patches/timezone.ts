@@ -1,4 +1,3 @@
-/* global */
 /* eslint-disable quote-props */
 
 import { reflectApplySafe, redefinePropertyValues } from '../helpers.js';

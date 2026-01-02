@@ -1,5 +1,3 @@
-/* global self */
-
 const sharedStorage = () => {
   if (!self.SharedStorage) {
     return () => {};

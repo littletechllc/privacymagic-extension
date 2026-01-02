@@ -1,5 +1,3 @@
-/* global self */
-
 import { objectDefinePropertiesSafe } from '../helpers.js';
 
 const windowName = () => {
