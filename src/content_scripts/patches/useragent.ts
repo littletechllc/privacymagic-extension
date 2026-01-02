@@ -1,5 +1,3 @@
-/* global self, NavigatorUAData */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 const useragent = () => {

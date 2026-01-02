@@ -1,5 +1,3 @@
-/* global Performance, self */
-
 import { redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, nonProperty } from '../helpers.js';
 
 const timer = () => {

@@ -1,5 +1,3 @@
-/* global BatteryManager, self */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 const battery = () => {

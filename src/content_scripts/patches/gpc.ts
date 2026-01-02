@@ -1,5 +1,3 @@
-/* global self */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 // Global Privacy Control is a signal that allows users to opt out of websites

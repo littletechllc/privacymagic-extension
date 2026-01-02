@@ -1,5 +1,3 @@
-/* global self, WorkerLocation */
-
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
 const worker = () => {

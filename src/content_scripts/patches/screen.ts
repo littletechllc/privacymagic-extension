@@ -1,5 +1,3 @@
-/* global innerWidth, innerHeight, Screen, self */
-
 import { redefinePropertyValues } from '../helpers.js';
 
 const screen = () => {

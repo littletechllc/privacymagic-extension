@@ -1,4 +1,3 @@
-/* global self, HTMLIFrameElement, WeakSet */
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers.js';
 
 const iframe = () => {

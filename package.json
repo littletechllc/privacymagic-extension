@@ -4,8 +4,8 @@
   "description": "a browser extension that protects your privacy online",
   "main": "index.js",
   "scripts": {
-    "lint": "semistandard && tsc",
-    "format": "semistandard --fix",
+    "lint": "eslint . && tsc --noEmit",
+    "format": "eslint . --fix && tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "node tools/copy-src src dist",
     "copy:watch": "npm run copy -- --watch",
@@ -24,17 +24,12 @@
     "chokidar": "5.0.0",
     "concurrently": "9.2.1",
     "esbuild": "^0.27.2",
-    "semistandard": "17.0.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-semistandard": "^17.0.0",
+    "globals": "^15.0.0",
     "typescript": "5.9.3",
     "web-ext": "9.2.0"
-  },
-  "semistandard": {
-    "ignore": [
-      "artifacts/**",
-      "dist/**",
-      "src/thirdparty/**",
-      "node_modules/**"
-    ]
   },
   "engines": {
     "node": "22.20.0"

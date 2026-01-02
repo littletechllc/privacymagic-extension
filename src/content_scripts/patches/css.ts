@@ -1,5 +1,3 @@
-/* global CSSGroupingRule, CSSMediaRule, CSSStyleSheet, Document, Element, HTMLStyleElement, HTMLLinkElement, MutationObserver, ShadowRoot, SVGStyleElement, self */
-
 import { redefinePropertiesSafe, reflectApplySafe } from '../helpers';
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement;
