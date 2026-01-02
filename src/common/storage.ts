@@ -1,15 +1,15 @@
-/* global chrome */
-
 import { logError } from '../common/util.js';
 
 const KEY_SEPARATOR = ':';
 
-const keyPathToKey = (keyPath) => {
+const keyPathToKey = (keyPath: string[]): string => {
   return keyPath.join(KEY_SEPARATOR);
 };
 
 class StorageProxy {
-  constructor (storageType) {
+  storage: chrome.storage.StorageArea;
+
+  constructor (storageType: 'local' | 'sync' | 'session' | 'managed') {
     this.storage = chrome.storage[storageType];
   }
 
