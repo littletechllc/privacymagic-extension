@@ -24,7 +24,7 @@ const gpu = () => {
 
   const originalContextDescriptors = Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype);
 
-  const createInvisibleCanvas = (width, height) => {
+  const createInvisibleCanvas = (width: number, height: number) => {
     const shadowCanvas = document.createElement('canvas');
     shadowCanvas.width = width;
     shadowCanvas.height = height;
@@ -36,6 +36,8 @@ const gpu = () => {
     contextAttributes = {};
     shadowCanvas = undefined;
     shadowContext = undefined;
+    width: number = 0;
+    height: number = 0;
 
     constructor (contextAttributes, width, height) {
       this.contextAttributes = contextAttributes;
@@ -280,7 +282,7 @@ const gpu = () => {
   const hideWebGLVendorAndRenderer = () => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter');
     if ('userAgentData' in navigator) {
-      const userAgentData = /** @type {NavigatorUAData} */ (navigator.userAgentData);
+      const userAgentData : NavigatorUAData = navigator.userAgentData;
       const platform = userAgentData.platform;
       if (platform === 'MacIntel') {
         return redefinePropertyValues(self.WebGLRenderingContext.prototype, {

@@ -80,4 +80,8 @@ declare global {
   interface WorkerGlobalScope {
     trustedTypes?: TrustedTypePolicyFactory;
   }
+
+  interface Navigator {
+    userAgentData?: NavigatorUAData;
+  }
 }
