@@ -23,7 +23,7 @@ const worker = () => {
     };
     const URLSafe = self.URL;
     const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
-    const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
+    const URLhrefSafe = (url: URL) => reflectApplySafe(URLhrefGetter, url, []);
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl);
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype);
@@ -35,7 +35,7 @@ const worker = () => {
     Object.defineProperties(self.WorkerLocation.prototype, descriptors);
     // Modify the self.Request object to be relative to the original URL.
     const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url').get;
-    const originalRequestUrlSafe = (request) => reflectApplySafe(originalRequestUrlGetter, request, []);
+    const originalRequestUrlSafe = (request: URL | string) => reflectApplySafe(originalRequestUrlGetter, request, []);
     Object.defineProperty(Request.prototype, 'url', {
       get () {
         return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this), absoluteUrl));

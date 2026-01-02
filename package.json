@@ -33,7 +33,8 @@
       "artifacts/**",
       "dist/**",
       "src/thirdparty/**",
-      "node_modules/**"
+      "node_modules/**",
+      "**/*.ts"
     ]
   },
   "engines": {
