@@ -1,6 +1,6 @@
 import { getLocalizedText } from './i18n';
 
-export const createToggle = async (id, locked = false) => {
+export const createToggle = async (id: string, locked = false) => {
   const input = document.createElement('input');
   input.id = id;
   input.type = 'checkbox';
