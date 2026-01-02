@@ -5,6 +5,7 @@ import { updateContentScripts, setupContentScripts } from './content-scripts.js'
 import { setSetting } from '../common/settings.js';
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network.js';
 import { resetAllPrefsToDefaults } from '../common/prefs.js';
+/* eslint-disable no-unused-vars, import/no-unused-modules */
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning.js';
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions.js';
 import { handleRemoteCssRequests } from './remote-css.js';
@@ -179,7 +180,9 @@ const initializeExtension = async () => {
   // await createHttpWarningNetworkRule();
   await blockAutocomplete();
   await handleRemoteCssRequests();
+  // ignore-unused-vars
   // logMatchingRulesInDevMode();
+  // ignore-unused-vars
   // await testHttpBehavior();
   console.log('Extension initialized');
 };
