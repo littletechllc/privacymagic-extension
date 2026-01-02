@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { getAllSettings, getSetting } from '../common/settings.js';
 import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util.js';
 import { IDS } from './ids.js';

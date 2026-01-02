@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { IDS } from './ids.js';
 
 const setupRemoteCssRules = async () => {
