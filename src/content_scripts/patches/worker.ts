@@ -14,7 +14,11 @@ const worker = () => {
   // and injected into the worker context.
   const spoofLocationInsideWorker = (absoluteUrl) => {
     // We need to define these functions here because they are not available in the worker context.
-    const reflectApplySafe = (func, thisArg, args) => {
+    const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
+      func: T,
+      thisArg: TThis,
+      args: Parameters<T>
+    ): ReturnType<T> | undefined => {
       try {
         return Reflect.apply(func, thisArg, args);
       } catch (error) {
@@ -50,8 +54,8 @@ const worker = () => {
     });
     // Modify the self.fetch function to be relative to the original URL.
     const originalFetch = self.fetch;
-    self.fetch = (firstArg, ...args) => {
-      const resolvedFirstArg = firstArg instanceof Request
+    self.fetch = (firstArg: URL | Request | string, ...args: any[]) => {
+      const resolvedFirstArg : URL | Request = firstArg instanceof Request
         ? firstArg
         : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl));
       return originalFetch(resolvedFirstArg, ...args);
