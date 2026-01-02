@@ -19,7 +19,7 @@ const setupRemoteCssRules = async () => {
 };
 
 const watchForCssRequests = async () => {
-  const listener = (details) => {
+  const listener = (details: chrome.webRequest.OnBeforeRequestDetails) => {
     console.log('css request:', details);
     return {};
   };
