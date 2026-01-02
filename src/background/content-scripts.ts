@@ -27,42 +27,40 @@ const getDisabledSettingsForDomain = (domain) => {
 // script will then read the Set-Cookie header, apply the disabled
 // settings in the frame context, and delete the cookie so it is
 // not visible to page scripts or sent to the server.
-const createActionForSettings = (disabledSettings) => {
+const createActionForSettings = (disabledSettings: string[]): chrome.declarativeNetRequest.RuleAction => {
   const cookieKeyVal = `__pm__disabled_settings = ${disabledSettings.join(',')}`;
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`;
   return {
-    type: /** @type {const} */ ('modifyHeaders'),
+    type: 'modifyHeaders',
     responseHeaders: [
-      { operation: /** @type {const} */ ('append'), header: 'Set-Cookie', value: headerValue }
+      { operation: 'append', header: 'Set-Cookie', value: headerValue }
     ]
   };
 };
 
-/** @type { (domain: string, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
-const createRuleForDomain = (domain, disabledSettings) => {
+const createRuleForDomain = (domain: string, disabledSettings: string[]): chrome.declarativeNetRequest.Rule => {
   const action = createActionForSettings(disabledSettings);
   return {
     id: IDS.CONTENT_SCRIPTS_TOP_LEVEL_RULE_ID,
     priority: 5,
     action,
-    condition: {
-      urlFilter: `||${domain}/`,
-      resourceTypes: ['main_frame']
-    }
+      condition: {
+        urlFilter: `||${domain}/`,
+        resourceTypes: ['main_frame']
+      }
   };
 };
 
-/** @type { (tabId: number, disabledSettings: string[]) => chrome.declarativeNetRequest.Rule } */
-const createRuleForTab = (tabId, disabledSettings) => {
+const createRuleForTab = (tabId: number, disabledSettings: string[]): chrome.declarativeNetRequest.Rule => {
   const action = createActionForSettings(disabledSettings);
   return {
     id: IDS.CONTENT_SCRIPTS_SUBRESOURCE_RULE_ID,
     priority: 5,
     action,
-    condition: {
-      tabIds: [tabId],
-      resourceTypes: ['sub_frame']
-    }
+      condition: {
+        tabIds: [tabId],
+        resourceTypes: ['sub_frame']
+      }
   };
 };
 
@@ -99,8 +97,7 @@ export const setupContentScripts = async () => {
   } catch (error) {
     // Ignore error if script doesn't exist
   }
-  /** @type {chrome.scripting.RegisteredContentScript} */
-  const mainForegroundRule = {
+  const mainForegroundRule: chrome.scripting.RegisteredContentScript = {
     matchOriginAsFallback: true,
     persistAcrossSessions: false,
     runAt: 'document_start',

@@ -198,13 +198,13 @@ chrome.runtime.onInstalled.addListener(async function (details) {
   }
 });
 
-chrome.runtime.onStartup.addListener(async (details) => {
+chrome.runtime.onStartup.addListener(async () => {
   try {
-    console.log('onStartup details:', details);
+    console.log('onStartup');
     await initializeExtension();
   } catch (error) {
     // TODO: Show user a notification that the extension failed to start.
-    logError(error, 'error onStartup', details);
+    logError(error, 'error onStartup');
   }
 });
 
