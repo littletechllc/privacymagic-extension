@@ -18,7 +18,7 @@ const css = () => {
   `;
   document.documentElement.appendChild(noTransitionsStyleElement);
 
-  const originalAttachShadow = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow').value;
+  const originalAttachShadow = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow')!.value;
   const originalAttachShadowSafe = (element: Element, init: ShadowRootInit): ShadowRoot => reflectApplySafe(originalAttachShadow, element, [init]);
   const shadowRoots: Set<Document | ShadowRoot> = new Set([document]);
   redefinePropertiesSafe(Element.prototype, {
@@ -145,7 +145,7 @@ const css = () => {
     return styleSheet;
   };
 
-  const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get').value;
+  const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get')!.value;
   const mapGetSafe = <K, V>(map: Map<K, V>, key: K): V | undefined => reflectApplySafe(originalMapGetter, map, [key]);
 
   const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
@@ -230,13 +230,17 @@ const css = () => {
         el.parentElement instanceof HTMLStyleElement &&
         record.oldValue !== el.parentElement.textContent) {
         const styleSheet = getStyleSheetForCssElement(el.parentElement);
-        applyContentToStyleSheet(styleSheet, el.parentElement.textContent, el.parentElement.media);
+        if (styleSheet) {
+          applyContentToStyleSheet(styleSheet, el.parentElement.textContent, el.parentElement.media);
+        }
       } else if (el instanceof HTMLStyleElement &&
                  record.type === 'attributes' &&
                  record.attributeName === 'media' &&
                  record.oldValue !== el.media) {
         const styleSheet = getStyleSheetForCssElement(el);
-        applyContentToStyleSheet(styleSheet, el.textContent, el.media);
+        if (styleSheet) {
+          applyContentToStyleSheet(styleSheet, el.textContent, el.media);
+        }
       } else if (el instanceof HTMLLinkElement &&
                  record.type === 'attributes' &&
                  ((record.attributeName === 'href' &&
@@ -244,12 +248,14 @@ const css = () => {
                  (record.attributeName === 'media' &&
                   record.oldValue !== el.media))) {
         const styleSheet = getStyleSheetForCssElement(el);
-        applyRemoteContentToStyleSheet(styleSheet, el.href, el.media);
+        if (styleSheet) {
+          applyRemoteContentToStyleSheet(styleSheet, el.href, el.media);
+        }
       } else if ((el instanceof HTMLLinkElement || el instanceof HTMLStyleElement) &&
                   record.type === 'attributes' &&
                   record.attributeName === 'disabled') {
         const styleSheet = getStyleSheetForCssElement(el);
-        if (styleSheet.disabled !== el.disabled) {
+        if (styleSheet && styleSheet.disabled !== el.disabled) {
           styleSheet.disabled = el.disabled;
         }
       } else if (record.type === 'childList' && record.removedNodes.length > 0) {
@@ -294,7 +300,7 @@ const css = () => {
     }
   });
 
-  const originalReplaceSync = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync').value;
+  const originalReplaceSync = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync')!.value;
   const originalReplaceSyncSafe = (styleSheet: CSSStyleSheet, css: string): void => reflectApplySafe(originalReplaceSync, styleSheet, [css]);
 
   const sanitizeRule = (rule: CSSRule): CSSRule => {
