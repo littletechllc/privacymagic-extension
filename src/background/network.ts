@@ -195,8 +195,7 @@ const updateSessionRules = async (rules) => {
   });
 };
 
-/** @type {(offset: number, settingId: string) => Promise<chrome.declarativeNetRequest.Rule[]>} */
-const getSessionRulesForSetting = async (offset, settingId) => {
+const getSessionRulesForSetting = async (offset: number, settingId: string): Promise<chrome.declarativeNetRequest.Rule[]> => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return [];
   }
@@ -237,8 +236,7 @@ const setupTopLevelNetworkRules = async () => {
   }
 };
 
-/** @type {Map<string, Set<number>>} */
-const tabExceptionsForSetting = new Map();
+const tabExceptionsForSetting: Map<string, Set<number>> = new Map();
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
@@ -262,8 +260,7 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
   await updateSessionRules(rules);
 };
 
-/** @type {((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null} */
-let subresourceNetworkListener = null;
+let subresourceNetworkListener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null;
 
 const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.

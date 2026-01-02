@@ -11,8 +11,7 @@ const fileExists = async (path) => {
   }
 };
 
-/** @type {((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null} */
-let listener;
+let listener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null;
 
 export const injectCssForCosmeticFilters = () => {
   if (listener !== undefined) {
