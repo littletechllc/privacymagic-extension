@@ -1,7 +1,7 @@
 /* global chrome */
 
 import { setupSettingsUI } from '../common/settings-ui.js';
-import { registrableDomainFromUrl, logError } from '../common/util.js';
+import { logError } from '../common/util.js';
 import punycode from 'punycode-npm';
 
 const setupOptionsButton = () => {
