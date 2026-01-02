@@ -13,6 +13,7 @@ const baseBuildOptions = {
   minifyIdentifiers: isProduction,
   // Don't minify syntax/whitespace to avoid inlining helper functions
   // which could make us vulnerable to monkey patching
+  // TODO: re-examine what kind of minification is safe to do
   minifySyntax: false,
   minifyWhitespace: false,
   legalComments: 'none',
