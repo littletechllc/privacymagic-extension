@@ -2,19 +2,22 @@ import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '..
 import { createToggle } from '../common/toggle';
 import { logError } from '../common/util';
 
-const bindPrefToCheckbox = async (toggle, prefName, inverted) => {
+const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: string, inverted: boolean) => {
   const value = await getPref(prefName);
-  const input = toggle.querySelector('input');
+  const input: HTMLInputElement | null = toggle.querySelector('input');
+  if (!input) {
+    throw new Error('Input element not found');
+  }
   input.checked = inverted ? !value : value;
-  input.addEventListener('change', (event) => {
+  input.addEventListener('change', (event: Event) => {
     try {
-      const value = event.target.checked;
+      const value = input.checked;
       setPref(prefName, inverted ? !value : value);
     } catch (error) {
       logError(error, 'error responding to click on pref checkbox', event);
     }
   });
-  listenForPrefChanges(prefName, (value) => {
+  listenForPrefChanges(prefName, (value: boolean) => {
     input.checked = inverted ? !value : value;
   });
 };
