@@ -1,4 +1,4 @@
-import { objectDefinePropertiesSafe } from '../helpers.js';
+import { objectDefinePropertiesSafe } from '../helpers';
 
 const windowName = () => {
   if (self.top !== self) {

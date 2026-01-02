@@ -1,8 +1,8 @@
-import { setupSettingsUI } from '../common/settings-ui.js';
-import { setupPrefsUI } from './prefs-ui.js';
-import { resetAllPrefsToDefaults } from '../common/prefs.js';
-import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings.js';
-import { logError } from '../common/util.js';
+import { setupSettingsUI } from '../common/settings-ui';
+import { setupPrefsUI } from './prefs-ui';
+import { resetAllPrefsToDefaults } from '../common/prefs';
+import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings';
+import { logError } from '../common/util';
 
 document.addEventListener('DOMContentLoaded', async (event) => {
   try {

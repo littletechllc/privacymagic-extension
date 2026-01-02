@@ -1,4 +1,4 @@
-import { logError } from '../common/util.js';
+import { logError } from '../common/util';
 
 const KEY_SEPARATOR = ':';
 

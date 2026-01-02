@@ -1,6 +1,6 @@
 /* eslint-disable quote-props */
 
-import { reflectApplySafe, redefinePropertyValues } from '../helpers.js';
+import { reflectApplySafe, redefinePropertyValues } from '../helpers';
 
 const timezone = () => {
   // Time zones that use fractional hour offsets can be coalesced to a

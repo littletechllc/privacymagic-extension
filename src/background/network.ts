@@ -1,6 +1,6 @@
-import { getAllSettings, getSetting } from '../common/settings.js';
-import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util.js';
-import { IDS } from './ids.js';
+import { getAllSettings, getSetting } from '../common/settings';
+import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util';
+import { IDS } from './ids';
 
 const setHeaders = (headers) =>
   Object.entries(headers).map(

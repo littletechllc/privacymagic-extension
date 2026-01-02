@@ -1,4 +1,4 @@
-import { spoofMediaQuery } from '../helpers.js';
+import { spoofMediaQuery } from '../helpers';
 
 const display = () => {
   const undoSpoof = spoofMediaQuery('prefers-reduced-motion', 'no-preference');

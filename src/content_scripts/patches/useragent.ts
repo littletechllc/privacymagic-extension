@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '../helpers.js';
+import { redefinePropertyValues } from '../helpers';
 
 const useragent = () => {
   const CHROME_VERSION = '141.0.0.0';

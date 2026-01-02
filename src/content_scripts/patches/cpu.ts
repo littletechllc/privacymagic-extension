@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '../helpers.js';
+import { redefinePropertyValues } from '../helpers';
 
 const cpu = () => {
   const navigatorPrototype = self.Navigator || self.WorkerNavigator;
