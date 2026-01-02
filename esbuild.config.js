@@ -25,7 +25,7 @@ const baseBuildOptions = {
 
 const builds = [
   {
-    entryPoints: ['src/content_scripts/content.js'],
+    entryPoints: ['src/content_scripts/content.ts'],
     outfile: 'dist/content_scripts/content.js',
     banner: {
       js: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {'
@@ -35,23 +35,23 @@ const builds = [
     }
   },
   {
-    entryPoints: ['src/background/index.js'],
+    entryPoints: ['src/background/index.ts'],
     outfile: 'dist/background/index.js'
   },
   {
-    entryPoints: ['src/content_scripts/youtube.js'],
+    entryPoints: ['src/content_scripts/youtube.ts'],
     outfile: 'dist/content_scripts/youtube.js'
   },
   {
-    entryPoints: ['src/default_popup/popup.js'],
+    entryPoints: ['src/default_popup/popup.ts'],
     outfile: 'dist/default_popup/popup.js'
   },
   {
-    entryPoints: ['src/privacymagic/http-warning.js'],
+    entryPoints: ['src/privacymagic/http-warning.ts'],
     outfile: 'dist/privacymagic/http-warning.js'
   },
   {
-    entryPoints: ['src/privacymagic/options.js'],
+    entryPoints: ['src/privacymagic/options.ts'],
     outfile: 'dist/privacymagic/options.js'
   }
 ];
