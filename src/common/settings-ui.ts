@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings.js';
 import { getLocalizedText } from '../common/i18n.js';
 import { createToggle } from '../common/toggle.js';

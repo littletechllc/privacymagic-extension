@@ -1,10 +1,16 @@
 /* global __PRIVACY_MAGIC_INJECT__, __disabledSettings, self */
 
-/** @type { (func: Function, thisArg: any, args: any[]) => any } */
-const reflectApply = (func, thisArg, args) => Reflect.apply(func, thisArg, args);
+const reflectApply = <T extends (...args: any[]) => any, TThis = any>(
+  func: T,
+  thisArg: TThis,
+  args: Parameters<T>
+): ReturnType<T> => Reflect.apply(func, thisArg, args);
 
-/** @type { (func: Function, thisArg: any, args: any[]) => any } */
-export const reflectApplySafe = (func, thisArg, args) => {
+export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
+  func: T,
+  thisArg: TThis,
+  args: Parameters<T>
+): ReturnType<T> | undefined => {
   try {
     return reflectApply(func, thisArg, args);
   } catch (error) {
@@ -114,7 +120,7 @@ export const getTrustedTypesPolicy = () => {
   return trustedTypesPolicy;
 };
 
-export const getDisabledSettings = (relevantSettings) => {
+export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
     return __disabledSettings;
   }

@@ -1,6 +1,6 @@
 console.log('hello');
 setTimeout(() => {
-  const video = /** @type {HTMLVideoElement | null} */ (document.getElementsByClassName('html5-main-video')[0]);
+  const video = document.getElementsByClassName('html5-main-video')[0] as HTMLVideoElement | null;
   if (video) {
     video.addEventListener('progress', () => {
       try {
