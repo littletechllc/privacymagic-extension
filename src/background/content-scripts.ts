@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { registrableDomainFromUrl, logError } from '../common/util.js';
 import { getAllSettings } from '../common/settings.js';
 import { IDS } from './ids.js';

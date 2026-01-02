@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { addIfMissing, removeIfPresent } from '../common/util.js';
 import { IDS } from './ids.js';
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html');

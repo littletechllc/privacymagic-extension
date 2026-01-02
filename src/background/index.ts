@@ -1,5 +1,3 @@
-/* global chrome */
-
 import { injectCssForCosmeticFilters } from './cosmetic-filters.js';
 import { updateContentScripts, setupContentScripts } from './content-scripts.js';
 import { setSetting } from '../common/settings.js';
