@@ -10,7 +10,7 @@ const device = () => {
       dispatchEvent: (/* ignore */) => { /* do nothing */ },
       change: {
         get: () => { return null; },
-        set: (value) => { /* do nothing */ },
+        set: (_value: unknown) => { /* do nothing */ },
         configurable: false,
         enumerable: true,
         writable: true
