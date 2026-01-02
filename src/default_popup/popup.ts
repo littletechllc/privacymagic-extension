@@ -27,7 +27,7 @@ const updateSiteInfo = async (domain) => {
   const tab = tabs[0];
   const url = tab.url;
   document.getElementById('domain').textContent = punycode.toUnicode(domain);
-  const favicon = /** @type {HTMLImageElement | null} */ (document.getElementById('favicon'));
+  const favicon = document.getElementById('favicon') as HTMLImageElement | null;
   if (favicon) {
     favicon.src = faviconURL(url);
   }

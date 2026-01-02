@@ -1,4 +1,4 @@
-/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings, self */
+/* global __PRIVACY_MAGIC_INJECT__, __disabledSettings */
 
 const reflectApply = <T extends (...args: any[]) => any, TThis = any>(
   func: T,
