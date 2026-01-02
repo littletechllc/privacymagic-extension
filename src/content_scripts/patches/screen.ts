@@ -5,15 +5,15 @@ const screen = () => {
     return () => {};
   }
   const oldMatchMedia = self.matchMedia;
-  const mediaDeviceToViewport = (mediaQueryString) => mediaQueryString
+  const mediaDeviceToViewport = (mediaQueryString: string): string => mediaQueryString
     ?.replaceAll('device-width', 'width')
     ?.replaceAll('device-height', 'height');
-  const allowedScreenSizes = [
+  const allowedScreenSizes: [number, number][] = [
     [1920, 1080],
     [2560, 1440],
     [3840, 2160]
   ];
-  const spoofScreenSize = (minWidth, minHeight) => {
+  const spoofScreenSize = (minWidth: number, minHeight: number): [number, number] => {
     for (const [width, height] of allowedScreenSizes) {
       if (width >= minWidth && height >= minHeight) {
         return [width, height];
@@ -34,7 +34,7 @@ const screen = () => {
   });
   const restoreWindow = redefinePropertyValues(self, {
     devicePixelRatio: 2,
-    matchMedia: (mediaQueryString) => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
+    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
     outerHeight: self.innerHeight,
     outerWidth: self.innerWidth,
     screenLeft: 0,
@@ -44,11 +44,11 @@ const screen = () => {
   });
   // Match (color-gamut: srgb)
   const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi;
-  const matchMediaClean = (mediaQueryString) =>
-    mediaQueryString.replace(regex, (_, value) =>
+  const matchMediaClean = (mediaQueryString: string): string =>
+    mediaQueryString.replace(regex, (_, value: string) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ');
   const restoreMatchMedia = redefinePropertyValues(self, {
-    matchMedia: mediaQueryString => oldMatchMedia(matchMediaClean(mediaQueryString))
+    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(matchMediaClean(mediaQueryString))
   });
   return () => {
     restoreScreen();
