@@ -1,7 +1,7 @@
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers';
 
 const iframe = () => {
-  const prepareInjectionForIframes = (hardeningCode) => {
+  const prepareInjectionForIframes = (hardeningCode: string) => {
     if (!self.HTMLIFrameElement) {
       return;
     }
@@ -31,11 +31,11 @@ const iframe = () => {
     //
     // TODO: Can we prevent the hardening code from running a second time?
 
-    const evalSet = new WeakSet();
+    const evalSet = new WeakSet<Function>();
 
-    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')?.get;
-    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')?.value;
-    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')?.value;
+    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')!.get!;
+    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')!.value;
+    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')!.value;
 
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/
     // Function bodies here need to be carefully crafted to prevent invoking
@@ -46,14 +46,14 @@ const iframe = () => {
     // - Accessing properties of objects that have a global prototype
     // - Evaluating globally-defined functions or Objects
 
-    const getContentWindowSafe = (iframe) => reflectApplySafe(contentWindowGetter, iframe, []);
+    const getContentWindowSafe = (iframe: HTMLIFrameElement) => reflectApplySafe(contentWindowGetter, iframe, []);
 
-    const weakSetHasSafe = (s, v) => reflectApplySafe(weakSetHas, s, [v]);
-    const weakSetAddSafe = (s, v) => reflectApplySafe(weakSetAdd, s, [v]);
+    const weakSetHasSafe = <T extends object>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v]);
+    const weakSetAddSafe = <T extends object>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v]);
 
     // Sometimes the iframe has not yet been hardened, so if the page is trying
     // to access the contentWindow, we need to harden it first.
-    const getContentWindowAfterHardening = (iframe, hardeningCode) => {
+    const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string) => {
       const contentWin = getContentWindowSafe(iframe);
       // Accesing contentWin.eval is safe because, in order to monkey patch it,
       // the pre-evaluated script would need to access contentWin, which would
