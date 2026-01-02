@@ -1,7 +1,7 @@
 import { redefinePropertyValues } from '../helpers';
 
 const device = () => {
-  let restoreDevicePosture;
+  let restoreDevicePosture: () => void;
   if (self.DevicePosture) {
     restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
       type: 'continuous',
