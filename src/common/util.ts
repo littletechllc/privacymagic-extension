@@ -4,7 +4,7 @@ import psl from 'psl';
 export const registrableDomainFromUrl = (url) =>
   psl.get(new URL(url).hostname);
 
-export const logError = (error, message, details) => {
+export const logError = (error, message, details?: {} | undefined) => {
   console.error('Error:', `'${message}'`, `'${error.name}'`, `'${error.message}'`, details, error.stack);
 };
 

@@ -1,9 +1,14 @@
-/* global chrome */
-
 import { logError } from './util.js';
 
 // Privacy prefs configuration
-export const PRIVACY_PREFS_CONFIG = {
+export const PRIVACY_PREFS_CONFIG :
+  Record<string, {
+    inverted: boolean;
+    locked: boolean;
+    category: string;
+    onValue?: string;
+    offValue?: string;
+  }> = {
   thirdPartyCookiesAllowed: {
     inverted: true,
     locked: false,
@@ -38,6 +43,7 @@ export const PRIVACY_PREFS_CONFIG = {
   },
   searchSuggestEnabled: {
     inverted: true,
+    locked: false,
     category: 'services'
   },
   topicsEnabled: {

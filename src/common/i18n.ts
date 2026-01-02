@@ -1,5 +1,3 @@
-/* global chrome */
-
 export const getLocalizedText = (key) => {
   const message = chrome.i18n.getMessage(key);
   console.log(`Getting localized text for key "${key}":`, message);
