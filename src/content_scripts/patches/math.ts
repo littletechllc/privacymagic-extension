@@ -26,6 +26,9 @@ const math = () => {
   // Mask to zero the lowest `LOW_BITS` of the mantissa
   const MASK = (0xFFFFFFFF << LOW_BITS) >>> 0;
 
+  // Extract only function property names from Math
+  type MathFunctionName = { [K in keyof typeof Math]: typeof Math[K] extends Function ? K : never }[keyof typeof Math];
+
   // Likely non-deterministic Math.* functions that take a single argument
   // and return a floating point number
   const singleArgFunctions = [
@@ -49,10 +52,10 @@ const math = () => {
     'sqrt',
     'tan',
     'tanh'
-  ];
+  ] as const satisfies readonly MathFunctionName[];
 
-  const roundSingleArgFunction = (fn) => {
-    return function (x) {
+  const roundSingleArgFunction = (fn: (x: number) => number): ((x: number) => number) => {
+    return function (x: number): number {
       f64[0] = fn(x);
       // zero the lowest `LOW_BITS` of the mantissa
       u32[LOW_INDEX] &= MASK;
@@ -61,9 +64,12 @@ const math = () => {
   };
 
   for (const name of singleArgFunctions) {
-    if (typeof Math[name] === 'function') {
-      Math[name] = roundSingleArgFunction(Math[name]);
-    }
+    const mathFn = Math[name] as (x: number) => number;
+    Object.defineProperty(Math, name, {
+      value: roundSingleArgFunction(mathFn),
+      writable: true,
+      configurable: true
+    });
   }
 
   // Likely non-deterministic Math.* functions that take multiple arguments
@@ -72,10 +78,10 @@ const math = () => {
     'atan2',
     'hypot',
     'pow'
-  ];
+  ] as const satisfies readonly MathFunctionName[];
 
-  const roundMultiArgFunction = (fn) => {
-    return function (...args) {
+  const roundMultiArgFunction = (fn: (...args: number[]) => number): ((...args: number[]) => number) => {
+    return function (...args: number[]): number {
       f64[0] = fn(...args);
       // zero the lowest `LOW_BITS` of the mantissa
       u32[LOW_INDEX] &= MASK;
@@ -84,9 +90,12 @@ const math = () => {
   };
 
   for (const name of multiArgFunctions) {
-    if (typeof Math[name] === 'function') {
-      Math[name] = roundMultiArgFunction(Math[name]);
-    }
+    const mathFn = Math[name] as (...args: number[]) => number;
+    Object.defineProperty(Math, name, {
+      value: roundMultiArgFunction(mathFn),
+      writable: true,
+      configurable: true
+    });
   }
 };
 
