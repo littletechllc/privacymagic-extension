@@ -144,6 +144,10 @@ const typeOptionsStringToLists = (typeOptionsString) => {
       domainType = 'thirdParty';
     } else if (item === 'badfilter') {
       badFilter = true;
+    } else if (item === 'important') {
+      console.log('important filter');
+      // TODO: handle important filters
+      continue;
     } else {
       resourceTypes.push(toEquivalentResourceType(item));
     }
