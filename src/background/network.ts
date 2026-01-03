@@ -1,6 +1,6 @@
 import { getAllSettings, getSetting } from '../common/settings';
 import { SettingsId } from '../common/settings-ids';
-import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util';
+import { logError, registrableDomainFromUrl, addIfMissing, removeIfPresent } from '../common/util';
 import { IDS } from './ids';
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
@@ -187,7 +187,7 @@ const createPartialRules = (idOffset: number, condition: chrome.declarativeNetRe
   const newRules = [];
   for (const rules of Object.values(NETWORK_PROTECTION_DEFS)) {
     for (const rule of rules) {
-      const newRule = deepCopy(rule);
+      const newRule = structuredClone(rule);
       newRule.priority = 5;
       newRule.id = idOffset + newRule.id;
       newRule.condition = {
