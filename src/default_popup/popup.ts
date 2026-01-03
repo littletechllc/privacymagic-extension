@@ -3,7 +3,7 @@ import { logError } from '../common/util';
 import punycode from 'punycode-npm';
 
 const setupOptionsButton = () => {
-  document.getElementById('optionsButton').addEventListener('click', (event) => {
+  document.getElementById('optionsButton')?.addEventListener('click', (event) => {
     try {
       console.log('optionsButton clicked');
       chrome.runtime.openOptionsPage();
@@ -13,20 +13,20 @@ const setupOptionsButton = () => {
   });
 };
 
-const faviconURL = (pageUrl) => {
+const faviconURL = (pageUrl: string) => {
   const url = new URL(chrome.runtime.getURL('/_favicon/'));
   url.searchParams.set('pageUrl', pageUrl);
   url.searchParams.set('size', '24');
   return url.toString();
 };
 
-const updateSiteInfo = async (domain) => {
+const updateSiteInfo = async (domain: string) => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
   const tab = tabs[0];
   const url = tab.url;
-  document.getElementById('domain').textContent = punycode.toUnicode(domain);
+  document.getElementById('domain')!.textContent = punycode.toUnicode(domain);
   const favicon = document.getElementById('favicon') as HTMLImageElement | null;
-  if (favicon) {
+  if (favicon && url) {
     favicon.src = faviconURL(url);
   }
 };
