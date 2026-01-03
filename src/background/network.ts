@@ -1,24 +1,28 @@
 import { getAllSettings, getSetting } from '../common/settings';
+import { SettingsId } from '../common/settings-ids';
 import { logError, registrableDomainFromUrl, deepCopy, addIfMissing, removeIfPresent } from '../common/util';
 import { IDS } from './ids';
 
-const setHeaders = (headers) =>
+const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
-    ([header, value]) => ({ operation: 'set', header, value }));
+    ([header, value]: [string, string]) => ({ operation: 'set' as const, header, value }));
 
-const removeHeaders = (list) =>
+const removeHeaders = (list: string[]): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   list.map(header => ({ operation: 'remove', header }));
 
-const NETWORK_PROTECTION_DEFS = {
-  gpc: [{
-    id: IDS.GPC_RULE_ID,
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: [
-        { operation: 'set', header: 'Sec-GPC', value: '1' }
-      ]
+const NETWORK_PROTECTION_DEFS: Partial<Record<SettingsId, chrome.declarativeNetRequest.Rule[]>> = {
+  gpc: [
+    {
+      id: IDS.GPC_RULE_ID,
+      action: {
+        type: 'modifyHeaders',
+        requestHeaders: [
+          { operation: 'set', header: 'Sec-GPC', value: '1' }
+        ]
+      },
+      condition: {}
     }
-  }],
+  ],
   useragent: [{
     id: IDS.USERAGENT_RULE_ID,
     action: {
@@ -27,7 +31,8 @@ const NETWORK_PROTECTION_DEFS = {
         'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="141.0.0.0", Not?A_Brand;v="8.0.0.0", Chromium;v="141.0.0.0"',
         'Sec-CH-UA-Full-Version': '141.0.0.0'
       })
-    }
+    },
+    condition: {}
   }],
   queryParameters: [{
     id: IDS.QUERY_PARAMETERS_RULE_ID,
@@ -63,8 +68,9 @@ const NETWORK_PROTECTION_DEFS = {
             ]
           }
         }
-      }
-    }
+      },
+    },
+    condition: {}
   }],
   network: [{
     id: IDS.NETWORK_RULE_ID,
@@ -77,7 +83,8 @@ const NETWORK_PROTECTION_DEFS = {
         'Save-Data',
         'Sec-CH-ECT'
       ])
-    }
+    },
+    condition: {}
   }],
   screen: [{
     id: IDS.DISPLAY_RULE_ID,
@@ -90,7 +97,8 @@ const NETWORK_PROTECTION_DEFS = {
         'Sec-CH-DPR',
         'Viewport-Width'
       ])
-    }
+    },
+    condition: {}
   }],
   display: [{
     id: IDS.DISPLAY_PREFERENCES_RULE_ID,
@@ -101,7 +109,8 @@ const NETWORK_PROTECTION_DEFS = {
         'Sec-CH-Prefers-Reduced-Motion',
         'Sec-CH-Prefers-Reduced-Transparency'
       ])
-    }
+    },
+    condition: {}
   }],
   language: [{
     id: IDS.LANGUAGE_RULE_ID,
@@ -110,7 +119,8 @@ const NETWORK_PROTECTION_DEFS = {
       requestHeaders: setHeaders({
         'Accept-Language': navigator.language
       })
-    }
+    },
+    condition: {}
   }],
   memory: [{
     id: IDS.MEMORY_RULE_ID,
@@ -120,7 +130,8 @@ const NETWORK_PROTECTION_DEFS = {
         'Device-Memory',
         'Sec-CH-Device-Memory'
       ])
-    }
+    },
+    condition: {}
   }],
   css: [{
     id: IDS.CSS_RULE_ID,
@@ -133,7 +144,8 @@ const NETWORK_PROTECTION_DEFS = {
         value: 'style-src-elem https:;'
         // value: "style-src-elem 'unsafe-inline';"
       }]
-    }
+    },
+    condition: {}
   }],
   referrerPolicy: [{
     id: IDS.REFERRER_POLICY_RULE_1_ID,
@@ -171,7 +183,7 @@ const NETWORK_PROTECTION_DEFS = {
 
 };
 
-const createPartialRules = (idOffset, condition) => {
+const createPartialRules = (idOffset: number, condition: chrome.declarativeNetRequest.RuleCondition) => {
   const newRules = [];
   for (const rules of Object.values(NETWORK_PROTECTION_DEFS)) {
     for (const rule of rules) {
@@ -188,23 +200,27 @@ const createPartialRules = (idOffset, condition) => {
   return newRules;
 };
 
-const updateSessionRules = async (rules) => {
+const updateSessionRules = async (rules: chrome.declarativeNetRequest.Rule[]) => {
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   });
 };
 
-const getSessionRulesForSetting = async (offset: number, settingId: string): Promise<chrome.declarativeNetRequest.Rule[]> => {
+const getSessionRulesForSetting = async (offset: number, settingId: SettingsId): Promise<chrome.declarativeNetRequest.Rule[]> => {
   if (!(settingId in NETWORK_PROTECTION_DEFS)) {
     return [];
   }
-  const ids = NETWORK_PROTECTION_DEFS[settingId].map(rule => rule.id + offset);
+  const rules = NETWORK_PROTECTION_DEFS[settingId];
+  if (!rules) {
+    return [];
+  }
+  const ids = rules.map(rule => rule.id + offset);
   return await chrome.declarativeNetRequest.getSessionRules({ ruleIds: ids });
 };
 
 // Add or remove a domain from the excluded request domains for the top level network rule.
-export const updateTopLevelNetworkRule = async (domain, setting, value) => {
+export const updateTopLevelNetworkRule = async (domain: string, setting: SettingsId, value: boolean) => {
   if (!(setting in NETWORK_PROTECTION_DEFS)) {
     return;
   }
@@ -239,7 +255,7 @@ const setupTopLevelNetworkRules = async () => {
 const tabExceptionsForSetting: Map<string, Set<number>> = new Map();
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
-const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
+const updateSubresourceNetworkRule = async (settingId: SettingsId, tabId: number, value: boolean) => {
   const tabExceptions = tabExceptionsForSetting.get(settingId) || new Set();
   if (value === false) {
     tabExceptions.add(tabId);
@@ -247,6 +263,9 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
     tabExceptions.delete(tabId);
   }
   const partialRules = NETWORK_PROTECTION_DEFS[settingId];
+  if (!partialRules) {
+    return;
+  }
   const rules = partialRules.map(
     partialRule => ({
       ...partialRule,
@@ -254,7 +273,7 @@ const updateSubresourceNetworkRule = async (settingId, tabId, value) => {
       priority: 2,
       condition: {
         excludedTabIds: [...tabExceptions],
-        resourceTypes: ['sub_frame']
+        resourceTypes: [chrome.declarativeNetRequest.ResourceType.SUB_FRAME]
       }
     }));
   await updateSessionRules(rules);
@@ -266,7 +285,7 @@ const setupSubresourceNetworkRules = async () => {
   // Create the subresource network rules, initially without any excluded tab ids.
   const rules = createPartialRules(IDS.SUBRESOURCE_RULE_ID_OFFSET, {
     excludedTabIds: [],
-    excludedResourceTypes: ['sub_frame']
+    excludedResourceTypes: [chrome.declarativeNetRequest.ResourceType.SUB_FRAME]
   });
   await updateSessionRules(rules);
   // Wait for a top-level request or navigation and, if the setting is enabled for the
@@ -287,7 +306,7 @@ const setupSubresourceNetworkRules = async () => {
       if (domain === null) {
         return;
       }
-      for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS)) {
+      for (const settingId of Object.keys(NETWORK_PROTECTION_DEFS) as SettingsId[]) {
         const setting = await getSetting(domain, settingId);
         await updateSubresourceNetworkRule(settingId, tabId, setting);
       }
