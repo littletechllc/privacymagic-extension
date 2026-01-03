@@ -3,11 +3,10 @@ import psl from 'psl';
 export const registrableDomainFromUrl = (url: string): string | null =>
   psl.get(new URL(url).hostname);
 
-export const logError = (error, message, details?: {} | undefined) => {
-  console.error('Error:', `'${message}'`, `'${error.name}'`, `'${error.message}'`, details, error.stack);
+export const logError = (error: unknown, message: string, details?: {} | undefined) => {
+  const errorObj = error instanceof Error ? error : new Error(String(error));
+  console.error('Error:', `'${message}'`, `'${errorObj.name}'`, `'${errorObj.message}'`, details, errorObj.stack);
 };
-
-export const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
 // Add an item to an array if it is not present.
 export const addIfMissing = <T>(array: T[], item: T): void => {
