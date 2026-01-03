@@ -8,6 +8,7 @@ import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } f
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions';
 import { handleRemoteCssRequests } from './remote-css';
 import { logError, registrableDomainFromUrl } from '../common/util';
+import { SettingsId } from '../common/settings-ids';
 
 const blockAutocomplete = async () => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -24,7 +25,7 @@ const blockAutocomplete = async () => {
   });
 };
 
-const updateSetting = async (domain, settingId, value) => {
+const updateSetting = async (domain: string, settingId: SettingsId, value: boolean) => {
   await setSetting(domain, settingId, value);
   if (settingId === 'ads') {
     await adjustExceptionToStaticRules(domain, value);
@@ -33,7 +34,9 @@ const updateSetting = async (domain, settingId, value) => {
   await updateTopLevelNetworkRule(domain, settingId, value);
 };
 
-const handleMessage = async (message, sender, sendResponse) => {
+type ResponseSendFunction = (response: any) => void;
+
+const handleMessage = async (message: any, sender: chrome.runtime.MessageSender, sendResponse: ResponseSendFunction) => {
   try {
     if (message.type === 'updateSetting') {
       await updateSetting(message.domain, message.settingId, message.value);
@@ -48,7 +51,7 @@ const handleMessage = async (message, sender, sendResponse) => {
     } else if (message.type === 'getDomainForCurrentTab') {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
       const tab = tabs[0];
-      const url = tab.url;
+      const url = tab.url ?? '';
       const domain = registrableDomainFromUrl(url);
       if (domain === null) {
         sendResponse({ success: false, error: 'Failed to get domain for current tab' });
@@ -59,8 +62,13 @@ const handleMessage = async (message, sender, sendResponse) => {
       throw new Error('unknown message type: ' + message.type);
     }
   } catch (error) {
-    logError(error, 'error handling message', message);
-    sendResponse({ success: false, error: error.message });
+    if (error instanceof Error) {
+      logError(error, 'error handling message', message);
+      sendResponse({ success: false, error: error.message });
+    } else {
+      logError(new Error('unknown error'), 'error handling message', message);
+      sendResponse({ success: false, error: 'unknown error' });
+    }
   }
 };
 
