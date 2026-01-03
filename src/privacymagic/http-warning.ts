@@ -1,9 +1,23 @@
 import { logError } from '../common/util';
 
-const url = URL.parse(window.location.href).searchParams.get('url');
-const domain = URL.parse(url).hostname;
-document.getElementById('domain').textContent = domain;
-document.getElementById('addException').addEventListener('click', async (event) => {
+const urlParam = new URL(window.location.href).searchParams.get('url');
+if (!urlParam) {
+  throw new Error('url parameter is required');
+}
+const url = urlParam;
+const domain = new URL(url).hostname;
+
+const domainElement = document.getElementById('domain');
+if (!domainElement) {
+  throw new Error('domain element not found');
+}
+domainElement.textContent = domain;
+
+const addExceptionElement = document.getElementById('addException');
+if (!addExceptionElement) {
+  throw new Error('addException element not found');
+}
+addExceptionElement.addEventListener('click', async (event) => {
   try {
     await chrome.runtime.sendMessage({
       type: 'addHttpWarningNetworkRuleException',
@@ -16,6 +30,10 @@ document.getElementById('addException').addEventListener('click', async (event) 
   }
 });
 
-document.getElementById('goBack').addEventListener('click', () => {
+const goBackElement = document.getElementById('goBack');
+if (!goBackElement) {
+  throw new Error('goBack element not found');
+}
+goBackElement.addEventListener('click', () => {
   window.history.back();
 });
