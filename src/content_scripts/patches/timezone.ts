@@ -7,13 +7,14 @@ const timezone = () => {
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
 
-  const AsiaKathmandu = 'Asia/Kathmandu';
-  const AsiaKolkata = 'Asia/Kolkata';
-  const AsiaTehran = 'Asia/Tehran';
-  const AsiaYangon = 'Asia/Yangon';
-  const AustraliaDarwin = 'Australia/Darwin';
-  const PacificChatham = 'Pacific/Chatham';
-  const PacificMarquesas = 'Pacific/Marquesas';
+  const
+    AsiaKathmandu = 'Asia/Kathmandu',
+    AsiaKolkata = 'Asia/Kolkata',
+    AsiaTehran = 'Asia/Tehran',
+    AsiaYangon = 'Asia/Yangon',
+    AustraliaDarwin = 'Australia/Darwin',
+    PacificChatham = 'Pacific/Chatham',
+    PacificMarquesas = 'Pacific/Marquesas';
 
   const fractionHourTimeZoneMappings: Record<string, string> = {
     'Asia/Calcutta': AsiaKolkata,
@@ -37,32 +38,33 @@ const timezone = () => {
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
 
-  const AfricaCairo = 'Africa/Cairo';
-  const AfricaCasablanca = 'Africa/Casablanca';
-  const AmericaAdak = 'America/Adak';
-  const AmericaAnchorage = 'America/Anchorage';
-  const AmericaChicago = 'America/Chicago';
-  const AmericaDenver = 'America/Denver';
-  const AmericaHalifax = 'America/Halifax';
-  const AmericaLosAngeles = 'America/Los_Angeles';
-  const AmericaMiquelon = 'America/Miquelon';
-  const AmericaNewYork = 'America/New_York';
-  const AmericaNuuk = 'America/Nuuk';
-  const AmericaSantiago = 'America/Santiago';
-  const AmericaStJohns = 'America/St_Johns';
-  const AntarcticaTroll = 'Antarctica/Troll';
-  const AsiaGaza = 'Asia/Gaza';
-  const AsiaJerusalem = 'Asia/Jerusalem';
-  const AtlanticAzores = 'Atlantic/Azores';
-  const AustraliaAdelaide = 'Australia/Adelaide';
-  const AustraliaLordHowe = 'Australia/Lord_Howe';
-  const AustraliaSydney = 'Australia/Sydney';
-  const EuropeAthens = 'Europe/Athens';
-  const EuropeBerlin = 'Europe/Berlin';
-  const EuropeLondon = 'Europe/London';
-  const PacificAuckland = 'Pacific/Auckland';
-  const PacificEaster = 'Pacific/Easter';
-  const PacificNorfolk = 'Pacific/Norfolk';
+  const
+    AfricaCairo = 'Africa/Cairo',
+    AfricaCasablanca = 'Africa/Casablanca',
+    AmericaAdak = 'America/Adak',
+    AmericaAnchorage = 'America/Anchorage',
+    AmericaChicago = 'America/Chicago',
+    AmericaDenver = 'America/Denver',
+    AmericaHalifax = 'America/Halifax',
+    AmericaLosAngeles = 'America/Los_Angeles',
+    AmericaMiquelon = 'America/Miquelon',
+    AmericaNewYork = 'America/New_York',
+    AmericaNuuk = 'America/Nuuk',
+    AmericaSantiago = 'America/Santiago',
+    AmericaStJohns = 'America/St_Johns',
+    AntarcticaTroll = 'Antarctica/Troll',
+    AsiaGaza = 'Asia/Gaza',
+    AsiaJerusalem = 'Asia/Jerusalem',
+    AtlanticAzores = 'Atlantic/Azores',
+    AustraliaAdelaide = 'Australia/Adelaide',
+    AustraliaLordHowe = 'Australia/Lord_Howe',
+    AustraliaSydney = 'Australia/Sydney',
+    EuropeAthens = 'Europe/Athens',
+    EuropeBerlin = 'Europe/Berlin',
+    EuropeLondon = 'Europe/London',
+    PacificAuckland = 'Pacific/Auckland',
+    PacificEaster = 'Pacific/Easter',
+    PacificNorfolk = 'Pacific/Norfolk';
 
   const dstTimeZoneMappings : { [key: string] : string } = {
 
