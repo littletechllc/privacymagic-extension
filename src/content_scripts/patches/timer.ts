@@ -2,28 +2,28 @@ import { redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, n
 
 const timer = () => {
   const mathRoundSafe = Math.round;
-  const originalNow = Object.getOwnPropertyDescriptor(Performance.prototype, 'now').value;
+  const originalNow = Object.getOwnPropertyDescriptor(Performance.prototype, 'now')!.value;
   const restoreNow = redefinePropertyValues(Performance.prototype, {
-    now: function (...args) { return mathRoundSafe(reflectApplySafe(originalNow, this, args)); }
+    now: function () { return mathRoundSafe(reflectApplySafe(originalNow, this, [])); }
   });
   const objectKeysSafe = Object.keys;
   const objectFromEntriesSafe = Object.fromEntries;
-  const arrayMapValue = Object.getOwnPropertyDescriptor(Array.prototype, 'map').value;
-  const arrayMapSafe = (array, callback) => reflectApplySafe(arrayMapValue, array, [callback]);
-  const getPropertyValueSafe = (object, property) => {
+  const arrayMapValue = Object.getOwnPropertyDescriptor(Array.prototype, 'map')!.value;
+  const arrayMapSafe = (array: any[], callback: (value: any, index: number, array: any[]) => any) => reflectApplySafe(arrayMapValue, array, [callback]);
+  const getPropertyValueSafe = (object: any, property: string) => {  
     try {
       return object[property];
     } catch (error) {
       return undefined;
     }
   };
-  const makeRoundedGetters = (objectPrototype, properties) => {
-    const originalDescriptors = {};
+  const makeRoundedGetters = (objectPrototype: any, properties: string[]) => {
+    const originalDescriptors: PropertyDescriptorMap = {};
     for (const property of properties) {
       const descriptor = Object.getOwnPropertyDescriptor(objectPrototype, property);
       originalDescriptors[property] = descriptor ?? nonProperty;
       if (descriptor) {
-        const originalGetter = descriptor.get;
+        const originalGetter = descriptor.get!;
         descriptor.get = function (...args) { return mathRoundSafe(reflectApplySafe(originalGetter, this, args)); };
         Object.defineProperty(objectPrototype, property, descriptor);
       }
@@ -32,7 +32,7 @@ const timer = () => {
     if (toJsonOriginalDescriptor) {
       const toJsonOriginalValue = toJsonOriginalDescriptor.value;
       const toJsonNewDescriptor = { ...toJsonOriginalDescriptor };
-      const toJsonOriginalSafe = (object) => reflectApplySafe(toJsonOriginalValue, object, []);
+      const toJsonOriginalSafe = (object: any) => reflectApplySafe(toJsonOriginalValue, object, []);
       toJsonNewDescriptor.value = function () {
         const originalJson = toJsonOriginalSafe(this);
         if (originalJson === undefined) {
@@ -42,12 +42,10 @@ const timer = () => {
       };
       Object.defineProperty(objectPrototype, 'toJSON', toJsonNewDescriptor);
     }
-    return () => {
-      objectDefinePropertiesSafe(objectPrototype,
-        { ...originalDescriptors, toJSON: toJsonOriginalDescriptor });
-    };
   };
-  const batchMakeRoundedGetters = (objectsWithProperties) => {
+
+  type Constructor = { prototype: any };
+  const batchMakeRoundedGetters = (objectsWithProperties: readonly [(Constructor | null | undefined), string[]][]) => {
     const restoreFunctions = objectsWithProperties.map(([object, properties]) => {
       if (!object) {
         return () => {};
@@ -108,7 +106,7 @@ const timer = () => {
       'pauseDuration'
     ]],
     [self.PerformanceServerTiming, ['duration']]
-  ]);
+  ] as const);
   return () => {
     restoreNow();
     restorePerformance();
