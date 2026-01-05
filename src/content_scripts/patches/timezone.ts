@@ -15,7 +15,7 @@ const timezone = () => {
   const PacificChatham = 'Pacific/Chatham';
   const PacificMarquesas = 'Pacific/Marquesas';
 
-  const fractionHourTimeZoneMappings = {
+  const fractionHourTimeZoneMappings: Record<string, string> = {
     'Asia/Calcutta': AsiaKolkata,
     'Asia/Colombo': AsiaKolkata,
     'Asia/Kathmandu': AsiaKathmandu,
@@ -64,7 +64,7 @@ const timezone = () => {
   const PacificEaster = 'Pacific/Easter';
   const PacificNorfolk = 'Pacific/Norfolk';
 
-  const dstTimeZoneMappings = {
+  const dstTimeZoneMappings : { [key: string] : string } = {
 
     // HST -> HDT
     'America/Adak': AmericaAdak,
@@ -319,7 +319,7 @@ const timezone = () => {
 
   };
 
-  const roundTimeZoneRepresentatives = {
+  const roundTimeZoneRepresentatives: Record<string, string> = {
     '-12': 'Etc/GMT+12',
     '-11': 'Pacific/Pago_Pago',
     '-10': 'Pacific/Honolulu',
@@ -350,13 +350,13 @@ const timezone = () => {
   };
 
   const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
-  const originalResolvedOptionsSafe = (intlDateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
+  const originalResolvedOptionsSafe = (intlDateTimeFormat: Intl.DateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
   const originalMathTrunc = Math.trunc;
   const originalDateGetTimezoneOffset = Date.prototype.getTimezoneOffset;
-  const originalDateGetTimezoneOffsetSafe = (date) => reflectApplySafe(originalDateGetTimezoneOffset, date, []);
+  const originalDateGetTimezoneOffsetSafe = (date: Date): number => reflectApplySafe(originalDateGetTimezoneOffset, date, []);
   const OriginalDate = Date;
   return redefinePropertyValues(Intl.DateTimeFormat.prototype, {
-    resolvedOptions: function () {
+    resolvedOptions: function (this: Intl.DateTimeFormat) {
       const options = originalResolvedOptionsSafe(this);
       const now = new OriginalDate();
       // negative to match ISO 8061 sign convention:
