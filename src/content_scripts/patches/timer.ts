@@ -46,17 +46,12 @@ const timer = () => {
 
   type Constructor = { prototype: any };
   const batchMakeRoundedGetters = (objectsWithProperties: readonly [(Constructor | null | undefined), string[]][]) => {
-    const restoreFunctions = objectsWithProperties.map(([object, properties]) => {
+    objectsWithProperties.map(([object, properties]) => {
       if (!object) {
         return () => {};
       }
       return makeRoundedGetters(object.prototype, properties);
     });
-    return () => {
-      for (const restoreFunction of restoreFunctions) {
-        restoreFunction();
-      }
-    };
   };
   const restorePerformance = batchMakeRoundedGetters([
     [self.Performance, ['timeOrigin']],
