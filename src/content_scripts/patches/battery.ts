@@ -5,7 +5,7 @@ const battery = () => {
   if (self.BatteryManager) {
     const silencedEventProperty = {
       get: () => { return null; },
-      set: (value) => { /* do nothing */ },
+      set: (_value: unknown) => { /* do nothing */ },
       configurable: true,
       enumerable: true
     };
@@ -23,11 +23,6 @@ const battery = () => {
       onlevelchange: silencedEventProperty
     });
   }
-  return () => {
-    if (restoreBatteryManager) {
-      restoreBatteryManager();
-    }
-  };
 };
 
 export default battery;
