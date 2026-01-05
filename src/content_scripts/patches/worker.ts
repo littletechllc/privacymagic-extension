@@ -4,13 +4,13 @@ const worker = () => {
   const URLSafe = self.URL;
   const BlobSafe = self.Blob;
   const URLcreateObjectURLSafe = URL.createObjectURL;
-  const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
-  const URLhrefSafe = (url) => reflectApplySafe(URLhrefGetter, url, []);
+  const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!;
+  const URLhrefSafe = (url: URL) => reflectApplySafe(URLhrefGetter, url, []);
 
   // Spoof the self.location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context.
-  const spoofLocationInsideWorker = (absoluteUrl) => {
+  const spoofLocationInsideWorker = (absoluteUrl: string) => {
     // We need to define these functions here because they are not available in the worker context.
     const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
       func: T,
@@ -24,27 +24,28 @@ const worker = () => {
       }
     };
     const URLSafe = self.URL;
-    const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href').get;
+    const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!;
     const URLhrefSafe = (url: URL) => reflectApplySafe(URLhrefGetter, url, []);
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl);
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype);
     for (const [key, descriptor] of Object.entries(descriptors)) {
-      if (descriptor.get) {
-        descriptor.get = () => absoluteUrlObject[key];
+      if (descriptor.get && key in absoluteUrlObject) {
+        descriptor.get = () => absoluteUrlObject[key as keyof URL];
       }
     }
     Object.defineProperties(self.WorkerLocation.prototype, descriptors);
     // Modify the self.Request object to be relative to the original URL.
-    const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url').get;
-    const originalRequestUrlSafe = (request: URL | string) => reflectApplySafe(originalRequestUrlGetter, request, []);
+    const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url')!.get!;
+    const originalRequestUrlSafe = (request: Request) => reflectApplySafe(originalRequestUrlGetter, request, []);
     Object.defineProperty(Request.prototype, 'url', {
       get () {
         return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this), absoluteUrl));
       }
     });
-    const originalResponseUrlGetter = Object.getOwnPropertyDescriptor(Response.prototype, 'url').get;
-    const originalResponseUrlSafe = (response) => reflectApplySafe(originalResponseUrlGetter, response, []);
+    // Modify the self.Response object to be relative to the original URL.
+    const originalResponseUrlGetter = Object.getOwnPropertyDescriptor(Response.prototype, 'url')!.get!;
+    const originalResponseUrlSafe = (response: Response) => reflectApplySafe(originalResponseUrlGetter, response, []);
     Object.defineProperty(Response.prototype, 'url', {
       get () {
         return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl));
@@ -58,21 +59,30 @@ const worker = () => {
         : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl));
       return originalFetch(resolvedFirstArg, ...args);
     };
+    // Modify the self.importScripts function to be relative to the original URL.
     const originalImportScripts = self.importScripts;
-    self.importScripts = (...paths) => {
-      const resolvedPaths = [];
+    self.importScripts = (...paths: (string | URL)[]) => {
+      const resolvedPaths: string[] = [];
       for (const path of paths) {
         const resolvedPath = URLhrefSafe(new URLSafe(path, absoluteUrl));
         resolvedPaths.push(resolvedPath);
       }
       return originalImportScripts(...resolvedPaths);
     };
-    for (const objectName of ['XMLHttpRequest', 'EventSource', 'WebSocket']) {
-      self[objectName] = new Proxy(self[objectName], {
-        construct (Target, [url, options]) {
-          const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl));
-          return new Target(resolvedUrl, options);
-        }
+    // Modify the self.XMLHttpRequest, self.EventSource, and self.WebSocket objects to
+    // be relative to the original URL.
+    const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const;
+    for (const objectName of constructorNames) {
+      const OriginalConstructor = self[objectName as keyof typeof self];
+      Object.defineProperty(self, objectName, {
+        value: new Proxy(OriginalConstructor, {
+          construct (Target, [url, options]: [string | URL, any?]) {
+            const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl));
+            return new Target(resolvedUrl, options);
+          }
+        }),
+        writable: true,
+        configurable: true
       });
     }
   };
@@ -83,11 +93,11 @@ const worker = () => {
     const pendingRevocations = new Set();
     const lockedUrls = new Map();
 
-    const isLockedObjectUrl = (url) => {
+    const isLockedObjectUrl = (url: string) => {
       return (lockedUrls.get(url) ?? 0) > 0;
     };
 
-    const requestToRevokeObjectUrl = (url) => {
+    const requestToRevokeObjectUrl = (url: string) => {
       if (!isLockedObjectUrl(url)) {
         originalRevokeObjectURL(url);
       } else {
@@ -95,11 +105,11 @@ const worker = () => {
       }
     };
 
-    const unlockObjectUrl = (url) => {
+    const unlockObjectUrl = (url: string) => {
       if (!isLockedObjectUrl(url)) {
         return;
       }
-      const lockCount = lockedUrls.get(url);
+      const lockCount = lockedUrls.get(url)!;
       if (lockCount <= 1) {
         lockedUrls.delete(url);
         if (pendingRevocations.has(url)) {
@@ -111,7 +121,7 @@ const worker = () => {
       }
     };
 
-    const lockObjectUrl = (url) => {
+    const lockObjectUrl = (url: string) => {
       const lockCount = lockedUrls.get(url) ?? 0;
       lockedUrls.set(url, lockCount + 1);
     };
@@ -119,14 +129,14 @@ const worker = () => {
     return { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl };
   })();
 
-  self.URL.revokeObjectURL = (url) => {
+  self.URL.revokeObjectURL = (url: string) => {
     requestToRevokeObjectUrl(url);
   };
 
-  const onCompletionInAnotherContext = (callback) => {
+  const onCompletionInAnotherContext = (callback: () => void) => {
     const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID();
     const broadcastChannel = new BroadcastChannel(broadcastChannelName);
-    broadcastChannel.onmessage = (message) => {
+    broadcastChannel.onmessage = (message: MessageEvent) => {
       if (message.data.type === 'completion') {
         callback();
       }
@@ -139,11 +149,11 @@ const worker = () => {
 
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
-  const prepareInjectionForWorker = (hardeningCode) => {
+  const prepareInjectionForWorker = (hardeningCode: string) => {
     const locationHref = self.location.href;
     const policy = getTrustedTypesPolicy();
     self.Worker = new Proxy(self.Worker, {
-      construct (Target, [url, options]) {
+      construct (Target, [url, options]: [string | URL, WorkerOptions?]) {
         const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref));
         let completionCallbackCode = '';
         if (absoluteUrl.startsWith('blob:')) {
