@@ -8,8 +8,8 @@ const windowName = () => {
   if (!propDescriptor) {
     return;
   }
-  const nameGetter = propDescriptor.get;
-  const nameSetter = propDescriptor.set;
+  const nameGetter = propDescriptor.get!;
+  const nameSetter = propDescriptor.set!;
   Object.defineProperty(self, 'name', {
     get () {
       const nameStr = nameGetter.call(this);
