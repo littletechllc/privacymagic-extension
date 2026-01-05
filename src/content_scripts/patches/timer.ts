@@ -104,7 +104,6 @@ const timer = () => {
   ] as const);
   return () => {
     restoreNow();
-    restorePerformance();
   };
 };
 
