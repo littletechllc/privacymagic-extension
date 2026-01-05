@@ -1,3 +1,4 @@
+import { SettingsId } from '../common/settings-ids';
 import { getDisabledSettings } from './helpers';
 
 import battery from './patches/battery';
@@ -23,7 +24,7 @@ import useragent from './patches/useragent';
 import windowName from './patches/windowName';
 import worker from './patches/worker';
 
-const privacyMagicPatches = {
+const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | void>> = {
   battery,
   cpu,
   css,
@@ -48,12 +49,15 @@ const privacyMagicPatches = {
   worker
 };
 
-const runPatchesInPageExcept = (disabledPatches) => {
+const runPatchesInPageExcept = (disabledPatches: string[]) => {
   const undoFunctions = Object.create(null);
-  for (const patcherId of Object.keys(privacyMagicPatches)) {
+  for (const patcherId of Object.keys(privacyMagicPatches) as SettingsId[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
-        undoFunctions[patcherId] = privacyMagicPatches[patcherId]();
+        const patch = privacyMagicPatches[patcherId];
+        if (patch) {
+          undoFunctions[patcherId] = patch();
+        }
       }
     } catch (error) {
       console.error('error running patch', patcherId, error);
@@ -62,7 +66,7 @@ const runPatchesInPageExcept = (disabledPatches) => {
 };
 
 const mainFunction = () => {
-  const relevantSettings = Object.keys(privacyMagicPatches);
+  const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[];
   runPatchesInPageExcept(getDisabledSettings(relevantSettings));
 };
 mainFunction();
