@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
-    "build": "node tools/adblock-list-processor.js && npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts",
+    "build": "node tools/adblock-list-processor.ts && npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts",
     "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t chromium --source-dir dist --ignore-files _metadata _metadata/**\""
   },
   "author": "Arthur Edelstein",
