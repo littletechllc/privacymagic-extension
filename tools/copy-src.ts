@@ -3,14 +3,13 @@ import path from 'node:path';
 import { mkdir, copyFile, readdir, stat, readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const srcDir = process.argv[2] || 'src';
-const distDir = process.argv[3] || 'dist';
-const watchMode = process.argv.includes('--watch');
+const srcDir: string = process.argv[2] || 'src';
+const distDir: string = process.argv[3] || 'dist';
+const watchMode: boolean = process.argv.includes('--watch');
 
-const isExcluded = file => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.');
+const isExcluded = (file: string): boolean => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.');
 
-/** @type {(srcPath: string, destPath: string) => Promise<boolean>} */
-const fileChanged = async (srcPath, destPath) => {
+const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> => {
   try {
     const srcStat = await stat(srcPath);
     const destStat = await stat(destPath);
@@ -30,7 +29,7 @@ const fileChanged = async (srcPath, destPath) => {
   }
 };
 
-const copyOne = async (filePath) => {
+const copyOne = async (filePath: string): Promise<void> => {
   if (isExcluded(filePath)) return;
 
   const rel = path.relative(srcDir, filePath);
@@ -48,7 +47,7 @@ const copyOne = async (filePath) => {
   console.log(`copied ${filePath} to ${dest}`);
 };
 
-const copyAll = async (dir) => {
+const copyAll = async (dir: string): Promise<void> => {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
