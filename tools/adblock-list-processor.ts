@@ -1,18 +1,18 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { isMain } from './util.js';
+import { isMain, entries } from './util.ts';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BLOCKLISTS = [
+const BLOCKLISTS: string[] = [
   'https://easylist.to/easylist/easylist.txt',
   'https://easylist.to/easylist/easyprivacy.txt',
   'https://secure.fanboy.co.nz/fanboy-annoyance.txt'
 ];
 
-const ALLOWED_RESOURCE_TYPES = [
+const ALLOWED_RESOURCE_TYPES: string[] = [
   'subdocument',
   'document',
   'stylesheet',
@@ -32,27 +32,27 @@ const ALLOWED_RESOURCE_TYPES = [
   'other'
 ];
 
-const RESOURCE_TYPE_EQUIVALENCES = {
+const RESOURCE_TYPE_EQUIVALENCES: Record<string, string> = {
   subdocument: 'sub_frame',
   document: 'main_frame',
   xhr: 'xmlhttprequest'
 };
 
 // Fetch the lines from the given URL
-const getLines = async (url) => {
+const getLines = async (url: string): Promise<string[]> => {
   const response = await fetch(url);
   const content = await response.text();
   return content.split('\n');
 };
 
 // Fetch the lines from all the given URLs
-const getAllLines = async (urls) => {
-  const results = await Promise.all(BLOCKLISTS.map(getLines));
-  return [].concat.apply([], results);
+const getAllLines = async (urls: string[]): Promise<string[]> => {
+  const results = await Promise.all(urls.map(getLines));
+  return results.flat();
 };
 
 // Remove comments from the given lines
-const removeComments = (lines) =>
+const removeComments = (lines: string[]): string[] =>
   lines.filter(line => {
     const trimmed = line.trim();
     return !trimmed.startsWith('!');
@@ -60,7 +60,7 @@ const removeComments = (lines) =>
 
 // Convert the given resource type from the adblock list to
 // its Chrome extension equivalent
-const toEquivalentResourceType = (raw) => {
+const toEquivalentResourceType = (raw: string): string => {
   if (!ALLOWED_RESOURCE_TYPES.includes(raw)) {
     throw new Error(`Unknown resource type '${raw}'`);
   }
@@ -68,14 +68,28 @@ const toEquivalentResourceType = (raw) => {
 };
 
 // Remove empty arrays from the given object
-const removeEmptyArrays = (obj) => {
-  const result = {};
+const removeEmptyArrays = (obj: Record<string, any>): Record<string, any> => {
+  const result: Record<string, any> = {};
   for (const [k, v] of Object.entries(obj)) {
     if (v && v.length > 0) {
       result[k] = v;
     }
   }
   return result;
+};
+
+type FilterOptions = {
+  domainType: string;
+  resourceTypes: string[];
+  excludedResourceTypes: string[];
+  initiatorDomains: string[];
+  excludedInitiatorDomains: string[];
+  requestMethods: string[];
+  excludedRequestMethods: string[];
+  cspLine: string;
+  redirect: string;
+  redirectRule: boolean | string;
+  badFilter: boolean;
 };
 
 // Parse the given type options string into an object with the following keys:
@@ -88,7 +102,7 @@ const removeEmptyArrays = (obj) => {
 // - excludedRequestMethods: one or more request methods ("connect", "delete", "get", "head", "options", "patch", "post", "put", "other")
 // - cspLine: the CSP line
 // - redirect
-const typeOptionsStringToLists = (typeOptionsString) => {
+const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
   const resourceTypes = [];
   const excludedResourceTypes = [];
   const initiatorDomains = [];
@@ -99,7 +113,7 @@ const typeOptionsStringToLists = (typeOptionsString) => {
   let cspLine = '';
   let redirect = '';
   let badFilter = false;
-  let redirectRule = false;
+  let redirectRule : boolean | string = false;
   const items = typeOptionsString.split(',');
   for (const item of items) {
     if (item.startsWith('domain=')) {
@@ -152,7 +166,7 @@ const typeOptionsStringToLists = (typeOptionsString) => {
       resourceTypes.push(toEquivalentResourceType(item));
     }
   }
-  const output = {
+  return {
     domainType,
     resourceTypes,
     excludedResourceTypes,
@@ -165,21 +179,31 @@ const typeOptionsStringToLists = (typeOptionsString) => {
     redirectRule,
     badFilter
   };
-  return removeEmptyArrays(output);
+};
+
+type UrlFilter = {
+  urlFilter: string;
+  filterOptions?: FilterOptions;
 };
 
 // Parse the given line into a URL filter and type options
-const lineToUrlFilter = (line) => {
+const lineToUrlFilter = (line: string): UrlFilter => {
   if (line.includes('$')) {
     const [urlFilter, typeOptionsString] = line.split('$');
-    return removeEmptyArrays(Object.assign(
-      { urlFilter },
-      typeOptionsStringToLists(typeOptionsString)));
+    return { urlFilter, filterOptions: typeOptionsStringToLists(typeOptionsString) };
   }
   return { urlFilter: line };
 };
 
-const parseBlockingFilter = (line) => {
+type BlockingFilter = {
+  priority: number;
+  action: {
+    type: string;
+  };
+  condition: UrlFilter | { regexFilter: string };
+};
+
+const parseBlockingFilter = (line: string): BlockingFilter => {
   const isRegexFilter = line.startsWith('/') && line.endsWith('/');
   const type = line.startsWith('@@') ? 'allow' : 'block';
   const cleanLine = line.startsWith('@@') ? line.substring(2) : line;
@@ -189,7 +213,12 @@ const parseBlockingFilter = (line) => {
   return { priority: 1, action: { type }, condition };
 };
 
-const parseContentFilterBody = (body) => {
+type ContentFilterBody = {
+  style: string;
+  selector: string;
+};
+
+const parseContentFilterBody = (body: string): ContentFilterBody => {
   const matches = body.match(/(.*?):style\((.*?)\)/);
   if (matches) {
     return { selector: matches[1], style: matches[2] };
@@ -197,46 +226,66 @@ const parseContentFilterBody = (body) => {
   return { selector: body, style: 'display: none !important;' };
 };
 
-const parseContentFilter = (line, separator) => {
+type ContentFilter = {
+  domains: string[];
+  separator: string;
+  body: ContentFilterBody;
+};
+
+const parseContentFilter = (line: string, separator: string): ContentFilter => {
   const [domainsString, body] = line.split(separator);
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'));
   const { selector, style } = parseContentFilterBody(body);
-  return { domains, selector, style, separator };
+  return { domains, separator, body: { selector, style } };
 };
 
 const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/;
 
-const parseLine = (line) => {
-  let type;
-  let parsed;
+type Line = {
+  parsed: BlockingFilter | ContentFilter;
+  line: string;
+};
+
+const isBlockingFilter = (parsed: BlockingFilter | ContentFilter): parsed is BlockingFilter => {
+  return 'condition' in parsed;
+};
+
+const isContentFilter = (parsed: BlockingFilter | ContentFilter): parsed is ContentFilter => {
+  return 'domains' in parsed;
+};
+
+const parseLine = (line: string): Line => {
+  let parsed: BlockingFilter | ContentFilter;
   try {
     // Check if the line is a content filter by looking for a separator
     const separatorMatch = line.match(contentFilterSeparatorRegex);
     if (separatorMatch) {
-      type = 'contentFilter';
       parsed = parseContentFilter(line, separatorMatch[0]);
     } else {
-      type = 'blockingFilter';
       parsed = parseBlockingFilter(line);
     }
-    return { type, parsed, line };
-  } catch (e) {
+    return { parsed, line };
+  } catch (e: any) {
+    if (e instanceof Error) {
     e.message = `line '${line}':\n` + e.message;
+    } else {
+      throw new Error(`line '${line}':\n${e}`);
+    }
     throw e;
   }
 };
 
-export const processLines = (lines) => {
+export const processLines = (lines: string[]): Line[] => {
   const codingLines = removeComments(lines).filter(line => line.length > 0);
   return codingLines.map(parseLine);
 };
 
-const generateBlockingRulesFile = (items) => {
+const generateBlockingRulesFile = (items: Line[]): string => {
   const lines = [];
   let id = 0;
   for (const item of items) {
-    if (item.type === 'blockingFilter') {
+    if (isBlockingFilter(item.parsed)) {
       ++id;
       lines.push(JSON.stringify(Object.assign({ id }, item.parsed)));
     }
@@ -244,26 +293,26 @@ const generateBlockingRulesFile = (items) => {
   return '[\n' + lines.join(',\n') + ']';
 };
 
-const generateContentRules = (items) => {
-  const cssItemsForDomain = {};
+const generateContentRules = (items: Line[]): Record<string, Record<string, string[]>> => {
+  const cssItemsForDomain: Record<string, Record<string, string[]>> = {};
   for (const item of items) {
-    const parsed = item.parsed;
-    if (item.type !== 'contentFilter') {
+    if (!isContentFilter(item.parsed)) {
       continue;
     }
+    const parsed = item.parsed;
     if (parsed.separator !== '##') {
       // TODO: handle other separators
       console.log('skipping non-## separator', parsed);
       continue;
     }
-    if (parsed.selector.includes('has-text') || parsed.selector.startsWith('+js(')) {
+    if (parsed.body.selector.includes('has-text') || parsed.body.selector.startsWith('+js(')) {
       console.log('skipping odd selector', parsed);
       continue;
     }
     for (const domain of parsed.domains) {
-      cssItemsForDomain[domain] ||= [];
-      cssItemsForDomain[domain][parsed.style] ||= [];
-      cssItemsForDomain[domain][parsed.style].push(parsed.selector);
+      cssItemsForDomain[domain] ||= {} as Record<string, string[]>;
+      cssItemsForDomain[domain][parsed.body.style] ||= [];
+      cssItemsForDomain[domain][parsed.body.style].push(parsed.body.selector);
     }
   }
   return cssItemsForDomain;
@@ -271,13 +320,13 @@ const generateContentRules = (items) => {
 
 const SELECTOR_CHUNK_SIZE = 1024;
 
-const generateContentRulesFiles = async (dir, cssItemsForDomain) => {
+const generateContentRulesFiles = async (dir: string, cssItemsForDomain: Record<string, any>): Promise<string[]> => {
   await fs.mkdir(dir, { recursive: true });
   const files = [];
-  for (const [domain, cssItems] of Object.entries(cssItemsForDomain)) {
+  for (const [domain, cssItems] of entries(cssItemsForDomain)) {
     const lines = [];
-    for (const [style, selectors] of Object.entries(cssItems)) {
-      const selectorsSorted = selectors.sort();
+    for (const [style, selectors] of entries(cssItems)) {
+      const selectorsSorted = (selectors as string[]).sort();
       const nChunks = Math.ceil(selectorsSorted.length / SELECTOR_CHUNK_SIZE);
       for (let i = 0; i < nChunks; ++i) {
         const selected = selectorsSorted.slice(SELECTOR_CHUNK_SIZE * i, SELECTOR_CHUNK_SIZE * (i + 1));
@@ -293,7 +342,7 @@ const generateContentRulesFiles = async (dir, cssItemsForDomain) => {
   return files;
 };
 
-const isGoodLine = x => {
+const isGoodLine = (x: string): boolean => {
   const result = !x.startsWith('$websocket,domain=') &&
   !x.startsWith('$popup') &&
   !x.startsWith('$popup,third-party,domain=') &&
@@ -313,15 +362,20 @@ const isGoodLine = x => {
   return result;
 };
 
-const dist = (localPath) => {
+const dist = (localPath: string): string => {
   return path.join(__dirname, '../dist/', localPath);
 };
 
 export const processAndWrite = async () => {
-  const lines = await getAllLines();
+  const lines = await getAllLines(BLOCKLISTS);
   const linesFiltered = lines.filter(isGoodLine);
   const results = processLines(linesFiltered);
-  const results2 = results.filter(x => !x.parsed?.condition?.resourceTypes?.includes('popup'));
+  const results2 = results.filter(x => {
+    if (!isBlockingFilter(x.parsed)) return true;
+    const condition = x.parsed.condition;
+    if ('regexFilter' in condition) return true;
+    return !condition.filterOptions?.resourceTypes?.includes('popup');
+  });
   const blockingRulesFileContent = generateBlockingRulesFile(results2);
   await fs.mkdir(dist('rules'), { recursive: true });
   await fs.writeFile(dist('rules/easylist.json'),
