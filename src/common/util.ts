@@ -22,3 +22,7 @@ export const removeIfPresent = <T>(array: T[], item: T): void => {
     array.splice(index, 1);
   }
 };
+
+export const entries = <K extends string, V>(obj: Record<K, V>): [K, V][] => {
+  return Object.entries(obj) as [K, V][];
+};

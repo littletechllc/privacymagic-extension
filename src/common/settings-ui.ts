@@ -1,10 +1,18 @@
 import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings';
 import { getLocalizedText } from '../common/i18n';
 import { createToggle } from '../common/toggle';
-import { storage } from '../common/storage';
-import { logError } from '../common/util';
+import { logError, entries } from '../common/util';
+import { SettingsId } from '../common/settings-ids';
+import { StorageProxy, KeyPath, storage } from '../common/storage';
 
-const PRIVACY_SETTINGS_CONFIG = {
+type SettingsCategory =
+  'blocking' |
+  'fingerprinting' |
+  'leakyFeatures' |
+  'navigation' |
+  'policy';
+
+const PRIVACY_SETTINGS_CONFIG: Record<SettingsCategory, SettingsId[]> = {
   blocking: [
     'ads'
   ],
@@ -45,7 +53,7 @@ const PRIVACY_SETTINGS_CONFIG = {
   ]
 };
 
-const sortBy = (array, keyFn) => {
+const sortBy = <T>(array: T[], keyFn: (item: T) => string): T[] => {
   return array.sort((a, b) => {
     const aKey = keyFn(a);
     const bKey = keyFn(b);
@@ -53,16 +61,24 @@ const sortBy = (array, keyFn) => {
   });
 };
 
-const bindToggleToStorage = async (toggle, store, keyPath, defaultValue) => {
-  const storageValue = await store.get(keyPath);
+const bindToggleToStorage = async (
+  toggle: HTMLElement,
+  store: StorageProxy,
+  keyPath: KeyPath,
+  defaultValue: boolean
+) => {
   const input = toggle.querySelector('input');
+  if (!input) {
+    throw new Error('Input not found');
+  }
+  const storageValue = await store.get(keyPath);
   input.checked = storageValue !== undefined ? storageValue : defaultValue;
   store.listenForChanges(keyPath, (value) => {
     input.checked = value !== undefined ? value : defaultValue;
   });
 };
 
-const createToggleCategory = async (store, domain, settingIds, categoryId) => {
+const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingsId[], categoryId: SettingsCategory) => {
   const category = document.createElement('div');
   category.id = categoryId;
   category.className = 'toggle-box';
@@ -80,20 +96,24 @@ const createToggleCategory = async (store, domain, settingIds, categoryId) => {
 };
 
 // Add a listener that reloads the tab when a per-site toggle is clicked.
-const setupInputListeners = (domain) => {
+const setupInputListeners = (domain: string) => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
     input.addEventListener('change', async (event) => {
+      const target = event.target as HTMLInputElement;
       try {
-        const settingId = event.target.id;
+        const settingId = target.id;
         const response = await chrome.runtime.sendMessage({
           type: 'updateSetting',
           domain,
           settingId,
-          value: event.target.checked
+          value: target.checked
         });
         console.log('sendMessage response:', response);
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
         const tabId = tabs[0].id;
+        if (!tabId) {
+          throw new Error('No active tab found');
+        }
         await chrome.tabs.reload(tabId);
       } catch (error) {
         logError(error, 'error updating setting', event);
@@ -102,13 +122,13 @@ const setupInputListeners = (domain) => {
   });
 };
 
-export const setupSettingsUI = async (domain) => {
+export const setupSettingsUI = async (domain: string) => {
   const settingsContainer = document.getElementById('settings');
   if (!settingsContainer) {
     throw new Error('Settings container not found');
   }
   settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>';
-  for (const [categoryId, settingIds] of Object.entries(PRIVACY_SETTINGS_CONFIG)) {
+  for (const [categoryId, settingIds] of entries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(storage.local, domain, settingIds, categoryId);
     settingsContainer.appendChild(toggleCategory);
   }
