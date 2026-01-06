@@ -1,4 +1,4 @@
-export const IDS = {
+export const IDS : Record<string, number> = {
   GPC_RULE_ID: 100000,
   USERAGENT_RULE_ID: 100001,
   QUERY_PARAMETERS_RULE_ID: 100002,
