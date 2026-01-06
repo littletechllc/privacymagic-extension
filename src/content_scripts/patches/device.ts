@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const device = () => {
+const device = (): (() => void) => {
   let restoreDevicePosture: () => void
   if (self.DevicePosture != null) {
     restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {

@@ -97,7 +97,7 @@ export const updateHttpWarningNetworkRuleException = async (url: string, value: 
   await updateRuleWithDomain(specialHttpAllowRule, domain, value)
 }
 
-export const createHttpWarningNetworkRule = async () => {
+export const createHttpWarningNetworkRule = async (): Promise<void> => {
   await updateRule(standardHttpUpgradeRule)
   await updateRule(specialHttpWarningRule)
   await updateRule(specialHttpAllowRule)

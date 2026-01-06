@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const serviceWorker = () => {
+const serviceWorker = (): (() => void) => {
   if (!self.ServiceWorkerContainer) {
     return () => {}
   }

@@ -1,4 +1,4 @@
-const sharedStorage = () => {
+const sharedStorage = (): (() => void) => {
   if (self.SharedStorage == null) {
     return () => {}
   }

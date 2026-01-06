@@ -1,16 +1,16 @@
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
-const worker = () => {
+const worker = (): (() => void) => {
   const URLSafe = self.URL
   const BlobSafe = self.Blob
   const URLcreateObjectURLSafe = URL.createObjectURL
   const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!
-  const URLhrefSafe = (url: URL) => reflectApplySafe(URLhrefGetter, url, [])
+  const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
 
   // Spoof the self.location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context.
-  const spoofLocationInsideWorker = (absoluteUrl: string) => {
+  const spoofLocationInsideWorker = (absoluteUrl: string): void => {
     // We need to define these functions here because they are not available in the worker context.
     const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
       func: T,
@@ -25,7 +25,7 @@ const worker = () => {
     }
     const URLSafe = self.URL
     const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!
-    const URLhrefSafe = (url: URL) => reflectApplySafe(URLhrefGetter, url, [])
+    const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl)
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
@@ -37,7 +37,7 @@ const worker = () => {
     Object.defineProperties(self.WorkerLocation.prototype, descriptors)
     // Modify the self.Request object to be relative to the original URL.
     const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url')!.get!
-    const originalRequestUrlSafe = (request: Request) => reflectApplySafe(originalRequestUrlGetter, request, [])
+    const originalRequestUrlSafe = (request: Request): string => reflectApplySafe(originalRequestUrlGetter, request, [])
     Object.defineProperty(Request.prototype, 'url', {
       get () {
         return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this), absoluteUrl))
@@ -45,7 +45,7 @@ const worker = () => {
     })
     // Modify the self.Response object to be relative to the original URL.
     const originalResponseUrlGetter = Object.getOwnPropertyDescriptor(Response.prototype, 'url')!.get!
-    const originalResponseUrlSafe = (response: Response) => reflectApplySafe(originalResponseUrlGetter, response, [])
+    const originalResponseUrlSafe = (response: Response): string => reflectApplySafe(originalResponseUrlGetter, response, [])
     Object.defineProperty(Response.prototype, 'url', {
       get () {
         return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl))
@@ -93,11 +93,11 @@ const worker = () => {
     const pendingRevocations = new Set()
     const lockedUrls = new Map()
 
-    const isLockedObjectUrl = (url: string) => {
+    const isLockedObjectUrl = (url: string): boolean => {
       return (lockedUrls.get(url) ?? 0) > 0
     }
 
-    const requestToRevokeObjectUrl = (url: string) => {
+    const requestToRevokeObjectUrl = (url: string): void => {
       if (!isLockedObjectUrl(url)) {
         originalRevokeObjectURL(url)
       } else {
@@ -105,7 +105,7 @@ const worker = () => {
       }
     }
 
-    const unlockObjectUrl = (url: string) => {
+    const unlockObjectUrl = (url: string): void => {
       if (!isLockedObjectUrl(url)) {
         return
       }
@@ -121,7 +121,7 @@ const worker = () => {
       }
     }
 
-    const lockObjectUrl = (url: string) => {
+    const lockObjectUrl = (url: string): void => {
       const lockCount = lockedUrls.get(url) ?? 0
       lockedUrls.set(url, lockCount + 1)
     }
@@ -133,7 +133,7 @@ const worker = () => {
     requestToRevokeObjectUrl(url)
   }
 
-  const onCompletionInAnotherContext = (callback: () => void) => {
+  const onCompletionInAnotherContext = (callback: () => void): string => {
     const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID()
     const broadcastChannel = new BroadcastChannel(broadcastChannelName)
     broadcastChannel.onmessage = (message: MessageEvent) => {
@@ -149,7 +149,7 @@ const worker = () => {
 
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
-  const prepareInjectionForWorker = (hardeningCode: string) => {
+  const prepareInjectionForWorker = (hardeningCode: string): void => {
     const locationHref = self.location.href
     const policy = getTrustedTypesPolicy()
     self.Worker = new Proxy(self.Worker, {

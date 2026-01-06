@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const battery = () => {
+const battery = (): (() => void) | undefined => {
   let restoreBatteryManager
   if (self.BatteryManager != null) {
     const silencedEventProperty = {

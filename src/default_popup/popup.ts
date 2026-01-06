@@ -2,7 +2,7 @@ import { setupSettingsUI } from '../common/settings-ui'
 import { logError } from '../common/util'
 import punycode from 'punycode-npm'
 
-const setupOptionsButton = () => {
+const setupOptionsButton = (): void => {
   document.getElementById('optionsButton')?.addEventListener('click', (event) => {
     try {
       console.log('optionsButton clicked')
@@ -13,14 +13,14 @@ const setupOptionsButton = () => {
   })
 }
 
-const faviconURL = (pageUrl: string) => {
+const faviconURL = (pageUrl: string): string => {
   const url = new URL(chrome.runtime.getURL('/_favicon/'))
   url.searchParams.set('pageUrl', pageUrl)
   url.searchParams.set('size', '24')
   return url.toString()
 }
 
-const updateSiteInfo = async (domain: string) => {
+const updateSiteInfo = async (domain: string): Promise<void> => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
   const url = tab.url
@@ -31,7 +31,7 @@ const updateSiteInfo = async (domain: string) => {
   }
 }
 
-document.addEventListener('DOMContentLoaded', async (event) => {
+document.addEventListener('DOMContentLoaded', async (event): Promise<void> => {
   try {
     const response = await chrome.runtime.sendMessage({
       type: 'getDomainForCurrentTab'

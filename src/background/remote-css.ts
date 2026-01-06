@@ -1,6 +1,6 @@
 import { IDS } from './ids'
 
-const setupRemoteCssRules = async () => {
+const setupRemoteCssRules = async (): Promise<void> => {
   return await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [IDS.REMOTE_CSS_BLOCK_RULE_ID],
     addRules: [
@@ -18,15 +18,15 @@ const setupRemoteCssRules = async () => {
   })
 }
 
-const watchForCssRequests = async () => {
-  const listener = (details: chrome.webRequest.OnBeforeRequestDetails) => {
+const watchForCssRequests = async (): Promise<void> => {
+  const listener = (details: chrome.webRequest.OnBeforeRequestDetails): { cancel: boolean } => {
     console.log('css request:', details)
     return {}
   }
   chrome.webRequest.onBeforeRequest.addListener(listener, { urls: ['<all_urls>'], types: ['stylesheet'] })
 }
 
-const handleRemoteCssRequests = async () => {
+const handleRemoteCssRequests = async (): Promise<void> => {
   await watchForCssRequests()
   await setupRemoteCssRules()
 }

@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const useragent = () => {
+const useragent = (): (() => void) => {
   const CHROME_VERSION = '141.0.0.0'
   const SHORT_CHROME_VERSION = CHROME_VERSION.split('.')[0]
   const PLATFORM_VERSION = '26.0.0'

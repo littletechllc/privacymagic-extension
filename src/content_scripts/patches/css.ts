@@ -2,7 +2,7 @@ import { redefinePropertiesSafe, reflectApplySafe } from '../helpers'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 
-const css = () => {
+const css = (): (() => void) => {
   console.log('css patch')
   if (self.HTMLStyleElement === undefined) {
     // We are likely in a worker context.

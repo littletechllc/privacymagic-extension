@@ -1,6 +1,6 @@
 import { redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, nonProperty } from '../helpers'
 
-const timer = () => {
+const timer = (): (() => void) => {
   const mathRoundSafe = Math.round
   const originalNow = Object.getOwnPropertyDescriptor(Performance.prototype, 'now')!.value
   const restoreNow = redefinePropertyValues(Performance.prototype, {
@@ -9,15 +9,15 @@ const timer = () => {
   const objectKeysSafe = Object.keys
   const objectFromEntriesSafe = Object.fromEntries
   const arrayMapValue = Object.getOwnPropertyDescriptor(Array.prototype, 'map')!.value
-  const arrayMapSafe = (array: any[], callback: (value: any, index: number, array: any[]) => any) => reflectApplySafe(arrayMapValue, array, [callback])
-  const getPropertyValueSafe = (object: any, property: string) => {
+  const arrayMapSafe = (array: any[], callback: (value: any, index: number, array: any[]) => any): any[] => reflectApplySafe(arrayMapValue, array, [callback])
+  const getPropertyValueSafe = (object: any, property: string): any => {
     try {
       return object[property]
     } catch (error) {
       return undefined
     }
   }
-  const makeRoundedGetters = (objectPrototype: any, properties: string[]) => {
+  const makeRoundedGetters = (objectPrototype: any, properties: string[]): (() => void) => {
     const originalDescriptors: PropertyDescriptorMap = {}
     for (const property of properties) {
       const descriptor = Object.getOwnPropertyDescriptor(objectPrototype, property)

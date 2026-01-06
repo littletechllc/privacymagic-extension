@@ -366,7 +366,7 @@ const dist = (localPath: string): string => {
   return path.join(__dirname, '../dist/', localPath)
 }
 
-export const processAndWrite = async () => {
+export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine)
   const results = processLines(linesFiltered)

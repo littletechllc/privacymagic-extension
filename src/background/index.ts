@@ -10,7 +10,7 @@ import { handleRemoteCssRequests } from './remote-css'
 import { logError, registrableDomainFromUrl } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 
-const blockAutocomplete = async () => {
+const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [400],
     addRules: [
@@ -25,7 +25,7 @@ const blockAutocomplete = async () => {
   })
 }
 
-const updateSetting = async (domain: string, settingId: SettingsId, value: boolean) => {
+const updateSetting = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
   await setSetting(domain, settingId, value)
   if (settingId === 'ads') {
     await adjustExceptionToStaticRules(domain, value)
@@ -36,7 +36,7 @@ const updateSetting = async (domain: string, settingId: SettingsId, value: boole
 
 type ResponseSendFunction = (response: any) => void
 
-const handleMessage = async (message: any, sender: chrome.runtime.MessageSender, sendResponse: ResponseSendFunction) => {
+const handleMessage = async (message: any, sender: chrome.runtime.MessageSender, sendResponse: ResponseSendFunction): Promise<void> => {
   try {
     if (message.type === 'updateSetting') {
       await updateSetting(message.domain, message.settingId, message.value)
@@ -79,7 +79,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true
 })
 
-const logMatchingRulesInDevMode = () => {
+const logMatchingRulesInDevMode = (): void => {
   if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
       async ({ request, rule }) => {
@@ -102,7 +102,7 @@ const logMatchingRulesInDevMode = () => {
   }
 }
 
-const testHttpBehavior = async () => {
+const testHttpBehavior = async (): Promise<void> => {
   chrome.webRequest.onBeforeRequest.addListener((details) => {
     console.log('onBeforeRequest debug:', details)
     return { cancel: false }
@@ -165,7 +165,7 @@ const testHttpBehavior = async () => {
   })
 }
 
-const clearRules = async () => {
+const clearRules = async (): Promise<void> => {
   const sessionRules = await chrome.declarativeNetRequest.getSessionRules()
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: sessionRules.map(rule => rule.id)
@@ -177,7 +177,7 @@ const clearRules = async () => {
   console.log('cleared rules')
 }
 
-const initializeExtension = async () => {
+const initializeExtension = async (): Promise<void> => {
   await clearRules()
   injectCssForCosmeticFilters()
   await setupContentScripts()

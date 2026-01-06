@@ -49,7 +49,7 @@ const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | void>
   worker
 }
 
-const runPatchesInPageExcept = (disabledPatches: string[]) => {
+const runPatchesInPageExcept = (disabledPatches: string[]): void => {
   const undoFunctions = Object.create(null)
   for (const patcherId of Object.keys(privacyMagicPatches) as SettingsId[]) {
     try {
@@ -65,7 +65,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]) => {
   }
 }
 
-const mainFunction = () => {
+const mainFunction = (): void => {
   const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
 }
