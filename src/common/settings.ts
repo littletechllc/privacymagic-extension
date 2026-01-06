@@ -1,4 +1,4 @@
-import { storage } from './storage';
+import { storage, KeyPath } from './storage';
 import { SettingsId } from './settings-ids';
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
@@ -53,7 +53,7 @@ export const setSetting = async (domain: string, settingId: SettingsId, value: b
 export const getAllSettings = async () => {
   const storedSettings = await storage.local.getAll();
   const allSettings = [];
-  for (const [[type, domain, settingId], value] of storedSettings) {
+  for (const [[type, domain, settingId], value] of storedSettings as [KeyPath, boolean][]) {
     if (type === SETTINGS_KEY_PREFIX) {
       allSettings.push([domain, settingId, value]);
     }
@@ -63,7 +63,7 @@ export const getAllSettings = async () => {
 
 export const resetAllSettingsToDefaults = async (domain: string) => {
   const items = await storage.local.getAll();
-  for (const [keyPath] of items) {
+  for (const [keyPath] of items as [KeyPath][]) {
     if (keyPath[0] === '_SETTINGS_' && keyPath[1] === domain) {
       await storage.local.remove(keyPath);
     }
