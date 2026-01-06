@@ -1,5 +1,5 @@
 import chokidar from 'chokidar';
-import path from 'node:path';
+import * as path from 'node:path';
 import { mkdir, copyFile, readdir, stat, readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
