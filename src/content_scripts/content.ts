@@ -1,28 +1,28 @@
-import { SettingsId } from '../common/settings-ids';
-import { getDisabledSettings } from './helpers';
+import { SettingsId } from '../common/settings-ids'
+import { getDisabledSettings } from './helpers'
 
-import battery from './patches/battery';
-import cpu from './patches/cpu';
-import css from './patches/css';
-import device from './patches/device';
-import disk from './patches/disk';
-import display from './patches/display';
-import gpc from './patches/gpc';
-import gpu from './patches/gpu';
-import iframe from './patches/iframe';
-import keyboard from './patches/keyboard';
-import language from './patches/language';
-import math from './patches/math';
-import memory from './patches/memory';
-import screen from './patches/screen';
-import serviceWorker from './patches/serviceWorker';
-import sharedStorage from './patches/sharedStorage';
-import timer from './patches/timer';
-import timezone from './patches/timezone';
-import touch from './patches/touch';
-import useragent from './patches/useragent';
-import windowName from './patches/windowName';
-import worker from './patches/worker';
+import battery from './patches/battery'
+import cpu from './patches/cpu'
+import css from './patches/css'
+import device from './patches/device'
+import disk from './patches/disk'
+import display from './patches/display'
+import gpc from './patches/gpc'
+import gpu from './patches/gpu'
+import iframe from './patches/iframe'
+import keyboard from './patches/keyboard'
+import language from './patches/language'
+import math from './patches/math'
+import memory from './patches/memory'
+import screen from './patches/screen'
+import serviceWorker from './patches/serviceWorker'
+import sharedStorage from './patches/sharedStorage'
+import timer from './patches/timer'
+import timezone from './patches/timezone'
+import touch from './patches/touch'
+import useragent from './patches/useragent'
+import windowName from './patches/windowName'
+import worker from './patches/worker'
 
 const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | void>> = {
   battery,
@@ -47,26 +47,26 @@ const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | void>
   useragent,
   windowName,
   worker
-};
+}
 
 const runPatchesInPageExcept = (disabledPatches: string[]) => {
-  const undoFunctions = Object.create(null);
+  const undoFunctions = Object.create(null)
   for (const patcherId of Object.keys(privacyMagicPatches) as SettingsId[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
-        const patch = privacyMagicPatches[patcherId];
-        if (patch) {
-          undoFunctions[patcherId] = patch();
+        const patch = privacyMagicPatches[patcherId]
+        if (patch != null) {
+          undoFunctions[patcherId] = patch()
         }
       }
     } catch (error) {
-      console.error('error running patch', patcherId, error);
+      console.error('error running patch', patcherId, error)
     }
   }
-};
+}
 
 const mainFunction = () => {
-  const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[];
-  runPatchesInPageExcept(getDisabledSettings(relevantSettings));
-};
-mainFunction();
+  const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[]
+  runPatchesInPageExcept(getDisabledSettings(relevantSettings))
+}
+mainFunction()

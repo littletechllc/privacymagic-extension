@@ -2,84 +2,84 @@ const reflectApply = <T extends (...args: any[]) => any, TThis = any>(
   func: T,
   thisArg: TThis,
   args: Parameters<T>
-): ReturnType<T> => Reflect.apply(func, thisArg, args);
+): ReturnType<T> => Reflect.apply(func, thisArg, args)
 
 export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
   func: T,
   thisArg: TThis,
   args: Parameters<T>
 ): ReturnType<T> => {
-  return reflectApply(func, thisArg, args);
-};
+  return reflectApply(func, thisArg, args)
+}
 
-export const objectDefinePropertiesSafe = Object.defineProperties;
-const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors;
+export const objectDefinePropertiesSafe = Object.defineProperties
+const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors
 
 export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
-  const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj);
-  objectDefinePropertiesSafe(obj, propertyMap);
-  return () => objectDefinePropertiesSafe(obj, originalDescriptors);
-};
+  const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj)
+  objectDefinePropertiesSafe(obj, propertyMap)
+  return () => objectDefinePropertiesSafe(obj, originalDescriptors)
+}
 
-export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true };
+export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true }
 
 export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: any }): (() => void) => {
-  const originalProperties: PropertyDescriptorMap = {};
-  const newProperties: PropertyDescriptorMap = {};
+  const originalProperties: PropertyDescriptorMap = {}
+  const newProperties: PropertyDescriptorMap = {}
   for (const [prop, value] of Object.entries(propertyMap)) {
-    const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop);
-    originalProperties[prop] = originalDescriptor || nonProperty;
+    const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop)
+    originalProperties[prop] = (originalDescriptor != null) || nonProperty
     if (value === undefined) {
-      newProperties[prop] = nonProperty;
+      newProperties[prop] = nonProperty
     } else {
-      if (!originalDescriptor) {
-        newProperties[prop] = { configurable: true, get: () => value };
+      if (originalDescriptor == null) {
+        newProperties[prop] = { configurable: true, get: () => value }
       } else if (originalDescriptor.value) {
-        newProperties[prop] = { ...originalDescriptor, value };
+        newProperties[prop] = { ...originalDescriptor, value }
       } else {
-        newProperties[prop] = { ...originalDescriptor, get: () => value };
+        newProperties[prop] = { ...originalDescriptor, get: () => value }
       }
     }
   }
-  Object.defineProperties(obj, newProperties);
+  Object.defineProperties(obj, newProperties)
   return () => {
-    objectDefinePropertiesSafe(obj, originalProperties);
-  };
-};
+    objectDefinePropertiesSafe(obj, originalProperties)
+  }
+}
 
 export const createSafeMethod = (globalInterface: { prototype: any }, methodName: string) => {
-  const originalMethod = Object.getOwnPropertyDescriptor(globalInterface.prototype, methodName)!.value;
-  return (instance: any, ...args: any[]) => reflectApplySafe(originalMethod, instance, args);
-};
+  const originalMethod = Object.getOwnPropertyDescriptor(globalInterface.prototype, methodName)!.value
+  return (instance: any, ...args: any[]) => reflectApplySafe(originalMethod, instance, args)
+}
 
-const weakMapGet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'get')!.value;
-const weakMapHas = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'has')!.value;
-const weakMapSet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'set')!.value;
-export const weakMapGetSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K) => reflectApplySafe(weakMapGet, weakMap, [key]);
-export const weakMapHasSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K) => reflectApplySafe(weakMapHas, weakMap, [key]);
-export const weakMapSetSafe = <K extends object, V>(weakMap: WeakMap<K, V>, key: K, value: V) => reflectApplySafe(weakMapSet, weakMap, [key, value]);
+const weakMapGet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'get')!.value
+const weakMapHas = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'has')!.value
+const weakMapSet = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'set')!.value
+export const weakMapGetSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K) => reflectApplySafe(weakMapGet, weakMap, [key])
+export const weakMapHasSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K) => reflectApplySafe(weakMapHas, weakMap, [key])
+export const weakMapSetSafe = <K extends object, V>(weakMap: WeakMap<K, V>, key: K, value: V) => reflectApplySafe(weakMapSet, weakMap, [key, value])
 
-export const reflectConstructSafe = Reflect.construct;
+export const reflectConstructSafe = Reflect.construct
 
 export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault = false) => {
-  const oldMatchMedia = self.matchMedia;
-  const targetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*${spoofValue}\\s*\\)`, 'ig');
-  const nonTargetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*[^)]+\\s*\\)`, 'ig');
-  const defaultRegex = new RegExp(`\\(\\s*${key}\\s*\\)`, 'ig');
-  const defaultReplacement = targetDefault ? 'all' : 'not all';
+  const oldMatchMedia = self.matchMedia
+  const targetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*${spoofValue}\\s*\\)`, 'ig')
+  const nonTargetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*[^)]+\\s*\\)`, 'ig')
+  const defaultRegex = new RegExp(`\\(\\s*${key}\\s*\\)`, 'ig')
+  const defaultReplacement = targetDefault ? 'all' : 'not all'
   const spoof = (mediaQueryString: string) =>
     mediaQueryString
       .replace(targetRegex, 'all')
       .replace(nonTargetRegex, 'not all')
-      .replace(defaultRegex, defaultReplacement);
-  self.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString));
+      .replace(defaultRegex, defaultReplacement)
+  self.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString))
   return () => {
-    self.matchMedia = oldMatchMedia;
-  };
-};
+    self.matchMedia = oldMatchMedia
+  }
+}
 
 // Cache the bundle for injection to avoid re-creating it on every call.
-let bundleForInjection: string | undefined;
+let bundleForInjection: string | undefined
 
 // Makes a code bundle for injection into a sandboxed iframe or a worker. The bundle
 // includes the shared secret, the patch decisions, and the __PRIVACY_MAGIC_INJECT__
@@ -91,47 +91,47 @@ export const makeBundleForInjection = (disabledSettings: string[]) => {
     const __PRIVACY_MAGIC_INJECT__ = ${__PRIVACY_MAGIC_INJECT__.toString()};
     __PRIVACY_MAGIC_INJECT__(${JSON.stringify(disabledSettings)});
   })();
-    `;
+    `
   }
-  return bundleForInjection;
-};
+  return bundleForInjection
+}
 
-let trustedTypePolicy: TrustedTypePolicy | undefined;
+let trustedTypePolicy: TrustedTypePolicy | undefined
 
 export const getTrustedTypesPolicy = (): TrustedTypePolicy => {
-  if (!trustedTypePolicy && self.trustedTypes) {
+  if ((trustedTypePolicy == null) && (self.trustedTypes != null)) {
     trustedTypePolicy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
       createHTML: (unsafeHTML) => unsafeHTML,
       createScript: (unsafeScript) => unsafeScript,
       createScriptURL: (unsafeScriptURL) => unsafeScriptURL
-    });
+    })
   }
-  return trustedTypePolicy!;
-};
+  return trustedTypePolicy!
+}
 
 export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
-    return __disabledSettings;
+    return __disabledSettings
   }
-  let result: string[] = [];
+  let result: string[] = []
   try {
     document.cookie.split(';').forEach(cookie => {
-      const [key, value] = cookie.trim().split('=');
+      const [key, value] = cookie.trim().split('=')
       if (key === '__pm__disabled_settings') {
-        result = value.split(',');
+        result = value.split(',')
       }
-    });
-    document.cookie = '__pm__disabled_settings=; Secure; SameSite=None; Path=/; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    })
+    document.cookie = '__pm__disabled_settings=; Secure; SameSite=None; Path=/; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
     if (result.length === 1 && result[0] === '') {
-      result = [];
+      result = []
     }
-    if (relevantSettings) {
-      result = result.filter(setting => relevantSettings.includes(setting));
+    if (relevantSettings != null) {
+      result = result.filter(setting => relevantSettings.includes(setting))
     }
   } catch (error) {
-    console.error('error getting disabled settings from cookie:', error);
+    console.error('error getting disabled settings from cookie:', error)
   }
   // eslint-disable-next-line no-global-assign
-  __disabledSettings = result;
-  return result;
-};
+  __disabledSettings = result
+  return result
+}

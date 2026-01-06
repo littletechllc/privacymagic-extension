@@ -1,8 +1,8 @@
-import { spoofMediaQuery } from '../helpers';
+import { spoofMediaQuery } from '../helpers'
 
 const display = () => {
-  const undoSpoof = spoofMediaQuery('prefers-reduced-motion', 'no-preference');
-  return undoSpoof;
-};
+  const undoSpoof = spoofMediaQuery('prefers-reduced-motion', 'no-preference')
+  return undoSpoof
+}
 
-export default display;
+export default display

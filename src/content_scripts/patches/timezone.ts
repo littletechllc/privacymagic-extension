@@ -1,6 +1,6 @@
 /* eslint-disable quote-props */
 
-import { reflectApplySafe, redefinePropertyValues } from '../helpers';
+import { reflectApplySafe, redefinePropertyValues } from '../helpers'
 
 const timezone = () => {
   // Time zones that use fractional hour offsets can be coalesced to a
@@ -8,13 +8,13 @@ const timezone = () => {
   // on the same dates to coalesce properly.
 
   const
-    AsiaKathmandu = 'Asia/Kathmandu',
-    AsiaKolkata = 'Asia/Kolkata',
-    AsiaTehran = 'Asia/Tehran',
-    AsiaYangon = 'Asia/Yangon',
-    AustraliaDarwin = 'Australia/Darwin',
-    PacificChatham = 'Pacific/Chatham',
-    PacificMarquesas = 'Pacific/Marquesas';
+    AsiaKathmandu = 'Asia/Kathmandu'
+  const AsiaKolkata = 'Asia/Kolkata'
+  const AsiaTehran = 'Asia/Tehran'
+  const AsiaYangon = 'Asia/Yangon'
+  const AustraliaDarwin = 'Australia/Darwin'
+  const PacificChatham = 'Pacific/Chatham'
+  const PacificMarquesas = 'Pacific/Marquesas'
 
   const fractionHourTimeZoneMappings: Record<string, string> = {
     'Asia/Calcutta': AsiaKolkata,
@@ -32,41 +32,41 @@ const timezone = () => {
     'NZ-CHAT': PacificChatham,
     'Pacific/Chatham': PacificChatham,
     'Pacific/Marquesas': PacificMarquesas
-  };
+  }
 
   // Time zones that use DST can be coalesced to a
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
 
   const
-    AfricaCairo = 'Africa/Cairo',
-    AfricaCasablanca = 'Africa/Casablanca',
-    AmericaAdak = 'America/Adak',
-    AmericaAnchorage = 'America/Anchorage',
-    AmericaChicago = 'America/Chicago',
-    AmericaDenver = 'America/Denver',
-    AmericaHalifax = 'America/Halifax',
-    AmericaLosAngeles = 'America/Los_Angeles',
-    AmericaMiquelon = 'America/Miquelon',
-    AmericaNewYork = 'America/New_York',
-    AmericaNuuk = 'America/Nuuk',
-    AmericaSantiago = 'America/Santiago',
-    AmericaStJohns = 'America/St_Johns',
-    AntarcticaTroll = 'Antarctica/Troll',
-    AsiaGaza = 'Asia/Gaza',
-    AsiaJerusalem = 'Asia/Jerusalem',
-    AtlanticAzores = 'Atlantic/Azores',
-    AustraliaAdelaide = 'Australia/Adelaide',
-    AustraliaLordHowe = 'Australia/Lord_Howe',
-    AustraliaSydney = 'Australia/Sydney',
-    EuropeAthens = 'Europe/Athens',
-    EuropeBerlin = 'Europe/Berlin',
-    EuropeLondon = 'Europe/London',
-    PacificAuckland = 'Pacific/Auckland',
-    PacificEaster = 'Pacific/Easter',
-    PacificNorfolk = 'Pacific/Norfolk';
+    AfricaCairo = 'Africa/Cairo'
+  const AfricaCasablanca = 'Africa/Casablanca'
+  const AmericaAdak = 'America/Adak'
+  const AmericaAnchorage = 'America/Anchorage'
+  const AmericaChicago = 'America/Chicago'
+  const AmericaDenver = 'America/Denver'
+  const AmericaHalifax = 'America/Halifax'
+  const AmericaLosAngeles = 'America/Los_Angeles'
+  const AmericaMiquelon = 'America/Miquelon'
+  const AmericaNewYork = 'America/New_York'
+  const AmericaNuuk = 'America/Nuuk'
+  const AmericaSantiago = 'America/Santiago'
+  const AmericaStJohns = 'America/St_Johns'
+  const AntarcticaTroll = 'Antarctica/Troll'
+  const AsiaGaza = 'Asia/Gaza'
+  const AsiaJerusalem = 'Asia/Jerusalem'
+  const AtlanticAzores = 'Atlantic/Azores'
+  const AustraliaAdelaide = 'Australia/Adelaide'
+  const AustraliaLordHowe = 'Australia/Lord_Howe'
+  const AustraliaSydney = 'Australia/Sydney'
+  const EuropeAthens = 'Europe/Athens'
+  const EuropeBerlin = 'Europe/Berlin'
+  const EuropeLondon = 'Europe/London'
+  const PacificAuckland = 'Pacific/Auckland'
+  const PacificEaster = 'Pacific/Easter'
+  const PacificNorfolk = 'Pacific/Norfolk'
 
-  const dstTimeZoneMappings : { [key: string] : string } = {
+  const dstTimeZoneMappings: { [key: string]: string } = {
 
     // HST -> HDT
     'America/Adak': AmericaAdak,
@@ -319,7 +319,7 @@ const timezone = () => {
     'NZ': PacificAuckland,
     'Pacific/Auckland': PacificAuckland
 
-  };
+  }
 
   const roundTimeZoneRepresentatives: Record<string, string> = {
     '-12': 'Etc/GMT+12',
@@ -349,43 +349,43 @@ const timezone = () => {
     '12': 'Pacific/Tarawa',
     '13': 'Pacific/Kanton',
     '14': 'Pacific/Kiritimati'
-  };
+  }
 
-  const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
-  const originalResolvedOptionsSafe = (intlDateTimeFormat: Intl.DateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, []);
-  const originalMathTrunc = Math.trunc;
-  const originalDateGetTimezoneOffset = Date.prototype.getTimezoneOffset;
-  const originalDateGetTimezoneOffsetSafe = (date: Date): number => reflectApplySafe(originalDateGetTimezoneOffset, date, []);
-  const OriginalDate = Date;
+  const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions
+  const originalResolvedOptionsSafe = (intlDateTimeFormat: Intl.DateTimeFormat) => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, [])
+  const originalMathTrunc = Math.trunc
+  const originalDateGetTimezoneOffset = Date.prototype.getTimezoneOffset
+  const originalDateGetTimezoneOffsetSafe = (date: Date): number => reflectApplySafe(originalDateGetTimezoneOffset, date, [])
+  const OriginalDate = Date
   return redefinePropertyValues(Intl.DateTimeFormat.prototype, {
     resolvedOptions: function (this: Intl.DateTimeFormat) {
-      const options = originalResolvedOptionsSafe(this);
-      const now = new OriginalDate();
+      const options = originalResolvedOptionsSafe(this)
+      const now = new OriginalDate()
       // negative to match ISO 8061 sign convention:
-      const offsetMinutes = -originalDateGetTimezoneOffsetSafe(now);
-      const hours = originalMathTrunc(offsetMinutes / 60);
-      const minutes = offsetMinutes % 60;
+      const offsetMinutes = -originalDateGetTimezoneOffsetSafe(now)
+      const hours = originalMathTrunc(offsetMinutes / 60)
+      const minutes = offsetMinutes % 60
       // If the time zone uses DST, return the DST representative time zone.
-      const dstRepresentativeTimeZone = dstTimeZoneMappings[options.timeZone];
+      const dstRepresentativeTimeZone = dstTimeZoneMappings[options.timeZone]
       if (dstRepresentativeTimeZone) {
-        return { ...options, timeZone: dstRepresentativeTimeZone };
+        return { ...options, timeZone: dstRepresentativeTimeZone }
       }
       // If the time zone has a minute offset, return the coalesced time zone.
       if (minutes !== 0) {
-        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone;
-        return { ...options, timeZone: fractionalHourRepresentativeTimeZone };
+        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone
+        return { ...options, timeZone: fractionalHourRepresentativeTimeZone }
       }
       // If the time zone is a round number of hours, return a representative time zone.
-      const roundTimeZoneRepresentative = roundTimeZoneRepresentatives[hours.toString()];
+      const roundTimeZoneRepresentative = roundTimeZoneRepresentatives[hours.toString()]
       if (roundTimeZoneRepresentative) {
-        return { ...options, timeZone: roundTimeZoneRepresentative };
+        return { ...options, timeZone: roundTimeZoneRepresentative }
       }
       // Otherwise, return the Etc/GMT+n or Etc/GMT-n representative time zone.
       // Negative to match the Etc/ sign convention.
-      const etcTimeZone = `Etc/GMT${hours > 0 ? '-' + hours : '+' + (-hours)}`;
-      return { ...options, timeZone: etcTimeZone };
+      const etcTimeZone = `Etc/GMT${hours > 0 ? '-' + hours : '+' + (-hours)}`
+      return { ...options, timeZone: etcTimeZone }
     }
-  });
-};
+  })
+}
 
-export default timezone;
+export default timezone

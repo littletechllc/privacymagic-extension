@@ -1,97 +1,97 @@
-import { logError } from '../common/util';
+import { logError } from '../common/util'
 
-export type KeyPath = string[];
+export type KeyPath = string[]
 
-const KEY_SEPARATOR = ':';
+const KEY_SEPARATOR = ':'
 
 const keyPathToKey = (keyPath: KeyPath): string => {
-  return keyPath.join(KEY_SEPARATOR);
-};
+  return keyPath.join(KEY_SEPARATOR)
+}
 
 export class StorageProxy {
-  storage: chrome.storage.StorageArea;
+  storage: chrome.storage.StorageArea
 
   constructor (storageType: 'local' | 'sync' | 'session' | 'managed') {
-    this.storage = chrome.storage[storageType];
+    this.storage = chrome.storage[storageType]
   }
 
   async set (keyPath: KeyPath, value: any) {
-    const key = keyPathToKey(keyPath);
-    return (await this.storage.set({ [key]: value }));
+    const key = keyPathToKey(keyPath)
+    return (await this.storage.set({ [key]: value }))
   }
 
-  async get (keyPath: KeyPath) : Promise<any> {
-    const key = keyPathToKey(keyPath);
-    return (await this.storage.get(key))[key];
+  async get (keyPath: KeyPath): Promise<any> {
+    const key = keyPathToKey(keyPath)
+    return (await this.storage.get(key))[key]
   }
 
   async remove (keyPath: KeyPath) {
-    const key = keyPathToKey(keyPath);
-    return (await this.storage.remove(key));
+    const key = keyPathToKey(keyPath)
+    return (await this.storage.remove(key))
   }
 
   async clear () {
-    return (await this.storage.clear());
+    return (await this.storage.clear())
   }
 
   async getAll () {
-    const values = await this.storage.get();
-    return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
+    const values = await this.storage.get()
+    return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value])
   }
 
   listenForChanges (keyPath: KeyPath, callback: (value: any) => void) {
     this.storage.onChanged.addListener((changes) => {
       try {
-        const key = keyPathToKey(keyPath);
+        const key = keyPathToKey(keyPath)
         if (changes[key]) {
-          callback(changes[key].newValue);
+          callback(changes[key].newValue)
         }
       } catch (error) {
-        logError(error, 'error responsding to storage changes', { keyPath, changes });
+        logError(error, 'error responsding to storage changes', { keyPath, changes })
       }
-    });
+    })
   }
 
-  listenForAnyChanges (callback: (changes: [KeyPath, any][]) => void) {
+  listenForAnyChanges (callback: (changes: Array<[KeyPath, any]>) => void) {
     this.storage.onChanged.addListener(async (change) => {
       try {
         await callback(Object.entries(change).map(
-          ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]));
+          ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
       } catch (error) {
-        logError(error, 'error responding to any storage changes', change);
+        logError(error, 'error responding to any storage changes', change)
       }
-    });
+    })
   }
 }
 
-let storageLocal: StorageProxy | null = null;
-let storageSession: StorageProxy | null = null;
-let storageSync: StorageProxy | null = null;
-let storageManaged: StorageProxy | null = null;
+let storageLocal: StorageProxy | null = null
+let storageSession: StorageProxy | null = null
+let storageSync: StorageProxy | null = null
+let storageManaged: StorageProxy | null = null
 
 export const storage = {
   get local () {
-    if (!storageLocal) {
-      storageLocal = new StorageProxy('local');
+    if (storageLocal == null) {
+      storageLocal = new StorageProxy('local')
     }
-    return storageLocal;
+    return storageLocal
   },
   get sync () {
-    if (!storageSync) {
-      storageSync = new StorageProxy('sync');
+    if (storageSync == null) {
+      storageSync = new StorageProxy('sync')
     }
-    return storageSync;
+    return storageSync
   },
   get session () {
-    if (!storageSession) {
-      storageSession = new StorageProxy('session');
+    if (storageSession == null) {
+      storageSession = new StorageProxy('session')
     }
-    return storageSession;
+    return storageSession
   },
   get managed () {
-    if (!storageManaged) {
-      storageManaged = new StorageProxy('managed');
+    if (storageManaged == null) {
+      storageManaged = new StorageProxy('managed')
     }
-    return storageManaged;
+    return storageManaged
   }
-};
+}

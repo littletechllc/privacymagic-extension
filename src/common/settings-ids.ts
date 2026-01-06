@@ -26,4 +26,4 @@ export type SettingsId =
   'touch' |
   'useragent' |
   'windowName' |
-  'worker';
+  'worker'

@@ -1,14 +1,14 @@
-import { redefinePropertyValues } from '../helpers';
+import { redefinePropertyValues } from '../helpers'
 
 const touch = () => {
-  const navigatorPrototype = self.Navigator || self.WorkerNavigator;
+  const navigatorPrototype = self.Navigator || self.WorkerNavigator
   const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
     // Cover Your Tracks: 1 in 1.74:
     maxTouchPoints: 0
-  });
+  })
   return () => {
-    restoreNavigator();
-  };
-};
+    restoreNavigator()
+  }
+}
 
-export default touch;
+export default touch

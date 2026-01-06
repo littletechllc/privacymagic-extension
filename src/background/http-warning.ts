@@ -1,6 +1,6 @@
-import { addIfMissing, removeIfPresent } from '../common/util';
-import { IDS } from './ids';
-const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html');
+import { addIfMissing, removeIfPresent } from '../common/util'
+import { IDS } from './ids'
+const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
 const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
   id: IDS.HTTP_STANDARD_HTTP_UPGRADE_RULE_ID,
@@ -12,7 +12,7 @@ const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
     regexFilter: '^http://.*',
     resourceTypes: ['main_frame']
   }
-};
+}
 
 const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
   id: IDS.HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID,
@@ -28,7 +28,7 @@ const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
     resourceTypes: ['main_frame'],
     requestDomains: ['dummy.domain']
   }
-};
+}
 
 const specialHttpAllowRule: chrome.declarativeNetRequest.Rule = {
   id: IDS.HTTP_SPECIAL_HTTP_ALLOW_RULE_ID,
@@ -41,7 +41,7 @@ const specialHttpAllowRule: chrome.declarativeNetRequest.Rule = {
     resourceTypes: ['main_frame'],
     requestDomains: ['dummy.domain']
   }
-};
+}
 
 /* Here's how the https-only mode works. Note that it only applies to top-level navigations and requests.
 
@@ -71,44 +71,44 @@ So: the strategy is:
 
  */
 
-const updateRule = async (rule: chrome.declarativeNetRequest.Rule) => {
+const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: [rule.id],
     addRules: [rule]
-  });
-};
+  })
+}
 
-const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean) => {
-  const requestDomains = rule.condition.requestDomains || [];
-  if (value === false) {
-    addIfMissing(requestDomains, domain);
+const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean): Promise<void> => {
+  const requestDomains = (rule.condition.requestDomains != null) || []
+  if (!value) {
+    addIfMissing(requestDomains, domain)
   } else {
-    removeIfPresent(requestDomains, domain);
+    removeIfPresent(requestDomains, domain)
   }
-  rule.condition.requestDomains = requestDomains;
-  await updateRule(rule);
-};
+  rule.condition.requestDomains = requestDomains
+  await updateRule(rule)
+}
 
-export const updateHttpWarningNetworkRuleException = async (url: string, value: boolean) => {
-  const domain = new URL(url).hostname;
+export const updateHttpWarningNetworkRuleException = async (url: string, value: boolean): Promise<void> => {
+  const domain = new URL(url).hostname
   if (domain === null) {
-    return;
+    return
   }
-  await updateRuleWithDomain(specialHttpAllowRule, domain, value === true);
-};
+  await updateRuleWithDomain(specialHttpAllowRule, domain, value)
+}
 
 export const createHttpWarningNetworkRule = async () => {
-  await updateRule(standardHttpUpgradeRule);
-  await updateRule(specialHttpWarningRule);
-  await updateRule(specialHttpAllowRule);
+  await updateRule(standardHttpUpgradeRule)
+  await updateRule(specialHttpWarningRule)
+  await updateRule(specialHttpAllowRule)
 
   chrome.webRequest.onErrorOccurred.addListener(async (details) => {
     if (details.url.startsWith('https://')) {
-      const domain = new URL(details.url).hostname;
+      const domain = new URL(details.url).hostname
       if (domain === null) {
-        return;
+        return
       }
-      await updateRuleWithDomain(specialHttpWarningRule, domain, true);
+      await updateRuleWithDomain(specialHttpWarningRule, domain, true)
     }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] });
-};
+  }, { urls: ['<all_urls>'], types: ['main_frame'] })
+}
