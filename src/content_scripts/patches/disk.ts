@@ -1,8 +1,8 @@
-import { redefinePropertyValues } from '../helpers';
+import { redefinePropertyValues } from '../helpers'
 
 const disk = () => {
   return redefinePropertyValues(StorageManager.prototype, {
-    estimate: () => Promise.resolve({
+    estimate: async () => await Promise.resolve({
       // Never report any usage
       usage: 0,
       // Report a fixed quota of 2 GB
@@ -10,7 +10,7 @@ const disk = () => {
       // Never report any usage details
       usageDetails: {}
     })
-  });
-};
+  })
+}
 
-export default disk;
+export default disk

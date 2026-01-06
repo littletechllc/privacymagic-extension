@@ -1,8 +1,8 @@
-import * as esbuild from 'esbuild';
-import { mkdir } from 'fs/promises';
-import { dirname } from 'path';
+import * as esbuild from 'esbuild'
+import { mkdir } from 'fs/promises'
+import { dirname } from 'path'
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production'
 
 const baseBuildOptions = {
   bundle: true,
@@ -22,7 +22,7 @@ const baseBuildOptions = {
   packages: 'bundle',
   mainFields: ['browser', 'module', 'main'],
   conditions: ['browser']
-};
+}
 
 const builds = [
   {
@@ -55,12 +55,12 @@ const builds = [
     entryPoints: ['src/privacymagic/options.ts'],
     outfile: 'dist/privacymagic/options.js'
   }
-];
+]
 
 async function ensureDir (filePath) {
-  const dir = dirname(filePath);
+  const dir = dirname(filePath)
   try {
-    await mkdir(dir, { recursive: true });
+    await mkdir(dir, { recursive: true })
   } catch (error) {
     // Directory might already exist, ignore
   }
@@ -68,36 +68,36 @@ async function ensureDir (filePath) {
 
 async function build () {
   for (const buildConfig of builds) {
-    await ensureDir(buildConfig.outfile);
+    await ensureDir(buildConfig.outfile)
     await esbuild.build({
       ...baseBuildOptions,
       ...buildConfig
-    });
+    })
   }
 }
 
 async function watch () {
   // Watch all builds individually
-  const contexts = [];
+  const contexts = []
   for (const buildConfig of builds) {
-    await ensureDir(buildConfig.outfile);
+    await ensureDir(buildConfig.outfile)
     const ctx = await esbuild.context({
       ...baseBuildOptions,
       ...buildConfig
-    });
-    await ctx.watch();
-    contexts.push(ctx);
+    })
+    await ctx.watch()
+    contexts.push(ctx)
   }
   // Keep process alive
   process.on('SIGINT', async () => {
-    await Promise.all(contexts.map(ctx => ctx.dispose()));
-    process.exit(0);
-  });
+    await Promise.all(contexts.map(ctx => ctx.dispose()))
+    process.exit(0)
+  })
 }
 
-const command = process.argv[2];
+const command = process.argv[2]
 if (command === 'watch') {
-  watch().catch(console.error);
+  watch().catch(console.error)
 } else {
-  build().catch(console.error);
+  build().catch(console.error)
 }

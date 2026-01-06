@@ -1,57 +1,57 @@
-import { objectDefinePropertiesSafe } from '../helpers';
+import { objectDefinePropertiesSafe } from '../helpers'
 
 const windowName = () => {
   if (self.top !== self) {
-    return;
+    return
   }
-  const propDescriptor = Object.getOwnPropertyDescriptor(self, 'name');
-  if (!propDescriptor) {
-    return;
+  const propDescriptor = Object.getOwnPropertyDescriptor(self, 'name')
+  if (propDescriptor == null) {
+    return
   }
-  const nameGetter = propDescriptor.get!;
-  const nameSetter = propDescriptor.set!;
+  const nameGetter = propDescriptor.get!
+  const nameSetter = propDescriptor.set!
   Object.defineProperty(self, 'name', {
     get () {
-      const nameStr = nameGetter.call(this);
+      const nameStr = nameGetter.call(this)
       try {
-        const data = JSON.parse(nameStr);
+        const data = JSON.parse(nameStr)
         if (typeof data !== 'object' || data === null) {
-          return '';
+          return ''
         }
-        const origin = self.location.origin;
+        const origin = self.location.origin
         if (typeof data[origin] !== 'string') {
-          return '';
+          return ''
         }
-        return data[origin];
+        return data[origin]
       } catch (error) {
-        return '';
+        return ''
       }
     },
     set (value) {
-      const nameStr = nameGetter.call(this);
-      let data;
+      const nameStr = nameGetter.call(this)
+      let data
       try {
-        data = JSON.parse(nameStr);
+        data = JSON.parse(nameStr)
         if (typeof data !== 'object' || data === null) {
-          data = {};
+          data = {}
         }
       } catch (error) {
-        data = {};
+        data = {}
       }
-      const origin = self.location.origin;
+      const origin = self.location.origin
       if (!origin || origin.length === 0) {
-        return;
+        return
       }
       // String(value) matches self.name native behavior
-      data[origin] = String(value);
-      nameSetter.call(this, JSON.stringify(data));
+      data[origin] = String(value)
+      nameSetter.call(this, JSON.stringify(data))
     },
     configurable: true
-  });
-  console.log('self.name patched');
+  })
+  console.log('self.name patched')
   return () => {
-    objectDefinePropertiesSafe(self, { name: propDescriptor });
-  };
-};
+    objectDefinePropertiesSafe(self, { name: propDescriptor })
+  }
+}
 
-export default windowName;
+export default windowName

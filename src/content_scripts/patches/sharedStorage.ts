@@ -1,12 +1,12 @@
 const sharedStorage = () => {
-  if (!self.SharedStorage) {
-    return () => {};
+  if (self.SharedStorage == null) {
+    return () => {}
   }
-  const originalSharedStorage = self.SharedStorage;
-  delete self.SharedStorage;
+  const originalSharedStorage = self.SharedStorage
+  delete self.SharedStorage
   return () => {
-    self.SharedStorage = originalSharedStorage;
-  };
-};
+    self.SharedStorage = originalSharedStorage
+  }
+}
 
-export default sharedStorage;
+export default sharedStorage

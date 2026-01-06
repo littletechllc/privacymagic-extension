@@ -1,11 +1,11 @@
-import { redefinePropertyValues } from '../helpers';
+import { redefinePropertyValues } from '../helpers'
 
 const cpu = () => {
-  const navigatorPrototype = self.Navigator || self.WorkerNavigator;
+  const navigatorPrototype = self.Navigator || self.WorkerNavigator
   return redefinePropertyValues(navigatorPrototype.prototype, {
     cpuClass: undefined,
     hardwareConcurrency: 4
-  });
-};
+  })
+}
 
-export default cpu;
+export default cpu

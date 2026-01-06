@@ -1,9 +1,9 @@
-import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers';
+import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
 const iframe = () => {
   const prepareInjectionForIframes = (hardeningCode: string) => {
     if (!self.HTMLIFrameElement) {
-      return;
+      return
     }
 
     // ## iframe hardening ##
@@ -31,11 +31,11 @@ const iframe = () => {
     //
     // TODO: Can we prevent the hardening code from running a second time?
 
-    const evalSet = new WeakSet<Function>();
+    const evalSet = new WeakSet<Function>()
 
-    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')!.get!;
-    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')!.value;
-    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')!.value;
+    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')!.get!
+    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')!.value
+    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')!.value
 
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/
     // Function bodies here need to be carefully crafted to prevent invoking
@@ -46,39 +46,39 @@ const iframe = () => {
     // - Accessing properties of objects that have a global prototype
     // - Evaluating globally-defined functions or Objects
 
-    const getContentWindowSafe = (iframe: HTMLIFrameElement) => reflectApplySafe(contentWindowGetter, iframe, []);
+    const getContentWindowSafe = (iframe: HTMLIFrameElement) => reflectApplySafe(contentWindowGetter, iframe, [])
 
-    const weakSetHasSafe = <T extends object>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v]);
-    const weakSetAddSafe = <T extends object>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v]);
+    const weakSetHasSafe = <T extends object>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v])
+    const weakSetAddSafe = <T extends object>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v])
 
     // Sometimes the iframe has not yet been hardened, so if the page is trying
     // to access the contentWindow, we need to harden it first.
     const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string) => {
-      const contentWin = getContentWindowSafe(iframe);
+      const contentWin = getContentWindowSafe(iframe)
       // Accesing contentWin.eval is safe because, in order to monkey patch it,
       // the pre-evaluated script would need to access contentWin, which would
       // trigger our hardening code injection first.
-      const evalFunction = contentWin.eval;
+      const evalFunction = contentWin.eval
       try {
         if (!weakSetHasSafe(evalSet, evalFunction)) {
-          const policy = getTrustedTypesPolicy();
-          evalFunction(policy.createScript(hardeningCode));
-          weakSetAddSafe(evalSet, evalFunction);
+          const policy = getTrustedTypesPolicy()
+          evalFunction(policy.createScript(hardeningCode))
+          weakSetAddSafe(evalSet, evalFunction)
         }
       } catch (error) {
-        console.error('error hardening iframe', error);
+        console.error('error hardening iframe', error)
       }
-      return contentWin;
-    };
+      return contentWin
+    }
 
     /** **************** VULNERABLE FUNCTIONS SECTION END ******************/
 
     // Ensure eval is primed with hardening code before it is used.
     Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {
-      get () { return getContentWindowAfterHardening(this, hardeningCode); }
-    });
-  };
-  return prepareInjectionForIframes(makeBundleForInjection(getDisabledSettings()));
-};
+      get () { return getContentWindowAfterHardening(this, hardeningCode) }
+    })
+  }
+  return prepareInjectionForIframes(makeBundleForInjection(getDisabledSettings()))
+}
 
-export default iframe;
+export default iframe

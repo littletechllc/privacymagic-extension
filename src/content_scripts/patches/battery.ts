@@ -1,14 +1,14 @@
-import { redefinePropertyValues } from '../helpers';
+import { redefinePropertyValues } from '../helpers'
 
 const battery = () => {
-  let restoreBatteryManager;
-  if (self.BatteryManager) {
+  let restoreBatteryManager
+  if (self.BatteryManager != null) {
     const silencedEventProperty = {
-      get: () => { return null; },
+      get: () => { return null },
       set: (_value: unknown) => { /* do nothing */ },
       configurable: true,
       enumerable: true
-    };
+    }
     restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
       charging: true,
       chargingTime: 0,
@@ -21,8 +21,8 @@ const battery = () => {
       onchargingtimechange: silencedEventProperty,
       ondischargingtimechange: silencedEventProperty,
       onlevelchange: silencedEventProperty
-    });
+    })
   }
-};
+}
 
-export default battery;
+export default battery
