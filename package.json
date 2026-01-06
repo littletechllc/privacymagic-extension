@@ -4,8 +4,8 @@
   "description": "a browser extension that protects your privacy online",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . && tsc --noEmit",
-    "format": "eslint . --fix && tsc --noEmit",
+    "lint": "ts-standard . && tsc --noEmit",
+    "format": "ts-standard . --fix && tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
