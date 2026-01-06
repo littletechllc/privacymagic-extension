@@ -1,9 +1,10 @@
 import { storage } from './storage';
+import { SettingsId } from './settings-ids';
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_';
 export const SETTINGS_KEY_PREFIX = '_SETTINGS_';
 
-export const getSetting = async (domain, settingId) => {
+export const getSetting = async (domain: string, settingId: SettingsId) => {
   const defaultSetting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId]);
   // If a setting has been set to false for the default settings,
   // then it overrides the domain-specific setting and we return
@@ -24,7 +25,7 @@ export const getSetting = async (domain, settingId) => {
   return true;
 };
 
-export const setSetting = async (domain, settingId, value) => {
+export const setSetting = async (domain: string, settingId: SettingsId, value: boolean) => {
   if (value !== true && value !== false) {
     throw new Error(`Invalid setting value: ${value}`);
   }
@@ -60,15 +61,7 @@ export const getAllSettings = async () => {
   return allSettings;
 };
 
-export const listenForSettingsChanges = (callback) => {
-  storage.local.listenForAnyChanges(async (changes) => {
-    const settingsChanges = changes.filter(([keypath, value]) => keypath[0] === SETTINGS_KEY_PREFIX)
-      .map(([keyPath, value]) => [keyPath, value === undefined ? true : value]);
-    await callback(settingsChanges);
-  });
-};
-
-export const resetAllSettingsToDefaults = async (domain) => {
+export const resetAllSettingsToDefaults = async (domain: string) => {
   const items = await storage.local.getAll();
   for (const [keyPath] of items) {
     if (keyPath[0] === '_SETTINGS_' && keyPath[1] === domain) {
