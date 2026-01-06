@@ -3,11 +3,13 @@
     "checkJs": true,
     "noEmit": true,
     "lib": ["ES2021", "dom", "webworker"],
-    "types": ["chrome"],
+    "types": ["chrome", "node"],
     "target": "ES2020",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./tools/**/*"]
 }
