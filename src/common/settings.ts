@@ -52,10 +52,10 @@ export const setSetting = async (domain: string, settingId: SettingsId, value: b
 
 export const getAllSettings = async () => {
   const storedSettings = await storage.local.getAll();
-  const allSettings = [];
+  const allSettings: [string, SettingsId, boolean][] = [];
   for (const [[type, domain, settingId], value] of storedSettings as [KeyPath, boolean][]) {
     if (type === SETTINGS_KEY_PREFIX) {
-      allSettings.push([domain, settingId, value]);
+      allSettings.push([domain, settingId as SettingsId, value]);
     }
   }
   return allSettings;
