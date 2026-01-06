@@ -1,6 +1,6 @@
 import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '../common/prefs'
 import { createToggle } from '../common/toggle'
-import { logError, entries } from '../common/util'
+import { logError, entries, handleAsync } from '../common/util'
 
 const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean): Promise<void> => {
   const value = await getPref(prefName)
@@ -10,12 +10,12 @@ const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inver
   }
   input.checked = inverted ? !value : value
   input.addEventListener('change', (event: Event) => {
-    try {
+    handleAsync(async () => {
       const value = input.checked
-      setPref(prefName, inverted ? !value : value)
-    } catch (error) {
+      await setPref(prefName, inverted ? !value : value)
+    }, (error: unknown) => {
       logError(error, 'error responding to click on pref checkbox', event)
-    }
+    })
   })
   listenForPrefChanges(prefName, (value: boolean) => {
     input.checked = inverted ? !value : value

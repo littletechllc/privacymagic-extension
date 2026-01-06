@@ -4,10 +4,11 @@ import { setSetting } from '../common/settings'
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network'
 import { resetAllPrefsToDefaults } from '../common/prefs'
 /* eslint-disable no-unused-vars, import/no-unused-modules */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions'
 import { handleRemoteCssRequests } from './remote-css'
-import { logError, registrableDomainFromUrl } from '../common/util'
+import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 
 const blockAutocomplete = async (): Promise<void> => {
@@ -59,7 +60,7 @@ const handleMessage = async (message: any, sender: chrome.runtime.MessageSender,
       }
       sendResponse({ success: true, domain })
     } else {
-      throw new Error('unknown message type: ' + message.type)
+      throw new Error(`unknown message type: ${String(message?.type)}`)
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -74,15 +75,16 @@ const handleMessage = async (message: any, sender: chrome.runtime.MessageSender,
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Asynchronously handle the message. We ignore the returned Promise of handleMessage.
-  handleMessage(message, sender, sendResponse)
+  void handleMessage(message, sender, sendResponse)
   // Return true to indicate that handleMessage will send a response asynchronously.
   return true
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const logMatchingRulesInDevMode = (): void => {
-  if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+  if (chrome.declarativeNetRequest.onRuleMatchedDebug !== undefined) {
     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-      async ({ request, rule }) => {
+      (async ({ request, rule }) => {
         let ruleContent
         if (rule.rulesetId === '_session') {
           const rules = await chrome.declarativeNetRequest.getSessionRules({
@@ -97,11 +99,12 @@ const logMatchingRulesInDevMode = (): void => {
           ruleContent = rules[0]
         }
         console.log('rule matched debug:', { request, rule, ruleContent })
-      }
+      }) as (info: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => void
     )
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const testHttpBehavior = async (): Promise<void> => {
   chrome.webRequest.onBeforeRequest.addListener((details) => {
     console.log('onBeforeRequest debug:', details)
@@ -135,33 +138,26 @@ const testHttpBehavior = async (): Promise<void> => {
   chrome.webRequest.onErrorOccurred.addListener((details) => {
     console.log('onErrorOccurred debug:', details)
   }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
+  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     console.log('onBeforeNavigate debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onCommitted.addListener(async (details) => {
+  chrome.webNavigation.onCommitted.addListener((details) => {
     console.log('onCommitted debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onDOMContentLoaded.addListener(async (details) => {
+  chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
     console.log('onDOMContentLoaded debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onCompleted.addListener(async (details) => {
+  chrome.webNavigation.onCompleted.addListener((details) => {
     console.log('onCompleted debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onErrorOccurred.addListener(async (details) => {
+  chrome.webNavigation.onErrorOccurred.addListener((details) => {
     console.log('onErrorOccurred debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onHistoryStateUpdated.addListener(async (details) => {
+  chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
     console.log('onHistoryStateUpdated debug:', details)
-    return { cancel: false }
   })
-  chrome.webNavigation.onReferenceFragmentUpdated.addListener(async (details) => {
+  chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
     console.log('onReferenceFragmentUpdated debug:', details)
-    return { cancel: false }
   })
 }
 
@@ -193,25 +189,25 @@ const initializeExtension = async (): Promise<void> => {
   console.log('Extension initialized')
 }
 
-chrome.runtime.onInstalled.addListener(async function (details) {
-  try {
+chrome.runtime.onInstalled.addListener((details) => {
+  handleAsync(async () => {
     console.log('onInstalled details:', details)
     await resetAllPrefsToDefaults()
     await initializeExtension()
-  } catch (error) {
+  }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details)
-  }
+  })
 })
 
-chrome.runtime.onStartup.addListener(async () => {
-  try {
+chrome.runtime.onStartup.addListener(() => {
+  handleAsync(async () => {
     console.log('onStartup')
     await initializeExtension()
-  } catch (error) {
+  }, (error) => {
     // TODO: Show user a notification that the extension failed to start.
     logError(error, 'error onStartup')
-  }
+  })
 })
 
 initializeExtension().then(() => {

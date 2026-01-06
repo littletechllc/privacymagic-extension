@@ -1,11 +1,15 @@
 import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers'
 
 const gpu = (): (() => void) => {
-  if (!self.HTMLCanvasElement) {
+  if (self.HTMLCanvasElement === undefined) {
     return () => {}
   }
 
-  const originalCanvasFromContext = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas')!.get!
+  const canvasDescriptor = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas')
+  if (canvasDescriptor?.get === undefined) {
+    throw new Error('canvas getter not found')
+  }
+  const originalCanvasFromContext = canvasDescriptor.get
   const originalCanvasFromContextSafe = (context: CanvasRenderingContext2D): HTMLCanvasElement => reflectApplySafe(originalCanvasFromContext, context, [])
   const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext')
   const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL')
@@ -15,9 +19,17 @@ const gpu = (): (() => void) => {
   const originalContextIsPointInPathSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInPath')
   const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke')
 
-  const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width')!.set!
+  const widthDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width')
+  if (widthDescriptor?.set === undefined) {
+    throw new Error('width setter not found')
+  }
+  const originalCanvasSetWidth = widthDescriptor.set
   const originalCanvasSetWidthSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetWidth, canvas, [value])
-  const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height')!.set!
+  const heightDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height')
+  if (heightDescriptor?.set === undefined) {
+    throw new Error('height setter not found')
+  }
+  const originalCanvasSetHeight = heightDescriptor.set
   const originalCanvasSetHeightSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetHeight, canvas, [value])
 
   const originalContextDescriptors = Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype)
@@ -146,10 +158,11 @@ const gpu = (): (() => void) => {
   }
 
   const createOrGetCommandRecorder = (canvas: HTMLCanvasElement, contextAttributes: CanvasRenderingContext2DSettings): CommandRecorder => {
-    if (weakMapHasSafe(canvasToCommandRecorder, canvas)) {
-      return weakMapGetSafe(canvasToCommandRecorder, canvas)
+    const existing = weakMapGetSafe(canvasToCommandRecorder, canvas)
+    if (existing !== undefined) {
+      return existing
     }
-    const commandRecorder = reflectConstructSafe(CommandRecorder, [contextAttributes || {}, canvas.width, canvas.height])
+    const commandRecorder = reflectConstructSafe(CommandRecorder, [contextAttributes ?? {}, canvas.width, canvas.height])
     weakMapSetSafe(canvasToCommandRecorder, canvas, commandRecorder)
     return commandRecorder
   }
@@ -164,11 +177,11 @@ const gpu = (): (() => void) => {
       }
       originalDescriptors[name] = descriptor
       const newDescriptor = { ...descriptor }
-      if (descriptor.value) {
+      if (descriptor.value !== undefined) {
         const originalMethod = descriptor.value
         newDescriptor.value = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalMethod>) {
           const commandRecorder = getCommandRecorderForContext(this)
-          if (commandRecorder) {
+          if (commandRecorder != null) {
             commandRecorder.recordCommand(name, args, 'call')
           }
           return reflectApplySafe(originalMethod, this, args)
@@ -177,7 +190,7 @@ const gpu = (): (() => void) => {
         const originalSet = descriptor.set
         newDescriptor.set = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalSet>) {
           const commandRecorder = getCommandRecorderForContext(this)
-          if (commandRecorder) {
+          if (commandRecorder != null) {
             commandRecorder.recordCommand(name, args, 'set')
           }
           return reflectApplySafe(originalSet, this, args)
@@ -192,7 +205,7 @@ const gpu = (): (() => void) => {
     const restore = redefinePropertyValues(CanvasRenderingContext2D.prototype, {
       getImageData: function (this: CanvasRenderingContext2D, sx: number, sy: number, sw: number, sh: number, settings: ImageDataSettings) {
         const commandRecorder = getCommandRecorderForContext(this)
-        if (commandRecorder) {
+        if (commandRecorder != null) {
           return commandRecorder.context2dGetImageData(sx, sy, sw, sh, settings)
         } else {
           const data = new Uint8ClampedArray(sw * sh * 4)
@@ -201,7 +214,7 @@ const gpu = (): (() => void) => {
       },
       measureText: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextMeasureTextSafe>) {
         const commandRecorder = getCommandRecorderForContext(this)
-        if (commandRecorder) {
+        if (commandRecorder != null) {
           return commandRecorder.context2dMeasureText(...args)
         } else {
           // Return a dummy value to prevent the native method from being called.
@@ -220,7 +233,7 @@ const gpu = (): (() => void) => {
       },
       isPointInPath: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextIsPointInPathSafe>) {
         const commandRecorder = getCommandRecorderForContext(this)
-        if (commandRecorder) {
+        if (commandRecorder != null) {
           return commandRecorder.context2dIsPointInPath(...args)
         } else {
           // Return a dummy value to prevent the native method from being called.
@@ -229,7 +242,7 @@ const gpu = (): (() => void) => {
       },
       isPointInStroke: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextIsPointInStrokeSafe>) {
         const commandRecorder = getCommandRecorderForContext(this)
-        if (commandRecorder) {
+        if (commandRecorder != null) {
           return commandRecorder.context2dIsPointInStroke(...args)
         } else {
           // Return a dummy value to prevent the native method from being called.
@@ -244,7 +257,7 @@ const gpu = (): (() => void) => {
     const restoreReaders = redefinePropertyValues(HTMLCanvasElement.prototype, {
       getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes)
-        if (context && contextType === '2d') {
+        if (context !== null && context !== undefined && contextType === '2d') {
           // Create recorder when context is created, storing it with the canvas
           createOrGetCommandRecorder(this, contextAttributes)
         }

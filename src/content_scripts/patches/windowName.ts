@@ -8,8 +8,11 @@ const windowName = (): (() => void) | undefined => {
   if (propDescriptor == null) {
     return
   }
-  const nameGetter = propDescriptor.get!
-  const nameSetter = propDescriptor.set!
+  if (propDescriptor.get === undefined || propDescriptor.set === undefined) {
+    return
+  }
+  const nameGetter = propDescriptor.get
+  const nameSetter = propDescriptor.set
   Object.defineProperty(self, 'name', {
     get () {
       const nameStr = nameGetter.call(this)
@@ -39,7 +42,7 @@ const windowName = (): (() => void) | undefined => {
         data = {}
       }
       const origin = self.location.origin
-      if (!origin || origin.length === 0) {
+      if (origin === '' || origin.length === 0) {
         return
       }
       // String(value) matches self.name native behavior

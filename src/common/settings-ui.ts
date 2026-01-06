@@ -1,7 +1,7 @@
 import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings'
 import { getLocalizedText } from '../common/i18n'
 import { createToggle } from '../common/toggle'
-import { logError, entries } from '../common/util'
+import { logError, entries, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
 
@@ -98,9 +98,9 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
 // Add a listener that reloads the tab when a per-site toggle is clicked.
 const setupInputListeners = (domain: string): void => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
-    input.addEventListener('change', async (event) => {
-      const target = event.target as HTMLInputElement
-      try {
+    input.addEventListener('change', (event) => {
+      handleAsync(async () => {
+        const target = event.target as HTMLInputElement
         const settingId = target.id
         const response = await chrome.runtime.sendMessage({
           type: 'updateSetting',
@@ -111,13 +111,13 @@ const setupInputListeners = (domain: string): void => {
         console.log('sendMessage response:', response)
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
         const tabId = tabs[0].id
-        if (!tabId) {
+        if (tabId === null || tabId === undefined) {
           throw new Error('No active tab found')
         }
         await chrome.tabs.reload(tabId)
-      } catch (error) {
+      }, (error) => {
         logError(error, 'error updating setting', event)
-      }
+      })
     })
   })
 }

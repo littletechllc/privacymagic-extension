@@ -18,7 +18,11 @@ const css = (): (() => void) => {
   `
   document.documentElement.appendChild(noTransitionsStyleElement)
 
-  const originalAttachShadow = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow')!.value
+  const attachShadowDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow')
+  if (attachShadowDescriptor?.value === undefined) {
+    throw new Error('attachShadow not found')
+  }
+  const originalAttachShadow = attachShadowDescriptor.value
   const originalAttachShadowSafe = (element: Element, init: ShadowRootInit): ShadowRoot => reflectApplySafe(originalAttachShadow, element, [init])
   const shadowRoots: Set<Document | ShadowRoot> = new Set([document])
   redefinePropertiesSafe(Element.prototype, {
@@ -89,7 +93,7 @@ const css = (): (() => void) => {
     } else {
       const remoteStyleSheetContents = await Promise.all(importUrls.map(getRemoteStyleSheetContent))
       const fullContent = remoteStyleSheetContents.join('\n') + cssTextWithoutImports
-      applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute)
+      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute)
     }
   }
 
@@ -102,9 +106,9 @@ const css = (): (() => void) => {
       return
     }
     // Initialize the style sheet with the remote content when it becomes available.
-    getRemoteStyleSheetContent(href).then(content => {
-      if (content) {
-        applyContentToStyleSheet(styleSheet, content, mediaAttribute)
+    void getRemoteStyleSheetContent(href).then(content => {
+      if (content !== '' && content !== undefined) {
+        void applyContentToStyleSheet(styleSheet, content, mediaAttribute)
         document.documentElement.style.visibility = 'visible'
       }
     }).catch(error => {
@@ -123,7 +127,7 @@ const css = (): (() => void) => {
   // Create a style sheet containing the CSS content of a style element.
   const createStyleSheetForStyleElement = (styleElement: HTMLStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
-    applyContentToStyleSheet(styleSheet, styleElement.textContent, styleElement.media)
+    void applyContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media)
     styleSheet.disabled = styleElement.disabled
     return styleSheet
   }
@@ -139,13 +143,17 @@ const css = (): (() => void) => {
     }
     const svgId = crypto.randomUUID()
     svg.setAttribute('data-svg-id', svgId)
-    const text = `[data-svg-id="${svgId}"] { ${svgStyleElement.textContent} }`
-    applyContentToStyleSheet(styleSheet, text, svgStyleElement.media)
+    const text = `[data-svg-id="${svgId}"] { ${svgStyleElement.textContent ?? ''} }`
+    void applyContentToStyleSheet(styleSheet, text, svgStyleElement.media)
     styleSheet.disabled = svgStyleElement.disabled
     return styleSheet
   }
 
-  const originalMapGetter = Object.getOwnPropertyDescriptor(Map.prototype, 'get')!.value
+  const mapGetDescriptor = Object.getOwnPropertyDescriptor(Map.prototype, 'get')
+  if (mapGetDescriptor?.value === undefined) {
+    throw new Error('Map.get not found')
+  }
+  const originalMapGetter = mapGetDescriptor.value
   const mapGetSafe = <K, V>(map: Map<K, V>, key: K): V | undefined => reflectApplySafe(originalMapGetter, map, [key])
 
   const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
@@ -160,7 +168,7 @@ const css = (): (() => void) => {
     if (root instanceof Document || root instanceof ShadowRoot) {
       return root
     }
-    throw new Error(`unknown root node type: ${root}`)
+    throw new Error(`unknown root node type: ${String(root)}`)
   }
 
   // Get the style sheet for a style element, creating it if it doesn't exist.
@@ -177,7 +185,7 @@ const css = (): (() => void) => {
     } else if (cssElement instanceof SVGStyleElement) {
       styleSheet = createStyleSheetForSvgStyleElement(cssElement)
     } else {
-      throw new Error(`unknown CSS element type: ${cssElement}`)
+      throw new Error(`unknown CSS element type: ${String(cssElement)}`)
     }
     styleSheetsForCssElements.set(cssElement, styleSheet)
     const root = getRootNode(cssElement)
@@ -231,7 +239,7 @@ const css = (): (() => void) => {
         record.oldValue !== el.parentElement.textContent) {
         const styleSheet = getStyleSheetForCssElement(el.parentElement)
         if (styleSheet != null) {
-          applyContentToStyleSheet(styleSheet, el.parentElement.textContent, el.parentElement.media)
+          void applyContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media)
         }
       } else if (el instanceof HTMLStyleElement &&
                  record.type === 'attributes' &&
@@ -239,7 +247,7 @@ const css = (): (() => void) => {
                  record.oldValue !== el.media) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet != null) {
-          applyContentToStyleSheet(styleSheet, el.textContent, el.media)
+          void applyContentToStyleSheet(styleSheet, el.textContent ?? '', el.media)
         }
       } else if (el instanceof HTMLLinkElement &&
                  record.type === 'attributes' &&
@@ -300,7 +308,11 @@ const css = (): (() => void) => {
     }
   })
 
-  const originalReplaceSync = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync')!.value
+  const replaceSyncDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync')
+  if (replaceSyncDescriptor?.value === undefined) {
+    throw new Error('replaceSync not found')
+  }
+  const originalReplaceSync = replaceSyncDescriptor.value
   const originalReplaceSyncSafe = (styleSheet: CSSStyleSheet, css: string): void => reflectApplySafe(originalReplaceSync, styleSheet, [css])
 
   const sanitizeRule = (rule: CSSRule): CSSRule => {

@@ -1,9 +1,11 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { isMain, entries } from './util.ts'
+import { isMain, entries } from './util'
 import { fileURLToPath } from 'url'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __filename = fileURLToPath(import.meta.url)
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = path.dirname(__filename)
 
 const BLOCKLISTS: string[] = [
@@ -64,18 +66,7 @@ const toEquivalentResourceType = (raw: string): string => {
   if (!ALLOWED_RESOURCE_TYPES.includes(raw)) {
     throw new Error(`Unknown resource type '${raw}'`)
   }
-  return RESOURCE_TYPE_EQUIVALENCES[raw] || raw
-}
-
-// Remove empty arrays from the given object
-const removeEmptyArrays = (obj: Record<string, any>): Record<string, any> => {
-  const result: Record<string, any> = {}
-  for (const [k, v] of Object.entries(obj)) {
-    if (v && v.length > 0) {
-      result[k] = v
-    }
-  }
-  return result
+  return RESOURCE_TYPE_EQUIVALENCES[raw] ?? raw
 }
 
 interface FilterOptions {
@@ -270,7 +261,7 @@ const parseLine = (line: string): Line => {
     if (e instanceof Error) {
       e.message = `line '${line}':\n` + e.message
     } else {
-      throw new Error(`line '${line}':\n${e}`)
+      throw new Error(`line '${line}':\n${String(e)}`)
     }
     throw e
   }
@@ -310,7 +301,7 @@ const generateContentRules = (items: Line[]): Record<string, Record<string, stri
       continue
     }
     for (const domain of parsed.domains) {
-      cssItemsForDomain[domain] ||= {} as Record<string, string[]>
+      cssItemsForDomain[domain] ||= {}
       cssItemsForDomain[domain][parsed.body.style] ||= []
       cssItemsForDomain[domain][parsed.body.style].push(parsed.body.selector)
     }
@@ -374,7 +365,7 @@ export const processAndWrite = async (): Promise<void> => {
     if (!isBlockingFilter(x.parsed)) return true
     const condition = x.parsed.condition
     if ('regexFilter' in condition) return true
-    return !condition.filterOptions?.resourceTypes?.includes('popup')
+    return condition.filterOptions?.resourceTypes?.includes('popup') !== true
   })
   const blockingRulesFileContent = generateBlockingRulesFile(results2)
   await fs.mkdir(dist('rules'), { recursive: true })
@@ -387,5 +378,5 @@ export const processAndWrite = async (): Promise<void> => {
 
 if (isMain(import.meta)) {
   console.log(path)
-  processAndWrite()
+  void processAndWrite()
 }

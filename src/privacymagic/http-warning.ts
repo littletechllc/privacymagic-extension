@@ -1,7 +1,7 @@
-import { logError } from '../common/util'
+import { handleAsync, logError } from '../common/util'
 
 const urlParam = new URL(window.location.href).searchParams.get('url')
-if (!urlParam) {
+if (urlParam === null || urlParam === '') {
   throw new Error('url parameter is required')
 }
 const url = urlParam
@@ -17,18 +17,16 @@ const addExceptionElement = document.getElementById('addException')
 if (addExceptionElement == null) {
   throw new Error('addException element not found')
 }
-addExceptionElement.addEventListener('click', async (event) => {
-  try {
-    await chrome.runtime.sendMessage({
-      type: 'addHttpWarningNetworkRuleException',
-      url,
-      value: 'exception'
-    })
-    window.location.replace(url)
-  } catch (error) {
-    logError(error, 'error adding exception to http warning network rule', { url, event })
-  }
-})
+addExceptionElement.addEventListener('click', (event: Event) => handleAsync(async () => {
+  await chrome.runtime.sendMessage({
+    type: 'addHttpWarningNetworkRuleException',
+    url,
+    value: 'exception'
+  })
+  window.location.replace(url)
+}, (error: unknown) => {
+  logError(error, 'error adding exception to http warning network rule', { url, event })
+}))
 
 const goBackElement = document.getElementById('goBack')
 if (goBackElement == null) {

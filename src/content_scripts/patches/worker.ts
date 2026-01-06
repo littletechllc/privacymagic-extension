@@ -4,7 +4,11 @@ const worker = (): (() => void) => {
   const URLSafe = self.URL
   const BlobSafe = self.Blob
   const URLcreateObjectURLSafe = URL.createObjectURL
-  const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!
+  const hrefDescriptor = Object.getOwnPropertyDescriptor(URL.prototype, 'href')
+  if (hrefDescriptor?.get === undefined) {
+    throw new Error('URL.href getter not found')
+  }
+  const URLhrefGetter = hrefDescriptor.get
   const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
 
   // Spoof the self.location object to return the original URL, and modify various
@@ -24,7 +28,11 @@ const worker = (): (() => void) => {
       }
     }
     const URLSafe = self.URL
-    const URLhrefGetter = Object.getOwnPropertyDescriptor(URL.prototype, 'href')!.get!
+    const hrefDescriptor = Object.getOwnPropertyDescriptor(URL.prototype, 'href')
+    if (hrefDescriptor?.get === undefined) {
+      throw new Error('URL.href getter not found')
+    }
+    const URLhrefGetter = hrefDescriptor.get
     const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl)
@@ -36,15 +44,24 @@ const worker = (): (() => void) => {
     }
     Object.defineProperties(self.WorkerLocation.prototype, descriptors)
     // Modify the self.Request object to be relative to the original URL.
-    const originalRequestUrlGetter = Object.getOwnPropertyDescriptor(Request.prototype, 'url')!.get!
+    const requestUrlDescriptor = Object.getOwnPropertyDescriptor(Request.prototype, 'url')
+    if (requestUrlDescriptor?.get === undefined) {
+      throw new Error('Request.url getter not found')
+    }
+    const originalRequestUrlGetter = requestUrlDescriptor.get
     const originalRequestUrlSafe = (request: Request): string => reflectApplySafe(originalRequestUrlGetter, request, [])
     Object.defineProperty(Request.prototype, 'url', {
       get () {
-        return URLhrefSafe(new URLSafe(originalRequestUrlSafe(this), absoluteUrl))
+        const relativeUrl = originalRequestUrlSafe(this)
+        return URLhrefSafe(new URLSafe(relativeUrl as string | URL, absoluteUrl))
       }
     })
     // Modify the self.Response object to be relative to the original URL.
-    const originalResponseUrlGetter = Object.getOwnPropertyDescriptor(Response.prototype, 'url')!.get!
+    const responseUrlDescriptor = Object.getOwnPropertyDescriptor(Response.prototype, 'url')
+    if (responseUrlDescriptor?.get === undefined) {
+      throw new Error('Response.url getter not found')
+    }
+    const originalResponseUrlGetter = responseUrlDescriptor.get
     const originalResponseUrlSafe = (response: Response): string => reflectApplySafe(originalResponseUrlGetter, response, [])
     Object.defineProperty(Response.prototype, 'url', {
       get () {
@@ -56,7 +73,7 @@ const worker = (): (() => void) => {
     self.fetch = async (firstArg: URL | Request | string, ...args: any[]) => {
       const resolvedFirstArg: URL | Request = firstArg instanceof Request
         ? firstArg
-        : URLhrefSafe(new URLSafe(firstArg.toString(), absoluteUrl))
+        : new URLSafe(firstArg.toString(), absoluteUrl)
       return await originalFetch(resolvedFirstArg, ...args)
     }
     // Modify the self.importScripts function to be relative to the original URL.
@@ -90,8 +107,8 @@ const worker = (): (() => void) => {
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
     const originalRevokeObjectURL = self.URL.revokeObjectURL
 
-    const pendingRevocations = new Set()
-    const lockedUrls = new Map()
+    const pendingRevocations = new Set<string>()
+    const lockedUrls = new Map<string, number>()
 
     const isLockedObjectUrl = (url: string): boolean => {
       return (lockedUrls.get(url) ?? 0) > 0
@@ -109,7 +126,7 @@ const worker = (): (() => void) => {
       if (!isLockedObjectUrl(url)) {
         return
       }
-      const lockCount = lockedUrls.get(url)!
+      const lockCount = lockedUrls.get(url) ?? 0
       if (lockCount <= 1) {
         lockedUrls.delete(url)
         if (pendingRevocations.has(url)) {
@@ -188,7 +205,10 @@ const worker = (): (() => void) => {
     })
   }
 
-  return prepareInjectionForWorker(makeBundleForInjection(getDisabledSettings()))
+  prepareInjectionForWorker(makeBundleForInjection(getDisabledSettings()))
+  return () => {
+    // TODO: Add cleanup if needed
+  }
 }
 
 export default worker

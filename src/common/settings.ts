@@ -26,8 +26,8 @@ export const getSetting = async (domain: string, settingId: SettingsId): Promise
 }
 
 export const setSetting = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
-  if (!value && value) {
-    throw new Error(`Invalid setting value: ${value}`)
+  if (typeof value !== 'boolean') {
+    throw new Error(`Invalid setting value: ${String(value)}`)
   }
   // If the domain is the default domain, then we set the setting value.
   // We remove the setting if the value is being set to true, since

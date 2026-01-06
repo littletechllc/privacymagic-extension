@@ -5,7 +5,10 @@ import { redefinePropertyValues } from '../helpers'
 // https://globalprivacycontrol.org/
 const gpc = (): (() => void) => {
   console.log('gpc patch', self.location.href)
-  const navigatorPrototype = self.Navigator || self.WorkerNavigator
+  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
+  if (navigatorPrototype === null || navigatorPrototype === undefined) {
+    return () => {}
+  }
   return redefinePropertyValues(navigatorPrototype.prototype, {
     globalPrivacyControl: true
   })

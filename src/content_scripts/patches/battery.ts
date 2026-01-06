@@ -1,7 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
 const battery = (): (() => void) | undefined => {
-  let restoreBatteryManager
   if (self.BatteryManager != null) {
     const silencedEventProperty = {
       get: () => { return null },
@@ -9,7 +8,7 @@ const battery = (): (() => void) | undefined => {
       configurable: true,
       enumerable: true
     }
-    restoreBatteryManager = redefinePropertyValues(BatteryManager.prototype, {
+    return redefinePropertyValues(BatteryManager.prototype, {
       charging: true,
       chargingTime: 0,
       dischargingTime: Infinity,
@@ -23,6 +22,7 @@ const battery = (): (() => void) | undefined => {
       onlevelchange: silencedEventProperty
     })
   }
+  return undefined
 }
 
 export default battery

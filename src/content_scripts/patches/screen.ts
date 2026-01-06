@@ -1,7 +1,7 @@
 import { redefinePropertyValues } from '../helpers'
 
 const screen = (): (() => void) => {
-  if (!self.Screen) {
+  if (self.Screen === undefined) {
     return () => {}
   }
   const oldMatchMedia = self.matchMedia
@@ -9,6 +9,7 @@ const screen = (): (() => void) => {
     return mediaQueryString
       ?.replaceAll('device-width', 'width')
       ?.replaceAll('device-height', 'height') ?? ''
+  }
   const allowedScreenSizes: Array<[number, number]> = [
     [1920, 1080],
     [2560, 1440],

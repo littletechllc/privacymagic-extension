@@ -91,12 +91,12 @@ export const getPref = async (prefName: PRIVACY_PREFS_NAME): Promise<boolean> =>
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
-  if (!pref) {
+  if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
   }
   const value = (await pref.get({})).value
-  console.log(`Read pref ${prefName} with value ${value}`)
-  if (config.onValue) {
+  console.log(`Read pref ${prefName} with value ${String(value)}`)
+  if (config.onValue !== undefined && config.onValue !== '') {
     return value === config.onValue
   }
   return value
@@ -106,15 +106,15 @@ export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean): Pro
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
-  if (!pref) {
+  if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
   }
   let nativeValue: string | boolean = value
-  if (config.onValue) {
+  if (config.onValue !== undefined && config.onValue !== '') {
     nativeValue = value ? config.onValue : (config.offValue ?? '')
   }
   await pref.set({ value: nativeValue })
-  console.log(`Set pref ${prefName} to value ${nativeValue}`)
+  console.log(`Set pref ${prefName} to value ${String(nativeValue)}`)
   return true
 }
 
@@ -122,14 +122,14 @@ export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (va
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
-  if (!pref) {
+  if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
   }
   pref.onChange.addListener((details: { value: unknown }) => {
     try {
-      console.log(`Pref ${prefName} changed to ${details.value}`)
+      console.log(`Pref ${prefName} changed to ${String(details.value)}`)
       let outValue: boolean = details.value as boolean
-      if (config.onValue) {
+      if (config.onValue !== undefined && config.onValue !== '') {
         outValue = details.value === config.onValue
       }
       callback(outValue)

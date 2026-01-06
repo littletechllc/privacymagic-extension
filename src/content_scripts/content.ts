@@ -24,7 +24,7 @@ import useragent from './patches/useragent'
 import windowName from './patches/windowName'
 import worker from './patches/worker'
 
-const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | void>> = {
+const privacyMagicPatches: Partial<Record<SettingsId, () => (() => void) | undefined>> = {
   battery,
   cpu,
   css,

@@ -1,4 +1,4 @@
-import { addIfMissing, removeIfPresent } from '../common/util'
+import { addIfMissing, handleAsync, logError, removeIfPresent } from '../common/util'
 import { IDS } from './ids'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
@@ -102,13 +102,17 @@ export const createHttpWarningNetworkRule = async (): Promise<void> => {
   await updateRule(specialHttpWarningRule)
   await updateRule(specialHttpAllowRule)
 
-  chrome.webRequest.onErrorOccurred.addListener(async (details) => {
-    if (details.url.startsWith('https://')) {
-      const domain = new URL(details.url).hostname
-      if (domain === null) {
-        return
+  chrome.webRequest.onErrorOccurred.addListener((details) => {
+    handleAsync(async () => {
+      if (details.url.startsWith('https://')) {
+        const domain = new URL(details.url).hostname
+        if (domain === null) {
+          return
+        }
+        await updateRuleWithDomain(specialHttpWarningRule, domain, true)
       }
-      await updateRuleWithDomain(specialHttpWarningRule, domain, true)
-    }
+    }, (error) => {
+      logError(error, 'error creating HTTP warning network rule', details)
+    })
   }, { urls: ['<all_urls>'], types: ['main_frame'] })
 }

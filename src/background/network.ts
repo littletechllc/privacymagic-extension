@@ -1,6 +1,6 @@
 import { getAllSettings, getSetting } from '../common/settings'
 import { SettingsId } from '../common/settings-ids'
-import { logError, registrableDomainFromUrl, addIfMissing, removeIfPresent } from '../common/util'
+import { logError, registrableDomainFromUrl, addIfMissing, removeIfPresent, handleAsync } from '../common/util'
 import { IDS } from './ids'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
@@ -279,7 +279,7 @@ const updateSubresourceNetworkRule = async (settingId: SettingsId, tabId: number
   await updateSessionRules(rules)
 }
 
-let subresourceNetworkListener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null
+const subresourceNetworkListener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null
 
 const setupSubresourceNetworkRules = async (): Promise<void> => {
   // Create the subresource network rules, initially without any excluded tab ids.
@@ -294,7 +294,7 @@ const setupSubresourceNetworkRules = async (): Promise<void> => {
   if (subresourceNetworkListener !== null) {
     chrome.webNavigation.onCommitted.removeListener(subresourceNetworkListener)
   }
-  subresourceNetworkListener = async (details) => {
+  chrome.webNavigation.onCommitted.addListener((details) => handleAsync(async () => {
     try {
       const { url, tabId, frameId } = details
       // For requests, frameId is undefined.
@@ -313,8 +313,9 @@ const setupSubresourceNetworkRules = async (): Promise<void> => {
     } catch (error) {
       logError(error, 'error updating subresource network rule for top-level navigation or request', details)
     }
-  }
-  chrome.webNavigation.onCommitted.addListener(subresourceNetworkListener)
+  }, (error: unknown) => {
+    logError(error, 'error updating subresource network rule for top-level navigation or request', details)
+  }))
 }
 
 export const setupNetworkRules = async (): Promise<void> => {
