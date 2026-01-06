@@ -1,29 +1,31 @@
 import { logError } from '../common/util';
 
+export type KeyPath = string[];
+
 const KEY_SEPARATOR = ':';
 
-const keyPathToKey = (keyPath: string[]): string => {
+const keyPathToKey = (keyPath: KeyPath): string => {
   return keyPath.join(KEY_SEPARATOR);
 };
 
-class StorageProxy {
+export class StorageProxy {
   storage: chrome.storage.StorageArea;
 
   constructor (storageType: 'local' | 'sync' | 'session' | 'managed') {
     this.storage = chrome.storage[storageType];
   }
 
-  async set (keyPath, value) {
+  async set (keyPath: KeyPath, value: any) {
     const key = keyPathToKey(keyPath);
     return (await this.storage.set({ [key]: value }));
   }
 
-  async get (keyPath) {
+  async get (keyPath: KeyPath) : Promise<any> {
     const key = keyPathToKey(keyPath);
     return (await this.storage.get(key))[key];
   }
 
-  async remove (keyPath) {
+  async remove (keyPath: KeyPath) {
     const key = keyPathToKey(keyPath);
     return (await this.storage.remove(key));
   }
@@ -37,7 +39,7 @@ class StorageProxy {
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value]);
   }
 
-  listenForChanges (keyPath, callback) {
+  listenForChanges (keyPath: KeyPath, callback: (value: any) => void) {
     this.storage.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath);
@@ -50,7 +52,7 @@ class StorageProxy {
     });
   }
 
-  listenForAnyChanges (callback) {
+  listenForAnyChanges (callback: (changes: [KeyPath, any][]) => void) {
     this.storage.onChanged.addListener(async (change) => {
       try {
         await callback(Object.entries(change).map(
@@ -62,31 +64,34 @@ class StorageProxy {
   }
 }
 
-let storageLocal_, storageSession_, storageSync_, storageManaged_;
+let storageLocal: StorageProxy | null = null;
+let storageSession: StorageProxy | null = null;
+let storageSync: StorageProxy | null = null;
+let storageManaged: StorageProxy | null = null;
 
 export const storage = {
   get local () {
-    if (!storageLocal_) {
-      storageLocal_ = new StorageProxy('local');
+    if (!storageLocal) {
+      storageLocal = new StorageProxy('local');
     }
-    return storageLocal_;
+    return storageLocal;
   },
   get sync () {
-    if (!storageSync_) {
-      storageSync_ = new StorageProxy('sync');
+    if (!storageSync) {
+      storageSync = new StorageProxy('sync');
     }
-    return storageSync_;
+    return storageSync;
   },
   get session () {
-    if (!storageSession_) {
-      storageSession_ = new StorageProxy('session');
+    if (!storageSession) {
+      storageSession = new StorageProxy('session');
     }
-    return storageSession_;
+    return storageSession;
   },
   get managed () {
-    if (!storageManaged_) {
-      storageManaged_ = new StorageProxy('managed');
+    if (!storageManaged) {
+      storageManaged = new StorageProxy('managed');
     }
-    return storageManaged_;
+    return storageManaged;
   }
 };

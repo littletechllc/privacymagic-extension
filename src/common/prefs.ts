@@ -1,14 +1,30 @@
 import { logError } from './util';
 
+type PrefCategory = 'websites' | 'services' | 'network';
+
 // Privacy prefs configuration
-export const PRIVACY_PREFS_CONFIG :
-  Record<string, {
-    inverted: boolean;
-    locked: boolean;
-    category: string;
-    onValue?: string;
-    offValue?: string;
-  }> = {
+type PrefConfig = {
+  inverted: boolean;
+  locked: boolean;
+  category: PrefCategory;
+  onValue?: string;
+  offValue?: string;
+};
+
+export type PrefName =
+  'adMeasurementEnabled' |
+  'alternateErrorPagesEnabled' |
+  'fledgeEnabled' |
+  'hyperlinkAuditingEnabled' |
+  'relatedWebsiteSetsEnabled' |
+  'safeBrowsingExtendedReportingEnabled' |
+  'searchSuggestEnabled' |
+  'spellingServiceEnabled' |
+  'thirdPartyCookiesAllowed' |
+  'topicsEnabled' |
+  'webRTCIPHandlingPolicy';
+
+export const PRIVACY_PREFS_CONFIG : Record<PrefName, PrefConfig> = {
   thirdPartyCookiesAllowed: {
     inverted: true,
     locked: false,
@@ -68,50 +84,53 @@ export const PRIVACY_PREFS_CONFIG :
   }
 };
 
-export const getPref = async (prefName) => {
-  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
+// Generate union type from the keys at compile time
+export type PRIVACY_PREFS_NAME = keyof typeof PRIVACY_PREFS_CONFIG;
+
+export const getPref = async (prefName: PRIVACY_PREFS_NAME) => {
+  const config = PRIVACY_PREFS_CONFIG[prefName];
+  const category = config.category as keyof typeof chrome.privacy;
+  const pref = (chrome.privacy[category] as any)[prefName];
+  if (!pref) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  if (!PRIVACY_PREFS_CONFIG[prefName]) {
-    throw new Error(`Pref ${prefName} not found in config`);
-  }
-  const value = (await chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].get({})).value;
+  const value = (await pref.get({})).value;
   console.log(`Read pref ${prefName} with value ${value}`);
-  if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
-    return value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+  if (config.onValue) {
+    return value === config.onValue;
   }
   return value;
 };
 
-export const setPref = async (prefName, value) => {
-  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
+export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean) => {
+  const config = PRIVACY_PREFS_CONFIG[prefName];
+  const category = config.category as keyof typeof chrome.privacy;
+  const pref = (chrome.privacy[category] as any)[prefName];
+  if (!pref) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  if (!PRIVACY_PREFS_CONFIG[prefName]) {
-    throw new Error(`Pref ${prefName} not found in config`);
+  let nativeValue: string | boolean = value;
+  if (config.onValue) {
+    nativeValue = value ? config.onValue : (config.offValue ?? '');
   }
-  let nativeValue = value;
-  if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
-    nativeValue = value ? PRIVACY_PREFS_CONFIG[prefName].onValue : PRIVACY_PREFS_CONFIG[prefName].offValue;
-  }
-  await chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].set({ value: nativeValue });
+  await pref.set({ value: nativeValue });
   console.log(`Set pref ${prefName} to value ${nativeValue}`);
   return true;
 };
 
-export const listenForPrefChanges = (prefName, callback) => {
-  if (!chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName]) {
+export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (value: boolean) => void) => {
+  const config = PRIVACY_PREFS_CONFIG[prefName];
+  const category = config.category as keyof typeof chrome.privacy;
+  const pref = (chrome.privacy[category] as any)[prefName];
+  if (!pref) {
     throw new Error(`Pref ${prefName} not found`);
   }
-  if (!PRIVACY_PREFS_CONFIG[prefName]) {
-    throw new Error(`Pref ${prefName} not found in config`);
-  }
-  chrome.privacy[PRIVACY_PREFS_CONFIG[prefName].category][prefName].onChange.addListener((details) => {
+  pref.onChange.addListener((details: { value: unknown }) => {
     try {
       console.log(`Pref ${prefName} changed to ${details.value}`);
-      let outValue = details.value;
-      if (PRIVACY_PREFS_CONFIG[prefName].onValue) {
-        outValue = details.value === PRIVACY_PREFS_CONFIG[prefName].onValue;
+      let outValue: boolean = details.value as boolean;
+      if (config.onValue) {
+        outValue = details.value === config.onValue;
       }
       callback(outValue);
     } catch (error) {
@@ -122,6 +141,6 @@ export const listenForPrefChanges = (prefName, callback) => {
 
 export const resetAllPrefsToDefaults = async () => {
   for (const [prefName, config] of Object.entries(PRIVACY_PREFS_CONFIG)) {
-    await setPref(prefName, !config.inverted);
+    await setPref(prefName as PRIVACY_PREFS_NAME, !config.inverted);
   }
 };
