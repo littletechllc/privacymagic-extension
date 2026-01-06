@@ -1,8 +1,12 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges } from '../common/prefs';
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '../common/prefs';
 import { createToggle } from '../common/toggle';
 import { logError } from '../common/util';
 
-const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: string, inverted: boolean) => {
+const entries = <K extends string, V>(obj: Record<K, V>): [K, V][] => {
+  return Object.entries(obj) as [K, V][];
+};
+
+const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean) => {
   const value = await getPref(prefName);
   const input: HTMLInputElement | null = toggle.querySelector('input');
   if (!input) {
@@ -30,7 +34,7 @@ export const setupPrefsUI = async () => {
   // Clear container and add title
   prefsContainer.innerHTML = '<h1>Browser Preferences</h1>';
   // Create toggles for each preference
-  for (const [prefName, { locked, inverted }] of Object.entries(PRIVACY_PREFS_CONFIG)) {
+  for (const [prefName, { locked, inverted }] of entries(PRIVACY_PREFS_CONFIG)) {
     const toggle = await createToggle(prefName, locked);
     await bindPrefToCheckbox(toggle, prefName, inverted);
     prefsContainer.appendChild(toggle);
