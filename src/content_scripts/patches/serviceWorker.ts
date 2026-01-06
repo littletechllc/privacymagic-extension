@@ -1,7 +1,7 @@
 import { redefinePropertyValues } from '../helpers'
 
 const serviceWorker = (): (() => void) => {
-  if (!self.ServiceWorkerContainer) {
+  if (self.ServiceWorkerContainer === undefined) {
     return () => {}
   }
 

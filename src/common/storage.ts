@@ -30,7 +30,7 @@ export class StorageProxy {
     return (await this.storage.remove(key))
   }
 
-  async clear (): Promise<void> => {
+  async clear (): Promise<void> {
     return (await this.storage.clear())
   }
 
@@ -43,7 +43,7 @@ export class StorageProxy {
     this.storage.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath)
-        if (changes[key]) {
+        if (changes[key] !== undefined) {
           callback(changes[key].newValue)
         }
       } catch (error) {
@@ -53,13 +53,15 @@ export class StorageProxy {
   }
 
   listenForAnyChanges (callback: (changes: Array<[KeyPath, any]>) => void): void {
-    this.storage.onChanged.addListener(async (change) => {
-      try {
-        await callback(Object.entries(change).map(
-          ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
-      } catch (error) {
-        logError(error, 'error responding to any storage changes', change)
-      }
+    this.storage.onChanged.addListener((change) => {
+      void (async () => {
+        try {
+          await callback(Object.entries(change).map(
+            ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
+        } catch (error) {
+          logError(error, 'error responding to any storage changes', change)
+        }
+      })()
     })
   }
 }

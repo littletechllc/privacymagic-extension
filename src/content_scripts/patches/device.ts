@@ -18,7 +18,7 @@ const device = (): (() => void) => {
     })
   }
   return () => {
-    if (restoreDevicePosture) {
+    if (restoreDevicePosture !== undefined) {
       restoreDevicePosture()
     }
   }

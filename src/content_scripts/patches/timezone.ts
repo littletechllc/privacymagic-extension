@@ -367,22 +367,22 @@ const timezone = (): (() => void) => {
       const minutes = offsetMinutes % 60
       // If the time zone uses DST, return the DST representative time zone.
       const dstRepresentativeTimeZone = dstTimeZoneMappings[options.timeZone]
-      if (dstRepresentativeTimeZone) {
+      if (dstRepresentativeTimeZone !== undefined && dstRepresentativeTimeZone !== '') {
         return { ...options, timeZone: dstRepresentativeTimeZone }
       }
       // If the time zone has a minute offset, return the coalesced time zone.
       if (minutes !== 0) {
-        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] || options.timeZone
+        const fractionalHourRepresentativeTimeZone = fractionHourTimeZoneMappings[options.timeZone] ?? options.timeZone
         return { ...options, timeZone: fractionalHourRepresentativeTimeZone }
       }
       // If the time zone is a round number of hours, return a representative time zone.
       const roundTimeZoneRepresentative = roundTimeZoneRepresentatives[hours.toString()]
-      if (roundTimeZoneRepresentative) {
+      if (roundTimeZoneRepresentative !== undefined && roundTimeZoneRepresentative !== '') {
         return { ...options, timeZone: roundTimeZoneRepresentative }
       }
       // Otherwise, return the Etc/GMT+n or Etc/GMT-n representative time zone.
       // Negative to match the Etc/ sign convention.
-      const etcTimeZone = `Etc/GMT${hours > 0 ? '-' + hours : '+' + (-hours)}`
+      const etcTimeZone = `Etc/GMT${hours > 0 ? '-' + String(hours) : '+' + String(-hours)}`
       return { ...options, timeZone: etcTimeZone }
     }
   })

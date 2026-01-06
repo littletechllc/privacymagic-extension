@@ -1,4 +1,4 @@
-import { registrableDomainFromUrl, logError } from '../common/util'
+import { registrableDomainFromUrl, logError, handleAsync } from '../common/util'
 import { getSetting } from '../common/settings'
 
 const fileExists = async (path: string): Promise<boolean> => {
@@ -11,19 +11,19 @@ const fileExists = async (path: string): Promise<boolean> => {
   }
 }
 
-let listener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => Promise<void>) | null = null
+let listener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => void) | null = null
 
 export const injectCssForCosmeticFilters = (): void => {
   if (listener !== null) {
     chrome.webNavigation.onCommitted.removeListener(listener)
     listener = null
   }
-  listener = async (details) => {
+  listener = (details) => handleAsync(async (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails): Promise<void> => {
     try {
       let url = details.url
       if (details.frameId !== 0 && details.frameId !== undefined) {
         const tab = await chrome.tabs.get(details.tabId)
-        if (tab.url) {
+        if (tab.url !== undefined && tab.url !== '') {
           url = tab.url
         }
       }
@@ -65,6 +65,18 @@ export const injectCssForCosmeticFilters = (): void => {
         logError(error, 'error injecting CSS for cosmetic filters', details)
       }
     }
+  }, (error: unknown) => {
+    if (error instanceof Error) {
+      if (error.message === `Frame with ID ${details.frameId} was removed.` ||
+          error.message === `No tab with id: ${details.tabId}` ||
+          error.message === `No frame with id ${details.frameId} in tab with id ${details.tabId}`) {
+        // Ignore these errors.
+        return
+      }
+      logError(error, 'error injecting CSS for cosmetic filters', details)
+    }
+  }) as (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => void
+  if (listener !== null) {
+    chrome.webNavigation.onCommitted.addListener(listener)
   }
-  chrome.webNavigation.onCommitted.addListener(listener)
 }

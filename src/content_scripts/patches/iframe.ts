@@ -2,7 +2,7 @@ import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrust
 
 const iframe = (): (() => void) => {
   const prepareInjectionForIframes = (hardeningCode: string): void => {
-    if (!self.HTMLIFrameElement) {
+    if (self.HTMLIFrameElement === undefined) {
       return
     }
 
@@ -33,9 +33,18 @@ const iframe = (): (() => void) => {
 
     const evalSet = new WeakSet<Function>()
 
-    const contentWindowGetter = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')!.get!
-    const weakSetHas = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')!.value
-    const weakSetAdd = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')!.value
+    const contentWindowDescriptor = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, 'contentWindow')
+    if (contentWindowDescriptor?.get === undefined) {
+      throw new Error('contentWindow getter not found')
+    }
+    const contentWindowGetter = contentWindowDescriptor.get
+    const weakSetHasDescriptor = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'has')
+    const weakSetAddDescriptor = Object.getOwnPropertyDescriptor(WeakSet.prototype, 'add')
+    if (weakSetHasDescriptor?.value === undefined || weakSetAddDescriptor?.value === undefined) {
+      throw new Error('WeakSet methods not found')
+    }
+    const weakSetHas = weakSetHasDescriptor.value
+    const weakSetAdd = weakSetAddDescriptor.value
 
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/
     // Function bodies here need to be carefully crafted to prevent invoking
@@ -46,7 +55,7 @@ const iframe = (): (() => void) => {
     // - Accessing properties of objects that have a global prototype
     // - Evaluating globally-defined functions or Objects
 
-    const getContentWindowSafe = (iframe: HTMLIFrameElement) => reflectApplySafe(contentWindowGetter, iframe, [])
+    const getContentWindowSafe = (iframe: HTMLIFrameElement): Window | null => reflectApplySafe(contentWindowGetter, iframe, [])
 
     const weakSetHasSafe = <T extends object>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v])
     const weakSetAddSafe = <T extends object>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v])

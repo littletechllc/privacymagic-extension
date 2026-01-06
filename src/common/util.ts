@@ -26,3 +26,14 @@ export const removeIfPresent = <T>(array: T[], item: T): void => {
 export const entries = <K extends string, V>(obj: Record<K, V>): Array<[K, V]> => {
   return Object.entries(obj) as Array<[K, V]>
 }
+
+// Safely call async functions in event listeners.
+export const handleAsync = (fn: () => Promise<void>, onError?: (error: unknown) => void): void => {
+  void fn().catch((error) => {
+    if (onError !== undefined) {
+      onError(error)
+    } else {
+      logError(error, 'error in async event handler')
+    }
+  })
+}

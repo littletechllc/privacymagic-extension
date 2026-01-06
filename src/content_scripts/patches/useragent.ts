@@ -6,7 +6,10 @@ const useragent = (): (() => void) => {
   const PLATFORM_VERSION = '26.0.0'
   const BRAND_VERSION = '8.0.0.0'
   const SHORT_BRAND_VERSION = BRAND_VERSION.split('.')[0]
-  const navigatorPrototype = self.Navigator || self.WorkerNavigator
+  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
+  if (navigatorPrototype === null || navigatorPrototype === undefined) {
+    return () => {}
+  }
   const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
     platform: 'MacIntel',
     userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`,

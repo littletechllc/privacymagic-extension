@@ -6,8 +6,8 @@ setTimeout(() => {
       try {
         console.log('progress event')
         const videoContainer = document.getElementById('movie_player')
-        const isAd = videoContainer?.classList.contains('ad-interrupting') ||
-                   videoContainer?.classList.contains('ad-showing')
+        const isAd = (videoContainer?.classList.contains('ad-interrupting') ?? false) ||
+                   (videoContainer?.classList.contains('ad-showing') ?? false)
         if (isAd) {
           video.muted = true
           video.currentTime = video.duration - 0.1

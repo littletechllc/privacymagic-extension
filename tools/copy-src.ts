@@ -3,8 +3,8 @@ import * as path from 'node:path'
 import { mkdir, copyFile, readdir, stat, readFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 
-const srcDir: string = process.argv[2] || 'src'
-const distDir: string = process.argv[3] || 'dist'
+const srcDir: string = process.argv[2] ?? 'src'
+const distDir: string = process.argv[3] ?? 'dist'
 const watchMode: boolean = process.argv.includes('--watch')
 
 const isExcluded = (file: string): boolean => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.')
