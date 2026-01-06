@@ -66,7 +66,7 @@ const bindToggleToStorage = async (
   store: StorageProxy,
   keyPath: KeyPath,
   defaultValue: boolean
-) => {
+): Promise<void> => {
   const input = toggle.querySelector('input')
   if (input == null) {
     throw new Error('Input not found')
@@ -78,7 +78,7 @@ const bindToggleToStorage = async (
   })
 }
 
-const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingsId[], categoryId: SettingsCategory) => {
+const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingsId[], categoryId: SettingsCategory): Promise<HTMLElement> => {
   const category = document.createElement('div')
   category.id = categoryId
   category.className = 'toggle-box'
@@ -96,7 +96,7 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
 }
 
 // Add a listener that reloads the tab when a per-site toggle is clicked.
-const setupInputListeners = (domain: string) => {
+const setupInputListeners = (domain: string): void => {
   document.querySelectorAll('#settings input[type="checkbox"]').forEach(input => {
     input.addEventListener('change', async (event) => {
       const target = event.target as HTMLInputElement
@@ -122,7 +122,7 @@ const setupInputListeners = (domain: string) => {
   })
 }
 
-export const setupSettingsUI = async (domain: string) => {
+export const setupSettingsUI = async (domain: string): Promise<void> => {
   const settingsContainer = document.getElementById('settings')
   if (settingsContainer == null) {
     throw new Error('Settings container not found')

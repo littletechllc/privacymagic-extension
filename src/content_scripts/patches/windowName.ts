@@ -1,6 +1,6 @@
 import { objectDefinePropertiesSafe } from '../helpers'
 
-const windowName = () => {
+const windowName = (): (() => void) | undefined => {
   if (self.top !== self) {
     return
   }

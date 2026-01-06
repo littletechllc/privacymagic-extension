@@ -15,7 +15,7 @@ export class StorageProxy {
     this.storage = chrome.storage[storageType]
   }
 
-  async set (keyPath: KeyPath, value: any) {
+  async set (keyPath: KeyPath, value: any): Promise<void> {
     const key = keyPathToKey(keyPath)
     return (await this.storage.set({ [key]: value }))
   }
@@ -25,21 +25,21 @@ export class StorageProxy {
     return (await this.storage.get(key))[key]
   }
 
-  async remove (keyPath: KeyPath) {
+  async remove (keyPath: KeyPath): Promise<void> {
     const key = keyPathToKey(keyPath)
     return (await this.storage.remove(key))
   }
 
-  async clear () {
+  async clear (): Promise<void> => {
     return (await this.storage.clear())
   }
 
-  async getAll () {
+  async getAll (): Promise<Array<[KeyPath, any]>> {
     const values = await this.storage.get()
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value])
   }
 
-  listenForChanges (keyPath: KeyPath, callback: (value: any) => void) {
+  listenForChanges (keyPath: KeyPath, callback: (value: any) => void): void {
     this.storage.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath)
@@ -52,7 +52,7 @@ export class StorageProxy {
     })
   }
 
-  listenForAnyChanges (callback: (changes: Array<[KeyPath, any]>) => void) {
+  listenForAnyChanges (callback: (changes: Array<[KeyPath, any]>) => void): void {
     this.storage.onChanged.addListener(async (change) => {
       try {
         await callback(Object.entries(change).map(

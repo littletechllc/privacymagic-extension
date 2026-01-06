@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const disk = () => {
+const disk = (): (() => void) => {
   return redefinePropertyValues(StorageManager.prototype, {
     estimate: async () => await Promise.resolve({
       // Never report any usage

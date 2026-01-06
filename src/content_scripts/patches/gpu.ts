@@ -1,12 +1,12 @@
 import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers'
 
-const gpu = () => {
+const gpu = (): (() => void) => {
   if (!self.HTMLCanvasElement) {
     return () => {}
   }
 
   const originalCanvasFromContext = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas')!.get!
-  const originalCanvasFromContextSafe = (context: CanvasRenderingContext2D) => reflectApplySafe(originalCanvasFromContext, context, [])
+  const originalCanvasFromContextSafe = (context: CanvasRenderingContext2D): HTMLCanvasElement => reflectApplySafe(originalCanvasFromContext, context, [])
   const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext')
   const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL')
   const originalCanvasToBlobSafe = createSafeMethod(HTMLCanvasElement, 'toBlob')
@@ -16,13 +16,13 @@ const gpu = () => {
   const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke')
 
   const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width')!.set!
-  const originalCanvasSetWidthSafe = (canvas: HTMLCanvasElement, value: number) => reflectApplySafe(originalCanvasSetWidth, canvas, [value])
+  const originalCanvasSetWidthSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetWidth, canvas, [value])
   const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height')!.set!
-  const originalCanvasSetHeightSafe = (canvas: HTMLCanvasElement, value: number) => reflectApplySafe(originalCanvasSetHeight, canvas, [value])
+  const originalCanvasSetHeightSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetHeight, canvas, [value])
 
   const originalContextDescriptors = Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype)
 
-  const createInvisibleCanvas = (width: number, height: number) => {
+  const createInvisibleCanvas = (width: number, height: number): HTMLCanvasElement => {
     const shadowCanvas: HTMLCanvasElement = document.createElement('canvas')
     shadowCanvas.width = width
     shadowCanvas.height = height
@@ -50,7 +50,7 @@ const gpu = () => {
       this.height = height
     }
 
-    recordCommand (name: string, args: any[], type: 'call' | 'set') {
+    recordCommand (name: string, args: any[], type: 'call' | 'set'): void {
       // Discard commands if the last command is more than 250ms old
       const timestamp = Date.now()
       if (this.commands.length > 0 && this.commands[this.commands.length - 1].timestamp < timestamp - 250) {
@@ -60,7 +60,7 @@ const gpu = () => {
       this.commands.push({ name, args, type, timestamp })
     }
 
-    replayCommands () {
+    replayCommands (): CanvasRenderingContext2D {
       if (this.shadowContext == null) {
         this.createShadowContext()
       }
@@ -76,35 +76,35 @@ const gpu = () => {
       return this.shadowContext
     }
 
-    createShadowContext () {
+    createShadowContext (): void {
       this.shadowCanvas = createInvisibleCanvas(this.width, this.height)
       this.shadowContext = this.shadowCanvas.getContext('2d', { ...this.contextAttributes, willReadFrequently: true })
       // We don't need to append the shadow canvas to the document: it still gets rendered, but it's invisible.
     }
 
-    wipeShadowCanvas () {
+    wipeShadowCanvas (): void {
       if (this.shadowCanvas != null) {
         this.shadowCanvas.width = this.width
       }
     }
 
-    context2dGetImageData (...args: Parameters<typeof originalContextGetImageDataSafe>) {
+    context2dGetImageData (...args: Parameters<typeof originalContextGetImageDataSafe>): ImageData {
       return originalContextGetImageDataSafe(this.replayCommands(), ...args)
     }
 
-    context2dMeasureText (...args: Parameters<typeof originalContextMeasureTextSafe>) {
+    context2dMeasureText (...args: Parameters<typeof originalContextMeasureTextSafe>): TextMetrics {
       return originalContextMeasureTextSafe(this.replayCommands(), ...args)
     }
 
-    context2dIsPointInPath (...args: Parameters<typeof originalContextIsPointInPathSafe>) {
+    context2dIsPointInPath (...args: Parameters<typeof originalContextIsPointInPathSafe>): boolean {
       return originalContextIsPointInPathSafe(this.replayCommands(), ...args)
     }
 
-    context2dIsPointInStroke (...args: Parameters<typeof originalContextIsPointInStrokeSafe>) {
+    context2dIsPointInStroke (...args: Parameters<typeof originalContextIsPointInStrokeSafe>): boolean {
       return originalContextIsPointInStrokeSafe(this.replayCommands(), ...args)
     }
 
-    canvasToDataURL (type: string, quality: number) {
+    canvasToDataURL (type: string, quality: number): string {
       const shadowContext = this.replayCommands()
       if (shadowContext == null) {
         return 'data:,'
@@ -113,7 +113,7 @@ const gpu = () => {
       return originalCanvasToDataURLSafe(shadowCanvas, type, quality)
     }
 
-    canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number) {
+    canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number): void {
       const shadowContext = this.replayCommands()
       if (shadowContext == null) {
         callback(null)
@@ -123,14 +123,14 @@ const gpu = () => {
       return originalCanvasToBlobSafe(shadowCanvas, callback, type, quality)
     }
 
-    setWidth (value: number) {
+    setWidth (value: number): void {
       this.width = value
       if (this.shadowCanvas != null) {
         this.shadowCanvas.width = value
       }
     }
 
-    setHeight (value: number) {
+    setHeight (value: number): void {
       this.height = value
       if (this.shadowCanvas != null) {
         this.shadowCanvas.height = value
@@ -140,12 +140,12 @@ const gpu = () => {
 
   const canvasToCommandRecorder = new WeakMap()
 
-  const getCommandRecorderForContext = (context: CanvasRenderingContext2D) => {
+  const getCommandRecorderForContext = (context: CanvasRenderingContext2D): CommandRecorder | undefined => {
     const canvas = originalCanvasFromContextSafe(context)
     return weakMapGetSafe(canvasToCommandRecorder, canvas)
   }
 
-  const createOrGetCommandRecorder = (canvas: HTMLCanvasElement, contextAttributes: CanvasRenderingContext2DSettings) => {
+  const createOrGetCommandRecorder = (canvas: HTMLCanvasElement, contextAttributes: CanvasRenderingContext2DSettings): CommandRecorder => {
     if (weakMapHasSafe(canvasToCommandRecorder, canvas)) {
       return weakMapGetSafe(canvasToCommandRecorder, canvas)
     }
@@ -156,7 +156,7 @@ const gpu = () => {
 
   const nonDrawingCommands = ['canvas', 'getImageData', 'measureText', 'isPointInPath', 'isPointInStroke']
 
-  const enableContext2dCommandRecording = () => {
+  const enableContext2dCommandRecording = (): (() => void) => {
     const originalDescriptors: Record<string, PropertyDescriptor> = {}
     for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype))) {
       if (nonDrawingCommands.includes(name)) {
@@ -188,7 +188,7 @@ const gpu = () => {
     return () => objectDefinePropertiesSafe(CanvasRenderingContext2D.prototype, originalDescriptors)
   }
 
-  const enableReadingFromContext2dCommandRecorder = () => {
+  const enableReadingFromContext2dCommandRecorder = (): (() => void) => {
     const restore = redefinePropertyValues(CanvasRenderingContext2D.prototype, {
       getImageData: function (this: CanvasRenderingContext2D, sx: number, sy: number, sw: number, sh: number, settings: ImageDataSettings) {
         const commandRecorder = getCommandRecorderForContext(this)
@@ -240,7 +240,7 @@ const gpu = () => {
     return restore
   }
 
-  const enableCanvasCommandRecording = () => {
+  const enableCanvasCommandRecording = (): (() => void) => {
     const restoreReaders = redefinePropertyValues(HTMLCanvasElement.prototype, {
       getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes)
@@ -290,7 +290,7 @@ const gpu = () => {
     }
   }
 
-  const hideWebGLVendorAndRenderer = () => {
+  const hideWebGLVendorAndRenderer = (): (() => void) => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter')
     if (navigator.userAgentData != null) {
       const userAgentData: NavigatorUAData = navigator.userAgentData

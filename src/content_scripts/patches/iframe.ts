@@ -1,7 +1,7 @@
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
-const iframe = () => {
-  const prepareInjectionForIframes = (hardeningCode: string) => {
+const iframe = (): (() => void) => {
+  const prepareInjectionForIframes = (hardeningCode: string): void => {
     if (!self.HTMLIFrameElement) {
       return
     }
@@ -53,7 +53,7 @@ const iframe = () => {
 
     // Sometimes the iframe has not yet been hardened, so if the page is trying
     // to access the contentWindow, we need to harden it first.
-    const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string) => {
+    const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string): Window | null => {
       const contentWin = getContentWindowSafe(iframe)
       // Accesing contentWin.eval is safe because, in order to monkey patch it,
       // the pre-evaluated script would need to access contentWin, which would

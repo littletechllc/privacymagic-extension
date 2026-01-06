@@ -87,7 +87,7 @@ export const PRIVACY_PREFS_CONFIG: Record<PrefName, PrefConfig> = {
 // Generate union type from the keys at compile time
 export type PRIVACY_PREFS_NAME = keyof typeof PRIVACY_PREFS_CONFIG
 
-export const getPref = async (prefName: PRIVACY_PREFS_NAME) => {
+export const getPref = async (prefName: PRIVACY_PREFS_NAME): Promise<boolean> => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
@@ -102,7 +102,7 @@ export const getPref = async (prefName: PRIVACY_PREFS_NAME) => {
   return value
 }
 
-export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean) => {
+export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean): Promise<void> => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
@@ -118,7 +118,7 @@ export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean) => {
   return true
 }
 
-export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (value: boolean) => void) => {
+export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (value: boolean) => void): void => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
   const category = config.category as keyof typeof chrome.privacy
   const pref = (chrome.privacy[category] as any)[prefName]
@@ -139,7 +139,7 @@ export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (va
   })
 }
 
-export const resetAllPrefsToDefaults = async () => {
+export const resetAllPrefsToDefaults = async (): Promise<void> => {
   for (const [prefName, config] of Object.entries(PRIVACY_PREFS_CONFIG)) {
     await setPref(prefName as PRIVACY_PREFS_NAME, !config.inverted)
   }

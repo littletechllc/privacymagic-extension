@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const language = () => {
+const language = (): (() => void) => {
   const originalLanguage = navigator.language
   const navigatorPrototype = self.Navigator || self.WorkerNavigator
   return redefinePropertyValues(navigatorPrototype.prototype, {

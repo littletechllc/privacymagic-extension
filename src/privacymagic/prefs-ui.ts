@@ -2,7 +2,7 @@ import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type Pref
 import { createToggle } from '../common/toggle'
 import { logError, entries } from '../common/util'
 
-const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean) => {
+const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean): Promise<void> => {
   const value = await getPref(prefName)
   const input: HTMLInputElement | null = toggle.querySelector('input')
   if (input == null) {
@@ -22,7 +22,7 @@ const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inver
   })
 }
 
-export const setupPrefsUI = async () => {
+export const setupPrefsUI = async (): Promise<void> => {
   const prefsContainer = document.getElementById('prefs')
   if (prefsContainer == null) {
     throw new Error('Prefs container not found')
