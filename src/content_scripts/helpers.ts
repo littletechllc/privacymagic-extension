@@ -98,7 +98,7 @@ export const makeBundleForInjection = (disabledSettings: string[]) => {
 
 let trustedTypePolicy: TrustedTypePolicy | undefined;
 
-export const getTrustedTypesPolicy = () => {
+export const getTrustedTypesPolicy = (): TrustedTypePolicy => {
   if (!trustedTypePolicy && self.trustedTypes) {
     trustedTypePolicy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
       createHTML: (unsafeHTML) => unsafeHTML,
@@ -106,7 +106,7 @@ export const getTrustedTypesPolicy = () => {
       createScriptURL: (unsafeScriptURL) => unsafeScriptURL
     });
   }
-  return trustedTypePolicy;
+  return trustedTypePolicy!;
 };
 
 export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
