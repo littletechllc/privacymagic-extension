@@ -5,8 +5,8 @@ const gpu = () => {
     return () => {};
   }
 
-  const originalCanvasFromContext = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas').get;
-  const originalCanvasFromContextSafe = (context) => reflectApplySafe(originalCanvasFromContext, context, []);
+  const originalCanvasFromContext = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas')!.get!;
+  const originalCanvasFromContextSafe = (context: CanvasRenderingContext2D) => reflectApplySafe(originalCanvasFromContext, context, []);
   const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext');
   const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL');
   const originalCanvasToBlobSafe = createSafeMethod(HTMLCanvasElement, 'toBlob');
@@ -15,35 +15,42 @@ const gpu = () => {
   const originalContextIsPointInPathSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInPath');
   const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke');
 
-  const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width').set;
-  const originalCanvasSetWidthSafe = (canvas, value) => reflectApplySafe(originalCanvasSetWidth, canvas, [value]);
-  const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height').set;
-  const originalCanvasSetHeightSafe = (canvas, value) => reflectApplySafe(originalCanvasSetHeight, canvas, [value]);
+  const originalCanvasSetWidth = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width')!.set!;
+  const originalCanvasSetWidthSafe = (canvas: HTMLCanvasElement, value: number) => reflectApplySafe(originalCanvasSetWidth, canvas, [value]);
+  const originalCanvasSetHeight = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height')!.set!;
+  const originalCanvasSetHeightSafe = (canvas: HTMLCanvasElement, value: number) => reflectApplySafe(originalCanvasSetHeight, canvas, [value]);
 
   const originalContextDescriptors = Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype);
 
   const createInvisibleCanvas = (width: number, height: number) => {
-    const shadowCanvas = document.createElement('canvas');
+    const shadowCanvas: HTMLCanvasElement = document.createElement('canvas');
     shadowCanvas.width = width;
     shadowCanvas.height = height;
     return shadowCanvas;
   };
 
+  type Command = {
+    name: string;
+    args: any[];
+    type: 'call' | 'set';
+    timestamp: number;
+  };
+
   class CommandRecorder {
-    commands = [];
+    commands: Command[] = [];
     contextAttributes = {};
-    shadowCanvas = undefined;
-    shadowContext = undefined;
+    shadowCanvas: HTMLCanvasElement | undefined;
+    shadowContext: CanvasRenderingContext2D | null = null;
     width: number = 0;
     height: number = 0;
 
-    constructor (contextAttributes, width, height) {
+    constructor (contextAttributes: CanvasRenderingContext2DSettings, width: number, height: number) {
       this.contextAttributes = contextAttributes;
       this.width = width;
       this.height = height;
     }
 
-    recordCommand (name, args, type) {
+    recordCommand (name: string, args: any[], type: 'call' | 'set') {
       // Discard commands if the last command is more than 250ms old
       const timestamp = Date.now();
       if (this.commands.length > 0 && this.commands[this.commands.length - 1].timestamp < timestamp - 250) {
@@ -76,47 +83,54 @@ const gpu = () => {
     }
 
     wipeShadowCanvas () {
-      if (this.shadowContext) {
+      if (this.shadowCanvas) {
         this.shadowCanvas.width = this.width;
       }
     }
 
-    context2dGetImageData (...args) {
+    context2dGetImageData (...args: Parameters<typeof originalContextGetImageDataSafe>) {
       return originalContextGetImageDataSafe(this.replayCommands(), ...args);
     }
 
-    context2dMeasureText (...args) {
+    context2dMeasureText (...args: Parameters<typeof originalContextMeasureTextSafe>) {
       return originalContextMeasureTextSafe(this.replayCommands(), ...args);
     }
 
-    context2dIsPointInPath (...args) {
+    context2dIsPointInPath (...args: Parameters<typeof originalContextIsPointInPathSafe>) {
       return originalContextIsPointInPathSafe(this.replayCommands(), ...args);
     }
 
-    context2dIsPointInStroke (...args) {
+    context2dIsPointInStroke (...args: Parameters<typeof originalContextIsPointInStrokeSafe>) {
       return originalContextIsPointInStrokeSafe(this.replayCommands(), ...args);
     }
 
-    canvasToDataURL (type, quality) {
+    canvasToDataURL (type: string, quality: number) {
       const shadowContext = this.replayCommands();
+      if (!shadowContext) {
+        return 'data:,';
+      }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext);
       return originalCanvasToDataURLSafe(shadowCanvas, type, quality);
     }
 
-    canvasToBlob (callback, type, quality) {
+    canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number) {
       const shadowContext = this.replayCommands();
+      if (!shadowContext) {
+        callback(null);
+        return;
+      }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext);
       return originalCanvasToBlobSafe(shadowCanvas, callback, type, quality);
     }
 
-    setWidth (value) {
+    setWidth (value: number) {
       this.width = value;
       if (this.shadowCanvas) {
         this.shadowCanvas.width = value;
       }
     }
 
-    setHeight (value) {
+    setHeight (value: number) {
       this.height = value;
       if (this.shadowCanvas) {
         this.shadowCanvas.height = value;
@@ -126,12 +140,12 @@ const gpu = () => {
 
   const canvasToCommandRecorder = new WeakMap();
 
-  const getCommandRecorderForContext = (context) => {
+  const getCommandRecorderForContext = (context: CanvasRenderingContext2D) => {
     const canvas = originalCanvasFromContextSafe(context);
     return weakMapGetSafe(canvasToCommandRecorder, canvas);
   };
 
-  const createOrGetCommandRecorder = (canvas, contextAttributes) => {
+  const createOrGetCommandRecorder = (canvas: HTMLCanvasElement, contextAttributes: CanvasRenderingContext2DSettings) => {
     if (weakMapHasSafe(canvasToCommandRecorder, canvas)) {
       return weakMapGetSafe(canvasToCommandRecorder, canvas);
     }
@@ -152,7 +166,7 @@ const gpu = () => {
       const newDescriptor = { ...descriptor };
       if (descriptor.value) {
         const originalMethod = descriptor.value;
-        newDescriptor.value = function (...args) {
+        newDescriptor.value = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalMethod>) {
           const commandRecorder = getCommandRecorderForContext(this);
           if (commandRecorder) {
             commandRecorder.recordCommand(name, args, 'call');
@@ -161,7 +175,7 @@ const gpu = () => {
         };
       } else if (descriptor.set) {
         const originalSet = descriptor.set;
-        newDescriptor.set = function (...args) {
+        newDescriptor.set = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalSet>) {
           const commandRecorder = getCommandRecorderForContext(this);
           if (commandRecorder) {
             commandRecorder.recordCommand(name, args, 'set');
@@ -176,7 +190,7 @@ const gpu = () => {
 
   const enableReadingFromContext2dCommandRecorder = () => {
     const restore = redefinePropertyValues(CanvasRenderingContext2D.prototype, {
-      getImageData: function (sx, sy, sw, sh, settings) {
+      getImageData: function (this: CanvasRenderingContext2D, sx: number, sy: number, sw: number, sh: number, settings: ImageDataSettings) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           return commandRecorder.context2dGetImageData(sx, sy, sw, sh, settings);
@@ -185,7 +199,7 @@ const gpu = () => {
           return new ImageData(data, sw, sh);
         }
       },
-      measureText: function (...args) {
+      measureText: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextMeasureTextSafe>) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           return commandRecorder.context2dMeasureText(...args);
@@ -204,7 +218,7 @@ const gpu = () => {
           };
         }
       },
-      isPointInPath: function (...args) {
+      isPointInPath: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextIsPointInPathSafe>) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           return commandRecorder.context2dIsPointInPath(...args);
@@ -213,7 +227,7 @@ const gpu = () => {
           return false;
         }
       },
-      isPointInStroke: function (...args) {
+      isPointInStroke: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof originalContextIsPointInStrokeSafe>) {
         const commandRecorder = getCommandRecorderForContext(this);
         if (commandRecorder) {
           return commandRecorder.context2dIsPointInStroke(...args);
@@ -228,7 +242,7 @@ const gpu = () => {
 
   const enableCanvasCommandRecording = () => {
     const restoreReaders = redefinePropertyValues(HTMLCanvasElement.prototype, {
-      getContext: function (contextType, contextAttributes) {
+      getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes);
         if (context && contextType === '2d') {
           // Create recorder when context is created, storing it with the canvas
@@ -236,14 +250,14 @@ const gpu = () => {
         }
         return context;
       },
-      toDataURL: function (type, quality) {
+      toDataURL: function (type: string, quality: number) {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this).canvasToDataURL(type, quality);
         }
         // Return a dummy data URL to prevent the native method from being called.
         return 'data:,';
       },
-      toBlob: function (callback, type, quality) {
+      toBlob: function (callback: (blob: Blob | null) => void, type: string, quality: number) {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this).canvasToBlob(callback, type, quality);
         }
@@ -254,7 +268,7 @@ const gpu = () => {
     });
     const restoreDimensions = redefinePropertiesSafe(HTMLCanvasElement.prototype, {
       width: {
-        set: function (value) {
+        set: function (this: HTMLCanvasElement, value: number) {
           originalCanvasSetWidthSafe(this, value);
           if (weakMapHasSafe(canvasToCommandRecorder, this)) {
             weakMapGetSafe(canvasToCommandRecorder, this).setWidth(value);
@@ -262,7 +276,7 @@ const gpu = () => {
         }
       },
       height: {
-        set: function (value) {
+        set: function (this: HTMLCanvasElement, value: number) {
           originalCanvasSetHeightSafe(this, value);
           if (weakMapHasSafe(canvasToCommandRecorder, this)) {
             weakMapGetSafe(canvasToCommandRecorder, this).setHeight(value);
@@ -278,12 +292,12 @@ const gpu = () => {
 
   const hideWebGLVendorAndRenderer = () => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter');
-    if ('userAgentData' in navigator) {
+    if (navigator.userAgentData) {
       const userAgentData : NavigatorUAData = navigator.userAgentData;
       const platform = userAgentData.platform;
       if (platform === 'MacIntel') {
         return redefinePropertyValues(self.WebGLRenderingContext.prototype, {
-          getParameter: function (constant) {
+          getParameter: function (constant: number) {
             console.log('getParameter', constant);
             const originalValue = originalGetParameterSafe(this, constant);
             switch (constant) {
