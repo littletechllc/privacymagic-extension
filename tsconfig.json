@@ -2,11 +2,12 @@
   "compilerOptions": {
     "checkJs": true,
     "noEmit": true,
-    "lib": ["ES2020", "dom", "webworker"],
+    "lib": ["ES2021", "dom", "webworker"],
     "types": ["chrome"],
     "target": "ES2020",
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strict": true
   },
   "include": ["./src/**/*"]
 }
