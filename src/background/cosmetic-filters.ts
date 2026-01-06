@@ -28,6 +28,9 @@ export const injectCssForCosmeticFilters = () => {
         }
       }
       const topLevelDomain = registrableDomainFromUrl(url);
+      if (topLevelDomain === null) {
+        return;
+      }
       const setting = await getSetting(topLevelDomain, 'ads');
       if (setting === false) {
         return;
