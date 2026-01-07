@@ -18,7 +18,7 @@ export const injectCssForCosmeticFilters = (): void => {
     chrome.webNavigation.onCommitted.removeListener(listener)
     listener = null
   }
-  listener = (details) => handleAsync(async (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails): Promise<void> => {
+  chrome.webNavigation.onCommitted.addListener((details) => handleAsync(async () => {
     try {
       let url = details.url
       if (details.frameId !== 0 && details.frameId !== undefined) {
@@ -75,8 +75,5 @@ export const injectCssForCosmeticFilters = (): void => {
       }
       logError(error, 'error injecting CSS for cosmetic filters', details)
     }
-  }) as (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => void
-  if (listener !== null) {
-    chrome.webNavigation.onCommitted.addListener(listener)
-  }
+  }))
 }

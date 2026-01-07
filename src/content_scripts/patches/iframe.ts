@@ -1,6 +1,6 @@
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
-const iframe = (): (() => void) => {
+const iframe = (): undefined => {
   const prepareInjectionForIframes = (hardeningCode: string): void => {
     if (self.HTMLIFrameElement === undefined) {
       return
@@ -57,8 +57,8 @@ const iframe = (): (() => void) => {
 
     const getContentWindowSafe = (iframe: HTMLIFrameElement): Window | null => reflectApplySafe(contentWindowGetter, iframe, [])
 
-    const weakSetHasSafe = <T extends object>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v])
-    const weakSetAddSafe = <T extends object>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v])
+    const weakSetHasSafe = <T extends WeakKey>(s: WeakSet<T>, v: T): boolean => reflectApplySafe(weakSetHas, s, [v])
+    const weakSetAddSafe = <T extends WeakKey>(s: WeakSet<T>, v: T): WeakSet<T> => reflectApplySafe(weakSetAdd, s, [v])
 
     // Sometimes the iframe has not yet been hardened, so if the page is trying
     // to access the contentWindow, we need to harden it first.
@@ -67,7 +67,10 @@ const iframe = (): (() => void) => {
       // Accesing contentWin.eval is safe because, in order to monkey patch it,
       // the pre-evaluated script would need to access contentWin, which would
       // trigger our hardening code injection first.
-      const evalFunction = contentWin.eval
+      const evalFunction: Function | null | undefined = contentWin != null && 'eval' in contentWin ? contentWin.eval : null
+      if (evalFunction === null || evalFunction === undefined) {
+        return contentWin
+      }
       try {
         if (!weakSetHasSafe(evalSet, evalFunction)) {
           const policy = getTrustedTypesPolicy()
@@ -87,7 +90,8 @@ const iframe = (): (() => void) => {
       get () { return getContentWindowAfterHardening(this, hardeningCode) }
     })
   }
-  return prepareInjectionForIframes(makeBundleForInjection(getDisabledSettings()))
+  prepareInjectionForIframes(makeBundleForInjection(getDisabledSettings()))
+  return undefined
 }
 
 export default iframe

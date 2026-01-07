@@ -256,12 +256,13 @@ const tabExceptionsForSetting: Map<string, Set<number>> = new Map()
 
 // Add or remove a tab id from the excluded tab ids for the subresource network rule.
 const updateSubresourceNetworkRule = async (settingId: SettingsId, tabId: number, value: boolean): Promise<void> => {
-  const tabExceptions = (tabExceptionsForSetting.get(settingId) != null) || new Set()
+  const tabExceptions: Set<number> = tabExceptionsForSetting.get(settingId) ?? new Set<number>()
   if (!value) {
     tabExceptions.add(tabId)
   } else {
     tabExceptions.delete(tabId)
   }
+  tabExceptionsForSetting.set(settingId, tabExceptions)
   const partialRules = NETWORK_PROTECTION_DEFS[settingId]
   if (partialRules == null) {
     return

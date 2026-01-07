@@ -1,4 +1,4 @@
-const math = (): void => {
+const math = (): undefined => {
   // Ensure that LOW_BITS is in (0,32)
   const LOW_BITS = 8
 

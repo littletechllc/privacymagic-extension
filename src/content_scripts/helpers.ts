@@ -28,7 +28,7 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
   const newProperties: PropertyDescriptorMap = {}
   for (const [prop, value] of Object.entries(propertyMap)) {
     const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop)
-    originalProperties[prop] = (originalDescriptor != null) || nonProperty
+    originalProperties[prop] = originalDescriptor != null ? originalDescriptor : nonProperty
     if (value === undefined) {
       newProperties[prop] = nonProperty
     } else {

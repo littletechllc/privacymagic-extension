@@ -79,7 +79,7 @@ const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void
 }
 
 const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean): Promise<void> => {
-  const requestDomains = (rule.condition.requestDomains != null) || []
+  const requestDomains = rule.condition.requestDomains ?? []
   if (!value) {
     addIfMissing(requestDomains, domain)
   } else {

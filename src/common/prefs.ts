@@ -115,7 +115,6 @@ export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean): Pro
   }
   await pref.set({ value: nativeValue })
   console.log(`Set pref ${prefName} to value ${String(nativeValue)}`)
-  return true
 }
 
 export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (value: boolean) => void): void => {

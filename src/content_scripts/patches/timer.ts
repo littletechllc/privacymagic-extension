@@ -25,7 +25,7 @@ const timer = (): (() => void) => {
       return undefined
     }
   }
-  const makeRoundedGetters = (objectPrototype: any, properties: string[]): (() => void) => {
+  const makeRoundedGetters = (objectPrototype: any, properties: string[]): void => {
     const originalDescriptors: PropertyDescriptorMap = {}
     for (const property of properties) {
       const descriptor = Object.getOwnPropertyDescriptor(objectPrototype, property)
@@ -53,16 +53,12 @@ const timer = (): (() => void) => {
   }
 
   interface Constructor { prototype: any }
-  const batchMakeRoundedGetters = (objectsWithProperties: ReadonlyArray<[(Constructor | null | undefined), string[]]>): (() => void) => {
-    const restores = objectsWithProperties.map(([object, properties]) => {
-      if (object == null) {
-        return () => {}
+  const batchMakeRoundedGetters = (objectsWithProperties: ReadonlyArray<[(Constructor | null | undefined), string[]]>): void => {
+    objectsWithProperties.forEach(([object, properties]) => {
+      if (object !== null && object !== undefined) {
+        makeRoundedGetters(object.prototype, properties)
       }
-      return makeRoundedGetters(object.prototype, properties)
     })
-    return () => {
-      restores.forEach(restore => restore())
-    }
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const restorePerformance = batchMakeRoundedGetters([
