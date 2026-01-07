@@ -3,9 +3,7 @@ import path from 'node:path'
 import { isMain, entries } from './util'
 import { fileURLToPath } from 'url'
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const __filename = fileURLToPath(import.meta.url)
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = path.dirname(__filename)
 
 const BLOCKLISTS: string[] = [
@@ -257,9 +255,9 @@ const parseLine = (line: string): Line => {
       parsed = parseBlockingFilter(line)
     }
     return { parsed, line }
-  } catch (e: any) {
+  } catch (e: unknown) {
     if (e instanceof Error) {
-      e.message = `line '${line}':\n` + e.message
+      e.message = `line '${line}':\n${e.message}`
     } else {
       throw new Error(`line '${line}':\n${String(e)}`)
     }
@@ -311,13 +309,13 @@ const generateContentRules = (items: Line[]): Record<string, Record<string, stri
 
 const SELECTOR_CHUNK_SIZE = 1024
 
-const generateContentRulesFiles = async (dir: string, cssItemsForDomain: Record<string, any>): Promise<string[]> => {
+const generateContentRulesFiles = async (dir: string, cssItemsForDomain: Record<string, Record<string, string[]>>): Promise<string[]> => {
   await fs.mkdir(dir, { recursive: true })
-  const files = []
+  const files: string[] = []
   for (const [domain, cssItems] of entries(cssItemsForDomain)) {
     const lines = []
     for (const [style, selectors] of entries(cssItems)) {
-      const selectorsSorted = (selectors as string[]).sort()
+      const selectorsSorted = selectors.sort()
       const nChunks = Math.ceil(selectorsSorted.length / SELECTOR_CHUNK_SIZE)
       for (let i = 0; i < nChunks; ++i) {
         const selected = selectorsSorted.slice(SELECTOR_CHUNK_SIZE * i, SELECTOR_CHUNK_SIZE * (i + 1))

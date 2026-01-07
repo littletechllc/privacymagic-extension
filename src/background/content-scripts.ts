@@ -100,7 +100,7 @@ export const setupContentScripts = async (): Promise<void> => {
   // Unregister any existing content script with this ID to avoid duplicates
   try {
     await chrome.scripting.unregisterContentScripts({ ids: ['foreground'] })
-  } catch (error) {
+  } catch {
     // Ignore error if script doesn't exist
   }
   const mainForegroundRule: chrome.scripting.RegisteredContentScript = {

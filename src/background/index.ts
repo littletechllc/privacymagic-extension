@@ -3,7 +3,6 @@ import { updateContentScripts, setupContentScripts } from './content-scripts'
 import { setSetting } from '../common/settings'
 import { setupNetworkRules, updateTopLevelNetworkRule } from './network'
 import { resetAllPrefsToDefaults } from '../common/prefs'
-/* eslint-disable no-unused-vars, import/no-unused-modules */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions'
@@ -35,9 +34,16 @@ const updateSetting = async (domain: string, settingId: SettingsId, value: boole
   await updateTopLevelNetworkRule(domain, settingId, value)
 }
 
-type ResponseSendFunction = (response: any) => void
+type ResponseSendFunction = (response: { success: boolean, error?: string, domain?: string, content?: string }) => void
+type Message =
+  { type: 'updateSetting', domain: string, settingId: SettingsId, value: boolean } |
+  { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean } | { type: 'getRemoteStyleSheetContent', href: string } |
+  { type: 'getDomainForCurrentTab' }
 
-const handleMessage = async (message: any, sender: chrome.runtime.MessageSender, sendResponse: ResponseSendFunction): Promise<void> => {
+const handleMessage = async (
+  message: Message,
+  sender: chrome.runtime.MessageSender,
+  sendResponse: ResponseSendFunction): Promise<void> => {
   try {
     if (message.type === 'updateSetting') {
       await updateSetting(message.domain, message.settingId, message.value)
@@ -75,7 +81,7 @@ const handleMessage = async (message: any, sender: chrome.runtime.MessageSender,
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Asynchronously handle the message. We ignore the returned Promise of handleMessage.
-  void handleMessage(message, sender, sendResponse)
+  void handleMessage(message as Message, sender, sendResponse)
   // Return true to indicate that handleMessage will send a response asynchronously.
   return true
 })
@@ -105,7 +111,7 @@ const logMatchingRulesInDevMode = (): void => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const testHttpBehavior = async (): Promise<void> => {
+const testHttpBehavior = () => {
   chrome.webRequest.onBeforeRequest.addListener((details) => {
     console.log('onBeforeRequest debug:', details)
     return { cancel: false }
