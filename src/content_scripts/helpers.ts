@@ -144,7 +144,7 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error)
   }
-  // eslint-disable-next-line no-global-assign
+   
   __disabledSettings = result
   return result
 }
