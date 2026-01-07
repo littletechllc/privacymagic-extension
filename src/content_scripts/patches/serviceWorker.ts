@@ -1,12 +1,12 @@
 import { redefinePropertyValues } from '../helpers'
 
-const serviceWorker = (): (() => void) => {
+const serviceWorker = (): void => {
   if (self.ServiceWorkerContainer === undefined) {
-    return () => {}
+    return
   }
 
   const DOMExceptionSafe = self.DOMException
-  return redefinePropertyValues(self.ServiceWorkerContainer.prototype, {
+  redefinePropertyValues(self.ServiceWorkerContainer.prototype, {
     register: (/* ignore */) => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError')
     }

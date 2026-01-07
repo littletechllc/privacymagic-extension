@@ -303,13 +303,13 @@ const gpu = (): (() => void) => {
     }
   }
 
-  const hideWebGLVendorAndRenderer = (): (() => void) => {
+  const hideWebGLVendorAndRenderer = (): void => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter')
     if (navigator.userAgentData != null) {
       const userAgentData: NavigatorUAData = navigator.userAgentData
       const platform = userAgentData.platform
       if (platform === 'MacIntel') {
-        return redefinePropertyValues(self.WebGLRenderingContext.prototype, {
+        redefinePropertyValues(self.WebGLRenderingContext.prototype, {
           getParameter: function (constant: number) {
             console.log('getParameter', constant)
             const originalValue = originalGetParameterSafe(this, constant)
@@ -325,7 +325,6 @@ const gpu = (): (() => void) => {
         })
       }
     }
-    return () => {}
   }
 
   const restoreContext2dPart1 = enableContext2dCommandRecording()

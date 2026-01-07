@@ -1,8 +1,8 @@
 import { redefinePropertyValues } from '../helpers'
 
-const screen = (): (() => void) => {
+const screen = (): void => {
   if (self.Screen === undefined) {
-    return () => {}
+    return
   }
   const oldMatchMedia = self.matchMedia
   const mediaDeviceToViewport = (mediaQueryString: string): string => {
@@ -24,7 +24,7 @@ const screen = (): (() => void) => {
     return allowedScreenSizes[allowedScreenSizes.length - 1]
   }
   const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight)
-  const restoreScreen = redefinePropertyValues(Screen.prototype, {
+  redefinePropertyValues(Screen.prototype, {
     availHeight: spoofedScreenHeight,
     availLeft: 0,
     availTop: 0,
@@ -34,7 +34,7 @@ const screen = (): (() => void) => {
     pixelDepth: 24,
     width: spoofedScreenWidth
   })
-  const restoreWindow = redefinePropertyValues(self, {
+  redefinePropertyValues(self, {
     devicePixelRatio: 2,
     matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
     outerHeight: self.innerHeight,
@@ -49,14 +49,9 @@ const screen = (): (() => void) => {
   const matchMediaClean = (mediaQueryString: string): string =>
     mediaQueryString.replace(regex, (_, value: string) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ')
-  const restoreMatchMedia = redefinePropertyValues(self, {
+  redefinePropertyValues(self, {
     matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(matchMediaClean(mediaQueryString))
   })
-  return () => {
-    restoreScreen()
-    restoreWindow()
-    restoreMatchMedia()
-  }
 }
 
 export default screen

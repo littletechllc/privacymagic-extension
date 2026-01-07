@@ -1,13 +1,13 @@
 import { redefinePropertyValues, reflectApplySafe, nonProperty } from '../helpers'
 
-const timer = (): (() => void) => {
+const timer = (): void => {
   const mathRoundSafe = Math.round
   const nowDescriptor = Object.getOwnPropertyDescriptor(Performance.prototype, 'now')
   if (nowDescriptor?.value === undefined) {
     throw new Error('Performance.now not found')
   }
   const originalNow = nowDescriptor.value
-  const restoreNow = redefinePropertyValues(Performance.prototype, {
+  redefinePropertyValues(Performance.prototype, {
     now: function () { return mathRoundSafe(reflectApplySafe(originalNow, this, [])) }
   })
   const objectKeysSafe = Object.keys
@@ -21,7 +21,7 @@ const timer = (): (() => void) => {
   const getPropertyValueSafe = (object: any, property: string): any => {
     try {
       return object[property]
-    } catch (error) {
+    } catch {
       return undefined
     }
   }
@@ -110,9 +110,6 @@ const timer = (): (() => void) => {
     ]],
     [self.PerformanceServerTiming, ['duration']]
   ] as const)
-  return () => {
-    restoreNow()
-  }
 }
 
 export default timer

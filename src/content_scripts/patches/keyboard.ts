@@ -1,11 +1,11 @@
 import { redefinePropertyValues } from '../helpers'
 
-const keyboard = (): (() => void) => {
+const keyboard = (): void => {
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
   if (navigatorPrototype === null || navigatorPrototype === undefined) {
-    return () => {}
+    throw new Error('Navigator prototype not found')
   }
-  return redefinePropertyValues(navigatorPrototype.prototype, {
+  redefinePropertyValues(navigatorPrototype.prototype, {
     keyboard: undefined
   })
 }

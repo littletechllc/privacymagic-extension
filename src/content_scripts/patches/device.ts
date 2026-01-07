@@ -1,9 +1,8 @@
 import { redefinePropertyValues } from '../helpers'
 
-const device = (): (() => void) => {
-  let restoreDevicePosture: () => void
+const device = (): void => {
   if (self.DevicePosture != null) {
-    restoreDevicePosture = redefinePropertyValues(DevicePosture.prototype, {
+    redefinePropertyValues(DevicePosture.prototype, {
       type: 'continuous',
       addEventListener: (/* ignore */) => { /* do nothing */ },
       removeEventListener: (/* ignore */) => { /* do nothing */ },
@@ -16,11 +15,6 @@ const device = (): (() => void) => {
         writable: true
       }
     })
-  }
-  return () => {
-    if (restoreDevicePosture !== undefined) {
-      restoreDevicePosture()
-    }
   }
 }
 
