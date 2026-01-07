@@ -35,17 +35,21 @@ const updateSiteInfo = async (domain: string): Promise<void> => {
   }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () => {
-  const response = await chrome.runtime.sendMessage({
+
+document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
+  setupOptionsButton()
+  const response : { success: boolean, domain: string } = await chrome.runtime.sendMessage({
     type: 'getDomainForCurrentTab'
   })
-  if (response === undefined || typeof response !== 'object' || !('success' in response) || response.success !== true) {
-    return
+  if (response === undefined ||
+      typeof response !== 'object' ||
+      response === null ||
+      !('success' in response) ||
+      response.success !== true) {
+    throw new Error('invalid response from getDomainForCurrentTab')
   }
-  const domain = response.domain
-  setupOptionsButton()
-  await updateSiteInfo(domain)
-  await setupSettingsUI(domain)
+  await updateSiteInfo(response.domain)
+  await setupSettingsUI(response.domain)
 }, (error: unknown) => {
   logError(error, 'error responding to DOMContentLoaded on current tab', event)
 }))
