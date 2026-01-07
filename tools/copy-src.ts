@@ -23,7 +23,7 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
     const srcHash = createHash('md5').update(srcContent).digest('hex')
     const destHash = createHash('md5').update(destContent).digest('hex')
     return srcHash !== destHash
-  } catch (error) {
+  } catch {
     // Destination doesn't exist or can't be accessed, file has changed
     return true
   }

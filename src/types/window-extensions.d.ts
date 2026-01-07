@@ -22,7 +22,11 @@ declare global {
     readonly mobile: boolean
     readonly platform: string
     getHighEntropyValues: () => Promise<{ architecture: string, bitness: string, brands: Array<{ brand: string, version: string }>, formFactors: string[], fullVersionList: Array<{ brand: string, version: string }>, mobile: boolean, model: string, platform: string, platformVersion: string, uaFullVersion: string, wow64: boolean }>
-    toJSON: () => {}
+    toJSON: {
+      brands: Array<{ brand: string, version: string }>
+      mobile: boolean
+      platform: string
+    }
   }
 
   class PerformanceLongAnimationFrameTiming extends PerformanceEntry {

@@ -6,7 +6,7 @@ const fileExists = async (path: string): Promise<boolean> => {
     const url = chrome.runtime.getURL(path)
     const response = await fetch(url)
     return response.ok
-  } catch (error) {
+  } catch {
     return false
   }
 }
