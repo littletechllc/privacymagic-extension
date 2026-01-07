@@ -2,11 +2,11 @@ import { redefinePropertiesSafe, reflectApplySafe } from '../helpers'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 
-const css = (): (() => void) => {
+const css = (): undefined => {
   console.log('css patch')
   if (self.HTMLStyleElement === undefined) {
     // We are likely in a worker context.
-    return () => {}
+    return
   }
 
   document.documentElement.style.visibility = 'hidden'
@@ -341,6 +341,7 @@ const css = (): (() => void) => {
       }
     }
   })
+  return undefined
 }
 
 export default css

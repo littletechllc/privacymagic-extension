@@ -72,7 +72,7 @@ const gpu = (): (() => void) => {
       this.commands.push({ name, args, type, timestamp })
     }
 
-    replayCommands (): CanvasRenderingContext2D {
+    replayCommands (): CanvasRenderingContext2D | null {
       if (this.shadowContext == null) {
         this.createShadowContext()
       }

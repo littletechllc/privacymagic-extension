@@ -74,6 +74,7 @@ declare global {
     PerformanceScriptTiming?: typeof PerformanceScriptTiming
     NavigatorUAData?: typeof NavigatorUAData
     SharedStorage?: typeof SharedStorage
+    eval?: (code: string) => unknown
     trustedTypes?: TrustedTypePolicyFactory
   }
 

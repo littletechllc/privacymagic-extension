@@ -63,7 +63,7 @@ export const getAllSettings = async (): Promise<Array<[string, SettingsId, boole
 
 export const resetAllSettingsToDefaults = async (domain: string): Promise<void> => {
   const items = await storage.local.getAll()
-  for (const [keyPath] of items as Array<[KeyPath]>) {
+  for (const [keyPath] of items) {
     if (keyPath[0] === '_SETTINGS_' && keyPath[1] === domain) {
       await storage.local.remove(keyPath)
     }
