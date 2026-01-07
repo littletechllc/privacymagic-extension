@@ -1,6 +1,6 @@
 import { redefinePropertyValues } from '../helpers'
 
-const useragent = (): (() => void) => {
+const useragent = (): void => {
   const CHROME_VERSION = '141.0.0.0'
   const SHORT_CHROME_VERSION = CHROME_VERSION.split('.')[0]
   const PLATFORM_VERSION = '26.0.0'
@@ -8,9 +8,9 @@ const useragent = (): (() => void) => {
   const SHORT_BRAND_VERSION = BRAND_VERSION.split('.')[0]
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
   if (navigatorPrototype === null || navigatorPrototype === undefined) {
-    return () => {}
+    return
   }
-  const restoreNavigator = redefinePropertyValues(navigatorPrototype.prototype, {
+  redefinePropertyValues(navigatorPrototype.prototype, {
     platform: 'MacIntel',
     userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`,
     appVersion: `5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${CHROME_VERSION} Safari/537.36`
@@ -22,7 +22,7 @@ const useragent = (): (() => void) => {
   ]
   const mobile = false
   const platform = 'MacIntel'
-  const restoreNavigatorUAData = redefinePropertyValues(NavigatorUAData.prototype, {
+  redefinePropertyValues(NavigatorUAData.prototype, {
     brands,
     mobile,
     platform,
@@ -52,10 +52,6 @@ const useragent = (): (() => void) => {
         wow64: false
       })
   })
-  return () => {
-    restoreNavigator()
-    restoreNavigatorUAData()
-  }
 }
 
 export default useragent

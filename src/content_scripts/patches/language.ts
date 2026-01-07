@@ -1,12 +1,12 @@
 import { redefinePropertyValues } from '../helpers'
 
-const language = (): (() => void) => {
+const language = (): void => {
   const originalLanguage = navigator.language
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
   if (navigatorPrototype === null || navigatorPrototype === undefined) {
-    return () => {}
+    throw new Error('Navigator prototype not found')
   }
-  return redefinePropertyValues(navigatorPrototype.prototype, {
+  redefinePropertyValues(navigatorPrototype.prototype, {
     // Reduce to a single language to reduce entropy.
     languages: [originalLanguage]
   })

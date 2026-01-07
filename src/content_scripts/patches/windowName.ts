@@ -1,6 +1,6 @@
 import { objectDefinePropertiesSafe } from '../helpers'
 
-const windowName = (): (() => void) | undefined => {
+const windowName = (): void => {
   if (self.top !== self) {
     return
   }
@@ -52,9 +52,6 @@ const windowName = (): (() => void) | undefined => {
     configurable: true
   })
   console.log('self.name patched')
-  return () => {
-    objectDefinePropertiesSafe(self, { name: propDescriptor })
-  }
 }
 
 export default windowName

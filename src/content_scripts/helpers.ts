@@ -23,7 +23,7 @@ export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: 
 
 export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true }
 
-export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: any }): (() => void) => {
+export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: unknown }): void => {
   const originalProperties: PropertyDescriptorMap = {}
   const newProperties: PropertyDescriptorMap = {}
   for (const [prop, value] of Object.entries(propertyMap)) {
@@ -42,9 +42,6 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
     }
   }
   Object.defineProperties(obj, newProperties)
-  return () => {
-    objectDefinePropertiesSafe(obj, originalProperties)
-  }
 }
 
 export const createSafeMethod = (globalInterface: { prototype: any }, methodName: string): (instance: any, ...args: any[]) => any => {
@@ -71,7 +68,7 @@ export const weakMapSetSafe = <K extends object, V>(weakMap: WeakMap<K, V>, key:
 
 export const reflectConstructSafe = Reflect.construct
 
-export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault = false): (() => void) => {
+export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault = false): void => {
   const oldMatchMedia = self.matchMedia
   const targetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*${spoofValue}\\s*\\)`, 'ig')
   const nonTargetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*[^)]+\\s*\\)`, 'ig')
@@ -83,9 +80,6 @@ export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault =
       .replace(nonTargetRegex, 'not all')
       .replace(defaultRegex, defaultReplacement)
   self.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString))
-  return () => {
-    self.matchMedia = oldMatchMedia
-  }
 }
 
 // Cache the bundle for injection to avoid re-creating it on every call.

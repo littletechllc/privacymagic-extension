@@ -2,7 +2,7 @@
 
 import { reflectApplySafe, redefinePropertyValues } from '../helpers'
 
-const timezone = (): (() => void) => {
+const timezone = (): void => {
   // Time zones that use fractional hour offsets can be coalesced to a
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
@@ -357,7 +357,7 @@ const timezone = (): (() => void) => {
   const originalDateGetTimezoneOffset = Date.prototype.getTimezoneOffset
   const originalDateGetTimezoneOffsetSafe = (date: Date): number => reflectApplySafe(originalDateGetTimezoneOffset, date, [])
   const OriginalDate = Date
-  return redefinePropertyValues(Intl.DateTimeFormat.prototype, {
+  redefinePropertyValues(Intl.DateTimeFormat.prototype, {
     resolvedOptions: function (this: Intl.DateTimeFormat) {
       const options = originalResolvedOptionsSafe(this)
       const now = new OriginalDate()

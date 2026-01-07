@@ -1,6 +1,6 @@
 import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
-const worker = (): (() => void) => {
+const worker = (): void => {
   const URLSafe = self.URL
   const BlobSafe = self.Blob
   const URLcreateObjectURLSafe = URL.createObjectURL
@@ -154,7 +154,8 @@ const worker = (): (() => void) => {
     const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID()
     const broadcastChannel = new BroadcastChannel(broadcastChannelName)
     broadcastChannel.onmessage = (message: MessageEvent) => {
-      if (message.data.type === 'completion') {
+      const data = message?.data as { type: string } | null
+      if (data?.type === 'completion') {
         callback()
       }
     }
@@ -206,9 +207,6 @@ const worker = (): (() => void) => {
   }
 
   prepareInjectionForWorker(makeBundleForInjection(getDisabledSettings()))
-  return () => {
-    // TODO: Add cleanup if needed
-  }
 }
 
 export default worker
