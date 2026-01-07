@@ -15,12 +15,12 @@ export class StorageProxy {
     this.storage = chrome.storage[storageType]
   }
 
-  async set (keyPath: KeyPath, value: any): Promise<void> {
+  async set (keyPath: KeyPath, value: unknown): Promise<void> {
     const key = keyPathToKey(keyPath)
     return (await this.storage.set({ [key]: value }))
   }
 
-  async get (keyPath: KeyPath): Promise<any> {
+  async get (keyPath: KeyPath): Promise<unknown> {
     const key = keyPathToKey(keyPath)
     return (await this.storage.get(key))[key]
   }
@@ -34,12 +34,12 @@ export class StorageProxy {
     return (await this.storage.clear())
   }
 
-  async getAll (): Promise<Array<[KeyPath, any]>> {
+  async getAll (): Promise<Array<[KeyPath, unknown]>> {
     const values = await this.storage.get()
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value])
   }
 
-  listenForChanges (keyPath: KeyPath, callback: (value: any) => void): void {
+  listenForChanges (keyPath: KeyPath, callback: (value: unknown) => void): void {
     this.storage.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath)
@@ -52,16 +52,14 @@ export class StorageProxy {
     })
   }
 
-  listenForAnyChanges (callback: (changes: Array<[KeyPath, any]>) => void): void {
+  listenForAnyChanges (callback: (changes: Array<[KeyPath, unknown]>) => void): void {
     this.storage.onChanged.addListener((change) => {
-      void (async () => {
-        try {
-          await callback(Object.entries(change).map(
-            ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
-        } catch (error) {
-          logError(error, 'error responding to any storage changes', change)
-        }
-      })()
+      try {
+        callback(Object.entries(change).map(
+          ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
+      } catch (error) {
+        logError(error, 'error responding to any storage changes', change)
+      }
     })
   }
 }
