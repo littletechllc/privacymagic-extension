@@ -3,7 +3,7 @@ import psl from 'psl'
 export const registrableDomainFromUrl = (url: string): string | null =>
   psl.get(new URL(url).hostname)
 
-export const logError = (error: unknown, message: string, details?: {} | undefined): void => {
+export const logError = (error: unknown, message: string, details?: {}  ): void => {
   const errorObj = error instanceof Error ? error : new Error(String(error))
   console.error('Error:', `'${message}'`, `'${errorObj.name}'`, `'${errorObj.message}'`, details, errorObj.stack)
 }
