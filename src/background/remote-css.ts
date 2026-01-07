@@ -1,4 +1,3 @@
-import { handleAsync } from '../common/util'
 import { IDS } from './ids'
 
 const setupRemoteCssRules = async (): Promise<void> => {
@@ -19,19 +18,15 @@ const setupRemoteCssRules = async (): Promise<void> => {
   })
 }
 
-const watchForCssRequests = async (): Promise<void> => {
-  chrome.webRequest.onBeforeRequest.addListener((details) => {
-    handleAsync(async () => {
-      console.log('css request:', details)
-    }, (error: unknown) => {
-      console.error('error watching for css requests:', error)
-    })
-    return undefined
+const watchForCssRequests = () => {
+  chrome.webRequest.onBeforeRequest.addListener(details => {
+    console.log('css request:', details)
+    return { cancel: false }
   }, { urls: ['<all_urls>'], types: ['stylesheet'] })
 }
 
 const handleRemoteCssRequests = async (): Promise<void> => {
-  await watchForCssRequests()
+  watchForCssRequests()
   await setupRemoteCssRules()
 }
 
