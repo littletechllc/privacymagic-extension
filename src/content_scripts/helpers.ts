@@ -1,14 +1,20 @@
-const reflectApply = <T extends (...args: any[]) => any, TThis = any>(
-  func: T,
-  thisArg: TThis,
-  args: Parameters<T>
-): ReturnType<T> => Reflect.apply(func, thisArg, args)
-
-export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const reflectApply = <T extends (...args: any[]) => any, TThis = unknown>(
   func: T,
   thisArg: TThis,
   args: Parameters<T>
 ): ReturnType<T> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return Reflect.apply(func, thisArg, args) as ReturnType<T>
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = unknown>(
+  func: T,
+  thisArg: TThis,
+  args: Parameters<T>
+): ReturnType<T> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return reflectApply(func, thisArg, args)
 }
 
@@ -44,27 +50,24 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
   Object.defineProperties(obj, newProperties)
 }
 
-export const createSafeMethod = (globalInterface: { prototype: any }, methodName: string): (instance: any, ...args: any[]) => any => {
-  const descriptor = Object.getOwnPropertyDescriptor(globalInterface.prototype, methodName)
+export const createSafeMethod = <TThis = unknown, TArgs extends unknown[] = unknown[], TReturn = unknown>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  specificPrototype: { [key: string]: any },
+  methodName: string
+): <TInstance extends TThis>(instance: TInstance, ...args: TArgs) => TReturn => {
+  const descriptor = Object.getOwnPropertyDescriptor(specificPrototype, methodName)
   if (descriptor?.value === undefined) {
     throw new Error(`Method ${methodName} not found`)
   }
-  const originalMethod = descriptor.value
-  return (instance: any, ...args: any[]) => reflectApplySafe(originalMethod, instance, args)
+  const originalMethod = descriptor.value as (this: TThis, ...args: TArgs) => TReturn
+  return <TInstance extends TThis>(instance: TInstance, ...args: TArgs) => {
+    return reflectApplySafe(originalMethod, instance, args)
+  }
 }
 
-const weakMapGetDescriptor = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'get')
-const weakMapHasDescriptor = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'has')
-const weakMapSetDescriptor = Object.getOwnPropertyDescriptor(WeakMap.prototype, 'set')
-if (weakMapGetDescriptor?.value === undefined || weakMapHasDescriptor?.value === undefined || weakMapSetDescriptor?.value === undefined) {
-  throw new Error('WeakMap methods not found')
-}
-const weakMapGet = weakMapGetDescriptor.value
-const weakMapHas = weakMapHasDescriptor.value
-const weakMapSet = weakMapSetDescriptor.value
-export const weakMapGetSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K): any => reflectApplySafe(weakMapGet, weakMap, [key])
-export const weakMapHasSafe = <K extends object>(weakMap: WeakMap<K, any>, key: K): boolean => reflectApplySafe(weakMapHas, weakMap, [key])
-export const weakMapSetSafe = <K extends object, V>(weakMap: WeakMap<K, V>, key: K, value: V): WeakMap<K, V> => reflectApplySafe(weakMapSet, weakMap, [key, value])
+export const weakMapGetSafe = createSafeMethod<WeakMap<object, unknown>, [object], unknown>(WeakMap.prototype, 'get')
+export const weakMapHasSafe = createSafeMethod<WeakMap<object, unknown>, [object], boolean>(WeakMap.prototype, 'has')
+export const weakMapSetSafe = createSafeMethod<WeakMap<object, unknown>, [object, unknown], WeakMap<object, unknown>>(WeakMap.prototype, 'set')
 
 export const reflectConstructSafe = Reflect.construct
 
