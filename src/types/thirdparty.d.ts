@@ -10,8 +10,7 @@ declare module 'psl' {
 declare module 'punycode-npm' {
   const punycode: {
     toUnicode: (domain: string) => string
-    toASCII?: (domain: string) => string
-    [key: string]: unknown
+    toASCII: (domain: string) => string
   }
   export default punycode
 }
