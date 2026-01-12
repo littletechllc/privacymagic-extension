@@ -170,16 +170,22 @@ const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
   }
 }
 
-interface UrlFilter {
-  urlFilter: string
+interface BasicFilter {
+  urlFilter?: string
   filterOptions?: FilterOptions
 }
 
 // Parse the given line into a URL filter and type options
-const lineToUrlFilter = (line: string): UrlFilter => {
+const lineToBasicFilter = (line: string): BasicFilter => {
   if (line.includes('$')) {
-    const [urlFilter, typeOptionsString] = line.split('$')
-    return { urlFilter, filterOptions: typeOptionsStringToLists(typeOptionsString) }
+    const [rawUrlFilter, typeOptionsString] = line.split('$')
+    const urlFilter = rawUrlFilter.trim()
+    const filterOptions = typeOptionsStringToLists(typeOptionsString)
+    if (urlFilter.length > 0) {
+      return { urlFilter, filterOptions }
+    } else {
+      return { filterOptions }
+    }
   }
   return { urlFilter: line }
 }
@@ -189,7 +195,7 @@ interface BlockingFilter {
   action: {
     type: string
   }
-  condition: UrlFilter | { regexFilter: string }
+  condition: BasicFilter | { regexFilter: string }
 }
 
 const parseBlockingFilter = (line: string): BlockingFilter => {
@@ -198,7 +204,7 @@ const parseBlockingFilter = (line: string): BlockingFilter => {
   const cleanLine = line.startsWith('@@') ? line.substring(2) : line
   const condition = isRegexFilter
     ? { regexFilter: cleanLine }
-    : lineToUrlFilter(cleanLine)
+    : lineToBasicFilter(cleanLine)
   return { priority: 1, action: { type }, condition }
 }
 
