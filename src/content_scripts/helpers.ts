@@ -35,9 +35,9 @@ export const objectDefinePropertiesSafe = Object.defineProperties
 
 // Safe version of Object.getOwnPropertyDescriptors; can be called even after site scripts have
 // overwritten Object.getOwnPropertyDescriptors.
-const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors
+export const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors
 
-const objectGetOwnPropertyDescriptorSafe = Object.getOwnPropertyDescriptor
+export const objectGetOwnPropertyDescriptorSafe = Object.getOwnPropertyDescriptor
 
 // Create a safe method that can be called even after site scripts have
 // overwritten the method. Compile-time check that the methodName points to a
