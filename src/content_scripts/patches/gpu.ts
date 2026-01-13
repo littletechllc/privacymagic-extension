@@ -1,4 +1,4 @@
-import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod } from '../helpers'
+import { redefinePropertyValues, objectDefinePropertiesSafe, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, redefinePropertiesSafe, reflectConstructSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '../helpers'
 
 const gpu = (): (() => void) => {
   if (self.HTMLCanvasElement === undefined) {
@@ -9,8 +9,7 @@ const gpu = (): (() => void) => {
   if (canvasDescriptor?.get === undefined) {
     throw new Error('canvas getter not found')
   }
-  const originalCanvasFromContext = canvasDescriptor.get
-  const originalCanvasFromContextSafe = (context: CanvasRenderingContext2D): HTMLCanvasElement => reflectApplySafe(originalCanvasFromContext, context, [])
+  const originalCanvasFromContextSafe = createSafeGetter(CanvasRenderingContext2D, 'canvas')
   const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext')
   const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL')
   const originalCanvasToBlobSafe = createSafeMethod(HTMLCanvasElement, 'toBlob')
@@ -19,20 +18,10 @@ const gpu = (): (() => void) => {
   const originalContextIsPointInPathSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInPath')
   const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke')
 
-  const widthDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width')
-  if (widthDescriptor?.set === undefined) {
-    throw new Error('width setter not found')
-  }
-  const originalCanvasSetWidth = widthDescriptor.set
-  const originalCanvasSetWidthSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetWidth, canvas, [value])
-  const heightDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height')
-  if (heightDescriptor?.set === undefined) {
-    throw new Error('height setter not found')
-  }
-  const originalCanvasSetHeight = heightDescriptor.set
-  const originalCanvasSetHeightSafe = (canvas: HTMLCanvasElement, value: number): void => reflectApplySafe(originalCanvasSetHeight, canvas, [value])
+  const originalCanvasSetWidthSafe = createSafeGetter(HTMLCanvasElement, 'width')
+  const originalCanvasSetHeightSafe = createSafeGetter(HTMLCanvasElement, 'height')
 
-  const originalContextDescriptors = Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype)
+  const originalContextDescriptors = objectGetOwnPropertyDescriptorsSafe(CanvasRenderingContext2D)
 
   const createInvisibleCanvas = (width: number, height: number): HTMLCanvasElement => {
     const shadowCanvas: HTMLCanvasElement = document.createElement('canvas')
