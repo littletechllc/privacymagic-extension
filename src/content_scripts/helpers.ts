@@ -84,12 +84,6 @@ export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
   }
 }
 
-export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
-  const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj)
-  objectDefinePropertiesSafe(obj, propertyMap)
-  return () => objectDefinePropertiesSafe(obj, originalDescriptors)
-}
-
 export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true }
 
 export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: unknown }): void => {
