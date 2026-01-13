@@ -21,13 +21,11 @@ type NonMethodPropertyKey<T> = {
 export const reflectApplySafe = Reflect.apply as <
   TThis,
   TMethod extends MethodOf<TThis>,
-  TMethodArgs extends Parameters<TMethod>,
-  TReturn extends ReturnType<TMethod>
 >(
   method: TMethod,
   thisArg: TThis,
-  args: TMethodArgs
-) => TReturn
+  args: Parameters<TMethod>
+) => ReturnType<TMethod>
 
 // Safe version of Object.defineProperties; can be called even after site scripts have
 // overwritten Object.defineProperties.
@@ -45,8 +43,11 @@ export const objectGetOwnPropertyDescriptorSafe = Object.getOwnPropertyDescripto
 export const createSafeMethod = <T, K extends MethodKey<T>>(
   constructorFunction: { prototype: T },
   methodName: K,
-) => (instance: T, ...args: Parameters<MethodOf<T>>) =>
-  reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args)
+) => {
+  type SpecificMethod = Extract<MethodOf<T>, T[K]>
+  return (instance: T, ...args: Parameters<SpecificMethod>): ReturnType<SpecificMethod> =>
+    (reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args) as ReturnType<SpecificMethod>)
+}
 
 // Create a safe getter that can be called even after site scripts have
 // overwritten the getter. Compile-time check that the propertyName points to a
@@ -68,9 +69,9 @@ export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
   }
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const getter = descriptor.get as MethodOf<T>
-  return (instance: T): T[K] =>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    reflectApplySafe(getter, instance, [] as any) as T[K]
+  return (instance: T): T[K] => {
+    return reflectApplySafe(getter, instance, [] as unknown as Parameters<MethodOf<T>>) as T[K]
+  }
 }
 
 export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
