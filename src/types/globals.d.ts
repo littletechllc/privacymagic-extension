@@ -1,7 +1,7 @@
 export {}
 
 declare global {
-  // Build-time globals injected by Rollup
+  // Build-time globals injected by our esbuild config.
    
   var __disabledSettings: string[]
    
