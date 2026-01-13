@@ -27,7 +27,9 @@ const math = (): void => {
   const MASK = (0xFFFFFFFF << LOW_BITS) >>> 0
 
   // Extract only function property names from Math
-  type MathFunctionName = { [K in keyof typeof Math]: typeof Math[K] extends Function ? K : never }[keyof typeof Math]
+  type MathFunctionName = {
+    [K in keyof typeof Math]: typeof Math[K] extends (...args: number[]) => number ? K : never
+  }[keyof typeof Math]
 
   // Likely non-deterministic Math.* functions that take a single argument
   // and return a floating point number
