@@ -1,6 +1,6 @@
 import { logError } from './util'
 
-type PrefCategory = 'websites' | 'services' | 'network'
+type PrefCategory = keyof typeof chrome.privacy
 
 // Privacy prefs configuration
 interface PrefConfig {
@@ -87,24 +87,37 @@ export const PRIVACY_PREFS_CONFIG: Record<PrefName, PrefConfig> = {
 // Generate union type from the keys at compile time
 export type PRIVACY_PREFS_NAME = keyof typeof PRIVACY_PREFS_CONFIG
 
+const getPrivacyPref = (category: PrefCategory, prefName: PrefName): chrome.types.ChromeSetting<boolean | string> | undefined => {
+  const categoryObj = chrome.privacy[category]
+  if (categoryObj === null || categoryObj === undefined) {
+    return undefined
+  }
+  return (categoryObj as Partial<Record<PrefName, chrome.types.ChromeSetting<boolean | string>>>)[prefName]
+}
+
 export const getPref = async (prefName: PRIVACY_PREFS_NAME): Promise<boolean> => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
-  const category = config.category as keyof typeof chrome.privacy
-  const pref = (chrome.privacy[category] as any)[prefName]
+  const category = config.category
+  const pref = getPrivacyPref(category, prefName)
   if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
   }
-  const value = (await pref.get({})).value
+  const result = await pref.get({})
+  const value = result.value
   console.log(`Read pref ${prefName} with value ${String(value)}`)
   if (config.onValue !== undefined && config.onValue !== '') {
-    return value === config.onValue
+    // For prefs like webRTCIPHandlingPolicy, the value is a string that needs to be compared
+    return String(value) === config.onValue
   }
-  return value
+  if (typeof value === 'boolean') {
+    return value
+  }
+  throw new Error(`Pref ${prefName} returned unexpected type: ${typeof value}`)
 }
 
 export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean): Promise<void> => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
-  const category = config.category as keyof typeof chrome.privacy
+  const category = config.category
   const pref = (chrome.privacy[category] as any)[prefName]
   if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
@@ -119,7 +132,7 @@ export const setPref = async (prefName: PRIVACY_PREFS_NAME, value: boolean): Pro
 
 export const listenForPrefChanges = (prefName: PRIVACY_PREFS_NAME, callback: (value: boolean) => void): void => {
   const config = PRIVACY_PREFS_CONFIG[prefName]
-  const category = config.category as keyof typeof chrome.privacy
+  const category = config.category
   const pref = (chrome.privacy[category] as any)[prefName]
   if (pref === null || pref === undefined) {
     throw new Error(`Pref ${prefName} not found`)
