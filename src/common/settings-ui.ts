@@ -87,7 +87,7 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
   category.appendChild(categoryTitle)
   const sortedSettingIds = sortBy(settingIds, (settingId) => getLocalizedText(settingId))
   for (const settingId of sortedSettingIds) {
-    const toggle = await createToggle(settingId)
+    const toggle = createToggle(settingId)
     const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId]
     await bindToggleToStorage(toggle, store, keyPath, /* defaultValue */ true)
     category.appendChild(toggle)
@@ -102,7 +102,7 @@ const setupInputListeners = (domain: string): void => {
       handleAsync(async () => {
         const target = event.target as HTMLInputElement
         const settingId = target.id
-        const response = await chrome.runtime.sendMessage({
+        const response: { success: boolean } = await chrome.runtime.sendMessage({
           type: 'updateSetting',
           domain,
           settingId,
@@ -116,7 +116,7 @@ const setupInputListeners = (domain: string): void => {
         }
         await chrome.tabs.reload(tabId)
       }, (error) => {
-        logError(error, 'error updating setting', event)
+        logError(error, 'error updating setting', { event: JSON.stringify(event) })
       })
     })
   })
