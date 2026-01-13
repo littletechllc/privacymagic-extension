@@ -1,24 +1,34 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reflectApply = <T extends (...args: any[]) => any, TThis = unknown>(
-  func: T,
-  thisArg: TThis,
-  args: Parameters<T>
-): ReturnType<T> => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return Reflect.apply(func, thisArg, args) as ReturnType<T>
-}
+// Type for methods of an object.
+type MethodOf<TThis> = {
+  [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
+}[keyof TThis]
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const reflectApplySafe = <T extends (...args: any[]) => any, TThis = unknown>(
-  func: T,
-  thisArg: TThis,
-  args: Parameters<T>
-): ReturnType<T> => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return reflectApply(func, thisArg, args)
-}
+// Type for method keys of an object.
+type MethodKey<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [P in keyof T]: T[P] extends (...args: any[]) => any ? P : never
+}[keyof T]
 
+// Safe version of Reflect.apply; can be called even after site scripts have
+// overwritten Reflect.apply. Also enforces type safety more than the original
+// Reflect.apply.
+export const reflectApplySafe = Reflect.apply as <
+  TThis,
+  TMethod extends MethodOf<TThis>,
+  TMethodArgs extends Parameters<TMethod>,
+  TReturn extends ReturnType<TMethod>
+>(
+  method: TMethod,
+  thisArg: TThis,
+  args: TMethodArgs
+) => TReturn
+
+// Safe version of Object.defineProperties; can be called even after site scripts have
+// overwritten Object.defineProperties.
 export const objectDefinePropertiesSafe = Object.defineProperties
+
+// Safe version of Object.getOwnPropertyDescriptors; can be called even after site scripts have
+// overwritten Object.getOwnPropertyDescriptors.
 const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors
 
 export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
@@ -45,29 +55,25 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
       } else {
         newProperties[prop] = { ...originalDescriptor, get: () => value }
       }
-    }
+    } 
   }
-  Object.defineProperties(obj, newProperties)
+  objectDefinePropertiesSafe(obj, newProperties)
 }
 
-export const createSafeMethod = <TThis = unknown, TArgs extends unknown[] = unknown[], TReturn = unknown>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  specificPrototype: { [key: string]: any },
-  methodName: string
-): <TInstance extends TThis>(instance: TInstance, ...args: TArgs) => TReturn => {
-  const descriptor = Object.getOwnPropertyDescriptor(specificPrototype, methodName)
-  if (descriptor?.value === undefined) {
-    throw new Error(`Method ${methodName} not found`)
-  }
-  const originalMethod = descriptor.value as (this: TThis, ...args: TArgs) => TReturn
-  return <TInstance extends TThis>(instance: TInstance, ...args: TArgs) => {
-    return reflectApplySafe(originalMethod, instance, args)
-  }
-}
+// Create a safe method that can be called even after site scripts have
+// overwritten the method. Compile-time check that the methodName points to a
+// method of the constructor function.
+export const createSafeMethod = <T, K extends MethodKey<T>>(
+  constructorFunction: { prototype: T },
+  methodName: K,
+) => (instance: T, ...args: Parameters<MethodOf<T>>) => 
+  reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args)
 
-export const weakMapGetSafe = createSafeMethod<WeakMap<object, unknown>, [object], unknown>(WeakMap.prototype, 'get')
-export const weakMapHasSafe = createSafeMethod<WeakMap<object, unknown>, [object], boolean>(WeakMap.prototype, 'has')
-export const weakMapSetSafe = createSafeMethod<WeakMap<object, unknown>, [object, unknown], WeakMap<object, unknown>>(WeakMap.prototype, 'set')
+// Create safe methods for WeakMap, which can be called even after site scripts have
+// overwritten the original methods.
+export const weakMapGetSafe = createSafeMethod(WeakMap, 'get')
+export const weakMapHasSafe = createSafeMethod(WeakMap, 'has')
+export const weakMapSetSafe = createSafeMethod(WeakMap, 'set')
 
 export const reflectConstructSafe = Reflect.construct
 
