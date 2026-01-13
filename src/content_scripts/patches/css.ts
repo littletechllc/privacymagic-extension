@@ -1,4 +1,4 @@
-import { redefinePropertiesSafe, reflectApplySafe } from '../helpers'
+import { createSafeMethod, redefinePropertiesSafe } from '../helpers'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 
@@ -18,18 +18,17 @@ const css = (): void => {
   `
   document.documentElement.appendChild(noTransitionsStyleElement)
 
-  const attachShadowDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'attachShadow')
-  if (attachShadowDescriptor?.value === undefined) {
-    throw new Error('attachShadow not found')
-  }
-  const originalAttachShadow = attachShadowDescriptor.value
-  const originalAttachShadowSafe = (element: Element, init: ShadowRootInit): ShadowRoot => reflectApplySafe(originalAttachShadow, element, [init])
+  const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
   const shadowRoots: Set<Document | ShadowRoot> = new Set([document])
   redefinePropertiesSafe(Element.prototype, {
     attachShadow: {
-      value: function (this: Element, init: ShadowRootInit) {
-        const shadowRoot = originalAttachShadowSafe(this, init)
-        shadowRoots.add(shadowRoot)
+      value (this: Element, init: ShadowRootInit) {
+        const shadowRoot = attachShadowSafe(this, init)
+        if (shadowRoot instanceof Document || shadowRoot instanceof ShadowRoot) {
+          shadowRoots.add(shadowRoot)
+        } else {
+          console.error('attachShadow returned an invalid shadow root')
+        }
         return shadowRoot
       }
     }
@@ -149,13 +148,6 @@ const css = (): void => {
     return styleSheet
   }
 
-  const mapGetDescriptor = Object.getOwnPropertyDescriptor(Map.prototype, 'get')
-  if (mapGetDescriptor?.value === undefined) {
-    throw new Error('Map.get not found')
-  }
-  const originalMapGetter = mapGetDescriptor.value
-  const mapGetSafe = <K, V>(map: Map<K, V>, key: K): V | undefined => reflectApplySafe(originalMapGetter, map, [key])
-
   const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
     if (cssElement === undefined ||
         cssElement === null) {
@@ -168,8 +160,10 @@ const css = (): void => {
     if (root instanceof Document || root instanceof ShadowRoot) {
       return root
     }
-    throw new Error(`unknown root node type: ${String(root)}`)
+    throw new Error(`unknown root node type: ${typeof root}`)
   }
+
+  const mapGetSafe = createSafeMethod(Map, 'get') as <K, V>(map: Map<K, V>, key: K) => V
 
   // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
@@ -308,12 +302,7 @@ const css = (): void => {
     }
   })
 
-  const replaceSyncDescriptor = Object.getOwnPropertyDescriptor(CSSStyleSheet.prototype, 'replaceSync')
-  if (replaceSyncDescriptor?.value === undefined) {
-    throw new Error('replaceSync not found')
-  }
-  const originalReplaceSync = replaceSyncDescriptor.value
-  const originalReplaceSyncSafe = (styleSheet: CSSStyleSheet, css: string): void => reflectApplySafe(originalReplaceSync, styleSheet, [css])
+  const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
 
   const sanitizeRule = (rule: CSSRule): CSSRule => {
     if (rule instanceof CSSMediaRule) {
@@ -329,15 +318,15 @@ const css = (): void => {
 
   const sanitizeCss = (css: string): string => {
     const tempStyleSheet = new CSSStyleSheet()
-    originalReplaceSyncSafe(tempStyleSheet, css)
+    replaceSyncSafe(tempStyleSheet, css)
     const rules = Array.from(tempStyleSheet.cssRules)
     return rules.map(sanitizeRule).map(rule => rule.cssText).join('\n')
   }
 
   redefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
-      value: function (this: CSSStyleSheet, css: string) {
-        originalReplaceSyncSafe(this, sanitizeCss(css))
+      value (this: CSSStyleSheet, css: string) {
+        replaceSyncSafe(this, sanitizeCss(css))
       }
     }
   })

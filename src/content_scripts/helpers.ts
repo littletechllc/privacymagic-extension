@@ -1,7 +1,11 @@
-// Type for methods of an object.
+// Type for methods of an object (union of all methods).
 type MethodOf<TThis> = {
   [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
 }[keyof TThis]
+
+type MethodOfKey<T, K extends keyof T> = T[K] extends (...args: infer Args) => infer Return 
+  ? (...args: Args) => Return 
+  : never
 
 // Type for method keys of an object.
 type MethodKey<T> = {
@@ -44,10 +48,16 @@ export const createSafeMethod = <T, K extends MethodKey<T>>(
   constructorFunction: { prototype: T },
   methodName: K,
 ) => {
-  type SpecificMethod = Extract<MethodOf<T>, T[K]>
-  return (instance: T, ...args: Parameters<SpecificMethod>): ReturnType<SpecificMethod> =>
-    (reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args) as ReturnType<SpecificMethod>)
+  return <TInstance extends T>(
+    instance: TInstance,
+    ...args: Parameters<MethodOfKey<TInstance, K>>
+  ): ReturnType<MethodOfKey<TInstance, K>> =>
+    (reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<TInstance>,
+                      instance,
+                      args as Parameters<MethodOf<TInstance>>) as ReturnType<MethodOfKey<TInstance, K>>)
 }
+
+export const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
 
 // Create a safe getter that can be called even after site scripts have
 // overwritten the getter. Compile-time check that the propertyName points to a
