@@ -9,6 +9,12 @@ type MethodKey<T> = {
   [P in keyof T]: T[P] extends (...args: any[]) => any ? P : never
 }[keyof T]
 
+// Type for keys that are NOT methods (could be getters or value properties)
+type NonMethodPropertyKey<T> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [P in keyof T]: T[P] extends (...args: any[]) => any ? never : P
+}[keyof T]
+
 // Safe version of Reflect.apply; can be called even after site scripts have
 // overwritten Reflect.apply. Also enforces type safety more than the original
 // Reflect.apply.
@@ -30,6 +36,42 @@ export const objectDefinePropertiesSafe = Object.defineProperties
 // Safe version of Object.getOwnPropertyDescriptors; can be called even after site scripts have
 // overwritten Object.getOwnPropertyDescriptors.
 const objectGetOwnPropertyDescriptorsSafe = Object.getOwnPropertyDescriptors
+
+const objectGetOwnPropertyDescriptorSafe = Object.getOwnPropertyDescriptor
+
+// Create a safe method that can be called even after site scripts have
+// overwritten the method. Compile-time check that the methodName points to a
+// method of the constructor function.
+export const createSafeMethod = <T, K extends MethodKey<T>>(
+  constructorFunction: { prototype: T },
+  methodName: K,
+) => (instance: T, ...args: Parameters<MethodOf<T>>) =>
+  reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args)
+
+// Create a safe getter that can be called even after site scripts have
+// overwritten the getter. Compile-time check that the propertyName points to a
+// getter of the object.
+export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
+  object: { prototype: T },
+  propertyName: K,
+) => {
+  const descriptor = objectGetOwnPropertyDescriptorSafe(object.prototype, propertyName)
+  if (descriptor === undefined) {
+    throw new Error(`Property ${String(propertyName)} not found`)
+  }
+  if (descriptor.get === undefined) {
+    throw new Error(`Getter for property ${String(propertyName)} not found`)
+  }
+  // Ensure it's an accessor property, not a data property
+  if ('value' in descriptor && descriptor.value !== undefined) {
+    throw new Error(`Property ${String(propertyName)} is a data property, not a getter`)
+  }
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const getter = descriptor.get as MethodOf<T>
+  return (instance: T): T[K] =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    reflectApplySafe(getter, instance, [] as any) as T[K]
+}
 
 export const redefinePropertiesSafe = <T>(obj: T, propertyMap: { [key: string]: PropertyDescriptor }): (() => void) => {
   const originalDescriptors = objectGetOwnPropertyDescriptorsSafe(obj)
@@ -55,19 +97,10 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
       } else {
         newProperties[prop] = { ...originalDescriptor, get: () => value }
       }
-    } 
+    }
   }
   objectDefinePropertiesSafe(obj, newProperties)
 }
-
-// Create a safe method that can be called even after site scripts have
-// overwritten the method. Compile-time check that the methodName points to a
-// method of the constructor function.
-export const createSafeMethod = <T, K extends MethodKey<T>>(
-  constructorFunction: { prototype: T },
-  methodName: K,
-) => (instance: T, ...args: Parameters<MethodOf<T>>) => 
-  reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<T>, instance, args)
 
 // Create safe methods for WeakMap, which can be called even after site scripts have
 // overwritten the original methods.
@@ -147,7 +180,7 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error)
   }
-   
+
   __disabledSettings = result
   return result
 }
