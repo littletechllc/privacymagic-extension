@@ -4,7 +4,7 @@ const battery = (): void => {
   if (self.BatteryManager != null) {
     const silencedEventProperty = {
       get: () => { return null },
-      set: (_value: unknown) => { /* do nothing */ },
+      set: (/* _value: unknown */) => { /* do nothing */ },
       configurable: true,
       enumerable: true
     }
