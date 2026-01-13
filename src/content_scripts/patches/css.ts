@@ -163,7 +163,7 @@ const css = (): void => {
     throw new Error(`unknown root node type: ${typeof root}`)
   }
 
-  const mapGetSafe = createSafeMethod(Map, 'get') as <K, V>(map: Map<K, V>, key: K) => V
+  const mapGetSafe = createSafeMethod(Map, 'get')
 
   // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
