@@ -31,7 +31,7 @@ export const setupPrefsUI = async (): Promise<void> => {
   prefsContainer.innerHTML = '<h1>Browser Preferences</h1>'
   // Create toggles for each preference
   for (const [prefName, { locked, inverted }] of entries(PRIVACY_PREFS_CONFIG)) {
-    const toggle = await createToggle(prefName, locked)
+    const toggle = createToggle(prefName, locked)
     await bindPrefToCheckbox(toggle, prefName, inverted)
     prefsContainer.appendChild(toggle)
   }
