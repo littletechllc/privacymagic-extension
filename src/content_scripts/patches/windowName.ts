@@ -1,53 +1,58 @@
-import { objectDefinePropertiesSafe } from '../helpers'
+import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '../helpers'
 
 const windowName = (): void => {
   if (self.top !== self) {
     return
   }
-  const propDescriptor = Object.getOwnPropertyDescriptor(self, 'name')
+  const propDescriptor = objectGetOwnPropertyDescriptorSafe(self, 'name')
   if (propDescriptor == null) {
     return
   }
   if (propDescriptor.get === undefined || propDescriptor.set === undefined) {
     return
   }
-  const nameGetter = propDescriptor.get
-  const nameSetter = propDescriptor.set
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const nameGetter = propDescriptor.get as (this: Window) => string
+  const nameGetterSafe = (window: Window): string => reflectApplySafe(nameGetter, window, [])
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const nameSetter = propDescriptor.set as (this: Window, value: string) => void
+  const nameSetterSafe = (window: Window, value: string): void => reflectApplySafe(nameSetter, window, [value])
+  const jsonParseSafe = JSON.parse
+  const locationOrigin = self.location.origin
+  const StringSafe = String
   Object.defineProperty(self, 'name', {
-    get () {
-      const nameStr = nameGetter.call(this)
+    get (this: Window) {
+      const nameStr = nameGetterSafe(this)
       try {
-        const data = JSON.parse(nameStr)
-        if (typeof data !== 'object' || data === null) {
+        const data: Record<string, string> = jsonParseSafe(nameStr) as Record<string, string>
+        if (typeof data !== 'object') {
           return ''
         }
-        const origin = self.location.origin
-        if (typeof data[origin] !== 'string') {
+        if (typeof data[locationOrigin] !== 'string') {
           return ''
         }
-        return data[origin]
-      } catch (error) {
+        return data[locationOrigin]
+      } catch {
         return ''
       }
     },
-    set (value) {
-      const nameStr = nameGetter.call(this)
-      let data
+    set (this: Window, value: string) {
+      const nameStr = nameGetterSafe(this)
+      let data: Record<string, string>
       try {
-        data = JSON.parse(nameStr)
+        data = jsonParseSafe(nameStr) as Record<string, string>
         if (typeof data !== 'object' || data === null) {
           data = {}
         }
-      } catch (error) {
+      } catch {
         data = {}
       }
-      const origin = self.location.origin
-      if (origin === '' || origin.length === 0) {
+      if (locationOrigin === '' || locationOrigin.length === 0) {
         return
       }
       // String(value) matches self.name native behavior
-      data[origin] = String(value)
-      nameSetter.call(this, JSON.stringify(data))
+      data[locationOrigin] = StringSafe(value)
+      nameSetterSafe(this, JSON.stringify(data))
     },
     configurable: true
   })
