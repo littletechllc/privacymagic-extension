@@ -6,7 +6,7 @@ export default [
   },
   ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ["src/**/*.ts", "tools/**/*.ts"],
+    files: ["src/**/*.ts", "tools/**/*.ts", "*.config.js"],
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.json",
