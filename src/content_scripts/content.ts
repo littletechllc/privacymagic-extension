@@ -1,6 +1,8 @@
 import { SettingsId } from '../common/settings-ids'
 import { getDisabledSettings } from './helpers'
 
+import { sharedSecret } from './secret'
+
 import battery from './patches/battery'
 import cpu from './patches/cpu'
 import css from './patches/css'
@@ -65,7 +67,14 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
 }
 
 const mainFunction = (): void => {
+  console.log('main function called')
+  const secret = sharedSecret()
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('load event called')
+    document.dispatchEvent(new CustomEvent(secret, { detail: { "hi": "there" } }))
+  })
   const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
+  console.log(sharedSecret())
 }
 mainFunction()
