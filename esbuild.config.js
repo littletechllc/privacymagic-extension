@@ -6,20 +6,20 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 const baseBuildOptions = {
   bundle: true,
-  format: 'iife',
-  sourcemap: isProduction ? false : 'inline',
-  target: 'es2020',
-  platform: 'browser',
+  format: /** @type {const} */ ('iife'),
+  sourcemap: isProduction ? false : /** @type {const} */ ('inline'),
+  target: /** @type {const} */ ('es2020'),
+  platform: /** @type {const} */ ('browser'),
   minifyIdentifiers: isProduction,
   // Don't minify syntax/whitespace to avoid inlining helper functions
   // which could make us vulnerable to monkey patching
   // TODO: re-examine what kind of minification is safe to do
   minifySyntax: false,
   minifyWhitespace: false,
-  legalComments: 'none',
+  legalComments: /** @type {const} */ ('none'),
   treeShaking: true,
   // Node resolution for browser environment
-  packages: 'bundle',
+  packages: /** @type {const} */ ('bundle'),
   mainFields: ['browser', 'module', 'main'],
   conditions: ['browser']
 }

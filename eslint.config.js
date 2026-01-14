@@ -2,7 +2,7 @@ import tseslint from "typescript-eslint"
 
 export default [
   {
-    ignores: ["artifacts/**", "dist/**", "node_modules/**", "*.config.js"]
+    ignores: ["artifacts/**", "dist/**", "node_modules/**"]
   },
   ...tseslint.configs.recommendedTypeChecked,
   {
