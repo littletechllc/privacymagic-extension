@@ -57,11 +57,15 @@ const builds = [
   }
 ]
 
+/**
+ * Ensures that the directory for a given file path exists.
+ * @param {string} filePath - The path to the file.
+ */
 async function ensureDir (filePath) {
   const dir = dirname(filePath)
   try {
     await mkdir(dir, { recursive: true })
-  } catch (error) {
+  } catch {
     // Directory might already exist, ignore
   }
 }
@@ -78,6 +82,7 @@ async function build () {
 
 async function watch () {
   // Watch all builds individually
+  /** @type {esbuild.BuildContext[]} */
   const contexts = []
   for (const buildConfig of builds) {
     await ensureDir(buildConfig.outfile)
@@ -89,9 +94,10 @@ async function watch () {
     contexts.push(ctx)
   }
   // Keep process alive
-  process.on('SIGINT', async () => {
-    await Promise.all(contexts.map(ctx => ctx.dispose()))
-    process.exit(0)
+  process.on('SIGINT', () => {
+    Promise.all(contexts.map(ctx => ctx.dispose())).then(() => {
+      process.exit(0)
+    }).catch(console.error)
   })
 }
 

@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["./src/**/*", "./tools/**/*"]
+  "include": ["./src/**/*", "./tools/**/*", "*.config.js"]
 }
