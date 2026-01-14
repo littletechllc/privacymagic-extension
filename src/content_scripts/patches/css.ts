@@ -26,7 +26,6 @@ const css = (): void => {
   objectDefinePropertiesSafe(Element.prototype, {
     attachShadow: {
       value (this: Element, init: ShadowRootInit) {
-        console.log('attachShadow called for element:', this, 'init:', init)
         const shadowRoot = attachShadowSafe(this, init)
         addShadowRoot(shadowRoot)
         return shadowRoot

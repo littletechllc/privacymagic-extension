@@ -21,7 +21,7 @@ const gpu = () => {
   const originalCanvasSetWidthSafe = createSafeSetter(HTMLCanvasElement, 'width')
   const originalCanvasSetHeightSafe = createSafeSetter(HTMLCanvasElement, 'height')
 
-  const originalContextDescriptors = objectGetOwnPropertyDescriptorsSafe(CanvasRenderingContext2D)
+  const originalContextDescriptors = objectGetOwnPropertyDescriptorsSafe(CanvasRenderingContext2D.prototype)
 
   const createInvisibleCanvas = (width: number, height: number): HTMLCanvasElement => {
     const shadowCanvas: HTMLCanvasElement = document.createElement('canvas')
@@ -33,10 +33,12 @@ const gpu = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type CommandArgs = any[]
 
+  type CommandType = 'call' | 'set'
+
   interface Command {
     name: string
     args: CommandArgs
-    type: 'call' | 'set'
+    type: CommandType
     timestamp: number
   }
 
@@ -54,7 +56,7 @@ const gpu = () => {
       this.height = height
     }
 
-    recordCommand (name: string, args: CommandArgs, type: 'call' | 'set'): void {
+    recordCommand (name: string, args: CommandArgs, type: CommandType): void {
       // Discard commands if the last command is more than 250ms old
       const timestamp = Date.now()
       if (this.commands.length > 0 && this.commands[this.commands.length - 1].timestamp < timestamp - 250) {
