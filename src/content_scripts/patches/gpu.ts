@@ -76,7 +76,7 @@ const gpu = () => {
         try {
           reflectApplySafe(originalContextDescriptors[command.name][property], this.shadowContext, command.args)
         } catch (error) {
-          console.error('Error replaying command:', command.name, command.args, error)
+          console.error('Error replaying command:', command.type, command.name, command.args, error)
         }
       }
       this.commands = []
