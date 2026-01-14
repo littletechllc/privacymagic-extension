@@ -84,6 +84,24 @@ export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
   }
 }
 
+export const createSafeSetter = <T, K extends NonMethodPropertyKey<T>>(
+  object: { prototype: T },
+  propertyName: K,
+) => {
+  const descriptor = objectGetOwnPropertyDescriptorSafe(object.prototype, propertyName)
+  if (descriptor === undefined) {
+    throw new Error(`Property ${String(propertyName)} not found`)
+  }
+  if (descriptor.set === undefined) {
+    throw new Error(`Setter for property ${String(propertyName)} not found`)
+  }
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const setter = descriptor.set as MethodOf<T>
+  return (instance: T, value: T[K]): void => {
+    reflectApplySafe(setter, instance, [value] as unknown as Parameters<MethodOf<T>>)
+  }
+}
+
 export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true }
 
 export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: unknown }): void => {
