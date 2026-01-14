@@ -9,7 +9,7 @@ import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './bl
 import { handleRemoteCssRequests } from './remote-css'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
-import { type Message, type ResponseSendFunction } from '../common/messages'
+import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse } from '../common/messages'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -43,24 +43,24 @@ const handleMessage = async (
   try {
     if (message.type === 'updateSetting') {
       await updateSetting(message.domain, message.settingId, message.value)
-      sendResponse({ success: true })
+      sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'addHttpWarningNetworkRuleException') {
       await updateHttpWarningNetworkRuleException(message.url, message.value)
-      sendResponse({ success: true })
+      sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'getRemoteStyleSheetContent') {
       const response = await fetch(message.href)
       const content = await response.text()
-      sendResponse({ success: true, content })
+      sendResponse({ success: true, content } as ContentResponse)
     } else if (message.type === 'getDomainForCurrentTab') {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs[0]
       const url = tab.url ?? ''
       const domain = registrableDomainFromUrl(url)
       if (domain === null) {
-        sendResponse({ success: false, error: 'Failed to get domain for current tab' })
+        sendResponse({ success: false, error: 'Failed to get domain for current tab' } as ErrorResponse)
         return
       }
-      sendResponse({ success: true, domain })
+      sendResponse({ success: true, domain } as DomainResponse)
     } else {
       // Exhaustive check: all message types should be handled above
       // If this code runs, a new message type was added but not handled
