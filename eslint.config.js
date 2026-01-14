@@ -14,7 +14,13 @@ export default [
       }
     },
     rules: {
-      eqeqeq: ["error", "always"]
+      eqeqeq: ["error", "always"],
+      "no-implicit-coercion": "error",
+      "no-cond-assign": ["error", "always"],
+      "no-constant-condition": "error",
+      "no-fallthrough": "error",
+      "no-prototype-builtins": "error",
+      "use-isnan": "error",
     }
   }
 ];

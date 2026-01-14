@@ -37,9 +37,11 @@ const css = (): void => {
   const extractImportUrls = (cssText: string): { urls: string[], cssTextWithoutImports: string } => {
     const urls: string[] = []
     const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi
-    let match
-    while ((match = regex.exec(cssText)) !== null) {
+    let match: RegExpExecArray | null
+    match = regex.exec(cssText)
+    while (match !== null) {
       urls.push(match[1])
+      match = regex.exec(cssText)
     }
     const cssTextWithoutImports = cssText.replace(regex, '')
     return { urls, cssTextWithoutImports }
