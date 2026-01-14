@@ -30,7 +30,7 @@ const updateSiteInfo = async (domain: string): Promise<void> => {
   }
   domainElement.textContent = punycode.toUnicode(domain)
   const favicon = document.getElementById('favicon') as HTMLImageElement | null
-  if ((favicon !== null && favicon !== undefined) && url !== undefined && url !== '') {
+  if (favicon != null && url !== undefined && url !== '') {
     favicon.src = faviconURL(url)
   }
 }

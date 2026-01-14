@@ -48,13 +48,11 @@ const css = (): void => {
   }
 
   const maybeWrapWithMediaQuery = (css: string, mediaAttribute: string): string => {
-    if (css === undefined ||
-      css === null ||
+    if (css == null ||
       css === '') {
       return ''
     }
-    if (mediaAttribute === undefined ||
-      mediaAttribute === null ||
+    if (mediaAttribute == null ||
       mediaAttribute === '') {
       return css
     }
@@ -101,8 +99,7 @@ const css = (): void => {
   const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map()
 
   const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string): void => {
-    if (styleSheet === undefined ||
-        styleSheet === null) {
+    if (styleSheet == null) {
       // The style sheet was not valid or has been removed.
       return
     }
@@ -151,8 +148,7 @@ const css = (): void => {
   }
 
   const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
-    if (cssElement === undefined ||
-        cssElement === null) {
+    if (cssElement == null) {
       return undefined
     }
     const root = cssElement.getRootNode()
@@ -170,7 +166,7 @@ const css = (): void => {
   // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
     const sheet = mapGetSafe(styleSheetsForCssElements, cssElement)
-    if (sheet !== undefined && sheet !== null) {
+    if (sheet != null) {
       return sheet
     }
     let styleSheet

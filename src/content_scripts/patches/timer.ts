@@ -53,14 +53,14 @@ const timer = (): void => {
       })
     }
     const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(apiObject, 'toJSON')
-    if (toJsonOriginalDescriptor !== null && toJsonOriginalDescriptor !== undefined) {
+    if (toJsonOriginalDescriptor != null) {
       const toJsonOriginalValue = createSafeMethod(apiObject, 'toJSON')
       const toJsonNewDescriptor = { ...toJsonOriginalDescriptor }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       toJsonNewDescriptor.value = function (this: performanceAPI['prototype']) : any {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const originalJson = toJsonOriginalValue(this)
-        if (originalJson === undefined || typeof originalJson !== 'object' || originalJson === null) {
+        if (originalJson == null || typeof originalJson !== 'object') {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return originalJson
         }
@@ -73,7 +73,7 @@ const timer = (): void => {
 
   const batchMakeRoundedGetters = (objectsWithProperties: ReadonlyArray<[performanceAPI | undefined, string[]]>): void => {
     objectsWithProperties.forEach(([object, properties]) => {
-      if (object !== null && object !== undefined) {
+      if (object != null) {
         makeRoundedGetters(object, properties)
       }
     })

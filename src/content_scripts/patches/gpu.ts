@@ -65,10 +65,10 @@ const gpu = () => {
     }
 
     replayCommands (): CanvasRenderingContext2D  {
-      if (this.shadowContext === null || this.shadowContext === undefined) {
+      if (this.shadowContext == null) {
         this.createShadowContext()
       }
-      if (this.shadowContext === null || this.shadowContext === undefined) {
+      if (this.shadowContext == null) {
         throw new Error('Shadow context not created')
       }
       for (const command of this.commands) {
@@ -90,7 +90,7 @@ const gpu = () => {
     }
 
     wipeShadowCanvas (): void {
-      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
+      if (this.shadowCanvas != null) {
         this.shadowCanvas.width = this.width
       }
     }
@@ -113,7 +113,7 @@ const gpu = () => {
 
     canvasToDataURL (type: string, quality: number): string {
       const shadowContext = this.replayCommands()
-      if (shadowContext === null || shadowContext === undefined) {
+      if (shadowContext == null) {
         return 'data:,'
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
@@ -122,7 +122,7 @@ const gpu = () => {
 
     canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number): void {
       const shadowContext = this.replayCommands()
-      if (shadowContext === null || shadowContext === undefined) {
+      if (shadowContext == null) {
         callback(null)
         return
       }
@@ -132,14 +132,14 @@ const gpu = () => {
 
     setWidth (value: number): void {
       this.width = value
-      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
+      if (this.shadowCanvas != null) {
         this.shadowCanvas.width = value
       }
     }
 
     setHeight (value: number): void {
       this.height = value
-      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
+      if (this.shadowCanvas != null) {
         this.shadowCanvas.height = value
       }
     }
@@ -246,7 +246,7 @@ const gpu = () => {
     redefinePropertyValues(HTMLCanvasElement.prototype, {
       getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes)
-        if (context !== null && context !== undefined && contextType === '2d') {
+        if (context != null && contextType === '2d') {
           // Create recorder when context is created, storing it with the canvas
           createOrGetCommandRecorder(this, contextAttributes)
         }
@@ -290,7 +290,7 @@ const gpu = () => {
 
   const hideWebGLVendorAndRenderer = (): void => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter')
-    if (navigator.userAgentData !== null && navigator.userAgentData !== undefined) {
+    if (navigator.userAgentData != null) {
       const userAgentData: NavigatorUAData = navigator.userAgentData
       const platform = userAgentData.platform
       if (platform === 'MacIntel') {

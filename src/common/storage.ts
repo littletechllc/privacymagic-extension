@@ -71,25 +71,25 @@ let storageManaged: StorageProxy | null = null
 
 export const storage = {
   get local () {
-    if (storageLocal === null || storageLocal === undefined) {
+    if (storageLocal == null) {
       storageLocal = new StorageProxy('local')
     }
     return storageLocal
   },
   get sync () {
-    if (storageSync === null || storageSync === undefined) {
+    if (storageSync == null) {
       storageSync = new StorageProxy('sync')
     }
     return storageSync
   },
   get session () {
-    if (storageSession === null || storageSession === undefined) {
+    if (storageSession == null) {
       storageSession = new StorageProxy('session')
     }
     return storageSession
   },
   get managed () {
-    if (storageManaged === null || storageManaged === undefined) {
+    if (storageManaged == null) {
       storageManaged = new StorageProxy('managed')
     }
     return storageManaged

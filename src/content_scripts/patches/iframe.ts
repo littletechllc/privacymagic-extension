@@ -54,8 +54,8 @@ const iframe = (): undefined => {
       // Accesing contentWin.eval is safe because, in order to monkey patch it,
       // the pre-evaluated script would need to access contentWin, which would
       // trigger our hardening code injection first.
-      const evalFunction: EvalFunction | null | undefined = contentWin !== undefined && contentWin !== null && 'eval' in contentWin ? contentWin.eval : null
-      if (evalFunction === null || evalFunction === undefined) {
+      const evalFunction: EvalFunction | null | undefined = contentWin != null && 'eval' in contentWin ? contentWin.eval : null
+      if (evalFunction == null) {
         return contentWin
       }
       try {

@@ -5,7 +5,7 @@ const windowName = (): void => {
     return
   }
   const propDescriptor = objectGetOwnPropertyDescriptorSafe(self, 'name')
-  if (propDescriptor === null || propDescriptor === undefined) {
+  if (propDescriptor == null) {
     return
   }
   if (propDescriptor.get === undefined || propDescriptor.set === undefined) {

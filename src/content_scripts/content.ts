@@ -54,7 +54,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
     try {
       if (!disabledPatches.includes(patcherId)) {
         const patch = privacyMagicPatches[patcherId]
-        if (patch !== undefined && patch !== null) {
+        if (patch != null) {
           patch()
         }
       }

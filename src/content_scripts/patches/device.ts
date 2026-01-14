@@ -1,7 +1,7 @@
 import { redefinePropertyValues } from '../helpers'
 
 const device = (): void => {
-  if (self.DevicePosture !== null && self.DevicePosture !== undefined) {
+  if (self.DevicePosture != null) {
     redefinePropertyValues(DevicePosture.prototype, {
       type: 'continuous',
       addEventListener: (/* ignore */) => { /* do nothing */ },
