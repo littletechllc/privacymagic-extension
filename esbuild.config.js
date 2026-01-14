@@ -36,6 +36,10 @@ const builds = [
     }
   },
   {
+    entryPoints: ['src/content_scripts/isolated.ts'],
+    outfile: 'dist/content_scripts/isolated.js'
+  },
+  {
     entryPoints: ['src/background/index.ts'],
     outfile: 'dist/background/index.js'
   },
