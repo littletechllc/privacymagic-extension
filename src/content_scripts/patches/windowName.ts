@@ -56,7 +56,6 @@ const windowName = (): void => {
     },
     configurable: true
   })
-  console.log('self.name patched')
 }
 
 export default windowName

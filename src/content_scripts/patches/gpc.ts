@@ -4,7 +4,6 @@ import { redefinePropertyValues } from '../helpers'
 // selling or sharing their personal information with third parties.
 // https://globalprivacycontrol.org/
 const gpc = (): void => {
-  console.log('gpc patch', self.location.href)
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
   if (navigatorPrototype == null) {
     throw new Error('Navigator prototype not found')
