@@ -30,7 +30,7 @@ const updateSiteInfo = async (domain: string): Promise<void> => {
   }
   domainElement.textContent = punycode.toUnicode(domain)
   const favicon = document.getElementById('favicon') as HTMLImageElement | null
-  if ((favicon != null) && url !== undefined && url !== '') {
+  if ((favicon !== null && favicon !== undefined) && url !== undefined && url !== '') {
     favicon.src = faviconURL(url)
   }
 }
@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   })
   if (response === undefined ||
       typeof response !== 'object' ||
-      response === null ||
       !('success' in response) ||
       response.success !== true) {
     throw new Error('invalid response from getDomainForCurrentTab')

@@ -1,5 +1,5 @@
 const sharedStorage = (): void => {
-  if (self.SharedStorage == null) {
+  if (self.SharedStorage === null || self.SharedStorage === undefined) {
     return
   }
   delete self.SharedStorage

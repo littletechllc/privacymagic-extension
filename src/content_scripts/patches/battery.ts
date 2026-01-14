@@ -1,7 +1,7 @@
 import { redefinePropertyValues } from '../helpers'
 
 const battery = (): void => {
-  if (self.BatteryManager != null) {
+  if (self.BatteryManager !== null && self.BatteryManager !== undefined) {
     const silencedEventProperty = {
       get: () => { return null },
       set: (/* _value: unknown */) => { /* do nothing */ },

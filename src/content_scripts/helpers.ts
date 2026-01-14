@@ -109,11 +109,11 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
   const newProperties: PropertyDescriptorMap = {}
   for (const [prop, value] of Object.entries(propertyMap)) {
     const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop)
-    originalProperties[prop] = originalDescriptor != null ? originalDescriptor : nonProperty
+    originalProperties[prop] = originalDescriptor !== undefined && originalDescriptor !== null ? originalDescriptor : nonProperty
     if (value === undefined) {
       newProperties[prop] = nonProperty
     } else {
-      if (originalDescriptor == null) {
+      if (originalDescriptor === null || originalDescriptor === undefined) {
         newProperties[prop] = { configurable: true, get: () => value }
       } else if (originalDescriptor.value !== undefined) {
         newProperties[prop] = { ...originalDescriptor, value }
@@ -168,7 +168,7 @@ export const makeBundleForInjection = (disabledSettings: string[]): string => {
 let trustedTypePolicy: TrustedTypePolicy | undefined
 
 export const getTrustedTypesPolicy = (): TrustedTypePolicy => {
-  if ((trustedTypePolicy == null) && (self.trustedTypes != null)) {
+  if ((trustedTypePolicy === null || trustedTypePolicy === undefined) && (self.trustedTypes !== null && self.trustedTypes !== undefined)) {
     trustedTypePolicy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
       createHTML: (unsafeHTML) => unsafeHTML,
       createScript: (unsafeScript) => unsafeScript,
@@ -197,7 +197,7 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
     if (result.length === 1 && result[0] === '') {
       result = []
     }
-    if (relevantSettings != null) {
+    if (relevantSettings !== undefined && relevantSettings !== null) {
       result = result.filter(setting => relevantSettings.includes(setting))
     }
   } catch (error) {

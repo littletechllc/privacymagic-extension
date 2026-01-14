@@ -53,7 +53,7 @@ const timer = (): void => {
       })
     }
     const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(apiObject, 'toJSON')
-    if (toJsonOriginalDescriptor != null) {
+    if (toJsonOriginalDescriptor !== null && toJsonOriginalDescriptor !== undefined) {
       const toJsonOriginalValue = createSafeMethod(apiObject, 'toJSON')
       const toJsonNewDescriptor = { ...toJsonOriginalDescriptor }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

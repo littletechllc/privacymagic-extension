@@ -68,7 +68,7 @@ const bindToggleToStorage = async (
   defaultValue: boolean
 ): Promise<void> => {
   const input = toggle.querySelector('input')
-  if (input == null) {
+  if (input === null || input === undefined) {
     throw new Error('Input not found')
   }
   const storageValue = await store.get(keyPath)
@@ -124,7 +124,7 @@ const setupInputListeners = (domain: string): void => {
 
 export const setupSettingsUI = async (domain: string): Promise<void> => {
   const settingsContainer = document.getElementById('settings')
-  if (settingsContainer == null) {
+  if (settingsContainer === null || settingsContainer === undefined) {
     throw new Error('Settings container not found')
   }
   settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>'

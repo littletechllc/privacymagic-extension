@@ -36,7 +36,7 @@ const worker = (): void => {
     const absoluteUrlObject = new URL(absoluteUrl)
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
     for (const [key, descriptor] of Object.entries(descriptors)) {
-      if ((descriptor.get != null) && key in absoluteUrlObject) {
+      if ((descriptor.get !== null && descriptor.get !== undefined) && key in absoluteUrlObject) {
         descriptor.get = () => absoluteUrlObject[key as keyof URL]
       }
     }

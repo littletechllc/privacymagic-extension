@@ -65,10 +65,10 @@ const gpu = () => {
     }
 
     replayCommands (): CanvasRenderingContext2D  {
-      if (this.shadowContext == null) {
+      if (this.shadowContext === null || this.shadowContext === undefined) {
         this.createShadowContext()
       }
-      if (this.shadowContext == null) {
+      if (this.shadowContext === null || this.shadowContext === undefined) {
         throw new Error('Shadow context not created')
       }
       for (const command of this.commands) {
@@ -90,7 +90,7 @@ const gpu = () => {
     }
 
     wipeShadowCanvas (): void {
-      if (this.shadowCanvas != null) {
+      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
         this.shadowCanvas.width = this.width
       }
     }
@@ -113,7 +113,7 @@ const gpu = () => {
 
     canvasToDataURL (type: string, quality: number): string {
       const shadowContext = this.replayCommands()
-      if (shadowContext == null) {
+      if (shadowContext === null || shadowContext === undefined) {
         return 'data:,'
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
@@ -122,7 +122,7 @@ const gpu = () => {
 
     canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number): void {
       const shadowContext = this.replayCommands()
-      if (shadowContext == null) {
+      if (shadowContext === null || shadowContext === undefined) {
         callback(null)
         return
       }
@@ -132,14 +132,14 @@ const gpu = () => {
 
     setWidth (value: number): void {
       this.width = value
-      if (this.shadowCanvas != null) {
+      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
         this.shadowCanvas.width = value
       }
     }
 
     setHeight (value: number): void {
       this.height = value
-      if (this.shadowCanvas != null) {
+      if (this.shadowCanvas !== undefined && this.shadowCanvas !== null) {
         this.shadowCanvas.height = value
       }
     }
@@ -290,7 +290,7 @@ const gpu = () => {
 
   const hideWebGLVendorAndRenderer = (): void => {
     const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter')
-    if (navigator.userAgentData != null) {
+    if (navigator.userAgentData !== null && navigator.userAgentData !== undefined) {
       const userAgentData: NavigatorUAData = navigator.userAgentData
       const platform = userAgentData.platform
       if (platform === 'MacIntel') {

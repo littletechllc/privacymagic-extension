@@ -12,6 +12,9 @@ export default [
         project: "./tsconfig.json",
         tsconfigRootDir: import.meta.dirname
       }
+    },
+    rules: {
+      eqeqeq: ["error", "always"]
     }
   }
 ];

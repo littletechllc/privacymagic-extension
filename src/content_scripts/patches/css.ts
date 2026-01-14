@@ -168,7 +168,7 @@ const css = (): void => {
   // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
     const sheet = mapGetSafe(styleSheetsForCssElements, cssElement)
-    if (sheet != null) {
+    if (sheet !== undefined && sheet !== null) {
       return sheet
     }
     let styleSheet
@@ -232,7 +232,7 @@ const css = (): void => {
         el.parentElement instanceof HTMLStyleElement &&
         record.oldValue !== el.parentElement.textContent) {
         const styleSheet = getStyleSheetForCssElement(el.parentElement)
-        if (styleSheet != null) {
+        if (styleSheet !== undefined) {
           void applyContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media)
         }
       } else if (el instanceof HTMLStyleElement &&
@@ -240,7 +240,7 @@ const css = (): void => {
                  record.attributeName === 'media' &&
                  record.oldValue !== el.media) {
         const styleSheet = getStyleSheetForCssElement(el)
-        if (styleSheet != null) {
+        if (styleSheet !== undefined) {
           void applyContentToStyleSheet(styleSheet, el.textContent ?? '', el.media)
         }
       } else if (el instanceof HTMLLinkElement &&
@@ -250,14 +250,14 @@ const css = (): void => {
                  (record.attributeName === 'media' &&
                   record.oldValue !== el.media))) {
         const styleSheet = getStyleSheetForCssElement(el)
-        if (styleSheet != null) {
+        if (styleSheet !== undefined) {
           applyRemoteContentToStyleSheet(styleSheet, el.href, el.media)
         }
       } else if ((el instanceof HTMLLinkElement || el instanceof HTMLStyleElement) &&
                   record.type === 'attributes' &&
                   record.attributeName === 'disabled') {
         const styleSheet = getStyleSheetForCssElement(el)
-        if ((styleSheet != null) && styleSheet.disabled !== el.disabled) {
+        if (styleSheet !== undefined && styleSheet.disabled !== el.disabled) {
           styleSheet.disabled = el.disabled
         }
       } else if (record.type === 'childList' && record.removedNodes.length > 0) {
