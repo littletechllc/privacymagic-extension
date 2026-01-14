@@ -9,7 +9,7 @@ import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './bl
 import { handleRemoteCssRequests } from './remote-css'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
-import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse } from '../common/messages'
+import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
