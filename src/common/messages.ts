@@ -7,13 +7,16 @@ export type Message =
   | { type: 'getRemoteStyleSheetContent', href: string }
   | { type: 'getDomainForCurrentTab' }
 
-type ErrorResponse = { success: false, error: string }
+export type SuccessResponse = { success: true }
+export type DomainResponse = { success: true, domain: string }
+export type ContentResponse = { success: true, content: string }
+export type ErrorResponse = { success: false, error: string }
 
 // Response types for each message type
 export type MessageResponse =
-  | { success: true }
-  | { success: true, domain: string }
-  | { success: true, content: string }
+  | SuccessResponse
+  | DomainResponse
+  | ContentResponse
   | ErrorResponse
 
 // Helper type for the sendResponse function
@@ -24,12 +27,10 @@ export const updateSettingMessageRemote = async (
   domain: string,
   settingId: SettingsId,
   value: boolean
-): Promise<{ success: true } | { success: false, error: string }> => {
+  ): Promise<void> => {
   const message: Message = { type: 'updateSetting', domain, settingId, value }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as { success: true } | ErrorResponse
-  if (response.success) {
-    return { success: true }
-  } else {
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
+  if (!response.success) {
     throw new Error(response.error)
   }
 }
@@ -37,12 +38,10 @@ export const updateSettingMessageRemote = async (
 export const addHttpWarningNetworkRuleExceptionMessageRemote = async (
   url: string,
   value: boolean
-): Promise<{ success: true } | { success: false, error: string }> => {
+): Promise<void> => {
   const message: Message = { type: 'addHttpWarningNetworkRuleException', url, value }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as { success: true } | ErrorResponse
-  if (response.success) {
-    return { success: true }
-  } else {
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
+  if (!response.success) {
     throw new Error(response.error)
   }
 }
@@ -51,21 +50,19 @@ export const getRemoteStyleSheetContentMessageRemote = async (
   href: string
 ): Promise<string> => {
   const message: Message = { type: 'getRemoteStyleSheetContent', href }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as { success: true, content: string } | ErrorResponse
-  if (response.success) {
-    return response.content
-  } else {
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as ContentResponse | ErrorResponse
+  if (!response.success) {
     throw new Error(response.error)
   }
+  return response.content
 }
 
 export const getDomainForCurrentTabMessageRemote = async (): Promise<string> => {
   const message: Message = { type: 'getDomainForCurrentTab' }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as { success: true, domain: string } | ErrorResponse
-  if (response.success) {
-    return response.domain
-  } else {
+  if (!response.success) {
     throw new Error(response.error)
   }
+  return response.domain
 }
 
