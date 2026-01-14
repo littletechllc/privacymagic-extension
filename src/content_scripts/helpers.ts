@@ -3,8 +3,8 @@ type MethodOf<TThis> = {
   [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
 }[keyof TThis]
 
-type MethodOfKey<T, K extends keyof T> = T[K] extends (...args: infer Args) => infer Return 
-  ? (...args: Args) => Return 
+type MethodOfKey<T, K extends keyof T> = T[K] extends (...args: infer Args) => infer Return
+  ? (...args: Args) => Return
   : never
 
 // Type for method keys of an object.

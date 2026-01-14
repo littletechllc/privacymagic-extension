@@ -77,7 +77,7 @@ const timer = (): void => {
         makeRoundedGetters(object, properties)
       }
     })
-  } 
+  }
   batchMakeRoundedGetters([
     [self.Performance, ['timeOrigin']],
     [self.PerformanceEntry, ['duration', 'startTime']],

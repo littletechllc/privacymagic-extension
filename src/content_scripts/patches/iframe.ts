@@ -37,7 +37,7 @@ const iframe = (): undefined => {
     const weakSetHasSafe = createSafeMethod(WeakSet<EvalFunction>, 'has')
     const weakSetAddSafe = createSafeMethod(WeakSet<EvalFunction>, 'add')
     const getContentWindowSafe = createSafeGetter(HTMLIFrameElement, 'contentWindow')
- 
+
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/
     // Function bodies here need to be carefully crafted to prevent invoking
     // anything that might have been monkey patched by pre-evaluated scripts.
