@@ -301,7 +301,6 @@ const css = (): void => {
   })
 
   // Get the original replaceSync method before we patch it
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
 
   const sanitizeRule = (rule: CSSRule): CSSRule => {
