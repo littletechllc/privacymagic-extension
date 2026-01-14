@@ -1,4 +1,4 @@
-import { redefinePropertyValues, reflectApplySafe, nonProperty } from '../helpers'
+import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '../helpers'
 
 const timer = (): void => {
   const mathRoundSafe = Math.round
@@ -6,9 +6,11 @@ const timer = (): void => {
   if (nowDescriptor?.value === undefined) {
     throw new Error('Performance.now not found')
   }
-  const originalNow = nowDescriptor.value
+  const originalNow = nowDescriptor.value as (this: Performance) => number
   redefinePropertyValues(Performance.prototype, {
-    now: function () { return mathRoundSafe(reflectApplySafe(originalNow, this, [])) }
+    now: function (this: Performance) {
+      return mathRoundSafe(reflectApplySafe(originalNow, this, []))
+    }
   })
   const objectKeysSafe = Object.keys
   const objectFromEntriesSafe = Object.fromEntries
@@ -16,52 +18,67 @@ const timer = (): void => {
   if (mapDescriptor?.value === undefined) {
     throw new Error('Array.prototype.map not found')
   }
-  const arrayMapValue = mapDescriptor.value
-  const arrayMapSafe = (array: any[], callback: (value: any, index: number, array: any[]) => any): any[] => reflectApplySafe(arrayMapValue, array, [callback])
-  const getPropertyValueSafe = (object: any, property: string): any => {
+  const arrayMapValue = mapDescriptor.value as <T, U>(this: T[], callback: (value: T, index: number, array: T[]) => U) => U[]
+  const arrayMapSafe = <T, U>(array: T[], callback: (value: T, index: number, array: T[]) => U): U[] => {
+    return reflectApplySafe(arrayMapValue, array, [callback] as Parameters<typeof arrayMapValue>) as U[]
+  }
+  const getPropertyValueSafe = <T, K extends keyof T>(object: T, property: K): T[K] | undefined => {
     try {
       return object[property]
     } catch {
       return undefined
     }
   }
-  const makeRoundedGetters = (objectPrototype: any, properties: string[]): void => {
+
+  type performanceAPI = { prototype: PerformanceEntry | Performance | PerformanceServerTiming  }
+
+  const makeRoundedGetters = (apiObject: performanceAPI, properties: string[]): void => {
     const originalDescriptors: PropertyDescriptorMap = {}
     for (const property of properties) {
-      const descriptor = Object.getOwnPropertyDescriptor(objectPrototype, property)
+      const descriptor = Object.getOwnPropertyDescriptor(apiObject.prototype, property)
       originalDescriptors[property] = descriptor ?? nonProperty
-      if (descriptor?.get !== undefined) {
-        const originalGetter = descriptor.get
-        descriptor.get = function (...args) { return mathRoundSafe(reflectApplySafe(originalGetter, this, args)) }
-        Object.defineProperty(objectPrototype, property, descriptor)
+      if (descriptor?.get === undefined) {
+        continue
       }
-    }
-    const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(objectPrototype, 'toJSON')
-    if (toJsonOriginalDescriptor != null) {
-      const toJsonOriginalValue = toJsonOriginalDescriptor.value
-      const toJsonNewDescriptor = { ...toJsonOriginalDescriptor }
-      const toJsonOriginalSafe = (object: any): any => reflectApplySafe(toJsonOriginalValue, object, [])
-      toJsonNewDescriptor.value = function () {
-        const originalJson = toJsonOriginalSafe(this)
-        if (originalJson === undefined) {
-          return undefined
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      const originalGetter = descriptor.get
+      redefinePropertyValues(apiObject.prototype, {
+        [property]: {
+          ...descriptor,
+          get: function (this: performanceAPI['prototype']) {
+            const result = reflectApplySafe(originalGetter as (this: performanceAPI['prototype']) => number, this, [])
+            return mathRoundSafe(Number(result))
+          }
         }
-        return objectFromEntriesSafe(arrayMapSafe(objectKeysSafe(originalJson), k => ([k, getPropertyValueSafe(this, k)])))
+      })
+    }
+    const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(apiObject, 'toJSON')
+    if (toJsonOriginalDescriptor != null) {
+      const toJsonOriginalValue = createSafeMethod(apiObject, 'toJSON')
+      const toJsonNewDescriptor = { ...toJsonOriginalDescriptor }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toJsonNewDescriptor.value = function (this: performanceAPI['prototype']) : any {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const originalJson = toJsonOriginalValue(this)
+        if (originalJson === undefined || typeof originalJson !== 'object' || originalJson === null) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          return originalJson
+        }
+        const jsonObject = originalJson as Record<string, unknown>
+        return objectFromEntriesSafe(arrayMapSafe(objectKeysSafe(jsonObject), k => ([k, getPropertyValueSafe(this, k as keyof typeof this)])))
       }
-      Object.defineProperty(objectPrototype, 'toJSON', toJsonNewDescriptor)
+      Object.defineProperty(apiObject, 'toJSON', toJsonNewDescriptor)
     }
   }
 
-  interface Constructor { prototype: any }
-  const batchMakeRoundedGetters = (objectsWithProperties: ReadonlyArray<[(Constructor | null | undefined), string[]]>): void => {
+  const batchMakeRoundedGetters = (objectsWithProperties: ReadonlyArray<[performanceAPI | undefined, string[]]>): void => {
     objectsWithProperties.forEach(([object, properties]) => {
       if (object !== null && object !== undefined) {
-        makeRoundedGetters(object.prototype, properties)
+        makeRoundedGetters(object, properties)
       }
     })
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const restorePerformance = batchMakeRoundedGetters([
+  } 
+  batchMakeRoundedGetters([
     [self.Performance, ['timeOrigin']],
     [self.PerformanceEntry, ['duration', 'startTime']],
     [self.LargestContentfulPaint, ['loadTime', 'renderTime']],
