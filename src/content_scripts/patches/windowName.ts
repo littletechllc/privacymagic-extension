@@ -5,7 +5,7 @@ const windowName = (): void => {
     return
   }
   const propDescriptor = objectGetOwnPropertyDescriptorSafe(self, 'name')
-  if (propDescriptor == null) {
+  if (propDescriptor === null || propDescriptor === undefined) {
     return
   }
   if (propDescriptor.get === undefined || propDescriptor.set === undefined) {
@@ -41,7 +41,7 @@ const windowName = (): void => {
       let data: Record<string, string>
       try {
         data = jsonParseSafe(nameStr) as Record<string, string>
-        if (typeof data !== 'object' || data === null) {
+        if (typeof data !== 'object') {
           data = {}
         }
       } catch {

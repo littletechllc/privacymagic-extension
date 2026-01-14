@@ -215,7 +215,7 @@ interface ContentFilterBody {
 
 const parseContentFilterBody = (body: string): ContentFilterBody => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
-  if (matches != null) {
+  if (matches !== null && matches !== undefined) {
     return { selector: matches[1], style: matches[2] }
   }
   return { selector: body, style: 'display: none !important;' }
@@ -255,7 +255,7 @@ const parseLine = (line: string): Line => {
   try {
     // Check if the line is a content filter by looking for a separator
     const separatorMatch = line.match(contentFilterSeparatorRegex)
-    if (separatorMatch != null) {
+    if (separatorMatch !== null && separatorMatch !== undefined) {
       parsed = parseContentFilter(line, separatorMatch[0])
     } else {
       parsed = parseBlockingFilter(line)
