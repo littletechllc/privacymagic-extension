@@ -15,14 +15,14 @@ export class StorageProxy {
     this.storage = chrome.storage[storageType]
   }
 
-  async set (keyPath: KeyPath, value: unknown): Promise<void> {
+  async set (keyPath: KeyPath, value: boolean): Promise<void> {
     const key = keyPathToKey(keyPath)
     return (await this.storage.set({ [key]: value }))
   }
 
-  async get (keyPath: KeyPath): Promise<unknown> {
+  async get (keyPath: KeyPath): Promise<undefined | boolean> {
     const key = keyPathToKey(keyPath)
-    return (await this.storage.get(key))[key]
+    return (await this.storage.get(key))[key] as undefined | boolean
   }
 
   async remove (keyPath: KeyPath): Promise<void> {
@@ -39,12 +39,12 @@ export class StorageProxy {
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value])
   }
 
-  listenForChanges (keyPath: KeyPath, callback: (value: unknown) => void): void {
+  listenForChanges (keyPath: KeyPath, callback: (value: boolean | undefined) => void): void {
     this.storage.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath)
         if (changes[key] !== undefined) {
-          callback(changes[key].newValue)
+          callback(changes[key].newValue as boolean | undefined)
         }
       } catch (error) {
         logError(error, 'error responsding to storage changes', { keyPath, changes })

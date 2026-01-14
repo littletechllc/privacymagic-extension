@@ -9,6 +9,7 @@ import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './bl
 import { handleRemoteCssRequests } from './remote-css'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
+import { type Message, type ResponseSendFunction } from '../common/messages'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -34,11 +35,6 @@ const updateSetting = async (domain: string, settingId: SettingsId, value: boole
   await updateTopLevelNetworkRule(domain, settingId, value)
 }
 
-type ResponseSendFunction = (response: { success: boolean, error?: string, domain?: string, content?: string }) => void
-type Message =
-  { type: 'updateSetting', domain: string, settingId: SettingsId, value: boolean } |
-  { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean } | { type: 'getRemoteStyleSheetContent', href: string } |
-  { type: 'getDomainForCurrentTab' }
 
 const handleMessage = async (
   message: Message,
@@ -66,7 +62,10 @@ const handleMessage = async (
       }
       sendResponse({ success: true, domain })
     } else {
-      throw new Error(`unknown message type: ${String(message?.type)}`)
+      // Exhaustive check: all message types should be handled above
+      // If this code runs, a new message type was added but not handled
+      const _exhaustive: never = message
+      throw new Error(`unknown message type: ${JSON.stringify(_exhaustive)}`)
     }
   } catch (error) {
     if (error instanceof Error) {

@@ -1,4 +1,5 @@
 import { handleAsync, logError } from '../common/util'
+import { addHttpWarningNetworkRuleExceptionMessageRemote } from '../common/messages'
 
 const urlParam = new URL(window.location.href).searchParams.get('url')
 if (urlParam === null || urlParam === '') {
@@ -18,11 +19,7 @@ if (addExceptionElement == null) {
   throw new Error('addException element not found')
 }
 addExceptionElement.addEventListener('click', (event: Event) => handleAsync(async () => {
-  await chrome.runtime.sendMessage({
-    type: 'addHttpWarningNetworkRuleException',
-    url,
-    value: 'exception'
-  })
+  await addHttpWarningNetworkRuleExceptionMessageRemote(url, true)
   window.location.replace(url)
 }, (error: unknown) => {
   logError(error, 'error adding exception to http warning network rule', { url, event })

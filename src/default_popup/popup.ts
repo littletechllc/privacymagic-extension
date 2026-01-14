@@ -1,6 +1,7 @@
 import { setupSettingsUI } from '../common/settings-ui'
 import { handleAsync, logError } from '../common/util'
 import punycode from 'punycode-npm'
+import { getDomainForCurrentTabMessageRemote } from '../common/messages'
 
 const setupOptionsButton = (): void => {
   document.getElementById('optionsButton')?.addEventListener('click', (event) => {
@@ -38,17 +39,9 @@ const updateSiteInfo = async (domain: string): Promise<void> => {
 
 document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
   setupOptionsButton()
-  const response : { success: boolean, domain: string } = await chrome.runtime.sendMessage({
-    type: 'getDomainForCurrentTab'
-  })
-  if (response === undefined ||
-      typeof response !== 'object' ||
-      !('success' in response) ||
-      response.success !== true) {
-    throw new Error('invalid response from getDomainForCurrentTab')
-  }
-  await updateSiteInfo(response.domain)
-  await setupSettingsUI(response.domain)
+  const domain = await getDomainForCurrentTabMessageRemote()
+  await updateSiteInfo(domain)
+  await setupSettingsUI(domain)
 }, (error: unknown) => {
   logError(error, 'error responding to DOMContentLoaded on current tab', event)
 }))
