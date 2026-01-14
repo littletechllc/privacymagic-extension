@@ -4,7 +4,7 @@ import { SettingsId } from './settings-ids'
 export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingsId, value: boolean }
   | { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean }
-  | { type: 'getRemoteStyleSheetContent', href: string }
+  | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'getDomainForCurrentTab' }
 
 export type SuccessResponse = { success: true }
@@ -23,7 +23,7 @@ export type MessageResponse =
 export type ResponseSendFunction = (response: MessageResponse) => void
 
 // Typed functions for each message type with matching response types
-export const updateSettingMessageRemote = async (
+export const updateSettingRemote = async (
   domain: string,
   settingId: SettingsId,
   value: boolean
@@ -35,7 +35,7 @@ export const updateSettingMessageRemote = async (
   }
 }
 
-export const addHttpWarningNetworkRuleExceptionMessageRemote = async (
+export const addHttpWarningNetworkRuleExceptionRemote = async (
   url: string,
   value: boolean
 ): Promise<void> => {
@@ -46,7 +46,7 @@ export const addHttpWarningNetworkRuleExceptionMessageRemote = async (
   }
 }
 
-export const getRemoteStyleSheetContentMessageRemote = async (
+export const getRemoteStyleSheetContentRemote = async (
   href: string
 ): Promise<string> => {
   const message: Message = { type: 'getRemoteStyleSheetContent', href }

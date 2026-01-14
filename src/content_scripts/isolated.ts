@@ -1,12 +1,8 @@
-import { sharedSecret } from './secret'
+import { getRemoteStyleSheetContentRemote } from '../common/messages'
+import { handleBackgroundFetchRequests } from './background-fetch'
 
 const isolated = () => {
-  const secret = sharedSecret()
-  document.addEventListener(secret, (event) => {
-    console.log('event received in isolated', event)
-  })
-  console.log('event listener added in isolated')
-  console.log(`shared secret: "${secret}"`)
+  handleBackgroundFetchRequests(getRemoteStyleSheetContentRemote)
 }
 
 isolated()

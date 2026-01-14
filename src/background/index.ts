@@ -48,7 +48,7 @@ const handleMessage = async (
       await updateHttpWarningNetworkRuleException(message.url, message.value)
       sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'getRemoteStyleSheetContent') {
-      const response = await fetch(message.href)
+      const response = await fetch(message.url)
       const content = await response.text()
       sendResponse({ success: true, content } as ContentResponse)
     } else if (message.type === 'getDomainForCurrentTab') {
