@@ -20,6 +20,7 @@ export default [
       "no-constant-condition": "error",
       "no-fallthrough": "error",
       "no-prototype-builtins": "error",
+      "no-trailing-spaces": "error",
       "use-isnan": "error",
     }
   }

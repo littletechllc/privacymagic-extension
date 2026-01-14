@@ -1,4 +1,4 @@
- 
+
 
 import { redefinePropertyValues, createSafeMethod } from '../helpers'
 

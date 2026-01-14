@@ -59,44 +59,32 @@ const css = (): void => {
     return `@media ${mediaAttribute} { ${css} }`
   }
 
+  const fetchSafe = fetch
+
   let pendingRemoteStyleSheets = 0
 
   const getRemoteStyleSheetContent = async (href: string): Promise<string> => {
-    /*
-    const response = await chrome.runtime.sendMessage({ type: 'getRemoteStyleSheetContent', href });
-    if (response.success) {
-      return response.content;
-    }
-      */
     pendingRemoteStyleSheets++
+    let content = ''
     try {
-      const response = await fetch(href)
+      const response = await fetchSafe(href)
       if (response.ok) {
-        console.log('fetch successful for href:', href)
-        pendingRemoteStyleSheets--
-        return await response.text()
+        console.log('direct fetch successful for href:', href)
+        content = await response.text()
       } else {
-        console.error('fetch failed for href:', href, 'status:', response.status)
-        const content = await backgroundFetch(href)
-        console.log('background fetch successful for href:', href)
-        pendingRemoteStyleSheets--
-        return content
+        throw new Error(`direct fetch failed for href: ${href}, status: ${response.status}`)
       }
     } catch (error) {
       console.error('error getting remote style sheet content for href:', href, 'error:', error)
-      console.log("dispatching event for error")
       try {
-        const content = await backgroundFetch(href)
-        console.log('background fetch successful for href:', href)
-        pendingRemoteStyleSheets--
-        return content
+        content = await backgroundFetch(href)
+        console.log('background fetch successful for href:', href, content)
       } catch (error) {
-        console.error('error dispatching event for error:', error)
+        console.error('error dispatching background fetch:', error)
       }
-      console.log("dispatched event for error")
-      pendingRemoteStyleSheets--
-      return ''
     }
+    pendingRemoteStyleSheets--
+    return content
   }
 
   const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string): Promise<void> => {
@@ -186,7 +174,11 @@ const css = (): void => {
     }
     let styleSheet
     if (cssElement instanceof HTMLLinkElement) {
-      styleSheet = createStyleSheetForLinkElement(cssElement)
+      if (cssElement.rel === 'stylesheet') {
+        styleSheet = createStyleSheetForLinkElement(cssElement)
+      } else {
+        return undefined
+      }
     } else if (cssElement instanceof HTMLStyleElement) {
       styleSheet = createStyleSheetForStyleElement(cssElement)
     } else if (cssElement instanceof SVGStyleElement) {
