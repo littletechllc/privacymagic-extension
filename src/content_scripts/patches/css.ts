@@ -1,4 +1,4 @@
-import { createSafeMethod, redefinePropertiesSafe } from '../helpers'
+import { createSafeMethod, objectDefinePropertiesSafe } from '../helpers'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 
@@ -20,7 +20,7 @@ const css = (): void => {
 
   const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
   const shadowRoots: Set<Document | ShadowRoot> = new Set([document])
-  redefinePropertiesSafe(Element.prototype, {
+  objectDefinePropertiesSafe(Element.prototype, {
     attachShadow: {
       value (this: Element, init: ShadowRootInit) {
         const shadowRoot = attachShadowSafe(this, init)
@@ -284,7 +284,7 @@ const css = (): void => {
 
   // HTMLStyleElement.sheet should return the adopted style
   // sheet we have created for the style element.
-  redefinePropertiesSafe(HTMLStyleElement.prototype, {
+  objectDefinePropertiesSafe(HTMLStyleElement.prototype, {
     sheet: {
       get: function (this: HTMLStyleElement) {
         return getStyleSheetForCssElement(this)
@@ -294,7 +294,7 @@ const css = (): void => {
 
   // HTMLLinkElement.sheet should return the adopted style
   // sheet we have created for the link element.
-  redefinePropertiesSafe(HTMLLinkElement.prototype, {
+  objectDefinePropertiesSafe(HTMLLinkElement.prototype, {
     sheet: {
       get: function (this: HTMLLinkElement) {
         return getStyleSheetForCssElement(this)
@@ -323,7 +323,7 @@ const css = (): void => {
     return rules.map(sanitizeRule).map(rule => rule.cssText).join('\n')
   }
 
-  redefinePropertiesSafe(CSSStyleSheet.prototype, {
+  objectDefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
       value (this: CSSStyleSheet, css: string) {
         replaceSyncSafe(this, sanitizeCss(css))
