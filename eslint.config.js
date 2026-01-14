@@ -1,11 +1,16 @@
-import tseslint from "typescript-eslint";
+import tseslint from "typescript-eslint"
 
-export default tseslint.config({
-  files: ["src/**/*.ts", "tools/**/*.ts"],
-  extends: [...tseslint.configs.recommendedTypeChecked],
-  languageOptions: {
-    parserOptions: {
-      project: "./tsconfig.json",
+export default [
+  {
+    ignores: ["artifacts/**", "dist/**", "node_modules/**", "*.config.js"]
+  },
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    files: ["src/**/*.ts", "tools/**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: "./tsconfig.json",
+      }
     }
   }
-});
+];
