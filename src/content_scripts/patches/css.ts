@@ -1,4 +1,5 @@
 import { createSafeMethod, objectDefinePropertiesSafe } from '../helpers'
+import { backgroundFetch } from '../background-fetch'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 
@@ -71,13 +72,28 @@ const css = (): void => {
     try {
       const response = await fetch(href)
       if (response.ok) {
+        console.log('fetch successful for href:', href)
+        pendingRemoteStyleSheets--
         return await response.text()
       } else {
-        // TODO: Handle CORS case. We may need to fetch the content from the background script.
-        throw new Error(`failed to fetch remote style sheet content for href: ${href}, status: ${response.status}`)
+        console.error('fetch failed for href:', href, 'status:', response.status)
+        const content = await backgroundFetch(href)
+        console.log('background fetch successful for href:', href)
+        pendingRemoteStyleSheets--
+        return content
       }
     } catch (error) {
       console.error('error getting remote style sheet content for href:', href, 'error:', error)
+      console.log("dispatching event for error")
+      try {
+        const content = await backgroundFetch(href)
+        console.log('background fetch successful for href:', href)
+        pendingRemoteStyleSheets--
+        return content
+      } catch (error) {
+        console.error('error dispatching event for error:', error)
+      }
+      console.log("dispatched event for error")
       pendingRemoteStyleSheets--
       return ''
     }
