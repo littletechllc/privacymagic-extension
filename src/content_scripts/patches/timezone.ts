@@ -1,6 +1,6 @@
  
 
-import { reflectApplySafe, redefinePropertyValues } from '../helpers'
+import { redefinePropertyValues, createSafeMethod } from '../helpers'
 
 const timezone = (): void => {
   // Time zones that use fractional hour offsets can be coalesced to a
@@ -351,11 +351,9 @@ const timezone = (): void => {
     '14': 'Pacific/Kiritimati'
   }
 
-  const originalResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions
-  const originalResolvedOptionsSafe = (intlDateTimeFormat: Intl.DateTimeFormat): Intl.ResolvedDateTimeFormatOptions => reflectApplySafe(originalResolvedOptions, intlDateTimeFormat, [])
+  const originalResolvedOptionsSafe = createSafeMethod(Intl.DateTimeFormat, 'resolvedOptions')
   const originalMathTrunc = Math.trunc
-  const originalDateGetTimezoneOffset = Date.prototype.getTimezoneOffset
-  const originalDateGetTimezoneOffsetSafe = (date: Date): number => reflectApplySafe(originalDateGetTimezoneOffset, date, [])
+  const originalDateGetTimezoneOffsetSafe = createSafeMethod(Date, 'getTimezoneOffset')
   const OriginalDate = Date
   redefinePropertyValues(Intl.DateTimeFormat.prototype, {
     resolvedOptions: function (this: Intl.DateTimeFormat) {
