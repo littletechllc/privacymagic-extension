@@ -30,9 +30,12 @@ const gpu = () => {
     return shadowCanvas
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type CommandArgs = any[]
+
   interface Command {
     name: string
-    args: any[]
+    args: CommandArgs
     type: 'call' | 'set'
     timestamp: number
   }
@@ -51,7 +54,7 @@ const gpu = () => {
       this.height = height
     }
 
-    recordCommand (name: string, args: any[], type: 'call' | 'set'): void {
+    recordCommand (name: string, args: CommandArgs, type: 'call' | 'set'): void {
       // Discard commands if the last command is more than 250ms old
       const timestamp = Date.now()
       if (this.commands.length > 0 && this.commands[this.commands.length - 1].timestamp < timestamp - 250) {
