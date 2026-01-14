@@ -48,11 +48,12 @@ export const createSafeMethod = <T, K extends MethodKey<T>>(
   constructorFunction: { prototype: T },
   methodName: K,
 ) => {
+  const method = constructorFunction.prototype[methodName]
   return <TInstance extends T>(
     instance: TInstance,
     ...args: Parameters<MethodOfKey<TInstance, K>>
   ): ReturnType<MethodOfKey<TInstance, K>> =>
-    (reflectApplySafe(constructorFunction.prototype[methodName] as MethodOf<TInstance>,
+    (reflectApplySafe(method as MethodOf<TInstance>,
                       instance,
                       args as Parameters<MethodOf<TInstance>>) as ReturnType<MethodOfKey<TInstance, K>>)
 }

@@ -300,6 +300,8 @@ const css = (): void => {
     }
   })
 
+  // Get the original replaceSync method before we patch it
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
 
   const sanitizeRule = (rule: CSSRule): CSSRule => {
@@ -316,6 +318,7 @@ const css = (): void => {
 
   const sanitizeCss = (css: string): string => {
     const tempStyleSheet = new CSSStyleSheet()
+    // Use the original method directly to avoid recursion (since replaceSyncSafe would call the patched version)
     replaceSyncSafe(tempStyleSheet, css)
     const rules = Array.from(tempStyleSheet.cssRules)
     return rules.map(sanitizeRule).map(rule => rule.cssText).join('\n')
