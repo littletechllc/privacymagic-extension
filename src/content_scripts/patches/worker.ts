@@ -1,38 +1,36 @@
-import { reflectApplySafe, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
+import { createSafeGetter, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
 
 const worker = (): void => {
   const URLSafe = self.URL
   const BlobSafe = self.Blob
-  const URLcreateObjectURLSafe = URL.createObjectURL
-  const hrefDescriptor = Object.getOwnPropertyDescriptor(URL.prototype, 'href')
-  if (hrefDescriptor?.get === undefined) {
-    throw new Error('URL.href getter not found')
-  }
-  const URLhrefGetter = hrefDescriptor.get
-  const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
+  const URLcreateObjectURLSafe = (source: Blob | MediaSource ): string => URL.createObjectURL(source)
+  const URLhrefSafe = createSafeGetter(URL, 'href')
 
   // Spoof the self.location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context.
   const spoofLocationInsideWorker = (absoluteUrl: string): void => {
     // We need to define these functions here because they are not available in the worker context.
-    const reflectApplySafe = <T extends (...args: any[]) => any, TThis = any>(
-      func: T,
+    type MethodOf<TThis> = {
+      [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
+    }[keyof TThis]
+    const reflectApplySafe = Reflect.apply as <
+      TThis,
+      TMethod extends MethodOf<TThis>,
+      TMethodArgs extends Parameters<TMethod>,
+      TReturn extends ReturnType<TMethod>
+    >(
+      method: TMethod,
       thisArg: TThis,
-      args: Parameters<T>
-    ): ReturnType<T> | undefined => {
-      try {
-        return Reflect.apply(func, thisArg, args)
-      } catch (error) {
-        return undefined
-      }
-    }
+      args: TMethodArgs
+    ) => TReturn
     const URLSafe = self.URL
     const hrefDescriptor = Object.getOwnPropertyDescriptor(URL.prototype, 'href')
     if (hrefDescriptor?.get === undefined) {
       throw new Error('URL.href getter not found')
     }
-    const URLhrefGetter = hrefDescriptor.get
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const URLhrefGetter = hrefDescriptor.get as (this: URL) => string
     const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
     // Spoof the self.location object to return the original URL.
     const absoluteUrlObject = new URL(absoluteUrl)
@@ -48,10 +46,11 @@ const worker = (): void => {
     if (requestUrlDescriptor?.get === undefined) {
       throw new Error('Request.url getter not found')
     }
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const originalRequestUrlGetter = requestUrlDescriptor.get
     const originalRequestUrlSafe = (request: Request): string => reflectApplySafe(originalRequestUrlGetter, request, [])
     Object.defineProperty(Request.prototype, 'url', {
-      get () {
+      get (this: Request) {
         const relativeUrl = originalRequestUrlSafe(this)
         return URLhrefSafe(new URLSafe(relativeUrl as string | URL, absoluteUrl))
       }
@@ -61,20 +60,22 @@ const worker = (): void => {
     if (responseUrlDescriptor?.get === undefined) {
       throw new Error('Response.url getter not found')
     }
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const originalResponseUrlGetter = responseUrlDescriptor.get
     const originalResponseUrlSafe = (response: Response): string => reflectApplySafe(originalResponseUrlGetter, response, [])
     Object.defineProperty(Response.prototype, 'url', {
-      get () {
+      get (this: Response) {
         return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl))
       }
     })
     // Modify the self.fetch function to be relative to the original URL.
     const originalFetch = self.fetch
-    self.fetch = async (firstArg: URL | Request | string, ...args: any[]) => {
-      const resolvedFirstArg: URL | Request = firstArg instanceof Request
+    self.fetch = async (...args: Parameters<typeof originalFetch>) => {
+      const firstArg = args[0]
+      args[0] = firstArg instanceof Request
         ? firstArg
         : new URLSafe(firstArg.toString(), absoluteUrl)
-      return await originalFetch(resolvedFirstArg, ...args)
+      return await originalFetch(...args)
     }
     // Modify the self.importScripts function to be relative to the original URL.
     const originalImportScripts = self.importScripts
@@ -90,10 +91,13 @@ const worker = (): void => {
     // be relative to the original URL.
     const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
     for (const objectName of constructorNames) {
-      const OriginalConstructor = self[objectName as keyof typeof self]
+      const OriginalConstructor = self[objectName]
       Object.defineProperty(self, objectName, {
         value: new Proxy(OriginalConstructor, {
-          construct (Target, [url, options]: [string | URL, any?]) {
+          construct (
+            Target,
+            [url, options]: [string | URL, EventSourceInit & (string | string[] | undefined)]
+          ) {
             const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl))
             return new Target(resolvedUrl, options)
           }
@@ -105,7 +109,7 @@ const worker = (): void => {
   }
 
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
-    const originalRevokeObjectURL = self.URL.revokeObjectURL
+    const originalRevokeObjectURL = (url: string): void => URL.revokeObjectURL(url)
 
     const pendingRevocations = new Set<string>()
     const lockedUrls = new Map<string, number>()
