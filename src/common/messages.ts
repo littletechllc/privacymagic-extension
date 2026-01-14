@@ -47,9 +47,9 @@ export const addHttpWarningNetworkRuleExceptionRemote = async (
 }
 
 export const getRemoteStyleSheetContentRemote = async (
-  href: string
+  url: string
 ): Promise<string> => {
-  const message: Message = { type: 'getRemoteStyleSheetContent', href }
+  const message: Message = { type: 'getRemoteStyleSheetContent', url }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as ContentResponse | ErrorResponse
   if (!response.success) {
     throw new Error(response.error)
