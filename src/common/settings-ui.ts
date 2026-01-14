@@ -3,6 +3,7 @@ import { getLocalizedText } from '../common/i18n'
 import { createToggle } from '../common/toggle'
 import { logError, entries, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
+import { updateSettingMessageRemote } from '../common/messages'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
 
 type SettingsCategory =
@@ -101,13 +102,8 @@ const setupInputListeners = (domain: string): void => {
     input.addEventListener('change', (event) => {
       handleAsync(async () => {
         const target = event.target as HTMLInputElement
-        const settingId = target.id
-        const response: { success: boolean } = await chrome.runtime.sendMessage({
-          type: 'updateSetting',
-          domain,
-          settingId,
-          value: target.checked
-        })
+        const settingId = target.id as SettingsId
+        const response = await updateSettingMessageRemote(domain, settingId, target.checked)
         console.log('sendMessage response:', response)
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
         const tabId = tabs[0].id
