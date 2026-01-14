@@ -68,7 +68,7 @@ const bindToggleToStorage = async (
   defaultValue: boolean
 ): Promise<void> => {
   const input = toggle.querySelector('input')
-  if (input === null || input === undefined) {
+  if (input == null) {
     throw new Error('Input not found')
   }
   const storageValue = await store.get(keyPath)
@@ -111,7 +111,7 @@ const setupInputListeners = (domain: string): void => {
         console.log('sendMessage response:', response)
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
         const tabId = tabs[0].id
-        if (tabId === null || tabId === undefined) {
+        if (tabId == null) {
           throw new Error('No active tab found')
         }
         await chrome.tabs.reload(tabId)
@@ -124,7 +124,7 @@ const setupInputListeners = (domain: string): void => {
 
 export const setupSettingsUI = async (domain: string): Promise<void> => {
   const settingsContainer = document.getElementById('settings')
-  if (settingsContainer === null || settingsContainer === undefined) {
+  if (settingsContainer == null) {
     throw new Error('Settings container not found')
   }
   settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>'

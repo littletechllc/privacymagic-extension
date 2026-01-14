@@ -14,7 +14,7 @@ export default [
       }
     },
     rules: {
-      eqeqeq: ["error", "always"],
+      eqeqeq: ["error", "always", { null: "ignore" }],
       "no-implicit-coercion": "error",
       "no-cond-assign": ["error", "always"],
       "no-constant-condition": "error",

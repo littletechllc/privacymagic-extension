@@ -2,7 +2,7 @@ import { redefinePropertyValues } from '../helpers'
 
 const touch = (): void => {
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype === null || navigatorPrototype === undefined) {
+  if (navigatorPrototype == null) {
     return
   }
   redefinePropertyValues(navigatorPrototype.prototype, {

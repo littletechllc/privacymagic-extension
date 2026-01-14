@@ -5,7 +5,7 @@ import { logError, entries, handleAsync } from '../common/util'
 const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean): Promise<void> => {
   const value = await getPref(prefName)
   const input: HTMLInputElement | null = toggle.querySelector('input')
-  if (input === null || input === undefined) {
+  if (input == null) {
     throw new Error('Input element not found')
   }
   input.checked = inverted ? !value : value
@@ -24,7 +24,7 @@ const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inver
 
 export const setupPrefsUI = async (): Promise<void> => {
   const prefsContainer = document.getElementById('prefs')
-  if (prefsContainer === null || prefsContainer === undefined) {
+  if (prefsContainer == null) {
     throw new Error('Prefs container not found')
   }
   // Clear container and add title

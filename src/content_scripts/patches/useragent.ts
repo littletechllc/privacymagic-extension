@@ -7,7 +7,7 @@ const useragent = (): void => {
   const BRAND_VERSION = '8.0.0.0'
   const SHORT_BRAND_VERSION = BRAND_VERSION.split('.')[0]
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype === null || navigatorPrototype === undefined) {
+  if (navigatorPrototype == null) {
     return
   }
   redefinePropertyValues(navigatorPrototype.prototype, {

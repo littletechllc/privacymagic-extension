@@ -212,7 +212,7 @@ const getSessionRulesForSetting = async (offset: number, settingId: SettingsId):
     return []
   }
   const rules = NETWORK_PROTECTION_DEFS[settingId]
-  if (rules === null || rules === undefined) {
+  if (rules == null) {
     return []
   }
   const ids = rules.map(rule => rule.id + offset)
@@ -264,7 +264,7 @@ const updateSubresourceNetworkRule = async (settingId: SettingsId, tabId: number
   }
   tabExceptionsForSetting.set(settingId, tabExceptions)
   const partialRules = NETWORK_PROTECTION_DEFS[settingId]
-  if (partialRules === null || partialRules === undefined) {
+  if (partialRules == null) {
     return
   }
   const rules = partialRules.map(

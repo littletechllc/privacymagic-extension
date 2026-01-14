@@ -6,7 +6,7 @@ import { redefinePropertyValues } from '../helpers'
 const gpc = (): void => {
   console.log('gpc patch', self.location.href)
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype === null || navigatorPrototype === undefined) {
+  if (navigatorPrototype == null) {
     throw new Error('Navigator prototype not found')
   }
   redefinePropertyValues(navigatorPrototype.prototype, {
