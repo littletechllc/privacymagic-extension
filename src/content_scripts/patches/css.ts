@@ -2,12 +2,15 @@ import { createSafeMethod, objectDefinePropertiesSafe } from '../helpers'
 import { backgroundFetch } from '../background-fetch'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
+type DocumentOrShadowRoot = Document | ShadowRoot
 
 const css = (): void => {
   if (self.HTMLStyleElement === undefined) {
     // We are likely in a worker context.
     return
   }
+
+  let addShadowRoot: (shadowRoot: DocumentOrShadowRoot) => void = () => {}
 
   document.documentElement.style.visibility = 'hidden'
   const noTransitionsStyleElement = document.createElement('style')
@@ -19,16 +22,13 @@ const css = (): void => {
   document.documentElement.appendChild(noTransitionsStyleElement)
 
   const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
-  const shadowRoots: Set<Document | ShadowRoot> = new Set([document])
+  const shadowRoots = new Set<DocumentOrShadowRoot>([document])
   objectDefinePropertiesSafe(Element.prototype, {
     attachShadow: {
       value (this: Element, init: ShadowRootInit) {
+        console.log('attachShadow called for element:', this, 'init:', init)
         const shadowRoot = attachShadowSafe(this, init)
-        if (shadowRoot instanceof Document || shadowRoot instanceof ShadowRoot) {
-          shadowRoots.add(shadowRoot)
-        } else {
-          console.error('attachShadow returned an invalid shadow root')
-        }
+        addShadowRoot(shadowRoot)
         return shadowRoot
       }
     }
@@ -150,7 +150,7 @@ const css = (): void => {
     return styleSheet
   }
 
-  const getRootNode = (cssElement: CSSElement): Document | ShadowRoot | undefined => {
+  const getRootNode = (cssElement: CSSElement): DocumentOrShadowRoot | undefined => {
     if (cssElement == null) {
       return undefined
     }
@@ -198,7 +198,7 @@ const css = (): void => {
 
   let frameCount = 0
 
-  const updateStyleSheetsForRoot = (root: Document | ShadowRoot): void => {
+  const updateStyleSheetsForRoot = (root: DocumentOrShadowRoot): void => {
     const cssElements: CSSElement[] = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'))
     if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
       const currentStyleSheets = cssElements.map(getStyleSheetForCssElement).filter(sheet => sheet !== undefined)
@@ -224,7 +224,6 @@ const css = (): void => {
     frameCount++
     self.requestAnimationFrame(updateAdoptedStyleSheetsToMatchCssElements)
   }
-  updateAdoptedStyleSheetsToMatchCssElements()
 
   // Use a MutationObserver to watch for changes to the CSS content or
   // media attribute of existing style elements. Whenever a change is
@@ -275,17 +274,59 @@ const css = (): void => {
           root.adoptedStyleSheets = root.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet))
         }
       }
+      if (record.type === 'childList' && record.addedNodes.length > 0) {
+        const addedNodes = Array.from(record.addedNodes)
+        addedNodes.forEach(node => {
+          if (node instanceof Element) {
+            const shadowRoot = node.shadowRoot
+            if (shadowRoot != null) {
+              addShadowRoot(shadowRoot)
+            }
+          }
+        })
+      }
     }
   })
-  mutationObserver.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['disabled', 'media', 'href'],
-    characterData: true,
-    attributeOldValue: true,
-    characterDataOldValue: true
-  })
+
+  const observeRoot = (root: DocumentOrShadowRoot): void => {
+    mutationObserver.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['disabled', 'media', 'href'],
+      characterData: true,
+      attributeOldValue: true,
+      characterDataOldValue: true
+    })
+
+    // TODO: Don't use setInterval/querySelectorAll if we can figure out a better way.
+    let count = 0
+    const interval = setInterval(() => {
+      count++
+      root.querySelectorAll('*').forEach(element => {
+        const shadowRoot = element.shadowRoot
+        if (shadowRoot != null) {
+          addShadowRoot(shadowRoot)
+        }
+      })
+      if (count >= 4) {
+        clearInterval(interval)
+      }
+    }, 250)
+  }
+
+  observeRoot(document)
+
+  addShadowRoot = (shadowRoot: DocumentOrShadowRoot): void => {
+    if (shadowRoots.has(shadowRoot)) {
+      return
+    }
+    shadowRoots.add(shadowRoot)
+    updateStyleSheetsForRoot(shadowRoot)
+    observeRoot(shadowRoot)
+  }
+
+  updateAdoptedStyleSheetsToMatchCssElements()
 
   // HTMLStyleElement.sheet should return the adopted style
   // sheet we have created for the style element.
