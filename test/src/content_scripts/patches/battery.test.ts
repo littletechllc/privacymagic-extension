@@ -1,5 +1,5 @@
 import {jest, describe, it, expect, beforeEach, afterEach} from '@jest/globals'
-import battery from '../../../../src/content_scripts/patches/battery'
+import battery from '@src/content_scripts/patches/battery'
 
 // Mock BatteryManager class
 class MockBatteryManager {

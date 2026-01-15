@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@tools/*": ["./tools/*"],
+      "@test/*": ["./test/*"]
+    },
     "checkJs": true,
     "noEmit": true,
     "lib": ["ES2021", "dom", "webworker"],
