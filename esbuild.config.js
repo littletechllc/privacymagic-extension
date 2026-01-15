@@ -21,7 +21,12 @@ const baseBuildOptions = {
   // Node resolution for browser environment
   packages: /** @type {const} */ ('bundle'),
   mainFields: ['browser', 'module', 'main'],
-  conditions: ['browser']
+  conditions: ['browser'],
+  alias: {
+    '@src': 'src',
+    '@tools': 'tools',
+    '@test': 'test'
+  }
 }
 
 const builds = [
