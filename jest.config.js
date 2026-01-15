@@ -14,10 +14,14 @@ export default {
       },
     ],
   },
+  moduleNameMapper: {
+    '^@src/(.*)$': '<rootDir>/src/$1',
+    '^@tools/(.*)$': '<rootDir>/tools/$1',
+    '^@test/(.*)$': '<rootDir>/test/$1'
+  },
   testMatch: ['**/test/**/*.test.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
   ],
 };
-
