@@ -8,13 +8,22 @@
 * Removes tracking headers
 * Blocks third-party cookies
 * Blocks fingerprinting leaks
-  * battery
-  * canvas
-  * hardware
-  * keyboard
-  * screen
-  * timer
-  * useragent
+  * battery status
+  * browser version
+  * device information
+  * disk space usage
+  * display settings
+  * graphics chip specs
+  * keyboard layout
+  * language settings
+  * main chip specs
+  * math processing
+  * memory usage
+  * network profile
+  * screen details
+  * system performance
+  * time-zone settings
+  * touch support status
 * Removes tracking query parameters
 * Caps Referrer-Policy
 * Blocks insecure HTTP connections
