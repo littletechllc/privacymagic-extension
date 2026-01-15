@@ -115,11 +115,11 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
       newProperties[prop] = nonProperty
     } else {
       if (originalDescriptor == null) {
-        newProperties[prop] = { configurable: true, get: () => value }
+        newProperties[prop] = { configurable: true, get: () => value, set: () => { /* do nothing */ } }
       } else if (originalDescriptor.value !== undefined) {
         newProperties[prop] = { ...originalDescriptor, value }
       } else {
-        newProperties[prop] = { ...originalDescriptor, get: () => value }
+        newProperties[prop] = { ...originalDescriptor, get: () => value, set: () => { /* do nothing */ } }
       }
     }
   }
