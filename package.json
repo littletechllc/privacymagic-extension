@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
-    "build": "npx tsx tools/adblock-list-processor.ts && npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts",
+    "build": "npx tsx tools/adblock-list-processor.ts && npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts --filename privacymagic.zip",
     "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t chromium --source-dir dist --ignore-files _metadata _metadata/**\""
   },
   "author": "Arthur Edelstein",
@@ -30,9 +30,9 @@
     "tsx": "^4.21.0",
     "typescript": "5.9.3",
     "typescript-eslint": "^8.52.0",
-    "web-ext": "9.2.0"
+    "web-ext": "^9.2.0"
   },
   "engines": {
-    "node": "22.20.0"
+    "node": "^22.x"
   }
 }
