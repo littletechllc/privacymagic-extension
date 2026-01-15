@@ -34,9 +34,7 @@ describe('battery patch', () => {
     const navigatorWithBattery = global.navigator as typeof global.navigator & {
       getBattery: () => Promise<MockBatteryManager>
     }
-    navigatorWithBattery.getBattery = jest.fn().mockImplementation(async () => {
-      return new MockBatteryManager()
-    }) as () => Promise<MockBatteryManager>
+    navigatorWithBattery.getBattery = jest.fn<() => Promise<MockBatteryManager>>().mockImplementation(() => Promise.resolve(new MockBatteryManager()))
   })
 
   afterEach(() => {
@@ -51,7 +49,7 @@ describe('battery patch', () => {
   describe('without patch', () => {
     it('should return original battery values', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.charging).toBe(false)
       expect(batteryInstance.chargingTime).toBe(3600)
       expect(batteryInstance.dischargingTime).toBe(7200)
@@ -61,7 +59,7 @@ describe('battery patch', () => {
     it('should allow setting event handlers', () => {
       const batteryInstance = new MockBatteryManager()
       const handler = jest.fn()
-      
+
       batteryInstance.onchargingchange = handler
       expect(batteryInstance.onchargingchange).toBe(handler)
     })
@@ -75,31 +73,31 @@ describe('battery patch', () => {
 
     it('should return patched charging value (true)', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.charging).toBe(true)
     })
 
     it('should return patched chargingTime value (0)', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.chargingTime).toBe(0)
     })
 
     it('should return patched dischargingTime value (Infinity)', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.dischargingTime).toBe(Infinity)
     })
 
     it('should return patched level value (1)', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.level).toBe(1)
     })
 
     it('should silence event handlers (return null)', () => {
       const batteryInstance = new MockBatteryManager()
-      
+
       expect(batteryInstance.onchargingchange).toBe(null)
       expect(batteryInstance.onchargingtimechange).toBe(null)
       expect(batteryInstance.ondischargingtimechange).toBe(null)
@@ -109,7 +107,7 @@ describe('battery patch', () => {
     it('should prevent setting event handlers', () => {
       const batteryInstance = new MockBatteryManager()
       const handler = jest.fn()
-      
+
       batteryInstance.onchargingchange = handler
       // Setting should not throw, but getter should still return null
       expect(batteryInstance.onchargingchange).toBe(null)
@@ -118,16 +116,16 @@ describe('battery patch', () => {
     it('should have no-op event listener methods', () => {
       const batteryInstance = new MockBatteryManager()
       const handler = jest.fn()
-      
+
       // These should not throw
       expect(() => {
         batteryInstance.addEventListener('chargingchange', handler)
       }).not.toThrow()
-      
+
       expect(() => {
         batteryInstance.removeEventListener('chargingchange', handler)
       }).not.toThrow()
-      
+
       expect(() => {
         batteryInstance.dispatchEvent(new Event('chargingchange'))
       }).not.toThrow()
@@ -138,7 +136,7 @@ describe('battery patch', () => {
         getBattery: () => Promise<MockBatteryManager>
       }
       const batteryInstance = await navigatorWithBattery.getBattery()
-      
+
       expect(batteryInstance.charging).toBe(true)
       expect(batteryInstance.chargingTime).toBe(0)
       expect(batteryInstance.dischargingTime).toBe(Infinity)

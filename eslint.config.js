@@ -6,7 +6,7 @@ export default [
   },
   ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ["src/**/*.ts", "tools/**/*.ts", "*.config.js"],
+    files: ["src/**/*.ts", "tools/**/*.ts", "test/**/*.ts", "*.config.js"],
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.json",
@@ -14,6 +14,18 @@ export default [
       }
     },
     rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "args": "all",
+          "argsIgnorePattern": "^_",
+          "caughtErrors": "all",
+          "caughtErrorsIgnorePattern": "^_",
+          "destructuredArrayIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "ignoreRestSiblings": true
+        }
+      ],
       "eqeqeq": ["error", "always", { null: "ignore" }],
       "no-cond-assign": ["error", "always"],
       "no-constant-condition": "error",

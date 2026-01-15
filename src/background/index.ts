@@ -38,7 +38,7 @@ const updateSetting = async (domain: string, settingId: SettingsId, value: boole
 
 const handleMessage = async (
   message: Message,
-  sender: chrome.runtime.MessageSender,
+  _sender: chrome.runtime.MessageSender,
   sendResponse: ResponseSendFunction): Promise<void> => {
   try {
     if (message.type === 'updateSetting') {
