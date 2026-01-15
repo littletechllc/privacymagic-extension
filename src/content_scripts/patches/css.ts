@@ -197,6 +197,10 @@ const css = (): void => {
 
   let frameCount = 0
 
+  const triggerOnLoadForPreloadLink = (link: HTMLLinkElement): void => {
+    link.dispatchEvent(new Event('load'))
+  }
+
   const updateStyleSheetsForRoot = (root: DocumentOrShadowRoot): void => {
     const cssElements: CSSElement[] = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'))
     if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
@@ -207,6 +211,9 @@ const css = (): void => {
         root.adoptedStyleSheets = currentStyleSheets
       }
     }
+    const preloadLinks = root.querySelectorAll('link[rel="preload"][as="style"]')
+    const preloadLinkElements = Array.from(preloadLinks) as HTMLLinkElement[];
+    preloadLinkElements.forEach(triggerOnLoadForPreloadLink)
   }
 
   // Ensure there is a style sheet for each style and link element
@@ -251,7 +258,9 @@ const css = (): void => {
                  ((record.attributeName === 'href' &&
                  record.oldValue !== el.href) ||
                  (record.attributeName === 'media' &&
-                  record.oldValue !== el.media))) {
+                  record.oldValue !== el.media) ||
+                 (record.attributeName === 'rel' &&
+                  record.oldValue !== el.rel))) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet !== undefined) {
           applyRemoteContentToStyleSheet(styleSheet, el.href, el.media)
@@ -277,9 +286,14 @@ const css = (): void => {
         const addedNodes = Array.from(record.addedNodes)
         addedNodes.forEach(node => {
           if (node instanceof Element) {
+            // If there's a shadow root, add it to the shadow roots set.
             const shadowRoot = node.shadowRoot
             if (shadowRoot != null) {
               addShadowRoot(shadowRoot)
+            }
+            // Dispatch a load event for blocked preload link elements to trigger onload scripts.
+            if (node instanceof HTMLLinkElement && node.rel === 'preload' && node.as === 'style') {
+              triggerOnLoadForPreloadLink(node)
             }
           }
         })
@@ -292,7 +306,7 @@ const css = (): void => {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['disabled', 'media', 'href'],
+      attributeFilter: ['disabled', 'media', 'href', 'rel'],
       characterData: true,
       attributeOldValue: true,
       characterDataOldValue: true
