@@ -42,17 +42,15 @@ const timer = (): void => {
       }
       // eslint-disable-next-line @typescript-eslint/unbound-method
       const originalGetter = descriptor.get
-      redefinePropertyValues(apiObject.prototype, {
-        [property]: {
-          ...descriptor,
-          get: function (this: performanceAPI['prototype']) {
-            const result = reflectApplySafe(originalGetter as (this: performanceAPI['prototype']) => number, this, [])
-            return mathRoundSafe(Number(result))
-          }
+      Object.defineProperty(apiObject.prototype, property, {
+        ...descriptor,
+        get: function (this: performanceAPI['prototype']) {
+          const result = reflectApplySafe(originalGetter as (this: performanceAPI['prototype']) => number, this, [])
+          return mathRoundSafe(Number(result))
         }
       })
     }
-    const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(apiObject, 'toJSON')
+    const toJsonOriginalDescriptor = Object.getOwnPropertyDescriptor(apiObject.prototype, 'toJSON')
     if (toJsonOriginalDescriptor != null) {
       const toJsonOriginalValue = createSafeMethod(apiObject, 'toJSON')
       const toJsonNewDescriptor = { ...toJsonOriginalDescriptor }
@@ -67,7 +65,7 @@ const timer = (): void => {
         const jsonObject = originalJson as Record<string, unknown>
         return objectFromEntriesSafe(arrayMapSafe(objectKeysSafe(jsonObject), k => ([k, getPropertyValueSafe(this, k as keyof typeof this)])))
       }
-      Object.defineProperty(apiObject, 'toJSON', toJsonNewDescriptor)
+      Object.defineProperty(apiObject.prototype, 'toJSON', toJsonNewDescriptor)
     }
   }
 
