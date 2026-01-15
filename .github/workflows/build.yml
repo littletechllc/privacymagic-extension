@@ -22,8 +22,14 @@ jobs:
         run: npm install
       - name: Build extension
         run: npm run build
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: privacymagic-${{ github.ref_name }}.zip
+          files: ./artifacts/privacymagic.zip
       - name: Upload zip-file artifact
         uses: actions/upload-artifact@v6
         with:
-          name: privacy_magic-${{ github.ref_name }}.zip
+          name: privacymagic-${{ github.ref_name }}.zip
           path: ./artifacts/privacymagic.zip
