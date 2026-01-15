@@ -1,0 +1,25 @@
+name: Build Privacy Magic Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Clean artifacts folder
+        run: rm -rf ./artifacts && mkdir ./artifacts
+      - name: Install dependencies
+        run: npm install
+      - name: Build extension
+        run: npm run build
+      - name: Upload zip-file artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: privacy_magic-${{ github.ref_name }}.zip
+          path: ./artifacts/privacy_magic.zip
