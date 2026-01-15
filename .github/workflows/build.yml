@@ -2,8 +2,8 @@ name: Build Privacy Magic Extension
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+    tags: ['v*']
 
 permissions:
   contents: write
@@ -25,14 +25,15 @@ jobs:
         run: npm install
       - name: Build extension
         run: npm run build
-      - name: Create GitHub Release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ github.ref_name }}
-          name: privacymagic-${{ github.ref_name }}.zip
-          artifact: ./artifacts/privacymagic.zip
       - name: Upload zip-file artifact
         uses: actions/upload-artifact@v6
         with:
           name: privacymagic-${{ github.ref_name }}.zip
           path: ./artifacts/privacymagic.zip
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: privacymagic-${{ github.ref_name }}.zip
+          artifact: ./artifacts/privacymagic.zip
