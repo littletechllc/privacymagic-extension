@@ -61,6 +61,10 @@ const handleMessage = async (
         return
       }
       sendResponse({ success: true, domain } as DomainResponse)
+    } else if (message.type === 'reloadTab') {
+      await chrome.tabs.reload(message.tabId)
+      console.log('reloaded tab', message.tabId)
+      sendResponse({ success: true } as SuccessResponse)
     } else {
       // Exhaustive check: all message types should be handled above
       // If this code runs, a new message type was added but not handled

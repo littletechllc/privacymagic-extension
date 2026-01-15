@@ -3,7 +3,7 @@ import { getLocalizedText } from '../common/i18n'
 import { createToggle } from '../common/toggle'
 import { logError, entries, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
-import { updateSettingRemote } from '../common/messages'
+import { updateSettingRemote, reloadTabRemote } from '../common/messages'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
 
 type SettingsCategory =
@@ -110,7 +110,7 @@ const setupInputListeners = (domain: string): void => {
         if (tabId == null) {
           throw new Error('No active tab found')
         }
-        await chrome.tabs.reload(tabId)
+        await reloadTabRemote(tabId)
       }, (error) => {
         logError(error, 'error updating setting', { event: JSON.stringify(event) })
       })
