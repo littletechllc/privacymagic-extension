@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +30,7 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           name: privacymagic-${{ github.ref_name }}.zip
-          files: ./artifacts/privacymagic.zip
+          artifact: ./artifacts/privacymagic.zip
       - name: Upload zip-file artifact
         uses: actions/upload-artifact@v6
         with:
