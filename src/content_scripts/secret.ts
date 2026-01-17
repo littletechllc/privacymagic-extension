@@ -3,6 +3,9 @@ export const sharedSecret = () => {
   if (value !== undefined) {
     return value
   }
+  if (self.document === undefined) {
+    return undefined
+  }
   if (document.documentElement.dataset.sharedSecret === undefined) {
     value = crypto.randomUUID()
     document.documentElement.dataset.sharedSecret = value

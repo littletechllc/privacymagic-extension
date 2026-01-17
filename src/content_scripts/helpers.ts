@@ -206,3 +206,9 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   __disabledSettings = result
   return result
 }
+
+export const dispatchEventSafe = createSafeMethod(Document, 'dispatchEvent')
+export const documentSafe = document;
+export const CustomEventSafe = CustomEvent
+
+export type FetchID = string

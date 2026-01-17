@@ -1,5 +1,5 @@
 import { createSafeMethod, objectDefinePropertiesSafe } from '../helpers'
-import { backgroundFetch } from '../background-fetch'
+import { backgroundFetch } from '../background-fetch-main'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type DocumentOrShadowRoot = Document | ShadowRoot
