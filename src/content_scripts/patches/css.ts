@@ -33,6 +33,10 @@ const css = (): void => {
     }
   })
 
+  const triggerOnLoadForLinkElement = (link: HTMLLinkElement): void => {
+    link.dispatchEvent(new Event('load'))
+  }
+
   const extractImportUrls = (cssText: string): { urls: string[], cssTextWithoutImports: string } => {
     const urls: string[] = []
     const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi
@@ -86,21 +90,24 @@ const css = (): void => {
     return content
   }
 
-  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string): Promise<void> => {
+  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string, onloadCallback?: () => void): Promise<void> => {
     const content = maybeWrapWithMediaQuery(css, mediaAttribute)
     const { urls: importUrls, cssTextWithoutImports } = extractImportUrls(content)
     if (importUrls.length === 0) {
       styleSheet.replaceSync(cssTextWithoutImports)
+      if (onloadCallback != null) {
+        onloadCallback()
+      }
     } else {
       const remoteStyleSheetContents = await Promise.all(importUrls.map(getRemoteStyleSheetContent))
       const fullContent = remoteStyleSheetContents.join('\n') + cssTextWithoutImports
-      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute)
+      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute, onloadCallback)
     }
   }
 
   const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map()
 
-  const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string): void => {
+  const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string, onloadCallback: () => void): void => {
     if (styleSheet == null) {
       // The style sheet was not valid or has been removed.
       return
@@ -108,7 +115,7 @@ const css = (): void => {
     // Initialize the style sheet with the remote content when it becomes available.
     void getRemoteStyleSheetContent(href).then(content => {
       if (content !== '' && content !== undefined) {
-        void applyContentToStyleSheet(styleSheet, content, mediaAttribute)
+        void applyContentToStyleSheet(styleSheet, content, mediaAttribute, onloadCallback)
         document.documentElement.style.visibility = 'visible'
       }
     }).catch(error => {
@@ -119,7 +126,8 @@ const css = (): void => {
   // Create a style sheet containing the CSS content of a link element.
   const createStyleSheetForLinkElement = (linkElement: HTMLLinkElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
-    applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media)
+    applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media,
+                                   () => triggerOnLoadForLinkElement(linkElement))
     styleSheet.disabled = linkElement.disabled
     return styleSheet
   }
@@ -197,10 +205,6 @@ const css = (): void => {
 
   let frameCount = 0
 
-  const triggerOnLoadForPreloadLink = (link: HTMLLinkElement): void => {
-    link.dispatchEvent(new Event('load'))
-  }
-
   const updateStyleSheetsForRoot = (root: DocumentOrShadowRoot): void => {
     const cssElements: CSSElement[] = Array.from(root.querySelectorAll('style, link[rel="stylesheet"]'))
     if (cssElements.some(element => !styleSheetsForCssElements.has(element))) {
@@ -213,7 +217,7 @@ const css = (): void => {
     }
     const preloadLinks = root.querySelectorAll('link[rel="preload"][as="style"]')
     const preloadLinkElements = Array.from(preloadLinks) as HTMLLinkElement[];
-    preloadLinkElements.forEach(triggerOnLoadForPreloadLink)
+    preloadLinkElements.forEach(triggerOnLoadForLinkElement)
   }
 
   // Ensure there is a style sheet for each style and link element
@@ -263,7 +267,7 @@ const css = (): void => {
                   record.oldValue !== el.rel))) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet !== undefined) {
-          applyRemoteContentToStyleSheet(styleSheet, el.href, el.media)
+          applyRemoteContentToStyleSheet(styleSheet, el.href, el.media, () => triggerOnLoadForLinkElement(el))
         }
       } else if ((el instanceof HTMLLinkElement || el instanceof HTMLStyleElement) &&
                   record.type === 'attributes' &&
@@ -293,7 +297,7 @@ const css = (): void => {
             }
             // Dispatch a load event for blocked preload link elements to trigger onload scripts.
             if (node instanceof HTMLLinkElement && node.rel === 'preload' && node.as === 'style') {
-              triggerOnLoadForPreloadLink(node)
+              triggerOnLoadForLinkElement(node)
             }
           }
         })
