@@ -21,9 +21,9 @@ const css = (): void => {
   `
   document.documentElement.appendChild(noTransitionsStyleElement)
 
-  const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
+  const attachShadowSafe = createSafeMethod(self.Element, 'attachShadow')
   const shadowRoots = new Set<DocumentOrShadowRoot>([document])
-  objectDefinePropertiesSafe(Element.prototype, {
+  objectDefinePropertiesSafe(self.Element.prototype, {
     attachShadow: {
       value (this: Element, init: ShadowRootInit) {
         const shadowRoot = attachShadowSafe(this, init)

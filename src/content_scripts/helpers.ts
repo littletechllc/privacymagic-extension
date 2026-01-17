@@ -58,8 +58,6 @@ export const createSafeMethod = <T, K extends MethodKey<T>>(
                       args as Parameters<MethodOf<TInstance>>) as ReturnType<MethodOfKey<TInstance, K>>)
 }
 
-export const attachShadowSafe = createSafeMethod(Element, 'attachShadow')
-
 // Create a safe getter that can be called even after site scripts have
 // overwritten the getter. Compile-time check that the propertyName points to a
 // getter of the object.
