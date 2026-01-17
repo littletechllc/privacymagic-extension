@@ -207,8 +207,8 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
   return result
 }
 
-export const dispatchEventSafe = createSafeMethod(Document, 'dispatchEvent')
-export const documentSafe = document;
-export const CustomEventSafe = CustomEvent
+export const dispatchEventSafe = self.Document !== undefined ? createSafeMethod(self.Document, 'dispatchEvent') : undefined
+export const documentSafe = self.document !== undefined ? self.document : undefined
+export const CustomEventSafe = self.CustomEvent !== undefined ? self.CustomEvent : undefined
 
 export type FetchID = string
