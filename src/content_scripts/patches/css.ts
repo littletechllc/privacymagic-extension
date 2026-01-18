@@ -2,6 +2,7 @@ import { createSafeMethod, objectDefinePropertiesSafe } from '../helpers'
 import { backgroundFetch } from '../background-fetch-main'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
+type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
 type DocumentOrShadowRoot = Document | ShadowRoot
 
 const css = (): void => {
@@ -345,25 +346,20 @@ const css = (): void => {
 
   updateAdoptedStyleSheetsToMatchCssElements()
 
-  // HTMLStyleElement.sheet should return the adopted style
+  // CSSElement.sheet should return the adopted style
   // sheet we have created for the style element.
-  objectDefinePropertiesSafe(HTMLStyleElement.prototype, {
-    sheet: {
-      get: function (this: HTMLStyleElement) {
-        return getStyleSheetForCssElement(this)
+  const connectSheetProperty = (element: CSSElementConstructor): void => {
+    objectDefinePropertiesSafe(element.prototype, {
+      sheet: {
+        get: function (this: CSSElement) {
+          return getStyleSheetForCssElement(this)
+        }
       }
-    }
-  })
-
-  // HTMLLinkElement.sheet should return the adopted style
-  // sheet we have created for the link element.
-  objectDefinePropertiesSafe(HTMLLinkElement.prototype, {
-    sheet: {
-      get: function (this: HTMLLinkElement) {
-        return getStyleSheetForCssElement(this)
-      }
-    }
-  })
+    })
+  }
+  connectSheetProperty(HTMLStyleElement)
+  connectSheetProperty(HTMLLinkElement)
+  connectSheetProperty(SVGStyleElement)
 
   // Get the original replaceSync method before we patch it
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
