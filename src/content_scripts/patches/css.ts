@@ -371,7 +371,8 @@ const css = (): void => {
           // ignore for now
           // TODO: Handle onerror getter
           return undefined
-        }
+        },
+        configurable: true
       },
       addEventListener: {
         value: function (this: CSSElement, type: string, _listener: EventListenerOrEventListenerObject, _options: boolean | AddEventListenerOptions) {
@@ -381,7 +382,8 @@ const css = (): void => {
           } else {
             addEventListenerSafe(this, type, _listener, _options)
           }
-        }
+        },
+        configurable: true
       }
     })
   }
