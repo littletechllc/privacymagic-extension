@@ -31,8 +31,8 @@ const baseBuildOptions = {
 
 const builds = [
   {
-    entryPoints: ['src/content_scripts/content.ts'],
-    outfile: 'dist/content_scripts/content.js',
+    entryPoints: ['src/content_scripts/main.ts'],
+    outfile: 'dist/content_scripts/main.js',
     banner: {
       js: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {'
     },
