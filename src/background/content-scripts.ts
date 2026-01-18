@@ -97,33 +97,6 @@ const initializeContentScripts = async (): Promise<void> => {
 }
 
 export const setupContentScripts = async (): Promise<void> => {
-  // Unregister any existing content script with this ID to avoid duplicates
-  try {
-    await chrome.scripting.unregisterContentScripts({ ids: ['foreground', 'isolated'] })
-  } catch {
-    // Ignore error if script doesn't exist
-  }
-  const mainForegroundRule: chrome.scripting.RegisteredContentScript = {
-    matchOriginAsFallback: true,
-    persistAcrossSessions: false,
-    runAt: 'document_start',
-    allFrames: true,
-    id: 'foreground',
-    js: ['content_scripts/main.js'],
-    matches: ['<all_urls>'],
-    world: 'MAIN'
-  }
-  const isolatedRule: chrome.scripting.RegisteredContentScript = {
-    matchOriginAsFallback: true,
-    persistAcrossSessions: false,
-    runAt: 'document_start',
-    allFrames: true,
-    id: 'isolated',
-    js: ['content_scripts/isolated.js'],
-    matches: ['<all_urls>'],
-    world: 'ISOLATED'
-  }
-  await chrome.scripting.registerContentScripts([mainForegroundRule, isolatedRule])
   await initializeContentScripts()
   applyDisabledSettingsForTabs()
 }
