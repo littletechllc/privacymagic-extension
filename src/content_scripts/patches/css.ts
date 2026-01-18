@@ -346,20 +346,46 @@ const css = (): void => {
 
   updateAdoptedStyleSheetsToMatchCssElements()
 
-  // CSSElement.sheet should return the adopted style
-  // sheet we have created for the style element.
-  const connectSheetProperty = (element: CSSElementConstructor): void => {
+  const addEventListenerSafe = createSafeMethod(EventTarget, 'addEventListener')
+
+  // Fix the API behavior of CSS elements so they
+  // behave normally even though they have been blocked
+  // from rendering CSS directly.
+  const fixCssElementApiBehavior = (element: CSSElementConstructor): void => {
     objectDefinePropertiesSafe(element.prototype, {
+      // CSSElement.sheet should return the adopted style
+      // sheet we have created for the style element.
       sheet: {
         get: function (this: CSSElement) {
           return getStyleSheetForCssElement(this)
         }
+      },
+      // Don't dispatch error events because we have blocked
+      // CSS loading via CSP.
+      onerror: {
+        set: function (this: CSSElement, _value: (this: CSSElement) => void) {
+          // ignore for now
+          // TODO: Handle onerror setter
+        },
+        get: function (this: CSSElement) {
+          // ignore for now
+          // TODO: Handle onerror getter
+          return undefined
+        }
+      },
+      addEventListener: {
+        value: function (this: CSSElement, type: string, _listener: EventListenerOrEventListenerObject, _options: boolean | AddEventListenerOptions) {
+          if (type === 'error') {
+            // ignore for now
+            // TODO: Handle 'error' event
+          } else {
+            addEventListenerSafe(this, type, _listener, _options)
+          }
+        }
       }
     })
   }
-  connectSheetProperty(HTMLStyleElement)
-  connectSheetProperty(HTMLLinkElement)
-  connectSheetProperty(SVGStyleElement)
+  [HTMLStyleElement, HTMLLinkElement, SVGStyleElement].forEach(fixCssElementApiBehavior)
 
   // Get the original replaceSync method before we patch it
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
