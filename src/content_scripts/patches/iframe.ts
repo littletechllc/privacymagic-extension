@@ -51,21 +51,29 @@ const iframe = (): undefined => {
     // to access the contentWindow, we need to harden it first.
     const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string): Window | null => {
       const contentWin = getContentWindowSafe(iframe)
-      // Accesing contentWin.eval is safe because, in order to monkey patch it,
-      // the pre-evaluated script would need to access contentWin, which would
-      // trigger our hardening code injection first.
-      const evalFunction: EvalFunction | null | undefined = contentWin != null && 'eval' in contentWin ? contentWin.eval : null
-      if (evalFunction == null) {
-        return contentWin
-      }
       try {
+        // Accesing contentWin.eval is safe because, in order to monkey patch it,
+        // the pre-evaluated script would need to access contentWin, which would
+        // trigger our hardening code injection first.
+        const evalFunction: EvalFunction | null | undefined = contentWin != null && 'eval' in contentWin ? contentWin.eval : null
+        if (evalFunction == null) {
+          return contentWin
+        }
         if (!weakSetHasSafe(evalSet, evalFunction)) {
           const policy = getTrustedTypesPolicy()
           evalFunction(policy.createScript(hardeningCode))
           weakSetAddSafe(evalSet, evalFunction)
         }
       } catch (error) {
-        console.error('error hardening iframe', error)
+        if (error instanceof DOMException && error.name === 'SecurityError') {
+          // SecurityError is expected if the iframe is sandboxed and the
+          // eval function is not allowed. In this case, we return the contentWindow
+          // as is. This is safe because the iframe is sandboxed and therefore
+          // if it allows scripts, it has already been hardened via our content script.
+          return contentWin
+        } else {
+          throw error
+        }
       }
       return contentWin
     }
