@@ -65,7 +65,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
 }
 
 const mainFunction = (): void => {
-  console.log('main function called in', window.location.href)
+  console.log('main function called in', self.location.href)
   const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
 }
