@@ -109,7 +109,7 @@ export const setupContentScripts = async (): Promise<void> => {
     runAt: 'document_start',
     allFrames: true,
     id: 'foreground',
-    js: ['content_scripts/content.js'],
+    js: ['content_scripts/main.js'],
     matches: ['<all_urls>'],
     world: 'MAIN'
   }
