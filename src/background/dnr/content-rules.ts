@@ -1,6 +1,6 @@
-import { updateListOfExceptions } from '../common/util'
-import { SettingsId } from '../common/settings-ids'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from './dnr-rule-parameters'
+import { updateListOfExceptions } from '@src/common/util'
+import { SettingsId } from '@src/common/settings-ids'
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const disabledSettingsForTopDomains: Map<string, SettingsId[]> = new Map()
 
