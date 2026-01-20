@@ -1,5 +1,4 @@
 import { updateListOfExceptions } from '../common/util'
-import { getAllSettings } from '../common/settings'
 import { SettingsId } from '../common/settings-ids'
 import { idForRuleName } from './dnr-rule-ids'
 
@@ -41,12 +40,5 @@ export const updateContentScriptRule = async (domain: string, setting: SettingsI
     const rule = createRuleForTopDomain(domain, updatedDisabledSettings)
     await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] })
     console.log('updated content script rule for domain', rule)
-  }
-}
-
-export const setupContentScripts = async (): Promise<void> => {
-  const settings = await getAllSettings()
-  for (const [domain, settingId, value] of settings) {
-    await updateContentScriptRule(domain, settingId, value)
   }
 }

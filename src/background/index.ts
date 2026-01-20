@@ -1,11 +1,11 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { setupContentScripts, updateContentScriptRule } from './content-scripts'
-import { setSetting } from '../common/settings'
-import { setupNetworkRules, updateNetworkRule } from './network'
+import { updateContentScriptRule } from './content-scripts'
+import { getAllSettings, setSetting } from '../common/settings'
+import { updateNetworkRule } from './network'
 import { resetAllPrefsToDefaults } from '../common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
-import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions'
+import { setupExceptionsToStaticRules, adjustExceptionToStaticRules } from './blocker-exceptions'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
@@ -188,15 +188,21 @@ const clearRules = async (): Promise<void> => {
 const initializeExtension = async (): Promise<void> => {
   await clearRules()
   injectCssForCosmeticFilters()
-  await setupContentScripts()
-  await setupNetworkRules()
+  const allSettings = await getAllSettings()
+  for (const [domain, settingId, value] of allSettings) {
+    if (settingId === 'masterSwitch' && value === false) {
+      await updateMasterSwitchRule(domain, value)
+    }
+    await updateNetworkRule(domain, settingId, value)
+    await updateContentScriptRule(domain, settingId, value)
+  }
   await setupExceptionsToStaticRules()
-  // await createHttpWarningNetworkRule();
+  // await createHttpWarningNetworkRule()
   await blockAutocomplete()
   // ignore-unused-vars
-  // logMatchingRulesInDevMode();
+  // logMatchingRulesInDevMode()
   // ignore-unused-vars
-  // await testHttpBehavior();
+  // await testHttpBehavior()
   console.log('Extension initialized')
 }
 

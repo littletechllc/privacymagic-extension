@@ -1,4 +1,3 @@
-import { getAllSettings } from "@src/common/settings";
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
 import { idForRuleName } from "./dnr-rule-ids";
 
@@ -18,14 +17,5 @@ export const updateMasterSwitchRule = async (domain: string, value: boolean): Pr
     await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [cachedMasterSwitchRule.id], addRules: [] })
   } else {
     await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [cachedMasterSwitchRule.id], addRules: [cachedMasterSwitchRule] })
-  }
-}
-
-export const setupMasterSwitchRule = async (): Promise<void> => {
-  const allSettings = await getAllSettings()
-  for (const [domain, settingId, value] of allSettings) {
-    if (settingId === 'masterSwitch' && value === false) {
-      await updateMasterSwitchRule(domain, value)
-    }
   }
 }
