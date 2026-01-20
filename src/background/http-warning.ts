@@ -79,7 +79,7 @@ const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void
 }
 
 const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean): Promise<void> => {
-  rule.condition.requestDomains = updateListOfExceptions(rule.condition.requestDomains, domain, value)
+  rule.condition.requestDomains = updateListOfExceptions<string>(rule.condition.requestDomains, domain, value)
   await updateRule(rule)
 }
 

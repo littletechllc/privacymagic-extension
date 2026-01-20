@@ -32,8 +32,8 @@ const createRuleForTopDomain = (domain: string, settings: SettingsId[]): chrome.
 }
 
 export const updateContentScriptRule = async (domain: string, setting: SettingsId, value: boolean): Promise<void> => {
-  const currentDisabledSettings = disabledSettingsForTopDomains.get(domain)
-  const updatedDisabledSettings = updateListOfExceptions(currentDisabledSettings, setting, value) ?? []
+  const currentDisabledSettings: SettingsId[] | undefined = disabledSettingsForTopDomains.get(domain)
+  const updatedDisabledSettings: SettingsId[] = updateListOfExceptions<SettingsId>(currentDisabledSettings, setting, value) ?? []
   disabledSettingsForTopDomains.set(domain, updatedDisabledSettings)
   if (updatedDisabledSettings.length === 0) {
     await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [idForTopDomain(domain)], addRules: [] })
