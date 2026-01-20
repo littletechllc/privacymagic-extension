@@ -1,5 +1,5 @@
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "./dnr-rule-ids";
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "./dnr-rule-parameters";
 
 const cachedMasterSwitchRule: chrome.declarativeNetRequest.Rule = {
     id: dnrRuleIdForName('masterSwitch'),
