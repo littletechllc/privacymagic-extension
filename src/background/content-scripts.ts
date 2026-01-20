@@ -1,12 +1,12 @@
 import { updateListOfExceptions } from '../common/util'
 import { getAllSettings } from '../common/settings'
 import { SettingsId } from '../common/settings-ids'
-import { idForSetting } from './ids'
+import { idForRuleName } from './dnr-rule-ids'
 
 const disabledSettingsForTopDomains: Map<string, SettingsId[]> = new Map()
 
 const idForTopDomain = (domain: string): number => {
-  return idForSetting(`disabled_settings|${domain}`)
+  return idForRuleName(`disabled_settings|${domain}`)
 }
 
 const createRuleForTopDomain = (domain: string, settings: SettingsId[]): chrome.declarativeNetRequest.Rule => {
