@@ -22,9 +22,4 @@ export const clearRules = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
     removeRuleIds: sessionRules.map(rule => rule.id)
   })
-  const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules()
-  await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: dynamicRules.map(rule => rule.id)
-  })
-  console.log('cleared rules')
 }
