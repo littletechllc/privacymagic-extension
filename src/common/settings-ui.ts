@@ -7,6 +7,7 @@ import { updateSettingRemote, reloadTabRemote } from '../common/messages'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
 
 type SettingsCategory =
+  'main' |
   'blocking' |
   'fingerprinting' |
   'leakyFeatures' |
@@ -14,6 +15,9 @@ type SettingsCategory =
   'policy'
 
 const PRIVACY_SETTINGS_CONFIG: Record<SettingsCategory, SettingsId[]> = {
+  main: [
+    'masterSwitch'
+  ],
   blocking: [
     'ads'
   ],

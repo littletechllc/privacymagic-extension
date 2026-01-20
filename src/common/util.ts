@@ -8,20 +8,25 @@ export const logError = (error: unknown, message: string, details?: unknown): vo
   console.error('Error:', `'${message}'`, `'${errorObj.name}'`, `'${errorObj.message}'`, details, errorObj.stack)
 }
 
-// Add an item to an array if it is not present.
-export const addIfMissing = <T>(array: T[], item: T): void => {
-  if (!array.includes(item)) {
-    array.push(item)
+// Add an item to an array if it is not present. Return undefined if the array is empty.
+const addIfMissing = <T>(array: T[] | undefined, item: T): T[] => {
+  const newArray = (array === undefined) ? [] : [...array]
+  if (!newArray.includes(item)) {
+    newArray.push(item)
   }
+  return newArray
 }
 
-// Remove an item from an array if it is present.
-export const removeIfPresent = <T>(array: T[], item: T): void => {
-  const index = array.indexOf(item)
-  if (index !== -1) {
-    array.splice(index, 1)
+// Remove an item from an array if it is present. Return undefined if the array is empty.
+const removeIfPresent = <T>(array: T[] | undefined, item: T): T[] | undefined => {
+  if (array === undefined) {
+    return undefined
   }
+  const newArray = array.filter(i => i !== item)
+  return newArray.length === 0 ? undefined : newArray
 }
+export const updateListOfExceptions = <T>(array: T[] | undefined, item: T, value: boolean): T[] | undefined =>
+  (value === false) ? addIfMissing<T>(array, item) : removeIfPresent<T>(array, item)
 
 export const entries = <K extends string, V>(obj: Record<K, V>): Array<[K, V]> => {
   return Object.entries(obj) as Array<[K, V]>
@@ -37,3 +42,6 @@ export const handleAsync = (fn: () => Promise<void>, onError?: (error: unknown) 
     }
   })
 }
+
+export const ALL_RESOURCE_TYPES: chrome.declarativeNetRequest.ResourceType[] =
+  Object.values(chrome.declarativeNetRequest.ResourceType)

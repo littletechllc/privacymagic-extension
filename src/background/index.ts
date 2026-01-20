@@ -1,15 +1,15 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { updateContentScripts, setupContentScripts } from './content-scripts'
+import { setupContentScripts, updateContentScriptRule } from './content-scripts'
 import { setSetting } from '../common/settings'
-import { setupNetworkRules, updateTopLevelNetworkRule } from './network'
+import { setupNetworkRules, updateNetworkRule } from './network'
 import { resetAllPrefsToDefaults } from '../common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { adjustExceptionToStaticRules, setupExceptionsToStaticRules } from './blocker-exceptions'
-import { handleRemoteCssRequests } from './remote-css'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
+import { updateMasterSwitchRule } from './master-switch'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -31,8 +31,11 @@ const updateSetting = async (domain: string, settingId: SettingsId, value: boole
   if (settingId === 'ads') {
     await adjustExceptionToStaticRules(domain, value)
   }
-  await updateContentScripts(domain, settingId, value)
-  await updateTopLevelNetworkRule(domain, settingId, value)
+  await updateContentScriptRule(domain, settingId, value)
+  await updateNetworkRule(domain, settingId, value)
+  if (settingId === 'masterSwitch') {
+    await updateMasterSwitchRule(domain, value)
+  }
 }
 
 
@@ -190,7 +193,6 @@ const initializeExtension = async (): Promise<void> => {
   await setupExceptionsToStaticRules()
   // await createHttpWarningNetworkRule();
   await blockAutocomplete()
-  await handleRemoteCssRequests()
   // ignore-unused-vars
   // logMatchingRulesInDevMode();
   // ignore-unused-vars

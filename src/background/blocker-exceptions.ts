@@ -1,6 +1,6 @@
 import { getAllSettings } from '../common/settings'
 import { registrableDomainFromUrl } from '../common/util'
-import { IDS } from './ids'
+import { idForSetting } from './ids'
 
 const topDomainAllowList: Set<string> = new Set()
 
@@ -12,7 +12,7 @@ export const updateExceptionToStaticRules = async (): Promise<void> => {
     const rule: chrome.declarativeNetRequest.Rule = {
       priority: 3,
       action: { type: 'allow' },
-      id: IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID,
+      id: idForSetting('exceptionToStaticRules'),
       condition: {
         tabIds: [...tabExceptions]
       }
@@ -21,7 +21,7 @@ export const updateExceptionToStaticRules = async (): Promise<void> => {
   }
   await chrome.declarativeNetRequest.updateSessionRules({
     addRules,
-    removeRuleIds: [IDS.EXCEPTION_TO_STATIC_RULES_RULE_ID]
+    removeRuleIds: addRules.map(rule => rule.id)
   })
 }
 

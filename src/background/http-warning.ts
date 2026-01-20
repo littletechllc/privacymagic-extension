@@ -1,9 +1,9 @@
-import { addIfMissing, handleAsync, logError, removeIfPresent } from '../common/util'
-import { IDS } from './ids'
+import { handleAsync, logError, updateListOfExceptions } from '../common/util'
+import { idForSetting } from './ids'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
 const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
-  id: IDS.HTTP_STANDARD_HTTP_UPGRADE_RULE_ID,
+  id: idForSetting('standardHttpUpgradeRule'),
   action: {
     type: 'upgradeScheme'
   },
@@ -15,7 +15,7 @@ const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
 }
 
 const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
-  id: IDS.HTTP_SPECIAL_HTTP_EXCEPTION_RULE_ID,
+  id: idForSetting('specialHttpWarningRule'),
   action: {
     type: 'redirect',
     redirect: {
@@ -31,7 +31,7 @@ const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
 }
 
 const specialHttpAllowRule: chrome.declarativeNetRequest.Rule = {
-  id: IDS.HTTP_SPECIAL_HTTP_ALLOW_RULE_ID,
+  id: idForSetting('specialHttpAllowRule'),
   action: {
     type: 'allow'
   },
@@ -79,13 +79,7 @@ const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void
 }
 
 const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean): Promise<void> => {
-  const requestDomains = rule.condition.requestDomains ?? []
-  if (!value) {
-    addIfMissing(requestDomains, domain)
-  } else {
-    removeIfPresent(requestDomains, domain)
-  }
-  rule.condition.requestDomains = requestDomains
+  rule.condition.requestDomains = updateListOfExceptions(rule.condition.requestDomains, domain, value)
   await updateRule(rule)
 }
 
