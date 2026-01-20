@@ -213,7 +213,7 @@ export const updateNetworkRule = async (topDomain: string, setting: SettingsId, 
   }
   const rules = cachedRules[setting]
   for (const rule of rules) {
-    rule.condition.excludedTopDomains = updateListOfExceptions(rule.condition.excludedTopDomains, topDomain, value)
+    rule.condition.excludedTopDomains = updateListOfExceptions<string>(rule.condition.excludedTopDomains, topDomain, value)
   }
   await updateSessionRules(rules)
 }

@@ -13,7 +13,7 @@ const masterSwitchRule: chrome.declarativeNetRequest.Rule = {
 }
 
 export const updateMasterSwitchRule = async (domain: string, value: boolean): Promise<void> => {
-  masterSwitchRule.condition.topDomains = updateListOfExceptions(masterSwitchRule.condition.topDomains, domain, value)
+  masterSwitchRule.condition.topDomains = updateListOfExceptions<string>(masterSwitchRule.condition.topDomains, domain, value)
   if (masterSwitchRule.condition.topDomains === undefined || masterSwitchRule.condition.topDomains.length === 0) {
     await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [masterSwitchRule.id], addRules: [] })
   } else {
