@@ -5,11 +5,10 @@ import { updateNetworkRule } from './network'
 import { resetAllPrefsToDefaults } from '../common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
-import { setupExceptionsToStaticRules, adjustExceptionToStaticRules } from './blocker-exceptions'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
-import { updateMasterSwitchRule } from './master-switch'
+import { updateMasterSwitchRule } from './allow-rules'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -27,17 +26,17 @@ const blockAutocomplete = async (): Promise<void> => {
 }
 
 const updateSetting = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
-  await setSetting(domain, settingId, value)
-  if (settingId === 'ads') {
-    await adjustExceptionToStaticRules(domain, value)
-  }
   await updateContentScriptRule(domain, settingId, value)
   await updateNetworkRule(domain, settingId, value)
-  if (settingId === 'masterSwitch') {
-    await updateMasterSwitchRule(domain, value)
-  }
+  await updateMasterSwitchRule(domain, settingId, value)
 }
 
+const setupSettings = async (): Promise<void> => {
+  const allSettings = await getAllSettings()
+  for (const [domain, settingId, value] of allSettings) {
+    await updateSetting(domain, settingId, value)
+  }
+}
 
 const handleMessage = async (
   message: Message,
@@ -45,6 +44,7 @@ const handleMessage = async (
   sendResponse: ResponseSendFunction): Promise<void> => {
   try {
     if (message.type === 'updateSetting') {
+      await setSetting(message.domain, message.settingId, message.value)
       await updateSetting(message.domain, message.settingId, message.value)
       sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'addHttpWarningNetworkRuleException') {
@@ -188,15 +188,7 @@ const clearRules = async (): Promise<void> => {
 const initializeExtension = async (): Promise<void> => {
   await clearRules()
   injectCssForCosmeticFilters()
-  const allSettings = await getAllSettings()
-  for (const [domain, settingId, value] of allSettings) {
-    if (settingId === 'masterSwitch' && value === false) {
-      await updateMasterSwitchRule(domain, value)
-    }
-    await updateNetworkRule(domain, settingId, value)
-    await updateContentScriptRule(domain, settingId, value)
-  }
-  await setupExceptionsToStaticRules()
+  await setupSettings()
   // await createHttpWarningNetworkRule()
   await blockAutocomplete()
   // ignore-unused-vars
