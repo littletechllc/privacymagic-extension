@@ -1,6 +1,6 @@
-import { SettingsId } from '../common/settings-ids'
-import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '../common/util'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from './dnr-rule-parameters'
+import { SettingsId } from '@src/common/settings-ids'
+import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '@src/common/util'
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(

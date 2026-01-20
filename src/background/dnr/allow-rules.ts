@@ -1,8 +1,8 @@
-import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "./dnr-rule-parameters";
-import { SettingsId } from "../common/settings-ids";
+import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "@src/common/util";
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
+import { SettingsId } from "@src/common/settings-ids";
 
-const cachedMasterSwitchRules: Partial<Record<SettingsId, chrome.declarativeNetRequest.Rule>> = {
+const cachedAllowRules: Partial<Record<SettingsId, chrome.declarativeNetRequest.Rule>> = {
   masterSwitch: {
     id: dnrRuleIdForName('allow_rule|masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
@@ -17,8 +17,8 @@ const cachedMasterSwitchRules: Partial<Record<SettingsId, chrome.declarativeNetR
   }
 }
 
-export const updateMasterSwitchRule = async (domain: string,setting: SettingsId, value: boolean): Promise<void> => {
-  const rule = cachedMasterSwitchRules[setting]
+export const updateAllowRules = async (domain: string,setting: SettingsId, value: boolean): Promise<void> => {
+  const rule = cachedAllowRules[setting]
   if (rule === undefined) {
     return
   }

@@ -1,5 +1,5 @@
-import { handleAsync, logError, updateListOfExceptions } from '../common/util'
-import { dnrRuleIdForName } from './dnr-rule-parameters'
+import { handleAsync, logError, updateListOfExceptions } from '@src/common/util'
+import { dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
 const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
