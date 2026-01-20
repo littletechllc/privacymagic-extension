@@ -2,7 +2,7 @@ import { getAllSettings } from "@src/common/settings";
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
 import { idForRuleName } from "./dnr-rule-ids";
 
-const masterSwitchRule: chrome.declarativeNetRequest.Rule = {
+const cachedMasterSwitchRule: chrome.declarativeNetRequest.Rule = {
     id: idForRuleName('masterSwitch'),
     priority: 6,
     action: { type: 'allow' },
@@ -13,11 +13,11 @@ const masterSwitchRule: chrome.declarativeNetRequest.Rule = {
 }
 
 export const updateMasterSwitchRule = async (domain: string, value: boolean): Promise<void> => {
-  masterSwitchRule.condition.topDomains = updateListOfExceptions<string>(masterSwitchRule.condition.topDomains, domain, value)
-  if (masterSwitchRule.condition.topDomains === undefined || masterSwitchRule.condition.topDomains.length === 0) {
-    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [masterSwitchRule.id], addRules: [] })
+  cachedMasterSwitchRule.condition.topDomains = updateListOfExceptions<string>(cachedMasterSwitchRule.condition.topDomains, domain, value)
+  if (cachedMasterSwitchRule.condition.topDomains === undefined || cachedMasterSwitchRule.condition.topDomains.length === 0) {
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [cachedMasterSwitchRule.id], addRules: [] })
   } else {
-    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [masterSwitchRule.id], addRules: [masterSwitchRule] })
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [cachedMasterSwitchRule.id], addRules: [cachedMasterSwitchRule] })
   }
 }
 
