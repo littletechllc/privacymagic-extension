@@ -1,11 +1,11 @@
 import { updateListOfExceptions } from '../common/util'
 import { SettingsId } from '../common/settings-ids'
-import { idForRuleName } from './dnr-rule-ids'
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from './dnr-rule-parameters'
 
 const disabledSettingsForTopDomains: Map<string, SettingsId[]> = new Map()
 
 const idForTopDomain = (domain: string): number => {
-  return idForRuleName(`disabled_settings|${domain}`)
+  return dnrRuleIdForName(`disabled_settings|${domain}`)
 }
 
 const createRuleForTopDomain = (domain: string, settings: SettingsId[]): chrome.declarativeNetRequest.Rule => {
@@ -22,7 +22,7 @@ const createRuleForTopDomain = (domain: string, settings: SettingsId[]): chrome.
         value: headerValue
       }]
     },
-    priority: 7,
+    priority: DNR_RULE_PRIORITIES.CONTENT_SCRIPTS,
     condition: {
       topDomains: [domain],
       resourceTypes: ["main_frame", "sub_frame"],

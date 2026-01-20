@@ -1,9 +1,9 @@
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
-import { idForRuleName } from "./dnr-rule-ids";
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "./dnr-rule-ids";
 
 const cachedMasterSwitchRule: chrome.declarativeNetRequest.Rule = {
-    id: idForRuleName('masterSwitch'),
-    priority: 6,
+    id: dnrRuleIdForName('masterSwitch'),
+    priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
     action: { type: 'allow' },
     condition: {
       topDomains: undefined,
