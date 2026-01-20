@@ -1,4 +1,3 @@
-import { getAllSettings } from '../common/settings'
 import { SettingsId } from '../common/settings-ids'
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '../common/util'
 import { idForRuleName } from './dnr-rule-ids'
@@ -208,7 +207,7 @@ const updateSessionRules = async (rules: chrome.declarativeNetRequest.Rule[]): P
 }
 
 export const updateNetworkRule = async (topDomain: string, setting: SettingsId, value: boolean): Promise<void> => {
-  if (!(setting in cachedRules)) {
+  if (!(setting in NETWORK_PROTECTION_DEFS)) {
     return
   }
   const rules = cachedRules[setting]
@@ -216,13 +215,4 @@ export const updateNetworkRule = async (topDomain: string, setting: SettingsId, 
     rule.condition.excludedTopDomains = updateListOfExceptions<string>(rule.condition.excludedTopDomains, topDomain, value)
   }
   await updateSessionRules(rules)
-}
-
-export const setupNetworkRules = async (): Promise<void> => {
-  const allSettings = await getAllSettings()
-  for (const [domain, settingId, value] of allSettings) {
-    if (settingId in NETWORK_PROTECTION_DEFS) {
-      await updateNetworkRule(domain, settingId, value)
-    }
-  }
 }
