@@ -1,6 +1,6 @@
 import { SettingsId } from '../common/settings-ids'
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '../common/util'
-import { idForRuleName } from './dnr-rule-ids'
+import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from './dnr-rule-parameters'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
@@ -180,8 +180,8 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
     for (const rule of rules) {
       const cachedRule: chrome.declarativeNetRequest.Rule = {
         ...rule,
-        id: idForRuleName(`${settingId}${rules.length > 1 ? String(i) : ''}`),
-        priority: 4,
+        id: dnrRuleIdForName(`${settingId}${rules.length > 1 ? String(i) : ''}`),
+        priority: DNR_RULE_PRIORITIES.NETWORK,
         condition: {
           resourceTypes: ALL_RESOURCE_TYPES,
           ...rule.condition
