@@ -50,6 +50,9 @@ const privacyMagicPatches: Partial<Record<SettingsId, () => void>> = {
 }
 
 const runPatchesInPageExcept = (disabledPatches: string[]): void => {
+  if (disabledPatches.includes('masterSwitch')) {
+    return
+  }
   for (const patcherId of Object.keys(privacyMagicPatches) as SettingsId[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
@@ -66,7 +69,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
 
 const mainFunction = (): void => {
   console.log('main function called in', self.location.href)
-  const relevantSettings = Object.keys(privacyMagicPatches) as SettingsId[]
+  const relevantSettings = ['masterSwitch', ...Object.keys(privacyMagicPatches)] as SettingsId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
 }
 mainFunction()

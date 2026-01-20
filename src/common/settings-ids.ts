@@ -1,29 +1,33 @@
-export type SettingsId =
-  'ads' |
-  'audio' |
-  'battery' |
-  'cpu' |
-  'css' |
-  'device' |
-  'disk' |
-  'display' |
-  'fonts' |
-  'gpc' |
-  'gpu' |
-  'iframe' |
-  'keyboard' |
-  'language' |
-  'math' |
-  'memory' |
-  'network' |
-  'queryParameters' |
-  'referrerPolicy' |
-  'screen' |
-  'serviceWorker' |
-  'sharedStorage' |
-  'timezone' |
-  'timer' |
-  'touch' |
-  'useragent' |
-  'windowName' |
+export const SETTINGS_IDS = [
+  'ads',
+  'audio',
+  'battery',
+  'cpu',
+  'css',
+  'device',
+  'disk',
+  'display',
+  'fonts',
+  'gpc',
+  'gpu',
+  'iframe',
+  'keyboard',
+  'language',
+  'masterSwitch',
+  'math',
+  'memory',
+  'network',
+  'queryParameters',
+  'referrerPolicy',
+  'screen',
+  'serviceWorker',
+  'sharedStorage',
+  'timezone',
+  'timer',
+  'touch',
+  'useragent',
+  'windowName',
   'worker'
+] as const
+
+export type SettingsId = typeof SETTINGS_IDS[number]

@@ -31,6 +31,10 @@ export const injectCssForCosmeticFilters = (): void => {
       if (topLevelDomain === null) {
         return
       }
+      const masterSwitch = await getSetting(topLevelDomain, 'masterSwitch')
+      if (!masterSwitch) {
+        return
+      }
       const setting = await getSetting(topLevelDomain, 'ads')
       if (!setting) {
         return

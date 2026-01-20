@@ -1,102 +1,52 @@
-import { registrableDomainFromUrl, logError } from '../common/util'
+import { updateListOfExceptions } from '../common/util'
 import { getAllSettings } from '../common/settings'
-import { IDS } from './ids'
+import { SettingsId } from '../common/settings-ids'
+import { idForSetting } from './ids'
 
-const disabledSettingsForDomain = new Map<string, string[]>()
+const disabledSettingsForTopDomains: Map<string, SettingsId[]> = new Map()
 
-const cacheDisabledSettingsForDomain = (domain: string, settingId: string, value: boolean): void => {
-  const existing = disabledSettingsForDomain.get(domain) ?? []
-  if (!value) {
-    existing.push(settingId)
-    disabledSettingsForDomain.set(domain, existing)
-  } else {
-    const filtered = existing.filter(s => s !== settingId)
-    if (filtered.length === 0) {
-      disabledSettingsForDomain.delete(domain)
-    } else {
-      disabledSettingsForDomain.set(domain, filtered)
-    }
-  }
+const idForTopDomain = (domain: string): number => {
+  return idForSetting(`disabled_settings|${domain}`)
 }
 
-const getDisabledSettingsForDomain = (domain: string): string[] => {
-  return disabledSettingsForDomain.get(domain) ?? []
-}
-
-// Create a rule that adds a Set-Cookie header to the response
-// that contains the disabled settings for the domain. The content
-// script will then read the Set-Cookie header, apply the disabled
-// settings in the frame context, and delete the cookie so it is
-// not visible to page scripts or sent to the server.
-const createActionForSettings = (disabledSettings: string[]): chrome.declarativeNetRequest.RuleAction => {
-  const cookieKeyVal = `__pm__disabled_settings = ${disabledSettings.join(',')}`
+const createRuleForTopDomain = (domain: string, settings: SettingsId[]): chrome.declarativeNetRequest.Rule => {
+  const id = idForTopDomain(domain)
+  const cookieKeyVal = `__pm__disabled_settings=${settings.join(',')}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
   return {
-    type: 'modifyHeaders',
-    responseHeaders: [
-      { operation: 'append', header: 'Set-Cookie', value: headerValue }
-    ]
-  }
-}
-
-const createRuleForDomain = (domain: string, disabledSettings: string[]): chrome.declarativeNetRequest.Rule => {
-  const action = createActionForSettings(disabledSettings)
-  return {
-    id: IDS.CONTENT_SCRIPTS_TOP_LEVEL_RULE_ID,
-    priority: 5,
-    action,
+    id,
+    action: {
+      type: 'modifyHeaders',
+      responseHeaders: [{
+        operation: 'append',
+        header: 'Set-Cookie',
+        value: headerValue
+      }]
+    },
+    priority: 7,
     condition: {
-      urlFilter: `||${domain}/`,
-      resourceTypes: ['main_frame']
+      topDomains: [domain],
+      resourceTypes: ["main_frame", "sub_frame"],
     }
   }
 }
 
-const createRuleForTab = (tabId: number, disabledSettings: string[]): chrome.declarativeNetRequest.Rule => {
-  const action = createActionForSettings(disabledSettings)
-  return {
-    id: IDS.CONTENT_SCRIPTS_SUBRESOURCE_RULE_ID,
-    priority: 5,
-    action,
-    condition: {
-      tabIds: [tabId],
-      resourceTypes: ['sub_frame']
-    }
-  }
-}
-
-const applyDisabledSettingsForTabs = (): void => {
-  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    try {
-      const domain = registrableDomainFromUrl(details.url)
-      if (domain === null) {
-        return
-      }
-      const disabledSettings = getDisabledSettingsForDomain(domain)
-      const rule = createRuleForTab(details.tabId, disabledSettings)
-      chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] }).catch(error => {
-        logError(error, 'error applying disabled settings for tabs', details)
-      })
-    } catch (error) {
-      logError(error, 'error applying disabled settings for tabs', details)
-    }
-  })
-}
-
-export const updateContentScripts = async (domain: string, settingId: string, value: boolean): Promise<void> => {
-  cacheDisabledSettingsForDomain(domain, settingId, value)
-  const rule = createRuleForDomain(domain, getDisabledSettingsForDomain(domain))
-  await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] })
-}
-
-const initializeContentScripts = async (): Promise<void> => {
-  const settings = await getAllSettings()
-  for (const [domain, settingId, value] of settings) {
-    await updateContentScripts(domain, settingId, value)
+export const updateContentScriptRule = async (domain: string, setting: SettingsId, value: boolean): Promise<void> => {
+  const currentDisabledSettings = disabledSettingsForTopDomains.get(domain)
+  const updatedDisabledSettings = updateListOfExceptions(currentDisabledSettings, setting, value) ?? []
+  disabledSettingsForTopDomains.set(domain, updatedDisabledSettings)
+  if (updatedDisabledSettings.length === 0) {
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [idForTopDomain(domain)], addRules: [] })
+  } else {
+    const rule = createRuleForTopDomain(domain, updatedDisabledSettings)
+    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] })
+    console.log('updated content script rule for domain', rule)
   }
 }
 
 export const setupContentScripts = async (): Promise<void> => {
-  await initializeContentScripts()
-  applyDisabledSettingsForTabs()
+  const settings = await getAllSettings()
+  for (const [domain, settingId, value] of settings) {
+    await updateContentScriptRule(domain, settingId, value)
+  }
 }
