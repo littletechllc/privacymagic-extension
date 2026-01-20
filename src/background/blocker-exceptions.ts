@@ -1,6 +1,6 @@
 import { getAllSettings } from '../common/settings'
 import { registrableDomainFromUrl } from '../common/util'
-import { idForSetting } from './ids'
+import { idForRuleName } from './dnr-rule-ids'
 
 const topDomainAllowList: Set<string> = new Set()
 
@@ -12,7 +12,7 @@ export const updateExceptionToStaticRules = async (): Promise<void> => {
     const rule: chrome.declarativeNetRequest.Rule = {
       priority: 3,
       action: { type: 'allow' },
-      id: idForSetting('exceptionToStaticRules'),
+      id: idForRuleName('exceptionToStaticRules'),
       condition: {
         tabIds: [...tabExceptions]
       }

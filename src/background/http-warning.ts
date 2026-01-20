@@ -1,9 +1,9 @@
 import { handleAsync, logError, updateListOfExceptions } from '../common/util'
-import { idForSetting } from './ids'
+import { idForRuleName } from './dnr-rule-ids'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
 const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
-  id: idForSetting('standardHttpUpgradeRule'),
+  id: idForRuleName('standardHttpUpgradeRule'),
   action: {
     type: 'upgradeScheme'
   },
@@ -15,7 +15,7 @@ const standardHttpUpgradeRule: chrome.declarativeNetRequest.Rule = {
 }
 
 const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
-  id: idForSetting('specialHttpWarningRule'),
+  id: idForRuleName('specialHttpWarningRule'),
   action: {
     type: 'redirect',
     redirect: {
@@ -31,7 +31,7 @@ const specialHttpWarningRule: chrome.declarativeNetRequest.Rule = {
 }
 
 const specialHttpAllowRule: chrome.declarativeNetRequest.Rule = {
-  id: idForSetting('specialHttpAllowRule'),
+  id: idForRuleName('specialHttpAllowRule'),
   action: {
     type: 'allow'
   },

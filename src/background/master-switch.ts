@@ -1,9 +1,9 @@
 import { getAllSettings } from "@src/common/settings";
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "../common/util";
-import { idForSetting } from "./ids";
+import { idForRuleName } from "./dnr-rule-ids";
 
 const masterSwitchRule: chrome.declarativeNetRequest.Rule = {
-    id: idForSetting('masterSwitch'),
+    id: idForRuleName('masterSwitch'),
     priority: 6,
     action: { type: 'allow' },
     condition: {
