@@ -1,14 +1,11 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { getAllSettings, setSetting } from '../common/settings'
+import { setSetting } from '../common/settings'
 import { resetAllPrefsToDefaults } from '../common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
-import { SettingsId } from '../common/settings-ids'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
-import { updateAllowRules } from './dnr/allow-rules'
-import { updateContentScriptRule } from './dnr/content-rules'
-import { updateNetworkRule } from './dnr/network-rules'
+import { updateRule, setupRules, clearRules } from './dnr/rule-manager'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -23,19 +20,6 @@ const blockAutocomplete = async (): Promise<void> => {
       }
     ]
   })
-}
-
-const updateRule = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
-  await updateContentScriptRule(domain, settingId, value)
-  await updateNetworkRule(domain, settingId, value)
-  await updateAllowRules(domain, settingId, value)
-}
-
-const setupRules = async (): Promise<void> => {
-  const allSettings = await getAllSettings()
-  for (const [domain, settingId, value] of allSettings) {
-    await updateRule(domain, settingId, value)
-  }
 }
 
 const handleMessage = async (
@@ -171,18 +155,6 @@ const testHttpBehavior = () => {
   chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
     console.log('onReferenceFragmentUpdated debug:', details)
   })
-}
-
-const clearRules = async (): Promise<void> => {
-  const sessionRules = await chrome.declarativeNetRequest.getSessionRules()
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: sessionRules.map(rule => rule.id)
-  })
-  const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules()
-  await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: dynamicRules.map(rule => rule.id)
-  })
-  console.log('cleared rules')
 }
 
 const initializeExtension = async (): Promise<void> => {
