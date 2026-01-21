@@ -4,7 +4,7 @@ import { SettingId } from "@src/common/setting-ids";
 
 const category = 'allow_rule'
 
-const cachedAllowRules: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> = {
+const BASE_RULES: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> = {
   masterSwitch: {
     id: dnrRuleIdForName(category, 'masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
@@ -19,19 +19,21 @@ const cachedAllowRules: Partial<Record<SettingId, chrome.declarativeNetRequest.R
   }
 }
 
-export const updateAllowRules = (domain: string, setting: SettingId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
-  const rule = cachedAllowRules[setting]
+export const updateAllowRules = async (domain: string, setting: SettingId, value: boolean): Promise<void> => {
+  if (!(setting in BASE_RULES)) {
+    return
+  }
+  const ruleId = dnrRuleIdForName(category, setting)
+  const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
+  const rule = oldRules.length ? oldRules[0] : BASE_RULES[setting]
   if (rule === undefined) {
-    return { removeRuleIds: [], addRules: [] }
+    return
   }
   rule.condition.topDomains = updateListOfExceptions<string>(rule.condition.topDomains, domain, value)
+  const ruleIsInUse = rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0
   const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-    removeRuleIds: [],
-    addRules: []
+    removeRuleIds: [rule.id],
+    addRules: ruleIsInUse ? [rule] : []
   }
-  updateRuleOptions.removeRuleIds!.push(rule.id)
-  if (rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0) {
-    updateRuleOptions.addRules!.push(rule)
-  }
-  return updateRuleOptions
+  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }

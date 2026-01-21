@@ -175,11 +175,11 @@ const NETWORK_PROTECTION_DEFS:
 const category = 'network_rule'
 
 const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule[]> => {
-  const cachedRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
+  const resultRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
   for (const [settingId, rules] of Object.entries(NETWORK_PROTECTION_DEFS)) {
     let i: number = 0;
     for (const rule of rules) {
-      const cachedRule: chrome.declarativeNetRequest.Rule = {
+      const resultRule: chrome.declarativeNetRequest.Rule = {
         ...rule,
         id: dnrRuleIdForName(category, `${settingId}${rules.length > 1 ? String(i) : ''}`),
         priority: DNR_RULE_PRIORITIES.NETWORK,
@@ -188,31 +188,31 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
           ...rule.condition
         }
       }
-      if (!cachedRules[settingId]) {
-        cachedRules[settingId] = []
+      if (!resultRules[settingId]) {
+        resultRules[settingId] = []
       }
-      cachedRules[settingId].push(cachedRule)
+      resultRules[settingId].push(resultRule)
       ++i
     }
   }
-  return cachedRules
+  return resultRules
 }
 
-const cachedRules = prepareNetworkRules()
+const baseRules = prepareNetworkRules()
 
-export const updateNetworkRules = (topDomain: string, setting: SettingId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
+export const updateNetworkRules = async (topDomain: string, setting: SettingId, value: boolean): Promise<void> => {
   if (!(setting in NETWORK_PROTECTION_DEFS)) {
-    return { removeRuleIds: [], addRules: [] }
+    return
   }
-  const rules = cachedRules[setting]
-  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-    removeRuleIds: [],
-    addRules: []
-  }
+  const ruleIds = baseRules[setting].map(rule => rule.id)
+  const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds})
+  const rules = structuredClone(oldRules.length > 0 ? oldRules : baseRules[setting])
   for (const rule of rules) {
     rule.condition.excludedTopDomains = updateListOfExceptions<string>(rule.condition.excludedTopDomains, topDomain, value)
-    updateRuleOptions.removeRuleIds!.push(rule.id)
-    updateRuleOptions.addRules!.push(rule)
   }
-  return updateRuleOptions
+  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
+    removeRuleIds: rules.map(rule => rule.id),
+    addRules: rules
+  }
+  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }
