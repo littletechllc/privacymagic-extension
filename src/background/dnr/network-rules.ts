@@ -172,6 +172,8 @@ const NETWORK_PROTECTION_DEFS:
   }]
 }
 
+const category = 'network_rule'
+
 const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule[]> => {
   const cachedRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
   for (const [settingId, rules] of Object.entries(NETWORK_PROTECTION_DEFS)) {
@@ -179,7 +181,7 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
     for (const rule of rules) {
       const cachedRule: chrome.declarativeNetRequest.Rule = {
         ...rule,
-        id: dnrRuleIdForName(`${settingId}${rules.length > 1 ? String(i) : ''}`),
+        id: dnrRuleIdForName(category, `${settingId}${rules.length > 1 ? String(i) : ''}`),
         priority: DNR_RULE_PRIORITIES.NETWORK,
         condition: {
           resourceTypes: ALL_RESOURCE_TYPES,

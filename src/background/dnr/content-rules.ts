@@ -4,8 +4,10 @@ import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-
 
 const disabledSettingsForTopDomains: Map<string, SettingId[]> = new Map()
 
+const category = 'content_rule'
+
 const idForTopDomain = (domain: string): number => {
-  return dnrRuleIdForName(`disabled_settings|${domain}`)
+  return dnrRuleIdForName(category, domain)
 }
 
 const createRuleForTopDomain = (domain: string, settings: SettingId[]): chrome.declarativeNetRequest.Rule => {
