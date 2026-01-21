@@ -10,10 +10,11 @@ const nameToIdMap = new Map<string, number>();
 
 let highestId = 0;
 
-export const dnrRuleIdForName = (ruleName: string): number => {
-  if (!nameToIdMap.has(ruleName)) {
-    ++highestId
-    nameToIdMap.set(ruleName, highestId)
+export const dnrRuleIdForName = (category: string, ruleName: string): number => {
+  const key = `${category}|${ruleName}`
+  if (!nameToIdMap.has(key)) {
+    highestId++
+    nameToIdMap.set(key, highestId)
   }
-  return nameToIdMap.get(ruleName)!
+  return nameToIdMap.get(key)!
 }
