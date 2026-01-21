@@ -172,7 +172,6 @@ const NETWORK_PROTECTION_DEFS:
   }]
 }
 
-
 const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule[]> => {
   const cachedRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
   for (const [settingId, rules] of Object.entries(NETWORK_PROTECTION_DEFS)) {
@@ -199,20 +198,19 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
 
 const cachedRules = prepareNetworkRules()
 
-const updateSessionRules = async (rules: chrome.declarativeNetRequest.Rule[]): Promise<void> => {
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: rules.map(rule => rule.id),
-    addRules: rules
-  })
-}
-
-export const updateNetworkRule = async (topDomain: string, setting: SettingsId, value: boolean): Promise<void> => {
+export const updateNetworkRules = (topDomain: string, setting: SettingsId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
   if (!(setting in NETWORK_PROTECTION_DEFS)) {
-    return
+    return { removeRuleIds: [], addRules: [] }
   }
   const rules = cachedRules[setting]
+  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
+    removeRuleIds: [],
+    addRules: []
+  }
   for (const rule of rules) {
     rule.condition.excludedTopDomains = updateListOfExceptions<string>(rule.condition.excludedTopDomains, topDomain, value)
+    updateRuleOptions.removeRuleIds!.push(rule.id)
+    updateRuleOptions.addRules!.push(rule)
   }
-  await updateSessionRules(rules)
+  return updateRuleOptions
 }

@@ -1,19 +1,32 @@
 import { updateAllowRules } from '@src/background/dnr/allow-rules'
-import { updateContentScriptRule } from '@src/background/dnr/content-rules'
-import { updateNetworkRule } from '@src/background/dnr/network-rules'
+import { updateContentRule } from '@src/background/dnr/content-rules'
+import { updateNetworkRules } from '@src/background/dnr/network-rules'
 import { SettingsId } from '@src/common/settings-ids'
 import { getAllSettings } from '@src/common/settings'
 
-export const updateRule = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
-  await updateContentScriptRule(domain, settingId, value)
-  await updateNetworkRule(domain, settingId, value)
-  await updateAllowRules(domain, settingId, value)
+export const updateRules = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
+  const contentScriptUpdateRuleOptions = updateContentRule(domain, settingId, value)
+  const networkUpdateRuleOptions = updateNetworkRules(domain, settingId, value)
+  const allowUpdateRuleOptions = updateAllowRules(domain, settingId, value)
+  const updateRuleOptions = {
+    removeRuleIds: [
+      ...(contentScriptUpdateRuleOptions.removeRuleIds ?? []),
+      ...(networkUpdateRuleOptions.removeRuleIds ?? []),
+      ...(allowUpdateRuleOptions.removeRuleIds ?? [])
+    ],
+    addRules: [
+      ...(contentScriptUpdateRuleOptions.addRules ?? []),
+      ...(networkUpdateRuleOptions.addRules ?? []),
+      ...(allowUpdateRuleOptions.addRules ?? [])
+    ]
+  }
+  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }
 
 export const setupRules = async (): Promise<void> => {
   const allSettings = await getAllSettings()
   for (const [domain, settingId, value] of allSettings) {
-    await updateRule(domain, settingId, value)
+    await updateRules(domain, settingId, value)
   }
 }
 
