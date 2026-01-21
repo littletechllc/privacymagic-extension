@@ -2,7 +2,7 @@ import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings'
 import { getLocalizedText } from '../common/i18n'
 import { createToggle } from '../common/toggle'
 import { logError, entries, handleAsync } from '../common/util'
-import { SettingsId } from '../common/settings-ids'
+import { SettingId } from '../common/setting-ids'
 import { updateSettingRemote, reloadTabRemote } from '../common/messages'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
 
@@ -14,7 +14,7 @@ type SettingsCategory =
   'navigation' |
   'policy'
 
-const PRIVACY_SETTINGS_CONFIG: Record<SettingsCategory, SettingsId[]> = {
+const PRIVACY_SETTINGS_CONFIG: Record<SettingsCategory, SettingId[]> = {
   main: [
     'masterSwitch'
   ],
@@ -83,7 +83,7 @@ const bindToggleToStorage = async (
   })
 }
 
-const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingsId[], categoryId: SettingsCategory): Promise<HTMLElement> => {
+const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingId[], categoryId: SettingsCategory): Promise<HTMLElement> => {
   const category = document.createElement('div')
   category.id = categoryId
   category.className = 'toggle-box'
@@ -106,7 +106,7 @@ const setupInputListeners = (domain: string): void => {
     input.addEventListener('change', (event) => {
       handleAsync(async () => {
         const target = event.target as HTMLInputElement
-        const settingId = target.id as SettingsId
+        const settingId = target.id as SettingId
         const response = await updateSettingRemote(domain, settingId, target.checked)
         console.log('sendMessage response:', response)
         const tabs = await chrome.tabs.query({ active: true, currentWindow: true })

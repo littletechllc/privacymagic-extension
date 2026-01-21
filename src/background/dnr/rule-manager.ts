@@ -1,10 +1,10 @@
 import { updateAllowRules } from '@src/background/dnr/allow-rules'
 import { updateContentRule } from '@src/background/dnr/content-rules'
 import { updateNetworkRules } from '@src/background/dnr/network-rules'
-import { SettingsId } from '@src/common/settings-ids'
+import { SettingId } from '@src/common/setting-ids'
 import { getAllSettings } from '@src/common/settings'
 
-export const updateRules = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
+export const updateRules = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
   const contentScriptUpdateRuleOptions = updateContentRule(domain, settingId, value)
   const networkUpdateRuleOptions = updateNetworkRules(domain, settingId, value)
   const allowUpdateRuleOptions = updateAllowRules(domain, settingId, value)

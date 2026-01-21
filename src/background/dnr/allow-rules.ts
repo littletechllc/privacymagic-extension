@@ -1,8 +1,8 @@
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "@src/common/util";
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
-import { SettingsId } from "@src/common/settings-ids";
+import { SettingId } from "@src/common/setting-ids";
 
-const cachedAllowRules: Partial<Record<SettingsId, chrome.declarativeNetRequest.Rule>> = {
+const cachedAllowRules: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> = {
   masterSwitch: {
     id: dnrRuleIdForName('allow_rule|masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
@@ -17,7 +17,7 @@ const cachedAllowRules: Partial<Record<SettingsId, chrome.declarativeNetRequest.
   }
 }
 
-export const updateAllowRules = (domain: string,setting: SettingsId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
+export const updateAllowRules = (domain: string,setting: SettingId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
   const rule = cachedAllowRules[setting]
   if (rule === undefined) {
     return { removeRuleIds: [], addRules: [] }

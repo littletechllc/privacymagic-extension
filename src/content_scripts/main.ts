@@ -1,4 +1,4 @@
-import { SettingsId } from '../common/settings-ids'
+import { SettingId } from '../common/setting-ids'
 import { getDisabledSettings } from './helpers'
 
 import battery from './patches/battery'
@@ -24,7 +24,7 @@ import useragent from './patches/useragent'
 import windowName from './patches/windowName'
 import worker from './patches/worker'
 
-const privacyMagicPatches: Partial<Record<SettingsId, () => void>> = {
+const privacyMagicPatches: Partial<Record<SettingId, () => void>> = {
   battery,
   cpu,
   css,
@@ -53,7 +53,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
   if (disabledPatches.includes('masterSwitch')) {
     return
   }
-  for (const patcherId of Object.keys(privacyMagicPatches) as SettingsId[]) {
+  for (const patcherId of Object.keys(privacyMagicPatches) as SettingId[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
         const patch = privacyMagicPatches[patcherId]
@@ -69,7 +69,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
 
 const mainFunction = (): void => {
   console.log('main function called in', self.location.href)
-  const relevantSettings = ['masterSwitch', ...Object.keys(privacyMagicPatches)] as SettingsId[]
+  const relevantSettings = ['masterSwitch', ...Object.keys(privacyMagicPatches)] as SettingId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
 }
 mainFunction()

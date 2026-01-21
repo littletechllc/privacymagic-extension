@@ -1,10 +1,10 @@
 import { storage, KeyPath } from './storage'
-import { SettingsId } from './settings-ids'
+import { SettingId } from './setting-ids'
 
 export const ALL_DOMAINS = '_ALL_DOMAINS_'
 export const SETTINGS_KEY_PREFIX = '_SETTINGS_'
 
-export const getSetting = async (domain: string, settingId: SettingsId): Promise<boolean> => {
+export const getSetting = async (domain: string, settingId: SettingId): Promise<boolean> => {
   const defaultSetting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
   // If a setting has been set to false for the default settings,
   // then it overrides the domain-specific setting and we return
@@ -25,7 +25,7 @@ export const getSetting = async (domain: string, settingId: SettingsId): Promise
   return true
 }
 
-export const setSetting = async (domain: string, settingId: SettingsId, value: boolean): Promise<void> => {
+export const setSetting = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
   if (typeof value !== 'boolean') {
     throw new Error(`Invalid setting value: ${String(value)}`)
   }
@@ -50,12 +50,12 @@ export const setSetting = async (domain: string, settingId: SettingsId, value: b
   await storage.local.set([SETTINGS_KEY_PREFIX, domain, settingId], value)
 }
 
-export const getAllSettings = async (): Promise<Array<[string, SettingsId, boolean]>> => {
+export const getAllSettings = async (): Promise<Array<[string, SettingId, boolean]>> => {
   const storedSettings = await storage.local.getAll()
-  const allSettings: Array<[string, SettingsId, boolean]> = []
+  const allSettings: Array<[string, SettingId, boolean]> = []
   for (const [[type, domain, settingId], value] of storedSettings as Array<[KeyPath, boolean]>) {
     if (type === SETTINGS_KEY_PREFIX) {
-      allSettings.push([domain, settingId as SettingsId, value])
+      allSettings.push([domain, settingId as SettingId, value])
     }
   }
   return allSettings

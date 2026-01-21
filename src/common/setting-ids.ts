@@ -1,4 +1,4 @@
-export const SETTINGS_IDS = [
+export const SETTING_IDS = [
   'ads',
   'audio',
   'battery',
@@ -30,4 +30,4 @@ export const SETTINGS_IDS = [
   'worker'
 ] as const
 
-export type SettingsId = typeof SETTINGS_IDS[number]
+export type SettingId = typeof SETTING_IDS[number]
