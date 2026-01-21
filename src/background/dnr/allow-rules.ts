@@ -17,15 +17,19 @@ const cachedAllowRules: Partial<Record<SettingsId, chrome.declarativeNetRequest.
   }
 }
 
-export const updateAllowRules = async (domain: string,setting: SettingsId, value: boolean): Promise<void> => {
+export const updateAllowRules = (domain: string,setting: SettingsId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
   const rule = cachedAllowRules[setting]
   if (rule === undefined) {
-    return
+    return { removeRuleIds: [], addRules: [] }
   }
   rule.condition.topDomains = updateListOfExceptions<string>(rule.condition.topDomains, domain, value)
-  if (rule.condition.topDomains === undefined || rule.condition.topDomains.length === 0) {
-    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [] })
-  } else {
-    await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: [rule.id], addRules: [rule] })
+  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
+    removeRuleIds: [],
+    addRules: []
   }
+  updateRuleOptions.removeRuleIds!.push(rule.id)
+  if (rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0) {
+    updateRuleOptions.addRules!.push(rule)
+  }
+  return updateRuleOptions
 }

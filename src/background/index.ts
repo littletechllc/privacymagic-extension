@@ -5,7 +5,7 @@ import { resetAllPrefsToDefaults } from '../common/prefs'
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
-import { updateRule, setupRules, clearRules } from './dnr/rule-manager'
+import { updateRules, setupRules, clearRules } from './dnr/rule-manager'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateSessionRules({
@@ -29,7 +29,7 @@ const handleMessage = async (
   try {
     if (message.type === 'updateSetting') {
       await setSetting(message.domain, message.settingId, message.value)
-      await updateRule(message.domain, message.settingId, message.value)
+      await updateRules(message.domain, message.settingId, message.value)
       sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'addHttpWarningNetworkRuleException') {
       await updateHttpWarningNetworkRuleException(message.url, message.value)
