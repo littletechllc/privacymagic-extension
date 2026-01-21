@@ -1,3 +1,9 @@
+// Content rules are used to disable settings for specific top domains.
+// Disabled settings are stored in a cookie set in the response headers
+// of the web page and any subframes. One rule is created for each top domain
+// whenever a setting is disabled for the top domain.
+// The rule is removed if no settings are disabled for the top domain.
+
 import { updateListOfExceptions } from '@src/common/util'
 import { SettingId } from '@src/common/setting-ids'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'

@@ -15,6 +15,9 @@ export const setupRules = async (): Promise<void> => {
   for (const [domain, settingId, value] of allSettings) {
     await updateRules(domain, settingId, value)
   }
+  // TODO: Set up default content cookie that has no disabled
+  // settings to overwrite any existing cookie from a fingerprinting
+  // website.
 }
 
 export const clearRules = async (): Promise<void> => {

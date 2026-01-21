@@ -1,3 +1,7 @@
+// Network rules are used to apply fingerprinting protections
+// to network requests. They are applied to all network requests,
+// except web pages under excluded top domains.
+
 import { SettingId } from '@src/common/setting-ids'
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '@src/common/util'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
