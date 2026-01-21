@@ -1,8 +1,8 @@
-import { SettingsId } from './settings-ids'
+import { SettingId } from './setting-ids'
 
 // Message types that can be sent to the background script
 export type Message =
-  | { type: 'updateSetting', domain: string, settingId: SettingsId, value: boolean }
+  | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
   | { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean }
   | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'getDomainForCurrentTab' }
@@ -26,7 +26,7 @@ export type ResponseSendFunction = (response: MessageResponse) => void
 // Typed functions for each message type with matching response types
 export const updateSettingRemote = async (
   domain: string,
-  settingId: SettingsId,
+  settingId: SettingId,
   value: boolean
   ): Promise<void> => {
   const message: Message = { type: 'updateSetting', domain, settingId, value }

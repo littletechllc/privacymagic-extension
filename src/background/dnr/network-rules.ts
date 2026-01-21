@@ -1,4 +1,4 @@
-import { SettingsId } from '@src/common/settings-ids'
+import { SettingId } from '@src/common/setting-ids'
 import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '@src/common/util'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
@@ -15,7 +15,7 @@ type PartialRule = {
 }
 
 const NETWORK_PROTECTION_DEFS:
-  Partial<Record<SettingsId, PartialRule[]>> = {
+  Partial<Record<SettingId, PartialRule[]>> = {
   gpc: [{
     action: {
       type: 'modifyHeaders',
@@ -198,7 +198,7 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
 
 const cachedRules = prepareNetworkRules()
 
-export const updateNetworkRules = (topDomain: string, setting: SettingsId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
+export const updateNetworkRules = (topDomain: string, setting: SettingId, value: boolean): chrome.declarativeNetRequest.UpdateRuleOptions => {
   if (!(setting in NETWORK_PROTECTION_DEFS)) {
     return { removeRuleIds: [], addRules: [] }
   }
