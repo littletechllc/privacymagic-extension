@@ -5,22 +5,9 @@ import { SettingId } from '@src/common/setting-ids'
 import { getAllSettings } from '@src/common/settings'
 
 export const updateRules = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
-  const contentScriptUpdateRuleOptions = updateContentRule(domain, settingId, value)
-  const networkUpdateRuleOptions = updateNetworkRules(domain, settingId, value)
-  const allowUpdateRuleOptions = updateAllowRules(domain, settingId, value)
-  const updateRuleOptions = {
-    removeRuleIds: [
-      ...(contentScriptUpdateRuleOptions.removeRuleIds ?? []),
-      ...(networkUpdateRuleOptions.removeRuleIds ?? []),
-      ...(allowUpdateRuleOptions.removeRuleIds ?? [])
-    ],
-    addRules: [
-      ...(contentScriptUpdateRuleOptions.addRules ?? []),
-      ...(networkUpdateRuleOptions.addRules ?? []),
-      ...(allowUpdateRuleOptions.addRules ?? [])
-    ]
-  }
-  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
+  await updateContentRule(domain, settingId, value)
+  await updateNetworkRules(domain, settingId, value)
+  await updateAllowRules(domain, settingId, value)
 }
 
 export const setupRules = async (): Promise<void> => {
