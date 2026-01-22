@@ -1,3 +1,6 @@
+/**
+ * Globally-defined priorities for DNR rules.
+ */
 export enum DNR_RULE_PRIORITIES {
   STATIC_RULES = 1,
   BLOCKER_EXCEPTIONS = 3,
@@ -11,8 +14,16 @@ export enum DNR_RULE_PRIORITIES {
  */
 export type CategoryId = 'content_rule' | 'network_rule' | 'allow_rule' | 'http_warnings'
 
+/**
+ * Map of category and rule name to unique ID.
+ * The key is a JSON string of the category and rule name.
+ * The value is a unique numeric ID.
+ */
 const nameToIdMap = new Map<string, number>();
 
+/**
+ * The highest ID currently assigned.
+ */
 let highestId = 0;
 
 /**
