@@ -4,7 +4,7 @@
 // whenever a setting is disabled for the top domain.
 // The rule is removed if no settings are disabled for the top domain.
 
-import { includeInListIfNeeded } from '@src/common/util'
+import { includeInListIfNeeded } from '@src/common/data-structures'
 import { SettingId } from '@src/common/setting-ids'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 

@@ -1,6 +1,7 @@
 import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '../common/prefs'
 import { createToggle } from '../common/toggle'
-import { logError, entries, handleAsync } from '../common/util'
+import { logError, handleAsync } from '../common/util'
+import { objectEntries } from '../common/data-structures'
 
 const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean): Promise<void> => {
   const value = await getPref(prefName)
@@ -30,7 +31,7 @@ export const setupPrefsUI = async (): Promise<void> => {
   // Clear container and add title
   prefsContainer.innerHTML = '<h1>Browser Preferences</h1>'
   // Create toggles for each preference
-  for (const [prefName, { locked, inverted }] of entries(PRIVACY_PREFS_CONFIG)) {
+  for (const [prefName, { locked, inverted }] of objectEntries(PRIVACY_PREFS_CONFIG)) {
     const toggle = createToggle(prefName, locked)
     await bindPrefToCheckbox(toggle, prefName, inverted)
     prefsContainer.appendChild(toggle)

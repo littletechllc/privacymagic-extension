@@ -2,7 +2,8 @@
 // Any of the allow rules is applied only to web pages under top domains
 // for which the corresponding setting is disabled.
 
-import { ALL_RESOURCE_TYPES, includeInListIfNeeded } from "@src/common/util";
+import { ALL_RESOURCE_TYPES } from "@src/common/util";
+import { includeInListIfNeeded } from "@src/common/data-structures";
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
 import { SettingId } from "@src/common/setting-ids";
 

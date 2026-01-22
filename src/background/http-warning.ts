@@ -1,4 +1,5 @@
-import { handleAsync, logError, includeInListIfNeeded } from '@src/common/util'
+import { handleAsync, logError } from '@src/common/util'
+import { includeInListIfNeeded } from '@src/common/data-structures'
 import { dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 

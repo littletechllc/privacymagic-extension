@@ -1,7 +1,8 @@
 import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings'
 import { getLocalizedText } from '../common/i18n'
 import { createToggle } from '../common/toggle'
-import { logError, entries, handleAsync } from '../common/util'
+import { logError, handleAsync } from '../common/util'
+import { objectEntries } from '../common/data-structures'
 import { SettingId } from '../common/setting-ids'
 import { updateSettingRemote, reloadTabRemote } from '../common/messages'
 import { StorageProxy, KeyPath, storage } from '../common/storage'
@@ -128,7 +129,7 @@ export const setupSettingsUI = async (domain: string): Promise<void> => {
     throw new Error('Settings container not found')
   }
   settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>'
-  for (const [categoryId, settingIds] of entries(PRIVACY_SETTINGS_CONFIG)) {
+  for (const [categoryId, settingIds] of objectEntries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(storage.local, domain, settingIds, categoryId)
     settingsContainer.appendChild(toggleCategory)
   }
