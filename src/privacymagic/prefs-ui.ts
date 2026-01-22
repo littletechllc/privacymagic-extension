@@ -1,7 +1,7 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '../common/prefs'
-import { createToggle } from '../common/toggle'
-import { logError, handleAsync } from '../common/util'
-import { objectEntries } from '../common/data-structures'
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '@src/common/prefs'
+import { createToggle } from '@src/common/toggle'
+import { logError, handleAsync } from '@src/common/util'
+import { objectEntries } from '@src/common/data-structures'
 
 const bindPrefToCheckbox = async (toggle: HTMLElement, prefName: PrefName, inverted: boolean): Promise<void> => {
   const value = await getPref(prefName)

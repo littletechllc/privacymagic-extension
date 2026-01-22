@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach, jest } from '@jest/globals'
+import '@test/mocks/web-extension'
 import { updateAllowRules } from '@src/background/dnr/allow-rules'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
 import type { SettingId } from '@src/common/setting-ids'
+import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 
 // Get references to the mocked functions (set up in test/setup.ts)
 const mockGetSessionRules = global.chrome.declarativeNetRequest.getSessionRules as jest.MockedFunction<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>

@@ -1,8 +1,8 @@
-import { setupSettingsUI } from '../common/settings-ui'
+import { setupSettingsUI } from '@src/common/settings-ui'
 import { setupPrefsUI } from './prefs-ui'
-import { resetAllPrefsToDefaults } from '../common/prefs'
-import { resetAllSettingsToDefaults, ALL_DOMAINS } from '../common/settings'
-import { handleAsync, logError } from '../common/util'
+import { resetAllPrefsToDefaults } from '@src/common/prefs'
+import { resetAllSettingsToDefaults, ALL_DOMAINS } from '@src/common/settings'
+import { handleAsync, logError } from '@src/common/util'
 
 document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () => {
   document.getElementById('reset-all')?.addEventListener('click', () => handleAsync(async () => {

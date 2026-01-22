@@ -1,10 +1,10 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { setSetting } from '../common/settings'
-import { resetAllPrefsToDefaults } from '../common/prefs'
+import { setSetting } from '@src/common/settings'
+import { resetAllPrefsToDefaults } from '@src/common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
-import { logError, registrableDomainFromUrl, handleAsync } from '../common/util'
-import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '../common/messages'
+import { logError, registrableDomainFromUrl, handleAsync } from '@src/common/util'
+import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '@src/common/messages'
 import { updateRules, setupRules, clearRules } from './dnr/rule-manager'
 
 const blockAutocomplete = async (): Promise<void> => {

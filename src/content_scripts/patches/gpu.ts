@@ -1,4 +1,4 @@
-import { createSafeSetter, redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, objectDefinePropertiesSafe, reflectConstructSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '../helpers'
+import { createSafeSetter, redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, objectDefinePropertiesSafe, reflectConstructSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers'
 
 const gpu = () => {
   if (self.HTMLCanvasElement === undefined) {
