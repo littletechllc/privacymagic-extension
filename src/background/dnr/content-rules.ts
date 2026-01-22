@@ -6,9 +6,9 @@
 
 import { includeInListIfNeeded } from '@src/common/data-structures'
 import { SettingId } from '@src/common/setting-ids'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
+import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
-const category = 'content_rule'
+const category: CategoryId = 'content_rule'
 
 const idForTopDomain = (domain: string): number => {
   return dnrRuleIdForName(category, domain)

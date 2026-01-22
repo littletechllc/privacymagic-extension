@@ -4,10 +4,10 @@
 
 import { ALL_RESOURCE_TYPES } from "@src/common/util";
 import { includeInListIfNeeded } from "@src/common/data-structures";
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
+import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
 import { SettingId } from "@src/common/setting-ids";
 
-const category = 'allow_rule'
+const category: CategoryId = 'allow_rule'
 
 const BASE_RULES: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> = {
   masterSwitch: {
