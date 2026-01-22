@@ -155,6 +155,9 @@ describe('setupRules', () => {
   })
 })
 
+// TODO: Add test to verify that setupRules calls individual setup functions
+// before calling updateRules for each setting
+
 describe('clearRules', () => {
   it('should get all session rules', async () => {
     await clearRules()
