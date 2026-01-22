@@ -3,7 +3,8 @@
 // except web pages under excluded top domains.
 
 import { SettingId } from '@src/common/setting-ids'
-import { ALL_RESOURCE_TYPES, includeInListIfNeeded } from '@src/common/util'
+import { ALL_RESOURCE_TYPES } from '@src/common/util'
+import { includeInListIfNeeded } from '@src/common/data-structures'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
