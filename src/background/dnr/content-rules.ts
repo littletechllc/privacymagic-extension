@@ -14,8 +14,8 @@ const idForTopDomain = (domain: string): number => {
   return dnrRuleIdForName(category, domain)
 }
 
-const createRuleForTopDomain = (domain: string, settings: SettingId[]): chrome.declarativeNetRequest.Rule => {
-  const id = idForTopDomain(domain)
+const createRuleForTopDomain = (settings: SettingId[], domain?: string): chrome.declarativeNetRequest.Rule => {
+  const id = domain == null ? dnrRuleIdForName(category, 'default') : idForTopDomain(domain)
   const cookieKeyVal = `__pm__disabled_settings=${settings.join(',')}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
   return {
@@ -30,8 +30,8 @@ const createRuleForTopDomain = (domain: string, settings: SettingId[]): chrome.d
     },
     priority: DNR_RULE_PRIORITIES.CONTENT_SCRIPTS,
     condition: {
-      topDomains: [domain],
       resourceTypes: ["main_frame", "sub_frame"],
+      ...(domain == null ? { excludedTopDomains: [] } : { topDomains: [domain] })
     }
   }
 }
@@ -44,19 +44,31 @@ const disabledSettingsFromRule = (rule: chrome.declarativeNetRequest.Rule | unde
   return match?.[1]?.split(',').map(setting => setting.trim() as SettingId) ?? []
 }
 
+const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetRequest.Rule | undefined> => {
+  const ruleResults = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
+  return ruleResults.length > 0 ? ruleResults[0] : undefined
+}
+
 export const updateContentRule = async (domain: string, setting: SettingId, value: boolean): Promise<void> => {
   const ruleId = dnrRuleIdForName(category, domain)
-  const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
-  const oldRule = oldRules[0]
+  const defaultRuleId = dnrRuleIdForName(category, 'default')
+  const [oldRule, oldDefaultRule] = await Promise.all([
+    getSingleRule(ruleId),
+    getSingleRule(defaultRuleId)
+  ])
   const currentDisabledSettings = disabledSettingsFromRule(oldRule)
   const updatedDisabledSettings: SettingId[] = updateListOfExceptions<SettingId>(currentDisabledSettings, setting, value) ?? []
-  const rule = createRuleForTopDomain(domain, updatedDisabledSettings)
-  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-    removeRuleIds: [rule.id],
-    addRules: []
+  const rule = createRuleForTopDomain(updatedDisabledSettings, domain)
+  const defaultRule = oldDefaultRule ?? createRuleForTopDomain([])
+  const domainHasDisabledSettings = updatedDisabledSettings.length > 0
+  defaultRule.condition.excludedTopDomains = updateListOfExceptions<string>(defaultRule.condition.excludedTopDomains, domain, !domainHasDisabledSettings)
+  const addRules = [defaultRule];
+  if (domainHasDisabledSettings) {
+    addRules.push(rule)
   }
-  if (updatedDisabledSettings.length > 0) {
-    updateRuleOptions.addRules = [rule]
+  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
+    removeRuleIds: [ruleId, defaultRuleId],
+    addRules
   }
   await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }
