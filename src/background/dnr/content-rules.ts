@@ -4,7 +4,7 @@
 // whenever a setting is disabled for the top domain.
 // The rule is removed if no settings are disabled for the top domain.
 
-import { updateListOfExceptions } from '@src/common/util'
+import { includeInListIfNeeded } from '@src/common/util'
 import { SettingId } from '@src/common/setting-ids'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
@@ -49,7 +49,7 @@ const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetReque
   return ruleResults.length > 0 ? ruleResults[0] : undefined
 }
 
-export const updateContentRule = async (domain: string, setting: SettingId, value: boolean): Promise<void> => {
+export const updateContentRule = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
   const ruleId = dnrRuleIdForName(category, domain)
   const defaultRuleId = dnrRuleIdForName(category, 'default')
   const [oldRule, oldDefaultRule] = await Promise.all([
@@ -57,11 +57,11 @@ export const updateContentRule = async (domain: string, setting: SettingId, valu
     getSingleRule(defaultRuleId)
   ])
   const currentDisabledSettings = disabledSettingsFromRule(oldRule)
-  const updatedDisabledSettings: SettingId[] = updateListOfExceptions<SettingId>(currentDisabledSettings, setting, value) ?? []
+  const updatedDisabledSettings: SettingId[] = includeInListIfNeeded<SettingId>(currentDisabledSettings, setting, !protectionEnabled) ?? []
   const rule = createRuleForTopDomain(updatedDisabledSettings, domain)
   const defaultRule = oldDefaultRule ?? createRuleForTopDomain([])
   const domainHasDisabledSettings = updatedDisabledSettings.length > 0
-  defaultRule.condition.excludedTopDomains = updateListOfExceptions<string>(defaultRule.condition.excludedTopDomains, domain, !domainHasDisabledSettings)
+  defaultRule.condition.excludedTopDomains = includeInListIfNeeded<string>(defaultRule.condition.excludedTopDomains, domain, domainHasDisabledSettings)
   const addRules = [defaultRule];
   if (domainHasDisabledSettings) {
     addRules.push(rule)

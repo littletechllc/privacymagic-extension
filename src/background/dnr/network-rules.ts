@@ -3,7 +3,7 @@
 // except web pages under excluded top domains.
 
 import { SettingId } from '@src/common/setting-ids'
-import { ALL_RESOURCE_TYPES, updateListOfExceptions } from '@src/common/util'
+import { ALL_RESOURCE_TYPES, includeInListIfNeeded } from '@src/common/util'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
@@ -204,7 +204,7 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
 
 const baseRules = prepareNetworkRules()
 
-export const updateNetworkRules = async (topDomain: string, setting: SettingId, value: boolean): Promise<void> => {
+export const updateNetworkRules = async (topDomain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
   if (!(setting in NETWORK_PROTECTION_DEFS)) {
     return
   }
@@ -212,7 +212,7 @@ export const updateNetworkRules = async (topDomain: string, setting: SettingId, 
   const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds})
   const rules = structuredClone(oldRules.length > 0 ? oldRules : baseRules[setting])
   for (const rule of rules) {
-    rule.condition.excludedTopDomains = updateListOfExceptions<string>(rule.condition.excludedTopDomains, topDomain, value)
+    rule.condition.excludedTopDomains = includeInListIfNeeded<string>(rule.condition.excludedTopDomains, topDomain, !protectionEnabled)
   }
   const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
     removeRuleIds: rules.map(rule => rule.id),
