@@ -5,7 +5,7 @@
 import { SettingId } from '@src/common/setting-ids'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
 import { includeInListIfNeeded } from '@src/common/data-structures'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
+import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
@@ -177,7 +177,7 @@ const NETWORK_PROTECTION_DEFS:
   }]
 }
 
-const category = 'network_rule'
+const category: CategoryId = 'network_rule'
 
 const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule[]> => {
   const resultRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
