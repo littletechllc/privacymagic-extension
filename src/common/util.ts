@@ -34,8 +34,8 @@ const removeIfPresent = <T>(array: T[] | undefined, item: T): T[] | undefined =>
  * @param unexceptional - Whether the item is unexceptional or not.
  * @returns The updated array.
  */
-export const updateListOfExceptions = <T>(array: T[] | undefined, item: T, unexceptional: boolean): T[] | undefined =>
-  (unexceptional === false) ? addIfMissing<T>(array, item) : removeIfPresent<T>(array, item)
+export const includeInListIfNeeded = <T>(array: T[] | undefined, item: T, include: boolean): T[] | undefined =>
+  include ? addIfMissing<T>(array, item) : removeIfPresent<T>(array, item)
 
 export const entries = <K extends string, V>(obj: Record<K, V>): Array<[K, V]> => {
   return Object.entries(obj) as Array<[K, V]>

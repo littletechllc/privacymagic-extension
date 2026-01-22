@@ -1,4 +1,4 @@
-import { handleAsync, logError, updateListOfExceptions } from '@src/common/util'
+import { handleAsync, logError, includeInListIfNeeded } from '@src/common/util'
 import { dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 const HTTP_WARNING_URL = chrome.runtime.getURL('/privacymagic/http-warning.html')
 
@@ -80,17 +80,17 @@ const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void
   })
 }
 
-const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, value: boolean): Promise<void> => {
-  rule.condition.requestDomains = updateListOfExceptions<string>(rule.condition.requestDomains, domain, value)
+const updateRuleWithDomain = async (rule: chrome.declarativeNetRequest.Rule, domain: string, protectionEnabled: boolean): Promise<void> => {
+  rule.condition.requestDomains = includeInListIfNeeded<string>(rule.condition.requestDomains, domain, !protectionEnabled)
   await updateRule(rule)
 }
 
-export const updateHttpWarningNetworkRuleException = async (url: string, value: boolean): Promise<void> => {
+export const updateHttpWarningNetworkRuleException = async (url: string, protectionEnabled: boolean): Promise<void> => {
   const domain = new URL(url).hostname
   if (domain === null) {
     return
   }
-  await updateRuleWithDomain(specialHttpAllowRule, domain, value)
+  await updateRuleWithDomain(specialHttpAllowRule, domain, protectionEnabled)
 }
 
 export const createHttpWarningNetworkRule = async (): Promise<void> => {

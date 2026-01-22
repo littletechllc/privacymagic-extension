@@ -2,7 +2,7 @@
 // Any of the allow rules is applied only to web pages under top domains
 // for which the corresponding setting is disabled.
 
-import { ALL_RESOURCE_TYPES, updateListOfExceptions } from "@src/common/util";
+import { ALL_RESOURCE_TYPES, includeInListIfNeeded } from "@src/common/util";
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
 import { SettingId } from "@src/common/setting-ids";
 
@@ -23,7 +23,7 @@ const BASE_RULES: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> 
   }
 }
 
-export const updateAllowRules = async (domain: string, setting: SettingId, value: boolean): Promise<void> => {
+export const updateAllowRules = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
   if (!(setting in BASE_RULES)) {
     return
   }
@@ -33,7 +33,7 @@ export const updateAllowRules = async (domain: string, setting: SettingId, value
   if (rule === undefined) {
     return
   }
-  rule.condition.topDomains = updateListOfExceptions<string>(rule.condition.topDomains, domain, value)
+  rule.condition.topDomains = includeInListIfNeeded<string>(rule.condition.topDomains, domain, !protectionEnabled)
   const ruleIsInUse = rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0
   const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
     removeRuleIds: [rule.id],
