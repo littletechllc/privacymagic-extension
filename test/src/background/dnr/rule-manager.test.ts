@@ -3,28 +3,15 @@ import { getSessionRulesMock, storageLocalGetMock, updateSessionRulesMock } from
 import { updateRules, setupRules, clearRules } from '@src/background/dnr/rule-manager'
 import { SETTINGS_KEY_PREFIX } from '@src/common/settings'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
+import { NETWORK_PROTECTION_DEFS } from '@src/background/dnr/network-rules'
 
-// Create mock functions that we can reference in both the factory and the test
-const mockSetupDefaultContentRule = jest.fn()
-const mockUpdateContentRule = jest.fn()
-const mockSetupDefaultNetworkRules = jest.fn()
-const mockUpdateNetworkRules = jest.fn()
-
-jest.mock('@src/background/dnr/content-rules', () => {
-  const actual = jest.requireActual('@src/background/dnr/content-rules')
-  return Object.assign({}, actual, {
-    setupDefaultContentRule: mockSetupDefaultContentRule,
-    updateContentRule: mockUpdateContentRule
-  })
-})
-
-jest.mock('@src/background/dnr/network-rules', () => {
-  const actual = jest.requireActual('@src/background/dnr/network-rules')
-  return Object.assign({}, actual, {
-    setupDefaultNetworkRules: mockSetupDefaultNetworkRules,
-    updateNetworkRules: mockUpdateNetworkRules
-  })
-})
+const countRules = () : number => {
+  let count = 0
+  for (const rules of Object.values(NETWORK_PROTECTION_DEFS)) {
+    count += rules.length
+  }
+  return count
+}
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -90,7 +77,7 @@ describe('updateRules', () => {
 })
 
 describe('setupRules', () => {
-  const totalDefaultNetworkRulesCount = 12
+  const totalDefaultNetworkRulesCount = countRules()
   const totalDefaultContentRulesCount = 1
 
   it('should apply stored settings to session rules', async () => {
