@@ -2,8 +2,9 @@
 // to network requests. They are applied to all network requests,
 // except web pages under excluded top domains.
 
-import { SettingId } from '@src/common/setting-ids'
+import { NetworkSettingId, SettingId } from '@src/common/setting-ids'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
+import { objectEntries } from '@src/common/data-structures'
 import { includeInListIfNeeded } from '@src/common/data-structures'
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
@@ -20,7 +21,7 @@ type PartialRule = {
 }
 
 const NETWORK_PROTECTION_DEFS:
-  Partial<Record<SettingId, PartialRule[]>> = {
+  Record<NetworkSettingId, PartialRule[]> = {
   gpc: [{
     action: {
       type: 'modifyHeaders',
@@ -179,9 +180,9 @@ const NETWORK_PROTECTION_DEFS:
 
 const category: CategoryId = 'network_rule'
 
-const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule[]> => {
-  const resultRules: Record<string, chrome.declarativeNetRequest.Rule[]> = {}
-  for (const [settingId, rules] of Object.entries(NETWORK_PROTECTION_DEFS)) {
+const prepareNetworkRules = (): Record<NetworkSettingId, chrome.declarativeNetRequest.Rule[]> => {
+  const resultRules = {} as Record<NetworkSettingId, chrome.declarativeNetRequest.Rule[]>
+  for (const [settingId, rules] of objectEntries(NETWORK_PROTECTION_DEFS)) {
     let i: number = 0;
     for (const rule of rules) {
       const resultRule: chrome.declarativeNetRequest.Rule = {
@@ -205,8 +206,12 @@ const prepareNetworkRules = (): Record<string, chrome.declarativeNetRequest.Rule
 
 const baseRules = prepareNetworkRules()
 
+const isNetworkSetting = (setting: SettingId): setting is NetworkSettingId => {
+  return setting in NETWORK_PROTECTION_DEFS
+}
+
 export const updateNetworkRules = async (topDomain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
-  if (!(setting in NETWORK_PROTECTION_DEFS)) {
+  if (!isNetworkSetting(setting)) {
     return
   }
   const ruleIds = baseRules[setting].map(rule => rule.id)
