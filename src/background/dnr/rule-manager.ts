@@ -1,6 +1,6 @@
 import { updateAllowRules } from '@src/background/dnr/allow-rules'
-import { updateContentRule } from '@src/background/dnr/content-rules'
-import { updateNetworkRules } from '@src/background/dnr/network-rules'
+import { setupDefaultContentRule, updateContentRule } from '@src/background/dnr/content-rules'
+import { setupDefaultNetworkRules, updateNetworkRules } from '@src/background/dnr/network-rules'
 import { SettingId } from '@src/common/setting-ids'
 import { getAllSettings } from '@src/common/settings'
 
@@ -11,13 +11,12 @@ export const updateRules = async (domain: string, settingId: SettingId, value: b
 }
 
 export const setupRules = async (): Promise<void> => {
+  await setupDefaultContentRule()
+  await setupDefaultNetworkRules()
   const allSettings = await getAllSettings()
   for (const [domain, settingId, value] of allSettings) {
     await updateRules(domain, settingId, value)
   }
-  // TODO: Set up default content cookie that has no disabled
-  // settings to overwrite any existing cookie from a fingerprinting
-  // website.
 }
 
 export const clearRules = async (): Promise<void> => {
