@@ -1,4 +1,4 @@
-import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '../helpers'
+import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '@src/content_scripts/helpers'
 
 const windowName = (): void => {
   if (self.top !== self) {

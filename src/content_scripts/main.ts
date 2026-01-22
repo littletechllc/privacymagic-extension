@@ -1,4 +1,4 @@
-import { SettingId } from '../common/setting-ids'
+import { SettingId } from '@src/common/setting-ids'
 import { getDisabledSettings } from './helpers'
 
 import battery from './patches/battery'

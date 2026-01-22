@@ -1,4 +1,4 @@
-import { getRemoteStyleSheetContentRemote } from '../common/messages'
+import { getRemoteStyleSheetContentRemote } from '@src/common/messages'
 import { handleBackgroundFetchRequests } from './background-fetch-isolated'
 
 const isolated = () => {

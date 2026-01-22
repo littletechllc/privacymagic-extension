@@ -1,4 +1,4 @@
-import { createSafeGetter, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '../helpers'
+import { createSafeGetter, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '@src/content_scripts/helpers'
 
 const worker = (): void => {
   const URLSafe = self.URL

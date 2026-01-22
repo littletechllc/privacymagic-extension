@@ -1,5 +1,5 @@
-import { handleAsync, logError } from '../common/util'
-import { addHttpWarningNetworkRuleExceptionRemote } from '../common/messages'
+import { handleAsync, logError } from '@src/common/util'
+import { addHttpWarningNetworkRuleExceptionRemote } from '@src/common/messages'
 
 const urlParam = new URL(window.location.href).searchParams.get('url')
 if (urlParam === null || urlParam === '') {

@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '../helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers'
 
 const disk = (): void => {
   redefinePropertyValues(StorageManager.prototype, {

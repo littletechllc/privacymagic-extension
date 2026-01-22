@@ -1,11 +1,11 @@
-import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '../common/settings'
-import { getLocalizedText } from '../common/i18n'
-import { createToggle } from '../common/toggle'
-import { logError, handleAsync } from '../common/util'
-import { objectEntries } from '../common/data-structures'
-import { SettingId } from '../common/setting-ids'
-import { updateSettingRemote, reloadTabRemote } from '../common/messages'
-import { StorageProxy, KeyPath, storage } from '../common/storage'
+import { SETTINGS_KEY_PREFIX, ALL_DOMAINS } from '@src/common/settings'
+import { getLocalizedText } from '@src/common/i18n'
+import { createToggle } from '@src/common/toggle'
+import { logError, handleAsync } from '@src/common/util'
+import { objectEntries } from '@src/common/data-structures'
+import { SettingId } from '@src/common/setting-ids'
+import { updateSettingRemote, reloadTabRemote } from '@src/common/messages'
+import { StorageProxy, KeyPath, storage } from '@src/common/storage'
 
 type SettingsCategory =
   'main' |

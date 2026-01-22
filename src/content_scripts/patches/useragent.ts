@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '../helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers'
 
 const useragent = (): void => {
   const CHROME_VERSION = '141.0.0.0'

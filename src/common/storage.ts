@@ -1,4 +1,4 @@
-import { logError } from '../common/util'
+import { logError } from '@src/common/util'
 
 export type KeyPath = string[]
 

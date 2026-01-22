@@ -1,7 +1,7 @@
-import { setupSettingsUI } from '../common/settings-ui'
-import { handleAsync, logError } from '../common/util'
+import { setupSettingsUI } from '@src/common/settings-ui'
+import { handleAsync, logError } from '@src/common/util'
 import punycode from 'punycode-npm'
-import { getDomainForCurrentTabMessageRemote } from '../common/messages'
+import { getDomainForCurrentTabMessageRemote } from '@src/common/messages'
 
 const setupOptionsButton = (): void => {
   document.getElementById('optionsButton')?.addEventListener('click', (event) => {
