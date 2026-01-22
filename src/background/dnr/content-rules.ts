@@ -72,3 +72,10 @@ export const updateContentRule = async (domain: string, setting: SettingId, valu
   }
   await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }
+
+export const setupDefaultContentRule = async (): Promise<void> => {
+  const defaultRule = createRuleForTopDomain([])
+  await chrome.declarativeNetRequest.updateSessionRules({
+    addRules: [defaultRule]
+  })
+}

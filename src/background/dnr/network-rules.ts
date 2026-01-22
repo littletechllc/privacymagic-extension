@@ -220,3 +220,13 @@ export const updateNetworkRules = async (topDomain: string, setting: SettingId, 
   }
   await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
 }
+
+export const setupDefaultNetworkRules = async (): Promise<void> => {
+  for (const rules of Object.values(baseRules)) {
+    for (const rule of rules) {
+      await chrome.declarativeNetRequest.updateSessionRules({
+        addRules: [rule], removeRuleIds: [rule.id]
+      })
+    }
+  }
+}
