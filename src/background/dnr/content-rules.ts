@@ -5,7 +5,7 @@
 // The rule is removed if no settings are disabled for the top domain.
 
 import { includeInListIfNeeded } from '@src/common/data-structures'
-import { SettingId } from '@src/common/setting-ids'
+import { CONTENT_SETTING_IDS, ContentSettingId, SettingId } from '@src/common/setting-ids'
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const category: CategoryId = 'content_rule'
@@ -14,7 +14,7 @@ const idForTopDomain = (domain: string): number => {
   return dnrRuleIdForName(category, domain)
 }
 
-const createRuleForTopDomain = (settings: SettingId[], domain?: string): chrome.declarativeNetRequest.Rule => {
+const createRuleForTopDomain = (settings: ContentSettingId[], domain?: string): chrome.declarativeNetRequest.Rule => {
   const id = domain == null ? dnrRuleIdForName(category, 'default') : idForTopDomain(domain)
   const cookieKeyVal = `__pm__disabled_settings=${settings.join(',')}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
@@ -36,12 +36,12 @@ const createRuleForTopDomain = (settings: SettingId[], domain?: string): chrome.
   }
 }
 
-const disabledSettingsFromRule = (rule: chrome.declarativeNetRequest.Rule | undefined): SettingId[] => {
+const disabledSettingsFromRule = (rule: chrome.declarativeNetRequest.Rule | undefined): ContentSettingId[] => {
   const cookieVal = rule?.action?.type === 'modifyHeaders'
     ? rule.action.responseHeaders?.find(header => header.header === 'Set-Cookie')?.value
     : undefined
   const match = cookieVal?.match(/^__pm__disabled_settings=([^;]+)/)
-  return match?.[1]?.split(',').map(setting => setting.trim() as SettingId) ?? []
+  return match?.[1]?.split(',').map(setting => setting.trim() as ContentSettingId) ?? []
 }
 
 const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetRequest.Rule | undefined> => {
@@ -49,7 +49,14 @@ const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetReque
   return ruleResults.length > 0 ? ruleResults[0] : undefined
 }
 
+const isContentSetting = (setting: SettingId): setting is ContentSettingId => {
+  return setting in CONTENT_SETTING_IDS
+}
+
 export const updateContentRule = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
+  if (!isContentSetting(setting)) {
+    return
+  }
   const ruleId = dnrRuleIdForName(category, domain)
   const defaultRuleId = dnrRuleIdForName(category, 'default')
   const [oldRule, oldDefaultRule] = await Promise.all([
@@ -57,7 +64,7 @@ export const updateContentRule = async (domain: string, setting: SettingId, prot
     getSingleRule(defaultRuleId)
   ])
   const currentDisabledSettings = disabledSettingsFromRule(oldRule)
-  const updatedDisabledSettings: SettingId[] = includeInListIfNeeded<SettingId>(currentDisabledSettings, setting, !protectionEnabled) ?? []
+  const updatedDisabledSettings: ContentSettingId[] = includeInListIfNeeded<ContentSettingId>(currentDisabledSettings, setting, !protectionEnabled) ?? []
   const rule = createRuleForTopDomain(updatedDisabledSettings, domain)
   const defaultRule = oldDefaultRule ?? createRuleForTopDomain([])
   const domainHasDisabledSettings = updatedDisabledSettings.length > 0

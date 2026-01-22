@@ -5,11 +5,11 @@
 import { ALL_RESOURCE_TYPES } from "@src/common/util";
 import { includeInListIfNeeded } from "@src/common/data-structures";
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
-import { SettingId } from "@src/common/setting-ids";
+import { BlockerSettingId, SettingId } from "@src/common/setting-ids";
 
 const category: CategoryId = 'allow_rule'
 
-const BASE_RULES: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> = {
+const BASE_RULES: Record<BlockerSettingId, chrome.declarativeNetRequest.Rule> = {
   masterSwitch: {
     id: dnrRuleIdForName(category, 'masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
@@ -24,16 +24,17 @@ const BASE_RULES: Partial<Record<SettingId, chrome.declarativeNetRequest.Rule>> 
   }
 }
 
+const isBlockerSetting = (setting: SettingId): setting is BlockerSettingId => {
+  return setting in BASE_RULES
+}
+
 export const updateAllowRules = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
-  if (!(setting in BASE_RULES)) {
+  if (!isBlockerSetting(setting)) {
     return
   }
   const ruleId = dnrRuleIdForName(category, setting)
   const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
   const rule = oldRules.length ? oldRules[0] : BASE_RULES[setting]
-  if (rule === undefined) {
-    return
-  }
   rule.condition.topDomains = includeInListIfNeeded<string>(rule.condition.topDomains, domain, !protectionEnabled)
   const ruleIsInUse = rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0
   const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {

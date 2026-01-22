@@ -1,3 +1,5 @@
+import { ContentSettingId } from "@src/common/setting-ids"
+
 // Type for methods of an object (union of all methods).
 type MethodOf<TThis> = {
   [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -180,7 +182,7 @@ export const getTrustedTypesPolicy = (): TrustedTypePolicy => {
   return trustedTypePolicy
 }
 
-export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
+export const getDisabledSettings = (relevantSettings?: ContentSettingId[]): ContentSettingId[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
     return __disabledSettings
   }
@@ -197,14 +199,14 @@ export const getDisabledSettings = (relevantSettings?: string[]): string[] => {
       result = []
     }
     if (relevantSettings != null) {
-      result = result.filter(setting => relevantSettings.includes(setting))
+      result = result.filter(setting => (relevantSettings as string[]).includes(setting))
     }
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error)
   }
 
-  __disabledSettings = result
-  return result
+  __disabledSettings = result as ContentSettingId[]
+  return __disabledSettings
 }
 
 export const dispatchEventSafe = self.Document !== undefined ? createSafeMethod(self.Document, 'dispatchEvent') : undefined

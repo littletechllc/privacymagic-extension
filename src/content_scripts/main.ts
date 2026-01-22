@@ -1,12 +1,14 @@
-import { SettingId } from '@src/common/setting-ids'
 import { getDisabledSettings } from './helpers'
+import { ContentSettingId } from '@src/common/setting-ids'
 
+import audio from './patches/audio'
 import battery from './patches/battery'
 import cpu from './patches/cpu'
 import css from './patches/css'
 import device from './patches/device'
 import disk from './patches/disk'
 import display from './patches/display'
+import fonts from './patches/fonts'
 import gpc from './patches/gpc'
 import gpu from './patches/gpu'
 import iframe from './patches/iframe'
@@ -24,13 +26,16 @@ import useragent from './patches/useragent'
 import windowName from './patches/windowName'
 import worker from './patches/worker'
 
-const privacyMagicPatches: Partial<Record<SettingId, () => void>> = {
+
+const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, () => void> = {
+  audio,
   battery,
   cpu,
   css,
   device,
   display,
   disk,
+  fonts,
   gpc,
   gpu,
   iframe,
@@ -49,11 +54,11 @@ const privacyMagicPatches: Partial<Record<SettingId, () => void>> = {
   worker
 }
 
-const runPatchesInPageExcept = (disabledPatches: string[]): void => {
+const runPatchesInPageExcept = (disabledPatches: ContentSettingId[]): void => {
   if (disabledPatches.includes('masterSwitch')) {
     return
   }
-  for (const patcherId of Object.keys(privacyMagicPatches) as SettingId[]) {
+  for (const patcherId of Object.keys(privacyMagicPatches) as Exclude<ContentSettingId, 'masterSwitch'>[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
         const patch = privacyMagicPatches[patcherId]
@@ -69,7 +74,7 @@ const runPatchesInPageExcept = (disabledPatches: string[]): void => {
 
 const mainFunction = (): void => {
   console.log('main function called in', self.location.href)
-  const relevantSettings = ['masterSwitch', ...Object.keys(privacyMagicPatches)] as SettingId[]
+  const relevantSettings = ['masterSwitch', ...Object.keys(privacyMagicPatches)] as ContentSettingId[]
   runPatchesInPageExcept(getDisabledSettings(relevantSettings))
 }
 mainFunction()
