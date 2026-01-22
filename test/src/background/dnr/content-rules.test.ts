@@ -2,7 +2,7 @@ import '@test/mocks/globals'
 import '@test/mocks/web-extension'
 import { updateContentRule, setupDefaultContentRule } from '@src/background/dnr/content-rules'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
-import type { SettingId } from '@src/common/setting-ids'
+import type { ContentSettingId } from '@src/common/setting-ids'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 
 // Get references to the mocked functions
@@ -16,7 +16,7 @@ beforeEach(() => {
 // Helper function to create a content rule for testing
 const createContentRule = (
   ruleId: number,
-  disabledSettings: SettingId[],
+  disabledSettings: ContentSettingId[],
   domain?: string
 ): chrome.declarativeNetRequest.Rule => {
   const cookieKeyVal = `__pm__disabled_settings=${disabledSettings.join(',')}`
@@ -42,7 +42,7 @@ const createContentRule = (
 describe('updateContentRule', () => {
   const category = 'content_rule'
   const domain = 'example.com'
-  const setting: SettingId = 'ads'
+  const setting: ContentSettingId = 'cpu'
 
   describe('when disabling protection for a domain', () => {
     it('should create domain rule and update default rule when no rules exist', async () => {
@@ -215,7 +215,7 @@ describe('updateContentRule', () => {
         : undefined
       expect(cookieValue).toContain('__pm__disabled_settings=')
       expect(cookieValue).toContain('battery')
-      expect(cookieValue).toContain('ads')
+      expect(cookieValue).toContain('cpu')
     })
   })
 })

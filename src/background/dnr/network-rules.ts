@@ -20,7 +20,7 @@ type PartialRule = {
   action: chrome.declarativeNetRequest.RuleAction
 }
 
-const NETWORK_PROTECTION_DEFS:
+export const NETWORK_PROTECTION_DEFS:
   Record<NetworkSettingId, PartialRule[]> = {
   gpc: [{
     action: {
