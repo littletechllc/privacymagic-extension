@@ -50,7 +50,7 @@ const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetReque
 }
 
 const isContentSetting = (setting: SettingId): setting is ContentSettingId => {
-  return setting in CONTENT_SETTING_IDS
+  return (CONTENT_SETTING_IDS as readonly string[]).includes(setting)
 }
 
 export const updateContentRule = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
