@@ -83,7 +83,7 @@ const logMatchingRulesInDevMode = (): void => {
       (async ({ request, rule }) => {
         let ruleContent
         if (rule.rulesetId === '_session') {
-          const rules = await chrome.declarativeNetRequest.getDynamicRules({
+          const rules = await chrome.declarativeNetRequest.getSessionRules({
             ruleIds: [rule.ruleId]
           })
           ruleContent = rules[0]
