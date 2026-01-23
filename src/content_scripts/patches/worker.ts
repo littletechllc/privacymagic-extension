@@ -109,7 +109,7 @@ const worker = (): void => {
   }
 
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
-    const originalRevokeObjectURL = (url: string): void => URL.revokeObjectURL(url)
+    const originalRevokeObjectURL = URL.revokeObjectURL.bind(URL)
 
     const pendingRevocations = new Set<string>()
     const lockedUrls = new Map<string, number>()
