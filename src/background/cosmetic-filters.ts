@@ -42,11 +42,11 @@ export const injectCssForCosmeticFilters = (): void => {
     const files = [
       'content_scripts/adblock_css/_default_.css'
     ]
-    const registrableDomain = registrableDomainFromUrl(details.url)
-    if (registrableDomain === null) {
+    const frameDomain = registrableDomainFromUrl(details.url)
+    if (frameDomain === null) {
       return
     }
-    const domainSpecificFile = `content_scripts/adblock_css/${registrableDomain}_.css`
+    const domainSpecificFile = `content_scripts/adblock_css/${frameDomain}_.css`
     if (await fileExists(domainSpecificFile)) {
       files.push(domainSpecificFile)
     }
@@ -57,7 +57,7 @@ export const injectCssForCosmeticFilters = (): void => {
       },
       files
     })
-    console.log('injected CSS for cosmetic filters for', registrableDomain, files)
+    console.log('injected CSS for cosmetic filters for', frameDomain, files)
   }, (error: unknown) => {
     if (error instanceof Error) {
       if (error.message === `Frame with ID ${details.frameId} was removed.` ||
