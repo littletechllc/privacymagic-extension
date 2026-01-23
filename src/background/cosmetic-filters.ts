@@ -14,11 +14,7 @@ const fileExists = async (path: string): Promise<boolean> => {
 let listener: ((details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => void) | null = null
 
 export const injectCssForCosmeticFilters = (): void => {
-  if (listener !== null) {
-    chrome.webNavigation.onCommitted.removeListener(listener)
-    listener = null
-  }
-  chrome.webNavigation.onCommitted.addListener((details) => handleAsync(async () => {
+  const newListener = (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => handleAsync(async () => {
     // Get the top level domain of the current tab.
     let url = details.url
     if (details.frameId !== 0 && details.frameId !== undefined) {
@@ -68,5 +64,10 @@ export const injectCssForCosmeticFilters = (): void => {
       }
       logError(error, 'error injecting CSS for cosmetic filters', details)
     }
-  }))
+  })
+  if (listener !== null) {
+    chrome.webNavigation.onCommitted.removeListener(listener)
+  }
+  chrome.webNavigation.onCommitted.addListener(newListener)
+  listener = newListener
 }
