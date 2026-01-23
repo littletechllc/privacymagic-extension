@@ -210,9 +210,9 @@ const isNetworkSetting = (setting: SettingId): setting is NetworkSettingId => {
   return setting in NETWORK_PROTECTION_DEFS
 }
 
-export const updateNetworkRules = async (topDomain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
+export const computeNetworkRuleUpdates = async (topDomain: string, setting: SettingId, protectionEnabled: boolean): Promise<chrome.declarativeNetRequest.UpdateRuleOptions | undefined> => {
   if (!isNetworkSetting(setting)) {
-    return
+    return undefined
   }
   const ruleIds = baseRules[setting].map(rule => rule.id)
   const oldRules = await chrome.declarativeNetRequest.getDynamicRules({ruleIds})
@@ -224,15 +224,17 @@ export const updateNetworkRules = async (topDomain: string, setting: SettingId, 
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   }
-  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
+  return updateRuleOptions
 }
 
-export const setupDefaultNetworkRules = async (): Promise<void> => {
+export const computeDefaultNetworkRuleUpdates = (): (chrome.declarativeNetRequest.UpdateRuleOptions | undefined)[] => {
+  const updateRuleOptionsList : (chrome.declarativeNetRequest.UpdateRuleOptions | undefined)[] = [];
   for (const rules of Object.values(baseRules)) {
     for (const rule of rules) {
-      await chrome.declarativeNetRequest.updateDynamicRules({
+      updateRuleOptionsList.push({
         addRules: [rule], removeRuleIds: [rule.id]
       })
     }
   }
+  return updateRuleOptionsList
 }

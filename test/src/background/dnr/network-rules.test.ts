@@ -1,29 +1,27 @@
 import '@test/mocks/globals'
 import '@test/mocks/web-extension'
-import { updateNetworkRules, setupDefaultNetworkRules } from '@src/background/dnr/network-rules'
+import { computeNetworkRuleUpdates, computeDefaultNetworkRuleUpdates } from '@src/background/dnr/network-rules'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
 import type { SettingId } from '@src/common/setting-ids'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
-
-// Get references to the mocked functions
-const mockGetDynamicRules = global.chrome.declarativeNetRequest.getDynamicRules as jest.MockedFunction<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>
-const mockUpdateDynamicRules = global.chrome.declarativeNetRequest.updateDynamicRules as jest.MockedFunction<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>
+import { getDynamicRulesMock } from '@test/mocks/web-extension'
 
 beforeEach(() => {
   jest.clearAllMocks()
+  getDynamicRulesMock.mockResolvedValue([])
 })
 
-describe('updateNetworkRules', () => {
+describe('computeNetworkRuleUpdates', () => {
   const category = 'network_rule'
   const domain = 'example.com'
 
   describe('when setting is not in NETWORK_PROTECTION_DEFS', () => {
-    it('should return early without calling any chrome APIs', async () => {
-      await updateNetworkRules(domain, 'audio' as SettingId, true)
+    it('should return undefined without calling any chrome APIs', async () => {
+      const result = await computeNetworkRuleUpdates(domain, 'audio' as SettingId, true)
 
-      expect(mockGetDynamicRules).not.toHaveBeenCalled()
-      expect(mockUpdateDynamicRules).not.toHaveBeenCalled()
+      expect(result).toBeUndefined()
+      expect(getDynamicRulesMock).not.toHaveBeenCalled()
     })
   })
 
@@ -32,12 +30,12 @@ describe('updateNetworkRules', () => {
     const ruleId = dnrRuleIdForName(category, setting)
 
     it('should not exclude domain when protection is enabled and rules do not exist', async () => {
-      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, true)
+      const result = await computeNetworkRuleUpdates(domain, setting, true)
 
-      expect(mockGetDynamicRules).toHaveBeenCalledWith({ ruleIds: [ruleId] })
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(getDynamicRulesMock).toHaveBeenCalledWith({ ruleIds: [ruleId] })
+      expect(result).toEqual({
         removeRuleIds: [ruleId],
         addRules: [{
           id: ruleId,
@@ -57,11 +55,11 @@ describe('updateNetworkRules', () => {
     })
 
     it('should exclude domain when protection is disabled', async () => {
-      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, false)
+      const result = await computeNetworkRuleUpdates(domain, setting, false)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId],
         addRules: [{
           id: ruleId,
@@ -95,11 +93,11 @@ describe('updateNetworkRules', () => {
           excludedTopDomains: ['other.com', domain]
         }
       }
-      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, true)
+      const result = await computeNetworkRuleUpdates(domain, setting, true)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId],
         addRules: [{
           id: ruleId,
@@ -133,11 +131,11 @@ describe('updateNetworkRules', () => {
           excludedTopDomains: ['other.com']
         }
       }
-      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, false)
+      const result = await computeNetworkRuleUpdates(domain, setting, false)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId],
         addRules: [{
           id: ruleId,
@@ -163,12 +161,12 @@ describe('updateNetworkRules', () => {
     const ruleId1 = dnrRuleIdForName(category, `${setting}1`)
 
     it('should not exclude domain in any rules when protection is enabled', async () => {
-      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, true)
+      const result = await computeNetworkRuleUpdates(domain, setting, true)
 
-      expect(mockGetDynamicRules).toHaveBeenCalledWith({ ruleIds: [ruleId0, ruleId1] })
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(getDynamicRulesMock).toHaveBeenCalledWith({ ruleIds: [ruleId0, ruleId1] })
+      expect(result).toEqual({
         removeRuleIds: [ruleId0, ruleId1],
         addRules: [
           {
@@ -230,11 +228,11 @@ describe('updateNetworkRules', () => {
           excludedTopDomains: ['other.com']
         }
       }
-      mockGetDynamicRules.mockResolvedValue([existingRule0, existingRule1] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([existingRule0, existingRule1] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, false)
+      const result = await computeNetworkRuleUpdates(domain, setting, false)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId0, ruleId1],
         addRules: [
           {
@@ -275,11 +273,11 @@ describe('updateNetworkRules', () => {
     const ruleId1 = dnrRuleIdForName(category, `${setting}1`)
 
     it('should not exclude domain when protection is enabled, preserving specific conditions', async () => {
-      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
-      await updateNetworkRules(domain, setting, true)
+      const result = await computeNetworkRuleUpdates(domain, setting, true)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId0, ruleId1],
         addRules: [
           {
@@ -328,25 +326,24 @@ describe('updateNetworkRules', () => {
   })
 })
 
-describe('setupDefaultNetworkRules', () => {
-  it('should set up all network rules', async () => {
-    await setupDefaultNetworkRules()
+describe('computeDefaultNetworkRuleUpdates', () => {
+  it('should return update options for all network rules', () => {
+    const result = computeDefaultNetworkRuleUpdates()
 
-    // Should call updateDynamicRules for each rule in each setting
-    // We can't easily count exact calls without knowing all settings, but we can verify it was called
-    expect(mockUpdateDynamicRules).toHaveBeenCalled()
+    // Should return an array of UpdateRuleOptions, one for each rule
+    expect(Array.isArray(result)).toBe(true)
+    expect(result.length).toBeGreaterThan(0)
 
-    // Verify the structure of calls - each should have addRules and removeRuleIds
-    const calls = mockUpdateDynamicRules.mock.calls
-    for (const call of calls) {
-      const options = call[0]
-      expect(options).toHaveProperty('addRules')
-      expect(options).toHaveProperty('removeRuleIds')
-      expect(Array.isArray(options.addRules)).toBe(true)
-      expect(Array.isArray(options.removeRuleIds)).toBe(true)
-      expect(options.addRules?.length).toBe(1)
-      expect(options.removeRuleIds?.length).toBe(1)
-      expect(options.addRules?.[0]?.id).toBe(options.removeRuleIds?.[0])
+    // Verify the structure of each update option
+    for (const updateOption of result) {
+      expect(updateOption).toBeDefined()
+      expect(updateOption).toHaveProperty('addRules')
+      expect(updateOption).toHaveProperty('removeRuleIds')
+      expect(Array.isArray(updateOption?.addRules)).toBe(true)
+      expect(Array.isArray(updateOption?.removeRuleIds)).toBe(true)
+      expect(updateOption?.addRules?.length).toBe(1)
+      expect(updateOption?.removeRuleIds?.length).toBe(1)
+      expect(updateOption?.addRules?.[0]?.id).toBe(updateOption?.removeRuleIds?.[0])
     }
   })
 })

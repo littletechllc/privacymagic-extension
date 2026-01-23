@@ -53,7 +53,7 @@ const isContentSetting = (setting: SettingId): setting is ContentSettingId => {
   return (CONTENT_SETTING_IDS as readonly string[]).includes(setting)
 }
 
-export const updateContentRule = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
+export const computeContentRuleUpdates = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<chrome.declarativeNetRequest.UpdateRuleOptions | undefined> => {
   if (!isContentSetting(setting)) {
     return
   }
@@ -77,12 +77,13 @@ export const updateContentRule = async (domain: string, setting: SettingId, prot
     removeRuleIds: [ruleId, defaultRuleId],
     addRules
   }
-  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
+  return updateRuleOptions
 }
 
-export const setupDefaultContentRule = async (): Promise<void> => {
+export const computeDefaultContentRuleUpdate = (): chrome.declarativeNetRequest.UpdateRuleOptions => {
   const defaultRule = createRuleForTopDomain([])
-  await chrome.declarativeNetRequest.updateDynamicRules({
+  return {
+    removeRuleIds: [defaultRule.id],
     addRules: [defaultRule]
-  })
+  }
 }

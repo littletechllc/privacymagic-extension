@@ -28,9 +28,9 @@ const isBlockerSetting = (setting: SettingId): setting is BlockerSettingId => {
   return setting in BASE_RULES
 }
 
-export const updateAllowRules = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<void> => {
+export const computeAllowRuleUpdates = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<chrome.declarativeNetRequest.UpdateRuleOptions | undefined> => {
   if (!isBlockerSetting(setting)) {
-    return
+    return undefined
   }
   const ruleId = dnrRuleIdForName(category, setting)
   const oldRules = await chrome.declarativeNetRequest.getDynamicRules({ruleIds: [ruleId]})
@@ -41,5 +41,5 @@ export const updateAllowRules = async (domain: string, setting: SettingId, prote
     removeRuleIds: [rule.id],
     addRules: ruleIsInUse ? [rule] : []
   }
-  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
+  return updateRuleOptions
 }

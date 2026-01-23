@@ -1,16 +1,14 @@
 import '@test/mocks/globals'
 import '@test/mocks/web-extension'
-import { updateContentRule, setupDefaultContentRule } from '@src/background/dnr/content-rules'
+import { computeContentRuleUpdates, computeDefaultContentRuleUpdate } from '@src/background/dnr/content-rules'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 import type { ContentSettingId } from '@src/common/setting-ids'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
-
-// Get references to the mocked functions
-const mockGetDynamicRules = global.chrome.declarativeNetRequest.getDynamicRules as jest.MockedFunction<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>
-const mockUpdateDynamicRules = global.chrome.declarativeNetRequest.updateDynamicRules as jest.MockedFunction<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>
+import { getDynamicRulesMock } from '@test/mocks/web-extension'
 
 beforeEach(() => {
   jest.clearAllMocks()
+  getDynamicRulesMock.mockResolvedValue([])
 })
 
 // Helper function to create a content rule for testing
@@ -39,27 +37,36 @@ const createContentRule = (
   }
 }
 
-describe('updateContentRule', () => {
+describe('computeContentRuleUpdates', () => {
   const category = 'content_rule'
   const domain = 'example.com'
   const setting: ContentSettingId = 'cpu'
+
+  describe('when setting is not a ContentSettingId', () => {
+    it('should return undefined without calling any chrome APIs', async () => {
+      const result = await computeContentRuleUpdates(domain, 'ads' as ContentSettingId, false)
+
+      expect(result).toBeUndefined()
+      expect(getDynamicRulesMock).not.toHaveBeenCalled()
+    })
+  })
 
   describe('when disabling protection for a domain', () => {
     it('should create domain rule and update default rule when no rules exist', async () => {
       const ruleId = dnrRuleIdForName(category, domain)
       const defaultRuleId = dnrRuleIdForName(category, 'default')
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([] as chrome.declarativeNetRequest.Rule[]) // domain rule
         .mockResolvedValueOnce([] as chrome.declarativeNetRequest.Rule[]) // default rule
 
-      await updateContentRule(domain, setting, false)
+      const result = await computeContentRuleUpdates(domain, setting, false)
 
-      expect(mockGetDynamicRules).toHaveBeenCalledTimes(2)
-      expect(mockGetDynamicRules).toHaveBeenNthCalledWith(1, { ruleIds: [ruleId] })
-      expect(mockGetDynamicRules).toHaveBeenNthCalledWith(2, { ruleIds: [defaultRuleId] })
+      expect(getDynamicRulesMock).toHaveBeenCalledTimes(2)
+      expect(getDynamicRulesMock).toHaveBeenNthCalledWith(1, { ruleIds: [ruleId] })
+      expect(getDynamicRulesMock).toHaveBeenNthCalledWith(2, { ruleIds: [defaultRuleId] })
       const expectedDefaultRule = createContentRule(defaultRuleId, [], undefined)
       expectedDefaultRule.condition.excludedTopDomains = [domain]
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId, defaultRuleId],
         addRules: [
           expectedDefaultRule,
@@ -74,13 +81,13 @@ describe('updateContentRule', () => {
       const existingRule = createContentRule(ruleId, ['battery'], domain)
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = ['other.com']
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([existingRule] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, false)
+      const result = await computeContentRuleUpdates(domain, setting, false)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId, defaultRuleId],
         addRules: [
           {
@@ -99,14 +106,14 @@ describe('updateContentRule', () => {
       const defaultRuleId = dnrRuleIdForName(category, 'default')
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = undefined
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, false)
+      const result = await computeContentRuleUpdates(domain, setting, false)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalled()
-      const defaultRule = mockUpdateDynamicRules.mock.calls[0]?.[0]?.addRules?.[0]
+      expect(result).toBeDefined()
+      const defaultRule = result?.addRules?.[0]
       expect(defaultRule?.condition.excludedTopDomains).toEqual([domain])
     })
   })
@@ -118,13 +125,13 @@ describe('updateContentRule', () => {
       const existingRule = createContentRule(ruleId, [setting], domain)
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = [domain]
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([existingRule] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, true)
+      const result = await computeContentRuleUpdates(domain, setting, true)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId, defaultRuleId],
         addRules: [
           {
@@ -144,13 +151,13 @@ describe('updateContentRule', () => {
       const existingRule = createContentRule(ruleId, ['battery', setting], domain)
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = [domain]
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([existingRule] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, true)
+      const result = await computeContentRuleUpdates(domain, setting, true)
 
-      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+      expect(result).toEqual({
         removeRuleIds: [ruleId, defaultRuleId],
         addRules: [
           {
@@ -171,26 +178,26 @@ describe('updateContentRule', () => {
       const existingRule = createContentRule(ruleId, [setting], domain)
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = ['other.com', domain]
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([existingRule] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, true)
+      const result = await computeContentRuleUpdates(domain, setting, true)
 
-      const defaultRule = mockUpdateDynamicRules.mock.calls[0]?.[0]?.addRules?.[0]
+      const defaultRule = result?.addRules?.[0]
       expect(defaultRule?.condition.excludedTopDomains).toEqual(['other.com'])
     })
   })
 
   describe('cookie format', () => {
     it('should create cookie with correct format', async () => {
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, false)
+      const result = await computeContentRuleUpdates(domain, setting, false)
 
-      const domainRule = mockUpdateDynamicRules.mock.calls[0]?.[0]?.addRules?.[1]
+      const domainRule = result?.addRules?.[1]
       const cookieValue = domainRule?.action.type === 'modifyHeaders'
         ? domainRule.action.responseHeaders?.find(h => h.header === 'Set-Cookie')?.value
         : undefined
@@ -203,13 +210,13 @@ describe('updateContentRule', () => {
       const existingRule = createContentRule(ruleId, ['battery'], domain)
       const existingDefaultRule = createContentRule(defaultRuleId, [], undefined)
       existingDefaultRule.condition.excludedTopDomains = [domain]
-      mockGetDynamicRules
+      getDynamicRulesMock
         .mockResolvedValueOnce([existingRule] as chrome.declarativeNetRequest.Rule[])
         .mockResolvedValueOnce([existingDefaultRule] as chrome.declarativeNetRequest.Rule[])
 
-      await updateContentRule(domain, setting, false)
+      const result = await computeContentRuleUpdates(domain, setting, false)
 
-      const domainRule = mockUpdateDynamicRules.mock.calls[0]?.[0]?.addRules?.[1]
+      const domainRule = result?.addRules?.[1]
       const cookieValue = domainRule?.action.type === 'modifyHeaders'
         ? domainRule.action.responseHeaders?.find(h => h.header === 'Set-Cookie')?.value
         : undefined
@@ -220,21 +227,22 @@ describe('updateContentRule', () => {
   })
 })
 
-describe('setupDefaultContentRule', () => {
-  it('should create default rule with empty disabled settings', async () => {
+describe('computeDefaultContentRuleUpdate', () => {
+  it('should create default rule with empty disabled settings', () => {
     const defaultRuleId = dnrRuleIdForName('content_rule', 'default')
 
-    await setupDefaultContentRule()
+    const result = computeDefaultContentRuleUpdate()
 
-    expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
+    expect(result).toEqual({
+      removeRuleIds: [defaultRuleId],
       addRules: [createContentRule(defaultRuleId, [], undefined)]
     })
   })
 
-  it('should create default rule with empty excludedTopDomains', async () => {
-    await setupDefaultContentRule()
+  it('should create default rule with empty excludedTopDomains', () => {
+    const result = computeDefaultContentRuleUpdate()
 
-    const defaultRule = mockUpdateDynamicRules.mock.calls[0]?.[0]?.addRules?.[0]
+    const defaultRule = result.addRules?.[0]
     expect(defaultRule?.condition.excludedTopDomains).toEqual([])
   })
 })
