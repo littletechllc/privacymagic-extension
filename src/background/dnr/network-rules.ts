@@ -215,7 +215,7 @@ export const updateNetworkRules = async (topDomain: string, setting: SettingId, 
     return
   }
   const ruleIds = baseRules[setting].map(rule => rule.id)
-  const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds})
+  const oldRules = await chrome.declarativeNetRequest.getDynamicRules({ruleIds})
   const rules = structuredClone(oldRules.length > 0 ? oldRules : baseRules[setting])
   for (const rule of rules) {
     rule.condition.excludedTopDomains = includeInListIfNeeded<string>(rule.condition.excludedTopDomains, topDomain, !protectionEnabled)
@@ -224,13 +224,13 @@ export const updateNetworkRules = async (topDomain: string, setting: SettingId, 
     removeRuleIds: rules.map(rule => rule.id),
     addRules: rules
   }
-  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
+  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
 }
 
 export const setupDefaultNetworkRules = async (): Promise<void> => {
   for (const rules of Object.values(baseRules)) {
     for (const rule of rules) {
-      await chrome.declarativeNetRequest.updateSessionRules({
+      await chrome.declarativeNetRequest.updateDynamicRules({
         addRules: [rule], removeRuleIds: [rule.id]
       })
     }

@@ -4,16 +4,16 @@
 import { jest } from '@jest/globals'
 
 // Create mock functions with proper types
-const mockGetSessionRules = jest.fn<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>()
-const mockUpdateSessionRules = jest.fn<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>()
+const mockGetDynamicRules = jest.fn<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>()
+const mockUpdateDynamicRules = jest.fn<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>()
 const mockStorageGet = jest.fn<(keys?: string | string[] | Record<string, unknown> | null) => Promise<Record<string, unknown>>>()
 const mockStorageSet = jest.fn<(items: Record<string, unknown>) => Promise<void>>()
 const mockStorageRemove = jest.fn<(keys: string | string[]) => Promise<void>>()
 const mockStorageClear = jest.fn<() => Promise<void>>()
 
 // Export typed mocks for use in tests
-export const getSessionRulesMock = mockGetSessionRules
-export const updateSessionRulesMock = mockUpdateSessionRules
+export const getDynamicRulesMock = mockGetDynamicRules
+export const updateDynamicRulesMock = mockUpdateDynamicRules
 export const storageLocalGetMock = mockStorageGet
 export const storageLocalSetMock = mockStorageSet
 export const storageLocalRemoveMock = mockStorageRemove
@@ -47,8 +47,8 @@ if (global.chrome?.declarativeNetRequest?.ResourceType === undefined) {
 
   global.chrome.declarativeNetRequest = {
     ResourceType: mockResourceType as unknown as typeof chrome.declarativeNetRequest.ResourceType,
-    getSessionRules: mockGetSessionRules as typeof chrome.declarativeNetRequest.getSessionRules,
-    updateSessionRules: mockUpdateSessionRules as typeof chrome.declarativeNetRequest.updateSessionRules
+    getDynamicRules: mockGetDynamicRules as typeof chrome.declarativeNetRequest.getDynamicRules,
+    updateDynamicRules: mockUpdateDynamicRules as typeof chrome.declarativeNetRequest.updateDynamicRules
   } as unknown as typeof chrome.declarativeNetRequest
 
   // Mock chrome.storage if not already set up

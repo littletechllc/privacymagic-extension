@@ -45,7 +45,7 @@ const disabledSettingsFromRule = (rule: chrome.declarativeNetRequest.Rule | unde
 }
 
 const getSingleRule = async (ruleId: number): Promise<chrome.declarativeNetRequest.Rule | undefined> => {
-  const ruleResults = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
+  const ruleResults = await chrome.declarativeNetRequest.getDynamicRules({ruleIds: [ruleId]})
   return ruleResults.length > 0 ? ruleResults[0] : undefined
 }
 
@@ -77,12 +77,12 @@ export const updateContentRule = async (domain: string, setting: SettingId, prot
     removeRuleIds: [ruleId, defaultRuleId],
     addRules
   }
-  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
+  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
 }
 
 export const setupDefaultContentRule = async (): Promise<void> => {
   const defaultRule = createRuleForTopDomain([])
-  await chrome.declarativeNetRequest.updateSessionRules({
+  await chrome.declarativeNetRequest.updateDynamicRules({
     addRules: [defaultRule]
   })
 }

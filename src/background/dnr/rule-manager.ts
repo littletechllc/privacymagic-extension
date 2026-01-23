@@ -4,6 +4,8 @@ import { setupDefaultNetworkRules, updateNetworkRules } from '@src/background/dn
 import { SettingId } from '@src/common/setting-ids'
 import { getAllSettings } from '@src/common/settings'
 
+// TODO: Switch to dynamic rules
+
 export const updateRules = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
   await updateContentRule(domain, settingId, value)
   await updateNetworkRules(domain, settingId, value)
@@ -20,8 +22,8 @@ export const setupRules = async (): Promise<void> => {
 }
 
 export const clearRules = async (): Promise<void> => {
-  const sessionRules = await chrome.declarativeNetRequest.getSessionRules()
-  await chrome.declarativeNetRequest.updateSessionRules({
-    removeRuleIds: sessionRules.map(rule => rule.id)
+  const rules = await chrome.declarativeNetRequest.getDynamicRules()
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: rules.map(rule => rule.id)
   })
 }
