@@ -33,7 +33,7 @@ export const updateAllowRules = async (domain: string, setting: SettingId, prote
     return
   }
   const ruleId = dnrRuleIdForName(category, setting)
-  const oldRules = await chrome.declarativeNetRequest.getSessionRules({ruleIds: [ruleId]})
+  const oldRules = await chrome.declarativeNetRequest.getDynamicRules({ruleIds: [ruleId]})
   const rule = oldRules.length ? oldRules[0] : BASE_RULES[setting]
   rule.condition.topDomains = includeInListIfNeeded<string>(rule.condition.topDomains, domain, !protectionEnabled)
   const ruleIsInUse = rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0
@@ -41,5 +41,5 @@ export const updateAllowRules = async (domain: string, setting: SettingId, prote
     removeRuleIds: [rule.id],
     addRules: ruleIsInUse ? [rule] : []
   }
-  await chrome.declarativeNetRequest.updateSessionRules(updateRuleOptions)
+  await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
 }

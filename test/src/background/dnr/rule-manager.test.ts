@@ -1,5 +1,5 @@
 import '@test/mocks/globals'
-import { getSessionRulesMock, storageLocalGetMock, updateSessionRulesMock } from '@test/mocks/web-extension'
+import { getDynamicRulesMock, storageLocalGetMock, updateDynamicRulesMock } from '@test/mocks/web-extension'
 import { updateRules, setupRules, clearRules } from '@src/background/dnr/rule-manager'
 import { SETTINGS_KEY_PREFIX } from '@src/common/settings'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
@@ -16,10 +16,10 @@ const countRules = () : number => {
 beforeEach(() => {
   jest.clearAllMocks()
   // Mock storage.local.get() and
-  // chrome.declarativeNetRequest.getSessionRules
+  // chrome.declarativeNetRequest.getDynamicRules
   // to return empty results by default
   storageLocalGetMock.mockResolvedValue({})
-  getSessionRulesMock.mockResolvedValue([])
+  getDynamicRulesMock.mockResolvedValue([])
 })
 
 describe('updateRules', () => {
@@ -28,51 +28,51 @@ describe('updateRules', () => {
   it('should call updateContentRule, updateNetworkRules, and updateAllowRules for gpc', async () => {
     await updateRules(domain, 'gpc', true)
 
-    // updateContentRule always calls updateSessionRules for 'gpc' (1 call)
-    // updateNetworkRules calls updateSessionRules for 'gpc' (1 call)
+    // updateContentRule always calls updateDynamicRules for 'gpc' (1 call)
+    // updateNetworkRules calls updateDynamicRules for 'gpc' (1 call)
     // updateAllowRules returns early for 'gpc' since it's not in BASE_RULES (0 calls)
-    // We verify that updateSessionRules was called twice to confirm execution.
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(2)
+    // We verify that updateDynamicRules was called twice to confirm execution.
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(2)
   })
 
-  it('should call updateSessionRules twice for masterSwitch', async () => {
+  it('should call updateDynamicRules twice for masterSwitch', async () => {
     await updateRules(domain, 'masterSwitch', true)
 
-    // updateContentRule calls updateSessionRules for 'masterSwitch' since it's a ContentSettingId (doesn't return early) (1 call)
+    // updateContentRule calls updateDynamicRules for 'masterSwitch' since it's a ContentSettingId (doesn't return early) (1 call)
     // updateNetworkRules returns early for 'masterSwitch' since it's not in NETWORK_PROTECTION_DEFS (0 calls)
-    // updateAllowRules calls updateSessionRules for 'masterSwitch' since it's in BASE_RULES (doesn't return early) (1 call)
+    // updateAllowRules calls updateDynamicRules for 'masterSwitch' since it's in BASE_RULES (doesn't return early) (1 call)
     // Total: 2 calls
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(2)
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(2)
   })
 
-  it('should call updateSessionRules once for math', async () => {
+  it('should call updateDynamicRules once for math', async () => {
     await updateRules(domain, 'math', true)
 
-    // updateContentRule calls updateSessionRules for 'math' since it's a ContentSettingId (doesn't return early) (1 call)
+    // updateContentRule calls updateDynamicRules for 'math' since it's a ContentSettingId (doesn't return early) (1 call)
     // updateNetworkRules returns early for 'math' since it's not in NETWORK_PROTECTION_DEFS (0 calls)
     // updateAllowRules returns early for 'math' since it's not in BASE_RULES (0 calls)
     // Total: 1 call
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(1)
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
   })
 
-  it('should call updateSessionRules once for ads', async () => {
+  it('should call updateDynamicRules once for ads', async () => {
     await updateRules(domain, 'ads', true)
 
     // updateContentRule returns early for 'ads' since it's not a ContentSettingId (0 calls)
     // updateNetworkRules returns early for 'ads' since it's not in NETWORK_PROTECTION_DEFS (0 calls)
-    // updateAllowRules calls updateSessionRules for 'ads' since it's in BASE_RULES (doesn't return early) (1 call)
+    // updateAllowRules calls updateDynamicRules for 'ads' since it's in BASE_RULES (doesn't return early) (1 call)
     // Total: 1 call
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(1)
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
   })
 
-  it('should call updateSessionRules once for queryParameters', async () => {
+  it('should call updateDynamicRules once for queryParameters', async () => {
     await updateRules(domain, 'queryParameters', true)
 
     // updateContentRule returns early for 'queryParameters' since it's not a ContentSettingId (0 calls)
-    // updateNetworkRules calls updateSessionRules for 'queryParameters' since it's in NETWORK_PROTECTION_DEFS (doesn't return early) (1 call)
+    // updateNetworkRules calls updateDynamicRules for 'queryParameters' since it's in NETWORK_PROTECTION_DEFS (doesn't return early) (1 call)
     // updateAllowRules returns early for 'queryParameters' since it's not in BASE_RULES (0 calls)
     // Total: 1 call
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(1)
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -93,19 +93,19 @@ describe('setupRules', () => {
       [`${SETTINGS_KEY_PREFIX}:${domain}:queryParameters`]: false // NetworkSettingId only - protection disabled
     }
     storageLocalGetMock.mockResolvedValue(storageData)
-    getSessionRulesMock.mockResolvedValue([])
+    getDynamicRulesMock.mockResolvedValue([])
 
-    const initialCallCount = updateSessionRulesMock.mock.calls.length
+    const initialCallCount = updateDynamicRulesMock.mock.calls.length
     await setupRules()
 
-    // Verify that updateSessionRules was called for setup and stored settings
+    // Verify that updateDynamicRules was called for setup and stored settings
     // setupDefaultContentRule: 1 call
     // setupDefaultNetworkRules: 12 calls (one per network rule)
     // updateRules for stored settings: 4 calls
     //   - battery: updateContentRule (1 call)
     //   - gpc: updateContentRule (1 call) + updateNetworkRules (1 call)
     //   - queryParameters: updateNetworkRules (1 call)
-    const finalCallCount = updateSessionRulesMock.mock.calls.length
+    const finalCallCount = updateDynamicRulesMock.mock.calls.length
     expect(finalCallCount - initialCallCount).toBe(totalDefaultNetworkRulesCount + totalDefaultContentRulesCount + 4)
 
     // Verify storage was called to get all settings
@@ -120,21 +120,21 @@ describe('setupRules', () => {
       [`${SETTINGS_KEY_PREFIX}:another.com:masterSwitch`]: true
     }
     storageLocalGetMock.mockResolvedValue(storageData)
-    getSessionRulesMock.mockResolvedValue([])
+    getDynamicRulesMock.mockResolvedValue([])
 
-    const initialCallCount = updateSessionRulesMock.mock.calls.length
+    const initialCallCount = updateDynamicRulesMock.mock.calls.length
     await setupRules()
 
     // Verify storage was called
     expect(storageLocalGetMock).toHaveBeenCalled()
-    // Verify that updateSessionRules was called for each stored setting
+    // Verify that updateDynamicRules was called for each stored setting
     // gpc: updateContentRule (1 call) + updateNetworkRules (1 call) = 2 calls
     // css: updateContentRule (1 call) + updateNetworkRules (1 call) = 2 calls
     // masterSwitch: updateContentRule (1 call) + updateAllowRules (1 call) = 2 calls
     // Total from updateRules: 6 calls
     // Plus setup: setupDefaultContentRule + setupDefaultNetworkRules
     // Total: totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 6
-    const finalCallCount = updateSessionRulesMock.mock.calls.length
+    const finalCallCount = updateDynamicRulesMock.mock.calls.length
     expect(finalCallCount - initialCallCount).toBe(totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 6)
   })
 
@@ -142,7 +142,7 @@ describe('setupRules', () => {
     // Empty storage means getAllSettings returns empty array
     storageLocalGetMock.mockResolvedValue({})
 
-    const initialCallCount = updateSessionRulesMock.mock.calls.length
+    const initialCallCount = updateDynamicRulesMock.mock.calls.length
     await setupRules()
 
     // setupDefaultContentRule and setupDefaultNetworkRules should still be called
@@ -150,7 +150,7 @@ describe('setupRules', () => {
     expect(storageLocalGetMock).toHaveBeenCalled()
     // The call count should only increase from setup functions, not from updateRules
     // Total: setupDefaultContentRule (1) + setupDefaultNetworkRules
-    const finalCallCount = updateSessionRulesMock.mock.calls.length
+    const finalCallCount = updateDynamicRulesMock.mock.calls.length
     expect(finalCallCount - initialCallCount).toBe(totalDefaultContentRulesCount + totalDefaultNetworkRulesCount)
   })
 })
@@ -162,8 +162,8 @@ describe('clearRules', () => {
   it('should get all session rules', async () => {
     await clearRules()
 
-    expect(getSessionRulesMock).toHaveBeenCalledTimes(1)
-    expect(getSessionRulesMock).toHaveBeenCalledWith()
+    expect(getDynamicRulesMock).toHaveBeenCalledTimes(1)
+    expect(getDynamicRulesMock).toHaveBeenCalledWith()
   })
 
   it('should remove all session rules', async () => {
@@ -172,23 +172,23 @@ describe('clearRules', () => {
       { id: 2, action: { type: 'allow' }, condition: {} },
       { id: 3, action: { type: 'redirect', redirect: { url: 'https://example.com' } }, condition: {} }
     ]
-    getSessionRulesMock.mockResolvedValue(rules)
+    getDynamicRulesMock.mockResolvedValue(rules)
 
     await clearRules()
 
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(1)
-    expect(updateSessionRulesMock).toHaveBeenCalledWith({
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
+    expect(updateDynamicRulesMock).toHaveBeenCalledWith({
       removeRuleIds: [1, 2, 3]
     })
   })
 
   it('should handle empty session rules', async () => {
-    getSessionRulesMock.mockResolvedValue([])
+    getDynamicRulesMock.mockResolvedValue([])
 
     await clearRules()
 
-    expect(updateSessionRulesMock).toHaveBeenCalledTimes(1)
-    expect(updateSessionRulesMock).toHaveBeenCalledWith({
+    expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
+    expect(updateDynamicRulesMock).toHaveBeenCalledWith({
       removeRuleIds: []
     })
   })

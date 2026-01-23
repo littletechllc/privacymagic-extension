@@ -6,8 +6,8 @@ import type { SettingId } from '@src/common/setting-ids'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 
 // Get references to the mocked functions (set up in test/setup.ts)
-const mockGetSessionRules = global.chrome.declarativeNetRequest.getSessionRules as jest.MockedFunction<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>
-const mockUpdateSessionRules = global.chrome.declarativeNetRequest.updateSessionRules as jest.MockedFunction<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>
+const mockGetDynamicRules = global.chrome.declarativeNetRequest.getDynamicRules as jest.MockedFunction<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>
+const mockUpdateDynamicRules = global.chrome.declarativeNetRequest.updateDynamicRules as jest.MockedFunction<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -36,8 +36,8 @@ describe('updateAllowRules', () => {
     it('should return early without calling any chrome APIs', async () => {
       await updateAllowRules(domain, 'audio' as SettingId, true)
 
-      expect(mockGetSessionRules).not.toHaveBeenCalled()
-      expect(mockUpdateSessionRules).not.toHaveBeenCalled()
+      expect(mockGetDynamicRules).not.toHaveBeenCalled()
+      expect(mockUpdateDynamicRules).not.toHaveBeenCalled()
     })
   })
 
@@ -46,12 +46,12 @@ describe('updateAllowRules', () => {
     const ruleId = dnrRuleIdForName(category, setting)
 
     it('should create new rule when rule does not exist and protection is disabled', async () => {
-      mockGetSessionRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, false)
 
-      expect(mockGetSessionRules).toHaveBeenCalledWith({ ruleIds: [ruleId] })
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockGetDynamicRules).toHaveBeenCalledWith({ ruleIds: [ruleId] })
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])]
       })
@@ -59,11 +59,11 @@ describe('updateAllowRules', () => {
 
     it('should remove rule when protection is enabled and rule has only this domain', async () => {
       const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])
-      mockGetSessionRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, true)
 
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: []
       })
@@ -71,11 +71,11 @@ describe('updateAllowRules', () => {
 
     it('should update existing rule when protection is disabled and rule already exists', async () => {
       const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com'])
-      mockGetSessionRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, false)
 
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', domain])]
       })
@@ -83,11 +83,11 @@ describe('updateAllowRules', () => {
 
     it('should remove domain from existing rule when protection is enabled', async () => {
       const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', domain, 'another.com'])
-      mockGetSessionRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, true)
 
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', 'another.com'])]
       })
@@ -95,11 +95,11 @@ describe('updateAllowRules', () => {
 
     it('should not add duplicate domain when protection is disabled', async () => {
       const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])
-      mockGetSessionRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, false)
 
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])]
       })
@@ -111,12 +111,12 @@ describe('updateAllowRules', () => {
     const ruleId = dnrRuleIdForName(category, setting)
 
     it('should create new rule when rule does not exist and protection is disabled', async () => {
-      mockGetSessionRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, false)
 
-      expect(mockGetSessionRules).toHaveBeenCalledWith({ ruleIds: [ruleId] })
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockGetDynamicRules).toHaveBeenCalledWith({ ruleIds: [ruleId] })
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [domain])]
       })
@@ -124,11 +124,11 @@ describe('updateAllowRules', () => {
 
     it('should remove rule when protection is enabled and rule has only this domain', async () => {
       const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [domain])
-      mockGetSessionRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+      mockGetDynamicRules.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
 
       await updateAllowRules(domain, setting, true)
 
-      expect(mockUpdateSessionRules).toHaveBeenCalledWith({
+      expect(mockUpdateDynamicRules).toHaveBeenCalledWith({
         removeRuleIds: [ruleId],
         addRules: []
       })

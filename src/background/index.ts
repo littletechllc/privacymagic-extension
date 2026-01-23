@@ -5,10 +5,10 @@ import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { logError, registrableDomainFromUrl, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '@src/common/messages'
-import { updateRules, setupRules, clearRules } from './dnr/rule-manager'
+import { updateRules, setupRules } from './dnr/rule-manager'
 
 const blockAutocomplete = async (): Promise<void> => {
-  await chrome.declarativeNetRequest.updateSessionRules({
+  await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: [400],
     addRules: [
       {
@@ -83,7 +83,7 @@ const logMatchingRulesInDevMode = (): void => {
       (async ({ request, rule }) => {
         let ruleContent
         if (rule.rulesetId === '_session') {
-          const rules = await chrome.declarativeNetRequest.getSessionRules({
+          const rules = await chrome.declarativeNetRequest.getDynamicRules({
             ruleIds: [rule.ruleId]
           })
           ruleContent = rules[0]
@@ -158,7 +158,6 @@ const testHttpBehavior = () => {
 }
 
 const initializeExtension = async (): Promise<void> => {
-  await clearRules()
   injectCssForCosmeticFilters()
   await setupRules()
   // await createHttpWarningNetworkRule()
