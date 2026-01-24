@@ -1,6 +1,3 @@
-// Debug utilities for development
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const logMatchingRulesInDevMode = (): void => {
   if (chrome.declarativeNetRequest.onRuleMatchedDebug !== undefined) {
     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
@@ -24,7 +21,6 @@ export const logMatchingRulesInDevMode = (): void => {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const testHttpBehavior = (): void => {
   chrome.webRequest.onBeforeRequest.addListener((details) => {
     console.log('onBeforeRequest debug:', details)

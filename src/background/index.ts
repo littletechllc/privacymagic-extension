@@ -76,104 +76,34 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const logMatchingRulesInDevMode = (): void => {
-  if (chrome.declarativeNetRequest.onRuleMatchedDebug !== undefined) {
-    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-      (async ({ request, rule }) => {
-        let ruleContent
-        if (rule.rulesetId === '_session') {
-          const rules = await chrome.declarativeNetRequest.getSessionRules({
-            ruleIds: [rule.ruleId]
-          })
-          ruleContent = rules[0]
-        }
-        if (rule.rulesetId === '_dynamic') {
-          const rules = await chrome.declarativeNetRequest.getDynamicRules({
-            ruleIds: [rule.ruleId]
-          })
-          ruleContent = rules[0]
-        }
-        console.log('rule matched debug:', { request, rule, ruleContent })
-      }) as (info: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => void
-    )
+// Functions that set up event listeners (need to be re-registered on every background script load)
+const initializeListeners = (): void => {
+  try {
+    injectCssForCosmeticFilters()
+    // Debug functions available in debug.ts:
+    // import { logMatchingRulesInDevMode, testHttpBehavior } from './debug'
+    // logMatchingRulesInDevMode()
+    // testHttpBehavior()
+  } catch (error) {
+    logError(error, 'error initializing listeners')
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const testHttpBehavior = () => {
-  chrome.webRequest.onBeforeRequest.addListener((details) => {
-    console.log('onBeforeRequest debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onBeforeSendHeaders.addListener((details) => {
-    console.log('onBeforeSendHeaders debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onSendHeaders.addListener((details) => {
-    console.log('onSendHeaders debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onHeadersReceived.addListener((details) => {
-    console.log('onHeadersReceived debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onAuthRequired.addListener((details) => {
-    console.log('onAuthRequired debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onBeforeRedirect.addListener((details) => {
-    console.log('onBeforeRedirect debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onResponseStarted.addListener((details) => {
-    console.log('onResponseStarted debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onCompleted.addListener((details) => {
-    console.log('onCompleted debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onErrorOccurred.addListener((details) => {
-    console.log('onErrorOccurred debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-    console.log('onBeforeNavigate debug:', details)
-  })
-  chrome.webNavigation.onCommitted.addListener((details) => {
-    console.log('onCommitted debug:', details)
-  })
-  chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
-    console.log('onDOMContentLoaded debug:', details)
-  })
-  chrome.webNavigation.onCompleted.addListener((details) => {
-    console.log('onCompleted debug:', details)
-  })
-  chrome.webNavigation.onErrorOccurred.addListener((details) => {
-    console.log('onErrorOccurred debug:', details)
-  })
-  chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-    console.log('onHistoryStateUpdated debug:', details)
-  })
-  chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
-    console.log('onReferenceFragmentUpdated debug:', details)
-  })
-}
-
-const initializeExtension = async (): Promise<void> => {
-  injectCssForCosmeticFilters()
+// Functions that set up persistent resources (dynamic DNR rules persist across sessions)
+const initializePersistentResources = async (): Promise<void> => {
+  await blockAutocomplete()
   await setupRules()
   // await createHttpWarningNetworkRule()
-  await blockAutocomplete()
-  // ignore-unused-vars
-  // logMatchingRulesInDevMode()
-  // ignore-unused-vars
-  // await testHttpBehavior()
-  console.log('Extension initialized')
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
   handleAsync(async () => {
     console.log('onInstalled details:', details)
+    // Reset prefs to defaults on install/update
+    // TODO: only reset prefs on first install
     await resetAllPrefsToDefaults()
-    await initializeExtension()
+    // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)
+    await initializePersistentResources()
   }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details)
@@ -181,17 +111,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 })
 
 chrome.runtime.onStartup.addListener(() => {
-  handleAsync(async () => {
-    console.log('onStartup')
-    await initializeExtension()
-  }, (error) => {
-    // TODO: Show user a notification that the extension failed to start.
-    logError(error, 'error onStartup')
-  })
+  console.log('onStartup')
 })
 
-initializeExtension().then(() => {
-  console.log('background script loaded')
-}).catch((error) => {
-  logError(error, 'error initializing extension')
-})
+initializeListeners()
