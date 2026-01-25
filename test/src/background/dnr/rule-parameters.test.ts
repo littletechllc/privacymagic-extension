@@ -1,3 +1,4 @@
+import '@test/mocks/globals'
 import { describe, it, expect, beforeEach } from '@jest/globals'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
@@ -41,18 +42,21 @@ describe('dnrRuleIdForName', () => {
     expect(id1).not.toBe(id2)
   })
 
-  it('should return sequential IDs for new category/name combinations', () => {
-    // Get a baseline ID
-    const baselineId = dnrRuleIdForName('content_rule', 'baseline')
-
-    // Get IDs for new combinations - they should be sequential
+  it('should return deterministic IDs for different category/name combinations', () => {
+    // Hash-based implementation produces deterministic but not sequential IDs
     const id1 = dnrRuleIdForName('content_rule', 'new1')
     const id2 = dnrRuleIdForName('content_rule', 'new2')
     const id3 = dnrRuleIdForName('content_rule', 'new3')
 
-    expect(id1).toBe(baselineId + 1)
-    expect(id2).toBe(baselineId + 2)
-    expect(id3).toBe(baselineId + 3)
+    // IDs should be different for different inputs
+    expect(id1).not.toBe(id2)
+    expect(id2).not.toBe(id3)
+    expect(id1).not.toBe(id3)
+
+    // IDs should be deterministic (same input = same output)
+    expect(dnrRuleIdForName('content_rule', 'new1')).toBe(id1)
+    expect(dnrRuleIdForName('content_rule', 'new2')).toBe(id2)
+    expect(dnrRuleIdForName('content_rule', 'new3')).toBe(id3)
   })
 
   it('should handle empty ruleName', () => {
