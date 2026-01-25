@@ -1,3 +1,5 @@
+import { KeyPath, storage } from '@src/common/storage'
+
 /**
  * Globally-defined priorities for DNR rules.
  */
@@ -14,17 +16,22 @@ export enum DNR_RULE_PRIORITIES {
  */
 export type CategoryId = 'content_rule' | 'network_rule' | 'allow_rule' | 'http_warnings'
 
-/**
- * Map of category and rule name to unique ID.
- * The key is a JSON string of the category and rule name.
- * The value is a unique numeric ID.
- */
-const nameToIdMap = new Map<string, number>();
+const encoderForFnv1a = new TextEncoder();
 
 /**
- * The highest ID currently assigned.
+ * FNV-1a hash function.
+ * @param str - The string to hash.
+ * @returns The hash value.
  */
-let highestId = 0;
+function fnv1a(str: string): number {
+  const bytes = encoderForFnv1a.encode(str);
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < bytes.length; i++) {
+    hash ^= bytes[i];
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return hash >>> 0;
+}
 
 /**
  * Generates a unique ID for a rule based on its category and name.
@@ -35,9 +42,6 @@ let highestId = 0;
  */
 export const dnrRuleIdForName = (category: CategoryId, ruleName: string): number => {
   const key = JSON.stringify([category, ruleName])
-  if (!nameToIdMap.has(key)) {
-    highestId++
-    nameToIdMap.set(key, highestId)
-  }
-  return nameToIdMap.get(key)!
+  // Keep range of IDs to fit into 32 bit integer comfortably.
+  return (fnv1a(key) % 1_000_000_000) + 1
 }
