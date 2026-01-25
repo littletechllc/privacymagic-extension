@@ -1,3 +1,4 @@
+import '@test/mocks/globals'
 import '@test/mocks/web-extension'
 import { computeAllowRuleUpdates } from '@src/background/dnr/allow-rules'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
