@@ -33,6 +33,8 @@ function fnv1a(str: string): number {
 
 /**
  * Generates a unique ID for a rule based on its category and name.
+ * Small probability of collision for different categories or rule names.
+ * Collisions are unlikely to happen in practice.
  *
  * @param category - The category of the rule (enforced at compile time).
  * @param ruleName - The name of the rule (arbitrary string).
