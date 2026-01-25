@@ -1,5 +1,3 @@
-import { KeyPath, storage } from '@src/common/storage'
-
 /**
  * Globally-defined priorities for DNR rules.
  */
