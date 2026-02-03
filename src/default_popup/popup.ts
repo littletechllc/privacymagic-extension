@@ -1,8 +1,6 @@
-import { createToggleWithBinding } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
 import { updateSiteInfo } from '@src/common/site-info'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
-import { storage } from '@src/common/storage'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const setupAdvancedSettingsButton = (): void => {
