@@ -1,4 +1,4 @@
-import { setupSettingsUI, createMasterSwitch } from '@src/common/settings-ui'
+import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { updateSiteInfo } from '@src/common/site-info'
