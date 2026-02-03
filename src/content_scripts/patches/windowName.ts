@@ -1,4 +1,4 @@
-import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '@src/content_scripts/helpers/helpers'
+import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '@src/content_scripts/helpers/monkey-patch'
 
 const windowName = (): void => {
   if (self.top !== self) {

@@ -1,5 +1,6 @@
 import { sharedSecret } from "./secret"
-import { dispatchEventSafe, documentSafe, CustomEventSafe, FetchID } from "./helpers"
+import { dispatchEventSafe, documentSafe, CustomEventSafe } from "./safe"
+import { FetchID } from "./helpers"
 
 const secret = sharedSecret()
 

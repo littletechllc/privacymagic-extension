@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
 
 const useragent = (): void => {
   const CHROME_VERSION = '141.0.0.0'

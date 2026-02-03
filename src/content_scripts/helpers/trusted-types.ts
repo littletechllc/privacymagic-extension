@@ -1,4 +1,5 @@
-import { createSafeMethod, redefinePropertyValues, weakMapGetSafe, weakMapSetSafe } from "./helpers"
+import { createSafeMethod, redefinePropertyValues } from "./monkey-patch"
+import { weakMapGetSafe, weakMapSetSafe } from "./safe"
 
 type TrustedObjectType = TrustedHTML | TrustedScript | TrustedScriptURL
 

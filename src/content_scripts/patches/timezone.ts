@@ -1,6 +1,6 @@
 
 
-import { redefinePropertyValues, createSafeMethod } from '@src/content_scripts/helpers/helpers'
+import { redefinePropertyValues, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 
 const timezone = (): void => {
   // Time zones that use fractional hour offsets can be coalesced to a

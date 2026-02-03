@@ -1,4 +1,4 @@
-import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers/helpers'
+import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 
 const timer = (): void => {
   const mathRoundSafe = Math.round
