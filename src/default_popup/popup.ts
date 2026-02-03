@@ -3,6 +3,7 @@ import { handleAsync, logError } from '@src/common/util'
 import { updateSiteInfo } from '@src/common/site-info'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { storage } from '@src/common/storage'
+import { createMasterSwitch } from '@src/common/settings-ui'
 
 const setupAdvancedSettingsButton = (): void => {
   document.getElementById('advancedSettingsButton')?.addEventListener('click', (event) => {
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   }
   const domain = await getDomainForTabMessageRemote(tabId)
   await updateSiteInfo(domain)
-  const masterSwitchToggle = await createToggleWithBinding(storage.local, domain, 'masterSwitch')
+  const masterSwitchToggle = await createMasterSwitch(domain)
   const toggleContainer = document.querySelector('.toggle-container')
   toggleContainer?.appendChild(masterSwitchToggle)
 }, (error: unknown) => {

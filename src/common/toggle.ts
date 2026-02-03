@@ -7,7 +7,7 @@ export const createToggle = (id: string, locked: boolean = false): HTMLElement =
   input.disabled = locked
 
   const toggleOuter = document.createElement('div')
-  toggleOuter.className = 'toggle-outer'
+  toggleOuter.className = `toggle-outer settings-toggle-${id}`
 
   const switchLabel = document.createElement('label')
   switchLabel.htmlFor = id
