@@ -5,7 +5,7 @@ export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
   | { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean }
   | { type: 'getRemoteStyleSheetContent', url: string }
-  | { type: 'getDomainForCurrentTab' }
+  | { type: 'getDomainForTab', tabId: number }
   | { type: 'reloadTab', tabId: number }
 
 export type SuccessResponse = { success: true }
@@ -58,8 +58,8 @@ export const getRemoteStyleSheetContentRemote = async (
   return response.content
 }
 
-export const getDomainForCurrentTabMessageRemote = async (): Promise<string> => {
-  const message: Message = { type: 'getDomainForCurrentTab' }
+export const getDomainForTabMessageRemote = async (tabId: number): Promise<string> => {
+  const message: Message = { type: 'getDomainForTab', tabId }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as DomainResponse | ErrorResponse
   if (!response.success) {
     throw new Error(response.error)

@@ -10,7 +10,7 @@ import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/backgrou
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
-    ([header, value]: [string, string]) => ({ operation: 'set' as const, header, value }))
+    ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
 
 const removeHeaders = (list: string[]): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   list.map(header => ({ operation: 'remove', header }))

@@ -38,9 +38,13 @@ const handleMessage = async (
       const response = await fetch(message.url, { headers: { "Content-Type": "text/css" } })
       const content = await response.text()
       sendResponse({ success: true, content } as ContentResponse)
-    } else if (message.type === 'getDomainForCurrentTab') {
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
-      const tab = tabs[0]
+    } else if (message.type === 'getDomainForTab') {
+      const tabId = message.tabId
+      const tab = await chrome.tabs.get(tabId)
+      if (tab == null) {
+        sendResponse({ success: false, error: 'tab not found' } as ErrorResponse)
+        return
+      }
       const url = tab.url ?? ''
       const domain = registrableDomainFromUrl(url)
       if (domain === null) {

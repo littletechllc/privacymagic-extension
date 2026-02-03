@@ -11,6 +11,9 @@
     "128": "logo/logo-128.png"
   },
   "options_page": "privacymagic/options.html",
+  "side_panel": {
+    "default_path": "privacymagic/sidepanel.html"
+  },
   "action": {
     "default_title": "Privacy Magic",
     "default_popup": "default_popup/popup.html",
@@ -27,6 +30,7 @@
     "favicon",
     "privacy",
     "scripting",
+    "sidePanel",
     "storage",
     "webNavigation",
     "webRequest"
