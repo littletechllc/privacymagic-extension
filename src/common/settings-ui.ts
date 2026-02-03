@@ -120,14 +120,23 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
   return category
 }
 
+export const createMasterSwitch = async (domain: string): Promise<HTMLElement> => {
+  const masterSwitchToggle = await createToggleWithBinding(storage.local, domain, 'masterSwitch')
+  return masterSwitchToggle
+}
+
 export const setupSettingsUI = async (domain: string): Promise<void> => {
   const settingsContainer = document.getElementById('settings')
   if (settingsContainer == null) {
     throw new Error('Settings container not found')
   }
-  settingsContainer.innerHTML = '<h1>Privacy Magic Protections</h1>'
+  const masterSwitchToggle = await createMasterSwitch(domain)
+  settingsContainer.appendChild(masterSwitchToggle)
+  const subswitchesContainer = document.createElement('div')
+  subswitchesContainer.className = 'subswitches-container'
+  settingsContainer.appendChild(subswitchesContainer)
   for (const [categoryId, settingIds] of objectEntries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(storage.local, domain, settingIds, categoryId)
-    settingsContainer.appendChild(toggleCategory)
+    subswitchesContainer.appendChild(toggleCategory)
   }
 }

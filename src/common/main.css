@@ -13,22 +13,6 @@
   margin-bottom: 15px;
 }
 
-.toggle-container {
-  margin: 24px 8px;
-
-  h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0px 0px 0px 0px;
-  }
-  h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0px 0px 0px 0px;
-  }
-  
-}
-
 input[type="checkbox"]:disabled, label.locked {
   opacity: 0.5;
   pointer-events: none;
