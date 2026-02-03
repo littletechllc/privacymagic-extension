@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
 
 const screen = (): void => {
   if (self.Screen === undefined) {

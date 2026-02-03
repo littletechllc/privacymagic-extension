@@ -1,4 +1,5 @@
-import { createSafeSetter, redefinePropertyValues, reflectApplySafe, weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, objectDefinePropertiesSafe, reflectConstructSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/helpers'
+import { createSafeSetter, redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
+import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, reflectConstructSafe } from '@src/content_scripts/helpers/safe'
 
 const gpu = () => {
   if (self.HTMLCanvasElement === undefined) {

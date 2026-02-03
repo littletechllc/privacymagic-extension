@@ -1,4 +1,5 @@
-import { createSafeGetter, makeBundleForInjection, getDisabledSettings, createSafeMethod } from '@src/content_scripts/helpers/helpers'
+import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
+import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 
 const worker = (): void => {

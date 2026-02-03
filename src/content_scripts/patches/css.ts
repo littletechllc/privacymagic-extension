@@ -1,4 +1,4 @@
-import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/helpers'
+import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement

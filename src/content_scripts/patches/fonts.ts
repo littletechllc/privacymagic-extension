@@ -1,5 +1,5 @@
 const fonts = (): void => {
-  // TODO: Implement audio patch
+  // TODO: Implement font patch
 }
 
 export default fonts

@@ -1,5 +1,6 @@
-import { createSafeMethod, makeBundleForInjection, getDisabledSettings,
-  createSafeGetter, redefinePropertyValues, weakMapGetSafe, weakMapSetSafe } from '@src/content_scripts/helpers/helpers'
+import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
+import { createSafeGetter } from '@src/content_scripts/helpers/monkey-patch'
+import { weakSetHasSafe, weakSetAddSafe } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 
 const iframe = (): undefined => {
@@ -37,8 +38,6 @@ const iframe = (): undefined => {
     const hardenedEvalFunctionSet = new WeakSet<EvalFunction>()
     const contentWinSet = new WeakSet<Window>()
 
-    const weakSetHasSafe = createSafeMethod(WeakSet<EvalFunction>, 'has')
-    const weakSetAddSafe = createSafeMethod(WeakSet<EvalFunction>, 'add')
     const getContentWindowSafe = createSafeGetter(HTMLIFrameElement, 'contentWindow')
 
     /** **************** VULNERABLE FUNCTIONS SECTION **********************/

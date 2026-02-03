@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
 
 const touch = (): void => {
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
