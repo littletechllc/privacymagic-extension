@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
 
 const device = (): void => {
   if (self.DevicePosture != null) {

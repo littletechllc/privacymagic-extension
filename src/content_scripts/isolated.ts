@@ -1,5 +1,5 @@
 import { getRemoteStyleSheetContentRemote } from '@src/common/messages'
-import { handleBackgroundFetchRequests } from './background-fetch-isolated'
+import { handleBackgroundFetchRequests } from './helpers/background-fetch-isolated'
 
 const isolated = () => {
   handleBackgroundFetchRequests(getRemoteStyleSheetContentRemote)

@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
 
 // Global Privacy Control is a signal that allows users to opt out of websites
 // selling or sharing their personal information with third parties.
