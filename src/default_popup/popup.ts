@@ -4,17 +4,6 @@ import { updateSiteInfo } from '@src/common/site-info'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { storage } from '@src/common/storage'
 
-const setupOptionsButton = (): void => {
-  document.getElementById('optionsButton')?.addEventListener('click', (event) => {
-    try {
-      console.log('optionsButton clicked')
-      void chrome.runtime.openOptionsPage()
-    } catch (error) {
-      logError(error, 'error opening options page', event)
-    }
-  })
-}
-
 const setupAdvancedSettingsButton = (): void => {
   document.getElementById('advancedSettingsButton')?.addEventListener('click', (event) => {
     handleAsync(async () => {
@@ -41,7 +30,6 @@ const setupAdvancedSettingsButton = (): void => {
 }
 
 document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
-  setupOptionsButton()
   setupAdvancedSettingsButton()
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
