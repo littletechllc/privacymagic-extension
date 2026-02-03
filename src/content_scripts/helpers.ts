@@ -166,22 +166,6 @@ export const makeBundleForInjection = (disabledSettings: string[]): string => {
   return bundleForInjection
 }
 
-let trustedTypePolicy: TrustedTypePolicy | undefined
-
-export const getTrustedTypesPolicy = (): TrustedTypePolicy => {
-  if (trustedTypePolicy == null && self.trustedTypes != null) {
-    trustedTypePolicy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
-      createHTML: (unsafeHTML) => unsafeHTML,
-      createScript: (unsafeScript) => unsafeScript,
-      createScriptURL: (unsafeScriptURL) => unsafeScriptURL
-    })
-  }
-  if (trustedTypePolicy === undefined) {
-    throw new Error('TrustedTypePolicy not available')
-  }
-  return trustedTypePolicy
-}
-
 export const getDisabledSettings = (relevantSettings?: ContentSettingId[]): ContentSettingId[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
     return __disabledSettings

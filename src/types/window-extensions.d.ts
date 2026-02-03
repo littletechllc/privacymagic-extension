@@ -55,18 +55,35 @@ declare global {
     clear: () => void
   }
 
-  interface TrustedTypePolicy {
-    createHTML: (input: string) => string
-    createScript: (input: string) => string
-    createScriptURL: (input: string) => string
+  class TrustedHTML {
+    toJSON: () => string
+    toString: () => string
   }
 
-  interface TrustedTypePolicyFactory {
-    createPolicy: (name: string, policy: {
-      createHTML?: (input: string) => string
-      createScript?: (input: string) => string
-      createScriptURL?: (input: string) => string
-    }) => TrustedTypePolicy
+  class TrustedScript extends String {
+    toJSON: () => string
+    toString: () => string
+  }
+
+  class TrustedScriptURL {
+    toJSON: () => string
+    toString: () => string
+  }
+
+  class TrustedTypePolicy {
+    createHTML: (input: string | TrustedHTML) => TrustedHTML
+    createScript: (input: string | TrustedScript) => TrustedScript
+    createScriptURL: (input: string | TrustedScriptURL) => TrustedScriptURL
+  }
+
+  type TrustedTypePolicyOptions = {
+    createHTML?: (input: string | TrustedHTML) => string | TrustedHTML
+    createScript?: (input: string | TrustedScript) => string | TrustedScript
+    createScriptURL?: (input: string | TrustedScriptURL) => string | TrustedScriptURL
+  }
+
+  class TrustedTypePolicyFactory {
+    createPolicy: (policyName: string, policyOptions: TrustedTypePolicyOptions) => TrustedTypePolicy
   }
 
   interface Window {
@@ -78,7 +95,7 @@ declare global {
     PerformanceScriptTiming?: typeof PerformanceScriptTiming
     NavigatorUAData?: typeof NavigatorUAData
     SharedStorage?: typeof SharedStorage
-    eval?: (code: string) => unknown
+    eval?: (code: string | TrustedScript) => unknown
     trustedTypes?: TrustedTypePolicyFactory
   }
 

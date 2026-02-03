@@ -1,4 +1,6 @@
-import { createSafeMethod, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy, createSafeGetter } from '@src/content_scripts/helpers'
+import { createSafeMethod, makeBundleForInjection, getDisabledSettings,
+  createSafeGetter, redefinePropertyValues, weakMapGetSafe, weakMapSetSafe } from '@src/content_scripts/helpers'
+import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '../trusted-types'
 
 const iframe = (): undefined => {
   const prepareInjectionForIframes = (hardeningCode: string): void => {
@@ -31,8 +33,9 @@ const iframe = (): undefined => {
     //
     // TODO: Can we prevent the hardening code from running a second time?
 
-    type EvalFunction = (code: string) => void
-    const evalSet = new WeakSet<EvalFunction>()
+    type EvalFunction = (code: string | TrustedScript) => void
+    const hardenedEvalFunctionSet = new WeakSet<EvalFunction>()
+    const contentWinSet = new WeakSet<Window>()
 
     const weakSetHasSafe = createSafeMethod(WeakSet<EvalFunction>, 'has')
     const weakSetAddSafe = createSafeMethod(WeakSet<EvalFunction>, 'add')
@@ -46,24 +49,46 @@ const iframe = (): undefined => {
     //   vars, etc.)
     // - Accessing properties of objects that have a global prototype
     // - Evaluating globally-defined functions or Objects
+    prepareInjectionForTrustedTypes(hardeningCode)
 
     // Sometimes the iframe has not yet been hardened, so if the page is trying
     // to access the contentWindow, we need to harden it first.
     const getContentWindowAfterHardening = (iframe: HTMLIFrameElement, hardeningCode: string): Window | null => {
       const contentWin = getContentWindowSafe(iframe)
       try {
-        // Accesing contentWin.eval is safe because, in order to monkey patch it,
+        // Accessing contentWin.eval is safe because, in order to monkey patch it,
         // the pre-evaluated script would need to access contentWin, which would
         // trigger our hardening code injection first.
         const evalFunction: EvalFunction | null | undefined = contentWin != null && 'eval' in contentWin ? contentWin.eval : null
-        if (evalFunction == null) {
+        if (contentWin == null ||
+            weakSetHasSafe(contentWinSet, contentWin) ||
+            evalFunction == null) {
+          // Nothing to harden or already hardened.
           return contentWin
         }
-        if (!weakSetHasSafe(evalSet, evalFunction)) {
-          const policy = getTrustedTypesPolicy()
-          evalFunction(policy.createScript(hardeningCode))
-          weakSetAddSafe(evalSet, evalFunction)
+        contentWin.eval = (code: string | TrustedScript) => {
+          if (!weakSetHasSafe(hardenedEvalFunctionSet, evalFunction)) {
+            // Find the trusted type policy for the code that has been passed to eval,
+            // if it exists. Only look up when code is an object (TrustedScript); WeakMap
+            // keys must be objects, so passing a string would throw TypeError.
+            const policy =
+              code != null && typeof code === 'object'
+                ? getTrustedTypePolicyForObject(code)
+                : undefined
+            try {
+              // Create a trusted script from the hardening code using the policy, if it exists.
+              const hardeningCodeForEval = policy ? policy.createScript(hardeningCode) : hardeningCode
+              // Evaluate the trusted script.
+              evalFunction(hardeningCodeForEval)
+              // Add the eval function to the set of eval functions that have been hardened.
+              weakSetAddSafe(hardenedEvalFunctionSet, evalFunction)
+            } catch (error) {
+              console.error('error in evaluating hardening code:', error)
+            }
+          }
+          return evalFunction(code)
         }
+        weakSetAddSafe(contentWinSet, contentWin)
       } catch (error) {
         if (error instanceof DOMException && error.name === 'SecurityError') {
           // SecurityError is expected if the iframe is sandboxed and the

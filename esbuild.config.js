@@ -63,6 +63,10 @@ const builds = [
   {
     entryPoints: ['src/privacymagic/options.ts'],
     outfile: 'dist/privacymagic/options.js'
+  },
+  {
+    entryPoints: ['src/privacymagic/sidepanel.ts'],
+    outfile: 'dist/privacymagic/sidepanel.js'
   }
 ]
 

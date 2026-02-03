@@ -75,7 +75,7 @@ So: the strategy is:
  */
 
 const updateRule = async (rule: chrome.declarativeNetRequest.Rule): Promise<void> => {
-  await chrome.declarativeNetRequest.updateSessionRules({
+  await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: [rule.id],
     addRules: [rule]
   })

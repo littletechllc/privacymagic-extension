@@ -51,8 +51,12 @@
     "message": "Disable WebRTC non-proxied UDP",
     "description": "Label for the WebRTC IP handling policy pref"
   },
+  "masterSwitch": {
+    "message": "Privacy Protections On",
+    "description": "Label for the master switch toggle"
+  },
   "blocking": {
-    "message": "Blocking tracking content",
+    "message": "Block tracking content",
     "description": "Category for content blocking settings"
   },
   "navigation": {

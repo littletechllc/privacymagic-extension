@@ -1,4 +1,5 @@
-import { createSafeGetter, makeBundleForInjection, getDisabledSettings, getTrustedTypesPolicy } from '@src/content_scripts/helpers'
+import { createSafeGetter, makeBundleForInjection, getDisabledSettings, createSafeMethod } from '@src/content_scripts/helpers'
+import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '../trusted-types'
 
 const worker = (): void => {
   const URLSafe = self.URL
@@ -154,32 +155,39 @@ const worker = (): void => {
     requestToRevokeObjectUrl(url)
   }
 
-  const onCompletionInAnotherContext = (callback: () => void): string => {
+  const generateCompletionCallbackCode = (callback: () => void): string => {
+    const completionType = 'completion'
     const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID()
     const broadcastChannel = new BroadcastChannel(broadcastChannelName)
     broadcastChannel.onmessage = (message: MessageEvent) => {
       const data = message?.data as { type: string } | null
-      if (data?.type === 'completion') {
+      if (data?.type === completionType) {
         callback()
       }
     }
     return `(() => {
       const broadcastChannel = new BroadcastChannel(${JSON.stringify(broadcastChannelName)});
-      broadcastChannel.postMessage({ type: 'completion' });
+      broadcastChannel.postMessage({ type: ${jsonStringifySafe(completionType)} });
     })();`
   }
+
+  const stringStartsWithSafe = createSafeMethod(String, 'startsWith')
+  const jsonStringifySafe = JSON.stringify
 
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode: string): void => {
     const locationHref = self.location.href
-    const policy = getTrustedTypesPolicy()
+    let policy: TrustedTypePolicy | undefined
     self.Worker = new Proxy(self.Worker, {
-      construct (Target, [url, options]: [string | URL, WorkerOptions?]) {
-        const absoluteUrl = URLhrefSafe(new URLSafe(url, locationHref))
+      construct (Target, [url, options]: [string | URL | TrustedScriptURL, WorkerOptions?]) {
+        if (url instanceof TrustedScriptURL) {
+          policy = getTrustedTypePolicyForObject(url)
+        }
+        const absoluteUrl = URLhrefSafe(new URLSafe(url as string | URL, locationHref))
         let completionCallbackCode = ''
-        if (absoluteUrl.startsWith('blob:')) {
-          completionCallbackCode = onCompletionInAnotherContext(() => {
+        if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
+          completionCallbackCode = generateCompletionCallbackCode(() => {
             unlockObjectUrl(absoluteUrl)
           })
           lockObjectUrl(absoluteUrl)
@@ -188,29 +196,28 @@ const worker = (): void => {
         const importCommand = ('type' in options && options.type === 'module')
           ? 'await import'
           : 'importScripts'
-        const bundle = `${hardeningCode}
-        const policy = self.trustedTypes.createPolicy('sanitized-worker-policy', {
-          createHTML: (unsafeHTML) => unsafeHTML,
-          createScript: (unsafeScript) => unsafeScript,
-          createScriptURL: (unsafeScriptURL) => unsafeScriptURL
-        });
-        const sanitizedAbsoluteUrl = policy.createScriptURL(${JSON.stringify(absoluteUrl)});
-        (${spoofLocationInsideWorker.toString()})(${JSON.stringify(absoluteUrl)});
-        try {
-          ${importCommand}(sanitizedAbsoluteUrl);
-        } catch (error) {
-          console.error("error in importing: ", error);
-        }
-        ${completionCallbackCode}
-        console.log("finished importing");`
+        const bundle = `
+          ${hardeningCode}
+          (${spoofLocationInsideWorker.toString()})(${jsonStringifySafe(absoluteUrl)});
+          // TODO: Apply trusted types policy to the absolute URL.
+          try {
+            ${importCommand}(${jsonStringifySafe(absoluteUrl)});
+          } catch (error) {
+            console.error("error in importing: ", error);
+          }
+          ${completionCallbackCode}
+          console.log("finished importing");
+        `
         const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }))
-        const sanitizedBlobUrl = policy.createScriptURL(blobUrl)
-        return new Target(sanitizedBlobUrl, options)
+        const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
+        return new Target(sanitizedBlobUrl as string, options)
       }
     })
   }
 
-  prepareInjectionForWorker(makeBundleForInjection(getDisabledSettings()))
+  const hardeningCode = makeBundleForInjection(getDisabledSettings())
+  prepareInjectionForTrustedTypes(hardeningCode)
+  prepareInjectionForWorker(hardeningCode)
 }
 
 export default worker
