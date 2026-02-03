@@ -1,4 +1,4 @@
-import { getDisabledSettings } from './helpers'
+import { getDisabledSettings } from './helpers/helpers'
 import { ContentSettingId } from '@src/common/setting-ids'
 
 import audio from './patches/audio'

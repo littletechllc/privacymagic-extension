@@ -1,4 +1,4 @@
-import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers'
+import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers/helpers'
 
 const timer = (): void => {
   const mathRoundSafe = Math.round

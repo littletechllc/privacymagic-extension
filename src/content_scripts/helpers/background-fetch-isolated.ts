@@ -29,4 +29,3 @@ export const handleBackgroundFetchRequests = (fetchFunction: (url: string) => Pr
     }
   })
 }
-

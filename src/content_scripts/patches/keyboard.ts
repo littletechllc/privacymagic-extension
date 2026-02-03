@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers'
+import { redefinePropertyValues } from '@src/content_scripts/helpers/helpers'
 
 const keyboard = (): void => {
   const navigatorPrototype = self.Navigator ?? self.WorkerNavigator

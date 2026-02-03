@@ -1,6 +1,6 @@
 import { createSafeMethod, makeBundleForInjection, getDisabledSettings,
-  createSafeGetter, redefinePropertyValues, weakMapGetSafe, weakMapSetSafe } from '@src/content_scripts/helpers'
-import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '../trusted-types'
+  createSafeGetter, redefinePropertyValues, weakMapGetSafe, weakMapSetSafe } from '@src/content_scripts/helpers/helpers'
+import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 
 const iframe = (): undefined => {
   const prepareInjectionForIframes = (hardeningCode: string): void => {
