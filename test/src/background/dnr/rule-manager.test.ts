@@ -135,7 +135,8 @@ describe('setupRules', () => {
     // removeRuleIds deduplicated: 1 (default content, appears 3 times) + totalDefaultNetworkRulesCount (default network, includes gpc and queryParameters IDs) + 1 (domain content, appears 2 times) = totalDefaultNetworkRulesCount + 2
     // addRules deduplicated: 1 (default content, last wins) + totalDefaultNetworkRulesCount (default network) + 1 (domain content with battery+gpc, last wins) + 1 (gpc network, last wins, replaces default) + 1 (queryParameters network, last wins, replaces default) = totalDefaultNetworkRulesCount + 4
     // But gpc and queryParameters network rules replace their defaults, so: totalDefaultNetworkRulesCount + 2
-    expectRuleCounts(call, totalDefaultNetworkRulesCount + 2, totalDefaultNetworkRulesCount + 2)
+    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
+    expectRuleCounts(call, totalDefaultNetworkRulesCount + 3, totalDefaultNetworkRulesCount + 3)
     // Verify removeRuleIds are deduplicated (no duplicates)
     const uniqueRemoveIds = new Set(call.removeRuleIds)
     expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
@@ -167,7 +168,8 @@ describe('setupRules', () => {
     // removeRuleIds deduplicated: 1 (default content, appears 3 times) + totalDefaultNetworkRulesCount (default network, includes gpc and css IDs) + 3 (domain content IDs) + 1 (masterSwitch allow) = totalDefaultNetworkRulesCount + 5
     // addRules deduplicated: 1 (default content, last wins) + totalDefaultNetworkRulesCount (default network) + 1 (test.com domain content) + 1 (gpc network, last wins, replaces default) + 2 (css network, last wins, replaces default) = totalDefaultNetworkRulesCount + 4
     // But gpc and css network rules replace their defaults, so: totalDefaultNetworkRulesCount + 2
-    expectRuleCounts(call, totalDefaultNetworkRulesCount + 5, totalDefaultNetworkRulesCount + 2)
+    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
+    expectRuleCounts(call, totalDefaultNetworkRulesCount + 6, totalDefaultNetworkRulesCount + 3)
     // Verify removeRuleIds are deduplicated
     const uniqueRemoveIds = new Set(call.removeRuleIds)
     expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
@@ -184,7 +186,8 @@ describe('setupRules', () => {
     const call = getUpdateDynamicRulesCall()
 
     // Only default rules: 1 content + totalDefaultNetworkRulesCount network
-    expectRuleCounts(call, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount)
+    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
+    expectRuleCounts(call, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 1, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 1)
     // Verify removeRuleIds are deduplicated
     const uniqueRemoveIds = new Set(call.removeRuleIds)
     expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)

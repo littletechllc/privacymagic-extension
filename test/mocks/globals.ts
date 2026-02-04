@@ -1,5 +1,20 @@
 // Polyfills for common globals that may not be available in the test environment
 
+// Mock fetch for tests that use remote config (e.g. rule-manager calling getAllSettings).
+// Returns the same shape as remote/remote.json so getAllSettingsDisabledByRemoteConfig works.
+const REMOTE_CONFIG_MOCK = {
+  version: '1',
+  setting_exceptions: { 'google.com': ['css', 'iframe'] }
+}
+
+if (global.fetch === undefined) {
+  global.fetch = ((_input: RequestInfo | URL, _init?: RequestInit): Promise<Response> =>
+    Promise.resolve({
+      ok: true,
+      json: async () => REMOTE_CONFIG_MOCK
+    } as unknown as Response)) as typeof fetch
+}
+
 // Polyfill for structuredClone if not available
 if (global.structuredClone === undefined) {
   global.structuredClone = <T>(obj: T): T => {
