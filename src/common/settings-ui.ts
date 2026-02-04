@@ -1,4 +1,4 @@
-import { SETTINGS_KEY_PREFIX } from '@src/common/settings'
+import { SETTINGS_KEY_PREFIX, getSetting } from '@src/common/settings'
 import { getLocalizedText } from '@src/common/i18n'
 import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'
@@ -69,17 +69,22 @@ const bindToggleToStorage = async (
   store: StorageProxy,
   domain: string,
   settingId: SettingId,
-  defaultValue: boolean
+  _defaultValue: boolean
 ): Promise<void> => {
   const input = toggle.querySelector('input')
   if (input == null) {
     throw new Error('Input not found')
   }
   const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId]
-  const storageValue = await store.get(keyPath)
-  input.checked = storageValue !== undefined ? storageValue : defaultValue
+  // Use effective setting (getSetting) so remote-disabled shows as off; raw storage has no key when remote disables.
+  const effectiveValue = await getSetting(domain, settingId)
+  input.checked = effectiveValue
   store.listenForChanges(keyPath, (value) => {
-    input.checked = value !== undefined ? value : defaultValue
+    if (value !== undefined) {
+      input.checked = value
+    } else {
+      void getSetting(domain, settingId).then((v) => { input.checked = v })
+    }
   })
   input.addEventListener('change', (event) => {
     handleAsync(async () => {
@@ -101,7 +106,7 @@ const bindToggleToStorage = async (
 
 export const createToggleWithBinding = async (store: StorageProxy, domain: string, settingId: SettingId): Promise<HTMLElement> => {
   const toggle = createToggle(settingId)
-  await bindToggleToStorage(toggle, store, domain, settingId, /* defaultValue */ true)
+  await bindToggleToStorage(toggle, store, domain, settingId, true)
   return toggle
 }
 
