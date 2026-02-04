@@ -9,13 +9,14 @@ import { CONTENT_SETTING_IDS, ContentSettingId, SettingId } from '@src/common/se
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
 const category: CategoryId = 'content_rule'
+const defaultRuleId = dnrRuleIdForName(category, 'default')
 
 const idForTopDomain = (domain: string): number => {
   return dnrRuleIdForName(category, domain)
 }
 
 const createRuleForTopDomain = (settings: ContentSettingId[], domain?: string): chrome.declarativeNetRequest.Rule => {
-  const id = domain == null ? dnrRuleIdForName(category, 'default') : idForTopDomain(domain)
+  const id = domain == null ? defaultRuleId : idForTopDomain(domain)
   const cookieKeyVal = `__pm__disabled_settings=${settings.join(',')}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
   return {
@@ -58,7 +59,6 @@ export const computeContentRuleUpdates = async (domain: string, setting: Setting
     return
   }
   const ruleId = dnrRuleIdForName(category, domain)
-  const defaultRuleId = dnrRuleIdForName(category, 'default')
   const [oldRule, oldDefaultRule] = await Promise.all([
     getSingleRule(ruleId),
     getSingleRule(defaultRuleId)
