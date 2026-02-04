@@ -1,5 +1,5 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { setSetting } from '@src/common/settings'
+import { getAllSettings, setSetting } from '@src/common/settings'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
@@ -73,6 +73,19 @@ const handleMessage = async (
   }
 }
 
+const removeAllServiceWorkers = async (): Promise<void> => {
+  const excludedDomains = new Set<string>()
+  for (const [domain, settingId, value] of await getAllSettings()) {
+    if (settingId === 'serviceWorker' && value === false) {
+      excludedDomains.add(domain)
+    }
+  }
+  const excludeOrigins = [...excludedDomains].map(domain => `https://${domain}`)
+  chrome.browsingData.removeServiceWorkers({ excludeOrigins }, () => {
+    console.log('service workers removed, except for domains:', [...excludedDomains].join(', '))
+  })
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Asynchronously handle the message. We ignore the returned Promise of handleMessage.
   void handleMessage(message as Message, sender, sendResponse)
@@ -119,3 +132,4 @@ chrome.runtime.onStartup.addListener(() => {
 })
 
 initializeListeners()
+void removeAllServiceWorkers()
