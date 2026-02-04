@@ -3,8 +3,8 @@ import { updateSiteInfo } from '@src/common/site-info'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
-const setupAdvancedSettingsButton = (): void => {
-  document.getElementById('advancedSettingsButton')?.addEventListener('click', (event) => {
+const setupAdvancedSettingsLink = (): void => {
+  document.getElementById('advancedSettingsLink')?.addEventListener('click', (event) => {
     handleAsync(async () => {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs[0]
@@ -29,7 +29,7 @@ const setupAdvancedSettingsButton = (): void => {
 }
 
 document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
-  setupAdvancedSettingsButton()
+  setupAdvancedSettingsLink()
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
   if (tab == null) {
