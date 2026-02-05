@@ -18,4 +18,4 @@ To test the Privacy Magic browser extension, you need to install it in your brow
   7. Now browse as normally! Your privacy should be protected. If you find a website isn't working properly, you can click on the Privacy Magic button and turn off protections for that website.<br>
   <img width="300"  alt="image" src="https://github.com/user-attachments/assets/aa067369-1534-49eb-8a93-293b1533ad50" /><br>
 <br>
-  Please report the problem and we will look for a fix!
+  Please report any problems and we will look for a fix!
