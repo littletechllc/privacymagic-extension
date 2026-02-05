@@ -11,7 +11,7 @@ if (global.fetch === undefined) {
   global.fetch = ((_input: RequestInfo | URL, _init?: RequestInit): Promise<Response> =>
     Promise.resolve({
       ok: true,
-      json: async () => REMOTE_CONFIG_MOCK
+      json: () => Promise.resolve(REMOTE_CONFIG_MOCK)
     } as unknown as Response)) as typeof fetch
 }
 
