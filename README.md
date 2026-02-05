@@ -28,10 +28,10 @@
 * Caps Referrer-Policy
 * Blocks insecure HTTP connections
 * Blocks window.name tracking
-* Sanitize IFrames
-* Sanitize Web Workers
-* Disable SharedStorage
-* Disable ServiceWorkers
+* Sanitizes IFrames
+* Sanitizes Web Workers
+* Disables SharedStorage
+* Disables ServiceWorkers
 * Enables Global Privacy Control
 * Disables WebRTC IP address leaks
 * Disables browser "spy" features
