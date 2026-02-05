@@ -4,7 +4,7 @@ import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const setupAdvancedSettingsLink = (): void => {
-  document.getElementById('advancedSettingsLink')?.addEventListener('click', (event) => {
+  document.getElementById('advancedSettingsLinkContainer')?.addEventListener('click', (event) => {
     handleAsync(async () => {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs[0]

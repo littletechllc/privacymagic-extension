@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Magic Side Panel</title>
     <link rel="stylesheet" href="../common/settings.css">
-  </head>
-  <body>
-    <div id="siteInfoContainer">
-      <img id="favicon" />
-      <h2 id="domain"></h2>
+    <link rel="stylesheet" href="./sidepanel.css">
+    </head>
+    <body>
+      <div class="main-container">
+        <div id="siteInfoContainer">
+          <img id="favicon" />
+          <h2 id="domain"></h2>
+        </div>
+        <div id="settings"></div>
+      </div>
+      </div>
+    <div class="link-container" id="globalOptionsLinkContainer">
+      <img src="../assets/toggles.svg" alt="Privacy Magic Settings" class="togglesIcon" />
+      <a href="#" id="globalOptionsLink">Privacy Magic Settings</a>
+      <img src="../assets/open_in_new.svg" alt="Privacy Magic Settings" id="globalOptionsIcon" />
     </div>
-    <div id="settings"></div>
-    <button id="globalOptionsButton">Privacy Magic Settings</button>
     <script src="./sidepanel.js" type="module"></script>
   </body>
 </html>

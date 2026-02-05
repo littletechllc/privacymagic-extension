@@ -1,6 +1,15 @@
 @import url('./toggle.css');
 @import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
 .toggle-box {
   display: flex;
   flex-direction: column;
@@ -51,4 +60,35 @@ div.title {
 
 button {
   cursor: pointer;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  gap: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 14px;
+  height: fit-content;
+  padding: 1em;
+  a {
+    text-decoration: none;
+    color: #1f1f1f;
+  }
+  &:hover {
+    background-color: #eee;
+    text-decoration: underline;
+  }
+  img {
+    width: 18px;
+    height: 18px;
+    filter: opacity(0.9);
+  }
+  img.togglesIcon {
+    width: 16px;
+    height: 16px;
+    filter: opacity(0.8);
+  }
 }
