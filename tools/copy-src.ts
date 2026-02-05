@@ -1,6 +1,7 @@
 import chokidar from 'chokidar'
+import { execSync, ExecSyncOptionsWithStringEncoding } from 'node:child_process'
 import * as path from 'node:path'
-import { mkdir, copyFile, readdir, stat, readFile } from 'node:fs/promises'
+import { mkdir, copyFile, readdir, stat, readFile, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 
 const srcDir: string = process.argv[2] ?? 'src'
@@ -8,6 +9,29 @@ const distDir: string = process.argv[3] ?? 'dist'
 const watchMode: boolean = process.argv.includes('--watch')
 
 const isExcluded = (file: string): boolean => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.')
+
+const gitOpts : ExecSyncOptionsWithStringEncoding = {
+  encoding: 'utf8' as const,
+  maxBuffer: 64,
+  stdio: ['pipe', 'pipe', 'ignore']
+}
+
+/** Version for dist manifest: latest git tag (strip "v") or short hash. */
+const getBuildVersion = (): string => {
+  try {
+    const exact = execSync('git describe --tags --exact-match', gitOpts).trim()
+    if (exact) return exact.replace(/^v/, '')
+  } catch {
+    // no exact tag
+  }
+  try {
+    const hash = execSync('git rev-parse --short=7 HEAD', gitOpts).trim()
+    if (hash) return hash
+  } catch {
+    // not a git repo or git unavailable
+  }
+  return 'unknown'
+}
 
 const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> => {
   try {
@@ -29,11 +53,26 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
   }
 }
 
+const specialFiles: Record<string, Record<string, string>> = {
+  'manifest.json': {
+    '__EXTENSION_VERSION__': getBuildVersion()
+  }
+}
+
 const copyOne = async (filePath: string): Promise<void> => {
   if (isExcluded(filePath)) return
 
   const rel = path.relative(srcDir, filePath)
   const dest = path.join(distDir, rel)
+
+  const baseName = path.basename(filePath)
+  const isSpecial = Object.keys(specialFiles).includes(baseName)
+  if (isSpecial) {
+    const raw = await readFile(filePath, 'utf8')
+    const content = raw.replace(new RegExp(Object.keys(specialFiles[baseName]).join('|'), 'g'), (match) => specialFiles[baseName][match])
+    await writeFile(dest, content, 'utf8')
+    return
+  }
 
   // Check if file has changed
   if (!(await fileChanged(filePath, dest))) {
