@@ -1,5 +1,6 @@
 import chokidar from 'chokidar'
-import { execSync, ExecSyncOptionsWithStringEncoding } from 'node:child_process'
+import { execSync } from 'node:child_process'
+import type { ExecSyncOptionsWithStringEncoding } from 'node:child_process'
 import * as path from 'node:path'
 import { mkdir, copyFile, readdir, stat, readFile, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
