@@ -136,6 +136,7 @@ const css = (): void => {
   // Create a style sheet containing the CSS content of a style element.
   const createStyleSheetForStyleElement = (styleElement: HTMLStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
+    console.log('createStyleSheetForStyleElement called in', self.location.href, self.top === self, styleElement.textContent)
     void applyContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media)
     styleSheet.disabled = styleElement.disabled
     return styleSheet

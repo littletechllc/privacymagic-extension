@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../common/settings.css">
     <title>Privacy Magic</title>
 </head>
+
 <body>
-    <div id="siteInfoContainer">
-        <img id="favicon" />
-        <h2 id="domain"></h2>
+    <div class="main-container">
+        <div id="siteInfoContainer">
+            <img id="favicon" />
+            <h2 id="domain"></h2>
+        </div>
+        <div id="settings" class="toggle-box toggle-container"></div>
     </div>
-
-
-    <div id="settings" class="toggle-box toggle-container"></div>
-    <a href="#" id="advancedSettingsLink">Advanced</a>
+    <div class="link-container" id="advancedSettingsLinkContainer">
+        <img src="../assets/toggles.svg" alt="Advanced" class="togglesIcon" />
+        <a href="#" id="advancedSettingsLink">Advanced</a>
+        <img src="../assets/right_panel_open.svg" alt="Advanced" id="advancedSettingsIcon" />
+    </div>
 
     <script defer src="./popup.js" type="module"></script>
 </body>
+
 </html>

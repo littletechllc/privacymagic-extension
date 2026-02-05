@@ -40,10 +40,9 @@ const watchForTabChanges = (tabId: number): void => {
   })
 }
 
-const setupGlobalOptionsButton = (): void => {
-  document.getElementById('globalOptionsButton')?.addEventListener('click', (event) => {
+const setupGlobalOptionsLink = (): void => {
+  document.getElementById('globalOptionsLinkContainer')?.addEventListener('click', (event) => {
     try {
-      console.log('globalOptionsButton clicked')
       void chrome.runtime.openOptionsPage()
     } catch (error) {
       logError(error, 'error opening global options page', event)
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
   const originalDomain = await updateUI(tabId)
   watchForNavigations(tabId, originalDomain)
   watchForTabChanges(tabId)
-  setupGlobalOptionsButton()
+  setupGlobalOptionsLink()
 }, (error: unknown) => {
   logError(error, 'error setting up sidepanel', event)
 }))
