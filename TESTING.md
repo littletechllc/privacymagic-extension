@@ -2,9 +2,9 @@
 
 To test the Privacy Magic browser extension, you need to install it in your browser. Here's how to do that:
 
-  1. Go to https://github.com/littletechllc/privacymagic-extension/releases and download a zip file (not the source code) to your Downloads folder:<br>
+  1. Go to https://github.com/littletechllc/privacymagic-extension/releases and download the latest zip file (not the source code) to your Downloads folder:<br>
   <img width="300" alt="image" src="https://github.com/user-attachments/assets/1014a59c-2677-4e3d-8463-cf36922b0d57"/><br>
-  2. Open Chrome, click on `⋮ > Extensions > Manage Extensions` to open the Extensions page.<br>
+  2. In Chrome, click on `⋮ > Extensions > Manage Extensions` to open the Extensions page.<br>
 <img width="300"  alt="image" src="https://github.com/user-attachments/assets/7439891c-9c51-4c9e-93f5-b9b47409c669" /><br>
   3. Click on the `Developer mode` toggle so that Developer Mode is enabled:<br>
 <img width="177" height="144" alt="image" src="https://github.com/user-attachments/assets/b3177dd7-0927-41fa-93f4-f6d7ba06f37c" /><br>
