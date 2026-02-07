@@ -75,9 +75,14 @@ const gpu = () => {
         throw new Error('Shadow context not created')
       }
       for (const command of this.commands) {
+        const descriptor = originalContextDescriptors[command.name]
         const property = command.type === 'call' ? 'value' : 'set'
+        const fn: unknown = descriptor?.[property]
+        if (typeof fn !== 'function') {
+          continue
+        }
         try {
-          reflectApplySafe(originalContextDescriptors[command.name][property], this.shadowContext, command.args)
+          reflectApplySafe(fn as (...args: unknown[]) => unknown, this.shadowContext, command.args)
         } catch (error) {
           console.error('Error replaying command:', command.type, command.name, command.args, error)
         }
@@ -176,18 +181,23 @@ const gpu = () => {
       originalDescriptors[name] = descriptor
       const newDescriptor = { ...descriptor }
       if (descriptor.value !== undefined) {
+        const originalValue = descriptor.value as (...a: unknown[]) => unknown
         newDescriptor.value = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof descriptor.value>) {
           const commandRecorder = getCommandRecorderForContext(this)
           if (commandRecorder !== undefined) {
             commandRecorder.recordCommand(name, args, 'call')
           }
+          return reflectApplySafe(originalValue, this, args)
         }
       } else if (descriptor.set !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        const originalSet = descriptor.set as (...a: unknown[]) => void
         newDescriptor.set = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof descriptor.set>) {
           const commandRecorder = getCommandRecorderForContext(this)
           if (commandRecorder !== undefined) {
             commandRecorder.recordCommand(name, args, 'set')
           }
+          reflectApplySafe(originalSet, this, args)
         }
       }
       Object.defineProperty(CanvasRenderingContext2D.prototype, name, newDescriptor)
@@ -299,7 +309,6 @@ const gpu = () => {
       if (platform === 'MacIntel') {
         redefinePropertyValues(self.WebGLRenderingContext.prototype, {
           getParameter: function (this: WebGLRenderingContext, constant: number) {
-            console.log('getParameter', constant)
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const originalValue = originalGetParameterSafe(this, constant)
             switch (constant) {
