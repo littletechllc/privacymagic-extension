@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Privacy Magic",
-  "description": "__MSG_extensionDescription__",
-  "version": "__EXTENSION_VERSION__",
+  "description": "__MSG_extensionDescription__ (version __EXTENSION_VERSION__)",
+  "version": "0.0.1",
   "default_locale": "en",
   "icons": {
     "16": "logo/logo-16.png",
