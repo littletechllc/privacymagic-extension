@@ -24,8 +24,12 @@ const baseBuildOptions = {
   conditions: ['browser'],
   alias: {
     '@src': 'src',
+    '@math': 'math',
     '@tools': 'tools',
     '@test': 'test'
+  },
+  loader: {
+    '.wasm': 'base64'
   }
 }
 
