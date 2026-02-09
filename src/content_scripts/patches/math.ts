@@ -4,9 +4,7 @@ const math = (): void => {
   type MathFunctionName = keyof Math
   type MathFunction = (...args: number[]) => number
 
-  // CI may not resolve @math/math.wasm to the .d.ts; assert string so lint passes everywhere
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const mathWasmBuffer = Uint8Array.fromBase64(mathWasmBase64 as string)
+  const mathWasmBuffer = Uint8Array.fromBase64(mathWasmBase64)
   const mathWasmModule = new WebAssembly.Module(mathWasmBuffer)
   const mathWasmInstance = new WebAssembly.Instance(mathWasmModule)
   const mathWasmExports = mathWasmInstance.exports
