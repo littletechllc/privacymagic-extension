@@ -3,6 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["./src/*"],
+      "@math/math.wasm": ["./src/types/math-wasm.d.ts"],
+      "@math/*": ["./math/*"],
       "@tools/*": ["./tools/*"],
       "@test/*": ["./test/*"]
     },

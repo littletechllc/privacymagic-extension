@@ -1,104 +1,48 @@
+import mathWasmBase64 from '@math/math.wasm'
+
 const math = (): void => {
-  // Ensure that LOW_BITS is in (0,32)
-  const LOW_BITS = 8
+  type MathFunctionName = keyof Math
+  type MathFunction = (...args: number[]) => number
 
-  if (LOW_BITS < 1 || LOW_BITS > 31) {
-    throw new Error('LOW_BITS must be an integer between 1 and 31')
-  }
+  const mathWasmBuffer = Uint8Array.fromBase64(mathWasmBase64)
+  const mathWasmModule = new WebAssembly.Module(mathWasmBuffer)
+  const mathWasmInstance = new WebAssembly.Instance(mathWasmModule)
+  const mathWasmExports = mathWasmInstance.exports
 
-  const isLittleEndian = (() => {
-    const buffer = new ArrayBuffer(4)
-    const u32 = new Uint32Array(buffer)
-    const u8 = new Uint8Array(buffer)
+  const mathFunctionNames: readonly MathFunctionName[] = [
+    'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'cbrt', 'cos', 'cosh',
+    'exp', 'expm1', 'log', 'log10', 'log1p', 'log2', 'pow', 'sin', 'sinh',
+    'sqrt', 'tan', 'tanh'
+  ]
 
-    u32[0] = 0x01020304
-
-    return u8[0] === 0x04
-  })()
-
-  const LOW_INDEX = isLittleEndian ? 0 : 1 // index of low 32 bits
-
-  // Shared buffer for bit manipulation
-  const buf = new ArrayBuffer(8)
-  const f64 = new Float64Array(buf)
-  const u32 = new Uint32Array(buf)
-
-  // Mask to zero the lowest `LOW_BITS` of the mantissa
-  const MASK = (0xFFFFFFFF << LOW_BITS) >>> 0
-
-  // Extract only function property names from Math
-  type MathFunctionName = {
-    [K in keyof typeof Math]: typeof Math[K] extends (...args: number[]) => number ? K : never
-  }[keyof typeof Math]
-
-  // Likely non-deterministic Math.* functions that take a single argument
-  // and return a floating point number
-  const singleArgFunctions = [
-    'acos',
-    'acosh',
-    'asin',
-    'asinh',
-    'atan',
-    'atanh',
-    'cbrt',
-    'cos',
-    'cosh',
-    'exp',
-    'expm1',
-    'log',
-    'log1p',
-    'log2',
-    'log10',
-    'sin',
-    'sinh',
-    'sqrt',
-    'tan',
-    'tanh'
-  ] as const satisfies readonly MathFunctionName[]
-
-  const roundSingleArgFunction = (fn: (x: number) => number): ((x: number) => number) => {
-    return function (x: number): number {
-      f64[0] = fn(x)
-      // zero the lowest `LOW_BITS` of the mantissa
-      u32[LOW_INDEX] &= MASK
-      return f64[0]
-    }
-  }
-
-  for (const name of singleArgFunctions) {
-    const mathFn = Math[name] as (x: number) => number
+  const redefineMathFunction = (name: MathFunctionName, value: MathFunction): void => {
     Object.defineProperty(Math, name, {
-      value: roundSingleArgFunction(mathFn),
+      value: value,
       writable: true,
       configurable: true
     })
   }
 
-  // Likely non-deterministic Math.* functions that take multiple arguments
-  // and return a floating point number
-  const multiArgFunctions = [
-    'atan2',
-    'hypot',
-    'pow'
-  ] as const satisfies readonly MathFunctionName[]
+  for (const name of mathFunctionNames) {
+    redefineMathFunction(name, mathWasmExports[name as string] as MathFunction)
+  }
 
-  const roundMultiArgFunction = (fn: (...args: number[]) => number): ((...args: number[]) => number) => {
-    return function (...args: number[]): number {
-      f64[0] = fn(...args)
-      // zero the lowest `LOW_BITS` of the mantissa
-      u32[LOW_INDEX] &= MASK
-      return f64[0]
+  const hypot = (...args: number[]): number => {
+    const len = args.length
+    const exports = mathWasmExports as {
+      memory: WebAssembly.Memory
+      malloc: (bytes: number) => number
+      free: (ptr: number) => void
+      math_hypot: (count: number, ptr: number) => number
     }
+    const ptr = exports.malloc(len * 8)
+    new Float64Array(exports.memory.buffer, ptr, len).set(args)
+    const result = exports.math_hypot(len, ptr)
+    exports.free(ptr)
+    return result
   }
 
-  for (const name of multiArgFunctions) {
-    const mathFn = Math[name] as (...args: number[]) => number
-    Object.defineProperty(Math, name, {
-      value: roundMultiArgFunction(mathFn),
-      writable: true,
-      configurable: true
-    })
-  }
+  redefineMathFunction('hypot', hypot)
 }
 
 export default math

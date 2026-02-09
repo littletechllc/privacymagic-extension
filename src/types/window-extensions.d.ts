@@ -106,4 +106,8 @@ declare global {
   interface Navigator {
     userAgentData?: NavigatorUAData
   }
+
+  interface Uint8ArrayConstructor {
+    fromBase64: (base64: string) => Uint8Array<ArrayBuffer>
+  }
 }
