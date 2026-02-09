@@ -51,8 +51,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: math-wasm
-      - name: Place WASM in math directory
-        run: mkdir -p math && cp math-wasm/math.wasm math/
+          path: .
       - name: Install modules
         run: npm install
       - name: Run ESLint
@@ -74,8 +73,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: math-wasm
-      - name: Place WASM in math directory
-        run: mkdir -p math && cp math-wasm/math.wasm math/
+          path: .
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -97,8 +95,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: math-wasm
-      - name: Place WASM in math directory
-        run: mkdir -p math && cp math-wasm/math.wasm math/
+          path: .
       - name: Clean artifacts folder
         run: rm -rf ./artifacts && mkdir ./artifacts
       - name: Install dependencies
