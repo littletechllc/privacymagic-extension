@@ -4,6 +4,7 @@ import { dirname } from 'path'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+/** @type {esbuild.BuildOptions} */
 const baseBuildOptions = {
   bundle: true,
   format: /** @type {const} */ ('iife'),
