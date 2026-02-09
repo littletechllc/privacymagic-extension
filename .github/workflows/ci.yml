@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  wasm:
+    name: Build WASM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Emscripten
+        run: |
+          cd /home/runner
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+      - name: Compile WASM
+        run: |
+          source /home/runner/emsdk/emsdk_env.sh
+          cd math
+          chmod +x build.sh
+          ./build.sh
+      - name: Upload math WASM
+        uses: actions/upload-artifact@v4
+        with:
+          name: math-wasm
+          path: math/
+
+  lint:
+    name: Lint
+    needs: wasm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.x'
+      - name: Restore math WASM
+        uses: actions/download-artifact@v4
+        with:
+          name: math-wasm
+          path: math
+      - name: Install modules
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
+
+  test:
+    name: Test
+    needs: wasm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      - name: Restore math WASM
+        uses: actions/download-artifact@v4
+        with:
+          name: math-wasm
+          path: math
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+
+  build:
+    name: Build extension
+    needs: wasm
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.x'
+      - name: Restore math WASM
+        uses: actions/download-artifact@v4
+        with:
+          name: math-wasm
+          path: math
+      - name: Clean artifacts folder
+        run: rm -rf ./artifacts && mkdir ./artifacts
+      - name: Install dependencies
+        run: npm install
+      - name: Build extension
+        run: npm run build
+      - name: Get short SHA
+        id: sha
+        run: echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      - name: Upload zip-file artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: privacymagic-${{ steps.sha.outputs.short }}.zip
+          path: ./artifacts/privacymagic.zip
+      - name: Rename zip with commit hash
+        run: mv ./artifacts/privacymagic.zip ./artifacts/privacymagic-${{ github.ref_name }}.zip
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: privacymagic-${{ github.ref_name }}.zip
+          artifact: ./artifacts/privacymagic-${{ github.ref_name }}.zip
