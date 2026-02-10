@@ -22,38 +22,6 @@ export const logMatchingRulesInDevMode = (): void => {
 }
 
 export const testHttpBehavior = (): void => {
-  chrome.webRequest.onBeforeRequest.addListener((details) => {
-    console.log('onBeforeRequest debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onBeforeSendHeaders.addListener((details) => {
-    console.log('onBeforeSendHeaders debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onSendHeaders.addListener((details) => {
-    console.log('onSendHeaders debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onHeadersReceived.addListener((details) => {
-    console.log('onHeadersReceived debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onAuthRequired.addListener((details) => {
-    console.log('onAuthRequired debug:', details)
-    return { cancel: false }
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onBeforeRedirect.addListener((details) => {
-    console.log('onBeforeRedirect debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onResponseStarted.addListener((details) => {
-    console.log('onResponseStarted debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onCompleted.addListener((details) => {
-    console.log('onCompleted debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
-  chrome.webRequest.onErrorOccurred.addListener((details) => {
-    console.log('onErrorOccurred debug:', details)
-  }, { urls: ['<all_urls>'], types: ['main_frame'] })
   chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     console.log('onBeforeNavigate debug:', details)
   })
