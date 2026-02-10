@@ -2,6 +2,7 @@ emcc math.c \
   -Oz \
   -s STANDALONE_WASM \
   -fno-builtin \
+  -fno-fast-math \
   -fno-exceptions \
   -Wl,--no-entry \
   -Wl,--strip-all \
