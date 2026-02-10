@@ -17,11 +17,28 @@ declare global {
     readonly lastInputTime: number
   }
 
+
+  type HighEntropyValues = {
+    brands: Array<{ brand: string, version: string }>
+    mobile: boolean
+    platform: string
+    architecture?: string
+    bitness?: string
+    formFactors?: string[]
+    fullVersionList?: Array<{ brand: string, version: string }>
+    model?: string
+    platformVersion?: string
+    uaFullVersion?: string
+    wow64?: boolean
+  }
+
+  type HighEntropyHint = 'architecture' | 'bitness' | 'brands' | 'formFactors' | 'fullVersionList' | 'mobile' | 'model' | 'platform' | 'platformVersion' | 'uaFullVersion' | 'wow64'
+
   class NavigatorUAData extends EventTarget {
     readonly brands: Array<{ brand: string, version: string }>
     readonly mobile: boolean
     readonly platform: string
-    getHighEntropyValues: () => Promise<{ architecture: string, bitness: string, brands: Array<{ brand: string, version: string }>, formFactors: string[], fullVersionList: Array<{ brand: string, version: string }>, mobile: boolean, model: string, platform: string, platformVersion: string, uaFullVersion: string, wow64: boolean }>
+    getHighEntropyValues: (hints: HighEntropyHint[]) => Promise<HighEntropyValues>
     toJSON: {
       brands: Array<{ brand: string, version: string }>
       mobile: boolean
