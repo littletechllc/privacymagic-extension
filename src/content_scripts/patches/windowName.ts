@@ -24,14 +24,14 @@ const windowName = (): void => {
     get (this: Window) {
       const nameStr = nameGetterSafe(this)
       try {
-        const data: Record<string, string> = jsonParseSafe(nameStr) as Record<string, string>
-        if (typeof data !== 'object') {
+        const data = jsonParseSafe(nameStr) as unknown
+        if (data == null || typeof data !== 'object' || Array.isArray(data)) {
           return ''
         }
-        if (typeof data[locationOrigin] !== 'string') {
+        if (typeof (data as Record<string, string>)[locationOrigin] !== 'string') {
           return ''
         }
-        return data[locationOrigin]
+        return (data as Record<string, string>)[locationOrigin]
       } catch {
         return ''
       }
@@ -40,14 +40,16 @@ const windowName = (): void => {
       const nameStr = nameGetterSafe(this)
       let data: Record<string, string>
       try {
-        data = jsonParseSafe(nameStr) as Record<string, string>
-        if (typeof data !== 'object') {
+        const parsed = jsonParseSafe(nameStr) as unknown
+        if (parsed == null || typeof parsed !== 'object' || Array.isArray(parsed)) {
           data = {}
+        } else {
+          data = parsed as Record<string, string>
         }
       } catch {
         data = {}
       }
-      if (locationOrigin === '' || locationOrigin.length === 0) {
+      if (locationOrigin === '') {
         return
       }
       // String(value) matches self.name native behavior
