@@ -3,7 +3,6 @@ import { SettingId } from './setting-ids'
 // Message types that can be sent to the background script
 export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
-  | { type: 'addHttpWarningNetworkRuleException', url: string, value: boolean }
   | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'getDomainForTab', tabId: number }
   | { type: 'reloadTab', tabId: number }
@@ -30,17 +29,6 @@ export const updateSettingRemote = async (
   value: boolean
   ): Promise<void> => {
   const message: Message = { type: 'updateSetting', domain, settingId, value }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
-  if (!response.success) {
-    throw new Error(response.error)
-  }
-}
-
-export const addHttpWarningNetworkRuleExceptionRemote = async (
-  url: string,
-  value: boolean
-): Promise<void> => {
-  const message: Message = { type: 'addHttpWarningNetworkRuleException', url, value }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
   if (!response.success) {
     throw new Error(response.error)
