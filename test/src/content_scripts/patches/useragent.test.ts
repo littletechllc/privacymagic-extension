@@ -1,12 +1,59 @@
-import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
-import useragent from '@src/content_scripts/patches/useragent'
+import {describe, it, expect, beforeEach, afterEach, beforeAll} from '@jest/globals'
 
 const leakyPlatform = 'CustomPlatform'
 
+// jsdom does not provide NavigatorUAData; useragent patch uses it at module load.
+// Define it before dynamic import so createSafeMethod(NavigatorUAData, ...) succeeds.
+const LEAKY_HIGH_ENTROPY: Record<string, unknown> = {
+  architecture: 'arm',
+  bitness: '64',
+  brands: [],
+  formFactors: ['Mobile'],
+  fullVersionList: [{ brand: 'Chrome', version: '120.0.6099.0' }],
+  mobile: true,
+  model: 'Pixel',
+  platform: 'Win32',
+  platformVersion: '14.0',
+  uaFullVersion: '120.0.6099.0',
+  wow64: true
+}
+
 describe('useragent patch', () => {
+  let useragent: () => void
   let originalPlatformDescriptor: PropertyDescriptor | undefined
   let originalUserAgentData: unknown
   const nav = navigator as unknown as Record<string, unknown>
+
+  beforeAll(async () => {
+    const g = globalThis as unknown as Record<string, unknown>
+    if (g.NavigatorUAData === undefined) {
+      g.NavigatorUAData = class NavigatorUAData {
+        async getHighEntropyValues(hints: string[]): Promise<Record<string, unknown>> {
+          const result: Record<string, unknown> = {}
+          for (const key of hints) {
+            if (key in LEAKY_HIGH_ENTROPY) {
+              result[key] = LEAKY_HIGH_ENTROPY[key]
+            }
+          }
+          return Promise.resolve(result)
+        }
+        get platform(): string {
+          return 'Win32'
+        }
+        get mobile(): boolean {
+          return false
+        }
+        get brands(): Array<{ brand: string; version: string }> {
+          return []
+        }
+        toJSON(): Record<string, unknown> {
+          return {}
+        }
+      }
+    }
+    const mod = await import('@src/content_scripts/patches/useragent')
+    useragent = mod.default
+  })
 
   beforeEach(() => {
     const proto = Object.getPrototypeOf(navigator) as object
@@ -18,7 +65,7 @@ describe('useragent patch', () => {
     })
     originalUserAgentData = (navigator as { userAgentData?: unknown }).userAgentData
     const NavigatorUADataClass = (globalThis as unknown as Record<string, new () => { platform: string; mobile: boolean }>).NavigatorUAData
-    if (NavigatorUADataClass == null) throw new Error('NavigatorUAData not defined (test/setup.ts)')
+    if (NavigatorUADataClass == null) throw new Error('NavigatorUAData not defined')
     const ua = new NavigatorUADataClass()
     Object.defineProperty(ua, 'platform', { get: () => 'Windows', configurable: true, enumerable: true })
     Object.defineProperty(ua, 'mobile', { get: () => true, configurable: true, enumerable: true })
