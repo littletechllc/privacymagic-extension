@@ -1,8 +1,6 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
 import { getAllSettings, setSetting } from '@src/common/settings'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { createHttpWarningNetworkRule, updateHttpWarningNetworkRuleException } from './http-warning'
 import { logError, registrableDomainFromUrl, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '@src/common/messages'
 import { updateRules, setupRules } from './dnr/rule-manager'
@@ -30,9 +28,6 @@ const handleMessage = async (
     if (message.type === 'updateSetting') {
       await setSetting(message.domain, message.settingId, message.value)
       await updateRules(message.domain, message.settingId, message.value)
-      sendResponse({ success: true } as SuccessResponse)
-    } else if (message.type === 'addHttpWarningNetworkRuleException') {
-      await updateHttpWarningNetworkRuleException(message.url, message.value)
       sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'getRemoteStyleSheetContent') {
       const response = await fetch(message.url, { headers: { "Content-Type": "text/css" } })
@@ -100,7 +95,6 @@ const initializeListeners = (): void => {
     // Debug functions available in debug.ts:
     // import { logMatchingRulesInDevMode, testHttpBehavior } from './debug'
     // logMatchingRulesInDevMode()
-    // testHttpBehavior()
   } catch (error) {
     logError(error, 'error initializing listeners')
   }
@@ -110,7 +104,6 @@ const initializeListeners = (): void => {
 const initializePersistentResources = async (): Promise<void> => {
   await blockAutocomplete()
   await setupRules()
-  // await createHttpWarningNetworkRule()
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
