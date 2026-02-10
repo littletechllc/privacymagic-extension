@@ -4,6 +4,7 @@ emcc math.c \
   -fno-builtin \
   -fno-fast-math \
   -fno-exceptions \
+  -mnontrapping-fptoint \
   -Wl,--no-entry \
   -Wl,--strip-all \
   -Wl,--gc-sections \
