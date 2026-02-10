@@ -1,4 +1,4 @@
-import {jest, describe, it, expect, beforeEach, afterEach} from '@jest/globals'
+import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
 import disk from '@src/content_scripts/patches/disk'
 
 // StorageManager may be absent or differ in jsdom; use a minimal mock that has estimate()
