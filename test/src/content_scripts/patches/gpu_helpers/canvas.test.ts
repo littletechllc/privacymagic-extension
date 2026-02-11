@@ -1,8 +1,13 @@
-import {describe, it, expect, beforeEach} from '@jest/globals'
+import {describe, it, expect, beforeEach, beforeAll} from '@jest/globals'
 import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/gpu_helpers/canvas'
 
 // In jsdom without the canvas package, CanvasRenderingContext2D is undefined and enableCanvasFingerprintSpoofing() would throw.
 const canvasSupported = typeof globalThis.CanvasRenderingContext2D !== 'undefined'
+
+// Record which context/canvas received draw vs read calls (set up in beforeAll so patch wraps our wrappers).
+let drawCallContexts: CanvasRenderingContext2D[] = []
+let getImageDataContexts: CanvasRenderingContext2D[] = []
+let toDataURLCanvases: HTMLCanvasElement[] = []
 
 describe('gpu_helpers/canvas', () => {
   const get2dContext = (): CanvasRenderingContext2D | null => {
@@ -98,6 +103,47 @@ describe('gpu_helpers/canvas', () => {
     })
 
     describe('drawing methods and two-canvas replay', () => {
+      beforeAll(() => {
+        if (!canvasSupported) return
+        const proto = CanvasRenderingContext2D.prototype
+        /* We must capture native methods to wrap them; the patch will then wrap our wrappers. */
+        /* eslint-disable @typescript-eslint/unbound-method */
+        const nativeGetImageData = proto.getImageData
+        const nativeFillRect = proto.fillRect
+        const nativeFillText = proto.fillText
+        const nativeStrokeRect = proto.strokeRect
+        /* eslint-enable @typescript-eslint/unbound-method */
+        proto.getImageData = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof proto.getImageData>) {
+          getImageDataContexts.push(this)
+          return Reflect.apply(nativeGetImageData, this, args)
+        }
+        proto.fillRect = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof proto.fillRect>) {
+          drawCallContexts.push(this)
+          return Reflect.apply(nativeFillRect, this, args)
+        }
+        proto.fillText = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof proto.fillText>) {
+          drawCallContexts.push(this)
+          return Reflect.apply(nativeFillText, this, args)
+        }
+        proto.strokeRect = function (this: CanvasRenderingContext2D, ...args: Parameters<typeof proto.strokeRect>) {
+          drawCallContexts.push(this)
+          return Reflect.apply(nativeStrokeRect, this, args)
+        }
+        const canvasProto = HTMLCanvasElement.prototype
+        /* eslint-disable-next-line @typescript-eslint/unbound-method */
+        const nativeToDataURL = canvasProto.toDataURL
+        canvasProto.toDataURL = function (this: HTMLCanvasElement, ...args: Parameters<typeof canvasProto.toDataURL>) {
+          toDataURLCanvases.push(this)
+          return Reflect.apply(nativeToDataURL, this, args)
+        }
+      })
+
+      beforeEach(() => {
+        drawCallContexts = []
+        getImageDataContexts = []
+        toDataURLCanvases = []
+      })
+
       it('should create two canvases: page canvas and shadow canvas for replay', () => {
         if (!canvasSupported) return
         let canvasCreateCount = 0
@@ -130,6 +176,10 @@ describe('gpu_helpers/canvas', () => {
         expect(imageData.width).toBe(4)
         expect(imageData.height).toBe(4)
         expect(imageData.data.length).toBe(4 * 4 * 4)
+        expect(drawCallContexts.length).toBe(1)
+        expect(drawCallContexts[0].canvas).toBe(canvas)
+        expect(getImageDataContexts.length).toBe(1)
+        expect(getImageDataContexts[0].canvas).not.toBe(canvas)
       })
 
       it('should replay fillText on shadow canvas', () => {
@@ -144,6 +194,10 @@ describe('gpu_helpers/canvas', () => {
         const url = canvas.toDataURL()
         expect(typeof url).toBe('string')
         expect(url.startsWith('data:')).toBe(true)
+        expect(drawCallContexts.length).toBe(1)
+        expect(drawCallContexts[0].canvas).toBe(canvas)
+        expect(toDataURLCanvases.length).toBe(1)
+        expect(toDataURLCanvases[0]).not.toBe(canvas)
       })
 
       it('should replay strokeRect on shadow canvas', () => {
@@ -156,6 +210,10 @@ describe('gpu_helpers/canvas', () => {
         ctx.strokeRect(2, 2, 4, 4)
         const imageData = ctx.getImageData(0, 0, 10, 10)
         expect(imageData).toBeInstanceOf(ImageData)
+        expect(drawCallContexts.length).toBe(1)
+        expect(drawCallContexts[0].canvas).toBe(canvas)
+        expect(getImageDataContexts.length).toBe(1)
+        expect(getImageDataContexts[0].canvas).not.toBe(canvas)
       })
 
       it('should replay multiple draw commands in order before getImageData', () => {
@@ -178,6 +236,10 @@ describe('gpu_helpers/canvas', () => {
         expect(imageData.width).toBe(20)
         expect(imageData.height).toBe(20)
         expect(imageData.data.length).toBe(20 * 20 * 4)
+        expect(drawCallContexts.length).toBe(4)
+        drawCallContexts.forEach((c) => expect(c.canvas).toBe(canvas))
+        expect(getImageDataContexts.length).toBe(1)
+        expect(getImageDataContexts[0].canvas).not.toBe(canvas)
       })
     })
   })
