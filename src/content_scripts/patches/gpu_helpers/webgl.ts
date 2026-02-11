@@ -1,6 +1,12 @@
 import { createSafeMethod, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
 
+// Based on results from https://camoufox.com/webgl-research/
+// navigator.userAgentData.platform is 'MacIntel' on Intel/Apple Silicon Macs
 const webglVendorAndRenderer: Record<string, { vendor: string, renderer: string }> = {
+  MacIntel: {
+    vendor: 'Apple',
+    renderer: 'Apple M1'
+  },
   macOS: {
     vendor: 'Apple',
     renderer: 'Apple M1'
@@ -23,16 +29,16 @@ export const hideWebGLVendorAndRenderer = (): void => {
   if (navigator.userAgentData != null) {
     const userAgentData: NavigatorUAData = navigator.userAgentData
     const platform = userAgentData.platform
-    if (platform === 'MacIntel') {
+    if (platform === 'MacIntel' || platform === 'macOS') {
       redefinePropertyValues(self.WebGLRenderingContext.prototype, {
         getParameter: function (this: WebGLRenderingContext, constant: number) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const originalValue = originalGetParameterSafe(this, constant)
           switch (constant) {
             case 37445: // UNMASKED_VENDOR_WEBGL
-              return webglVendorAndRenderer[platform].vendor ?? 'Unknown'
+              return webglVendorAndRenderer[platform]?.vendor ?? 'Unknown'
             case 37446: // UNMASKED_RENDERER_WEBGL
-              return webglVendorAndRenderer[platform].renderer ?? 'Unknown'
+              return webglVendorAndRenderer[platform]?.renderer ?? 'Unknown'
             default:
               // eslint-disable-next-line @typescript-eslint/no-unsafe-return
               return originalValue
