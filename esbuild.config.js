@@ -62,10 +62,6 @@ const builds = [
     outfile: 'dist/default_popup/popup.js'
   },
   {
-    entryPoints: ['src/privacymagic/http-warning.ts'],
-    outfile: 'dist/privacymagic/http-warning.js'
-  },
-  {
     entryPoints: ['src/privacymagic/options.ts'],
     outfile: 'dist/privacymagic/options.js'
   },
