@@ -1,4 +1,4 @@
-import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeGetter, createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
@@ -108,6 +108,34 @@ const css = (): void => {
 
   const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map()
 
+  const URLSafe = self.URL
+  const URLhrefSafe = createSafeGetter(URL, 'href')
+  const stringReplaceSafe = createSafeMethod(String, 'replace')
+
+  /**
+   * Converts relative CSS URLs to absolute ones.
+   * @param {string} cssText - The raw CSS content.
+   * @param {string} baseURL - The absolute URL of the original CSS file.
+   */
+  const convertToAbsoluteUrls = (cssText: string, baseURL: string): string => {
+    // Regex captures the path inside url(), handling optional quotes and whitespace
+    const urlRegex = /url\(\s*['"]?([^'")]*?)['"]?\s*\)/gi;
+    return stringReplaceSafe(cssText, urlRegex, (match: string, path: string) => {
+      // 1. Skip empty paths, absolute URLs, or data URIs
+      if (!path || /^https?:\/\/|^data:|^blob:/i.test(path)) {
+        return match;
+      }
+      // 2. Resolve the path relative to the baseURL
+      try {
+        const absoluteUrl = URLhrefSafe(new URLSafe(path, baseURL));
+        return `url("${absoluteUrl}")`;
+      } catch {
+        // If resolution fails (invalid path), return the original match
+        return match;
+      }
+    });
+  }
+
   const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string, onloadCallback: () => void): void => {
     if (styleSheet == null) {
       // The style sheet was not valid or has been removed.
@@ -116,7 +144,8 @@ const css = (): void => {
     // Initialize the style sheet with the remote content when it becomes available.
     void getRemoteStyleSheetContent(href).then(content => {
       if (content !== '' && content !== undefined) {
-        void applyContentToStyleSheet(styleSheet, content, mediaAttribute, onloadCallback)
+        const contentWithAbsoluteUrls = convertToAbsoluteUrls(content, href)
+        void applyContentToStyleSheet(styleSheet, contentWithAbsoluteUrls, mediaAttribute, onloadCallback)
         document.documentElement.style.visibility = 'visible'
       }
     }).catch(error => {
