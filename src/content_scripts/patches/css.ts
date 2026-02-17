@@ -392,7 +392,13 @@ const css = (): void => {
 
   // Get the original replaceSync method before we patch it
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
+  const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
 
+  /**
+   * Sanitize a single CSS rule by removing/modifying any invalid CSS rules.
+   * @param rule - The CSS rule to sanitize.
+   * @returns The sanitized CSS rule.
+   */
   const sanitizeRule = (rule: CSSRule): CSSRule => {
     if (rule instanceof CSSMediaRule) {
       rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height')
@@ -405,18 +411,30 @@ const css = (): void => {
     return rule
   }
 
-  const sanitizeCss = (css: string): string => {
-    const tempStyleSheet = new CSSStyleSheet()
-    // Use the original method directly to avoid recursion (since replaceSyncSafe would call the patched version)
-    replaceSyncSafe(tempStyleSheet, css)
-    const rules = Array.from(tempStyleSheet.cssRules)
-    return rules.map(sanitizeRule).map(rule => rule.cssText).join('\n')
+  /**
+   * Sanitize the style sheet in place by removing/modifying any invalid CSS rules.
+   * @param styleSheet - The style sheet to sanitize.
+   */
+  const sanitizeStyleSheet = (styleSheet: CSSStyleSheet): void => {
+    try {
+      const rules = Array.from(styleSheet.cssRules)
+      rules.forEach(rule => sanitizeRule(rule))
+    } catch (error) {
+      console.error('error sanitizing style sheet', error)
+    }
   }
 
   objectDefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
       value (this: CSSStyleSheet, css: string) {
-        replaceSyncSafe(this, sanitizeCss(css))
+        replaceSyncSafe(this, css)
+        sanitizeStyleSheet(this)
+      }
+    },
+    replace: {
+      async value (this: CSSStyleSheet, css: string) {
+        await replaceSafe(this, css)
+        sanitizeStyleSheet(this)
       }
     }
   })
