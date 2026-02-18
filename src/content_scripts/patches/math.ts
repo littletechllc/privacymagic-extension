@@ -29,13 +29,19 @@ const math = (): void => {
 
   const hypot = (...args: number[]): number => {
     const len = args.length
+    if (len === 0) {
+      return 0
+    }
+    if (len === 1) {
+      return args[0]
+    }
     const exports = mathWasmExports as {
       memory: WebAssembly.Memory
       malloc: (bytes: number) => number
       free: (ptr: number) => void
       math_hypot: (count: number, ptr: number) => number
     }
-    const ptr = exports.malloc(len * 8)
+    const ptr = exports.malloc(len * Float64Array.BYTES_PER_ELEMENT)
     new Float64Array(exports.memory.buffer, ptr, len).set(args)
     const result = exports.math_hypot(len, ptr)
     exports.free(ptr)
