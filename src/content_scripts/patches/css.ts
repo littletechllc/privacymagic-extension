@@ -92,7 +92,7 @@ const css = (): void => {
     return content
   }
 
-  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string, onloadCallback?: () => void): Promise<void> => {
+  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string, baseURL: string, onloadCallback?: () => void): Promise<void> => {
     const content = maybeWrapWithMediaQuery(css, mediaAttribute)
     const { urls: importUrls, cssTextWithoutImports } = extractImportUrls(content)
     if (importUrls.length === 0) {
@@ -101,9 +101,10 @@ const css = (): void => {
         onloadCallback()
       }
     } else {
-      const remoteStyleSheetContents = await Promise.all(importUrls.map(getRemoteStyleSheetContent))
+      const absoluteImportUrls = importUrls.map(url => new URL(url, baseURL).href)
+      const remoteStyleSheetContents = await Promise.all(absoluteImportUrls.map(getRemoteStyleSheetContent))
       const fullContent = remoteStyleSheetContents.join('\n') + cssTextWithoutImports
-      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute, onloadCallback)
+      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute, baseURL, onloadCallback)
     }
   }
 
@@ -146,7 +147,7 @@ const css = (): void => {
     void getRemoteStyleSheetContent(href).then(content => {
       if (content !== '' && content !== undefined) {
         const contentWithAbsoluteUrls = convertToAbsoluteUrls(content, href)
-        void applyContentToStyleSheet(styleSheet, contentWithAbsoluteUrls, mediaAttribute, onloadCallback)
+        void applyContentToStyleSheet(styleSheet, contentWithAbsoluteUrls, mediaAttribute, href, onloadCallback)
         document.documentElement.style.visibility = 'visible'
       }
     }).catch(error => {
@@ -167,7 +168,7 @@ const css = (): void => {
   const createStyleSheetForStyleElement = (styleElement: HTMLStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
     console.log('createStyleSheetForStyleElement called in', self.location.href, self.top === self, styleElement.textContent)
-    void applyContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media)
+    void applyContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media, self.location.href)
     styleSheet.disabled = styleElement.disabled
     return styleSheet
   }
@@ -184,7 +185,7 @@ const css = (): void => {
     const svgId = crypto.randomUUID()
     svg.setAttribute('data-svg-id', svgId)
     const text = `[data-svg-id="${svgId}"] { ${svgStyleElement.textContent ?? ''} }`
-    void applyContentToStyleSheet(styleSheet, text, svgStyleElement.media)
+    void applyContentToStyleSheet(styleSheet, text, svgStyleElement.media, self.location.href)
     styleSheet.disabled = svgStyleElement.disabled
     return styleSheet
   }
@@ -279,7 +280,7 @@ const css = (): void => {
         record.oldValue !== el.parentElement.textContent) {
         const styleSheet = getStyleSheetForCssElement(el.parentElement)
         if (styleSheet !== undefined) {
-          void applyContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media)
+          void applyContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media, self.location.href)
         }
       } else if (el instanceof HTMLStyleElement &&
                  record.type === 'attributes' &&
@@ -287,7 +288,7 @@ const css = (): void => {
                  record.oldValue !== el.media) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet !== undefined) {
-          void applyContentToStyleSheet(styleSheet, el.textContent ?? '', el.media)
+          void applyContentToStyleSheet(styleSheet, el.textContent ?? '', el.media, self.location.href)
         }
       } else if (el instanceof HTMLLinkElement &&
                  record.type === 'attributes' &&
