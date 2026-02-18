@@ -1,5 +1,4 @@
 @import url('./toggle.css');
-@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
 
 * {
   box-sizing: border-box;
@@ -47,7 +46,7 @@ div.title {
   height: 50%;
   width: 100%;
   color: #091276;
-  font-family: "Modern Antiqua", serif;
+  font-family: serif;
   font-weight: 600;
   font-style: normal;
 }
