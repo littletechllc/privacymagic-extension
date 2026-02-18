@@ -1,5 +1,6 @@
 import { createSafeGetter, createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
+import { isAllowedFont } from '@src/common/font-filter'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
@@ -423,25 +424,45 @@ const css = (): void => {
   const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
   const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
 
+  const localFontRegex = /local\s*\(\s*['"]?([^'")]*?)['"]?\s*\)/gi
+  const emptyDataUri = 'url("data:application/font-woff2;base64,")'
+
   /**
-   * Sanitize a single CSS rule by removing/modifying any invalid CSS rules.
+   * Sanitize a font face rule by replacing any invalid local font names
+   * that are not in the allowlist with an empty Data URI.
+   * @param rule - The font face rule to sanitize.
+   */
+  const sanitizeFontFaceRule = (rule: CSSFontFaceRule): void => {
+    const src = rule.style.getPropertyValue('src')
+    const sanitizedSrc: string = stringReplaceSafe(src, localFontRegex,
+      (match: string, fontName: string): string =>
+        (isAllowedFont(fontName) ? match : emptyDataUri))
+    if (sanitizedSrc !== src) {
+      rule.style.setProperty('src', sanitizedSrc)
+    }
+  }
+
+  /**
+   * Sanitize a single CSS rule by modifying leaky CSS rules.
    * @param rule - The CSS rule to sanitize.
    * @returns The sanitized CSS rule.
    */
-  const sanitizeRule = (rule: CSSRule): CSSRule => {
+  const sanitizeRule = (rule: CSSRule): void => {
     if (rule instanceof CSSMediaRule) {
       rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height')
+    }
+    if (rule instanceof CSSFontFaceRule) {
+      sanitizeFontFaceRule(rule)
     }
     if (rule instanceof CSSGroupingRule) {
       for (const childRule of Array.from(rule.cssRules)) {
         sanitizeRule(childRule)
       }
     }
-    return rule
   }
 
   /**
-   * Sanitize the style sheet in place by removing/modifying any invalid CSS rules.
+   * Sanitize the style sheet in place by modifying leaky CSS rules.
    * @param styleSheet - The style sheet to sanitize.
    */
   const sanitizeStyleSheet = (styleSheet: CSSStyleSheet): void => {
