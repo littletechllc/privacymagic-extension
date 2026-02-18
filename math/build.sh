@@ -10,6 +10,5 @@ emcc math.c \
   -Wl,--strip-all \
   -Wl,--gc-sections \
   -Wl,--lto-O3 \
-  -s MALLOC='emmalloc' \
   -s EXPORTED_FUNCTIONS='["_malloc","_free","_acos","_acosh","_asin","_asinh","_atan","_atanh","_cbrt","_cos","_cosh","_exp","_expm1","_log","_log1p","_log2","_log10","_sin","_sinh","_sqrt","_tan","_tanh","_atan2","_math_hypot","_pow"]' \
   -o math.wasm
