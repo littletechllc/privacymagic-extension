@@ -56,7 +56,7 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
 
 const specialFiles: Record<string, Record<string, string>> = {
   'manifest.json': {
-    '__EXTENSION_VERSION__': getBuildVersion()
+    '__EXTENSION_VERSION_NAME__': getBuildVersion()
   }
 }
 
