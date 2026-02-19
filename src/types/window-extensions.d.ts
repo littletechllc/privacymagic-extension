@@ -17,7 +17,6 @@ declare global {
     readonly lastInputTime: number
   }
 
-
   type HighEntropyValues = {
     brands: Array<{ brand: string, version: string }>
     mobile: boolean
@@ -126,5 +125,11 @@ declare global {
 
   interface Uint8ArrayConstructor {
     fromBase64: (base64: string) => Uint8Array<ArrayBuffer>
+  }
+
+  interface FontFaceSet {
+    add(font: FontFace): void
+    clear(): void
+    delete(font: FontFace): void
   }
 }

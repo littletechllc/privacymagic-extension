@@ -1,7 +1,8 @@
 import { createSafeGetter, createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
-import { isAllowedFont } from '@src/common/font-filter'
 import { getDisabledSettings } from '../helpers/helpers'
+import { sanitizeFontFaceSource } from './css_helpers/font-face'
+import { stringReplaceSafe } from '../helpers/safe'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
@@ -113,7 +114,6 @@ const css = (): void => {
 
   const URLSafe = self.URL
   const URLhrefSafe = createSafeGetter(URL, 'href')
-  const stringReplaceSafe = createSafeMethod(String, 'replace')
 
   /**
    * Converts relative CSS URLs to absolute ones.
@@ -422,13 +422,6 @@ const css = (): void => {
   }
   [HTMLStyleElement, HTMLLinkElement, SVGStyleElement].forEach(fixCssElementApiBehavior)
 
-  // Get the original replaceSync method before we patch it
-  const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
-  const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
-
-  const localFontRegex = /local\s*\(\s*['"]?([^'")]*?)['"]?\s*\)/gi
-  const emptyDataUri = 'url("data:application/font-woff2;base64,")'
-
   /**
    * Sanitize a font face rule by replacing any invalid local font names
    * that are not in the allowlist with an empty Data URI.
@@ -436,9 +429,7 @@ const css = (): void => {
    */
   const sanitizeFontFaceRule = (rule: CSSFontFaceRule): void => {
     const src = rule.style.getPropertyValue('src')
-    const sanitizedSrc: string = stringReplaceSafe(src, localFontRegex,
-      (match: string, fontName: string): string =>
-        (isAllowedFont(fontName) ? match : emptyDataUri))
+    const sanitizedSrc = sanitizeFontFaceSource(src)
     if (sanitizedSrc !== src) {
       rule.style.setProperty('src', sanitizedSrc)
     }
@@ -477,6 +468,10 @@ const css = (): void => {
       console.error('error sanitizing style sheet', error)
     }
   }
+
+  // Get the original replaceSync method before we patch it
+  const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
+  const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
 
   objectDefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
