@@ -1,6 +1,7 @@
 import { createSafeGetter, createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
 import { isAllowedFont } from '@src/common/font-filter'
+import { getDisabledSettings } from '../helpers/helpers'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
@@ -443,6 +444,8 @@ const css = (): void => {
     }
   }
 
+  const isFontSettingDisabled = getDisabledSettings().includes('fonts')
+
   /**
    * Sanitize a single CSS rule by modifying leaky CSS rules.
    * @param rule - The CSS rule to sanitize.
@@ -452,7 +455,7 @@ const css = (): void => {
     if (rule instanceof CSSMediaRule) {
       rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height')
     }
-    if (rule instanceof CSSFontFaceRule) {
+    if (rule instanceof CSSFontFaceRule && !isFontSettingDisabled) {
       sanitizeFontFaceRule(rule)
     }
     if (rule instanceof CSSGroupingRule) {
