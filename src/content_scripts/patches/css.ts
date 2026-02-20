@@ -60,7 +60,14 @@ const css = (): void => {
   }
 
   const applyLocalContentToStyleSheet = async (styleSheet: CSSStyleSheet, cssText: string, mediaAttribute: string, baseURL: string, onloadCallback?: () => void): Promise<void> => {
-    const compiledContent = await compileCss(cssText, baseURL)
+    let compiledContent: string
+    if (cssText.includes('@import')) {
+      compiledContent = await compileCss(cssText, baseURL)
+    } else {
+      // No imports, so we can keep this synchronous to satisify assumptions
+      // on some web pages, for example nytimes.com and theguardian.com.
+      compiledContent = cssText
+    }
     applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
   }
 
