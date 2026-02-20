@@ -1,9 +1,11 @@
-import { createSafeGetter } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { stringReplaceSafe } from '@src/content_scripts/helpers/safe'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
 
 const URLSafe = self.URL
 const URLhrefSafe = createSafeGetter(URL, 'href')
+const regexExecSafe = createSafeMethod(RegExp, 'exec')
+const regexTestSafe = createSafeMethod(RegExp, 'test')
 
 const resolveAbsoluteUrl = (path: string, baseURL: string): string => {
   return URLhrefSafe(new URLSafe(path, baseURL))
@@ -13,10 +15,10 @@ const extractImportUrls = (cssText: string, baseURL: string): { urls: string[], 
   const urls: string[] = []
   const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi
   let match: RegExpExecArray | null
-  match = regex.exec(cssText)
+  match = regexExecSafe(regex, cssText)
   while (match !== null) {
     urls.push(resolveAbsoluteUrl(match[1], baseURL))
-    match = regex.exec(cssText)
+    match = regexExecSafe(regex, cssText)
   }
   const cssTextWithoutImports = cssText.replace(regex, '')
   return { urls, cssTextWithoutImports }
@@ -32,7 +34,7 @@ const convertToAbsoluteUrls = (cssText: string, baseURL: string): string => {
   const urlRegex = /url\(\s*['"]?([^'")]*?)['"]?\s*\)/gi;
   return stringReplaceSafe(cssText, urlRegex, (match: string, path: string) => {
     // 1. Skip empty paths, absolute URLs, or data URIs
-    if (!path || /^https?:\/\/|^data:|^blob:/i.test(path)) {
+    if (!path || regexTestSafe(/^https?:\/\/|^data:|^blob:/i, path)) {
       return match;
     }
     // 2. Resolve the path relative to the baseURL
