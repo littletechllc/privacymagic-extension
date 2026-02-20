@@ -1,8 +1,6 @@
-import { createSafeGetter, createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
-import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
-import { getDisabledSettings } from '../helpers/helpers'
-import { sanitizeFontFaceSource } from './css_helpers/font-face'
-import { stringReplaceSafe } from '../helpers/safe'
+import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
+import { compileCss, compileRemoteCss, getPendingRemoteStyleSheets } from './css_helpers/css-compiler'
+import { sanitizeStyleSheetsReplace } from './css_helpers/sanitizer'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
@@ -41,19 +39,6 @@ const css = (): void => {
     link.dispatchEvent(new Event('load'))
   }
 
-  const extractImportUrls = (cssText: string): { urls: string[], cssTextWithoutImports: string } => {
-    const urls: string[] = []
-    const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi
-    let match: RegExpExecArray | null
-    match = regex.exec(cssText)
-    while (match !== null) {
-      urls.push(match[1])
-      match = regex.exec(cssText)
-    }
-    const cssTextWithoutImports = cssText.replace(regex, '')
-    return { urls, cssTextWithoutImports }
-  }
-
   const maybeWrapWithMediaQuery = (css: string, mediaAttribute: string): string => {
     if (css == null ||
       css === '') {
@@ -66,100 +51,28 @@ const css = (): void => {
     return `@media ${mediaAttribute} { ${css} }`
   }
 
-  const fetchSafe = fetch
-
-  let pendingRemoteStyleSheets = 0
-
-  const getRemoteStyleSheetContent = async (href: string): Promise<string> => {
-    pendingRemoteStyleSheets++
-    let content = ''
-    try {
-      const response = await fetchSafe(href)
-      if (response.ok) {
-        console.log('direct fetch successful for href:', href)
-        content = await response.text()
-      } else {
-        throw new Error(`direct fetch failed for href: ${href}, status: ${response.status}`)
-      }
-    } catch (error) {
-      console.error('error getting remote style sheet content for href:', href, 'error:', error)
-      try {
-        content = await backgroundFetch(href)
-        console.log('background fetch successful for href:', href, content)
-      } catch (error) {
-        console.error('error dispatching background fetch:', error)
-      }
-    }
-    pendingRemoteStyleSheets--
-    return content
-  }
-
-  const applyContentToStyleSheet = async (styleSheet: CSSStyleSheet, css: string, mediaAttribute: string, baseURL: string, onloadCallback?: () => void): Promise<void> => {
-    const content = maybeWrapWithMediaQuery(css, mediaAttribute)
-    const { urls: importUrls, cssTextWithoutImports } = extractImportUrls(content)
-    if (importUrls.length === 0) {
-      styleSheet.replaceSync(cssTextWithoutImports)
-      if (onloadCallback != null) {
-        onloadCallback()
-      }
-    } else {
-      const absoluteImportUrls = importUrls.map(url => new URL(url, baseURL).href)
-      const remoteStyleSheetContents = await Promise.all(absoluteImportUrls.map(getRemoteStyleSheetContent))
-      const fullContent = remoteStyleSheetContents.join('\n') + cssTextWithoutImports
-      void applyContentToStyleSheet(styleSheet, fullContent, mediaAttribute, baseURL, onloadCallback)
+  const applyCompiledContentToStyleSheet = async (styleSheet: CSSStyleSheet, compiledContent: string, mediaAttribute: string, onloadCallback?: () => void): Promise<void> => {
+    const compiledContentWithMediaQuery = maybeWrapWithMediaQuery(compiledContent, mediaAttribute)
+    styleSheet.replaceSync(compiledContentWithMediaQuery)
+    if (onloadCallback != null) {
+      onloadCallback()
     }
   }
 
-  const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map()
-
-  const URLSafe = self.URL
-  const URLhrefSafe = createSafeGetter(URL, 'href')
-
-  /**
-   * Converts relative CSS URLs to absolute ones.
-   * @param {string} cssText - The raw CSS content.
-   * @param {string} baseURL - The absolute URL of the original CSS file.
-   */
-  const convertToAbsoluteUrls = (cssText: string, baseURL: string): string => {
-    // Regex captures the path inside url(), handling optional quotes and whitespace
-    const urlRegex = /url\(\s*['"]?([^'")]*?)['"]?\s*\)/gi;
-    return stringReplaceSafe(cssText, urlRegex, (match: string, path: string) => {
-      // 1. Skip empty paths, absolute URLs, or data URIs
-      if (!path || /^https?:\/\/|^data:|^blob:/i.test(path)) {
-        return match;
-      }
-      // 2. Resolve the path relative to the baseURL
-      try {
-        const absoluteUrl = URLhrefSafe(new URLSafe(path, baseURL));
-        return `url("${absoluteUrl}")`;
-      } catch {
-        // If resolution fails (invalid path), return the original match
-        return match;
-      }
-    });
+  const applyLocalContentToStyleSheet = async (styleSheet: CSSStyleSheet, cssText: string, mediaAttribute: string, baseURL: string, onloadCallback?: () => void): Promise<void> => {
+    const compiledContent = await compileCss(cssText, baseURL)
+    await applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
   }
 
-  const applyRemoteContentToStyleSheet = (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string, onloadCallback: () => void): void => {
-    if (styleSheet == null) {
-      // The style sheet was not valid or has been removed.
-      return
-    }
-    // Initialize the style sheet with the remote content when it becomes available.
-    void getRemoteStyleSheetContent(href).then(content => {
-      if (content !== '' && content !== undefined) {
-        const contentWithAbsoluteUrls = convertToAbsoluteUrls(content, href)
-        void applyContentToStyleSheet(styleSheet, contentWithAbsoluteUrls, mediaAttribute, href, onloadCallback)
-        document.documentElement.style.visibility = 'visible'
-      }
-    }).catch(error => {
-      console.error('error applying remote content to style sheet for href:', href, 'error:', error)
-    })
+  const applyRemoteContentToStyleSheet = async (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string, onloadCallback: () => void): Promise<void> => {
+    const compiledContent = await compileRemoteCss(href, self.location.href)
+    await applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
   }
 
   // Create a style sheet containing the CSS content of a link element.
   const createStyleSheetForLinkElement = (linkElement: HTMLLinkElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
-    applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media,
+    void applyRemoteContentToStyleSheet(styleSheet, linkElement.href, linkElement.media,
                                    () => triggerOnLoadForLinkElement(linkElement))
     styleSheet.disabled = linkElement.disabled
     return styleSheet
@@ -168,8 +81,7 @@ const css = (): void => {
   // Create a style sheet containing the CSS content of a style element.
   const createStyleSheetForStyleElement = (styleElement: HTMLStyleElement): CSSStyleSheet => {
     const styleSheet = new CSSStyleSheet()
-    console.log('createStyleSheetForStyleElement called in', self.location.href, self.top === self, styleElement.textContent)
-    void applyContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media, self.location.href)
+    void applyLocalContentToStyleSheet(styleSheet, styleElement.textContent ?? '', styleElement.media, self.location.href)
     styleSheet.disabled = styleElement.disabled
     return styleSheet
   }
@@ -186,7 +98,7 @@ const css = (): void => {
     const svgId = crypto.randomUUID()
     svg.setAttribute('data-svg-id', svgId)
     const text = `[data-svg-id="${svgId}"] { ${svgStyleElement.textContent ?? ''} }`
-    void applyContentToStyleSheet(styleSheet, text, svgStyleElement.media, self.location.href)
+    void applyLocalContentToStyleSheet(styleSheet, text, svgStyleElement.media, self.location.href)
     styleSheet.disabled = svgStyleElement.disabled
     return styleSheet
   }
@@ -206,6 +118,8 @@ const css = (): void => {
   }
 
   const mapGetSafe = createSafeMethod(Map, 'get')
+
+  const styleSheetsForCssElements: Map<CSSElement, CSSStyleSheet> = new Map()
 
   // Get the style sheet for a style element, creating it if it doesn't exist.
   const getStyleSheetForCssElement = (cssElement: CSSElement): CSSStyleSheet | undefined => {
@@ -260,7 +174,7 @@ const css = (): void => {
   // elements because it would be too slow and cause a FOUC.
   const updateAdoptedStyleSheetsToMatchCssElements = (): void => {
     shadowRoots.forEach(updateStyleSheetsForRoot)
-    if ((frameCount === 3 && pendingRemoteStyleSheets === 0) ||
+    if ((frameCount === 3 && getPendingRemoteStyleSheets() === 0) ||
       frameCount === 10) {
       document.documentElement.style.visibility = 'visible'
       noTransitionsStyleElement.remove()
@@ -281,7 +195,7 @@ const css = (): void => {
         record.oldValue !== el.parentElement.textContent) {
         const styleSheet = getStyleSheetForCssElement(el.parentElement)
         if (styleSheet !== undefined) {
-          void applyContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media, self.location.href)
+          void applyLocalContentToStyleSheet(styleSheet, el.parentElement.textContent ?? '', el.parentElement.media, self.location.href)
         }
       } else if (el instanceof HTMLStyleElement &&
                  record.type === 'attributes' &&
@@ -289,7 +203,7 @@ const css = (): void => {
                  record.oldValue !== el.media) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet !== undefined) {
-          void applyContentToStyleSheet(styleSheet, el.textContent ?? '', el.media, self.location.href)
+          void applyLocalContentToStyleSheet(styleSheet, el.textContent ?? '', el.media, self.location.href)
         }
       } else if (el instanceof HTMLLinkElement &&
                  record.type === 'attributes' &&
@@ -301,7 +215,7 @@ const css = (): void => {
                   record.oldValue !== el.rel))) {
         const styleSheet = getStyleSheetForCssElement(el)
         if (styleSheet !== undefined) {
-          applyRemoteContentToStyleSheet(styleSheet, el.href, el.media, () => triggerOnLoadForLinkElement(el))
+          void applyRemoteContentToStyleSheet(styleSheet, el.href, el.media, () => triggerOnLoadForLinkElement(el))
         }
       } else if ((el instanceof HTMLLinkElement || el instanceof HTMLStyleElement) &&
                   record.type === 'attributes' &&
@@ -422,71 +336,8 @@ const css = (): void => {
   }
   [HTMLStyleElement, HTMLLinkElement, SVGStyleElement].forEach(fixCssElementApiBehavior)
 
-  /**
-   * Sanitize a font face rule by replacing any invalid local font names
-   * that are not in the allowlist with an empty Data URI.
-   * @param rule - The font face rule to sanitize.
-   */
-  const sanitizeFontFaceRule = (rule: CSSFontFaceRule): void => {
-    const src = rule.style.getPropertyValue('src')
-    const sanitizedSrc = sanitizeFontFaceSource(src)
-    if (sanitizedSrc !== src) {
-      rule.style.setProperty('src', sanitizedSrc)
-    }
-  }
 
-  const isFontSettingDisabled = getDisabledSettings().includes('fonts')
-
-  /**
-   * Sanitize a single CSS rule by modifying leaky CSS rules.
-   * @param rule - The CSS rule to sanitize.
-   * @returns The sanitized CSS rule.
-   */
-  const sanitizeRule = (rule: CSSRule): void => {
-    if (rule instanceof CSSMediaRule) {
-      rule.media.mediaText = rule.media.mediaText.replace(/device-width/g, 'width').replace(/device-height/g, 'height')
-    }
-    if (rule instanceof CSSFontFaceRule && !isFontSettingDisabled) {
-      sanitizeFontFaceRule(rule)
-    }
-    if (rule instanceof CSSGroupingRule) {
-      for (const childRule of Array.from(rule.cssRules)) {
-        sanitizeRule(childRule)
-      }
-    }
-  }
-
-  /**
-   * Sanitize the style sheet in place by modifying leaky CSS rules.
-   * @param styleSheet - The style sheet to sanitize.
-   */
-  const sanitizeStyleSheet = (styleSheet: CSSStyleSheet): void => {
-    try {
-      const rules = Array.from(styleSheet.cssRules)
-      rules.forEach(rule => sanitizeRule(rule))
-    } catch (error) {
-      console.error('error sanitizing style sheet', error)
-    }
-  }
-
-  // Get the original replaceSync method before we patch it
-  const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
-  const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
-
-  objectDefinePropertiesSafe(CSSStyleSheet.prototype, {
-    replaceSync: {
-      value (this: CSSStyleSheet, css: string) {
-        replaceSyncSafe(this, css)
-        sanitizeStyleSheet(this)
-      }
-    },
-    replace: {
-      async value (this: CSSStyleSheet, css: string) {
-        await replaceSafe(this, css)
-        sanitizeStyleSheet(this)
-      }
-    }
-  })
+  sanitizeStyleSheetsReplace()
 }
 
 export default css
