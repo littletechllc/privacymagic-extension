@@ -51,7 +51,7 @@ const css = (): void => {
     return `@media ${mediaAttribute} { ${css} }`
   }
 
-  const applyCompiledContentToStyleSheet = async (styleSheet: CSSStyleSheet, compiledContent: string, mediaAttribute: string, onloadCallback?: () => void): Promise<void> => {
+  const applyCompiledContentToStyleSheet = (styleSheet: CSSStyleSheet, compiledContent: string, mediaAttribute: string, onloadCallback?: () => void): void => {
     const compiledContentWithMediaQuery = maybeWrapWithMediaQuery(compiledContent, mediaAttribute)
     styleSheet.replaceSync(compiledContentWithMediaQuery)
     if (onloadCallback != null) {
@@ -61,12 +61,12 @@ const css = (): void => {
 
   const applyLocalContentToStyleSheet = async (styleSheet: CSSStyleSheet, cssText: string, mediaAttribute: string, baseURL: string, onloadCallback?: () => void): Promise<void> => {
     const compiledContent = await compileCss(cssText, baseURL)
-    await applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
+    applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
   }
 
   const applyRemoteContentToStyleSheet = async (styleSheet: CSSStyleSheet, href: string, mediaAttribute: string, onloadCallback: () => void): Promise<void> => {
     const compiledContent = await compileRemoteCss(href, self.location.href)
-    await applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
+    applyCompiledContentToStyleSheet(styleSheet, compiledContent, mediaAttribute, onloadCallback)
   }
 
   // Create a style sheet containing the CSS content of a link element.
