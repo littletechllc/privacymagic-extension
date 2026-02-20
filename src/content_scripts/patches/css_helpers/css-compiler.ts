@@ -85,7 +85,7 @@ export const compileCss = async (cssText: string, baseURL: string): Promise<stri
   const { urls: importUrls, cssTextWithoutImports } = extractImportUrls(contentWithAbsoluteUrls, baseURL)
   const importContents = await Promise.all(importUrls.map(
     async (href: string) => compileRemoteCss(href, baseURL)))
-  return importContents.join('\n') + cssTextWithoutImports
+  return importContents.join('\n') + '\n' + cssTextWithoutImports
 }
 
 export const getPendingRemoteStyleSheets = (): number => {
