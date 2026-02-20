@@ -12,6 +12,7 @@ const resolveAbsoluteUrl = (path: string, baseURL: string): string => {
 }
 
 const extractImportUrls = (cssText: string, baseURL: string): { urls: string[], cssTextWithoutImports: string } => {
+  // TODO: Handle layer(...), supports(...) and list-of-media-queries.
   const urls: string[] = []
   const regex = /@import\s+(?:url\()?["']?([^"')]+)["']?\)?\s*;/gi
   let match: RegExpExecArray | null
