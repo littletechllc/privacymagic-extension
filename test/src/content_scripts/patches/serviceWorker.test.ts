@@ -62,15 +62,16 @@ describe('serviceWorker patch', () => {
       serviceWorker()
     })
 
-    it('should throw SecurityError when register is called', () => {
-      expect(() => navigator.serviceWorker.register('/sw.js')).toThrow(DOMException)
-      try {
-        void navigator.serviceWorker.register('/sw.js')
-      } catch (e) {
-        expect(e).toBeInstanceOf(DOMException)
-        expect((e as DOMException).name).toBe('SecurityError')
-        expect((e as DOMException).message).toBe('Service workers blocked')
-      }
+    it('should reject with SecurityError when register is called', async () => {
+      await expect(navigator.serviceWorker.register('/sw.js')).rejects.toMatchObject({
+        name: 'SecurityError',
+        message: 'Service workers blocked'
+      })
+      const err = await navigator.serviceWorker.register('/sw.js').then(
+        () => null,
+        (e: unknown) => e
+      )
+      expect(err).toBeInstanceOf(DOMException)
     })
   })
 })

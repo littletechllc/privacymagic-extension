@@ -7,7 +7,7 @@ const serviceWorker = (): void => {
 
   const DOMExceptionSafe = self.DOMException
   redefinePropertyValues(self.ServiceWorkerContainer.prototype, {
-    register: (/* ignore */) => {
+    register: async (/* ignore */) => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError')
     }
   })
