@@ -227,9 +227,9 @@ const css = (): void => {
       } else if (record.type === 'childList' && record.removedNodes.length > 0) {
         const removedNodes = Array.from(record.removedNodes)
           .filter(node => node instanceof HTMLStyleElement || node instanceof HTMLLinkElement)
-        removedNodes.forEach(node => styleSheetsForCssElements.delete(node))
-        const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined)
-        const root = getRootNode(removedNodes[0])
+          const styleSheets = removedNodes.map(node => getStyleSheetForCssElement(node)).filter(sheet => sheet !== undefined)
+          removedNodes.forEach(node => styleSheetsForCssElements.delete(node))
+          const root = getRootNode(removedNodes[0])
         if (root !== undefined) {
           root.adoptedStyleSheets = root.adoptedStyleSheets.filter(sheet => !styleSheets.includes(sheet))
         }
