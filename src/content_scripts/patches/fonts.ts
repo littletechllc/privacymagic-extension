@@ -1,5 +1,5 @@
 import { redefinePropertyValues } from "../helpers/monkey-patch"
-import { sanitizeFontFaceSource } from "./css_helpers/font-face"
+import { sanitizeFontFaceSource } from "./css/font-face"
 import { isAllowedFont } from "@src/common/font-filter"
 
 const DISALLOWED_FONTS: string[] = [

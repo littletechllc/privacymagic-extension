@@ -1,11 +1,14 @@
 import { stringTrimSafe } from "@src/content_scripts/helpers/safe"
 import { getOperatingSystem } from "@src/common/operating-system"
 
+const makeLowerCaseSet = (fontNames: string[]): Set<string> =>
+  new Set(fontNames.map(fontName => fontName.toLowerCase()))
+
 /** List of fonts that are allowed on Windows.
  * Based on the list of fonts installed by default on Windows 11:
  * https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
  */
-const ALLOWED_FONTS_WINDOWS: string[] = [
+const ALLOWED_FONTS_WINDOWS: Set<string> = makeLowerCaseSet([
   'Arial',
   'Arial Italic',
   'Arial Bold',
@@ -239,13 +242,13 @@ const ALLOWED_FONTS_WINDOWS: string[] = [
   'Yu Gothic UI Regular',
   'Yu Gothic UI Semibold',
   'Yu Gothic UI Bold',
-].map(fontName => fontName.toLowerCase())
+])
 
 /** List of fonts that are allowed on macOS.
  * Based on the list of fonts installed by default on macOS 26.0.1,
  * measured on 2026-02-18.
  */
-const ALLOWED_FONTS_MACOS: string[] = [
+const ALLOWED_FONTS_MACOS: Set<string> = makeLowerCaseSet([
   'Academy Engraved LET Plain:1.0',
   'Al Bayan Plain',
   'Al Bayan Bold',
@@ -775,15 +778,15 @@ const ALLOWED_FONTS_MACOS: string[] = [
   'Wingdings 3',
   'Zapf Dingbats',
   'Zapfino'
-].map(fontName => fontName.toLowerCase())
+])
 
 export const isAllowedFont = (fontName: string): boolean => {
   const normalizedFontName = stringTrimSafe(fontName).toLowerCase()
   const os = getOperatingSystem()
   if (os === 'Windows') {
-    return ALLOWED_FONTS_WINDOWS.includes(normalizedFontName)
+    return ALLOWED_FONTS_WINDOWS.has(normalizedFontName)
   } else if (os === 'macOS') {
-    return ALLOWED_FONTS_MACOS.includes(normalizedFontName)
+    return ALLOWED_FONTS_MACOS.has(normalizedFontName)
   } else {
     return true // Allow all fonts on other operating systems
   }
