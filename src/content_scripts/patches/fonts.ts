@@ -59,6 +59,9 @@ const DISALLOWED_FONTS: string[] = [
 ].map(fontName => fontName.toLowerCase())
 
 const fonts = (): void => {
+  if (!document) {
+    return
+  }
   const originalFontFace = self.FontFace
 
   const addEmptyFontFace = (fontFaceSet: FontFaceSet, fontName: string): void => {
