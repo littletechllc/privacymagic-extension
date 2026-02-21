@@ -7,6 +7,7 @@ const serviceWorker = (): void => {
 
   const DOMExceptionSafe = self.DOMException
   redefinePropertyValues(self.ServiceWorkerContainer.prototype, {
+    // eslint-disable-next-line @typescript-eslint/require-await
     register: async (/* ignore */) => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError')
     }
