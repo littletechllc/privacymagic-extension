@@ -2,7 +2,6 @@ import { getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { sanitizeFontFaceSource } from './font-face'
 
-
 /**
  * Sanitize a font face rule by replacing any invalid local font names
  * that are not in the allowlist with an empty Data URI.
@@ -50,11 +49,9 @@ const sanitizeStyleSheet = (styleSheet: CSSStyleSheet): void => {
   }
 }
 
-// Get the original replaceSync method before we patch it
-const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
-const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
-
 export const sanitizeStyleSheetsReplace = () => {
+  const replaceSyncSafe = createSafeMethod(CSSStyleSheet, 'replaceSync')
+  const replaceSafe = createSafeMethod(CSSStyleSheet, 'replace')
   objectDefinePropertiesSafe(CSSStyleSheet.prototype, {
     replaceSync: {
       value(this: CSSStyleSheet, css: string) {
