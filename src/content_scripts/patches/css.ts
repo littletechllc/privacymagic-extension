@@ -1,6 +1,6 @@
 import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
-import { compileCss, compileRemoteCss, getPendingRemoteStyleSheets } from './css_helpers/css-compiler'
-import { sanitizeStyleSheetsReplace } from './css_helpers/sanitizer'
+import { compileCss, compileRemoteCss, getPendingRemoteStyleSheets } from './css/css-compiler'
+import { sanitizeStyleSheetsReplace } from './css/sanitizer'
 
 type CSSElement = HTMLStyleElement | HTMLLinkElement | SVGStyleElement
 type CSSElementConstructor = typeof HTMLStyleElement | typeof HTMLLinkElement | typeof SVGStyleElement
