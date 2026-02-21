@@ -59,7 +59,7 @@ const DISALLOWED_FONTS: string[] = [
 ].map(fontName => fontName.toLowerCase())
 
 const fonts = (): void => {
-  if (!document) {
+  if (self.document === undefined) {
     return
   }
   const originalFontFace = self.FontFace
