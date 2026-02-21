@@ -1,6 +1,6 @@
 {
   "version": "1",
   "setting_exceptions": {
-    "google.com": ["css","iframe","worker"]
+    "google.com": ["css","iframe"]
   }
 }
