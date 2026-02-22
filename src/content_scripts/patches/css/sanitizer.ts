@@ -1,9 +1,24 @@
 import { getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod, objectDefinePropertiesSafe } from '@src/content_scripts/helpers/monkey-patch'
-import { sanitizeFontFaceSource } from './font-face'
+import { stringReplaceSafe } from "@src/content_scripts/helpers/safe"
+import { isAllowedFont } from "@src/common/font-filter"
+
+const localFontRegex = /local\s*\(\s*['"]?([^'")]*?)['"]?\s*\)/gi
+const emptyDataUri = 'url("data:application/font-woff2;base64,")'
 
 /**
- * Sanitize a font face rule by replacing any invalid local font names
+ * Sanitize a font face source by replacing any local font names
+ * that are not in the allowlist with an empty Data URI.
+ * @param source - The font face source to sanitize.
+ * @returns The sanitized font face source.
+ */
+export const sanitizeFontFaceSource = (source: string): string => {
+  return stringReplaceSafe(source, localFontRegex, (match: string, fontName: string): string =>
+    isAllowedFont(fontName) ? match : emptyDataUri)
+}
+
+/**
+ * Sanitize a font face rule by replacing any local font names
  * that are not in the allowlist with an empty Data URI.
  * @param rule - The font face rule to sanitize.
  */
