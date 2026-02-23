@@ -1,11 +1,11 @@
 import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
 
 const cpu = (): void => {
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
+  const NavigatorClass = self.Navigator ?? self.WorkerNavigator
+  if (NavigatorClass == null) {
     throw new Error('Navigator prototype not found')
   }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+  redefinePropertyValues(NavigatorClass.prototype, {
     cpuClass: undefined,
     hardwareConcurrency: 4
   })
