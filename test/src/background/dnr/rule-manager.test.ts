@@ -161,15 +161,14 @@ describe('setupRules', () => {
     // Stored settings:
     //   - gpc (enabled): content rule removes [example.comContentRuleId, defaultContentRuleId], adds [defaultRule]
     //     - network rule removes [gpcNetworkRuleId], adds [gpcNetworkRule] (same ID as default, deduplicated)
-    //   - css (disabled): content rule removes [test.comContentRuleId, defaultContentRuleId], adds [defaultRule, test.comRule]
-    //     - network rule removes [cssNetworkRuleId0, cssNetworkRuleId1], adds [cssRule0, cssRule1] (same IDs as default, deduplicated)
+    //   - css (disabled): content rule only (css has no network rules in NETWORK_PROTECTION_DEFS when commented out)
+    //     - content rule removes [test.comContentRuleId, defaultContentRuleId], adds [defaultRule, test.comRule]
     //   - masterSwitch (enabled): content rule removes [another.comContentRuleId, defaultContentRuleId], adds [defaultRule]
     //     - allow rule removes [masterSwitchAllowRuleId], adds [] (empty topDomains)
-    // removeRuleIds deduplicated: 1 (default content, appears 3 times) + totalDefaultNetworkRulesCount (default network, includes gpc and css IDs) + 3 (domain content IDs) + 1 (masterSwitch allow) = totalDefaultNetworkRulesCount + 5
-    // addRules deduplicated: 1 (default content, last wins) + totalDefaultNetworkRulesCount (default network) + 1 (test.com domain content) + 1 (gpc network, last wins, replaces default) + 2 (css network, last wins, replaces default) = totalDefaultNetworkRulesCount + 4
-    // But gpc and css network rules replace their defaults, so: totalDefaultNetworkRulesCount + 2
-    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
-    expectRuleCounts(call, totalDefaultNetworkRulesCount + 6, totalDefaultNetworkRulesCount + 3)
+    // Remote config adds google.com: css, iframe (one domain, two settings → same content rule ID removed once after dedupe).
+    // removeRuleIds deduplicated: 1 (default content) + totalDefaultNetworkRulesCount (default network) + 4 (domain content: example, test, another, google) + 1 (masterSwitch allow) = totalDefaultNetworkRulesCount + 6, but one fewer unique after dedupe when google.com appears twice (css, iframe).
+    // addRules: default content + default network + 1 domain content (test.com) + gpc network; css has no network rules when commented out, so one fewer add than older formula.
+    expectRuleCounts(call, totalDefaultNetworkRulesCount + 5, totalDefaultNetworkRulesCount + 2)
     // Verify removeRuleIds are deduplicated
     const uniqueRemoveIds = new Set(call.removeRuleIds)
     expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
