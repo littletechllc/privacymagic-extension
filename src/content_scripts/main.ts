@@ -4,7 +4,7 @@ import { ContentSettingId } from '@src/common/setting-ids'
 import audio from './patches/audio'
 import battery from './patches/battery'
 import cpu from './patches/cpu'
-import css from './patches/css'
+//import css from './patches/css'
 import device from './patches/device'
 import disk from './patches/disk'
 import display from './patches/display'
@@ -31,7 +31,7 @@ const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, () 
   audio,
   battery,
   cpu,
-  css,
+  //css,
   device,
   display,
   disk,
