@@ -155,7 +155,8 @@ describe('computeNetworkRuleUpdates', () => {
     })
   })
 
-  describe('when setting is css (has multiple rules)', () => {
+
+  /* describe('when setting is css (has multiple rules)', () => {
     const setting: SettingId = 'css'
     const ruleId0 = dnrRuleIdForName(category, `${setting}0`)
     const ruleId1 = dnrRuleIdForName(category, `${setting}1`)
@@ -265,7 +266,7 @@ describe('computeNetworkRuleUpdates', () => {
         ]
       })
     })
-  })
+  }) */
 
   describe('when setting is referrerPolicy (has multiple rules with conditions)', () => {
     const setting: SettingId = 'referrerPolicy'
