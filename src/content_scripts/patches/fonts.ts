@@ -73,6 +73,12 @@ const fonts = (): void => {
     fontFaceSet.add(fontFace)
   }
 
+  /**
+   * Add empty font faces for all disabled fonts.
+   * This "squats" on the font face set to prevent the browser from loading
+   * local fonts that are not in the allowlist.
+   * @param fontFaceSet - The font face set to add the empty font faces to.
+   */
   const addEmptyFontFaces = (fontFaceSet: FontFaceSet): void => {
     for (const fontName of DISALLOWED_FONTS) {
       if (isAllowedFont(fontName)) {
