@@ -126,7 +126,7 @@ export const NETWORK_PROTECTION_DEFS:
       ])
     },
   }],
-  css: [{
+  /* css: [{
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -144,7 +144,7 @@ export const NETWORK_PROTECTION_DEFS:
     condition: {
       resourceTypes: ['stylesheet']
     }
-  }],
+  }], */
   referrerPolicy: [{
     action: {
       type: 'modifyHeaders',
