@@ -20,7 +20,7 @@ export const CONTENT_SETTING_IDS = [
   'audio',
   'battery',
   'cpu',
-  'css',
+  //'css',
   'device',
   'disk',
   'display',
