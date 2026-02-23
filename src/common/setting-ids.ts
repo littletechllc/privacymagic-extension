@@ -1,5 +1,5 @@
 export const NETWORK_SETTING_IDS = [
-  'css',
+  //'css',
   'display',
   'gpc',
   'language',
