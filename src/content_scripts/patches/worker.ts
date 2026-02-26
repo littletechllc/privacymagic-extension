@@ -11,7 +11,7 @@ const worker = (): void => {
   // Spoof the self.location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context.
-  const spoofLocationInsideWorker = (absoluteUrl: string): void => {
+  const spoofLocationInsideWorkerFunction = (absoluteUrl: string): void => {
     // We need to define these functions here because they are not available in the worker context.
     type MethodOf<TThis> = {
       [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -81,11 +81,16 @@ const worker = (): void => {
     }
     // Modify the self.importScripts function to be relative to the original URL.
     const originalImportScripts = self.importScripts
-    self.importScripts = (...paths: Array<string | URL>) => {
-      const resolvedPaths: string[] = []
+    self.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
+      console.log('importScripts paths:', paths)
+      const resolvedPaths: Array<string | URL | TrustedScriptURL> = []
       for (const path of paths) {
-        const resolvedPath = URLhrefSafe(new URLSafe(path, absoluteUrl))
-        resolvedPaths.push(resolvedPath)
+        if (path instanceof TrustedScriptURL) {
+          resolvedPaths.push(path)
+        } else {
+          const resolvedPath = URLhrefSafe(new URLSafe(path, absoluteUrl))
+          resolvedPaths.push(resolvedPath)
+        }
       }
       return originalImportScripts(...resolvedPaths)
     }
@@ -172,6 +177,28 @@ const worker = (): void => {
     })();`
   }
 
+  /**
+   * Create a function that will make a trusted script URL from a policy name and a URL.
+   * This function is serialized and injected into the worker context.
+   * @param policyName - The name of the policy to use.
+   * @param url - The URL to make a trusted script URL from.
+   * @returns A function that will make a trusted script URL from a policy name and a URL.
+   */
+  const makeTrustedScriptURLFunction = (policyName: string | undefined, url: string): TrustedScriptURL | string => {
+    if (policyName == null) {
+      policyName = 'default'
+    }
+    if (self.trustedTypes == null) {
+      return url
+    }
+    const dummyPolicy = self.trustedTypes.createPolicy(policyName, {
+      createScriptURL: (url) => {
+        return url
+      }
+    })
+    return dummyPolicy.createScriptURL(url)
+  }
+
   const stringStartsWithSafe = createSafeMethod(String, 'startsWith')
   const jsonStringifySafe = JSON.stringify
 
@@ -182,9 +209,17 @@ const worker = (): void => {
     let policy: TrustedTypePolicy | undefined
     self.Worker = new Proxy(self.Worker, {
       construct (Target, [url, options]: [string | URL | TrustedScriptURL, WorkerOptions?]) {
+        console.log(' New Worker url:', url);
+        if (url.toString().startsWith('chrome:') || url.toString().startsWith('chrome-extension:')) {
+          // Don't harden chrome:// or chrome-extension:// URLs.
+          return new Target(url.toString(), options)
+        }
+        let policyNameString: string | undefined = undefined
         if (url instanceof TrustedScriptURL) {
           policy = getTrustedTypePolicyForObject(url)
+          policyNameString = policy ? jsonStringifySafe(policy?.name) : undefined
         }
+        console.trace('policyNameString:', policyNameString);
         const absoluteUrl = URLhrefSafe(new URLSafe(url as string | URL, locationHref))
         let completionCallbackCode = ''
         if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
@@ -199,10 +234,10 @@ const worker = (): void => {
           : 'importScripts'
         const bundle = `
           ${hardeningCode}
-          (${spoofLocationInsideWorker.toString()})(${jsonStringifySafe(absoluteUrl)});
-          // TODO: Apply trusted types policy to the absolute URL.
+          (${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)});
+          const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
           try {
-            ${importCommand}(${jsonStringifySafe(absoluteUrl)});
+            ${importCommand}(trustedAbsoluteUrl);
           } catch (error) {
             console.error("error in importing: ", error);
           }
@@ -210,6 +245,7 @@ const worker = (): void => {
           console.log("finished importing");
         `
         const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }))
+        console.log('policy:', policy);
         const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
         return new Target(sanitizedBlobUrl as string, options)
       }
