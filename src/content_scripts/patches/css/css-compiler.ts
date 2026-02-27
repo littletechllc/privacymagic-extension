@@ -1,15 +1,10 @@
-import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { stringReplaceSafe } from '@src/content_scripts/helpers/safe'
 import { backgroundFetch } from '@src/content_scripts/helpers/background-fetch-main'
+import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/helpers'
 
-const URLSafe = self.URL
-const URLhrefSafe = createSafeGetter(URL, 'href')
 const regexExecSafe = createSafeMethod(RegExp, 'exec')
 const regexTestSafe = createSafeMethod(RegExp, 'test')
-
-const resolveAbsoluteUrl = (path: string, baseURL: string): string => {
-  return URLhrefSafe(new URLSafe(path, baseURL))
-}
 
 const extractImportUrls = (cssText: string, baseURL: string): { urls: string[], cssTextWithoutImports: string } => {
   // TODO: Handle layer(...), supports(...) and list-of-media-queries.

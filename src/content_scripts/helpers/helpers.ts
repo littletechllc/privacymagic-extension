@@ -1,4 +1,5 @@
 import { ContentSettingId } from "@src/common/setting-ids"
+import { createSafeGetter } from "./monkey-patch"
 
 export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault = false): void => {
   const oldMatchMedia = self.matchMedia
@@ -58,6 +59,13 @@ export const getDisabledSettings = (relevantSettings?: ContentSettingId[]): Cont
 
   __disabledSettings = result as ContentSettingId[]
   return __disabledSettings
+}
+
+const URLSafe = self.URL
+const URLhrefSafe = createSafeGetter(URL, 'href')
+
+export const resolveAbsoluteUrl = (path: string | URL, baseURL: string | URL): string => {
+  return URLhrefSafe(new URLSafe(path, baseURL))
 }
 
 export type FetchID = string
