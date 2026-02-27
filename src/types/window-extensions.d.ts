@@ -87,6 +87,7 @@ declare global {
   }
 
   class TrustedTypePolicy {
+    name: string
     createHTML: (input: string | TrustedHTML) => TrustedHTML
     createScript: (input: string | TrustedScript) => TrustedScript
     createScriptURL: (input: string | TrustedScriptURL) => TrustedScriptURL

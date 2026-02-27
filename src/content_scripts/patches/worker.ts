@@ -1,12 +1,10 @@
-import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
-import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { makeBundleForInjection, getDisabledSettings, resolveAbsoluteUrl } from '@src/content_scripts/helpers/helpers'
+import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 
 const worker = (): void => {
-  const URLSafe = self.URL
   const BlobSafe = self.Blob
   const URLcreateObjectURLSafe = (source: Blob | MediaSource ): string => URL.createObjectURL(source)
-  const URLhrefSafe = createSafeGetter(URL, 'href')
 
   // Spoof the self.location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
@@ -82,7 +80,6 @@ const worker = (): void => {
     // Modify the self.importScripts function to be relative to the original URL.
     const originalImportScripts = self.importScripts
     self.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
-      console.log('importScripts paths:', paths)
       const resolvedPaths: Array<string | URL | TrustedScriptURL> = []
       for (const path of paths) {
         if (path instanceof TrustedScriptURL) {
@@ -92,7 +89,7 @@ const worker = (): void => {
           resolvedPaths.push(resolvedPath)
         }
       }
-      return originalImportScripts(...resolvedPaths)
+      return originalImportScripts(...resolvedPaths as Array<string | URL>)
     }
     // Modify the self.XMLHttpRequest, self.EventSource, and self.WebSocket objects to
     // be relative to the original URL.
@@ -249,7 +246,6 @@ const worker = (): void => {
     let policy: TrustedTypePolicy | undefined
     self.Worker = new Proxy(self.Worker, {
       construct (Target, [url, options]: [string | URL | TrustedScriptURL, WorkerOptions?]) {
-        console.log(' New Worker url:', url, 'document =', self.document);
         if (url.toString().startsWith('chrome:') || url.toString().startsWith('chrome-extension:')) {
           // Don't harden chrome:// or chrome-extension:// URLs.
           return new Target(url.toString(), options)
@@ -259,8 +255,7 @@ const worker = (): void => {
           policy = getTrustedTypePolicyForObject(url)
           policyNameString = policy ? jsonStringifySafe(policy?.name) : undefined
         }
-        console.log('policyNameString:', policyNameString);
-        const absoluteUrl = URLhrefSafe(new URLSafe(url as string | URL, locationHref))
+        const absoluteUrl = resolveAbsoluteUrl(url.toString(), locationHref)
         let completionCallbackCode = ''
         if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
           completionCallbackCode = generateCompletionCallbackCode(() => {
@@ -272,13 +267,12 @@ const worker = (): void => {
         const importCommand = ('type' in options && options.type === 'module')
           ? 'await import'
           : 'importScripts'
+        // Semicolon separated code to avoid issues with line continuations.
         const bundleWrapper = (script: string) => `
-          ${hardeningCode}
-          (${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)});
-          ///// ------------------------------------------------------------ /////
-          ${script}
-          ///// ------------------------------------------------------------ /////
-          ${completionCallbackCode}
+          ;${hardeningCode}
+          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)});
+          ;${script}
+          ;${completionCallbackCode}
         `;
         const cachedScript = getCachedScript(absoluteUrl)
         let bundle: string
@@ -296,7 +290,6 @@ const worker = (): void => {
           `);
         }
         const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }))
-        console.log('policy:', policy);
         const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
         return new Target(sanitizedBlobUrl as string, options)
       }
