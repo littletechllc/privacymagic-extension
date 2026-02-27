@@ -8,6 +8,34 @@ import { objectEntries } from '@src/common/data-structures'
 import { includeInListIfNeeded } from '@src/common/data-structures'
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 
+const disallowedQueryParams = [
+  '__hsfp',
+  '__hssc',
+  '__hstc',
+  '__s',
+  '_hsenc',
+  '_openstat',
+  'dclid',
+  'fbclid',
+  'gclid',
+  'hsCtaTracking',
+  'mc_eid',
+  'mkt_tok',
+  'ml_subscriber',
+  'ml_subscriber_hash',
+  'msclkid',
+  'oly_anon_id',
+  'oly_enc_id',
+  'rb_clickid',
+  's_cid',
+  'vero_conv',
+  'vero_id',
+  'wickedid',
+  'yclid'
+]
+
+const disallowedQueryParamsRegexFilter = `[\\?&](${disallowedQueryParams.join('|')})=`
+
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
     ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
@@ -34,42 +62,25 @@ export const NETWORK_PROTECTION_DEFS:
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
+        // TODO: Use the actual low-entropy version of the browser.
         'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="141.0.0.0", Not?A_Brand;v="8.0.0.0", Chromium;v="141.0.0.0"',
         'Sec-CH-UA-Full-Version': '141.0.0.0'
       })
     },
   }],
   queryParameters: [{
+    // Only match URLs that actually have at least one removable param. Otherwise the redirect
+    // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
+    // so "ads off" per-site would never unblock requests that were already redirected.
+    condition: {
+      regexFilter: disallowedQueryParamsRegexFilter
+    },
     action: {
       type: 'redirect',
       redirect: {
         transform: {
           queryTransform: {
-            removeParams: [
-              '__hsfp',
-              '__hssc',
-              '__hstc',
-              '__s',
-              '_hsenc',
-              '_openstat',
-              'dclid',
-              'fbclid',
-              'gclid',
-              'hsCtaTracking',
-              'mc_eid',
-              'mkt_tok',
-              'ml_subscriber',
-              'ml_subscriber_hash',
-              'msclkid',
-              'oly_anon_id',
-              'oly_enc_id',
-              'rb_clickid',
-              's_cid',
-              'vero_conv',
-              'vero_id',
-              'wickedid',
-              'yclid'
-            ]
+            removeParams: disallowedQueryParams
           }
         }
       }
