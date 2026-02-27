@@ -115,6 +115,9 @@ const worker = (): void => {
     }
   }
 
+  const blobScriptCache = new WeakMap<Blob, string>()
+  const blobURLScriptCache = new Map<string, string>()
+
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
     const originalRevokeObjectURL = URL.revokeObjectURL.bind(URL)
 
@@ -142,6 +145,7 @@ const worker = (): void => {
         lockedUrls.delete(url)
         if (pendingRevocations.has(url)) {
           originalRevokeObjectURL(url)
+          blobURLScriptCache.delete(url)
           pendingRevocations.delete(url)
         }
       } else {
@@ -157,8 +161,44 @@ const worker = (): void => {
     return { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl }
   })()
 
+  const isPotentialScript = (options: BlobPropertyBag | undefined): boolean => {
+    if (options == null || 'type' in options == null) {
+      return true
+    }
+    return (options.type === 'text/javascript' || options.type === 'application/javascript' || options.type === 'text/plain')
+  }
+
+  self.Blob = new Proxy(self.Blob, {
+    construct (Target, [blobParts, options]: [BlobPart[], BlobPropertyBag?]) {
+      const blob = new Target(blobParts, options)
+      if (isPotentialScript(options)) {
+        const joinedBlobParts = blobParts.filter(x => typeof x === 'string').join('\n')
+        if (joinedBlobParts.length < 5000000) {
+          blobScriptCache.set(blob, joinedBlobParts)
+        }
+      }
+      return blob
+    }
+  })
+
+  const originalCreateObjectURL = self.URL.createObjectURL.bind(self.URL)
+  self.URL.createObjectURL = (source: Blob | MediaSource): string => {
+    const url = originalCreateObjectURL(source)
+    if (source instanceof Blob && blobScriptCache.has(source)) {
+      const cachedScript = blobScriptCache.get(source)
+      if (cachedScript != null) {
+        blobURLScriptCache.set(url, cachedScript)
+      }
+    }
+    return url
+  }
+
   self.URL.revokeObjectURL = (url: string) => {
     requestToRevokeObjectUrl(url)
+  }
+
+  const getCachedScript = (url: string): string | undefined => {
+    return blobURLScriptCache.get(url)
   }
 
   const generateCompletionCallbackCode = (callback: () => void): string => {
@@ -209,7 +249,7 @@ const worker = (): void => {
     let policy: TrustedTypePolicy | undefined
     self.Worker = new Proxy(self.Worker, {
       construct (Target, [url, options]: [string | URL | TrustedScriptURL, WorkerOptions?]) {
-        console.log(' New Worker url:', url);
+        console.log(' New Worker url:', url, 'document =', self.document);
         if (url.toString().startsWith('chrome:') || url.toString().startsWith('chrome-extension:')) {
           // Don't harden chrome:// or chrome-extension:// URLs.
           return new Target(url.toString(), options)
@@ -219,7 +259,7 @@ const worker = (): void => {
           policy = getTrustedTypePolicyForObject(url)
           policyNameString = policy ? jsonStringifySafe(policy?.name) : undefined
         }
-        console.trace('policyNameString:', policyNameString);
+        console.log('policyNameString:', policyNameString);
         const absoluteUrl = URLhrefSafe(new URLSafe(url as string | URL, locationHref))
         let completionCallbackCode = ''
         if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
@@ -232,18 +272,29 @@ const worker = (): void => {
         const importCommand = ('type' in options && options.type === 'module')
           ? 'await import'
           : 'importScripts'
-        const bundle = `
+        const bundleWrapper = (script: string) => `
           ${hardeningCode}
           (${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)});
-          const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
-          try {
-            ${importCommand}(trustedAbsoluteUrl);
-          } catch (error) {
-            console.error("error in importing: ", error);
-          }
+          ///// ------------------------------------------------------------ /////
+          ${script}
+          ///// ------------------------------------------------------------ /////
           ${completionCallbackCode}
-          console.log("finished importing");
-        `
+        `;
+        const cachedScript = getCachedScript(absoluteUrl)
+        let bundle: string
+        if (cachedScript != null) {
+          bundle = bundleWrapper(cachedScript);
+        } else {
+          bundle = bundleWrapper(`
+            const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
+            try {
+              ${importCommand}(trustedAbsoluteUrl);
+              console.log("finished importing");
+            } catch (error) {
+              console.error("error in importing: ", error);
+            }
+          `);
+        }
         const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }))
         console.log('policy:', policy);
         const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
