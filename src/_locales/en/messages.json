@@ -176,8 +176,8 @@
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {
-    "message": "Installed Fonts",
-    "description": "Setting to block installed fonts fingerprinting"
+    "message": "Fonts on Device",
+    "description": "Setting to block fingerprinting of fonts on the device"
   },
   "language": {
     "message": "Language Settings",

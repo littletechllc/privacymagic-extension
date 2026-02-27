@@ -1,10 +1,9 @@
 import { redefinePropertyValues } from "../helpers/monkey-patch"
-import { sanitizeFontFaceSource } from "./css/sanitizer"
 import { isAllowedFont } from "@src/common/font-filter"
+import { stringReplaceSafe } from "@src/content_scripts/helpers/safe"
 
 const DISALLOWED_FONTS: string[] = [
-  // This is android-specific font from "Roboto" family
-  'sans-serif-thin',
+  'sans-serif-thin',  // Android-specific font from "Roboto" family
   'ARNO PRO',
   'Agency FB',
   'Arabic Typesetting',
@@ -89,6 +88,14 @@ const fonts = (): void => {
   }
 
   addEmptyFontFaces(document.fonts)
+
+  const localFontRegex = /local\s*\(\s*['"]?([^'")]*?)['"]?\s*\)/gi
+  const emptyDataUri = 'url("data:application/font-woff2;base64,")'
+
+  const sanitizeFontFaceSource = (source: string): string => {
+    return stringReplaceSafe(source, localFontRegex, (match: string, fontName: string): string =>
+      isAllowedFont(fontName) ? match : emptyDataUri)
+  }
 
   Object.defineProperty(self, 'FontFace', {
     value: new Proxy(originalFontFace, {
