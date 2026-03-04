@@ -36,7 +36,7 @@ describe('language patch', () => {
   describe('with patch enabled', () => {
     beforeEach(() => {
       delete nav.languages
-      language()
+      language(self)
     })
 
     it('should reduce languages to single entry matching navigator.language', () => {

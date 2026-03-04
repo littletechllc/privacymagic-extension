@@ -1,25 +1,24 @@
-import { createSafeMethod, redefinePropertyValues } from "./monkey-patch"
-import { weakMapGetSafe, weakMapSetSafe } from "./safe"
+import type { GlobalScope } from './globalObject'
+import { createSafeMethod, redefinePropertyValues } from './monkey-patch'
+import { weakMapGetSafe, weakMapSetSafe } from './safe'
 
-type TrustedObjectType = TrustedHTML | TrustedScript | TrustedScriptURL
-
-const createHTMLSafe = createSafeMethod(TrustedTypePolicy, 'createHTML')
-const createScriptSafe = createSafeMethod(TrustedTypePolicy, 'createScript')
-const createScriptURLSafe = createSafeMethod(TrustedTypePolicy, 'createScriptURL')
-const createPolicySafe = createSafeMethod(TrustedTypePolicyFactory, 'createPolicy')
+export type TrustedObjectType = TrustedHTML | TrustedScript | TrustedScriptURL
 
 const trustedObjectsToPolicy = new WeakMap<TrustedObjectType, TrustedTypePolicy>()
 
-let isPrepared = false
-
-export const prepareInjectionForTrustedTypes = (hardeningCode: string): void => {
-  if (isPrepared) {
+export const prepareInjectionForTrustedTypes = (globalObject: GlobalScope, hardeningCode: string): void => {
+  if (globalObject.TrustedTypePolicy == null || globalObject.TrustedTypePolicyFactory == null) {
     return
   }
-  isPrepared = true
+
+  const createHTMLSafe = createSafeMethod(globalObject.TrustedTypePolicy, 'createHTML')
+  const createScriptSafe = createSafeMethod(globalObject.TrustedTypePolicy, 'createScript')
+  const createScriptURLSafe = createSafeMethod(globalObject.TrustedTypePolicy, 'createScriptURL')
+  const createPolicySafe = createSafeMethod(globalObject.TrustedTypePolicyFactory, 'createPolicy')
+
   // Modify the TrustedTypePolicy prototype to keep track of the trusted type policy
   // that generated each trusted object.
-  redefinePropertyValues(TrustedTypePolicy.prototype, {
+  redefinePropertyValues(globalObject.TrustedTypePolicy.prototype, {
     createHTML: function (this: TrustedTypePolicy, input: string): TrustedHTML {
       const trustedHTML = createHTMLSafe(this, input)
       weakMapSetSafe(trustedObjectsToPolicy, trustedHTML, this)
@@ -39,7 +38,7 @@ export const prepareInjectionForTrustedTypes = (hardeningCode: string): void => 
 
   // Modify the TrustedTypePolicyFactory prototype to create a trusted type policy
   // that will pass the hardening code unchanged into a TrustedScript.
-  redefinePropertyValues(TrustedTypePolicyFactory.prototype, {
+  redefinePropertyValues(globalObject.TrustedTypePolicyFactory.prototype, {
     createPolicy: function (
       this: TrustedTypePolicyFactory, policyName: string, policyOptions: TrustedTypePolicyOptions
     ): TrustedTypePolicy {
@@ -61,8 +60,6 @@ export const prepareInjectionForTrustedTypes = (hardeningCode: string): void => 
       })
     }
   })
-
-  isPrepared = true
 }
 
 export const getTrustedTypePolicyForObject = (object: TrustedObjectType): TrustedTypePolicy | undefined => {

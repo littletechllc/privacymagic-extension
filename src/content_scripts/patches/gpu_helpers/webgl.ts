@@ -1,4 +1,5 @@
 import { createSafeMethod, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../../helpers/globalObject'
 
 // Based on results from https://camoufox.com/webgl-research/
 // navigator.userAgentData.platform is 'MacIntel' on Intel/Apple Silicon Macs
@@ -21,16 +22,16 @@ const webglVendorAndRenderer: Record<string, { vendor: string, renderer: string 
   }
 }
 
-export const hideWebGLVendorAndRenderer = (): void => {
-  if (self.WebGLRenderingContext === undefined) {
+export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
+  if (globalObject.WebGLRenderingContext === undefined) {
     return
   }
-  const originalGetParameterSafe = createSafeMethod(self.WebGLRenderingContext, 'getParameter')
-  if (navigator.userAgentData != null) {
-    const userAgentData: NavigatorUAData = navigator.userAgentData
+  const originalGetParameterSafe = createSafeMethod(globalObject.WebGLRenderingContext, 'getParameter')
+  if (globalObject.navigator.userAgentData != null) {
+    const userAgentData: NavigatorUAData = globalObject.navigator.userAgentData
     const platform = userAgentData.platform
     if (platform === 'MacIntel' || platform === 'macOS') {
-      redefinePropertyValues(self.WebGLRenderingContext.prototype, {
+      redefinePropertyValues(globalObject.WebGLRenderingContext.prototype, {
         getParameter: function (this: WebGLRenderingContext, constant: number) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const originalValue = originalGetParameterSafe(this, constant)

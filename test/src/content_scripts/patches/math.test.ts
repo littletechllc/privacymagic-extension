@@ -10,7 +10,7 @@ if (typeof (Uint8Array as unknown as { fromBase64?: (s: string) => Uint8Array })
 
 // Apply the math patch once so Math.* uses the WASM implementation
 beforeAll(() => {
-  math()
+  math(self)
 })
 
 describe('math patch', () => {

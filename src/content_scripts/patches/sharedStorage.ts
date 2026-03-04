@@ -1,8 +1,10 @@
-const sharedStorage = (): void => {
-  if (self.SharedStorage == null) {
+import { GlobalScope } from '../helpers/globalObject'
+
+const sharedStorage = (globalObject: GlobalScope): void => {
+  if (globalObject.SharedStorage == null) {
     return
   }
-  delete self.SharedStorage
+  delete globalObject.SharedStorage
 }
 
 export default sharedStorage

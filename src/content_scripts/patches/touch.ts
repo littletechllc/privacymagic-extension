@@ -1,11 +1,8 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
-const touch = (): void => {
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    return
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const touch = (globalObject: GlobalScope): void => {
+  redefineNavigatorProperties(globalObject, {
     // Cover Your Tracks: 1 in 1.74:
     maxTouchPoints: 0
   })

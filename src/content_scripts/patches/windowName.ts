@@ -1,10 +1,11 @@
 import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const windowName = (): void => {
-  if (self.top !== self) {
+const windowName = (globalObject: GlobalScope): void => {
+  if (globalObject.top !== globalObject) {
     return
   }
-  const propDescriptor = objectGetOwnPropertyDescriptorSafe(self, 'name')
+  const propDescriptor = objectGetOwnPropertyDescriptorSafe(globalObject, 'name')
   if (propDescriptor == null) {
     return
   }
@@ -12,16 +13,16 @@ const windowName = (): void => {
     return
   }
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const nameGetter = propDescriptor.get as (this: Window) => string
-  const nameGetterSafe = (window: Window): string => reflectApplySafe(nameGetter, window, [])
+  const nameGetter = propDescriptor.get as (this: GlobalScope) => string
+  const nameGetterSafe = (win: GlobalScope): string => reflectApplySafe(nameGetter, win, [])
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const nameSetter = propDescriptor.set as (this: Window, value: string) => void
-  const nameSetterSafe = (window: Window, value: string): void => reflectApplySafe(nameSetter, window, [value])
+  const nameSetter = propDescriptor.set as (this: GlobalScope, value: string) => void
+  const nameSetterSafe = (win: GlobalScope, value: string): void => reflectApplySafe(nameSetter, win, [value])
   const jsonParseSafe = JSON.parse
-  const locationOrigin = self.location.origin
+  const locationOrigin = globalObject.location.origin
   const StringSafe = String
-  Object.defineProperty(self, 'name', {
-    get (this: Window) {
+  Object.defineProperty(globalObject, 'name', {
+    get (this: GlobalScope) {
       const nameStr = nameGetterSafe(this)
       try {
         const data = jsonParseSafe(nameStr) as unknown
@@ -36,7 +37,7 @@ const windowName = (): void => {
         return ''
       }
     },
-    set (this: Window, value: string) {
+    set (this: GlobalScope, value: string) {
       const nameStr = nameGetterSafe(this)
       let data: Record<string, string>
       try {
@@ -52,7 +53,7 @@ const windowName = (): void => {
       if (locationOrigin === '') {
         return
       }
-      // String(value) matches self.name native behavior
+      // String(value) matches globalObject.name native behavior
       data[locationOrigin] = StringSafe(value)
       nameSetterSafe(this, JSON.stringify(data))
     },

@@ -1,12 +1,13 @@
 import mathWasmBase64 from '@math/math.wasm'
+import { GlobalScope } from '../helpers/globalObject'
 
-const math = (): void => {
+const math = (globalObject: GlobalScope): void => {
   type MathFunctionName = keyof Math
   type MathFunction = (...args: number[]) => number
 
   const mathWasmBuffer = Uint8Array.fromBase64(mathWasmBase64)
-  const mathWasmModule = new WebAssembly.Module(mathWasmBuffer)
-  const mathWasmInstance = new WebAssembly.Instance(mathWasmModule)
+  const mathWasmModule = new globalObject.WebAssembly.Module(mathWasmBuffer)
+  const mathWasmInstance = new globalObject.WebAssembly.Instance(mathWasmModule)
   const mathWasmExports = mathWasmInstance.exports
 
   const mathFunctionNames: readonly MathFunctionName[] = [
@@ -16,7 +17,7 @@ const math = (): void => {
   ]
 
   const redefineMathFunction = (name: MathFunctionName, value: MathFunction): void => {
-    Object.defineProperty(Math, name, {
+    Object.defineProperty(globalObject.Math, name, {
       value: value,
       writable: true,
       configurable: true

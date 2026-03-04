@@ -1,4 +1,14 @@
 import tseslint from "typescript-eslint"
+import globals from "globals"
+
+// Browser-only globals (exclude standard ES); patches must use globalObject.XXX instead.
+const browserOnlyGlobalNames = Object.keys(globals.browser).filter(
+  (name) => !(name in globals.es2021)
+)
+const noRestrictedBrowserGlobals = browserOnlyGlobalNames.map((name) => ({
+  name,
+  message: `Use globalObject.${name} from the patch parameter instead of the global ${name}.`
+}))
 
 export default [
   {
@@ -35,6 +45,13 @@ export default [
       "no-prototype-builtins": "error",
       "no-trailing-spaces": "error",
       "use-isnan": "error",
+    }
+  },
+  // Patches must use globalObject.XXX only; no bare browser globals.
+  {
+    files: ["src/content_scripts/patches/**/*.ts"],
+    rules: {
+      "no-restricted-globals": ["error", ...noRestrictedBrowserGlobals]
     }
   }
 ];

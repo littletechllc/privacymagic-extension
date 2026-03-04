@@ -1,11 +1,8 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
-const keyboard = (): void => {
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    throw new Error('Navigator prototype not found')
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const keyboard = (globalObject: GlobalScope): void => {
+  redefineNavigatorProperties(globalObject, {
     keyboard: undefined
   })
 }

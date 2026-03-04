@@ -1,11 +1,8 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
-const cpu = (): void => {
-  const NavigatorClass = self.Navigator ?? self.WorkerNavigator
-  if (NavigatorClass == null) {
-    throw new Error('Navigator prototype not found')
-  }
-  redefinePropertyValues(NavigatorClass.prototype, {
+const cpu = (globalObject: GlobalScope): void => {
+  redefineNavigatorProperties(globalObject, {
     cpuClass: undefined,
     hardwareConcurrency: 4
   })

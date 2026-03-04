@@ -1,11 +1,12 @@
 import {describe, it, expect, beforeEach, beforeAll, afterAll} from '@jest/globals'
+import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 // Mock must be in place before timezone module loads so the patch captures it as "original"
 describe('timezone patch', () => {
   let originalResolvedOptions: PropertyDescriptor | undefined
 
   describe('mocked unusual timezones', () => {
-    let timezone: () => void
+    let timezone: (globalObject: GlobalScope) => void
     let mockTimeZone: string
     // Offset in minutes (e.g. 330 = UTC+5:30). Patch uses -this for offsetMinutes so fractional hours work.
     let mockGetTimezoneOffset: () => number
@@ -77,7 +78,7 @@ describe('timezone patch', () => {
 
     describe('with patch enabled', () => {
       beforeEach(() => {
-        timezone()
+        timezone(self)
       })
 
       it('US/Eastern is normalized to America/New_York', () => {

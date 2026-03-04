@@ -1,4 +1,5 @@
 import {describe, it, expect, beforeEach, afterEach, beforeAll} from '@jest/globals'
+import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 const leakyPlatform = 'CustomPlatform'
 
@@ -19,7 +20,7 @@ const LEAKY_HIGH_ENTROPY: Record<string, unknown> = {
 }
 
 describe('useragent patch', () => {
-  let useragent: () => void
+  let useragent: (globalObject: GlobalScope) => void
   let originalPlatformDescriptor: PropertyDescriptor | undefined
   let originalUserAgentData: unknown
   const nav = navigator as unknown as Record<string, unknown>
@@ -107,7 +108,7 @@ describe('useragent patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      useragent()
+      useragent(self)
       // Remove instance own properties so prototype (patched) values are used
       const ua = navigator.userAgentData as unknown as Record<string, unknown>
       if (ua != null) {

@@ -28,7 +28,7 @@ describe('sharedStorage patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      sharedStorage()
+      sharedStorage(self)
     })
 
     it('should remove SharedStorage from self', () => {

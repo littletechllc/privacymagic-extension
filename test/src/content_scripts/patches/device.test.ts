@@ -45,7 +45,7 @@ describe('device patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      device()
+      device(self)
     })
 
     it('should spoof type to continuous', () => {

@@ -1,7 +1,7 @@
 import {describe, it, expect, beforeEach, beforeAll} from '@jest/globals'
 import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/gpu_helpers/canvas'
 
-// In jsdom without the canvas package, CanvasRenderingContext2D is undefined and enableCanvasFingerprintSpoofing() would throw.
+// In jsdom without the canvas package, CanvasRenderingContext2D is undefined and enableCanvasFingerprintSpoofing(self) would throw.
 const canvasSupported = typeof globalThis.CanvasRenderingContext2D !== 'undefined'
 
 // Record which context/canvas received draw vs read calls (set up in beforeAll so patch wraps our wrappers).
@@ -22,12 +22,12 @@ describe('gpu_helpers/canvas', () => {
   describe('enableCanvasFingerprintSpoofing', () => {
     beforeEach(() => {
       if (!canvasSupported) return
-      enableCanvasFingerprintSpoofing()
+      enableCanvasFingerprintSpoofing(self)
     })
 
     it('should not throw when applied', () => {
       if (!canvasSupported) return
-      expect(() => enableCanvasFingerprintSpoofing()).not.toThrow()
+      expect(() => enableCanvasFingerprintSpoofing(self)).not.toThrow()
     })
 
     it('getContext("2d") should return a context when supported', () => {

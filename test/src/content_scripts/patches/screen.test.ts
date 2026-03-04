@@ -102,7 +102,7 @@ describe('screen patch', () => {
           ({ matches: false, media: '', addListener: () => {}, removeListener: () => {}, addEventListener: () => {}, removeEventListener: () => {}, dispatchEvent: () => true, onchange: null })
         Object.defineProperty(self, 'matchMedia', { value: stub, configurable: true, writable: true })
       }
-      screenPatch()
+      screenPatch(self)
     })
 
     it('should spoof Screen dimensions from allowed list', () => {

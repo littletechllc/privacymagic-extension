@@ -1,27 +1,30 @@
 import { createSafeSetter, redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, reflectConstructSafe } from '@src/content_scripts/helpers/safe'
+import { GlobalScope } from '../../helpers/globalObject'
 
-export const enableCanvasFingerprintSpoofing = (): void => {
-  const canvasDescriptor = Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype, 'canvas')
+export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void => {
+  const doc = globalObject.document
+  if (doc == null) return
+  const canvasDescriptor = Object.getOwnPropertyDescriptor(globalObject.CanvasRenderingContext2D.prototype, 'canvas')
   if (canvasDescriptor?.get === undefined) {
     throw new Error('canvas getter not found')
   }
-  const originalCanvasFromContextSafe = createSafeGetter(CanvasRenderingContext2D, 'canvas')
-  const originalGetContextSafe = createSafeMethod(HTMLCanvasElement, 'getContext')
-  const originalCanvasToDataURLSafe = createSafeMethod(HTMLCanvasElement, 'toDataURL')
-  const originalCanvasToBlobSafe = createSafeMethod(HTMLCanvasElement, 'toBlob')
-  const originalContextGetImageDataSafe = createSafeMethod(CanvasRenderingContext2D, 'getImageData')
-  const originalContextMeasureTextSafe = createSafeMethod(CanvasRenderingContext2D, 'measureText')
-  const originalContextIsPointInPathSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInPath')
-  const originalContextIsPointInStrokeSafe = createSafeMethod(CanvasRenderingContext2D, 'isPointInStroke')
+  const originalCanvasFromContextSafe = createSafeGetter(globalObject.CanvasRenderingContext2D, 'canvas')
+  const originalGetContextSafe = createSafeMethod(globalObject.HTMLCanvasElement, 'getContext')
+  const originalCanvasToDataURLSafe = createSafeMethod(globalObject.HTMLCanvasElement, 'toDataURL')
+  const originalCanvasToBlobSafe = createSafeMethod(globalObject.HTMLCanvasElement, 'toBlob')
+  const originalContextGetImageDataSafe = createSafeMethod(globalObject.CanvasRenderingContext2D, 'getImageData')
+  const originalContextMeasureTextSafe = createSafeMethod(globalObject.CanvasRenderingContext2D, 'measureText')
+  const originalContextIsPointInPathSafe = createSafeMethod(globalObject.CanvasRenderingContext2D, 'isPointInPath')
+  const originalContextIsPointInStrokeSafe = createSafeMethod(globalObject.CanvasRenderingContext2D, 'isPointInStroke')
 
-  const originalCanvasSetWidthSafe = createSafeSetter(HTMLCanvasElement, 'width')
-  const originalCanvasSetHeightSafe = createSafeSetter(HTMLCanvasElement, 'height')
+  const originalCanvasSetWidthSafe = createSafeSetter(globalObject.HTMLCanvasElement, 'width')
+  const originalCanvasSetHeightSafe = createSafeSetter(globalObject.HTMLCanvasElement, 'height')
 
-  const originalContextDescriptors = objectGetOwnPropertyDescriptorsSafe(CanvasRenderingContext2D.prototype)
+  const originalContextDescriptors = objectGetOwnPropertyDescriptorsSafe(globalObject.CanvasRenderingContext2D.prototype)
 
   const createInvisibleCanvas = (width: number, height: number): HTMLCanvasElement => {
-    const shadowCanvas: HTMLCanvasElement = document.createElement('canvas')
+    const shadowCanvas = doc.createElement('canvas')
     shadowCanvas.width = width
     shadowCanvas.height = height
     return shadowCanvas
@@ -79,7 +82,7 @@ export const enableCanvasFingerprintSpoofing = (): void => {
         try {
           reflectApplySafe(fn as (...args: unknown[]) => unknown, this.shadowContext, command.args)
         } catch (error) {
-          console.error('Error replaying command:', command.type, command.name, command.args, error)
+          globalObject.console.error('Error replaying command:', command.type, command.name, command.args, error)
         }
       }
       this.commands = []
@@ -97,19 +100,19 @@ export const enableCanvasFingerprintSpoofing = (): void => {
       }
     }
 
-    context2dGetImageData (...args: Parameters<typeof CanvasRenderingContext2D.prototype.getImageData>): ImageData {
+    context2dGetImageData (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.getImageData>): ImageData {
       return originalContextGetImageDataSafe(this.replayCommands(), ...args)
     }
 
-    context2dMeasureText (...args: Parameters<typeof CanvasRenderingContext2D.prototype.measureText>): TextMetrics {
+    context2dMeasureText (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.measureText>): TextMetrics {
       return originalContextMeasureTextSafe(this.replayCommands(), ...args)
     }
 
-    context2dIsPointInPath (...args: Parameters<typeof CanvasRenderingContext2D.prototype.isPointInPath>): boolean {
+    context2dIsPointInPath (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInPath>): boolean {
       return originalContextIsPointInPathSafe(this.replayCommands(), ...args)
     }
 
-    context2dIsPointInStroke (...args: Parameters<typeof CanvasRenderingContext2D.prototype.isPointInStroke>): boolean {
+    context2dIsPointInStroke (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInStroke>): boolean {
       return originalContextIsPointInStrokeSafe(this.replayCommands(), ...args)
     }
 
@@ -167,7 +170,7 @@ export const enableCanvasFingerprintSpoofing = (): void => {
   const nonDrawingCommands = ['canvas', 'getImageData', 'measureText', 'isPointInPath', 'isPointInStroke']
 
   const enableContext2dCommandRecording = (): void => {
-    for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(CanvasRenderingContext2D.prototype))) {
+    for (const [name, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(globalObject.CanvasRenderingContext2D.prototype))) {
       if (nonDrawingCommands.includes(name)) {
         continue
       }
@@ -192,22 +195,22 @@ export const enableCanvasFingerprintSpoofing = (): void => {
           reflectApplySafe(originalSet, this, args)
         }
       }
-      Object.defineProperty(CanvasRenderingContext2D.prototype, name, newDescriptor)
+      Object.defineProperty(globalObject.CanvasRenderingContext2D.prototype, name, newDescriptor)
     }
   }
 
   const enableReadingFromContext2dCommandRecorder = (): void => {
-    redefinePropertyValues(CanvasRenderingContext2D.prototype, {
+    redefinePropertyValues(globalObject.CanvasRenderingContext2D.prototype, {
       getImageData: function (this: CanvasRenderingContext2D, sx: number, sy: number, sw: number, sh: number, settings: ImageDataSettings) {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dGetImageData(sx, sy, sw, sh, settings)
         } else {
           const data = new Uint8ClampedArray(sw * sh * 4)
-          return new ImageData(data, sw, sh)
+          return new globalObject.ImageData(data, sw, sh)
         }
       },
-      measureText: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof CanvasRenderingContext2D.prototype.measureText>) {
+      measureText: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.measureText>) {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dMeasureText(...args)
@@ -225,7 +228,7 @@ export const enableCanvasFingerprintSpoofing = (): void => {
           }
         }
       },
-      isPointInPath: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof CanvasRenderingContext2D.prototype.isPointInPath>) {
+      isPointInPath: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInPath>) {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dIsPointInPath(...args)
@@ -233,7 +236,7 @@ export const enableCanvasFingerprintSpoofing = (): void => {
           return false
         }
       },
-      isPointInStroke: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof CanvasRenderingContext2D.prototype.isPointInStroke>) {
+      isPointInStroke: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInStroke>) {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dIsPointInStroke(...args)
@@ -245,7 +248,7 @@ export const enableCanvasFingerprintSpoofing = (): void => {
   }
 
   const enableCanvasCommandRecording = (): void => {
-    redefinePropertyValues(HTMLCanvasElement.prototype, {
+    redefinePropertyValues(globalObject.HTMLCanvasElement.prototype, {
       getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes)
         if (context != null && contextType === '2d') {
@@ -263,10 +266,10 @@ export const enableCanvasFingerprintSpoofing = (): void => {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToBlob(callback, type, quality)
         }
-        setTimeout(() => callback(null), 0)
+        globalObject.setTimeout(() => callback(null), 0)
       }
     })
-    objectDefinePropertiesSafe(HTMLCanvasElement.prototype, {
+    objectDefinePropertiesSafe(globalObject.HTMLCanvasElement.prototype, {
       width: {
         set: function (this: HTMLCanvasElement, value: number) {
           originalCanvasSetWidthSafe(this, value)

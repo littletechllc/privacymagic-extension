@@ -1,8 +1,8 @@
-
-
 import { redefinePropertyValues, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const timezone = (): void => {
+const timezone = (globalObject: GlobalScope): void => {
+  if (globalObject.Intl == null) return
   // Time zones that use fractional hour offsets can be coalesced to a
   // representative time zone. Must change its offset
   // on the same dates to coalesce properly.
@@ -351,11 +351,11 @@ const timezone = (): void => {
     '14': 'Pacific/Kiritimati'
   }
 
-  const originalResolvedOptionsSafe = createSafeMethod(Intl.DateTimeFormat, 'resolvedOptions')
+  const originalResolvedOptionsSafe = createSafeMethod(globalObject.Intl.DateTimeFormat, 'resolvedOptions')
   const originalMathTrunc = Math.trunc
-  const originalDateGetTimezoneOffsetSafe = createSafeMethod(Date, 'getTimezoneOffset')
+  const originalDateGetTimezoneOffsetSafe = createSafeMethod(globalObject.Date, 'getTimezoneOffset')
   const OriginalDate = Date
-  redefinePropertyValues(Intl.DateTimeFormat.prototype, {
+  redefinePropertyValues(globalObject.Intl.DateTimeFormat.prototype, {
     resolvedOptions: function (this: Intl.DateTimeFormat) {
       const options = originalResolvedOptionsSafe(this)
       const now = new OriginalDate()

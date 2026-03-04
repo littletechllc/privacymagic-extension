@@ -54,7 +54,7 @@ describe('disk patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      disk()
+      disk(self)
     })
 
     it('should return patched usage (0)', async () => {
