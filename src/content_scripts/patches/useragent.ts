@@ -1,4 +1,5 @@
-import { createSafeMethod, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeMethod, redefineNavigatorProperties, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
 const roundVersion = (originalVersionString: string): string => {
   try {
@@ -22,19 +23,15 @@ const spoofPlatforms: Record<string, string> = {
   iOS: 'iPhone'
 }
 
-const getHighEntropyValuesSafe = createSafeMethod(NavigatorUAData, 'getHighEntropyValues')
-
-const useragent = (): void => {
-  const platform = spoofPlatforms[navigator.userAgentData?.platform ?? 'Win32']
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    return
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const useragent = (globalObject: GlobalScope): void => {
+  if (globalObject.NavigatorUAData === undefined) return
+  const getHighEntropyValuesSafe = createSafeMethod(globalObject.NavigatorUAData, 'getHighEntropyValues')
+  const platform = spoofPlatforms[globalObject.navigator.userAgentData?.platform ?? 'Win32']
+  redefineNavigatorProperties(globalObject, {
     platform,
   })
   const mobile = false
-  redefinePropertyValues(NavigatorUAData.prototype, {
+  redefinePropertyValues(globalObject.NavigatorUAData.prototype, {
     mobile,
     platform,
     toJSON: {
@@ -58,7 +55,7 @@ const useragent = (): void => {
       if (result.fullVersionList != null) {
         // TODO: Use a common unrounded browser version
         result.fullVersionList = result.fullVersionList.map(
-          ({brand, version}) => ({ brand, version: roundVersion(version) }))
+          ({ brand, version }: { brand: string, version: string }) => ({ brand, version: roundVersion(version) }))
       }
       if (result.mobile != null) {
         result.mobile = false

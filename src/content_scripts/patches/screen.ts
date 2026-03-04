@@ -1,10 +1,11 @@
 import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const screen = (): void => {
-  if (self.Screen === undefined) {
+const screen = (globalObject: GlobalScope): void => {
+  if (globalObject.Screen === undefined || globalObject.matchMedia === undefined) {
     return
   }
-  const oldMatchMedia = self.matchMedia
+  const oldMatchMedia = globalObject.matchMedia
   const mediaDeviceToViewport = (mediaQueryString: string): string => {
     return mediaQueryString
       ?.replaceAll('device-width', 'width')
@@ -23,8 +24,10 @@ const screen = (): void => {
     }
     return allowedScreenSizes[allowedScreenSizes.length - 1]
   }
-  const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerWidth, innerHeight)
-  redefinePropertyValues(Screen.prototype, {
+  const innerW = globalObject.innerWidth ?? 1920
+  const innerH = globalObject.innerHeight ?? 1080
+  const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerW, innerH)
+  redefinePropertyValues(globalObject.Screen.prototype, {
     availHeight: spoofedScreenHeight,
     availLeft: 0,
     availTop: 0,
@@ -34,11 +37,11 @@ const screen = (): void => {
     pixelDepth: 24,
     width: spoofedScreenWidth
   })
-  redefinePropertyValues(self, {
+  redefinePropertyValues(globalObject, {
     devicePixelRatio: 2,
     matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
-    outerHeight: self.innerHeight,
-    outerWidth: self.innerWidth,
+    outerHeight: globalObject.innerHeight ?? 1080,
+    outerWidth: globalObject.innerWidth ?? 1920,
     screenLeft: 0,
     screenTop: 0,
     screenX: 0,
@@ -49,7 +52,7 @@ const screen = (): void => {
   const matchMediaClean = (mediaQueryString: string): string =>
     mediaQueryString.replace(regex, (_, value: string) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ')
-  redefinePropertyValues(self, {
+  redefinePropertyValues(globalObject, {
     matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(matchMediaClean(mediaQueryString))
   })
 }

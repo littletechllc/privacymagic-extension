@@ -1,15 +1,17 @@
 import { makeBundleForInjection, getDisabledSettings, resolveAbsoluteUrl } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
+import { GlobalScope } from '../helpers/globalObject'
 
-const worker = (): void => {
-  const BlobSafe = self.Blob
-  const URLcreateObjectURLSafe = (source: Blob | MediaSource ): string => URL.createObjectURL(source)
+const worker = (globalObject: GlobalScope): void => {
+  const BlobSafe = globalObject.Blob
+  const URLSafe = globalObject.URL
+  const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
 
-  // Spoof the self.location object to return the original URL, and modify various
+  // Spoof the worker's location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
-  // and injected into the worker context.
-  const spoofLocationInsideWorkerFunction = (absoluteUrl: string): void => {
+  // and injected into the worker context; it receives the worker global as second arg.
+  const spoofLocationInsideWorkerFunction = (absoluteUrl: string, workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket'> & { [k: string]: unknown }): void => {
     // We need to define these functions here because they are not available in the worker context.
     type MethodOf<TThis> = {
       [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -24,24 +26,28 @@ const worker = (): void => {
       thisArg: TThis,
       args: TMethodArgs
     ) => TReturn
-    const URLSafe = self.URL
-    const hrefDescriptor = Object.getOwnPropertyDescriptor(URL.prototype, 'href')
+    const hrefDescriptor = Object.getOwnPropertyDescriptor(URLSafe.prototype, 'href')
     if (hrefDescriptor?.get === undefined) {
       throw new Error('URL.href getter not found')
     }
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const URLhrefGetter = hrefDescriptor.get as (this: URL) => string
     const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
-    // Spoof the self.location object to return the original URL.
-    const absoluteUrlObject = new URL(absoluteUrl)
+    // Spoof the worker's location object to return the original URL.
+    const absoluteUrlObject = new URLSafe(absoluteUrl)
+    const WorkerLocation = workerGlobal.WorkerLocation
+    if (WorkerLocation == null) return
     const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
     for (const [key, descriptor] of Object.entries(descriptors)) {
       if (descriptor.get != null && key in absoluteUrlObject) {
         descriptor.get = () => absoluteUrlObject[key as keyof URL]
       }
     }
-    Object.defineProperties(self.WorkerLocation.prototype, descriptors)
-    // Modify the self.Request object to be relative to the original URL.
+    Object.defineProperties(WorkerLocation.prototype, descriptors)
+    // Modify the worker's Request object to be relative to the original URL.
+    const Request = workerGlobal.Request
+    const Response = workerGlobal.Response
+    if (Request == null || Response == null) return
     const requestUrlDescriptor = Object.getOwnPropertyDescriptor(Request.prototype, 'url')
     if (requestUrlDescriptor?.get === undefined) {
       throw new Error('Request.url getter not found')
@@ -55,7 +61,7 @@ const worker = (): void => {
         return URLhrefSafe(new URLSafe(relativeUrl as string | URL, absoluteUrl))
       }
     })
-    // Modify the self.Response object to be relative to the original URL.
+    // Modify the worker's Response object to be relative to the original URL.
     const responseUrlDescriptor = Object.getOwnPropertyDescriptor(Response.prototype, 'url')
     if (responseUrlDescriptor?.get === undefined) {
       throw new Error('Response.url getter not found')
@@ -68,35 +74,39 @@ const worker = (): void => {
         return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl))
       }
     })
-    // Modify the self.fetch function to be relative to the original URL.
-    const originalFetch = self.fetch
-    self.fetch = async (...args: Parameters<typeof originalFetch>) => {
-      const firstArg = args[0]
-      args[0] = firstArg instanceof Request
-        ? firstArg
-        : new URLSafe(firstArg.toString(), absoluteUrl)
-      return await originalFetch(...args)
-    }
-    // Modify the self.importScripts function to be relative to the original URL.
-    const originalImportScripts = self.importScripts
-    self.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
-      const resolvedPaths: Array<string | URL | TrustedScriptURL> = []
-      for (const path of paths) {
-        if (path instanceof TrustedScriptURL) {
-          resolvedPaths.push(path)
-        } else {
-          const resolvedPath = URLhrefSafe(new URLSafe(path, absoluteUrl))
-          resolvedPaths.push(resolvedPath)
-        }
+    // Modify the worker's fetch function to be relative to the original URL.
+    const origFetch = workerGlobal.fetch
+    if (origFetch != null) {
+      workerGlobal.fetch = async (...args: Parameters<typeof origFetch>) => {
+        const firstArg = args[0]
+        args[0] = firstArg instanceof Request
+          ? firstArg
+          : new URLSafe(firstArg.toString(), absoluteUrl)
+        return await origFetch(...args)
       }
-      return originalImportScripts(...resolvedPaths as Array<string | URL>)
     }
-    // Modify the self.XMLHttpRequest, self.EventSource, and self.WebSocket objects to
+    // Modify the worker's importScripts function to be relative to the original URL.
+    const origImportScripts = workerGlobal.importScripts
+    if (origImportScripts != null) {
+      workerGlobal.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
+        const resolvedPaths: Array<string | URL> = []
+        for (const path of paths) {
+          if (globalObject.TrustedScriptURL != null && path instanceof globalObject.TrustedScriptURL) {
+            resolvedPaths.push(path.toString())
+          } else {
+            resolvedPaths.push(URLhrefSafe(new URLSafe(path.toString(), absoluteUrl)))
+          }
+        }
+        return origImportScripts(...resolvedPaths)
+      }
+    }
+    // Modify the worker's XMLHttpRequest, EventSource, and WebSocket objects to
     // be relative to the original URL.
     const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
     for (const objectName of constructorNames) {
-      const OriginalConstructor = self[objectName]
-      Object.defineProperty(self, objectName, {
+      const OriginalConstructor = workerGlobal[objectName]
+      if (OriginalConstructor == null) continue
+      Object.defineProperty(workerGlobal, objectName, {
         value: new Proxy(OriginalConstructor, {
           construct (
             Target,
@@ -116,7 +126,7 @@ const worker = (): void => {
   const blobURLScriptCache = new Map<string, string>()
 
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
-    const originalRevokeObjectURL = URL.revokeObjectURL.bind(URL)
+    const originalRevokeObjectURL = globalObject.URL.revokeObjectURL.bind(globalObject.URL)
 
     const pendingRevocations = new Set<string>()
     const lockedUrls = new Map<string, number>()
@@ -165,7 +175,7 @@ const worker = (): void => {
     return (options.type === 'text/javascript' || options.type === 'application/javascript' || options.type === 'text/plain')
   }
 
-  self.Blob = new Proxy(self.Blob, {
+  globalObject.Blob = new Proxy(globalObject.Blob, {
     construct (Target, [blobParts, options]: [BlobPart[], BlobPropertyBag?]) {
       const blob = new Target(blobParts, options)
       if (isPotentialScript(options)) {
@@ -178,10 +188,10 @@ const worker = (): void => {
     }
   })
 
-  const originalCreateObjectURL = self.URL.createObjectURL.bind(self.URL)
-  self.URL.createObjectURL = (source: Blob | MediaSource): string => {
+  const originalCreateObjectURL = globalObject.URL.createObjectURL.bind(globalObject.URL)
+  globalObject.URL.createObjectURL = (source: Blob | MediaSource): string => {
     const url = originalCreateObjectURL(source)
-    if (source instanceof Blob && blobScriptCache.has(source)) {
+    if (source instanceof BlobSafe && blobScriptCache.has(source)) {
       const cachedScript = blobScriptCache.get(source)
       if (cachedScript != null) {
         blobURLScriptCache.set(url, cachedScript)
@@ -190,7 +200,7 @@ const worker = (): void => {
     return url
   }
 
-  self.URL.revokeObjectURL = (url: string) => {
+  globalObject.URL.revokeObjectURL = (url: string) => {
     requestToRevokeObjectUrl(url)
   }
 
@@ -200,8 +210,10 @@ const worker = (): void => {
 
   const generateCompletionCallbackCode = (callback: () => void): string => {
     const completionType = 'completion'
-    const broadcastChannelName = '--privacy-magic-completion--' + crypto.randomUUID()
-    const broadcastChannel = new BroadcastChannel(broadcastChannelName)
+    const broadcastChannelName = '--privacy-magic-completion--' + globalObject.crypto.randomUUID()
+    const BroadcastChannelConstructor = globalObject.BroadcastChannel
+    if (BroadcastChannelConstructor == null) throw new Error('BroadcastChannel not available')
+    const broadcastChannel = new BroadcastChannelConstructor(broadcastChannelName)
     broadcastChannel.onmessage = (message: MessageEvent) => {
       const data = message?.data as { type: string } | null
       if (data?.type === completionType) {
@@ -225,10 +237,10 @@ const worker = (): void => {
     if (policyName == null) {
       policyName = 'default'
     }
-    if (self.trustedTypes == null) {
+    if (globalObject.trustedTypes == null) {
       return url
     }
-    const dummyPolicy = self.trustedTypes.createPolicy(policyName, {
+    const dummyPolicy = globalObject.trustedTypes.createPolicy(policyName, {
       createScriptURL: (url) => {
         return url
       }
@@ -242,16 +254,17 @@ const worker = (): void => {
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode: string): void => {
-    const locationHref = self.location.href
+    const locationHref = globalObject.location.href
     let policy: TrustedTypePolicy | undefined
-    self.Worker = new Proxy(self.Worker, {
+    if (globalObject.Worker == null) return
+    globalObject.Worker = new Proxy(globalObject.Worker, {
       construct (Target, [url, options]: [string | URL | TrustedScriptURL, WorkerOptions?]) {
         if (url.toString().startsWith('chrome:') || url.toString().startsWith('chrome-extension:')) {
           // Don't harden chrome:// or chrome-extension:// URLs.
           return new Target(url.toString(), options)
         }
         let policyNameString: string | undefined = undefined
-        if (url instanceof TrustedScriptURL) {
+        if (globalObject.TrustedScriptURL != null && url instanceof globalObject.TrustedScriptURL) {
           policy = getTrustedTypePolicyForObject(url)
           policyNameString = policy ? jsonStringifySafe(policy?.name) : undefined
         }
@@ -270,10 +283,10 @@ const worker = (): void => {
         // Semicolon separated code to avoid issues with line continuations.
         const bundleWrapper = (script: string) => `
           ;${hardeningCode}
-          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)});
-          ;${script}
-          ;${completionCallbackCode}
-        `;
+          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)}, globalObject);\n
+          ;${script}\n
+          ;${completionCallbackCode}\n
+          `
         const cachedScript = getCachedScript(absoluteUrl)
         let bundle: string
         if (cachedScript != null) {
@@ -297,7 +310,7 @@ const worker = (): void => {
   }
 
   const hardeningCode = makeBundleForInjection(getDisabledSettings())
-  prepareInjectionForTrustedTypes(hardeningCode)
+  prepareInjectionForTrustedTypes(globalObject, hardeningCode)
   prepareInjectionForWorker(hardeningCode)
 }
 

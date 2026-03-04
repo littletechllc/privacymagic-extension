@@ -1,8 +1,9 @@
-import { ContentSettingId } from "@src/common/setting-ids"
+import { ContentSettingId, CONTENT_SETTING_IDS } from "@src/common/setting-ids"
 import { createSafeGetter } from "./monkey-patch"
+import { GlobalScope } from "./globalObject"
 
-export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault = false): void => {
-  const oldMatchMedia = self.matchMedia
+export const spoofMediaQuery = (globalObject: GlobalScope, key: string, spoofValue: string, targetDefault = false): void => {
+  const oldMatchMedia = globalObject.matchMedia.bind(globalObject)
   const targetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*${spoofValue}\\s*\\)`, 'ig')
   const nonTargetRegex = new RegExp(`\\(\\s*${key}\\s*:\\s*[^)]+\\s*\\)`, 'ig')
   const defaultRegex = new RegExp(`\\(\\s*${key}\\s*\\)`, 'ig')
@@ -12,7 +13,7 @@ export const spoofMediaQuery = (key: string, spoofValue: string, targetDefault =
       .replace(targetRegex, 'all')
       .replace(nonTargetRegex, 'not all')
       .replace(defaultRegex, defaultReplacement)
-  self.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString))
+  globalObject.matchMedia = (mediaQueryString) => oldMatchMedia(spoof(mediaQueryString))
 }
 
 
@@ -34,7 +35,7 @@ export const makeBundleForInjection = (disabledSettings: string[]): string => {
   return bundleForInjection
 }
 
-export const getDisabledSettings = (relevantSettings?: ContentSettingId[]): ContentSettingId[] => {
+export const getDisabledSettings = (): ContentSettingId[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
     return __disabledSettings
   }
@@ -50,9 +51,8 @@ export const getDisabledSettings = (relevantSettings?: ContentSettingId[]): Cont
     if (result.length === 1 && result[0] === '') {
       result = []
     }
-    if (relevantSettings != null) {
-      result = result.filter(setting => (relevantSettings as string[]).includes(setting))
-    }
+    result = result.filter((setting): setting is ContentSettingId =>
+      (CONTENT_SETTING_IDS as readonly string[]).includes(setting))
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error)
   }

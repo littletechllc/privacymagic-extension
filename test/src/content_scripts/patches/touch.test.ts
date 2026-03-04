@@ -33,7 +33,7 @@ describe('touch patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      touch()
+      touch(self)
     })
 
     it('should set maxTouchPoints to 0', () => {

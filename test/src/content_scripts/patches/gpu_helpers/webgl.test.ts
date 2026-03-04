@@ -34,14 +34,14 @@ describe('gpu_helpers/webgl', () => {
       const selfWith = self as unknown as SelfWithWebGL
       originalWebGL = selfWith.WebGLRenderingContext
       delete selfWith.WebGLRenderingContext
-      expect(() => hideWebGLVendorAndRenderer()).not.toThrow()
+      expect(() => hideWebGLVendorAndRenderer(self)).not.toThrow()
     })
 
     it('should no-op when navigator.userAgentData is null', () => {
       if (typeof self.WebGLRenderingContext === 'undefined') return
       const nav = navigator as unknown as NavWithUAData
       nav.userAgentData = null
-      expect(() => hideWebGLVendorAndRenderer()).not.toThrow()
+      expect(() => hideWebGLVendorAndRenderer(self)).not.toThrow()
     })
 
     describe('when WebGL and userAgentData.platform are available', () => {
@@ -65,7 +65,7 @@ describe('gpu_helpers/webgl', () => {
       it('should spoof UNMASKED_VENDOR_WEBGL and UNMASKED_RENDERER_WEBGL on macOS', () => {
         const selfWith = self as unknown as SelfWithWebGL
         if (selfWith.WebGLRenderingContext === undefined) return
-        hideWebGLVendorAndRenderer()
+        hideWebGLVendorAndRenderer(self)
         const proto = selfWith.WebGLRenderingContext.prototype
         const ctx = Object.create(proto) as WebGLRenderingContext
         expect(proto.getParameter.call(ctx, UNMASKED_VENDOR_WEBGL)).toBe('Apple')
@@ -75,7 +75,7 @@ describe('gpu_helpers/webgl', () => {
       it('should pass through other getParameter constants', () => {
         const selfWith = self as unknown as SelfWithWebGL
         if (selfWith.WebGLRenderingContext === undefined) return
-        hideWebGLVendorAndRenderer()
+        hideWebGLVendorAndRenderer(self)
         const proto = selfWith.WebGLRenderingContext.prototype
         const ctx = Object.create(proto) as WebGLRenderingContext
         // Some arbitrary constant; original mock returns null

@@ -1,14 +1,11 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
 // Global Privacy Control is a signal that allows users to opt out of websites
 // selling or sharing their personal information with third parties.
 // https://globalprivacycontrol.org/
-const gpc = (): void => {
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    throw new Error('Navigator prototype not found')
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const gpc = (globalObject: GlobalScope): void => {
+  redefineNavigatorProperties(globalObject, {
     globalPrivacyControl: true
   })
 }

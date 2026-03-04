@@ -28,7 +28,7 @@ describe('gpc patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      gpc()
+      gpc(self)
     })
 
     it('should expose navigator.globalPrivacyControl = true', () => {

@@ -1,6 +1,7 @@
 import { redefinePropertyValues } from "../helpers/monkey-patch"
 import { isAllowedFont } from "@src/common/font-filter"
 import { stringReplaceSafe } from "@src/content_scripts/helpers/safe"
+import { GlobalScope } from "../helpers/globalObject"
 
 const DISALLOWED_FONTS: string[] = [
   'sans-serif-thin',  // Android-specific font from "Roboto" family
@@ -57,14 +58,15 @@ const DISALLOWED_FONTS: string[] = [
   'ZWAdobeF'
 ].map(fontName => fontName.toLowerCase())
 
-const fonts = (): void => {
-  if (self.document === undefined) {
+const fonts = (globalObject: GlobalScope): void => {
+  if (globalObject.document === undefined) {
     return
   }
-  const originalFontFace = self.FontFace
+  const originalFontFace = globalObject.FontFace
+  if (originalFontFace == null) return
 
   const addEmptyFontFace = (fontFaceSet: FontFaceSet, fontName: string): void => {
-    const fontFace = new FontFace(fontName, 'url(data:application/font-woff2;base64,)', {
+    const fontFace = new originalFontFace(fontName, 'url(data:application/font-woff2;base64,)', {
       style: 'normal',
       weight: '400',
       display: 'swap'
@@ -87,7 +89,7 @@ const fonts = (): void => {
     }
   }
 
-  addEmptyFontFaces(document.fonts)
+  addEmptyFontFaces(globalObject.document.fonts)
 
   const localFontRegex = /local\s*\(\s*['"]?([^'")]*?)['"]?\s*\)/gi
   const emptyDataUri = 'url("data:application/font-woff2;base64,")'
@@ -97,7 +99,7 @@ const fonts = (): void => {
       isAllowedFont(fontName) ? match : emptyDataUri)
   }
 
-  Object.defineProperty(self, 'FontFace', {
+  Object.defineProperty(globalObject, 'FontFace', {
     value: new Proxy(originalFontFace, {
       construct(target: typeof FontFace, args: [string, string | BufferSource, FontFaceDescriptors | undefined]) {
         const [name, source, descriptors] = args
@@ -110,11 +112,11 @@ const fonts = (): void => {
   })
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const deleteOriginal = document.fonts.delete
+  const deleteOriginal = globalObject.document.fonts.delete
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const clearOriginal = document.fonts.clear
+  const clearOriginal = globalObject.document.fonts.clear
 
-  redefinePropertyValues(Object.getPrototypeOf(document.fonts), {
+  redefinePropertyValues(Object.getPrototypeOf(globalObject.document.fonts), {
     delete: function (this: FontFaceSet, font: FontFace) {
       deleteOriginal.call(this, font)
       if (DISALLOWED_FONTS.includes(font.family.toLowerCase()) && !isAllowedFont(font.family)) {

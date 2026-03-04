@@ -1,3 +1,5 @@
+import { getNavigatorConstructor, GlobalScope } from "./globalObject"
+
 // Type for methods of an object (union of all methods).
 type MethodOf<TThis> = {
   [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -122,5 +124,10 @@ export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: 
     }
   }
   objectDefinePropertiesSafe(obj, newProperties)
+}
+
+export const redefineNavigatorProperties = (globalObject: GlobalScope, propertyMap: { [key: string]: unknown }): void => {
+  const NavigatorConstructor = getNavigatorConstructor(globalObject)
+  redefinePropertyValues(NavigatorConstructor.prototype, propertyMap)
 }
 

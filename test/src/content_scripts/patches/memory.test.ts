@@ -27,7 +27,7 @@ describe('memory patch', () => {
   describe('with patch enabled', () => {
     beforeEach(() => {
       delete nav.deviceMemory
-      memory()
+      memory(self)
     })
 
     it('should set deviceMemory to undefined', () => {

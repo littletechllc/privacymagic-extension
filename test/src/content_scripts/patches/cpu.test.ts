@@ -36,7 +36,7 @@ describe('cpu patch', () => {
     beforeEach(() => {
       delete nav.hardwareConcurrency
       delete nav.cpuClass
-      cpu()
+      cpu(self)
     })
 
     it('should set hardwareConcurrency to 4', () => {

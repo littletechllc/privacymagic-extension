@@ -1,8 +1,9 @@
 import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const battery = (): void => {
-  if (self.BatteryManager != null) {
-    redefinePropertyValues(BatteryManager.prototype, {
+const battery = (globalObject: GlobalScope): void => {
+  if (globalObject.BatteryManager != null) {
+    redefinePropertyValues(globalObject.BatteryManager.prototype, {
       charging: true,
       chargingTime: 0,
       dischargingTime: Infinity,

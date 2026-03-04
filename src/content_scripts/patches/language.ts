@@ -1,12 +1,9 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
-const language = (): void => {
-  const originalLanguage = navigator.language
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    throw new Error('Navigator prototype not found')
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const language = (globalObject: GlobalScope): void => {
+  const originalLanguage = globalObject.navigator.language
+  redefineNavigatorProperties(globalObject, {
     // Reduce to a single language to reduce entropy.
     languages: [originalLanguage]
   })

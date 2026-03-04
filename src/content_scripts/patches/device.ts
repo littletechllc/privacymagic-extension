@@ -1,8 +1,9 @@
 import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const device = (): void => {
-  if (self.DevicePosture != null) {
-    redefinePropertyValues(DevicePosture.prototype, {
+const device = (globalObject: GlobalScope): void => {
+  if (globalObject.DevicePosture != null) {
+    redefinePropertyValues(globalObject.DevicePosture.prototype, {
       type: 'continuous',
       addEventListener: (/* ignore */) => { /* do nothing */ },
       removeEventListener: (/* ignore */) => { /* do nothing */ },

@@ -46,7 +46,7 @@ describe('display patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      display()
+      display(self)
       calls = []
     })
 

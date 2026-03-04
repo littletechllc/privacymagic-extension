@@ -204,7 +204,7 @@ describe.each([
     })
 
     if (patchEnabled) {
-      timer()
+      timer(self)
     }
   })
 

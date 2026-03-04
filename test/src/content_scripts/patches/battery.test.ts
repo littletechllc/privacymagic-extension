@@ -68,7 +68,7 @@ describe('battery patch', () => {
   describe('with patch enabled', () => {
     beforeEach(() => {
       // Apply the patch
-      battery()
+      battery(self)
     })
 
     it('should return patched charging value (true)', () => {
@@ -152,7 +152,7 @@ describe('battery patch', () => {
 
     it('should not throw when patch is applied', () => {
       expect(() => {
-        battery()
+        battery(self)
       }).not.toThrow()
     })
   })

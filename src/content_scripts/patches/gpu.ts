@@ -1,12 +1,13 @@
 import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/gpu_helpers/canvas'
 import { hideWebGLVendorAndRenderer } from '@src/content_scripts/patches/gpu_helpers/webgl'
+import { GlobalScope } from '../helpers/globalObject'
 
-const gpu = (): void | (() => void) => {
-  if (self.HTMLCanvasElement === undefined) {
+const gpu = (globalObject: GlobalScope): void | (() => void) => {
+  if (globalObject.HTMLCanvasElement === undefined) {
     return () => {}
   }
-  enableCanvasFingerprintSpoofing()
-  hideWebGLVendorAndRenderer()
+  enableCanvasFingerprintSpoofing(globalObject)
+  hideWebGLVendorAndRenderer(globalObject)
 }
 
 export default gpu

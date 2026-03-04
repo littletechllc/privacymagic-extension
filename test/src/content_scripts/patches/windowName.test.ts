@@ -42,7 +42,7 @@ describe('windowName patch', () => {
     const origin = self.location.origin
 
     beforeEach(() => {
-      windowName()
+      windowName(self)
     })
 
     it('get: should return empty string when name is empty', () => {

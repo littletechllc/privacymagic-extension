@@ -21,7 +21,7 @@ describe('gpu patch', () => {
     })
 
     it('should return a no-op function instead of patching', () => {
-      const result = gpu()
+      const result = gpu(self)
       expect(typeof result).toBe('function')
       expect(() => (result as () => void)()).not.toThrow()
     })
@@ -30,7 +30,7 @@ describe('gpu patch', () => {
   describe('when canvas stack is available', () => {
     it('should not throw when applied', () => {
       if (typeof globalThis.CanvasRenderingContext2D === 'undefined') return
-      expect(() => gpu()).not.toThrow()
+      expect(() => gpu(self)).not.toThrow()
     })
   })
 })

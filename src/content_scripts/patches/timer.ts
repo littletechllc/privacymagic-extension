@@ -1,13 +1,15 @@
 import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { GlobalScope } from '../helpers/globalObject'
 
-const timer = (): void => {
+const timer = (globalObject: GlobalScope): void => {
   const mathRoundSafe = Math.round
-  const nowDescriptor = Object.getOwnPropertyDescriptor(Performance.prototype, 'now')
+  if (globalObject.Performance === undefined) return
+  const nowDescriptor = Object.getOwnPropertyDescriptor(globalObject.Performance.prototype, 'now')
   if (nowDescriptor?.value === undefined) {
     throw new Error('Performance.now not found')
   }
   const originalNow = nowDescriptor.value as (this: Performance) => number
-  redefinePropertyValues(Performance.prototype, {
+  redefinePropertyValues(globalObject.Performance.prototype, {
     now: function (this: Performance) {
       return mathRoundSafe(reflectApplySafe(originalNow, this, []))
     }
@@ -77,19 +79,19 @@ const timer = (): void => {
     })
   }
   batchMakeRoundedGetters([
-    [self.Performance, ['timeOrigin']],
-    [self.PerformanceEntry, ['duration', 'startTime']],
-    [self.LargestContentfulPaint, ['loadTime', 'renderTime']],
-    [self.LayoutShift, ['lastInputTime']],
-    [self.PerformanceEventTiming, ['processingEnd', 'processingStart']],
-    [self.PerformanceLongAnimationFrameTiming, [
+    [globalObject.Performance, ['timeOrigin']],
+    [globalObject.PerformanceEntry, ['duration', 'startTime']],
+    [globalObject.LargestContentfulPaint, ['loadTime', 'renderTime']],
+    [globalObject.LayoutShift, ['lastInputTime']],
+    [globalObject.PerformanceEventTiming, ['processingEnd', 'processingStart']],
+    [globalObject.PerformanceLongAnimationFrameTiming, [
       'blockingDuration',
       'firstUIEventTimestamp',
       'renderStart',
       'styleAndLayoutStart'
     ]],
-    [self.PerformanceLongTaskTiming, []],
-    [self.PerformanceResourceTiming, [
+    [globalObject.PerformanceLongTaskTiming, []],
+    [globalObject.PerformanceResourceTiming, [
       'connectEnd',
       'connectStart',
       'domainLookupEnd',
@@ -106,7 +108,7 @@ const timer = (): void => {
       'secureConnectionStart',
       'workerStart'
     ]],
-    [self.PerformanceNavigationTiming, [
+    [globalObject.PerformanceNavigationTiming, [
       'activationStart',
       'criticalCHRestart',
       'domComplete',
@@ -118,12 +120,12 @@ const timer = (): void => {
       'unloadEventEnd',
       'unloadEventStart'
     ]],
-    [self.PerformanceScriptTiming, [
+    [globalObject.PerformanceScriptTiming, [
       'executionStart',
       'forcedStyleAndLayoutDuration',
       'pauseDuration'
     ]],
-    [self.PerformanceServerTiming, ['duration']]
+    [globalObject.PerformanceServerTiming, ['duration']]
   ] as const)
 }
 

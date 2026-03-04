@@ -33,7 +33,7 @@ describe('keyboard patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      keyboard()
+      keyboard(self)
     })
 
     it('should set keyboard to undefined', () => {

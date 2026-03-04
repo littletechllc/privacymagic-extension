@@ -59,7 +59,7 @@ describe('serviceWorker patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      serviceWorker()
+      serviceWorker(self)
     })
 
     it('should reject with SecurityError when register is called', async () => {

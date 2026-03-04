@@ -1,11 +1,8 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import type { GlobalScope } from '../helpers/globalObject'
 
-const memory = (): void => {
-  const navigatorPrototype = self.Navigator ?? self.WorkerNavigator
-  if (navigatorPrototype == null) {
-    throw new Error('Navigator prototype not found')
-  }
-  redefinePropertyValues(navigatorPrototype.prototype, {
+const memory = (globalObject: GlobalScope): void => {
+  redefineNavigatorProperties(globalObject, {
     // Cover Your Tracks: 1 in 1.93 browsers have this value:
     deviceMemory: undefined
   })
