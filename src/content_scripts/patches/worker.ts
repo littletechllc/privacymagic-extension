@@ -4,14 +4,10 @@ import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '
 import { GlobalScope } from '../helpers/globalObject'
 
 const worker = (globalObject: GlobalScope): void => {
-  const BlobSafe = globalObject.Blob
-  const URLSafe = globalObject.URL
-  const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
-
   // Spoof the worker's location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context; it receives the worker global as second arg.
-  const spoofLocationInsideWorkerFunction = (absoluteUrl: string, workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket'> & { [k: string]: unknown }): void => {
+  const spoofLocationInsideWorkerFunction = (absoluteUrl: string, workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket' | 'TrustedScriptURL' | 'URL'> & { [k: string]: unknown }): void => {
     // We need to define these functions here because they are not available in the worker context.
     type MethodOf<TThis> = {
       [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -26,6 +22,7 @@ const worker = (globalObject: GlobalScope): void => {
       thisArg: TThis,
       args: TMethodArgs
     ) => TReturn
+    const URLSafe = workerGlobal.URL
     const hrefDescriptor = Object.getOwnPropertyDescriptor(URLSafe.prototype, 'href')
     if (hrefDescriptor?.get === undefined) {
       throw new Error('URL.href getter not found')
@@ -91,7 +88,7 @@ const worker = (globalObject: GlobalScope): void => {
       workerGlobal.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
         const resolvedPaths: Array<string | URL> = []
         for (const path of paths) {
-          if (globalObject.TrustedScriptURL != null && path instanceof globalObject.TrustedScriptURL) {
+          if (workerGlobal.TrustedScriptURL != null && path instanceof workerGlobal.TrustedScriptURL) {
             resolvedPaths.push(path.toString())
           } else {
             resolvedPaths.push(URLhrefSafe(new URLSafe(path.toString(), absoluteUrl)))
@@ -124,7 +121,9 @@ const worker = (globalObject: GlobalScope): void => {
 
   const blobScriptCache = new WeakMap<Blob, string>()
   const blobURLScriptCache = new Map<string, string>()
-
+  const BlobSafe = globalObject.Blob
+  const URLSafe = globalObject.URL
+  const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
     const originalRevokeObjectURL = globalObject.URL.revokeObjectURL.bind(globalObject.URL)
 
@@ -283,7 +282,7 @@ const worker = (globalObject: GlobalScope): void => {
         // Semicolon separated code to avoid issues with line continuations.
         const bundleWrapper = (script: string) => `
           ;${hardeningCode}
-          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)}, globalObject);\n
+          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)}, self);\n
           ;${script}\n
           ;${completionCallbackCode}\n
           `
