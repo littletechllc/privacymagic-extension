@@ -30,61 +30,48 @@ const worker = (globalObject: GlobalScope): void => {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const URLhrefGetter = hrefDescriptor.get as (this: URL) => string
     const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
-    // Spoof the worker's location object to return the original URL.
-    const absoluteUrlObject = new URLSafe(absoluteUrl)
-    const WorkerLocation = workerGlobal.WorkerLocation
-    if (WorkerLocation == null) return
-    const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
-    for (const [key, descriptor] of Object.entries(descriptors)) {
-      if (descriptor.get != null && key in absoluteUrlObject) {
-        descriptor.get = () => absoluteUrlObject[key as keyof URL]
+    const spoofWorkerLocation = (): void => {
+      const absoluteUrlObject = new URLSafe(absoluteUrl)
+      const WorkerLocation = workerGlobal.WorkerLocation
+      if (WorkerLocation == null) return
+      const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
+      for (const [key, descriptor] of Object.entries(descriptors)) {
+        if (descriptor.get != null && key in absoluteUrlObject) {
+          descriptor.get = () => absoluteUrlObject[key as keyof URL]
+        }
+      }
+      Object.defineProperties(WorkerLocation.prototype, descriptors)
+    }
+    const spoofRequest = (): void => {
+      const Request = workerGlobal.Request
+      if (Request == null) return
+      const requestUrlDescriptor = Object.getOwnPropertyDescriptor(Request.prototype, 'url')
+      if (requestUrlDescriptor?.get === undefined) {
+        throw new Error('Request.url getter not found')
       }
     }
-    Object.defineProperties(WorkerLocation.prototype, descriptors)
-    // Modify the worker's Request object to be relative to the original URL.
-    const Request = workerGlobal.Request
-    const Response = workerGlobal.Response
-    if (Request == null || Response == null) return
-    const requestUrlDescriptor = Object.getOwnPropertyDescriptor(Request.prototype, 'url')
-    if (requestUrlDescriptor?.get === undefined) {
-      throw new Error('Request.url getter not found')
-    }
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const originalRequestUrlGetter = requestUrlDescriptor.get
-    const originalRequestUrlSafe = (request: Request): string => reflectApplySafe(originalRequestUrlGetter, request, [])
-    Object.defineProperty(Request.prototype, 'url', {
-      get (this: Request) {
-        const relativeUrl = originalRequestUrlSafe(this)
-        return URLhrefSafe(new URLSafe(relativeUrl as string | URL, absoluteUrl))
+    const spoofResponse = (): void => {
+      const Response = workerGlobal.Response
+      if (Response == null) return
+      const responseUrlDescriptor = Object.getOwnPropertyDescriptor(Response.prototype, 'url')
+      if (responseUrlDescriptor?.get === undefined) {
+        throw new Error('Response.url getter not found')
       }
-    })
-    // Modify the worker's Response object to be relative to the original URL.
-    const responseUrlDescriptor = Object.getOwnPropertyDescriptor(Response.prototype, 'url')
-    if (responseUrlDescriptor?.get === undefined) {
-      throw new Error('Response.url getter not found')
     }
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const originalResponseUrlGetter = responseUrlDescriptor.get
-    const originalResponseUrlSafe = (response: Response): string => reflectApplySafe(originalResponseUrlGetter, response, [])
-    Object.defineProperty(Response.prototype, 'url', {
-      get (this: Response) {
-        return URLhrefSafe(new URLSafe(originalResponseUrlSafe(this), absoluteUrl))
-      }
-    })
-    // Modify the worker's fetch function to be relative to the original URL.
-    const origFetch = workerGlobal.fetch
-    if (origFetch != null) {
+    const spoofFetch = (): void => {
+      const origFetch = workerGlobal.fetch
+      if (origFetch == null) return
       workerGlobal.fetch = async (...args: Parameters<typeof origFetch>) => {
         const firstArg = args[0]
-        args[0] = firstArg instanceof Request
+        args[0] = firstArg instanceof workerGlobal.Request
           ? firstArg
           : new URLSafe(firstArg.toString(), absoluteUrl)
         return await origFetch(...args)
       }
     }
-    // Modify the worker's importScripts function to be relative to the original URL.
-    const origImportScripts = workerGlobal.importScripts
-    if (origImportScripts != null) {
+    const spoofImportScripts = (): void => {
+      const origImportScripts = workerGlobal.importScripts
+      if (origImportScripts == null) return
       workerGlobal.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
         const resolvedPaths: Array<string | URL> = []
         for (const path of paths) {
@@ -97,26 +84,32 @@ const worker = (globalObject: GlobalScope): void => {
         return origImportScripts(...resolvedPaths)
       }
     }
-    // Modify the worker's XMLHttpRequest, EventSource, and WebSocket objects to
-    // be relative to the original URL.
-    const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
-    for (const objectName of constructorNames) {
-      const OriginalConstructor = workerGlobal[objectName]
-      if (OriginalConstructor == null) continue
-      Object.defineProperty(workerGlobal, objectName, {
-        value: new Proxy(OriginalConstructor, {
-          construct (
-            Target,
-            [url, options]: [string | URL, EventSourceInit & (string | string[] | undefined)]
-          ) {
-            const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl))
-            return new Target(resolvedUrl, options)
-          }
-        }),
-        writable: true,
-        configurable: true
-      })
+    const spoofNetworkObjects = (): void => {
+      const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
+      for (const objectName of constructorNames) {
+        const OriginalConstructor = workerGlobal[objectName]
+        if (OriginalConstructor == null) continue
+        Object.defineProperty(workerGlobal, objectName, {
+          value: new Proxy(OriginalConstructor, {
+            construct (
+              Target,
+              [url, options]: [string | URL, EventSourceInit & (string | string[] | undefined)]
+            ) {
+              const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl))
+              return new Target(resolvedUrl, options)
+            }
+          }),
+          writable: true,
+          configurable: true
+        })
+      }
     }
+    spoofWorkerLocation()
+    spoofRequest()
+    spoofResponse()
+    spoofFetch()
+    spoofImportScripts()
+    spoofNetworkObjects()
   }
 
   const blobScriptCache = new WeakMap<Blob, string>()
