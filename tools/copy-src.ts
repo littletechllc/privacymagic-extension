@@ -34,6 +34,17 @@ const getBuildVersion = (): string => {
   return 'unknown'
 }
 
+const getLatestVersionNumber = (): string => {
+  try {
+    const tag = execSync('git describe --tags --abbrev=0', gitOpts).trim()
+    const versionNumber = tag.replace(/^v/, '')
+    if (versionNumber) return versionNumber
+  } catch {
+    // no tags
+  }
+  return '0.0.0'
+}
+
 const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> => {
   try {
     const srcStat = await stat(srcPath)
@@ -56,7 +67,8 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
 
 const specialFiles: Record<string, Record<string, string>> = {
   'manifest.json': {
-    '__EXTENSION_VERSION_NAME__': getBuildVersion()
+    '__EXTENSION_VERSION_NAME__': getBuildVersion(),
+    '__EXTENSION_VERSION_NUMBER__': getLatestVersionNumber()
   }
 }
 
