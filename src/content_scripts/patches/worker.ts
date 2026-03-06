@@ -6,8 +6,11 @@ import { GlobalScope } from '../helpers/globalObject'
 const worker = (globalObject: GlobalScope): void => {
   // Spoof the worker's location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
-  // and injected into the worker context; it receives the worker global as second arg.
-  const spoofLocationInsideWorkerFunction = (absoluteUrl: string, workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket' | 'TrustedScriptURL' | 'URL'> & { [k: string]: unknown }): void => {
+  // and injected into the worker context; it receives the worker global and the absolute URL as args.
+  const spoofLocationInsideWorkerFunction = (
+    workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket' | 'TrustedScriptURL' | 'URL'> & { [k: string]: unknown },
+    absoluteUrl: string
+  ): void => {
     // We need to define these functions here because they are not available in the worker context.
     type MethodOf<TThis> = {
       [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
@@ -225,14 +228,14 @@ const worker = (globalObject: GlobalScope): void => {
    * @param url - The URL to make a trusted script URL from.
    * @returns A function that will make a trusted script URL from a policy name and a URL.
    */
-  const makeTrustedScriptURLFunction = (policyName: string | undefined, url: string): TrustedScriptURL | string => {
+  const makeTrustedScriptURLFunction = (workerGlobal: Pick<GlobalScope, 'trustedTypes'>, policyName: string | undefined, url: string): TrustedScriptURL | string => {
     if (policyName == null) {
       policyName = 'default'
     }
-    if (globalObject.trustedTypes == null) {
+    if (workerGlobal.trustedTypes == null) {
       return url
     }
-    const dummyPolicy = globalObject.trustedTypes.createPolicy(policyName, {
+    const dummyPolicy = workerGlobal.trustedTypes.createPolicy(policyName, {
       createScriptURL: (url) => {
         return url
       }
@@ -275,7 +278,7 @@ const worker = (globalObject: GlobalScope): void => {
         // Semicolon separated code to avoid issues with line continuations.
         const bundleWrapper = (script: string) => `
           ;${hardeningCode}
-          ;(${spoofLocationInsideWorkerFunction.toString()})(${jsonStringifySafe(absoluteUrl)}, self);\n
+          ;(${spoofLocationInsideWorkerFunction.toString()})(self, ${jsonStringifySafe(absoluteUrl)});\n
           ;${script}\n
           ;${completionCallbackCode}\n
           `
@@ -285,7 +288,7 @@ const worker = (globalObject: GlobalScope): void => {
           bundle = bundleWrapper(cachedScript);
         } else {
           bundle = bundleWrapper(`
-            const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
+            const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
             try {
               ${importCommand}(trustedAbsoluteUrl);
               console.log("finished importing");
