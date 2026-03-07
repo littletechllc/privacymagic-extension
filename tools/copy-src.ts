@@ -65,10 +65,18 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
   }
 }
 
-const specialFiles: Record<string, Record<string, string>> = {
-  'manifest.json': {
-    '__EXTENSION_VERSION_NAME__': getBuildVersion(),
-    '__EXTENSION_VERSION_NUMBER__': getLatestVersionNumber()
+const isProduction = (): boolean => process.env.NODE_ENV === 'production'
+
+const specialFiles: Record<string, (json: Record<string, unknown>) => Record<string, unknown>> = {
+  'manifest.json': (json: Record<string, unknown>) => {
+    const cloned = structuredClone(json)
+    cloned['version'] = getBuildVersion()
+    cloned['version_name'] = getLatestVersionNumber()
+    const permissions = cloned['permissions'] as string[] | undefined
+    if (Array.isArray(permissions) && isProduction()) {
+      cloned['permissions'] = permissions.filter((p) => p !== 'declarativeNetRequestFeedback')
+    }
+    return cloned
   }
 }
 
@@ -81,9 +89,10 @@ const copyOne = async (filePath: string): Promise<void> => {
   const baseName = path.basename(filePath)
   const isSpecial = Object.keys(specialFiles).includes(baseName)
   if (isSpecial) {
-    const raw = await readFile(filePath, 'utf8')
-    const content = raw.replace(new RegExp(Object.keys(specialFiles[baseName]).join('|'), 'g'), (match) => specialFiles[baseName][match])
-    await writeFile(dest, content, 'utf8')
+    const raw: string = await readFile(filePath, 'utf8')
+    const json = JSON.parse(raw) as Record<string, unknown>
+    const modified = specialFiles[baseName](json)
+    await writeFile(dest, JSON.stringify(modified, null, 2), 'utf8')
     return
   }
 
