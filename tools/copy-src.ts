@@ -70,8 +70,8 @@ const isProduction = (): boolean => process.env.NODE_ENV === 'production'
 const specialFiles: Record<string, (json: Record<string, unknown>) => Record<string, unknown>> = {
   'manifest.json': (json: Record<string, unknown>) => {
     const cloned = structuredClone(json)
-    cloned['version'] = getBuildVersion()
-    cloned['version_name'] = getLatestVersionNumber()
+    cloned['version'] = getLatestVersionNumber()
+    cloned['version_name'] = getBuildVersion()
     const permissions = cloned['permissions'] as string[] | undefined
     if (Array.isArray(permissions) && isProduction()) {
       cloned['permissions'] = permissions.filter((p) => p !== 'declarativeNetRequestFeedback')
