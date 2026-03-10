@@ -3,6 +3,34 @@ import path from 'node:path'
 import { isMain, entries } from './util'
 import { fileURLToPath } from 'url'
 
+type Rule = chrome.declarativeNetRequest.Rule
+type RuleAction = chrome.declarativeNetRequest.RuleAction
+type RuleCondition = chrome.declarativeNetRequest.RuleCondition
+type ResourceType = chrome.declarativeNetRequest.ResourceType
+type ResourceTypeValue = `${ResourceType}`
+type RequestMethod = chrome.declarativeNetRequest.RequestMethod
+type RequestMethodValue = `${RequestMethod}`
+
+type NetworkRuleWithoutId = Omit<Rule, 'id'>
+
+/** Mirror of chrome.declarativeNetRequest.RequestMethod; Record ensures exhaustiveness. */
+const REQUEST_METHOD: Record<RequestMethodValue, RequestMethodValue> = {
+  connect: 'connect',
+  delete: 'delete',
+  get: 'get',
+  head: 'head',
+  options: 'options',
+  patch: 'patch',
+  post: 'post',
+  put: 'put',
+  other: 'other'
+}
+
+const VALID_REQUEST_METHODS = new Set(Object.values(REQUEST_METHOD))
+
+const isRequestMethod = (s: string): boolean =>
+  VALID_REQUEST_METHODS.has(s as RequestMethodValue)
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -29,10 +57,11 @@ const ALLOWED_RESOURCE_TYPES: string[] = [
   'websocket',
   'xhr',
   'method',
+  'csp',
   'other'
 ]
 
-const RESOURCE_TYPE_EQUIVALENCES: Record<string, string> = {
+const RESOURCE_TYPE_EQUIVALENCES: Record<string, ResourceTypeValue> = {
   subdocument: 'sub_frame',
   document: 'main_frame',
   xhr: 'xmlhttprequest'
@@ -60,49 +89,46 @@ const removeComments = (lines: string[]): string[] =>
 
 // Convert the given resource type from the adblock list to
 // its Chrome extension equivalent
-const toEquivalentResourceType = (raw: string): string => {
+const toEquivalentResourceType = (raw: string): ResourceTypeValue => {
   if (!ALLOWED_RESOURCE_TYPES.includes(raw)) {
     throw new Error(`Unknown resource type '${raw}'`)
   }
-  return RESOURCE_TYPE_EQUIVALENCES[raw] ?? raw
+  return RESOURCE_TYPE_EQUIVALENCES[raw] ?? (raw as ResourceTypeValue)
 }
 
-interface FilterOptions {
-  domainType: string
-  resourceTypes: string[]
-  excludedResourceTypes: string[]
-  initiatorDomains: string[]
-  excludedInitiatorDomains: string[]
-  requestMethods: string[]
-  excludedRequestMethods: string[]
-  cspLine: string
-  redirect: string
-  redirectRule: boolean | string
-  badFilter: boolean
+type ParsedTypeOptions = {
+  condition: RuleCondition,
+  options: {
+    redirect: string | undefined,
+    redirectRule: boolean | string | undefined,
+    badFilter: boolean | undefined,
+    cspLine: string | undefined
+  }
 }
 
-// Parse the given type options string into an object with the following keys:
-// - domainType: the type of domain (firstParty or thirdParty)
-// - resourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
-// - excludedResourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
-// - excludedInitiatorDomains: one or more domain names or wildcard domain names
-// - initiatorDomains: one or more domain names or wildcard domain names
-// - requestMethods: one or more request methods ("connect", "delete", "get", "head", "options", "patch", "post", "put", "other")
-// - excludedRequestMethods: one or more request methods ("connect", "delete", "get", "head", "options", "patch", "post", "put", "other")
-// - cspLine: the CSP line
-// - redirect
-const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
-  const resourceTypes = []
-  const excludedResourceTypes = []
-  const initiatorDomains = []
-  const excludedInitiatorDomains = []
-  const requestMethods = []
-  const excludedRequestMethods = []
-  let domainType = ''
-  let cspLine = ''
-  let redirect = ''
-  let badFilter = false
-  let redirectRule: boolean | string = false
+/**
+ * Parse the given type options string into an object with the following keys:
+ * - domainType: the type of domain (firstParty or thirdParty)
+ * - resourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
+ * - excludedResourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
+ * - requestMethods: one or more of the request methods (get, post, put, delete, options, head, patch, other)
+ * - excludedRequestMethods: one or more of the request methods (get, post, put, delete, options, head, patch, other)
+ * - initiatorDomains: one or more of the initiator domains
+ * - excludedInitiatorDomains: one or more of the initiator domains
+ * - cspLine: the CSP line
+ */
+const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions => {
+  const requestMethods: RequestMethodValue[] = []
+  const excludedRequestMethods: RequestMethodValue[] = []
+  let domainType : 'firstParty' | 'thirdParty' | undefined = undefined
+  let redirect : string | undefined = undefined
+  let badFilter : boolean | undefined = undefined
+  let redirectRule: boolean | string | undefined = undefined
+  const excludedInitiatorDomains: string[] = []
+  const initiatorDomains: string[] = []
+  const resourceTypes: ResourceTypeValue[] = []
+  const excludedResourceTypes: ResourceTypeValue[] = []
+  let cspLine: string | undefined = undefined
   const items = typeOptionsString.split(',')
   for (const item of items) {
     if (item.startsWith('domain=')) {
@@ -118,16 +144,15 @@ const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
       const methods = item.split('=')[1].split('|')
       for (const method of methods) {
         if (method.startsWith('~')) {
-          excludedRequestMethods.push(method.substring(1))
+          const m = method.substring(1)
+          if (isRequestMethod(m)) {
+            excludedRequestMethods.push(m as RequestMethodValue)
+          }
         } else {
-          requestMethods.push(method)
+          if (isRequestMethod(method)) {
+            requestMethods.push(method as RequestMethodValue)
+          }
         }
-      }
-    } else if (item.startsWith('csp')) {
-      if (item.startsWith('csp=')) {
-        cspLine = item.split('=')[1]
-      } else {
-        cspLine = ''
       }
     } else if (item.startsWith('redirect=')) {
       redirect = item.split('=')[1]
@@ -147,6 +172,8 @@ const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
       domainType = 'thirdParty'
     } else if (item === 'badfilter') {
       badFilter = true
+    } else if (item.startsWith('csp=')) {
+      cspLine = item.split('=')[1]
     } else if (item === 'important') {
       console.log('important filter')
       // TODO: handle important filters
@@ -156,56 +183,68 @@ const typeOptionsStringToLists = (typeOptionsString: string): FilterOptions => {
     }
   }
   return {
-    domainType,
-    resourceTypes,
-    excludedResourceTypes,
-    initiatorDomains,
-    excludedInitiatorDomains,
-    requestMethods,
-    excludedRequestMethods,
-    cspLine,
-    redirect,
-    redirectRule,
-    badFilter
+    condition: {
+      domainType,
+      resourceTypes,
+      excludedResourceTypes,
+      initiatorDomains,
+      excludedInitiatorDomains,
+      requestMethods,
+      excludedRequestMethods,
+    },
+    options: {
+      redirect,
+      redirectRule,
+      badFilter,
+      cspLine
+    }
   }
-}
-
-interface BasicFilter {
-  urlFilter?: string
-  filterOptions?: FilterOptions
 }
 
 // Parse the given line into a URL filter and type options
-const lineToBasicFilter = (line: string): BasicFilter => {
+const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
+  const priority = 1
+  const type = line.startsWith('@@') ? 'allow' : 'block'
+  const action: RuleAction = { type }
+  const cleanLine = line.startsWith('@@') ? line.substring(2) : line
+  const isRegexFilter = line.startsWith('/') && line.endsWith('/')
+  if (isRegexFilter) {
+    return { priority, action, condition: { regexFilter: cleanLine } }
+  }
   if (line.includes('$')) {
     const [rawUrlFilter, typeOptionsString] = line.split('$')
     const urlFilter = rawUrlFilter.trim()
-    const filterOptions = typeOptionsStringToLists(typeOptionsString)
-    if (urlFilter.length > 0) {
-      return { urlFilter, filterOptions }
-    } else {
-      return { filterOptions }
+    const { condition, options } = parseTypeOptionsString(typeOptionsString)
+    if (options?.badFilter !== undefined) {
+      return undefined
     }
+    if (options?.redirect !== undefined) {
+      return undefined
+    }
+    if (options?.redirectRule !== undefined) {
+      return undefined
+    }
+    if (options?.cspLine !== undefined) {
+      return {
+        priority,
+        action: {
+          type: 'modifyHeaders',
+          responseHeaders: [{
+            operation: 'set',
+            header: 'Content-Security-Policy',
+            value: options.cspLine
+          }]
+        },
+        condition
+      }
+    }
+    const result: Omit<Rule, 'id'> = { priority, action, condition }
+    if (urlFilter.length > 0) {
+      result.condition.urlFilter = urlFilter
+    }
+    return result
   }
-  return { urlFilter: line }
-}
-
-interface BlockingFilter {
-  priority: number
-  action: {
-    type: string
-  }
-  condition: BasicFilter | { regexFilter: string }
-}
-
-const parseBlockingFilter = (line: string): BlockingFilter => {
-  const isRegexFilter = line.startsWith('/') && line.endsWith('/')
-  const type = line.startsWith('@@') ? 'allow' : 'block'
-  const cleanLine = line.startsWith('@@') ? line.substring(2) : line
-  const condition = isRegexFilter
-    ? { regexFilter: cleanLine }
-    : lineToBasicFilter(cleanLine)
-  return { priority: 1, action: { type }, condition }
+  return { priority, action, condition: { urlFilter: line } }
 }
 
 interface ContentFilterBody {
@@ -237,28 +276,20 @@ const parseContentFilter = (line: string, separator: string): ContentFilter => {
 
 const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/
 
-interface Line {
-  parsed: BlockingFilter | ContentFilter
+interface ParsedLine {
+  parsed: NetworkRuleWithoutId | ContentFilter | undefined
   line: string
 }
 
-const isBlockingFilter = (parsed: BlockingFilter | ContentFilter): parsed is BlockingFilter => {
-  return 'condition' in parsed
-}
-
-const isContentFilter = (parsed: BlockingFilter | ContentFilter): parsed is ContentFilter => {
-  return 'domains' in parsed
-}
-
-const parseLine = (line: string): Line => {
-  let parsed: BlockingFilter | ContentFilter
+const parseLine = (line: string): ParsedLine => {
+  let parsed: NetworkRuleWithoutId | ContentFilter | undefined
   try {
     // Check if the line is a content filter by looking for a separator
     const separatorMatch = line.match(contentFilterSeparatorRegex)
     if (separatorMatch !== null && separatorMatch !== undefined) {
       parsed = parseContentFilter(line, separatorMatch[0])
     } else {
-      parsed = parseBlockingFilter(line)
+      parsed = parseNetworkFilter(line)
     }
     return { parsed, line }
   } catch (e: unknown) {
@@ -271,24 +302,39 @@ const parseLine = (line: string): Line => {
   }
 }
 
-export const processLines = (lines: string[]): Line[] => {
+export const processLines = (lines: string[]): ParsedLine[] => {
   const codingLines = removeComments(lines).filter(line => line.length > 0)
   return codingLines.map(parseLine)
 }
 
-const generateBlockingRulesFile = (items: Line[]): string => {
+const isBlockingFilter = (parsed: NetworkRuleWithoutId | ContentFilter | undefined): parsed is NetworkRuleWithoutId => {
+  if (parsed === undefined) {
+    return false
+  }
+  return 'condition' in parsed
+}
+
+const generateBlockingRulesFile = (items: ParsedLine[]): string => {
   const lines = []
   let id = 0
   for (const item of items) {
     if (isBlockingFilter(item.parsed)) {
       ++id
-      lines.push(JSON.stringify(Object.assign({ id }, item.parsed)))
+      const rule: Rule = Object.assign({ id }, item.parsed)
+      lines.push(JSON.stringify(rule))
     }
   }
   return '[\n' + lines.join(',\n') + ']'
 }
 
-const generateContentRules = (items: Line[]): Record<string, Record<string, string[]>> => {
+const isContentFilter = (parsed: NetworkRuleWithoutId | ContentFilter | undefined): parsed is ContentFilter => {
+  if (parsed === undefined) {
+    return false
+  }
+  return 'domains' in parsed
+}
+
+const generateContentRules = (items: ParsedLine[]): Record<string, Record<string, string[]>> => {
   const cssItemsForDomain: Record<string, Record<string, string[]>> = {}
   for (const item of items) {
     if (!isContentFilter(item.parsed)) {
@@ -369,7 +415,7 @@ export const processAndWrite = async (): Promise<void> => {
     if (!isBlockingFilter(x.parsed)) return true
     const condition = x.parsed.condition
     if ('regexFilter' in condition) return true
-    return condition.filterOptions?.resourceTypes?.includes('popup') !== true
+    return false
   })
   const blockingRulesFileContent = generateBlockingRulesFile(results2)
   await fs.mkdir(dist('rules'), { recursive: true })
