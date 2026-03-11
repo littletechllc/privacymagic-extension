@@ -34,8 +34,6 @@ const disallowedQueryParams = [
   'yclid'
 ]
 
-const disallowedQueryParamsRegexFilter = `[\\?&](${disallowedQueryParams.join('|')})=`
-
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
     ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
@@ -68,13 +66,10 @@ export const NETWORK_PROTECTION_DEFS:
       })
     },
   }],
-  queryParameters: [{
-    // Only match URLs that actually have at least one removable param. Otherwise the redirect
-    // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
-    // so "ads off" per-site would never unblock requests that were already redirected.
-    condition: {
-      regexFilter: disallowedQueryParamsRegexFilter
-    },
+  // Only match URLs that actually have at least one removable param. Otherwise the redirect
+  // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
+  // so "ads off" per-site would never unblock requests that were already redirected.
+  queryParameters: disallowedQueryParams.map(param => ({
     action: {
       type: 'redirect',
       redirect: {
@@ -85,7 +80,10 @@ export const NETWORK_PROTECTION_DEFS:
         }
       }
     },
-  }],
+    condition: {
+      regexFilter: `[\\?&]${param}=`
+    }
+  })),
   network: [{
     action: {
       type: 'modifyHeaders',
