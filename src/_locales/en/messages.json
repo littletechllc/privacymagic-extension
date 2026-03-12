@@ -72,7 +72,7 @@
     "description": "Setting to block advertisements"
   },
   "queryParameters": {
-    "message": "Remove Tracking Query Parameters",
+    "message": "Tracking Parameters",
     "description": "Setting to block tracking query parameters"
   },
   "doNotTrack": {
@@ -80,11 +80,11 @@
     "description": "Setting to enable Do Not Track header"
   },
   "screen": {
-    "message": "Screen Details",
+    "message": "Screen",
     "description": "Setting to block screen fingerprinting"
   },
   "windowName": {
-    "message": "Block Window Name Tracking",
+    "message": "Window Name",
     "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
@@ -100,15 +100,15 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Enable Global Privacy Control",
+    "message": "Global Privacy Control",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Battery Status",
+    "message": "Battery",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Browser Version",
+    "message": "Browser",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
@@ -128,23 +128,23 @@
     "description": "Setting to enable search suggest"
   },
   "referrerPolicy": {
-    "message": "Tighten Referrer Policy",
+    "message": "Referrer Policy",
     "description": "Setting to tighten referrer policy"
   },
   "keyboard": {
-    "message": "Keyboard Layout",
+    "message": "Keyboard",
     "description": "Setting to block keyboard fingerprinting"
   },
   "timer": {
-    "message": "System Performance",
+    "message": "Timing",
     "description": "Setting to inhibit timing-based fingerprinting"
   },
   "serviceWorker": {
-    "message": "Disable Service Workers",
+    "message": "Service Workers",
     "description": "Setting to block service workers"
   },
   "sharedStorage": {
-    "message": "Disable Shared Storage",
+    "message": "Shared Storage",
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
@@ -152,71 +152,71 @@
     "description": "Category for leaky web features settings"
   },
   "audio": {
-    "message": "Audio Processing",
+    "message": "Audio",
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Display Settings",
+    "message": "Display",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {
-    "message": "Device Information",
+    "message": "Device",
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
-    "message": "Memory Usage",
+    "message": "Memory",
     "description": "Setting to block device memory fingerprinting"
   },
   "disk": {
-    "message": "Disk Space Usage",
+    "message": "Disk",
     "description": "Setting to block disk space fingerprinting"
   },
   "gpu": {
-    "message": "Graphics Chip Specs",
+    "message": "Graphics",
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {
-    "message": "Fonts on Device",
+    "message": "Fonts",
     "description": "Setting to block fingerprinting of fonts on the device"
   },
   "language": {
-    "message": "Language Settings",
+    "message": "Language",
     "description": "Setting to block language fingerprinting"
   },
   "cpu": {
-    "message": "Main Chip Specs",
+    "message": "Processor",
     "description": "Setting to block main chip fingerprinting"
   },
   "math": {
-    "message": "Math Processing",
+    "message": "Math",
     "description": "Setting to block math processing fingerprinting"
   },
   "timezone": {
-    "message": "Time-Zone Settings",
+    "message": "Time Zone",
     "description": "Setting to block time-zone fingerprinting"
   },
   "touch": {
-    "message": "Touch Support Status",
+    "message": "Touch",
     "description": "Setting to block touch support fingerprinting"
   },
   "worker": {
-    "message": "Harden Web Workers",
+    "message": "Web Workers",
     "description": "Setting to harden web workers"
   },
   "iframe": {
-    "message": "Harden Sandboxed Iframes",
+    "message": "Iframes",
     "description": "Setting to harden sandboxed iframes"
   },
   "network": {
-    "message": "Network Profile",
+    "message": "Network",
     "description": "Setting to block network information fingerprinting"
   },
   "css": {
-    "message": "Harden Stylesheets",
+    "message": "Stylesheets",
     "description": "Setting to harden stylesheets"
   },
   "policy": {
-    "message": "Send Privacy Signals",
+    "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   }
 }
