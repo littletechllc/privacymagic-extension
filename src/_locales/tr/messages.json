@@ -72,7 +72,7 @@
     "description": "Setting to block advertisements"
   },
   "queryParameters": {
-    "message": "İzleme Sorgu Parametrelerini Kaldır",
+    "message": "İzleme Parametreleri",
     "description": "Setting to block tracking query parameters"
   },
   "doNotTrack": {
@@ -80,11 +80,11 @@
     "description": "Setting to enable Do Not Track header"
   },
   "screen": {
-    "message": "Ekran Ayrıntıları",
+    "message": "Ekran",
     "description": "Setting to block screen fingerprinting"
   },
   "windowName": {
-    "message": "Pencere Adı İzlemeyi Engelle",
+    "message": "Pencere Adı",
     "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
@@ -92,7 +92,7 @@
     "description": "Title for browser preferences section"
   },
   "websiteDefaultSettings": {
-    "message": "Web Sitesi Varsayılan Ayarları",
+    "message": "Site Varsayılanları",
     "description": "Title for website default settings section"
   },
   "resetToDefaults": {
@@ -100,15 +100,15 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Küresel Gizlilik Kontrolünü Etkinleştir",
+    "message": "Küresel Gizlilik",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Pil Durumu",
+    "message": "Pil",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Tarayıcı Sürümü",
+    "message": "Tarayıcı",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
@@ -128,23 +128,23 @@
     "description": "Setting to enable search suggest"
   },
   "referrerPolicy": {
-    "message": "Yönlendiren Politikasını Sıkılaştır",
+    "message": "Yönlendiren",
     "description": "Setting to tighten referrer policy"
   },
   "keyboard": {
-    "message": "Klavye Yerleşimi",
+    "message": "Klavye",
     "description": "Setting to block keyboard fingerprinting"
   },
   "timer": {
-    "message": "Sistem Performansı",
+    "message": "Zamanlama",
     "description": "Setting to inhibit timing-based fingerprinting"
   },
   "serviceWorker": {
-    "message": "Service Worker'ları Devre Dışı Bırak",
+    "message": "Service Workers",
     "description": "Setting to block service workers"
   },
   "sharedStorage": {
-    "message": "Paylaşılan Depolamayı Devre Dışı Bırak",
+    "message": "Paylaşılan Depolama",
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
@@ -152,71 +152,71 @@
     "description": "Category for leaky web features settings"
   },
   "audio": {
-    "message": "Ses İşleme",
+    "message": "Ses",
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Görüntü Ayarları",
+    "message": "Görüntü",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {
-    "message": "Cihaz Bilgisi",
+    "message": "Cihaz",
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
-    "message": "Bellek Kullanımı",
+    "message": "Bellek",
     "description": "Setting to block device memory fingerprinting"
   },
   "disk": {
-    "message": "Disk Alanı Kullanımı",
+    "message": "Disk",
     "description": "Setting to block disk space fingerprinting"
   },
   "gpu": {
-    "message": "Grafik Yonga Özellikleri",
+    "message": "Grafik",
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {
-    "message": "Cihazdaki Yazı Tipleri",
+    "message": "Yazı Tipleri",
     "description": "Setting to block fingerprinting of fonts on the device"
   },
   "language": {
-    "message": "Dil Ayarları",
+    "message": "Dil",
     "description": "Setting to block language fingerprinting"
   },
   "cpu": {
-    "message": "Ana Yonga Özellikleri",
+    "message": "İşlemci",
     "description": "Setting to block main chip fingerprinting"
   },
   "math": {
-    "message": "Matematik İşleme",
+    "message": "Matematik",
     "description": "Setting to block math processing fingerprinting"
   },
   "timezone": {
-    "message": "Saat Dilimi Ayarları",
+    "message": "Saat Dilimi",
     "description": "Setting to block time-zone fingerprinting"
   },
   "touch": {
-    "message": "Dokunmatik Destek Durumu",
+    "message": "Dokunmatik",
     "description": "Setting to block touch support fingerprinting"
   },
   "worker": {
-    "message": "Web Worker'ları Güçlendir",
+    "message": "Web Workers",
     "description": "Setting to harden web workers"
   },
   "iframe": {
-    "message": "Kum Havuzlu Iframe'leri Güçlendir",
+    "message": "Iframes",
     "description": "Setting to harden sandboxed iframes"
   },
   "network": {
-    "message": "Ağ Profili",
+    "message": "Ağ",
     "description": "Setting to block network information fingerprinting"
   },
   "css": {
-    "message": "Stil Sayfalarını Güçlendir",
+    "message": "Stil Sayfaları",
     "description": "Setting to harden stylesheets"
   },
   "policy": {
-    "message": "Gizlilik Sinyalleri Gönder",
+    "message": "Gizlilik Sinyalleri",
     "description": "Category for privacy policy protection settings"
   }
 }

@@ -72,7 +72,7 @@
     "description": "Setting to block client hints"
   },
   "queryParameters": {
-    "message": "Eliminar Parámetros de Consulta de Rastreo",
+    "message": "Parámetros de rastreo",
     "description": "Setting to block tracking query parameters"
   },
   "doNotTrack": {
@@ -80,15 +80,15 @@
     "description": "Setting to enable Do Not Track header"
   },
   "hardware": {
-    "message": "Bloquear Huella Digital de Hardware",
+    "message": "Hardware",
     "description": "Setting to block hardware fingerprinting"
   },
   "screen": {
-    "message": "Bloquear Huella Digital de Pantalla",
+    "message": "Pantalla",
     "description": "Setting to block screen fingerprinting"
   },
   "windowName": {
-    "message": "Bloquear Rastreo de Nombre de Ventana",
+    "message": "Nombre de ventana",
     "description": "Setting to block window name tracking"
   },
   "browserPreferences": {
@@ -96,7 +96,7 @@
     "description": "Title for browser preferences section"
   },
   "websiteDefaultSettings": {
-    "message": "Configuración Predeterminada del Sitio Web",
+    "message": "Configuración del sitio",
     "description": "Title for website default settings section"
   },
   "resetToDefaults": {
@@ -104,15 +104,15 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Activar Control de Privacidad Global",
+    "message": "Control global",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
-    "message": "Bloquear Huella Digital de la API de Batería",
+    "message": "Batería",
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Bloquear Huella Digital de User-Agent",
+    "message": "Navegador",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
@@ -132,27 +132,27 @@
     "description": "Configuración para habilitar sugerencias de búsqueda"
   },
   "referrerPolicy": {
-    "message": "Ajustar Política de Referrer",
+    "message": "Referrer",
     "description": "Configuración para ajustar la política de referrer"
   },
   "keyboard": {
-    "message": "Bloquear Huella Digital de Teclado",
+    "message": "Teclado",
     "description": "Setting to block keyboard fingerprinting"
   },
   "timer": {
-    "message": "Redondear Temporizadores",
+    "message": "Tiempos",
     "description": "Setting to inhibit timing-based fingerprinting"
   },
   "canvas": {
-    "message": "Bloquear Huella Digital de Canvas",
+    "message": "Canvas",
     "description": "Setting to block canvas fingerprinting"
   },
   "serviceWorker": {
-    "message": "Bloquear Service Workers",
+    "message": "Service Workers",
     "description": "Setting to block service workers"
   },
   "sharedStorage": {
-    "message": "Bloquear Shared Storage",
+    "message": "Shared Storage",
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
@@ -160,55 +160,55 @@
     "description": "Category for leaky web features settings"
   },
   "audio": {
-    "message": "Bloquear Huella Digital de Audio",
+    "message": "Audio",
     "description": "Setting to block audio fingerprinting"
   },
   "browser": {
-    "message": "Bloquear Huella Digital de Versión del Navegador",
+    "message": "Navegador",
     "description": "Setting to block browser version fingerprinting"
   },
   "display": {
-    "message": "Bloquear Huella Digital de Preferencias de Pantalla",
+    "message": "Pantalla",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {
-    "message": "Bloquear Huella Digital de Versión del Dispositivo",
+    "message": "Dispositivo",
     "description": "Setting to block device version fingerprinting"
   },
   "memory": {
-    "message": "Bloquear Huella Digital de Memoria del Dispositivo",
+    "message": "Memoria",
     "description": "Setting to block device memory fingerprinting"
   },
   "disk": {
-    "message": "Bloquear Huella Digital de Espacio en Disco",
+    "message": "Disco",
     "description": "Setting to block disk space fingerprinting"
   },
   "gpu": {
-    "message": "Bloquear Huella Digital del Chip de Gráficos",
+    "message": "Gráficos",
     "description": "Setting to block graphics chip fingerprinting"
   },
   "fonts": {
-    "message": "Bloquear Huella Digital de Fuentes Instaladas",
+    "message": "Fuentes",
     "description": "Setting to block installed fonts fingerprinting"
   },
   "language": {
-    "message": "Bloquear Huella Digital de Idioma",
+    "message": "Idioma",
     "description": "Setting to block language fingerprinting"
   },
   "cpu": {
-    "message": "Bloquear Huella Digital del Chip Principal",
+    "message": "Procesador",
     "description": "Setting to block main chip fingerprinting"
   },
   "math": {
-    "message": "Bloquear Huella Digital de Procesamiento Matemático",
+    "message": "Matemáticas",
     "description": "Setting to block math processing fingerprinting"
   },
   "timezone": {
-    "message": "Bloquear Huella Digital de Zona Horaria",
+    "message": "Zona horaria",
     "description": "Setting to block time-zone fingerprinting"
   },
   "touch": {
-    "message": "Bloquear Huella Digital de Soporte Táctil",
+    "message": "Táctil",
     "description": "Setting to block touch support fingerprinting"
   }
 }
