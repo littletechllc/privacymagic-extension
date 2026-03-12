@@ -1,0 +1,222 @@
+{
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Web gezintisini mümkün olduğunca gizli tutun",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Ayarlar",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Merhaba, Privacy Magic diyor!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Takip Etmeyi Etkinleştir",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Üçüncü Taraf Çerezlerini Devre Dışı Bırak",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Köprü Denetimini Devre Dışı Bırak",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API'yi Devre Dışı Bırak",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE'i Devre Dışı Bırak",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Reklam Ölçümünü Devre Dışı Bırak",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "İlişkili Web Sitesi Kümelerini Devre Dışı Bırak",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC proxy kullanmayan UDP'yi Devre Dışı Bırak",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Gizlilik Korumaları Açık",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "İzleme içeriğini engelle",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "İzleme İzlerini Kaldır",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Sistem Bilgisini Koru",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Reklamları ve İzleyicileri Engelle",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "İzleme Sorgu Parametrelerini Kaldır",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Takip Etmeyi Etkinleştir",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Ekran Ayrıntıları",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Pencere Adı İzlemeyi Engelle",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Tarayıcı Tercihleri",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Web Sitesi Varsayılan Ayarları",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Varsayılana Sıfırla",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "Küresel Gizlilik Kontrolünü Etkinleştir",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Pil Durumu",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Tarayıcı Sürümü",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Alternatif Hata Sayfalarını Devre Dışı Bırak",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Güvenli Tarama Genişletilmiş Raporlamayı Devre Dışı Bırak",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Yazım Denetimi Hizmetini Devre Dışı Bırak",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Arama Önerisini Devre Dışı Bırak",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Yönlendiren Politikasını Sıkılaştır",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Klavye Yerleşimi",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Sistem Performansı",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Worker'ları Devre Dışı Bırak",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Paylaşılan Depolamayı Devre Dışı Bırak",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Web Sızıntılarını Durdur",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Ses İşleme",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Görüntü Ayarları",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Cihaz Bilgisi",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Bellek Kullanımı",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disk Alanı Kullanımı",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafik Yonga Özellikleri",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Cihazdaki Yazı Tipleri",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Dil Ayarları",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Ana Yonga Özellikleri",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematik İşleme",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Saat Dilimi Ayarları",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Dokunmatik Destek Durumu",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Worker'ları Güçlendir",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Kum Havuzlu Iframe'leri Güçlendir",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Ağ Profili",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stil Sayfalarını Güçlendir",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Gizlilik Sinyalleri Gönder",
+    "description": "Category for privacy policy protection settings"
+  }
+}
