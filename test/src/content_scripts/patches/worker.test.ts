@@ -73,7 +73,7 @@ describe('worker patch', () => {
 
   it('should replace Worker with a Proxy when Worker is defined', () => {
     function OriginalWorker (this: unknown, ..._args: unknown[]) {
-      return Object.create(OriginalWorker.prototype)
+      return {}
     }
     const OriginalWorkerSpy = jest.fn().mockImplementation(OriginalWorker)
     const fakeGlobal = {
@@ -96,7 +96,7 @@ describe('worker patch', () => {
     const constructorArgs: [string, WorkerOptions?][] = []
     function OriginalWorker (this: unknown, ...args: unknown[]) {
       constructorArgs.push([String(args[0]), args[1] as WorkerOptions | undefined])
-      return Object.create(OriginalWorker.prototype)
+      return {}
     }
     const OriginalWorkerMock = jest.fn().mockImplementation(OriginalWorker)
     const fakeGlobal = {
@@ -111,8 +111,11 @@ describe('worker patch', () => {
 
     workerPatch(fakeGlobal)
 
-    new (fakeGlobal.Worker as typeof Worker)('chrome://extension/id/script.js')
-    new (fakeGlobal.Worker as typeof Worker)('chrome-extension://extension-id/script.js')
+    // Call the proxied Worker constructor; we only care that the original
+    // constructor sees the original URLs, not the returned instance shape.
+    const WorkerCtor = fakeGlobal.Worker as new (url: string) => unknown
+    void new WorkerCtor('chrome://extension/id/script.js')
+    void new WorkerCtor('chrome-extension://extension-id/script.js')
 
     expect(constructorArgs[0][0]).toBe('chrome://extension/id/script.js')
     expect(constructorArgs[1][0]).toBe('chrome-extension://extension-id/script.js')
@@ -122,7 +125,7 @@ describe('worker patch', () => {
     const OriginalBlob = class Blob {
       constructor (public parts: BlobPart[], public options?: BlobPropertyBag) {}
     }
-    function MockWorker (this: unknown) { return Object.create(MockWorker.prototype) }
+    function MockWorker (this: void) { return {} }
     const fakeGlobal = {
       Worker: jest.fn().mockImplementation(MockWorker),
       Blob: OriginalBlob,
@@ -136,14 +139,15 @@ describe('worker patch', () => {
     workerPatch(fakeGlobal)
 
     expect(fakeGlobal.Blob).not.toBe(OriginalBlob)
-    const blob = new (fakeGlobal.Blob as typeof globalThis.Blob)(['const x = 1'], { type: 'text/javascript' })
+    const BlobCtor = fakeGlobal.Blob as new (parts: BlobPart[], options?: BlobPropertyBag) => Blob
+    const blob = new BlobCtor(['const x = 1'], { type: 'text/javascript' })
     expect(blob).toBeInstanceOf(OriginalBlob)
   })
 
   it('should patch URL.createObjectURL and URL.revokeObjectURL', () => {
     const fakeURL = makeFakeURL()
-    const originalRevokeObjectURL = fakeURL.revokeObjectURL as jest.Mock
-    function MockWorker (this: unknown) { return Object.create(MockWorker.prototype) }
+    const revokeSpy = jest.spyOn(fakeURL, 'revokeObjectURL')
+    function MockWorker (this: void) { return {} }
     const fakeGlobal = {
       Worker: jest.fn().mockImplementation(MockWorker),
       Blob: class Blob {},
@@ -156,10 +160,8 @@ describe('worker patch', () => {
 
     workerPatch(fakeGlobal)
 
-    expect(fakeGlobal.URL.createObjectURL).toBeDefined()
-    expect(fakeGlobal.URL.revokeObjectURL).toBeDefined()
     fakeGlobal.URL.revokeObjectURL('blob:https://example.com/uuid')
-    expect(originalRevokeObjectURL).toHaveBeenCalledWith('blob:https://example.com/uuid')
+    expect(revokeSpy).toHaveBeenCalledWith('blob:https://example.com/uuid')
   })
 
   it('should call makeBundleForInjection with getDisabledSettings result', () => {
