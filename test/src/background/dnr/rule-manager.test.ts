@@ -99,8 +99,9 @@ describe('updateRules', () => {
     await updateRules(domain, 'queryParameters', true)
 
     const call = getUpdateDynamicRulesCall()
-    // Network rule: remove 1 ID, add 1 rule (updated without domain in excludedTopDomains)
-    expectRuleCounts(call, 1, 1)
+    const queryParamsRuleCount = NETWORK_PROTECTION_DEFS.queryParameters.length
+    // Network rule: remove/add one rule per query param (updated without domain in excludedTopDomains)
+    expectRuleCounts(call, queryParamsRuleCount, queryParamsRuleCount)
   })
 })
 
