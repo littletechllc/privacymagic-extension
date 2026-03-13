@@ -96,13 +96,23 @@ const toEquivalentResourceType = (raw: string): ResourceTypeValue => {
   return RESOURCE_TYPE_EQUIVALENCES[raw] ?? (raw as ResourceTypeValue)
 }
 
+const removeEmptyProperties = (obj: Record<string, unknown>): Record<string, unknown> => {
+  const newObj = structuredClone(obj)
+  for (const [key, value] of Object.entries(newObj)) {
+    if (value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
+      delete newObj[key]
+    }
+  }
+  return newObj
+}
+
 type ParsedTypeOptions = {
   condition: RuleCondition,
   options: {
-    redirect: string | undefined,
-    redirectRule: boolean | string | undefined,
-    badFilter: boolean | undefined,
-    cspLine: string | undefined
+    redirect?: string,
+    redirectRule?: boolean | string,
+    badFilter?: boolean,
+    cspLine?: string
   }
 }
 
@@ -182,22 +192,24 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
       resourceTypes.push(toEquivalentResourceType(item))
     }
   }
+  const condition = removeEmptyProperties({
+    domainType,
+    resourceTypes,
+    excludedResourceTypes,
+    initiatorDomains,
+    excludedInitiatorDomains,
+    requestMethods,
+    excludedRequestMethods,
+  })
+  const options = removeEmptyProperties({
+    redirect,
+    redirectRule,
+    badFilter,
+    cspLine
+  })
   return {
-    condition: {
-      domainType,
-      resourceTypes,
-      excludedResourceTypes,
-      initiatorDomains,
-      excludedInitiatorDomains,
-      requestMethods,
-      excludedRequestMethods,
-    },
-    options: {
-      redirect,
-      redirectRule,
-      badFilter,
-      cspLine
-    }
+    condition,
+    options
   }
 }
 
