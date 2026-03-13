@@ -183,6 +183,16 @@ export const NETWORK_PROTECTION_DEFS:
         values: ['origin']
       }]
     }
+  }],
+  cpu: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Sec-CH-UA-Architecture',
+        'Sec-CH-UA-Bitness',
+        'Sec-CH-UA-Model'
+      ])
+    },
   }]
 }
 
