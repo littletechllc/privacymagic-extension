@@ -411,22 +411,15 @@ export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine)
   const results = processLines(linesFiltered)
-  const results2 = results.filter(x => {
-    if (!isBlockingFilter(x.parsed)) return true
-    const condition = x.parsed.condition
-    if ('regexFilter' in condition) return true
-    return false
-  })
-  const blockingRulesFileContent = generateBlockingRulesFile(results2)
+  const blockingRulesFileContent = generateBlockingRulesFile(results)
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
     blockingRulesFileContent)
-  const contentRules = generateContentRules(results2)
+  const contentRules = generateContentRules(results)
   const adblockCssDir = dist('content_scripts/adblock_css')
   /* const cssFiles = */await generateContentRulesFiles(adblockCssDir, contentRules)
 }
 
 if (isMain(import.meta)) {
-  console.log(path)
   void processAndWrite()
 }
