@@ -34,7 +34,7 @@ const disallowedQueryParams = [
   'yclid'
 ]
 
-const roundedVersion = (navigator.userAgentData?.brands.find(brand => brand.brand === 'Chromium')?.version ?? 0)+ '0.0.0'
+const roundedVersion = (navigator.userAgentData?.brands.find(brand => brand.brand === 'Chromium')?.version ?? '0')+ '.0.0.0'
 
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
