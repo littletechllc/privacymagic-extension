@@ -34,8 +34,6 @@ const disallowedQueryParams = [
   'yclid'
 ]
 
-const roundedVersion = (navigator.userAgentData?.brands.find(brand => brand.brand === 'Chromium')?.version ?? '0')+ '.0.0.0'
-
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
     ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
@@ -61,11 +59,10 @@ export const NETWORK_PROTECTION_DEFS:
   useragent: [{
     action: {
       type: 'modifyHeaders',
-      requestHeaders: setHeaders({
-        // TODO: Use the actual low-entropy version of the browser.
-        'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="'+roundedVersion+'", Not?A_Brand;v="8.0.0.0", Chromium;v="'+roundedVersion+'"',
-        'Sec-CH-UA-Full-Version': roundedVersion
-      })
+      requestHeaders: removeHeaders([
+        'Sec-CH-UA-Full-Version',
+        'Sec-CH-UA-Full-Version-List'
+      ])
     },
   }],
   // Only match URLs that actually have at least one removable param. Otherwise the redirect
