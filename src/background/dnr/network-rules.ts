@@ -100,10 +100,12 @@ export const NETWORK_PROTECTION_DEFS:
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
         'DPR',
+        'Sec-CH-DPR',
         'Sec-CH-Viewport-Height',
         'Sec-CH-Viewport-Width',
-        'Sec-CH-DPR',
-        'Viewport-Width'
+        'Sec-CH-Width',
+        'Viewport-Width',
+        'Width'
       ])
     },
   }],
@@ -189,8 +191,19 @@ export const NETWORK_PROTECTION_DEFS:
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
         'Sec-CH-UA-Architecture',
-        'Sec-CH-UA-Bitness',
-        'Sec-CH-UA-Model'
+        'Sec-CH-UA-Bitness'
+      ])
+    },
+  }],
+  device: [{
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+       'Sec-CH-UA-Form-Factors',
+       'Sec-CH-UA-Mobile',
+       'Sec-CH-UA-Model',
+       'Sec-CH-UA-Platform-Version',
+       'Sec-CH-UA-WoW64'
       ])
     },
   }]
