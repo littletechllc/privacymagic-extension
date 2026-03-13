@@ -34,6 +34,8 @@ const disallowedQueryParams = [
   'yclid'
 ]
 
+const roundedVersion = (navigator.userAgentData?.brands.find(brand => brand.brand === 'Chromium')?.version ?? 0)+ '0.0.0'
+
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
     ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
@@ -61,8 +63,8 @@ export const NETWORK_PROTECTION_DEFS:
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
         // TODO: Use the actual low-entropy version of the browser.
-        'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="141.0.0.0", Not?A_Brand;v="8.0.0.0", Chromium;v="141.0.0.0"',
-        'Sec-CH-UA-Full-Version': '141.0.0.0'
+        'Sec-CH-UA-Full-Version-List': 'Google Chrome;v="'+roundedVersion+'", Not?A_Brand;v="8.0.0.0", Chromium;v="'+roundedVersion+'"',
+        'Sec-CH-UA-Full-Version': roundedVersion
       })
     },
   }],
