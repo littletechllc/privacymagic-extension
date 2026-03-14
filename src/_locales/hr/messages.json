@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Neka pregledavanje weba bude što privatnije", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic štiti vas od nadzora tijekom pregledavanja weba.", "description": "The description of the extension" },
   "settingsButton": { "message": "Postavke", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Bok, kaže Privacy Magic!", "description": "Greeting message in the popup" },

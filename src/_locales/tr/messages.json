@@ -4,7 +4,7 @@
     "description": "The name of the extension"
   },
   "extensionDescription": {
-    "message": "Web gezintisini mümkün olduğunca gizli tutun",
+    "message": "Privacy Magic, web'de gezinirken sizi gözetimden korur.",
     "description": "The description of the extension"
   },
   "settingsButton": {

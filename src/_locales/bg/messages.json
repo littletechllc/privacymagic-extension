@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Направете сърфирането възможно най-приватно", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic ви предпазва от наблюдение, докато сърфирате в интернет.", "description": "The description of the extension" },
   "settingsButton": { "message": "Настройки", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Здравей, казва Privacy Magic!", "description": "Greeting message in the popup" },

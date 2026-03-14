@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "വെബ് ബ്രൗസിംഗ് കഴിയുന്നത്ര സ്വകാര്യമാക്കുക", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic വെബ് ബ്രൗസ് ചെയ്യുമ്പോൾ നിങ്ങളെ നിരീക്ഷണത്തിൽ നിന്ന് പരിരക്ഷിക്കുന്നു.", "description": "The description of the extension" },
   "settingsButton": { "message": "ക്രമീകരണങ്ങൾ", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "നമസ്കാരം, Privacy Magic പറയുന്നു!", "description": "Greeting message in the popup" },

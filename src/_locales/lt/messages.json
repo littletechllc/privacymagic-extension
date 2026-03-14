@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Padarykite naršymą kuo privatesnį", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic apsaugo jus nuo priežiūros naršant žiniatinklyje.", "description": "The description of the extension" },
   "settingsButton": { "message": "Nustatymai", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Sveiki, sako Privacy Magic!", "description": "Greeting message in the popup" },

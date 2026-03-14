@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Κάντε την περιήγηση στο διαδίκτυο όσο πιο ιδιωτική γίνεται", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Το Privacy Magic σας προστατεύει από την παρακολούθηση καθώς πλοηγείστε στο διαδίκτυο.", "description": "The description of the extension" },
   "settingsButton": { "message": "Ρυθμίσεις", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Γεια, λέει το Privacy Magic!", "description": "Greeting message in the popup" },

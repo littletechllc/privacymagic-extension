@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Haz que la navegación web sea lo más privada posible", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic te protege de la vigilancia mientras navegás por la web.", "description": "The description of the extension" },
   "settingsButton": { "message": "Configuración", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "¡Hola, dice Privacy Magic!", "description": "Greeting message in the popup" },

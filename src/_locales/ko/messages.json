@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "웹 검색을 최대한 비공개로 유지하세요", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic은 웹을 탐색할 때 감시로부터 당신을 보호합니다.", "description": "The description of the extension" },
   "settingsButton": { "message": "설정", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "안녕하세요, Privacy Magic입니다!", "description": "Greeting message in the popup" },

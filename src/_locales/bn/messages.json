@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "ওয়েব ব্রাউজিং যতটা সম্ভব গোপন রাখুন", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic ওয়েব ব্রাউজ করার সময় আপনাকে নজরদারি থেকে রক্ষা করে।", "description": "The description of the extension" },
   "settingsButton": { "message": "সেটিংস", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "হ্যালো, Privacy Magic বলছে!", "description": "Greeting message in the popup" },

@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Tegye a böngészést a lehető legmagánjellegűbbé", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic megvédi a megfigyeléstől a webböngészés során.", "description": "The description of the extension" },
   "settingsButton": { "message": "Beállítások", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Szia, mondja a Privacy Magic!", "description": "Greeting message in the popup" },

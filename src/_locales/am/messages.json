@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "ድር ማሰስን በተቻለ መጠን የግል ያድርጉ", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic እያሰራጩ በድር ሲጎብኙ ከተጣራ ጣልቃ ገብነት ይጠብቅዎታል።", "description": "The description of the extension" },
   "settingsButton": { "message": "ቅንብሮች", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "ሰላም፣ Privacy Magic ይላል!", "description": "Greeting message in the popup" },

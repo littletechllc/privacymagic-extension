@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "वेब ब्राउझिंग शक्य तितकी खाजगी ठेवा", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic वेब ब्राउझ करताना तुम्हाला निरीक्षणापासून संरक्षण देते.", "description": "The description of the extension" },
   "settingsButton": { "message": "सेटिंग्ज", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "नमस्कार, Privacy Magic म्हणतो!", "description": "Greeting message in the popup" },

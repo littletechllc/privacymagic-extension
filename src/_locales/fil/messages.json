@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Gawing mas pribado ang pagba-browse sa web", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Pinoprotektahan ka ng Privacy Magic mula sa surveillance habang nagba-browse sa web.", "description": "The description of the extension" },
   "settingsButton": { "message": "Mga setting", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Hello, sabi ng Privacy Magic!", "description": "Greeting message in the popup" },

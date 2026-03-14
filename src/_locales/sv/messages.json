@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Gör webbsurfning så privat som möjligt", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic skyddar dig mot övervakning när du surfar på webben.", "description": "The description of the extension" },
   "settingsButton": { "message": "Inställningar", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Hej, säger Privacy Magic!", "description": "Greeting message in the popup" },

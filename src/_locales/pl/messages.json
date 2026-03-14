@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Przeglądaj sieć w jak największej prywatności", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic chroni Cię przed inwigilacją podczas przeglądania sieci.", "description": "The description of the extension" },
   "settingsButton": { "message": "Ustawienia", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Cześć, mówi Privacy Magic!", "description": "Greeting message in the popup" },

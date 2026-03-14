@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "让网页浏览尽可能私密", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic 在您浏览网页时保护您免受监控。", "description": "The description of the extension" },
   "settingsButton": { "message": "设置", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "你好，Privacy Magic 说！", "description": "Greeting message in the popup" },

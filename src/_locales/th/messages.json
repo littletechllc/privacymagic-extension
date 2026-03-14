@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "ทำให้การท่องเว็บเป็นส่วนตัวมากที่สุด", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ", "description": "The description of the extension" },
   "settingsButton": { "message": "การตั้งค่า", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "สวัสดี Privacy Magic พูด!", "description": "Greeting message in the popup" },

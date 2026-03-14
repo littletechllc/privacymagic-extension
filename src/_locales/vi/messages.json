@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Làm cho việc duyệt web riêng tư nhất có thể", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic bảo vệ bạn khỏi sự giám sát khi bạn duyệt web.", "description": "The description of the extension" },
   "settingsButton": { "message": "Cài đặt", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Xin chào, Privacy Magic nói!", "description": "Greeting message in the popup" },

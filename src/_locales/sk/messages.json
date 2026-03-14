@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Urobte prehliadanie webu čo najsúkromnejšie", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic vás chráni pred sledovaním pri prehliadaní webu.", "description": "The description of the extension" },
   "settingsButton": { "message": "Nastavenia", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "Ahoj, hovorí Privacy Magic!", "description": "Greeting message in the popup" },

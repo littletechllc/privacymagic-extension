@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "వెబ్ బ్రౌజింగ్‌ను వీలైనంత ప్రైవేట్‌గా చేయండి", "description": "The description of the extension" },
+  "extensionDescription": { "message": "Privacy Magic మీరు వెబ్ బ్రౌజ్ చేసేటప్పుడు నిఘా నుండి మిమ్మల్ని రక్షిస్తుంది.", "description": "The description of the extension" },
   "settingsButton": { "message": "సెట్టింగ్‌లు", "description": "Text for the settings button in the popup" },
   "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
   "popupGreeting": { "message": "నమస్కారం, Privacy Magic చెప్పుతుంది!", "description": "Greeting message in the popup" },
