@@ -7,26 +7,26 @@ Per defensar la vostra privacitat, Privacy Magic:
 - Bloqueja anuncis, seguidors i molesties
 - Protegeix la informació del sistema (contra la presa d'empremtes)
   · Bateria
-  · Navegador
-  · Dispositiu
   · Disc
-  · Monitor
+  · Dispositiu
   · Fonts
   · Gràfics
-  · Teclat
   · Idioma
   · Matemàtiques
   · Memòria
-  · Xarxa
-  · Processador
+  · Monitor
+  · Navegador
   · Pantalla
-  · Zona horària
-  · Temps
+  · Processador
   · Tàctil
+  · Teclat
+  · Temps
+  · Xarxa
+  · Zona horària
 - Elimina les restes de seguiment
-  · Referent
-  · Paràmetres de seguiment
   · Nom de la finestra
+  · Paràmetres de seguiment
+  · Referent
 - Endureix els elements web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Per defensar la vostra privacitat, Privacy Magic:
   · Web Workers
 - Envia el senyal Global Privacy Control
 - Desactiva les funcions del navegador que perden dades
-  · Galetes de tercers
-  · Conjunts de llocs relacionats
-  · WebRTC UDP sense proxy
   · Auditoria d'hiperenllaços
+  · Conjunts de llocs relacionats
+  · Galetes de tercers
+  · WebRTC UDP sense proxy
 - Desactiva els serveis al núvol invasius
+  · Informe ampliat de navegació segura
+  · Pàgines d'error alternatives
   · Servei d'ortografia
   · Suggeriments de cerca
-  · Pàgines d'error alternatives
-  · Informe ampliat de navegació segura
 - Desactiva les API de segmentació d'anuncis
-  · Topics API
-  · Protected Audience API
   · Mesura d'anuncis
+  · Protected Audience API
+  · Topics API
+

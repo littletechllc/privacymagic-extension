@@ -7,26 +7,26 @@ Az adatvédelem érdekében a Privacy Magic:
 - Blokkolja a hirdetéseket, követőket és zaklatásokat
 - Védi a rendszerinformációkat (fingerprinting ellen)
   · Akkumulátor
-  · Böngésző
-  · Eszköz
-  · Lemez
-  · Kijelző
   · Betűtípusok
-  · Grafika
   · Billentyűzet
-  · Nyelv
+  · Böngésző
+  · Érintés
+  · Eszköz
+  · Grafika
+  · Hálózat
+  · Időzítés
+  · Időzóna
+  · Képernyő
+  · Kijelző
+  · Lemez
   · Matematika
   · Memória
-  · Hálózat
+  · Nyelv
   · Processzor
-  · Képernyő
-  · Időzóna
-  · Időzítés
-  · Érintés
 - Eltávolítja a követési nyomokat
-  · Referrer
-  · Követési paraméterek
   · Ablak neve
+  · Követési paraméterek
+  · Referrer
 - Megerősíti a webelemeket
   · Iframes
   · Service Workers
@@ -35,15 +35,16 @@ Az adatvédelem érdekében a Privacy Magic:
 - Global Privacy Control jelzés küldése
 - Kikapcsolja a szivárgó böngészőfunkciókat
   · Harmadik féltől származó sütik
+  · Hiperhivatkozás-naplózás
   · Kapcsolódó webhelycsoportok
   · WebRTC proxy nélküli UDP
-  · Hiperhivatkozás-naplózás
 - Kikapcsolja a tolakodó felhőszolgáltatásokat
-  · Helyesírás-ellenőrzés
-  · Keresési javaslatok
   · Alternatív hiboldalak
   · Biztonságos böngészés bővített jelentése
+  · Helyesírás-ellenőrzés
+  · Keresési javaslatok
 - Kikapcsolja a hirdetésközvetítő API-kat
-  · Topics API
-  · Protected Audience API
   · Hirdetésmérés
+  · Protected Audience API
+  · Topics API
+

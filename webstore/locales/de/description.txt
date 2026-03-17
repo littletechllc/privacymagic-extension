@@ -6,27 +6,27 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
 
 - Blockiert Werbung, Tracker und Störungen
 - Schützt Systeminformationen (gegen Fingerprinting)
+  · Anzeige
   · Batterie
+  · Bildschirm
   · Browserversion
   · Gerät
-  · Speicherplatz
-  · Anzeige
-  · Schriftarten
   · Grafikchip
-  · Tastatur
-  · Sprache
   · Mathematik
-  · Speicher
   · Netzwerk
   · Prozessor
-  · Bildschirm
-  · Zeitzone
+  · Schriftarten
+  · Speicher
+  · Speicherplatz
+  · Sprache
+  · Tastatur
   · Timer
   · Touch
+  · Zeitzone
 - Entfernt Tracking-Spuren
+  · Fenster-Name
   · Referrer-Richtlinie
   · Tracking-Parameter
-  · Fenster-Name
 - Härtet Web-Elemente ab
   · Iframes
   · Service Workers
@@ -35,15 +35,16 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
 - Sendet Global Privacy Control Signal
 - Deaktiviert undichte Browser-Funktionen
   · Drittanbieter-Cookies
+  · Hyperlink-Überwachung
   · Verwandte Website-Sets
   · WebRTC UDP ohne Proxy
-  · Hyperlink-Überwachung
 - Deaktiviert invasive Cloud-Dienste
-  · Rechtschreibprüfung
-  · Suchvorschläge
   · Alternative Fehlerseiten
   · Erweiterte Safe-Browsing-Berichte
+  · Rechtschreibprüfung
+  · Suchvorschläge
 - Deaktiviert API für zielgerichtete Werbung
-  · Topics API
-  · Protected Audience API
   · Anzeigenmessung
+  · Protected Audience API
+  · Topics API
+

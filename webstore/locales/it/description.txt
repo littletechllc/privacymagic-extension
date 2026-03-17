@@ -8,25 +8,25 @@ Per difendere la tua privacy, Privacy Magic:
 - Protegge le informazioni di sistema (per resistere al fingerprinting)
   · Batteria
   · Browser
-  · Dispositivo
   · Disco
   · Display
+  · Dispositivo
   · Font
+  · Fuso orario
   · Grafica
-  · Tastiera
   · Lingua
   · Matematica
   · Memoria
-  · Rete
   · Processore
+  · Rete
   · Schermo
-  · Fuso orario
+  · Tastiera
   · Tempi
   · Touch
 - Rimuove le tracce di navigazione
-  · Referrer
-  · Parametri tracciamento
   · Nome finestra
+  · Parametri tracciamento
+  · Referrer
 - Irrobustisce gli elementi web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Per difendere la tua privacy, Privacy Magic:
   · Web Workers
 - Invia il segnale Global Privacy Control
 - Disattiva le funzioni del browser che perdono dati
+  · Controllo collegamenti
   · Cookie di terze parti
   · Set di siti correlati
   · WebRTC UDP senza proxy
-  · Controllo collegamenti
 - Disattiva i servizi cloud invasivi
   · Correzione ortografica
-  · Suggerimenti di ricerca
   · Pagine di errore alternative
   · Report esteso navigazione sicura
+  · Suggerimenti di ricerca
 - Disattiva le API per pubblicità mirata
-  · Topics API
-  · Protected Audience API
   · Misurazione annunci
+  · Protected Audience API
+  · Topics API
+

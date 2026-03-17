@@ -6,27 +6,27 @@ Untuk membela privasi Anda, Privacy Magic:
 
 - Memblokir iklan, pelacak, dan gangguan
 - Melindungi informasi sistem (dari fingerprinting)
+  · Bahasa
   · Baterai
   · Browser
-  · Perangkat
   · Disk
-  · Tampilan
   · Font
   · Grafis
+  · Jaringan
   · Keyboard
-  · Bahasa
+  · Layar
   · Matematika
   · Memori
-  · Jaringan
+  · Perangkat
   · Prosesor
-  · Layar
-  · Zona waktu
-  · Timing
   · Sentuh
+  · Tampilan
+  · Timing
+  · Zona waktu
 - Menghapus jejak pelacakan
-  · Perujuk
-  · Parameter pelacakan
   · Nama jendela
+  · Parameter pelacakan
+  · Perujuk
 - Mengeraskan elemen web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Untuk membela privasi Anda, Privacy Magic:
   · Web Workers
 - Mengirim sinyal Global Privacy Control (GPC)
 - Menonaktifkan fitur browser yang bocor
+  · Audit hyperlink
   · Cookie pihak ketiga
   · Set situs terkait
   · WebRTC UDP non-proxy
-  · Audit hyperlink
 - Menonaktifkan layanan cloud invasif
-  · Layanan ejaan
-  · Saran penelusuran
   · Halaman error alternatif
+  · Layanan ejaan
   · Pelaporan diperluas penelusuran aman
+  · Saran penelusuran
 - Menonaktifkan API target iklan
-  · Topics API
-  · Protected Audience API
   · Pengukuran iklan
+  · Protected Audience API
+  · Topics API
+

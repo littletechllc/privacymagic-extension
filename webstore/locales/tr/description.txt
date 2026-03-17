@@ -6,27 +6,27 @@ Gizliliğinizi korumak için Privacy Magic:
 
 - Reklamları, izleyicileri ve rahatsızlıkları engeller
 - Sistem bilgisini korur (parmak izine karşı)
-  · Pil
-  · Tarayıcı
-  · Cihaz
-  · Disk
-  · Görüntü
-  · Yazı tipleri
-  · Grafik
-  · Klavye
-  · Dil
-  · Matematik
-  · Bellek
   · Ağ
-  · İşlemci
-  · Ekran
-  · Saat dilimi
-  · Zamanlama
+  · Bellek
+  · Cihaz
+  · Dil
+  · Disk
   · Dokunma
+  · Ekran
+  · Görüntü
+  · Grafik
+  · İşlemci
+  · Klavye
+  · Matematik
+  · Pil
+  · Saat dilimi
+  · Tarayıcı
+  · Yazı tipleri
+  · Zamanlama
 - İzleme izlerini kaldırır
-  · Yönlendiren
   · İzleme parametreleri
   · Pencere adı
+  · Yönlendiren
 - Web öğelerini güçlendirir
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Gizliliğinizi korumak için Privacy Magic:
   · Web Workers
 - Global Privacy Control sinyali gönderir
 - Sızdıran tarayıcı özelliklerini devre dışı bırakır
-  · Üçüncü taraf çerezleri
   · İlişkili web sitesi kümeleri
-  · WebRTC proxy kullanmayan UDP
   · Köprü denetimi
+  · Üçüncü taraf çerezleri
+  · WebRTC proxy kullanmayan UDP
 - Müdahaleci bulut hizmetlerini devre dışı bırakır
-  · Yazım denetimi hizmeti
-  · Arama önerisi
   · Alternatif hata sayfaları
+  · Arama önerisi
   · Güvenli tarama genişletilmiş raporlama
+  · Yazım denetimi hizmeti
 - Reklam hedefleme API'lerini devre dışı bırakır
-  · Topics API
   · Protected Audience API
   · Reklam ölçümü
+  · Topics API
+

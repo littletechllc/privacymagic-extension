@@ -6,27 +6,27 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
 
 - Blokeerib reklaame, jälgijaid ja tülikust
 - Kaitseb süsteemi teavet (sõrmejälje võtmise vastu)
-  · Patarei
+  · Ajastus
+  · Ajavöönd
   · Brauser
-  · Seade
-  · Ketas
-  · Kuva
+  · Ekraan
   · Fondid
   · Graafika
-  · Klaviatuur
   · Keel
+  · Ketas
+  · Klaviatuur
+  · Kuva
   · Matemaatika
   · Mälu
-  · Võrk
+  · Patarei
   · Protsessor
-  · Ekraan
-  · Ajavöönd
-  · Ajastus
   · Puudutus
+  · Seade
+  · Võrk
 - Eemaldab jälgimise jäljed
-  · Viitaja
-  · Jälgimise parameetrid
   · Akna nimi
+  · Jälgimise parameetrid
+  · Viitaja
 - Tugevdab veebielemente
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Web Workers
 - Saadab Global Privacy Control (GPC) signaali
 - Keelab lekkivad brauseri funktsioonid
+  · Hüperlingi auditeerimine
   · Kolmandate osapoolte küpsised
   · Seotud veebisaidikogumid
   · WebRTC proxyta UDP
-  · Hüperlingi auditeerimine
 - Keelab tungival pilveteenused
-  · Õigekirja teenus
-  · Otsingu soovitused
   · Asendusvea leheküljed
+  · Otsingu soovitused
   · Turvalise sirvimise laiendatud aruandlus
+  · Õigekirja teenus
 - Keelab reklaamide sihtimise API-d
-  · Topics API
   · Protected Audience API
   · Reklaamide mõõtmine
+  · Topics API
+

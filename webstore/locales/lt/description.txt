@@ -6,27 +6,27 @@ Jūsų privatumui ginti Privacy Magic:
 
 - Blokuoja reklamas, sekiklius ir erzinimus
 - Apsaugo sistemos informaciją (nuo pirštų atspaudų)
+  · Atmintis
   · Baterija
-  · Naršyklė
-  · Įrenginys
   · Diskas
   · Ekranas
-  · Šriftai
-  · Grafika
-  · Klaviatūra
-  · Kalba
-  · Matematika
-  · Atmintis
-  · Tinklas
-  · Procesorius
   · Ekranas
-  · Laiko juosta
+  · Grafika
+  · Įrenginys
+  · Kalba
+  · Klaviatūra
   · Laikmatis
+  · Laiko juosta
   · Lietimas
+  · Matematika
+  · Naršyklė
+  · Procesorius
+  · Šriftai
+  · Tinklas
 - Pašalina sekimo pėdsakus
+  · Lango pavadinimas
   · Nurodytojas
   · Sekimo parametrai
-  · Lango pavadinimas
 - Stiprina žiniatinklio elementus
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Jūsų privatumui ginti Privacy Magic:
   · Web Workers
 - Siunčia Global Privacy Control (GPC) signalą
 - Išjungia nesandarius naršyklės funkcijas
-  · Trečiųjų šalių slapukai
-  · Susijusių svetainių rinkiniai
-  · WebRTC be proxy UDP
   · Hipernuorodų auditas
+  · Susijusių svetainių rinkiniai
+  · Trečiųjų šalių slapukai
+  · WebRTC be proxy UDP
 - Išjungia įsibroviančias debesų paslaugas
-  · Rašybos tikrinimo paslauga
-  · Paieškos pasiūlymai
   · Alternatyvūs klaidų puslapiai
+  · Paieškos pasiūlymai
+  · Rašybos tikrinimo paslauga
   · Saugaus naršymo išplėstinė ataskaita
 - Išjungia reklamų taikinimo API
-  · Topics API
   · Protected Audience API
   · Reklamų matavimas
+  · Topics API
+

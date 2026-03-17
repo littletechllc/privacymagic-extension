@@ -6,27 +6,27 @@ Pour défendre votre vie privée, Privacy Magic :
 
 - Bloque les publicités, traceurs et nuisances
 - Protège les informations système (pour résister au fingerprinting)
-  · Batterie
-  · Navigateur
-  · Appareil
-  · Disque
   · Affichage
-  · Polices
-  · Graphique
+  · Appareil
+  · Batterie
+  · Chronométrage
   · Clavier
+  · Disque
+  · Écran
+  · Fuseau horaire
+  · Graphique
   · Langue
   · Maths
   · Mémoire
-  · Réseau
+  · Navigateur
+  · Polices
   · Processeur
-  · Écran
-  · Fuseau horaire
-  · Chronométrage
+  · Réseau
   · Tactile
 - Supprime les traces de suivi
-  · Référent
-  · Paramètres de suivi
   · Nom de fenêtre
+  · Paramètres de suivi
+  · Référent
 - Durcit les éléments web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Pour défendre votre vie privée, Privacy Magic :
   · Web Workers
 - Envoie le signal Global Privacy Control
 - Désactive les fonctionnalités du navigateur qui fuient
+  · Audit des hyperliens
   · Cookies tiers
   · Ensembles de sites associés
   · WebRTC UDP sans proxy
-  · Audit des hyperliens
 - Désactive les services cloud invasifs
   · Correcteur orthographique
-  · Suggestions de recherche
   · Pages d'erreur alternatives
   · Rapport étendu de navigation sécurisée
+  · Suggestions de recherche
 - Désactive les API de ciblage publicitaire
-  · Topics API
-  · Protected Audience API
   · Mesure publicitaire
+  · Protected Audience API
+  · Topics API
+

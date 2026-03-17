@@ -6,27 +6,27 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
 
 - Blokkeert advertenties, trackers en overlast
 - Beschermt systeeminformatie (tegen fingerprinting)
+  · Aanraking
+  · Apparaat
   · Batterij
   · Browser
-  · Apparaat
-  · Schijf
-  · Weergave
-  · Lettertypen
-  · Grafisch
-  · Toetsenbord
-  · Taal
-  · Wiskunde
   · Geheugen
+  · Grafisch
+  · Lettertypen
   · Netwerk
   · Processor
   · Scherm
+  · Schijf
+  · Taal
   · Tijdzone
   · Timing
-  · Aanraking
+  · Toetsenbord
+  · Weergave
+  · Wiskunde
 - Verwijdert trackingsporen
-  · Verwijzer
   · Trackingparameters
   · Vensternaam
+  · Verwijzer
 - Versterkt web-elementen
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
   · Web Workers
 - Stuurt Global Privacy Control-signaal
 - Schakelt lekkende browserfuncties uit
+  · Controle van hyperlinks
   · Cookies van derden
   · Gerelateerde websitesets
   · WebRTC niet-proxy UDP
-  · Controle van hyperlinks
 - Schakelt invasieve clouddiensten uit
-  · Spellingscontrole
-  · Zoeksuggesties
   · Alternatieve foutpagina's
+  · Spellingscontrole
   · Uitgebreide rapportage veilig browsen
+  · Zoeksuggesties
 - Schakelt API's voor advertentietargeting uit
-  · Topics API
-  · Protected Audience API
   · Advertentiemeting
+  · Protected Audience API
+  · Topics API
+

@@ -7,26 +7,26 @@ Aby chronić Twoją prywatność, Privacy Magic:
 - Blokuje reklamy, trackery i uciążliwości
 - Chroni informacje systemowe (przed fingerprintingiem)
   · Bateria
-  · Przeglądarka
-  · Urządzenie
-  · Dysk
-  · Wyświetlacz
+  · Czasowanie
   · Czcionki
+  · Dotyk
+  · Dysk
+  · Ekran
   · Grafika
-  · Klawiatura
   · Język
+  · Klawiatura
   · Matematyka
   · Pamięć
-  · Sieć
   · Procesor
-  · Ekran
+  · Przeglądarka
+  · Sieć
   · Strefa czasowa
-  · Czasowanie
-  · Dotyk
+  · Urządzenie
+  · Wyświetlacz
 - Usuwa ślady śledzenia
-  · Referrer
-  · Parametry śledzenia
   · Nazwa okna
+  · Parametry śledzenia
+  · Referrer
 - Wzmacnia elementy sieciowe
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Aby chronić Twoją prywatność, Privacy Magic:
   · Web Workers
 - Wysyła sygnał Global Privacy Control
 - Wyłącza funkcje przeglądarki powodujące wycieki
+  · Audyt hiperłączy
   · Ciasteczka stron trzecich
   · Powiązane zestawy witryn
   · WebRTC UDP bez proxy
-  · Audyt hiperłączy
 - Wyłącza inwazyjne usługi w chmurze
-  · Usługa sprawdzania pisowni
-  · Sugestie wyszukiwania
   · Alternatywne strony błędów
   · Rozszerzone raportowanie bezpiecznego przeglądania
+  · Sugestie wyszukiwania
+  · Usługa sprawdzania pisowni
 - Wyłącza API targetowania reklam
-  · Topics API
-  · Protected Audience API
   · Pomiar reklam
+  · Protected Audience API
+  · Topics API
+

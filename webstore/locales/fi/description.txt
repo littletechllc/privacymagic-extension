@@ -6,27 +6,27 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
 
 - Estää mainokset, seuraimet ja häiriöt
 - Suojaa järjestelmätiedot (fingerprintingia vastaan)
-  · Paristi
-  · Selain
-  · Laite
-  · Levy
-  · Näyttö
-  · Fontit
-  · Grafiikka
-  · Näppäimistö
-  · Kieli
-  · Matematiikka
-  · Muisti
-  · Verkko
-  · Prosessori
-  · Näyttö
   · Aikavyöhyke
   · Ajoitus
+  · Fontit
+  · Grafiikka
+  · Kieli
   · Kosketus
+  · Laite
+  · Levy
+  · Matematiikka
+  · Muisti
+  · Näppäimistö
+  · Näyttö
+  · Näyttö
+  · Paristi
+  · Prosessori
+  · Selain
+  · Verkko
 - Poistaa seurannan jäljet
-  · Viittaaja
-  · Seurantaparametrit
   · Ikkunan nimi
+  · Seurantaparametrit
+  · Viittaaja
 - Vahvistaa web-elementtejä
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Web Workers
 - Lähettää Global Privacy Control -signaalin
 - Poistaa vuotavat selaintoiminnot käytöstä
+  · Hyperlinkkien tarkastus
   · Kolmannen osapuolen evästeet
   · Liittyvät verkkosivustojoukot
   · WebRTC-välityspalveluttoman UDP:n
-  · Hyperlinkkien tarkastus
 - Poistaa tungettelevat pilvipalvelut käytöstä
-  · Oikeinkirjoituksen tarkistus
   · Hakuehdotukset
-  · Vaihtoehtoiset virhesivut
+  · Oikeinkirjoituksen tarkistus
   · Turvallisen selaamisen laajennettu raportointi
+  · Vaihtoehtoiset virhesivut
 - Poistaa mainosten kohdentamis-API:t käytöstä
-  · Topics API
-  · Protected Audience API
   · Mainosten mittaus
+  · Protected Audience API
+  · Topics API
+

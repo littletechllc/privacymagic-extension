@@ -7,26 +7,26 @@ Pre obranu vášho súkromia Privacy Magic:
 - Blokuje reklamy, sledovače a obťažovanie
 - Chráni systémové informácie (proti fingerprintingu)
   · Batéria
-  · Prehliadač
-  · Zariadenie
-  · Disk
-  · Zobrazenie
-  · Písma
-  · Grafika
-  · Klávesnica
-  · Jazyk
-  · Matematika
-  · Pamäť
-  · Sieť
-  · Procesor
-  · Obrazovka
-  · Časové pásmo
   · Časovanie
+  · Časové pásmo
+  · Disk
   · Dotyková obrazovka
+  · Grafika
+  · Jazyk
+  · Klávesnica
+  · Matematika
+  · Obrazovka
+  · Pamäť
+  · Písma
+  · Prehliadač
+  · Procesor
+  · Sieť
+  · Zariadenie
+  · Zobrazenie
 - Odstraňuje sledovacie stopy
-  · Referrer
-  · Parametre sledovania
   · Názov okna
+  · Parametre sledovania
+  · Referrer
 - Spevňuje webové prvky
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Pre obranu vášho súkromia Privacy Magic:
   · Web Workers
 - Odesiela signál Global Privacy Control
 - Vypína funkcie prehliadača spôsobujúce úniky
+  · Auditovanie odkazov
   · Cookies tretích strán
   · Súbory súvisiacich webov
   · WebRTC neproxované UDP
-  · Auditovanie odkazov
 - Vypína invazívne cloudové služby
-  · Služba kontroly pravopisu
-  · Návrhy vyhľadávania
   · Alternatívne chybové stránky
+  · Návrhy vyhľadávania
   · Rozšírené reportovanie bezpečného prehliadania
+  · Služba kontroly pravopisu
 - Vypína API pre cielenie reklám
-  · Topics API
-  · Protected Audience API
   · Meranie reklám
+  · Protected Audience API
+  · Topics API
+

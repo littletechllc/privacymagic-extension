@@ -7,26 +7,26 @@ Kako bi obranio vašu privatnost, Privacy Magic:
 - Blokira oglase, programe za praćenje i smetnje
 - Zaštiti informacije sustava (od otiska prsta)
   · Baterija
-  · Preglednik
-  · Uređaj
   · Disk
-  · Zaslon
+  · Dodir
   · Fontovi
   · Grafika
-  · Tipkovnica
   · Jezik
   · Matematika
   · Memorija
   · Mreža
+  · Preglednik
   · Procesor
-  · Zaslon
+  · Tipkovnica
+  · Uređaj
   · Vremenska zona
   · Vremensko mjerjenje
-  · Dodir
+  · Zaslon
+  · Zaslon
 - Uklanja tragove praćenja
-  · Referer
-  · Parametri praćenja
   · Naziv prozora
+  · Parametri praćenja
+  · Referer
 - Ojačava web elemente
   · Iframes
   · Service Workers
@@ -36,14 +36,15 @@ Kako bi obranio vašu privatnost, Privacy Magic:
 - Onemogućuje funkcije preglednika koje cure
   · Kolačići trećih strana
   · Povezane skupine web-mjesta
-  · WebRTC UDP bez proxyja
   · Revizija hiperveza
+  · WebRTC UDP bez proxyja
 - Onemogućuje nametljive cloud usluge
-  · Usluga provjere pravopisa
-  · Prijedlozi pretraživanja
   · Alternativne stranice pogrešaka
+  · Prijedlozi pretraživanja
   · Prošireno izvještavanje sigurnog pregledavanja
+  · Usluga provjere pravopisa
 - Onemogućuje API-je za targetiranje oglasa
-  · Topics API
-  · Protected Audience API
   · Mjerenje oglasa
+  · Protected Audience API
+  · Topics API
+

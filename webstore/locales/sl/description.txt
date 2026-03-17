@@ -8,25 +8,25 @@ Za obrambo vaše zasebnosti Privacy Magic:
 - Zaščiti sistemske informacije (pred fingerprintingom)
   · Baterija
   · Brskalnik
-  · Naprava
-  · Disk
-  · Prikaz
-  · Pisave
-  · Grafika
-  · Tipkovnica
-  · Jezik
-  · Matematika
-  · Pomnilnik
-  · Omrežje
-  · Procesor
-  · Zaslon
   · Časovni pas
   · Časovni zamik
+  · Disk
   · Dotek
+  · Grafika
+  · Jezik
+  · Matematika
+  · Naprava
+  · Omrežje
+  · Pisave
+  · Pomnilnik
+  · Prikaz
+  · Procesor
+  · Tipkovnica
+  · Zaslon
 - Odstrani sledi sledenja
+  · Ime okna
   · Napotitelj
   · Parametri sledenja
-  · Ime okna
 - Okrepí spletne elemente
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Web Workers
 - Pošlje signal Global Privacy Control
 - Onemogoči funkcije brskalnika, ki puščajo
-  · Piškotki tretjih strani
   · Nizi povezanih spletnih mest
-  · WebRTC neproksirani UDP
+  · Piškotki tretjih strani
   · Revizija hiperpovezav
+  · WebRTC neproksirani UDP
 - Onemogoči vsiljive oblačne storitve
-  · Storitev preverjanja črkovanja
-  · Predlogi iskanja
   · Nadomestne strani z napakami
+  · Predlogi iskanja
   · Razširjeno poročanje varnega brskanja
+  · Storitev preverjanja črkovanja
 - Onemogoči API-je za ciljanje oglasov
-  · Topics API
-  · Protected Audience API
   · Merjenje oglasov
+  · Protected Audience API
+  · Topics API
+

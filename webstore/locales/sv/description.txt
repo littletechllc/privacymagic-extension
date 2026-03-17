@@ -7,26 +7,26 @@ För att skydda din integritet erbjuder Privacy Magic:
 - Blockerar annonser, spårare och störningar
 - Skyddar systeminformation (mot fingerprinting)
   · Batteri
-  · Webbläsare
-  · Enhet
   · Disk
-  · Visning
-  · Typsnitt
+  · Enhet
   · Grafik
-  · Tangentbord
-  · Språk
   · Matematik
   · Minne
   · Nätverk
+  · Pek
   · Processor
   · Skärm
+  · Språk
+  · Tangentbord
   · Tidszon
   · Timing
-  · Pek
+  · Typsnitt
+  · Visning
+  · Webbläsare
 - Tar bort spårningsspår
+  · Fönsternamn
   · Referrer
   · Spårningsparametrar
-  · Fönsternamn
 - Förstärker webbelement
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Web Workers
 - Skickar Global Privacy Control-signal
 - Inaktiverar läckande webbläsarfunktioner
-  · Tredjepartscookies
-  · Relaterade webbplatsuppsättningar
-  · WebRTC icke-proxierad UDP
   · Hyperlänksgranskning
+  · Relaterade webbplatsuppsättningar
+  · Tredjepartscookies
+  · WebRTC icke-proxierad UDP
 - Inaktiverar invasiva molntjänster
+  · Alternativa felsidor
   · Stavningskontroll
   · Sökförslag
-  · Alternativa felsidor
   · Utökad rapportering för säker surfning
 - Inaktiverar API:er för annonsmätning
-  · Topics API
-  · Protected Audience API
   · Annonsmätning
+  · Protected Audience API
+  · Topics API
+

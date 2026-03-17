@@ -7,26 +7,26 @@ Para defender su privacidad, Privacy Magic:
 - Bloquea anuncios, rastreadores y molestias
 - Protege la información del sistema (para resistir el fingerprinting)
   · Batería
-  · Navegador
-  · Dispositivo
   · Disco
-  · Pantalla
+  · Dispositivo
   · Fuentes
   · Gráficos
-  · Teclado
   · Idioma
   · Matemáticas
   · Memoria
-  · Red
-  · Procesador
+  · Navegador
   · Pantalla
-  · Zona horaria
-  · Tiempos
+  · Pantalla
+  · Procesador
+  · Red
   · Táctil
+  · Teclado
+  · Tiempos
+  · Zona horaria
 - Elimina las huellas de rastreo
-  · Referrer
-  · Parámetros de rastreo
   · Nombre de ventana
+  · Parámetros de rastreo
+  · Referrer
 - Endurece elementos web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Para defender su privacidad, Privacy Magic:
   · Web Workers
 - Envía la señal Global Privacy Control
 - Desactiva funciones del navegador con fugas
-  · Cookies de terceros
-  · Conjuntos de sitios relacionados
-  · WebRTC UDP sin proxy
   · Auditoría de enlaces
+  · Conjuntos de sitios relacionados
+  · Cookies de terceros
+  · WebRTC UDP sin proxy
 - Desactiva servicios en la nube invasivos
+  · Informes extendidos de navegación segura
+  · Páginas de error alternativas
   · Servicio de corrección ortográfica
   · Sugerencias de búsqueda
-  · Páginas de error alternativas
-  · Informes extendidos de navegación segura
 - Desactiva las API de segmentación publicitaria
-  · Topics API
-  · Protected Audience API
   · Medición de anuncios
+  · Protected Audience API
+  · Topics API
+

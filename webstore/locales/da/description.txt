@@ -7,22 +7,22 @@ For at beskytte din privatliv tilbyder Privacy Magic:
 - Blokerer annoncer, sporingsværktøjer og gener
 - Beskytter systemoplysninger (mod fingerprinting)
   · Batteri
+  · Berøring
   · Browser
-  · Enhed
   · Disk
-  · Visning
-  · Skrifttyper
+  · Enhed
   · Grafik
-  · Tastatur
-  · Sprog
-  · Matematik
   · Hukommelse
+  · Matematik
   · Netværk
   · Processor
+  · Skrifttyper
   · Skærm
+  · Sprog
+  · Tastatur
   · Tidszone
   · Timing
-  · Berøring
+  · Visning
 - Fjerner sporingsspor
   · Referrer
   · Sporingsparametre
@@ -34,16 +34,17 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Web Workers
 - Sender Global Privacy Control-signal
 - Deaktiverer lækkende browserfunktioner
-  · Tredjepartscookies
-  · Relaterede websæt
-  · WebRTC ikke-proxy UDP
   · Hyperlink-audit
+  · Relaterede websæt
+  · Tredjepartscookies
+  · WebRTC ikke-proxy UDP
 - Deaktiverer invasive cloudtjenester
+  · Alternative fejlsider
   · Stavekontrollen
   · Søgeforslag
-  · Alternative fejlsider
   · Udvidet sikker browsing-rapportering
 - Deaktiverer API'er til annoncemåling
-  · Topics API
-  · Protected Audience API
   · Annoncemåling
+  · Protected Audience API
+  · Topics API
+

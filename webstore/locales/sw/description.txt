@@ -7,26 +7,26 @@ Ili kulinda faragha yako, Privacy Magic:
 - Inazuia matangazo, wafuatiliaji na usumbufu
 - Inalinda taarifa za mfumo (dhidi ya uchukuzi wa alama za vidole)
   · Betri
-  · Kivinjari
-  · Kifaa
   · Diski
-  · Onyesho
   · Fonti
   · Graphics
-  · Kibodi
-  · Lugha
   · Hisabati
+  · Kibodi
+  · Kifaa
+  · Kivinjari
   · Kumbukumbu
+  · Lugha
+  · Mguso
   · Mtandao
+  · Muda
+  · Onyesho
   · Processor
   · Skrini
   · Ukanda wa Saa
-  · Muda
-  · Mguso
 - Inaondoa alama za ufuatiliaji
+  · Jina la Dirisha
   · Mrejeshi
   · Vigezo vya Ufuatiliaji
-  · Jina la Dirisha
 - Inaimarisha vipengele vya wavuti
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Ili kulinda faragha yako, Privacy Magic:
   · Web Workers
 - Inatuma ishara ya Global Privacy Control
 - Inazima vipengele vya kivinjari vinavyovuja
-  · Vidakuzi vya Wahusika wa Tatu
   · Seti za Tovuti Zinazohusiana
-  · WebRTC UDP isiyo-proxy
   · Ukaguzi wa Viungo
+  · Vidakuzi vya Wahusika wa Tatu
+  · WebRTC UDP isiyo-proxy
 - Inazima huduma za wingu zinazoingilia
   · Huduma ya Kuangalia Orthografia
-  · Mapendekezo ya Utafuti
   · Kurasa za Makosa Mbadala
+  · Mapendekezo ya Utafuti
   · Ripoti Iliyopanuliwa ya Uvinjari Salama
 - Inazima API za kulenga matangazo
-  · Topics API
-  · Protected Audience API
   · Kupima Matangazo
+  · Protected Audience API
+  · Topics API
+

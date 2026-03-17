@@ -7,22 +7,22 @@ For å beskytte ditt personvern tilbyr Privacy Magic:
 - Blokkerer annonser, sporere og plager
 - Beskytter systeminformasjon (mot fingerprinting)
   · Batteri
-  · Nettleser
-  · Enhet
+  · Berøring
   · Disk
-  · Skjerm
-  · Skrifter
+  · Enhet
   · Grafikk
-  · Tastatur
-  · Språk
   · Matematikk
   · Minne
+  · Nettleser
   · Nettverk
   · Prosessor
   · Skjerm
+  · Skjerm
+  · Skrifter
+  · Språk
+  · Tastatur
   · Tidssone
   · Timing
-  · Berøring
 - Fjerner sporingsspor
   · Referrer
   · Sporingsparametere
@@ -34,16 +34,17 @@ For å beskytte ditt personvern tilbyr Privacy Magic:
   · Web Workers
 - Sender Global Privacy Control-signal
 - Deaktiverer lekkende nettleserfunksjoner
-  · Tredjepartsinformasjonskapsler
   · Relaterte nettstedsett
-  · WebRTC UDP uten proxy
   · Revisjon av hyperlenker
+  · Tredjepartsinformasjonskapsler
+  · WebRTC UDP uten proxy
 - Deaktiverer invasive skytjenester
+  · Alternative feilsider
   · Stavekontrolltjeneste
   · Søkeforslag
-  · Alternative feilsider
   · Utvidet rapportering for trygg nettlesing
 - Deaktiverer API-er for annonsemåling
-  · Topics API
-  · Protected Audience API
   · Annonsemåling
+  · Protected Audience API
+  · Topics API
+

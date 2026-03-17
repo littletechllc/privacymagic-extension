@@ -34,16 +34,17 @@ To defend your privacy, Privacy Magic:
   · Web Workers
 - Sends Global Privacy Control signal
 - Disables leaky browser features
-  · Third-Party Cookies
-  · Related Website Sets
-  · WebRTC non-proxied UDP
   · Hyperlink Auditing
+  · Related Website Sets
+  · Third-Party Cookies
+  · WebRTC non-proxied UDP
 - Disables invasive cloud services
-  · Spelling Service
-  · Search Suggest
   · Alternate Error Pages
   · Safe Browsing Extended Reporting
+  · Search Suggest
+  · Spelling Service
 - Disables ad targeting APIs
-  · Topics API
-  · Protected Audience API
   · Ad Measurement API
+  · Protected Audience API
+  · Topics API
+

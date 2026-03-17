@@ -6,23 +6,23 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
 
 - Bloķē reklāmas, izsekotājus un kaitinājumus
 - Aizsargā sistēmas informāciju (pret pirkstu nospiedumu)
+  · Atmiņa
   · Baterija
-  · Pārlūks
-  · Ierīce
   · Disks
   · Displejs
-  · Šrifti
-  · Grafika
-  · Tastatūra
-  · Valoda
-  · Matemātika
-  · Atmiņa
-  · Tīkls
-  · Procesors
   · Ekrāns
+  · Grafika
+  · Ierīce
   · Laika zona
   · Laiks
+  · Matemātika
+  · Pārlūks
   · Pieskāriens
+  · Procesors
+  · Šrifti
+  · Tastatūra
+  · Tīkls
+  · Valoda
 - Noņem izsekošanas pēdas
   · Atsauce
   · Izsekošanas parametri
@@ -34,16 +34,17 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Web Workers
 - Nosūta Global Privacy Control (GPC) signālu
 - Atspējo noplūstošās pārlūka funkcijas
-  · Trešo pušu sīkdatnes
-  · Saistītās vietņu kopas
-  · WebRTC bez starpniekservera UDP
   · Hipersaites audits
+  · Saistītās vietņu kopas
+  · Trešo pušu sīkdatnes
+  · WebRTC bez starpniekservera UDP
 - Atspējo iejaukšanās mākoņpakalpojumus
-  · Pareizrakstības pakalpojums
-  · Meklēšanas ieteikumi
   · Alternatīvās kļūdu lapas
   · Drošās pārlūkošanas paplašinātā ziņošana
+  · Meklēšanas ieteikumi
+  · Pareizrakstības pakalpojums
 - Atspējo reklāmu mērķēšanas API
-  · Topics API
   · Protected Audience API
   · Reklāmu mērīšana
+  · Topics API
+

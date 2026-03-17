@@ -6,27 +6,27 @@ Untuk mempertahankan privasi anda, Privacy Magic:
 
 - Menyekat iklan, penjejak dan gangguan
 - Melindungi maklumat sistem (daripada cap jari)
+  · Bahasa
   · Bateri
-  · Pelayar
-  · Peranti
   · Cakera
-  · Paparan
   · Fon
   · Grafik
-  · Papan kekunci
-  · Bahasa
   · Matematik
   · Memori
-  · Rangkaian
+  · Papan kekunci
+  · Paparan
+  · Pelayar
   · Pemproses
-  · Skrin
-  · Zon masa
-  · Timing
+  · Peranti
+  · Rangkaian
   · Sentuhan
+  · Skrin
+  · Timing
+  · Zon masa
 - Membuang jejak penjejakan
-  · Perujuk
-  · Parameter penjejakan
   · Nama tetingkap
+  · Parameter penjejakan
+  · Perujuk
 - Mengukuhkan elemen web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Untuk mempertahankan privasi anda, Privacy Magic:
   · Web Workers
 - Menghantar isyarat Global Privacy Control
 - Melumpuhkan ciri pelayar yang bocor
+  · Audit hiperpautan
   · Kuki pihak ketiga
   · Set laman web berkaitan
   · WebRTC UDP tanpa proksi
-  · Audit hiperpautan
 - Melumpuhkan perkhidmatan awan yang menceroboh
-  · Perkhidmatan ejaan
   · Cadangan carian
   · Halaman ralat alternatif
   · Laporan lanjutan pelayaran selamat
+  · Perkhidmatan ejaan
 - Melumpuhkan API penargetan iklan
-  · Topics API
-  · Protected Audience API
   · Pengukuran iklan
+  · Protected Audience API
+  · Topics API
+

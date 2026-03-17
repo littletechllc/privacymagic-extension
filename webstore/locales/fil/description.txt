@@ -34,16 +34,17 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
   · Web Workers
 - Nagpapadala ng Global Privacy Control signal
 - Pinapatay ang mga browser feature na tumatagas
-  · Third-Party Cookies
-  · Related Website Sets
-  · WebRTC non-proxied UDP
   · Hyperlink Auditing
+  · Related Website Sets
+  · Third-Party Cookies
+  · WebRTC non-proxied UDP
 - Pinapatay ang mga invasive cloud services
-  · Spelling Service
-  · Search Suggest
   · Alternate Error Pages
   · Safe Browsing Extended Reporting
+  · Search Suggest
+  · Spelling Service
 - Pinapatay ang mga ad targeting API
-  · Topics API
-  · Protected Audience API
   · Ad Measurement API
+  · Protected Audience API
+  · Topics API
+

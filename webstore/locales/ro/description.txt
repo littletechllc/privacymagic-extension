@@ -6,27 +6,27 @@ Pentru a vă apăra confidențialitatea, Privacy Magic:
 
 - Blochează reclame, trackere și supărări
 - Protejează informațiile de sistem (împotriva fingerprintingului)
+  · Afișaj
   · Baterie
   · Browser
-  · Dispozitiv
+  · Cronometrare
   · Disc
-  · Afișaj
+  · Dispozitiv
+  · Ecran
   · Fonturi
+  · Fus orar
   · Grafice
-  · Tastatură
   · Limbă
   · Matematică
   · Memorie
-  · Rețea
   · Procesor
-  · Ecran
-  · Fus orar
-  · Cronometrare
+  · Rețea
   · Tactil
+  · Tastatură
 - Elimină urmele de urmărire
-  · Referrer
-  · Parametri urmărire
   · Nume fereastră
+  · Parametri urmărire
+  · Referrer
 - Întărește elementele web
   · Iframes
   · Service Workers
@@ -34,16 +34,17 @@ Pentru a vă apăra confidențialitatea, Privacy Magic:
   · Web Workers
 - Trimite semnal Global Privacy Control
 - Dezactivează funcțiile browser care scurg date
+  · Auditarea hiperlinkurilor
   · Cookie-uri terțe
   · Seturi de site-uri înrudite
   · WebRTC UDP neproxiat
-  · Auditarea hiperlinkurilor
 - Dezactivează serviciile cloud invazive
-  · Serviciul de verificare ortografică
-  · Sugestiile de căutare
   · Paginile de eroare alternative
   · Raportarea extinsă pentru navigare sigură
+  · Serviciul de verificare ortografică
+  · Sugestiile de căutare
 - Dezactivează API-urile de targetare a reclamelor
-  · Topics API
-  · Protected Audience API
   · Măsurarea reclamelor
+  · Protected Audience API
+  · Topics API
+
