@@ -1,0 +1,49 @@
+Le Web est une merveille : il vous donne accès à l'information du monde. C'est une partie essentielle de la vie moderne. Malheureusement, le Web est aussi un vecteur de surveillance de masse. Tout ce que vous faites en ligne est collecté, stocké et analysé par des entreprises et des gouvernements.
+
+Privacy Magic fournit des protections complètes et multicouches pour vous protéger de la surveillance.
+
+Pour défendre votre vie privée, Privacy Magic :
+
+- Bloque les publicités, traceurs et nuisances
+- Protège les informations système (pour résister au fingerprinting)
+  · Batterie
+  · Navigateur
+  · Appareil
+  · Disque
+  · Affichage
+  · Polices
+  · Graphique
+  · Clavier
+  · Langue
+  · Maths
+  · Mémoire
+  · Réseau
+  · Processeur
+  · Écran
+  · Fuseau horaire
+  · Chronométrage
+  · Tactile
+- Supprime les traces de suivi
+  · Référent
+  · Paramètres de suivi
+  · Nom de fenêtre
+- Durcit les éléments web
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Envoie le signal Global Privacy Control
+- Désactive les fonctionnalités du navigateur qui fuient
+  · Cookies tiers
+  · Ensembles de sites associés
+  · WebRTC UDP sans proxy
+  · Audit des hyperliens
+- Désactive les services cloud invasifs
+  · Correcteur orthographique
+  · Suggestions de recherche
+  · Pages d'erreur alternatives
+  · Rapport étendu de navigation sécurisée
+- Désactive les API de ciblage publicitaire
+  · Topics API
+  · Protected Audience API
+  · Mesure publicitaire

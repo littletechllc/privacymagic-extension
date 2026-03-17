@@ -1,0 +1,49 @@
+El web és una cosa meravellosa: us dóna accés a la informació del món. És una part essencial de la vida moderna. Malauradament, el web és també un vehicle de vigilància massiva. Tot el que feu en línia es recull, s'emmagatzema i s'analitza per corporacions i governs.
+
+Privacy Magic proporciona proteccions exhaustives i en capes contra la vigilància.
+
+Per defensar la vostra privacitat, Privacy Magic:
+
+- Bloqueja anuncis, seguidors i molesties
+- Protegeix la informació del sistema (contra la presa d'empremtes)
+  · Bateria
+  · Navegador
+  · Dispositiu
+  · Disc
+  · Monitor
+  · Fonts
+  · Gràfics
+  · Teclat
+  · Idioma
+  · Math
+  · Memòria
+  · Xarxa
+  · Processador
+  · Pantalla
+  · Zona horària
+  · Temps
+  · Tàctil
+- Elimina les restes de seguiment
+  · Referent
+  · Paràmetres de seguiment
+  · Nom de la finestra
+- Endureix els elements web
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Envia el senyal Global Privacy Control
+- Desactiva les funcions del navegador que perden dades
+  · Galetes de tercers
+  · Conjunts de llocs relacionats
+  · WebRTC UDP sense proxy
+  · Auditoria d'hiperenllaços
+- Desactiva els serveis al núvol invasius
+  · Servei d'ortografia
+  · Suggeriments de cerca
+  · Pàgines d'error alternatives
+  · Informe ampliat de navegació segura
+- Desactiva les API de segmentació d'anuncis
+  · Topics API
+  · Protected Audience API
+  · Mesura d'anuncis

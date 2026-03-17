@@ -1,0 +1,49 @@
+Wavuti ni jambo la ajabu: inakupa ufikiaji wa taarifa za ulimwengu. Ni sehemu muhimu ya maisha ya kisasa. Kwa bahati mbaya, wavuti pia ni chombo cha ufuatiliaji wa wingi. Kila unachofanya mtandaoni kinakusanywa, kuhifadhiwa na kuchambuliwa na mashirika na serikali.
+
+Privacy Magic inatoa ulinzi kamili na wa tabaka dhidi ya ufuatiliaji.
+
+Ili kulinda faragha yako, Privacy Magic:
+
+- Inazuia matangazo, wafuatiliaji na usumbufu
+- Inalinda taarifa za mfumo (dhidi ya uchukuzi wa alama za vidole)
+  · Betri
+  · Kivinjari
+  · Kifaa
+  · Diski
+  · Onyesho
+  · Fonti
+  · Graphics
+  · Kibodi
+  · Lugha
+  · Math
+  · Kumbukumbu
+  · Mtandao
+  · Processor
+  · Skrini
+  · Ukanda wa Saa
+  · Muda
+  · Mguso
+- Inaondoa alama za ufuatiliaji
+  · Mrejeshi
+  · Vigezo vya Ufuatiliaji
+  · Jina la Dirisha
+- Inaimarisha vipengele vya wavuti
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Inatuma ishara ya Global Privacy Control
+- Inazima vipengele vya kivinjari vinavyovuja
+  · Vidakuzi vya Wahusika wa Tatu
+  · Seti za Tovuti Zinazohusiana
+  · WebRTC UDP isiyo-proxy
+  · Ukaguzi wa Viungo
+- Inazima huduma za wingu zinazoingilia
+  · Huduma ya Kuangalia Orthografia
+  · Mapendekezo ya Utafuti
+  · Kurasa za Makosa Mbadala
+  · Ripoti Iliyopanuliwa ya Uvinjari Salama
+- Inazima API za kulenga matangazo
+  · Topics API
+  · Protected Audience API
+  · Kupima Matangazo

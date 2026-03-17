@@ -1,0 +1,49 @@
+Veeb on imeline: see annab teile juurdepääsu maailma teadmistele. See on oluline osa kaasajast elust. Kahjuks on veeb ka massilise järelevalve vahend. Kõik, mida te võrgus teete, kogub, salvestab ja analüüsib ettevõtteid ja valitsusi.
+
+Privacy Magic pakub põhjalikke, kihiliselt kaitseid järelevalve eest.
+
+Teie privaatsuse kaitsmiseks pakub Privacy Magic:
+
+- Blokeerib reklaame, jälgijaid ja tülikust
+- Kaitseb süsteemi teavet (sõrmejälje võtmise vastu)
+  · Patarei
+  · Brauser
+  · Seade
+  · Ketas
+  · Kuva
+  · Fondid
+  · Graafika
+  · Klaviatuur
+  · Keel
+  · Math
+  · Mälu
+  · Võrk
+  · Protsessor
+  · Ekraan
+  · Ajavöönd
+  · Ajastus
+  · Puudutus
+- Eemaldab jälgimise jäljed
+  · Viitaja
+  · Jälgimise parameetrid
+  · Akna nimi
+- Tugevdab veebielemente
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Saadab Global Privacy Control (GPC) signaali
+- Keelab lekkivad brauseri funktsioonid
+  · Kolmandate osapoolte küpsised
+  · Seotud veebisaidikogumid
+  · WebRTC proxyta UDP
+  · Hüperlingi auditeerimine
+- Keelab tungival pilveteenused
+  · Õigekirja teenus
+  · Otsingu soovitused
+  · Asendusvea leheküljed
+  · Turvalise sirvimise laiendatud aruandlus
+- Keelab reklaamide sihtimise API-d
+  · Topics API
+  · Protected Audience API
+  · Reklaamide mõõtmine

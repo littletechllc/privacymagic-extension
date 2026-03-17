@@ -1,0 +1,49 @@
+A web csodálatos dolog: hozzáférést biztosít a világ információihoz. Lényeges része a modern életnek. Sajnos a web egyben tömeges megfigyelés eszköze is. Minden, amit online csinálsz, gyűjtésre, tárolásra és elemzésre kerül vállalatok és kormányok által.
+
+A Privacy Magic átfogó, rétegezett védelmet nyújt a megfigyelés ellen.
+
+Az adatvédelem érdekében a Privacy Magic:
+
+- Blokkolja a hirdetéseket, követőket és zaklatásokat
+- Védi a rendszerinformációkat (fingerprinting ellen)
+  · Akkumulátor
+  · Böngésző
+  · Eszköz
+  · Lemez
+  · Kijelző
+  · Betűtípusok
+  · Grafika
+  · Billentyűzet
+  · Nyelv
+  · Math
+  · Memória
+  · Hálózat
+  · Processzor
+  · Képernyő
+  · Időzóna
+  · Időzítés
+  · Érintés
+- Eltávolítja a követési nyomokat
+  · Referrer
+  · Követési paraméterek
+  · Ablak neve
+- Megerősíti a webelemeket
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Global Privacy Control jelzés küldése
+- Kikapcsolja a szivárgó böngészőfunkciókat
+  · Harmadik féltől származó sütik
+  · Kapcsolódó webhelycsoportok
+  · WebRTC proxy nélküli UDP
+  · Hiperhivatkozás-naplózás
+- Kikapcsolja a tolakodó felhőszolgáltatásokat
+  · Helyesírás-ellenőrzés
+  · Keresési javaslatok
+  · Alternatív hiboldalak
+  · Biztonságos böngészés bővített jelentése
+- Kikapcsolja a hirdetésközvetítő API-kat
+  · Topics API
+  · Protected Audience API
+  · Hirdetésmérés

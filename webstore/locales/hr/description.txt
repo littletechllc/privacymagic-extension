@@ -1,0 +1,49 @@
+Web je divan: daje vam pristup informacijama svijeta. Bitni je dio modernog života. Nažalost, web je i sredstvo masovnog nadzora. Sve što radite online prikupljaju, pohranjuju i analiziraju korporacije i vlade.
+
+Privacy Magic pruža temeljitu, slojevitu zaštitu od nadzora.
+
+Kako bi obranio vašu privatnost, Privacy Magic:
+
+- Blokira oglase, programe za praćenje i smetnje
+- Zaštiti informacije sustava (od otiska prsta)
+  · Baterija
+  · Preglednik
+  · Uređaj
+  · Disk
+  · Zaslon
+  · Fontovi
+  · Grafika
+  · Tipkovnica
+  · Jezik
+  · Math
+  · Memorija
+  · Mreža
+  · Procesor
+  · Zaslon
+  · Vremenska zona
+  · Vremensko mjerjenje
+  · Dodir
+- Uklanja tragove praćenja
+  · Referer
+  · Parametri praćenja
+  · Naziv prozora
+- Ojačava web elemente
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Šalje Global Privacy Control signal
+- Onemogućuje funkcije preglednika koje cure
+  · Kolačići trećih strana
+  · Povezane skupine web-mjesta
+  · WebRTC UDP bez proxyja
+  · Revizija hiperveza
+- Onemogućuje nametljive cloud usluge
+  · Usluga provjere pravopisa
+  · Prijedlozi pretraživanja
+  · Alternativne stranice pogrešaka
+  · Prošireno izvještavanje sigurnog pregledavanja
+- Onemogućuje API-je za targetiranje oglasa
+  · Topics API
+  · Protected Audience API
+  · Mjerenje oglasa

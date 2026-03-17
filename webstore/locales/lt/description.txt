@@ -1,0 +1,49 @@
+Žiniatinklis yra nuostabus: jis suteikia jums prieigą prie pasaulio informacijos. Tai esminė šiuolaikinio gyvenimo dalis. Deja, žiniatinklis taip pat yra masinės priežiūros priemonė. Viskas, ką darote internete, renka, saugo ir analizuoja korporacijos ir vyriausybės.
+
+Privacy Magic suteikia nuodugnų, sluoksniuotą apsaugą nuo priežiūros.
+
+Jūsų privatumui ginti Privacy Magic:
+
+- Blokuoja reklamas, sekiklius ir erzinimus
+- Apsaugo sistemos informaciją (nuo pirštų atspaudų)
+  · Baterija
+  · Naršyklė
+  · Įrenginys
+  · Diskas
+  · Ekranas
+  · Šriftai
+  · Grafika
+  · Klaviatūra
+  · Kalba
+  · Math
+  · Atmintis
+  · Tinklas
+  · Procesorius
+  · Ekranas
+  · Laiko juosta
+  · Laikmatis
+  · Lietimas
+- Pašalina sekimo pėdsakus
+  · Nurodytojas
+  · Sekimo parametrai
+  · Lango pavadinimas
+- Stiprina žiniatinklio elementus
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Siunčia Global Privacy Control (GPC) signalą
+- Išjungia nesandarius naršyklės funkcijas
+  · Trečiųjų šalių slapukai
+  · Susijusių svetainių rinkiniai
+  · WebRTC be proxy UDP
+  · Hipernuorodų auditas
+- Išjungia įsibroviančias debesų paslaugas
+  · Rašybos tikrinimo paslauga
+  · Paieškos pasiūlymai
+  · Alternatyvūs klaidų puslapiai
+  · Saugaus naršymo išplėstinė ataskaita
+- Išjungia reklamų taikinimo API
+  · Topics API
+  · Protected Audience API
+  · Reklamų matavimas

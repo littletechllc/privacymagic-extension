@@ -1,0 +1,49 @@
+Ang web ay kahanga-hanga: binibigyan ka nito ng access sa impormasyon ng mundo. Mahalagang bahagi ito ng modernong buhay. Sa kasamaang-palad, ang web ay daluyan din ng mass surveillance. Lahat ng ginagawa mo online ay kinokolekta, iniimbak at sinusuri ng mga korporasyon at gobyerno.
+
+Nagbibigay ang Privacy Magic ng masinsinan, patong-patong na proteksyon laban sa surveillance.
+
+Para ipagtanggol ang iyong privacy, ang Privacy Magic:
+
+- Nagba-block ng ads, trackers at mga abala
+- Pinoprotektahan ang system information (laban sa fingerprinting)
+  · Battery
+  · Browser
+  · Device
+  · Disk
+  · Display
+  · Fonts
+  · Graphics
+  · Keyboard
+  · Language
+  · Math
+  · Memory
+  · Network
+  · Processor
+  · Screen
+  · Time Zone
+  · Timing
+  · Touch
+- Inaalis ang tracking breadcrumbs
+  · Referrer
+  · Tracking Parameters
+  · Window Name
+- Pinatitibay ang web elements
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Nagpapadala ng Global Privacy Control signal
+- Pinapatay ang mga browser feature na tumatagas
+  · Third-Party Cookies
+  · Related Website Sets
+  · WebRTC non-proxied UDP
+  · Hyperlink Auditing
+- Pinapatay ang mga invasive cloud services
+  · Spelling Service
+  · Search Suggest
+  · Alternate Error Pages
+  · Safe Browsing Extended Reporting
+- Pinapatay ang mga ad targeting API
+  · Topics API
+  · Protected Audience API
+  · Ad Measurement API

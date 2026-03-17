@@ -1,0 +1,49 @@
+Nettet er en fantastisk ting: det gir deg tilgang til verdens informasjon. Det er en viktig del av det moderne livet. Dessverre er nettet også et verktøy for masseovervåking. Alt du gjør på nettet, blir samlet inn, lagret og analysert av selskaper og myndigheter.
+
+Privacy Magic gir grundig, lagdelt beskyttelse mot overvåking.
+
+For å beskytte ditt personvern tilbyr Privacy Magic:
+
+- Blokkerer annonser, sporere og plager
+- Beskytter systeminformasjon (mot fingerprinting)
+  · Batteri
+  · Nettleser
+  · Enhet
+  · Disk
+  · Skjerm
+  · Skrifter
+  · Grafikk
+  · Tastatur
+  · Språk
+  · Math
+  · Minne
+  · Nettverk
+  · Prosessor
+  · Skjerm
+  · Tidssone
+  · Timing
+  · Berøring
+- Fjerner sporingsspor
+  · Referrer
+  · Sporingsparametere
+  · Vindunavn
+- Styrker webelementer
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Sender Global Privacy Control-signal
+- Deaktiverer lekkende nettleserfunksjoner
+  · Tredjepartsinformasjonskapsler
+  · Relaterte nettstedsett
+  · WebRTC UDP uten proxy
+  · Revisjon av hyperlenker
+- Deaktiverer invasive skytjenester
+  · Stavekontrolltjeneste
+  · Søkeforslag
+  · Alternative feilsider
+  · Utvidet rapportering for trygg nettlesing
+- Deaktiverer API-er for annonsemåling
+  · Topics API
+  · Protected Audience API
+  · Annonsemåling

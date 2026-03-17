@@ -1,0 +1,49 @@
+Splet je čudovita stvar: omogoča vam dostop do informacij sveta. Bistveni del je modernega življenja. Žal je splet tudi orodje za množično nadzorstvo. Vse, kar počnete na spletu, zbere, shrani in analizirajo korporacije in vlade.
+
+Privacy Magic zagotavlja temeljito, večplastno zaščito pred nadzorstvom.
+
+Za obrambo vaše zasebnosti Privacy Magic:
+
+- Blokira oglase, sledilce in moteče vsebine
+- Zaščiti sistemske informacije (pred fingerprintingom)
+  · Baterija
+  · Brskalnik
+  · Naprava
+  · Disk
+  · Prikaz
+  · Pisave
+  · Grafika
+  · Tipkovnica
+  · Jezik
+  · Math
+  · Pomnilnik
+  · Omrežje
+  · Procesor
+  · Zaslon
+  · Časovni pas
+  · Časovni zamik
+  · Dotek
+- Odstrani sledi sledenja
+  · Napotitelj
+  · Parametri sledenja
+  · Ime okna
+- Okrepí spletne elemente
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Pošlje signal Global Privacy Control
+- Onemogoči funkcije brskalnika, ki puščajo
+  · Piškotki tretjih strani
+  · Nizi povezanih spletnih mest
+  · WebRTC neproksirani UDP
+  · Revizija hiperpovezav
+- Onemogoči vsiljive oblačne storitve
+  · Storitev preverjanja črkovanja
+  · Predlogi iskanja
+  · Nadomestne strani z napakami
+  · Razširjeno poročanje varnega brskanja
+- Onemogoči API-je za ciljanje oglasov
+  · Topics API
+  · Protected Audience API
+  · Merjenje oglasov

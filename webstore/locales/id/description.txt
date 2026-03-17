@@ -1,0 +1,49 @@
+Web adalah hal yang luar biasa: memberi Anda akses ke informasi dunia. Ini bagian penting dari kehidupan modern. Sayangnya, web juga menjadi sarana pengawasan massal. Semua yang Anda lakukan daring dikumpulkan, disimpan, dan dianalisis oleh perusahaan dan pemerintah.
+
+Privacy Magic menyediakan perlindungan menyeluruh dan berlapis dari pengawasan.
+
+Untuk membela privasi Anda, Privacy Magic:
+
+- Memblokir iklan, pelacak, dan gangguan
+- Melindungi informasi sistem (dari fingerprinting)
+  · Baterai
+  · Browser
+  · Perangkat
+  · Disk
+  · Tampilan
+  · Font
+  · Grafis
+  · Keyboard
+  · Bahasa
+  · Math
+  · Memori
+  · Jaringan
+  · Prosesor
+  · Layar
+  · Zona waktu
+  · Timing
+  · Sentuh
+- Menghapus jejak pelacakan
+  · Perujuk
+  · Parameter pelacakan
+  · Nama jendela
+- Mengeraskan elemen web
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Mengirim sinyal Global Privacy Control (GPC)
+- Menonaktifkan fitur browser yang bocor
+  · Cookie pihak ketiga
+  · Set situs terkait
+  · WebRTC UDP non-proxy
+  · Audit hyperlink
+- Menonaktifkan layanan cloud invasif
+  · Layanan ejaan
+  · Saran penelusuran
+  · Halaman error alternatif
+  · Pelaporan diperluas penelusuran aman
+- Menonaktifkan API target iklan
+  · Topics API
+  · Protected Audience API
+  · Pengukuran iklan

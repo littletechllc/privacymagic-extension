@@ -1,0 +1,49 @@
+Web là điều tuyệt vời: nó mang đến cho bạn quyền truy cập thông tin của thế giới. Đó là phần thiết yếu của cuộc sống hiện đại. Thật không may, web cũng là phương tiện giám sát hàng loạt. Mọi thứ bạn làm trực tuyến đều bị thu thập, lưu trữ và phân tích bởi các tập đoàn và chính phủ.
+
+Privacy Magic cung cấp sự bảo vệ toàn diện, nhiều lớp chống lại giám sát.
+
+Để bảo vệ quyền riêng tư của bạn, Privacy Magic:
+
+- Chặn quảng cáo, trình theo dõi và nội dung phiền nhiễu
+- Bảo vệ thông tin hệ thống (chống lấy dấu vân tay)
+  · Pin
+  · Trình duyệt
+  · Thiết bị
+  · Đĩa
+  · Hiển thị
+  · Phông chữ
+  · Đồ họa
+  · Bàn phím
+  · Ngôn ngữ
+  · Math
+  · Bộ nhớ
+  · Mạng
+  · Bộ xử lý
+  · Màn hình
+  · Múi giờ
+  · Thời gian
+  · Cảm ứng
+- Xóa dấu vết theo dõi
+  · Người giới thiệu
+  · Tham số theo dõi
+  · Tên cửa sổ
+- Củng cố các phần tử web
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Gửi tín hiệu Global Privacy Control
+- Tắt các tính năng trình duyệt rò rỉ
+  · Cookie bên thứ ba
+  · Tập trang web liên quan
+  · WebRTC UDP không qua proxy
+  · Kiểm tra siêu liên kết
+- Tắt các dịch vụ đám mây xâm phạm
+  · Dịch vụ chính tả
+  · Gợi ý tìm kiếm
+  · Trang lỗi thay thế
+  · Báo cáo mở rộng duyệt web an toàn
+- Tắt API nhắm mục tiêu quảng cáo
+  · Topics API
+  · Protected Audience API
+  · Đo lường quảng cáo

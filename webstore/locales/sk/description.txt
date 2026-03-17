@@ -1,0 +1,49 @@
+Web je úžasná vec: dáva vám prístup k informáciám sveta. Je neoddeliteľnou súčasťou moderného života. Bohužiaľ web je tiež nástrojom hromadného sledovania. Všetko, čo robíte online, je zbierané, ukladané a analyzované korporáciami a vládami.
+
+Privacy Magic poskytuje dôkladnú, vrstvenú ochranu pred sledovaním.
+
+Pre obranu vášho súkromia Privacy Magic:
+
+- Blokuje reklamy, sledovače a obťažovanie
+- Chráni systémové informácie (proti fingerprintingu)
+  · Batéria
+  · Prehliadač
+  · Zariadenie
+  · Disk
+  · Zobrazenie
+  · Písma
+  · Grafika
+  · Klávesnica
+  · Jazyk
+  · Math
+  · Pamäť
+  · Sieť
+  · Procesor
+  · Obrazovka
+  · Časové pásmo
+  · Časovanie
+  · Dotyková obrazovka
+- Odstraňuje sledovacie stopy
+  · Referrer
+  · Parametre sledovania
+  · Názov okna
+- Spevňuje webové prvky
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Odesiela signál Global Privacy Control
+- Vypína funkcie prehliadača spôsobujúce úniky
+  · Cookies tretích strán
+  · Súbory súvisiacich webov
+  · WebRTC neproxované UDP
+  · Auditovanie odkazov
+- Vypína invazívne cloudové služby
+  · Služba kontroly pravopisu
+  · Návrhy vyhľadávania
+  · Alternatívne chybové stránky
+  · Rozšírené reportovanie bezpečného prehliadania
+- Vypína API pre cielenie reklám
+  · Topics API
+  · Protected Audience API
+  · Meranie reklám

@@ -1,0 +1,49 @@
+Webben är en fantastisk sak: den ger dig tillgång till världens information. Det är en väsentlig del av det moderna livet. Tyvärr är webben också ett verktyg för massövervakning. Allt du gör online samlas in, lagras och analyseras av företag och regeringar.
+
+Privacy Magic ger grundlig, skiktad skydd mot övervakning.
+
+För att skydda din integritet erbjuder Privacy Magic:
+
+- Blockerar annonser, spårare och störningar
+- Skyddar systeminformation (mot fingerprinting)
+  · Batteri
+  · Webbläsare
+  · Enhet
+  · Disk
+  · Visning
+  · Typsnitt
+  · Grafik
+  · Tangentbord
+  · Språk
+  · Math
+  · Minne
+  · Nätverk
+  · Processor
+  · Skärm
+  · Tidszon
+  · Timing
+  · Pek
+- Tar bort spårningsspår
+  · Referrer
+  · Spårningsparametrar
+  · Fönsternamn
+- Förstärker webbelement
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Skickar Global Privacy Control-signal
+- Inaktiverar läckande webbläsarfunktioner
+  · Tredjepartscookies
+  · Relaterade webbplatsuppsättningar
+  · WebRTC icke-proxierad UDP
+  · Hyperlänksgranskning
+- Inaktiverar invasiva molntjänster
+  · Stavningskontroll
+  · Sökförslag
+  · Alternativa felsidor
+  · Utökad rapportering för säker surfning
+- Inaktiverar API:er för annonsmätning
+  · Topics API
+  · Protected Audience API
+  · Annonsmätning

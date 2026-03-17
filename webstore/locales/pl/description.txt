@@ -1,0 +1,49 @@
+Internet to wspaniała rzecz: daje dostęp do informacji z całego świata. To nieodzowna część współczesnego życia. Niestety, internet jest także narzędziem masowej inwigilacji. Wszystko, co robisz online, jest zbierane, przechowywane i analizowane przez korporacje i rządy.
+
+Privacy Magic zapewnia wszechstronną, wielowarstwową ochronę przed inwigilacją.
+
+Aby chronić Twoją prywatność, Privacy Magic:
+
+- Blokuje reklamy, trackery i uciążliwości
+- Chroni informacje systemowe (przed fingerprintingiem)
+  · Bateria
+  · Przeglądarka
+  · Urządzenie
+  · Dysk
+  · Wyświetlacz
+  · Czcionki
+  · Grafika
+  · Klawiatura
+  · Język
+  · Math
+  · Pamięć
+  · Sieć
+  · Procesor
+  · Ekran
+  · Strefa czasowa
+  · Czasowanie
+  · Dotyk
+- Usuwa ślady śledzenia
+  · Referrer
+  · Parametry śledzenia
+  · Nazwa okna
+- Wzmacnia elementy sieciowe
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Wysyła sygnał Global Privacy Control
+- Wyłącza funkcje przeglądarki powodujące wycieki
+  · Ciasteczka stron trzecich
+  · Powiązane zestawy witryn
+  · WebRTC UDP bez proxy
+  · Audyt hiperłączy
+- Wyłącza inwazyjne usługi w chmurze
+  · Usługa sprawdzania pisowni
+  · Sugestie wyszukiwania
+  · Alternatywne strony błędów
+  · Rozszerzone raportowanie bezpiecznego przeglądania
+- Wyłącza API targetowania reklam
+  · Topics API
+  · Protected Audience API
+  · Pomiar reklam

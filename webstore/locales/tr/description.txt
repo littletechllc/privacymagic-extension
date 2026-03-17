@@ -1,0 +1,49 @@
+Web harika bir şeydir: size dünyanın bilgisine erişim sağlar. Modern yaşamın vazgeçilmez bir parçasıdır. Ne yazık ki web aynı zamanda kitlesel gözetimin aracıdır. Çevrimiçi yaptığınız her şey şirketler ve hükümetler tarafından toplanıyor, depolanıyor ve analiz ediliyor.
+
+Privacy Magic, sizi gözetimden korumak için kapsamlı, katmanlı koruma sağlar.
+
+Gizliliğinizi korumak için Privacy Magic:
+
+- Reklamları, izleyicileri ve rahatsızlıkları engeller
+- Sistem bilgisini korur (parmak izine karşı)
+  · Pil
+  · Tarayıcı
+  · Cihaz
+  · Disk
+  · Görüntü
+  · Yazı tipleri
+  · Grafik
+  · Klavye
+  · Dil
+  · Math
+  · Bellek
+  · Ağ
+  · İşlemci
+  · Ekran
+  · Saat dilimi
+  · Zamanlama
+  · Dokunma
+- İzleme izlerini kaldırır
+  · Yönlendiren
+  · İzleme parametreleri
+  · Pencere adı
+- Web öğelerini güçlendirir
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Global Privacy Control sinyali gönderir
+- Sızdıran tarayıcı özelliklerini devre dışı bırakır
+  · Üçüncü taraf çerezleri
+  · İlişkili web sitesi kümeleri
+  · WebRTC proxy kullanmayan UDP
+  · Köprü denetimi
+- Müdahaleci bulut hizmetlerini devre dışı bırakır
+  · Yazım denetimi hizmeti
+  · Arama önerisi
+  · Alternatif hata sayfaları
+  · Güvenli tarama genişletilmiş raporlama
+- Reklam hedefleme API'lerini devre dışı bırakır
+  · Topics API
+  · Protected Audience API
+  · Reklam ölçümü

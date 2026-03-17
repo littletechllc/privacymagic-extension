@@ -1,0 +1,49 @@
+Het web is iets wonderlijks: het geeft u toegang tot de informatie van de wereld. Het is een essentieel onderdeel van het moderne leven. Helaas is het web ook een middel voor massasurveillance. Alles wat u online doet, wordt verzameld, opgeslagen en geanalyseerd door bedrijven en overheden.
+
+Privacy Magic biedt grondige, gelaagde bescherming om u te beschermen tegen surveillance.
+
+Om uw privacy te verdedigen, biedt Privacy Magic:
+
+- Blokkeert advertenties, trackers en overlast
+- Beschermt systeeminformatie (tegen fingerprinting)
+  · Batterij
+  · Browser
+  · Apparaat
+  · Schijf
+  · Weergave
+  · Lettertypen
+  · Grafisch
+  · Toetsenbord
+  · Taal
+  · Math
+  · Geheugen
+  · Netwerk
+  · Processor
+  · Scherm
+  · Tijdzone
+  · Timing
+  · Aanraking
+- Verwijdert trackingsporen
+  · Verwijzer
+  · Trackingparameters
+  · Vensternaam
+- Versterkt web-elementen
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Stuurt Global Privacy Control-signaal
+- Schakelt lekkende browserfuncties uit
+  · Cookies van derden
+  · Gerelateerde websitesets
+  · WebRTC niet-proxy UDP
+  · Controle van hyperlinks
+- Schakelt invasieve clouddiensten uit
+  · Spellingscontrole
+  · Zoeksuggesties
+  · Alternatieve foutpagina's
+  · Uitgebreide rapportage veilig browsen
+- Schakelt API's voor advertentietargeting uit
+  · Topics API
+  · Protected Audience API
+  · Advertentiemeting

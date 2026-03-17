@@ -1,0 +1,49 @@
+Verkko on ihmeellinen asia: se antaa sinulle pääsyn maailman tietoihin. Se on olennainen osa nykypäivän elämää. Valitettavasti verkko on myös massavalvonnan väline. Kaikki mitä teet verkossa kerätään, tallennetaan ja analysoidaan yritysten ja hallitusten toimesta.
+
+Privacy Magic tarjoaa perusteellisen, kerrostetun suojan valvonnalta.
+
+Suojatakseen yksityisyyttäsi Privacy Magic:
+
+- Estää mainokset, seuraimet ja häiriöt
+- Suojaa järjestelmätiedot (fingerprintingia vastaan)
+  · Paristi
+  · Selain
+  · Laite
+  · Levy
+  · Näyttö
+  · Fontit
+  · Grafiikka
+  · Näppäimistö
+  · Kieli
+  · Math
+  · Muisti
+  · Verkko
+  · Prosessori
+  · Näyttö
+  · Aikavyöhyke
+  · Ajoitus
+  · Kosketus
+- Poistaa seurannan jäljet
+  · Viittaaja
+  · Seurantaparametrit
+  · Ikkunan nimi
+- Vahvistaa web-elementtejä
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Lähettää Global Privacy Control -signaalin
+- Poistaa vuotavat selaintoiminnot käytöstä
+  · Kolmannen osapuolen evästeet
+  · Liittyvät verkkosivustojoukot
+  · WebRTC-välityspalveluttoman UDP:n
+  · Hyperlinkkien tarkastus
+- Poistaa tungettelevat pilvipalvelut käytöstä
+  · Oikeinkirjoituksen tarkistus
+  · Hakuehdotukset
+  · Vaihtoehtoiset virhesivut
+  · Turvallisen selaamisen laajennettu raportointi
+- Poistaa mainosten kohdentamis-API:t käytöstä
+  · Topics API
+  · Protected Audience API
+  · Mainosten mittaus

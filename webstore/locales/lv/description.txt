@@ -1,0 +1,49 @@
+Tīmeklis ir brīnišķīga lieta: tas sniedz jums piekļuvi pasaules informācijai. Tas ir būtiska mūsdienu dzīves sastāvdaļa. Diemžēl tīmeklis ir arī masu uzraudzības līdzeklis. Viss, ko darāt tiešsaistē, tiek vākts, glabāts un analizēts korporācijām un valdībām.
+
+Privacy Magic nodrošina rūpīgu, daudzslāņu aizsardzību pret uzraudzību.
+
+Lai aizstāvētu jūsu privātumu, Privacy Magic:
+
+- Bloķē reklāmas, izsekotājus un kaitinājumus
+- Aizsargā sistēmas informāciju (pret pirkstu nospiedumu)
+  · Baterija
+  · Pārlūks
+  · Ierīce
+  · Disks
+  · Displejs
+  · Šrifti
+  · Grafika
+  · Tastatūra
+  · Valoda
+  · Math
+  · Atmiņa
+  · Tīkls
+  · Procesors
+  · Ekrāns
+  · Laika zona
+  · Laiks
+  · Pieskāriens
+- Noņem izsekošanas pēdas
+  · Atsauce
+  · Izsekošanas parametri
+  · Loga nosaukums
+- Stiprina tīmekļa elementus
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Nosūta Global Privacy Control (GPC) signālu
+- Atspējo noplūstošās pārlūka funkcijas
+  · Trešo pušu sīkdatnes
+  · Saistītās vietņu kopas
+  · WebRTC bez starpniekservera UDP
+  · Hipersaites audits
+- Atspējo iejaukšanās mākoņpakalpojumus
+  · Pareizrakstības pakalpojums
+  · Meklēšanas ieteikumi
+  · Alternatīvās kļūdu lapas
+  · Drošās pārlūkošanas paplašinātā ziņošana
+- Atspējo reklāmu mērķēšanas API
+  · Topics API
+  · Protected Audience API
+  · Reklāmu mērīšana
