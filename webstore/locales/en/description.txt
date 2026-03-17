@@ -1,47 +1,49 @@
 The Web is a wonderful thing: it gives you access to the world's information. It's an essential part of modern life. Unfortunately, the Web is also a vehicle for mass surveillance. Everything you do online is being collected, stored, and analyzed by corporations and governments.
 
-Privacy Magic provides state-of-the-art, extensive protections that plug the leaks in your browser.
+Privacy Magic provides thorough, layered protections to shield you from surveillance.
 
-To protect your privacy, Privacy Magic:
+To defend your privacy, Privacy Magic:
 
-- Blocks ads
-- Blocks tracking scripts
-- Blocks annoyances
-- Removes tracking headers
-- Blocks third-party cookies
-- Blocks fingerprinting leaks
-   · battery status
-   · browser version
-   · device information
-   · disk space usage
-   · display settings
-   · fonts installed
-   · graphics chip specs
-   · keyboard layout
-   · language settings
-   · main chip specs
-   · math processing
-   · memory usage
-   · network profile
-   · screen details
-   · system performance
-   · time-zone settings
-   · touch support status
-- Removes tracking query parameters
-- Caps Referrer-Policy
-- Blocks window.name tracking
-- Sanitizes IFrames
-- Sanitizes Web Workers
-- Disables SharedStorage
-- Disables ServiceWorkers
-- Enables Global Privacy Control
-- Disables WebRTC IP address leaks
-- Disables browser "spy" features
-- Disables Related Website Sets
-- Disables Hyperlink Auditing
-- Disables remote Spell Check Service Features
-Advanced: Enable and disable protections globally in options page
-Advanced: Enable and disable protections per-site in popup
-Protections are applied to top-level documents and iframes (including nested, sandboxed iframes)
-
-With more protections to come!
+- Blocks ads, trackers, and annoyances
+- Protects system information (to resist fingerprinting)
+  · Battery
+  · Browser
+  · Device
+  · Disk
+  · Display
+  · Fonts
+  · Graphics
+  · Keyboard
+  · Language
+  · Math
+  · Memory
+  · Network
+  · Processor
+  · Screen
+  · Time Zone
+  · Timing
+  · Touch
+- Removes tracking breadcrumbs
+  · Referrer Policy
+  · Tracking Parameters
+  · Window Name
+- Hardens web elements
+  · Iframes
+  · Service Workers
+  · Shared Storage
+  · Web Workers
+- Sends Global Privacy Control signal
+- Disables leaky browser features
+  · Third-Party Cookies
+  · Related Website Sets
+  · WebRTC non-proxied UDP
+  · Hyperlink Auditing
+- Disables invasive cloud services
+  · Spelling Service
+  · Search Suggest
+  · Alternate Error Pages
+  · Safe Browsing Extended Reporting
+- Disables ad targeting APIs
+  · Topics API
+  · Protected Audience API
+  · Ad Measurement API
