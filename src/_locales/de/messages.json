@@ -108,7 +108,7 @@
     "description": "Text for the reset button"
   },
   "gpc": {
-    "message": "Globaler Datenschutz",
+    "message": "Global Privacy Control",
     "description": "Setting to enable global privacy control"
   },
   "battery": {
