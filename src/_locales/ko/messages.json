@@ -46,7 +46,7 @@
   "fonts": { "message": "글꼴", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "언어", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "프로세서", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "수학", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "시간대", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "터치", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },

@@ -15,7 +15,7 @@ Az adatvédelem érdekében a Privacy Magic:
   · Grafika
   · Billentyűzet
   · Nyelv
-  · Math
+  · Matematika
   · Memória
   · Hálózat
   · Processzor

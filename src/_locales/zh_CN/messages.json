@@ -46,7 +46,7 @@
   "fonts": { "message": "字体", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "语言", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "处理器", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "数学", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "时区", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "触控", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },

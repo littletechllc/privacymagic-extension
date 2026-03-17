@@ -46,7 +46,7 @@
   "fonts": { "message": "Skrifttyper", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "Sprog", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "Processor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "Matematik", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "Tidszone", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "Berøring", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },

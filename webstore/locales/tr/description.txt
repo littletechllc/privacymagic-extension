@@ -15,7 +15,7 @@ Gizliliğinizi korumak için Privacy Magic:
   · Grafik
   · Klavye
   · Dil
-  · Math
+  · Matematik
   · Bellek
   · Ağ
   · İşlemci

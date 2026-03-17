@@ -15,7 +15,7 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Grafik
   · Tangentbord
   · Språk
-  · Math
+  · Matematik
   · Minne
   · Nätverk
   · Processor

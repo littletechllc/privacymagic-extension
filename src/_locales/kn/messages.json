@@ -46,7 +46,7 @@
   "fonts": { "message": "ಫಾಂಟ್‌ಗಳು", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "ಭಾಷೆ", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "ಪ್ರಾಸೆಸರ್", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "ಗಣಿತ", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "ಸಮಯ ವಲಯ", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "ಟಚ್", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },

@@ -46,7 +46,7 @@
   "fonts": { "message": "ఫాంట్లు", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "భాష", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "ప్రాసెసర్", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "గణితం", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "టైమ్ జోన్", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "టచ్", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },

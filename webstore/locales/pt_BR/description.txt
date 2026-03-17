@@ -15,7 +15,7 @@ Para defender sua privacidade, o Privacy Magic:
   · Gráficos
   · Teclado
   · Idioma
-  · Math
+  · Matemática
   · Memória
   · Rede
   · Processador

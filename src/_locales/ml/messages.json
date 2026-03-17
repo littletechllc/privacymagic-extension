@@ -46,7 +46,7 @@
   "fonts": { "message": "ഫോണ്ടുകൾ", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "ഭാഷ", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "പ്രോസസർ", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Math", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "ഗണിതം", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "ടൈം സോൺ", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "ടച്ച്", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
