@@ -1,5 +1,5 @@
 import {describe, it, expect, beforeEach, beforeAll} from '@jest/globals'
-import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/gpu_helpers/canvas'
+import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/patch_helpers/canvas'
 
 // In jsdom without the canvas package, CanvasRenderingContext2D is undefined and enableCanvasFingerprintSpoofing(self) would throw.
 const canvasSupported = typeof globalThis.CanvasRenderingContext2D !== 'undefined'
@@ -9,7 +9,7 @@ let drawCallContexts: CanvasRenderingContext2D[] = []
 let getImageDataContexts: CanvasRenderingContext2D[] = []
 let toDataURLCanvases: HTMLCanvasElement[] = []
 
-describe('gpu_helpers/canvas', () => {
+describe('patch_helpers/canvas', () => {
   const get2dContext = (): CanvasRenderingContext2D | null => {
     try {
       const canvas = document.createElement('canvas')

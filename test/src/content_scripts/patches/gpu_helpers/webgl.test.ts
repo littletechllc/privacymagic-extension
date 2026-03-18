@@ -1,5 +1,5 @@
 import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
-import { hideWebGLVendorAndRenderer } from '@src/content_scripts/patches/gpu_helpers/webgl'
+import { hideWebGLVendorAndRenderer } from '@src/content_scripts/patches/patch_helpers/webgl'
 
 const UNMASKED_VENDOR_WEBGL = 37445
 const UNMASKED_RENDERER_WEBGL = 37446
@@ -7,7 +7,7 @@ const UNMASKED_RENDERER_WEBGL = 37446
 type NavWithUAData = { userAgentData?: { platform: string } | null }
 type SelfWithWebGL = { WebGLRenderingContext?: typeof WebGLRenderingContext }
 
-describe('gpu_helpers/webgl', () => {
+describe('patch_helpers/webgl', () => {
   let originalWebGL: typeof WebGLRenderingContext | undefined
   let originalUserAgentData: unknown
 

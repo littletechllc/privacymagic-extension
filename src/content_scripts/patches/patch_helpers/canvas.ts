@@ -293,3 +293,4 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
   enableReadingFromContext2dCommandRecorder()
   enableCanvasCommandRecording()
 }
+

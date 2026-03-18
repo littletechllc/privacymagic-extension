@@ -49,3 +49,4 @@ export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
     }
   }
 }
+

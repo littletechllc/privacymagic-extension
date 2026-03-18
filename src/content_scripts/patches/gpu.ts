@@ -1,5 +1,5 @@
-import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/gpu_helpers/canvas'
-import { hideWebGLVendorAndRenderer } from '@src/content_scripts/patches/gpu_helpers/webgl'
+import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/patch_helpers/canvas'
+import { hideWebGLVendorAndRenderer } from '@src/content_scripts/patches/patch_helpers/webgl'
 import { GlobalScope } from '../helpers/globalObject'
 
 const gpu = (globalObject: GlobalScope): void | (() => void) => {
