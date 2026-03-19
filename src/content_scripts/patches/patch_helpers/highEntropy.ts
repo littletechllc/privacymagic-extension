@@ -8,22 +8,24 @@ const sanitizeGetHighEntropyValues = (globalObject: GlobalScope, disabledSetting
   const throwNotAllowedError = (message: string) => {
     throw new globalObject.DOMException(message, 'NotAllowedError')
   }
-  const hintControlMap: Partial<Record<ContentSettingId, HighEntropyHint[]>> = {
-    cpu: ['architecture', 'bitness'],
-    device: ['formFactors', 'mobile', 'model', 'platformVersion', 'wow64'],
-    useragent: ['brands', 'fullVersionList', 'uaFullVersion'],
+  const settingForHint: Record<HighEntropyHint, Exclude<ContentSettingId, 'masterSwitch'> | undefined> = {
+    architecture: 'cpu',
+    bitness: 'cpu',
+    brands: undefined,
+    formFactors: 'device',
+    fullVersionList: 'useragent',
+    mobile: 'device',
+    model: 'device',
+    platform: undefined,
+    platformVersion: 'device',
+    uaFullVersion: 'useragent',
+    wow64: 'device',
   }
   redefinePropertyValues(globalObject.NavigatorUAData.prototype, {
     getHighEntropyValues: async function (this: NavigatorUAData, hints: HighEntropyHint[]): Promise<HighEntropyValues> {
-      const allowedHints = new Set<HighEntropyHint>()
-      for (const disabledSetting of disabledSettings) {
-        const allowedHintsForSetting = hintControlMap[disabledSetting]
-        if (allowedHintsForSetting != null) {
-          allowedHintsForSetting.forEach(hint => allowedHints.add(hint))
-        }
-      }
       for (const hint of hints) {
-        if (!allowedHints.has(hint)) {
+        const setting = settingForHint[hint]
+        if (setting != null && !disabledSettings.includes(setting)) {
           throwNotAllowedError('Not allowed')
         }
       }

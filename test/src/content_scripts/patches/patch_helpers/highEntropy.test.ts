@@ -78,21 +78,20 @@ describe('patch_helpers/highEntropy', () => {
       })
     })
 
+    it('should allow hints not present in hintControlMap (e.g. platform)', async () => {
+      sanitizeGetHighEntropyValues(globalThis as unknown as GlobalScope, [])
+      const ua = getUA()
+      const result = await ua.getHighEntropyValues(['brands', 'platform'])
+      expect(result.brands).toEqual([])
+      expect(result.platform).toBe('Win32')
+    })
+
     it('should allow architecture and bitness when cpu is in disabledSettings', async () => {
       sanitizeGetHighEntropyValues(globalThis as unknown as GlobalScope, ['cpu'])
       const ua = getUA()
       const result = await ua.getHighEntropyValues(['architecture', 'bitness'])
       expect(result.architecture).toBe('x86')
       expect(result.bitness).toBe('64')
-    })
-
-    it('should throw for brands when only cpu is in disabledSettings', async () => {
-      sanitizeGetHighEntropyValues(globalThis as unknown as GlobalScope, ['cpu'])
-      const ua = getUA()
-      await expect(ua.getHighEntropyValues(['brands'])).rejects.toMatchObject({
-        name: 'NotAllowedError',
-        message: 'Not allowed'
-      })
     })
 
     it('should allow brands when useragent is in disabledSettings', async () => {
