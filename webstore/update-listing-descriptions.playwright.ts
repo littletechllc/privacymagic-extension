@@ -186,8 +186,8 @@ async function selectLanguage(page: Page, locale: string): Promise<void> {
     if (text.length > 0) return text
     return (await picker.inputValue().catch(() => '')).trim()
   }
-  const waitForPickerLocale = async (): Promise<boolean> => {
-    const deadline = Date.now() + 900
+  const waitForPickerLocale = async (timeoutMs = 900): Promise<boolean> => {
+    const deadline = Date.now() + timeoutMs
     while (Date.now() < deadline) {
       const text = await getPickerText()
       if (targetLocalePattern.test(text)) return true
@@ -208,17 +208,38 @@ async function selectLanguage(page: Page, locale: string): Promise<void> {
     // Continue with fallback queries below.
   }
 
-  const directOption = page.locator(
-    `${selectors.openDropdownOptionScope} ${selectors.languageOptionListItem}[data-value="${cwsLocale}"], ` +
-    `${selectors.openDropdownOptionScope} ${selectors.languageOptionListItem}[data-value="${locale}"]`
-  ).first()
-  if (await directOption.count() > 0) {
-    await directOption.click({ timeout: 5000, force: true })
-    if (await waitForPickerLocale()) {
-      selectionApproach = 'data-value-direct'
-      process.stdout.write(`  [selectLanguage] ${locale}: ${selectionApproach}\n`)
-      return
-    }
+  const clickDataValueDirect = async (value: string): Promise<boolean> => {
+    const clicked = await page.evaluate((targetValue) => {
+      const listboxes = Array.from(document.querySelectorAll<HTMLElement>('[role="listbox"]'))
+      const activeListbox = listboxes.find((el) => el.offsetParent !== null) ?? null
+      if (activeListbox == null) return false
+
+      const option = activeListbox.querySelector<HTMLElement>(`[role="option"][data-value="${CSS.escape(targetValue)}"]`)
+      if (option == null) return false
+
+      option.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }))
+      option.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }))
+      option.click()
+      return true
+    }, value).catch(() => false)
+    if (!clicked) return false
+
+    // Confirm quickly by selected state in the open listbox.
+    const selectedInListbox = await page.waitForFunction((targetValue) => {
+      const listboxes = Array.from(document.querySelectorAll<HTMLElement>('[role="listbox"]'))
+      const activeListbox = listboxes.find((el) => el.offsetParent !== null) ?? null
+      if (activeListbox == null) return false
+      const option = activeListbox.querySelector<HTMLElement>(`[role="option"][data-value="${CSS.escape(targetValue)}"]`)
+      return option?.getAttribute('aria-selected') === 'true'
+    }, value, { timeout: 400 }).then(() => true).catch(() => false)
+
+    return selectedInListbox || await waitForPickerLocale(900)
+  }
+
+  if (await clickDataValueDirect(cwsLocale) || (locale !== cwsLocale && await clickDataValueDirect(locale))) {
+    selectionApproach = 'data-value-direct'
+    process.stdout.write(`  [selectLanguage] ${locale}: ${selectionApproach}\n`)
+    return
   }
 
   // Match text patterns commonly used in CWS: "English – en (default)", "Amharic – am", etc.
@@ -254,19 +275,12 @@ async function selectLanguage(page: Page, locale: string): Promise<void> {
     return false
   }
 
-  // Preferred: exact locale code suffix in option text, e.g. "German - de", "Portuguese - pt-BR"
+  // Match CWS option text format, e.g. "German - de", "Portuguese - pt-BR".
+  process.stdout.write(`  [selectLanguage] ${locale}: trying pattern-locale-suffix\n`)
   if (await clickOptionByLocalePattern(new RegExp(`(?:-|–)\\s*${escapedLocale}(?:\\b|\\s|\\()`, 'i'))) {
     // selected
     selectionApproach = 'pattern-locale-suffix'
-  } else if (await clickOptionByLocalePattern(new RegExp(`\\b${escapedLocale}\\b`, 'i'))) {
-    // selected
-    selectionApproach = 'pattern-exact-locale'
-  } else if (await clickOptionByLocalePattern(new RegExp(`(?:-|–)\\s*${escapedLocaleBase}(?:\\b|\\s|\\()`, 'i'))) {
-    // base-language fallback
-    selectionApproach = 'pattern-base-locale-suffix'
-  } else if (await clickOptionByLocalePattern(new RegExp(`\\b${escapeRegExp(locale)}\\b`, 'i'))) {
-    // raw locale text fallback
-    selectionApproach = 'pattern-raw-locale'
+    process.stdout.write(`  [selectLanguage] ${locale}: matched pattern-locale-suffix\n`)
   } else {
     const visibleOptions = await page
       .locator(`${selectors.openDropdownOptionScope} ${selectors.languageOptionListItem}`)
