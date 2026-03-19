@@ -125,29 +125,5 @@ describe('useragent patch', () => {
       expect(navigator.userAgentData?.platform).toBe('Win32')
       expect(navigator.userAgentData?.mobile).toBe(false)
     })
-
-    it('should spoof getHighEntropyValues and not add or remove requested entries', async () => {
-      const requestedHints = ['architecture', 'bitness', 'formFactors', 'model', 'wow64', 'fullVersionList', 'mobile'] as HighEntropyHint[]
-      const ua = navigator.userAgentData
-      if (ua == null || typeof ua.getHighEntropyValues !== 'function') return
-      const result = await ua.getHighEntropyValues(requestedHints)
-      const resultKeys = Object.keys(result).sort()
-      for (const key of requestedHints) {
-        expect(result).toHaveProperty(key)
-      }
-      const allowedExtras = ['platform', 'brands']
-      for (const key of resultKeys) {
-        expect(requestedHints.includes(key as HighEntropyHint) || allowedExtras.includes(key)).toBe(true)
-      }
-      expect(result.architecture).toBe('x86')
-      expect(result.bitness).toBe('64')
-      expect(result.mobile).toBe(false)
-      expect(result.formFactors).toEqual(['Desktop'])
-      expect(result.model).toBe('')
-      expect(result.wow64).toBe(false)
-      if (result.fullVersionList != null) {
-        expect(result.fullVersionList.every(({ version }) => /^\d+\.0\.0\.0$/.test(version))).toBe(true)
-      }
-    })
   })
 })

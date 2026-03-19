@@ -136,4 +136,11 @@ declare global {
     clear(): void
     delete(font: FontFace): void
   }
+
+  class NotAllowedError extends Error {
+    constructor(message?: string) {
+      super(message)
+      this.name = 'NotAllowedError'
+    }
+  }
 }

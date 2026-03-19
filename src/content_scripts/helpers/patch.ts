@@ -25,6 +25,7 @@ import touch from '@src/content_scripts/patches/touch'
 import useragent from '@src/content_scripts/patches/useragent'
 import windowName from '@src/content_scripts/patches/windowName'
 import worker from '@src/content_scripts/patches/worker'
+import sanitizeGetHighEntropyValues from '../patches/patch_helpers/highEntropy'
 
 type PatchFn<T extends (arg: GlobalScope) => void> =
   Parameters<T> extends [GlobalScope]
@@ -63,7 +64,7 @@ export const applyPatchesToGlobalObject = (globalObject: GlobalScope): void => {
   if (disabledPatches.includes('masterSwitch')) {
     return
   }
-  for (const patcherId of Object.keys(privacyMagicPatches) as Exclude<ContentSettingId, 'masterSwitch'>[]) {
+  for (const patcherId of Object.keys(privacyMagicPatches) as (keyof typeof privacyMagicPatches)[]) {
     try {
       if (!disabledPatches.includes(patcherId)) {
         const patch = privacyMagicPatches[patcherId]
@@ -75,4 +76,5 @@ export const applyPatchesToGlobalObject = (globalObject: GlobalScope): void => {
       console.error('error running patch', patcherId, error)
     }
   }
+  sanitizeGetHighEntropyValues(globalObject, disabledPatches as Exclude<ContentSettingId, 'masterSwitch'>[])
 }
