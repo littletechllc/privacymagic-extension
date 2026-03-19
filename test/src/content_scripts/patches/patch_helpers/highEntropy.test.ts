@@ -19,7 +19,6 @@ describe('patch_helpers/highEntropy', () => {
   beforeAll(async () => {
     const g = globalThis as unknown as Record<string, unknown>
     if (g.NavigatorUAData === undefined) {
-      const self = globalThis as unknown as GlobalScope
       g.NavigatorUAData = class NavigatorUAData {
         async getHighEntropyValues(hints: HighEntropyHint[]): Promise<HighEntropyValues> {
           const result: HighEntropyValues = { brands: [], mobile: false, platform: '' }
