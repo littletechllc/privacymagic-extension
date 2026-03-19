@@ -46,7 +46,7 @@
   "fonts": { "message": "ቅርጸቶች", "description": "Setting to block fingerprinting of fonts on the device" },
   "language": { "message": "ቋንቋ", "description": "Setting to block language fingerprinting" },
   "cpu": { "message": "ፕሮሰሰር", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Մաթեմատիկա", "description": "Setting to block math processing fingerprinting" },
+  "math": { "message": "ሂሳብ", "description": "Setting to block math processing fingerprinting" },
   "timezone": { "message": "ጊዜ ቀጠና", "description": "Setting to block time-zone fingerprinting" },
   "touch": { "message": "ታክ", "description": "Setting to block touch support fingerprinting" },
   "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
