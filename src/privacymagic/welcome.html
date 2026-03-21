@@ -195,6 +195,33 @@
 
   .step-body p:last-child { margin-bottom: 0; }
 
+  .step-card-completed {
+    background: var(--blue-light);
+    border-color: var(--blue);
+
+    .step-title {
+      color: lightgray
+    }
+    .step-title::after {
+      content: ' (completed)';
+      font-size: 0.9rem;
+      font-weight: 400;
+      margin-left: 0.5rem;
+    }
+
+    .step-body {
+      display: none;
+    }
+
+    .step-time {
+      display: none;
+    }
+
+    .step-num {
+      background: lightgray;
+    }
+  }
+
   /* Placeholder image */
   .img-placeholder {
     background: var(--blue-light);
@@ -420,11 +447,11 @@
   <h1 class="welcome-msg" style="position:relative; z-index:2; background:transparent;">Thank you for installing Privacy Magic!</h1>
   <p class="welcome-sub" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
 </header>
-
+<script src="./welcome.js" type="module"></script>
 <div class="steps-container">
 
 <!-- Step 1 -->
-  <div class="step-card">
+  <div class="step-card" id="step1">
     <div class="step-header">
       <div class="step-num">1</div>
       <div class="step-title">Pin Privacy Magic to your toolbar</div>
@@ -437,7 +464,7 @@
   </div>
 
   <!-- Step 2 -->
-  <div class="step-card">
+  <div class="step-card" id="step2">
     <div class="step-header">
       <div class="step-num">2</div>
       <div class="step-title">Hide your IP address with a VPN</div>
@@ -461,7 +488,7 @@
   </div>
 
   <!-- Step 3 -->
-  <div class="step-card">
+  <div class="step-card" id="step3">
     <div class="step-header">
       <div class="step-num">3</div>
       <div class="step-title">Disable browser history syncing</div>
@@ -485,7 +512,7 @@
 </div>
 
 <footer>
-  &copy; 2026 Little Tech LLC &nbsp;·&nbsp; <a href="https://github.com/littletechllc/privacymagic-extension" style="color:inherit;">Source Code</a>
+  &copy; 2026 Little Tech LLC &nbsp;·&nbsp; <a href="https://github.com/littletechllc/privacymagic-extension" style="color:inherit;" target="_blank">Source Code</a>
 </footer>
 
 </body>

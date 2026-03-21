@@ -26,6 +26,7 @@
     }
   },
   "permissions": [
+    "action",
     "browsingData",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
