@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Privacy Magic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Fondamento&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1a5ca8;
+    --blue-dark: #0f3d72;
+    --blue-light: #e8f0fb;
+    --blue-mid: #8ab0e0;
+    --text: #0d1f3c;
+    --text-muted: #3a5070;
+    --text-hint: #7a96b8;
+    --bg: #fdfcfa;
+    --bg-card: #ffffff;
+    --border: rgba(26,92,168,0.1);
+    --red: #e05555;
+    --radius: 16px;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 3rem 2rem 1.5rem;
+    position: relative;
+    background: radial-gradient(ellipse 70% 120% at 50% 40%, #fdf6e6 0%, #fdfcfa 65%);
+    margin: 0;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.16rem;
+    text-decoration: none;
+    margin-bottom: 2.5rem;
+  }
+
+  .logo-icon {
+    width: 80px; height: 80px;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    align-self: center;
+    position: relative;
+    overflow: visible;
+  }
+  .logo-rays {
+    position: absolute;
+    top: 54px;
+    left: 42px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .logo-name {
+    font-family: 'Fondamento', cursive;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .welcome-msg {
+    position: relative;
+    z-index: 2;
+    font-family: 'Lora', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--blue-dark);
+    margin-bottom: 0.5rem;
+    margin-top: 3rem;
+    line-height: 1.4;
+    text-shadow: 0 0 16px #fefcf8, 0 0 24px #fefcf8, 0 0 32px #fefcf8;
+  }
+
+  .welcome-msg .logo-name {
+    font-size: inherit;
+    color: var(--blue-dark);
+    line-height: inherit;
+    margin-bottom: 0;
+  }
+
+  .welcome-msg em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .welcome-sub {
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-family: 'Lora', serif;
+    position: relative;
+    z-index: 2;
+    color: var(--text-muted);
+    text-shadow: 0 0 16px #fefcf8, 0 0 24px #fefcf8;
+    margin-top: 2rem;
+    margin-bottom: 0;
+  }
+
+  /* STEPS */
+  .steps-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 1rem 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .steps-intro {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow:
+      0 -1px 0 rgba(26,92,168,0.06),
+      0 1px 0 rgba(26,92,168,0.25),
+      -1px 0 0 rgba(26,92,168,0.1),
+      1px 0 0 rgba(26,92,168,0.1);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: white;
+  }
+
+  .step-num {
+    width: 36px; height: 36px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    flex: 1;
+  }
+
+  .step-time {
+    font-size: 0.8rem;
+    color: var(--text-hint);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .step-time::before {
+    content: '⏱';
+    font-size: 0.8rem;
+  }
+
+  .step-body {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .step-body p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .step-body p:last-child { margin-bottom: 0; }
+
+  /* Placeholder image */
+  .img-placeholder {
+    background: var(--blue-light);
+    border: 1px dashed var(--blue-mid);
+    border-radius: 10px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-mid);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* VPN recommendation */
+  .vpn-box {
+    background: var(--blue-light);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .vpn-box-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+  }
+
+  .vpn-logo-placeholder {
+    width: 48px; height: 48px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--blue-mid);
+    text-align: center;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  .vpn-info { flex: 1; }
+
+  .vpn-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .vpn-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--blue);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.65rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.65rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--blue-mid);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+  .btn-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .affiliate-note {
+    font-size: 0.78rem;
+    color: var(--text-hint);
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+
+  /* History sync step */
+  .history-explanation {
+    background: #fff8f8;
+    border-left: 3px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Progress dots */
+  .progress {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue-mid);
+    opacity: 0.3;
+  }
+
+  .progress-dot.active { background: var(--blue); opacity: 1; }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-hint);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo">
+    <span class="logo-icon">
+      <svg class="logo-rays" width="600" height="600" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="gy" cx="0" cy="0" r="285" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ffd966" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffd966" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="gc" cx="0" cy="0" r="285" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#fffbe8" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#fffbe8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ellipseGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="white" stop-opacity="1"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </radialGradient>
+          <mask id="ellipFade">
+            <ellipse cx="0" cy="0" rx="428" ry="100" fill="url(#ellipseGrad)"/>
+          </mask>
+          <filter id="rayBlur" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="5"/>
+          </filter>
+        </defs>
+        <g filter="url(#rayBlur)" mask="url(#ellipFade)">
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(0)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(22.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(45)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(67.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(90)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(112.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(135)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(157.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(180)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(202.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(225)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(247.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(270)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(292.5)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gy)" transform="rotate(315)"/>
+        <polygon points="0,0 57,285 -57,285" fill="url(#gc)" transform="rotate(337.5)"/>
+        </g>
+      </svg>
+      <svg viewBox="-15 95 105 125" xmlns="http://www.w3.org/2000/svg" width="80" height="80" style="position:relative; z-index:1;">
+        <defs>
+          <filter id="whiteGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+            <feFlood flood-color="white" flood-opacity="0.7" result="color"/>
+            <feComposite in="color" in2="blur" operator="in" result="glow"/>
+            <feMerge>
+              <feMergeNode in="glow"/>
+              <feMergeNode in="glow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <g transform="translate(6.60056,0.6882665)" filter="url(#whiteGlow)">
+          <path fill="#0f3d72" d="m 33.69642,99.483523 c -7.67476,-0.002 -7.35765,8.160267 -7.30244,12.641607 -0.18534,12.94585 -0.21633,26.0355 -0.38189,38.9816 -1.36617,0.0384 -1.93514,0.0345 -3.11249,0.0165 -0.0326,-12.38815 -0.0781,-27.55861 -0.51987,-39.94072 -0.48834,-3.70581 -2.59806,-5.13258 -6.33453,-5.11545 -4.39162,0.0201 -5.81078,2.45532 -6.27717,5.48597 -0.81609,10.79484 -0.29735,21.63493 -0.7519,32.44557 -0.0734,5.41556 -0.1493,10.83127 -0.24133,16.24655 -2.84676,-4.67192 -8.70217,-10.69061 -14.86687,-11.32644 -5.09657,-0.58843 -6.94072,1.42229 -11.37043,3.65146 8.08098,0.22217 11.85647,7.36039 14.33098,16.04036 4.05089,11.87787 7.25503,23.7197 14.01732,34.53019 5.13548,6.05692 13.31801,10.05135 21.36884,9.93658 v 0.0295 c 0.0128,-4.2e-4 0.0248,-5.9e-4 0.0362,-0.001 8.96231,-0.055 17.89265,-2.45427 23.6974,-9.91668 6.76224,-10.81049 9.96638,-22.65232 14.01723,-34.53019 2.47451,-8.67997 6.24997,-15.8182 14.33091,-16.04037 -4.42969,-2.22917 -6.27383,-4.23988 -11.37036,-3.65145 -6.16468,0.63583 -12.02005,6.65452 -14.8668,11.32644 -0.092,-5.41528 -0.16792,-10.831 -0.24133,-16.24656 -0.45455,-10.81064 0.0642,-21.65074 -0.75189,-32.44556 -0.46638,-3.03064 -1.88556,-5.46588 -6.27717,-5.48598 -3.73647,-0.0171 -5.84619,1.40967 -6.33453,5.11546 -0.44176,12.38209 -0.48727,27.55256 -0.51987,39.94071 -1.17736,0.018 -1.74631,0.0219 -3.11249,-0.0165 -0.16555,-12.9461 -0.19655,-26.03577 -0.38189,-38.98161 0.0552,-4.48131 0.40738,-12.615667 -6.7836,-12.690177 z"/>
+          <ellipse fill="white" stroke="#0f3d72" stroke-width="2" cx="33.650284" cy="178.74698" rx="23" ry="14"/><circle fill="#0f3d72" cx="33.650284" cy="178.74698" r="9"/>
+        </g>
+      </svg>
+    </span>
+  </a>
+
+  <h1 class="welcome-msg" style="position:relative; z-index:2; background:transparent;">Thank you for installing Privacy Magic!</h1>
+  <p class="welcome-sub" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
+</header>
+
+<div class="steps-container">
+
+<!-- Step 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Pin Privacy Magic to your toolbar</div>
+      <div class="step-time">1 min</div>
+    </div>
+    <div class="step-body">
+      <p>Click the <strong>puzzle</strong> <img src="../assets/puzzle.svg" alt="puzzle icon" style="width:20px; height:20px; display:inline-block; vertical-align:middle; position:relative; top:-1px; margin:0 3px;"/> in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> <img src="../assets/pin.svg" alt="pin icon" style="width:20px; height:20px; display:inline-block; vertical-align:middle; position:relative; top:-1px; margin:0 3px;"/> next to it. Once the Privacy Magic button <svg viewBox="-15 95 105 125" xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="display:inline-block; vertical-align:middle; position:relative; top:-1px; margin:0 3px;"><g transform="translate(6.60056,0.6882665)"><path fill="#0f3d72" d="m 33.69642,99.483523 c -7.67476,-0.002 -7.35765,8.160267 -7.30244,12.641607 -0.18534,12.94585 -0.21633,26.0355 -0.38189,38.9816 -1.36617,0.0384 -1.93514,0.0345 -3.11249,0.0165 -0.0326,-12.38815 -0.0781,-27.55861 -0.51987,-39.94072 -0.48834,-3.70581 -2.59806,-5.13258 -6.33453,-5.11545 -4.39162,0.0201 -5.81078,2.45532 -6.27717,5.48597 -0.81609,10.79484 -0.29735,21.63493 -0.7519,32.44557 -0.0734,5.41556 -0.1493,10.83127 -0.24133,16.24655 -2.84676,-4.67192 -8.70217,-10.69061 -14.86687,-11.32644 -5.09657,-0.58843 -6.94072,1.42229 -11.37043,3.65146 8.08098,0.22217 11.85647,7.36039 14.33098,16.04036 4.05089,11.87787 7.25503,23.7197 14.01732,34.53019 5.13548,6.05692 13.31801,10.05135 21.36884,9.93658 v 0.0295 c 0.0128,-4.2e-4 0.0248,-5.9e-4 0.0362,-0.001 8.96231,-0.055 17.89265,-2.45427 23.6974,-9.91668 6.76224,-10.81049 9.96638,-22.65232 14.01723,-34.53019 2.47451,-8.67997 6.24997,-15.8182 14.33091,-16.04037 -4.42969,-2.22917 -6.27383,-4.23988 -11.37036,-3.65145 -6.16468,0.63583 -12.02005,6.65452 -14.8668,11.32644 -0.092,-5.41528 -0.16792,-10.831 -0.24133,-16.24656 -0.45455,-10.81064 0.0642,-21.65074 -0.75189,-32.44556 -0.46638,-3.03064 -1.88556,-5.46588 -6.27717,-5.48598 -3.73647,-0.0171 -5.84619,1.40967 -6.33453,5.11546 -0.44176,12.38209 -0.48727,27.55256 -0.51987,39.94071 -1.17736,0.018 -1.74631,0.0219 -3.11249,-0.0165 -0.16555,-12.9461 -0.19655,-26.03577 -0.38189,-38.98161 0.0552,-4.48131 0.40738,-12.615667 -6.7836,-12.690177 z"/><ellipse fill="white" stroke="#0f3d72" stroke-width="2" cx="33.650284" cy="178.74698" rx="23" ry="14"/><circle fill="#0f3d72" cx="33.650284" cy="178.74698" r="9"/></g></svg> is pinned, you can click it anytime to see how you're being protected and to control individual protections.</p>
+      <img src="../assets/pin_action_button.gif" alt="Pinning Privacy Magic to the toolbar" style="border-color:rgb(224, 224, 224); border-radius:30px; border-style:solid; border-width:1px; display:block; margin:auto; margin-top:1rem;"/>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Hide your IP address with a VPN</div>
+      <div class="step-time">5 min</div>
+    </div>
+    <div class="step-body">
+      <p>Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it, can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address, you'll need a VPN.</strong></p>
+      <div class="vpn-box">
+        <div class="vpn-box-label">Suggested VPN</div>
+        <div class="vpn-info">
+          <div class="vpn-name">Proton VPN</div>
+          <p class="vpn-desc">Independently audited, open source, and keeps no logs of your browsing. One of the most trusted VPNs available.</p>
+        </div>
+        <a href="https://protonvpn.com/" class="btn-primary" target="_blank" rel="noopener noreferrer" style="margin-top:0.75rem; align-self:flex-start;">Get Proton VPN →</a>
+        <p class="affiliate-note" style="margin-top:0.5rem;">Privacy Magic receives a commission which helps sustain our work.</p>
+      </div>
+      <div class="btn-row" style="justify-content:flex-end;">
+        <a href="#" class="btn-secondary">No thanks, I'll use another VPN</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Disable browser history syncing</div>
+      <div class="step-time">1 min</div>
+    </div>
+    <div class="step-body">
+      <p>If history syncing is enabled, <strong>Google treats this as permission to log your browsing habits.</strong> Disabling it prevents your browsing history from being sent to Google's servers.</p>
+      <p>Would you like help disabling history syncing?</p>
+      <div class="btn-row">
+        <a href="#" class="btn-primary">Yes, show me</a>
+        <div style="flex:1;"></div>
+        <a href="#" class="btn-secondary">Later</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center; padding: 3rem 2rem 3rem;">
+  <p style="font-family:'Lora',serif; font-size:clamp(1.2rem, 2.5vw, 1.7rem); color:var(--text-muted);">That's it! Enjoy your privacy.</p>
+</div>
+
+<footer>
+  &copy; 2026 Little Tech LLC &nbsp;·&nbsp; <a href="https://github.com/littletechllc/privacymagic-extension" style="color:inherit;">Source Code</a>
+</footer>
+
+</body>
+</html>
