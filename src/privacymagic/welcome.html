@@ -184,6 +184,9 @@
 
   .step-body {
     padding: 1.75rem 1.5rem;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in;
   }
 
   .step-body p {
@@ -196,9 +199,6 @@
   .step-body p:last-child { margin-bottom: 0; }
 
   .step-card-completed {
-    background: var(--blue-light);
-    border-color: var(--blue);
-
     .step-title {
       color: lightgray
     }
@@ -210,7 +210,9 @@
     }
 
     .step-body {
-      display: none;
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     .step-time {
@@ -220,23 +222,6 @@
     .step-num {
       background: lightgray;
     }
-  }
-
-  /* Placeholder image */
-  .img-placeholder {
-    background: var(--blue-light);
-    border: 1px dashed var(--blue-mid);
-    border-radius: 10px;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--blue-mid);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   /* VPN recommendation */
