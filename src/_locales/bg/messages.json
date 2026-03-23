@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic ви предпазва от наблюдение, докато сърфирате в интернет.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Настройки", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Здравей, казва Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Включи Не ме проследявай", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Изключи бисквитки от трети страни", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Изключи одит на хипервръзки", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Изключи Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Изключи FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Изключи измерване на реклами", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Изключи свързани набори от сайтове", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Изключи WebRTC UDP без прокси", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Защити на приватността включена", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Блокирай съдържание за проследяване", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Премахни следите от проследяване", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Защити системна информация", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Блокирай реклами и проследяващи", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Параметри за проследяване", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Включи Не ме проследявай", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Екран", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Име на прозорец", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Предпочитания на браузъра", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "По подразбиране за сайта", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Възстанови по подразбиране", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Батерия", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Браузър", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Изключи алтернативни страници за грешки", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Изключи разширено съобщаване за безопасно сърфиране", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Изключи услуга за правопис", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Изключи предложения за търсене", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Реферер", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Клавиатура", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Тайминг", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Спри изтичания в мрежата", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Аудио", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Дисплей", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Устройство", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Памят", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Диск", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Графика", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Шрифтове", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Език", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Процесор", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Математика", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Часова зона", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Допир", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Мрежа", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Таблици със стилове", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic ви предпазва от наблюдение, докато сърфирате в интернет.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Настройки",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Здравей, казва Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Включи Не ме проследявай",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Изключи бисквитки от трети страни",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Изключи одит на хипервръзки",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Изключи Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Изключи FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Изключи измерване на реклами",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Изключи свързани набори от сайтове",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Изключи WebRTC UDP без прокси",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Защити на приватността включена",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Блокирай съдържание за проследяване",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Премахни следите от проследяване",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Защити системна информация",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Блокирай реклами и проследяващи",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Параметри за проследяване",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Включи Не ме проследявай",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Екран",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Име на прозорец",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Предпочитания на браузъра",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "По подразбиране за сайта",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Възстанови по подразбиране",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Батерия",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Браузър",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Изключи алтернативни страници за грешки",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Изключи разширено съобщаване за безопасно сърфиране",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Изключи услуга за правопис",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Изключи предложения за търсене",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Реферер",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Клавиатура",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Тайминг",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Спри изтичания в мрежата",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Аудио",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Дисплей",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Устройство",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Памят",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Диск",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Графика",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Шрифтове",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Език",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Процесор",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Математика",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Часова зона",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Допир",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Мрежа",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Таблици със стилове",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Добре дошли в Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Благодарим ви, че инсталирахте Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "За да завършите настройката, следвайте тези бързи стъпки.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Закачете Privacy Magic в лентата с инструменти",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 мин",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "икона пъзел",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "икона карфица",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Закачане на Privacy Magic в лентата с инструменти",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Скрийте своя IP адрес с VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 мин",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic ви защитава на ниво браузър. Но всеки сайт, който посещавате, и всеки вграден в него тракер все още може да вижда вашия IP адрес, което може да разкрие самоличността и местоположението ви. <strong>За да скриете своя IP адрес, ще ви е нужен VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Препоръчан VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Независимо одитиран, с отворен код и без логове за сърфирането ви. Един от най-доверените налични VPN-и.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Вземете Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic получава комисиона, която помага да поддържаме работата си.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Не, благодаря, ще използвам друг VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Изключете синхронизирането на историята в браузъра",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 мин",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Ако синхронизирането на историята е включено, <strong>Chrome може да изпраща историята ви на сърфиране към сървърите на Google.</strong> Изключването на синхронизирането пази историята ви по-поверителна.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Искате ли помощ за изключване на синхронизирането на историята?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Да, покажете ми",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Не, ще се справя сам",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Това е всичко! Наслаждавайте се на поверителността си.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Изходен код",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Щракнете върху <strong>пъзела</strong> {puzzleIcon} в лентата с инструменти на Chrome, за да видите разширенията си. Намерете <strong>Privacy Magic</strong> в списъка и щракнете върху <strong>карфицата</strong> {pinIcon} до него. След като бутонът Privacy Magic {hamsaIcon} е закачен, можете да щраквате върху него по всяко време, за да видите как сте защитени и да управлявате отделните защити.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic te protejează de supraveghere în timp ce navighezi pe web.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Setări", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Salut, spune Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Activează Nu urmări", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Dezactivează cookie-urile terțe", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Dezactivează auditarea hiperlinkurilor", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Dezactivează Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Dezactivează FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Dezactivează măsurarea reclamelor", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Dezactivează seturile de site-uri înrudite", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Dezactivează WebRTC UDP neproxiat", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Protecții de confidențialitate activate", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Blochează conținutul de urmărire", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Elimină urmele de urmărire", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Protejează informațiile de sistem", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Blochează reclame și trackere", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Parametri urmărire", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Activează Nu urmări", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Ecran", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Nume fereastră", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Preferințe browser", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Implicit site", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Resetează la implicit", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Baterie", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Browser", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Dezactivează paginile de eroare alternative", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Dezactivează raportarea extinsă pentru navigare sigură", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Dezactivează serviciul de verificare ortografică", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Dezactivează sugestiile de căutare", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Referrer", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Tastatură", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Cronometrare", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Oprește scurgerile web", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Audio", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Afișaj", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Dispozitiv", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Memorie", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disc", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafice", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fonturi", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Limbă", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Procesor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematică", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Fus orar", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Tactil", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Rețea", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Foile de stil", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic te protejează de supraveghere în timp ce navighezi pe web.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Setări",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Salut, spune Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Activează Nu urmări",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Dezactivează cookie-urile terțe",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Dezactivează auditarea hiperlinkurilor",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Dezactivează Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Dezactivează FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Dezactivează măsurarea reclamelor",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Dezactivează seturile de site-uri înrudite",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Dezactivează WebRTC UDP neproxiat",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Protecții de confidențialitate activate",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Blochează conținutul de urmărire",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Elimină urmele de urmărire",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Protejează informațiile de sistem",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Blochează reclame și trackere",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Parametri urmărire",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Activează Nu urmări",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Ecran",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Nume fereastră",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Preferințe browser",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Implicit site",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Resetează la implicit",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Baterie",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Browser",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Dezactivează paginile de eroare alternative",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Dezactivează raportarea extinsă pentru navigare sigură",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Dezactivează serviciul de verificare ortografică",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Dezactivează sugestiile de căutare",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Referrer",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Tastatură",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Cronometrare",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Oprește scurgerile web",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Afișaj",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Dispozitiv",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Memorie",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disc",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafice",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fonturi",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Limbă",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Procesor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematică",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Fus orar",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Tactil",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Rețea",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Foile de stil",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Bine ai venit la Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Îți mulțumim că ai instalat Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Urmează acești pași rapizi pentru a finaliza configurarea.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Fixează Privacy Magic în bara de instrumente",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "pictogramă puzzle",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "pictogramă ac",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Fixarea Privacy Magic în bara de instrumente",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Ascunde-ți adresa IP cu un VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic te protejează la nivel de browser. Dar fiecare site pe care îl vizitezi și fiecare tracker încorporat în el îți poate vedea în continuare adresa IP, care îți poate dezvălui identitatea și locația. <strong>Pentru a-ți ascunde adresa IP, ai nevoie de un VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN recomandat",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Auditat independent, open source și fără jurnale ale navigării tale. Unul dintre cele mai de încredere VPN-uri disponibile.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Obține Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic primește un comision care ajută la susținerea muncii noastre.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Nu, mulțumesc, voi folosi alt VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Dezactivează sincronizarea istoricului browserului",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Dacă sincronizarea istoricului este activată, <strong>Chrome poate trimite istoricul tău de navigare către serverele Google.</strong> Dezactivarea sincronizării păstrează istoricul tău mai privat.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Vrei ajutor pentru dezactivarea sincronizării istoricului?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Da, arată-mi",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Nu, mă ocup singur",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Asta e tot! Bucură-te de confidențialitatea ta.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Cod sursă",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Fă clic pe <strong>puzzle</strong> {puzzleIcon} din bara de instrumente Chrome pentru a-ți vedea extensiile. Găsește <strong>Privacy Magic</strong> în listă și fă clic pe <strong>ac</strong> {pinIcon} de lângă el. După ce butonul Privacy Magic {hamsaIcon} este fixat, poți face clic pe el oricând pentru a vedea cum ești protejat și pentru a controla protecțiile individuale.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic beskytter deg mot overvåking når du surfer på nettet.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Innstillinger", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Hei, sier Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Aktiver Ikke spor meg", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Deaktiver tredjepartsinformasjonskapsler", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Deaktiver revisjon av hyperlenker", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Deaktiver Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Deaktiver FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Deaktiver annonsemåling", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Deaktiver relaterte nettstedsett", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Deaktiver WebRTC UDP uten proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Personvernbeskyttelse på", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Blokker sporingsinnhold", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Fjern sporingsspor", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Beskytt systeminformasjon", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Blokker annonser og sporere", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Sporingsparametere", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Aktiver Ikke spor meg", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Skjerm", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Vindunavn", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Nettleserpreferanser", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Nettstedsstandard", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Tilbakestill til standard", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Batteri", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Nettleser", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Deaktiver alternative feilsider", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Deaktiver utvidet rapportering for trygg nettlesing", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Deaktiver stavekontrolltjeneste", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Deaktiver søkeforslag", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Referrer", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Tastatur", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Timing", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Stopp weblekkasjer", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Lyd", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Skjerm", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Enhet", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Minne", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disk", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafikk", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Skrifter", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Språk", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Prosessor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematikk", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Tidssone", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Berøring", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Nettverk", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stilark", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic beskytter deg mot overvåking når du surfer på nettet.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Innstillinger",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Hei, sier Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Aktiver Ikke spor meg",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Deaktiver tredjepartsinformasjonskapsler",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Deaktiver revisjon av hyperlenker",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Deaktiver Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Deaktiver FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Deaktiver annonsemåling",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Deaktiver relaterte nettstedsett",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Deaktiver WebRTC UDP uten proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Personvernbeskyttelse på",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Blokker sporingsinnhold",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Fjern sporingsspor",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Beskytt systeminformasjon",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Blokker annonser og sporere",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Sporingsparametere",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Aktiver Ikke spor meg",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Skjerm",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Vindunavn",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Nettleserpreferanser",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Nettstedsstandard",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Tilbakestill til standard",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Batteri",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Nettleser",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Deaktiver alternative feilsider",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Deaktiver utvidet rapportering for trygg nettlesing",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Deaktiver stavekontrolltjeneste",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Deaktiver søkeforslag",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Referrer",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Tastatur",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Timing",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Stopp weblekkasjer",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Lyd",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Skjerm",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Enhet",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Minne",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disk",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafikk",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Skrifter",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Språk",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Prosessor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematikk",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Tidssone",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Berøring",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Nettverk",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stilark",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Velkommen til Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Takk for at du installerte Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Følg disse raske trinnene for å fullføre oppsettet.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Fest Privacy Magic til verktøylinjen",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "puslespillikon",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "nålikon",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Feste Privacy Magic til verktøylinjen",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Skjul IP-adressen din med en VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic beskytter deg på nettlesernivå. Men hvert nettsted du besøker, og hver sporingsmekanisme som er innebygd i det, kan fortsatt se IP-adressen din, som kan avsløre identiteten og plasseringen din. <strong>For å skjule IP-adressen din trenger du en VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Anbefalt VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Uavhengig revidert, åpen kildekode og fører ingen logger over surfingen din. En av de mest pålitelige VPN-tjenestene som finnes.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Få Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic mottar en provisjon som bidrar til å støtte arbeidet vårt.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Nei takk, jeg bruker en annen VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Deaktiver synkronisering av nettleserhistorikk",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Hvis historikksynkronisering er aktivert, <strong>kan Chrome sende nettleserhistorikken din til Googles servere.</strong> Å deaktivere synkronisering holder nettleserhistorikken din mer privat.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Vil du ha hjelp til å deaktivere historikksynkronisering?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ja, vis meg",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Nei, jeg ordner det selv",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Det var alt! Nyt personvernet ditt.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Kildekode",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Klikk på <strong>puslespillet</strong> {puzzleIcon} i Chrome-verktøylinjen for å se utvidelsene dine. Finn <strong>Privacy Magic</strong> i listen og klikk på <strong>nålen</strong> {pinIcon} ved siden av. Når Privacy Magic-knappen {hamsaIcon} er festet, kan du klikke på den når som helst for å se hvordan du blir beskyttet og styre individuelle beskyttelser.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

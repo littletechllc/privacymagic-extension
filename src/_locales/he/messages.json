@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic מגן עליך מפני מעקב בזמן גלישה באינטרנט.", "description": "The description of the extension" },
-  "settingsButton": { "message": "הגדרות", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "שלום, אומר Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "הפעל אל תעקוב", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "כבה עוגיות צד שלישי", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "כבה ביקורת קישורים", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "כבה Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "כבה FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "כבה מדידת פרסומות", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "כבה קבוצות אתרים קשורים", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "כבה WebRTC UDP ללא פרוקסי", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "הגנות פרטיות פעילות", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "חסום תוכן מעקב", "description": "Category for content blocking settings" },
-  "navigation": { "message": "הסר עקבות ניווט", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "הגן על מידע מערכת", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "חסום פרסומות ומעקבים", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "פרמטרי מעקב", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "הפעל אל תעקוב", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "מסך", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "שם חלון", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "העדפות דפדפן", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "ברירת מחדל לאתר", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "איפוס לברירת מחדל", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "סוללה", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "דפדפן", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "כבה דפי שגיאה חלופיים", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "כבה דיווח מורחב לגלישה בטוחה", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "כבה שירות איות", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "כבה הצעות חיפוש", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "מפנה", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "מקלדת", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "תזמון", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "עצור דליפות אינטרנט", "description": "Category for leaky web features settings" },
-  "audio": { "message": "אודיו", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "תצוגה", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "מכשיר", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "זיכרון", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "דיסק", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "גרפיקה", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "גופנים", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "שפה", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "מעבד", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "מתמטיקה", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "אזור זמן", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "מגע", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "רשת", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "גיליונות סגנון", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic מגן עליך מפני מעקב בזמן גלישה באינטרנט.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "הגדרות",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "שלום, אומר Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "הפעל אל תעקוב",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "כבה עוגיות צד שלישי",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "כבה ביקורת קישורים",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "כבה Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "כבה FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "כבה מדידת פרסומות",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "כבה קבוצות אתרים קשורים",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "כבה WebRTC UDP ללא פרוקסי",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "הגנות פרטיות פעילות",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "חסום תוכן מעקב",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "הסר עקבות ניווט",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "הגן על מידע מערכת",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "חסום פרסומות ומעקבים",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "פרמטרי מעקב",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "הפעל אל תעקוב",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "מסך",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "שם חלון",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "העדפות דפדפן",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "ברירת מחדל לאתר",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "איפוס לברירת מחדל",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "סוללה",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "דפדפן",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "כבה דפי שגיאה חלופיים",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "כבה דיווח מורחב לגלישה בטוחה",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "כבה שירות איות",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "כבה הצעות חיפוש",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "מפנה",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "מקלדת",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "תזמון",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "עצור דליפות אינטרנט",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "אודיו",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "תצוגה",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "מכשיר",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "זיכרון",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "דיסק",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "גרפיקה",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "גופנים",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "שפה",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "מעבד",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "מתמטיקה",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "אזור זמן",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "מגע",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "רשת",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "גיליונות סגנון",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "ברוכים הבאים ל-Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "תודה שהתקנתם את Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "כדי להשלים את ההגדרה, בצעו את השלבים המהירים הבאים.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "הצמידו את Privacy Magic לסרגל הכלים",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "דקה",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "סמל פאזל",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "סמל נעיצה",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "הצמדת Privacy Magic לסרגל הכלים",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "הסתירו את כתובת ה-IP שלכם עם VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 דקות",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic מגן עליכם ברמת הדפדפן. אך כל אתר שבו אתם מבקרים וכל עוקב שמוטמע בו עדיין יכולים לראות את כתובת ה-IP שלכם, שעלולה לחשוף את הזהות והמיקום שלכם. <strong>כדי להסתיר את כתובת ה-IP שלכם, תצטרכו VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN מומלץ",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "נבדק באופן עצמאי, קוד פתוח, ואינו שומר יומני גלישה. אחד משירותי ה-VPN האמינים ביותר הזמינים.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "קבלו Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic מקבל עמלה שמסייעת לתמוך בעבודה שלנו.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "לא תודה, אשתמש ב-VPN אחר",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "השביתו סנכרון היסטוריית גלישה",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "דקה",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "אם סנכרון היסטוריה מופעל, <strong>Chrome עשוי לשלוח את היסטוריית הגלישה שלכם לשרתי Google.</strong> השבתת הסנכרון תשמור על ההיסטוריה שלכם פרטית יותר.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "רוצים עזרה בהשבתת סנכרון היסטוריה?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "כן, הראו לי",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "לא, אטפל בזה בעצמי",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "זה הכול! תיהנו מהפרטיות שלכם.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "קוד מקור",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של Chrome כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>הנעיצה</strong> {pinIcon} לידו. לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

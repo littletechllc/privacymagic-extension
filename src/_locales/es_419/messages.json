@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic te protege de la vigilancia mientras navegás por la web.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Configuración", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "¡Hola, dice Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Activar No rastrear", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Desactivar cookies de terceros", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Desactivar auditoría de hipervínculos", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Desactivar Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Desactivar FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Desactivar medición de anuncios", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Desactivar conjuntos de sitios relacionados", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Desactivar WebRTC UDP sin proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Protecciones de privacidad activadas", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Bloquear contenido de rastreo", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Quitar rastros de navegación", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Proteger información del sistema", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Bloquear anuncios y rastreadores", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Parámetros de rastreo", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Activar No rastrear", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Pantalla", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Nombre de ventana", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Preferencias del navegador", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Predeterminado del sitio", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Restablecer valores predeterminados", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Batería", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Navegador", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Desactivar páginas de error alternativas", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Desactivar informes ampliados de navegación segura", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Desactivar servicio de ortografía", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Desactivar sugerencias de búsqueda", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Referente", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Teclado", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Cronometraje", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Detener fugas web", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Audio", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Pantalla", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Dispositivo", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Memoria", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disco", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Gráficos", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fuentes", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Idioma", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Procesador", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matemáticas", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Zona horaria", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Táctil", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Red", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Hojas de estilo", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic te protege de la vigilancia mientras navegás por la web.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Configuración",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "¡Hola, dice Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Activar No rastrear",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Desactivar cookies de terceros",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Desactivar auditoría de hipervínculos",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Desactivar Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Desactivar FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Desactivar medición de anuncios",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Desactivar conjuntos de sitios relacionados",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Desactivar WebRTC UDP sin proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Protecciones de privacidad activadas",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Bloquear contenido de rastreo",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Quitar rastros de navegación",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Proteger información del sistema",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Bloquear anuncios y rastreadores",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Parámetros de rastreo",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Activar No rastrear",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Pantalla",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Nombre de ventana",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Preferencias del navegador",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Predeterminado del sitio",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Restablecer valores predeterminados",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Batería",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Navegador",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Desactivar páginas de error alternativas",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Desactivar informes ampliados de navegación segura",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Desactivar servicio de ortografía",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Desactivar sugerencias de búsqueda",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Referente",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Teclado",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Cronometraje",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Detener fugas web",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Pantalla",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Dispositivo",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Memoria",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disco",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Gráficos",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fuentes",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Idioma",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Procesador",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matemáticas",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Zona horaria",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Táctil",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Red",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Hojas de estilo",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Bienvenido a Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "¡Gracias por instalar Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Para terminar la configuración, sigue estos pasos rápidos.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Fija Privacy Magic en tu barra de herramientas",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "icono de rompecabezas",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "icono de pin",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Fijar Privacy Magic en la barra de herramientas",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Oculta tu dirección IP con una VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic te protege a nivel del navegador. Pero cada sitio web que visitas y cada rastreador incrustado en él aún puede ver tu dirección IP, lo que puede revelar tu identidad y ubicación. <strong>Para ocultar tu dirección IP, necesitarás una VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN sugerida",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Auditada de forma independiente, de código abierto y sin registros de tu navegación. Una de las VPN más confiables disponibles.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Obtener Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic recibe una comisión que ayuda a sostener nuestro trabajo.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "No, gracias, usaré otra VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Desactivar la sincronización del historial del navegador",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Si la sincronización del historial está activada, <strong>Chrome puede enviar tu historial de navegación a los servidores de Google.</strong> Desactivar la sincronización mantiene tu historial más privado.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "¿Te gustaría ayuda para desactivar la sincronización del historial?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Sí, muéstrame",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "No, yo me encargo",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "¡Eso es todo! Disfruta de tu privacidad.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Código fuente",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} en la barra de herramientas de Chrome para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>pin</strong> {pinIcon} junto a él. Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo estás protegido y controlar protecciones individuales.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

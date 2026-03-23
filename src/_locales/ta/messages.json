@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic நீங்கள் இணையத்தில் உலாவும்போது கண்காணிப்பிலிருந்து உங்களைப் பாதுகாக்கிறது.", "description": "The description of the extension" },
-  "settingsButton": { "message": "அமைப்புகள்", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "வணக்கம், Privacy Magic சொல்கிறது!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "கண்காணிக்க வேண்டாம் இயக்கு", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "மூன்றாம் தர குக்கீகளை முடக்கு", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "ஹைப்பர்லிங்கு தணிக்கையை முடக்கு", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API ஐ முடக்கு", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE ஐ முடக்கு", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "விளம்பர் அளவீட்டை முடக்கு", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "தொடர்புடைய இணையதள தொகுப்புகளை முடக்கு", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC ப்ராக்ஸி அல்லாத UDP ஐ முடக்கு", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "தனியுரிமை பாதுகாப்புகள் இயக்கப்பட்டுள்ளன", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "கண்காணிப்பு உள்ளடக்கத்தைத் தடு", "description": "Category for content blocking settings" },
-  "navigation": { "message": "கண்காணிப்பு சுவடுகளை அகற்று", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "கணினி தகவலைப் பாதுகாத்தல்", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "விளம்பரங்கள் மற்றும் கண்காணிப்பாளர்களைத் தடு", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "கண்காணிப்பு அளவுருக்கள்", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "கண்காணிக்க வேண்டாம் இயக்கு", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "திரை", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "சாளரப் பெயர்", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "உலாவி விருப்பங்கள்", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "தள இயல்புநிலை", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "இயல்புநிலைக்கு மீட்டமை", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "பேட்டரி", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "உலாவி", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "மாற்று பிழை பக்கங்களை முடக்கு", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "பாதுகாப்பான உலாவல் நீட்டிக்கப்பட்ட அறிக்கையிடலை முடக்கு", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "எழுத்துப்பிழை சேவையை முடக்கு", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "தேடல் பரிந்துரைகளை முடக்கு", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "குறிப்பிடுபவர்", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "விசைப்பலகை", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "நேரம்", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "வலை கசிவுகளை நிறுத்து", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ஒலி", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "காட்சி", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "சாதனம்", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "நினைவகம்", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "வட்டு", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "கிராஃபிக்ஸ்", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "எழுத்துருக்கள்", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "மொழி", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "செயலி", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "கணிதம்", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "நேர மண்டலம்", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "தொடு", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "பிணையம்", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "பாணி தாள்கள்", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic நீங்கள் இணையத்தில் உலாவும்போது கண்காணிப்பிலிருந்து உங்களைப் பாதுகாக்கிறது.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "அமைப்புகள்",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "வணக்கம், Privacy Magic சொல்கிறது!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "கண்காணிக்க வேண்டாம் இயக்கு",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "மூன்றாம் தர குக்கீகளை முடக்கு",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "ஹைப்பர்லிங்கு தணிக்கையை முடக்கு",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API ஐ முடக்கு",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE ஐ முடக்கு",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "விளம்பர் அளவீட்டை முடக்கு",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "தொடர்புடைய இணையதள தொகுப்புகளை முடக்கு",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC ப்ராக்ஸி அல்லாத UDP ஐ முடக்கு",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "தனியுரிமை பாதுகாப்புகள் இயக்கப்பட்டுள்ளன",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "கண்காணிப்பு உள்ளடக்கத்தைத் தடு",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "கண்காணிப்பு சுவடுகளை அகற்று",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "கணினி தகவலைப் பாதுகாத்தல்",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "விளம்பரங்கள் மற்றும் கண்காணிப்பாளர்களைத் தடு",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "கண்காணிப்பு அளவுருக்கள்",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "கண்காணிக்க வேண்டாம் இயக்கு",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "திரை",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "சாளரப் பெயர்",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "உலாவி விருப்பங்கள்",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "தள இயல்புநிலை",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "இயல்புநிலைக்கு மீட்டமை",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "பேட்டரி",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "உலாவி",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "மாற்று பிழை பக்கங்களை முடக்கு",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "பாதுகாப்பான உலாவல் நீட்டிக்கப்பட்ட அறிக்கையிடலை முடக்கு",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "எழுத்துப்பிழை சேவையை முடக்கு",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "தேடல் பரிந்துரைகளை முடக்கு",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "குறிப்பிடுபவர்",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "விசைப்பலகை",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "நேரம்",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "வலை கசிவுகளை நிறுத்து",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ஒலி",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "காட்சி",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "சாதனம்",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "நினைவகம்",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "வட்டு",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "கிராஃபிக்ஸ்",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "எழுத்துருக்கள்",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "மொழி",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "செயலி",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "கணிதம்",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "நேர மண்டலம்",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "தொடு",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "பிணையம்",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "பாணி தாள்கள்",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic-க்கு வரவேற்கிறோம்",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic நிறுவியதற்கு நன்றி!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "அமைப்பை முடிக்க இந்த விரைவு படிகளை பின்பற்றவும்.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic-ஐ கருவிப்பட்டியில் பின் செய்யவும்",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 நிமிடம்",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "பஸில் ஐகான்",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "பின் ஐகான்",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic-ஐ கருவிப்பட்டியில் பின் செய்வது",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN மூலம் உங்கள் IP முகவரியை மறைக்கவும்",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 நிமிடம்",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic உங்களை உலாவி மட்டத்தில் பாதுகாக்கிறது. ஆனால் நீங்கள் பார்வையிடும் ஒவ்வொரு தளமும் அதில் உள்ள ட்ராக்கர்களும் இன்னும் உங்கள் IP முகவரியை காணலாம். <strong>உங்கள் IP முகவரியை மறைக்க VPN தேவை.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "பரிந்துரைக்கப்பட்ட VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "சுயாதீனமாக ஆய்வு செய்யப்பட்ட, திறந்த மூலமானது, உலாவல் பதிவுகளைச் சேமிக்காது.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN பெறுங்கள் →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic கமிஷன் பெறுகிறது; அது எங்கள் பணியைத் தொடர உதவுகிறது.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "வேண்டாம், நான் வேறு VPN பயன்படுத்துவேன்",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "உலாவி வரலாறு ஒத்திசைப்பை முடக்கவும்",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 நிமிடம்",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "வரலாறு ஒத்திசைப்பு இயக்கப்பட்டிருந்தால் <strong>Chrome உங்கள் உலாவல் வரலாற்றை Google சேவையகங்களுக்கு அனுப்பக்கூடும்.</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "வரலாறு ஒத்திசைப்பை முடக்க உதவி வேண்டுமா?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "ஆம், காண்பிக்கவும்",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "வேண்டாம், நான் செய்வேன்",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "அதுவே! உங்கள் தனியுரிமையை அனுபவிக்கவும்.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "மூல குறியீடு",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க Chrome கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>பின்</strong> {pinIcon} ஐ கிளிக் செய்யவும். Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

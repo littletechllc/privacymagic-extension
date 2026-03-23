@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic يحميك من المراقبة أثناء تصفح الويب.", "description": "The description of the extension" },
-  "settingsButton": { "message": "الإعدادات", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "مرحبًا، كما يقول Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "تفعيل عدم التتبع", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "تعطيل ملفات تعريف الارتباط من جهات خارجية", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "تعطيل تدقيق الارتباطات التشعبية", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "تعطيل Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "تعطيل FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "تعطيل قياس الإعلانات", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "تعطيل مجموعات المواقع ذات الصلة", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "تعطيل WebRTC UDP غير المعتمد على وكيل", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "حماية الخصوصية مفعلة", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "حظر محتوى التتبع", "description": "Category for content blocking settings" },
-  "navigation": { "message": "إزالة آثار التتبع", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "حماية معلومات النظام", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "حظر الإعلانات والمتتبعات", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "معلمات التتبع", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "تفعيل عدم التتبع", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "الشاشة", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "اسم النافذة", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "تفضيلات المتصفح", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "الإعدادات الافتراضية للموقع", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "إعادة التعيين إلى الافتراضي", "description": "Text for the reset button" },
-  "gpc": { "message": "Global Privacy Control", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "البطارية", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "المتصفح", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "تعطيل صفحات الخطأ البديلة", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "تعطيل التقارير الموسعة للتصفح الآمن", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "تعطيل خدمة التدقيق الإملائي", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "تعطيل اقتراحات البحث", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "المُحيل", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "لوحة المفاتيح", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "التوقيت", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "إيقاف تسريبات الويب", "description": "Category for leaky web features settings" },
-  "audio": { "message": "الصوت", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "العرض", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "الجهاز", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "الذاكرة", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "القرص", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "الرسومات", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "الخطوط", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "اللغة", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "المعالج", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "الرياضيات", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "المنطقة الزمنية", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "اللمس", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "الشبكة", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "صفحات الأنماط", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "إشارات الخصوصية", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic يحميك من المراقبة أثناء تصفح الويب.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "الإعدادات",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "مرحبًا، كما يقول Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "تفعيل عدم التتبع",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "تعطيل ملفات تعريف الارتباط من جهات خارجية",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "تعطيل تدقيق الارتباطات التشعبية",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "تعطيل Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "تعطيل FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "تعطيل قياس الإعلانات",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "تعطيل مجموعات المواقع ذات الصلة",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "تعطيل WebRTC UDP غير المعتمد على وكيل",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "حماية الخصوصية مفعلة",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "حظر محتوى التتبع",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "إزالة آثار التتبع",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "حماية معلومات النظام",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "حظر الإعلانات والمتتبعات",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "معلمات التتبع",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "تفعيل عدم التتبع",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "الشاشة",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "اسم النافذة",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "تفضيلات المتصفح",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "الإعدادات الافتراضية للموقع",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "إعادة التعيين إلى الافتراضي",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "Global Privacy Control",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "البطارية",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "المتصفح",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "تعطيل صفحات الخطأ البديلة",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "تعطيل التقارير الموسعة للتصفح الآمن",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "تعطيل خدمة التدقيق الإملائي",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "تعطيل اقتراحات البحث",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "المُحيل",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "لوحة المفاتيح",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "التوقيت",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "إيقاف تسريبات الويب",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "الصوت",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "العرض",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "الجهاز",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "الذاكرة",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "القرص",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "الرسومات",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "الخطوط",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "اللغة",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "المعالج",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "الرياضيات",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "المنطقة الزمنية",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "اللمس",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "الشبكة",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "صفحات الأنماط",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "إشارات الخصوصية",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "مرحبًا بك في Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "شكرًا لتثبيت Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "لإكمال الإعداد، اتبع هذه الخطوات السريعة.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "ثبّت Privacy Magic في شريط الأدوات",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 دقيقة",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "أيقونة اللغز",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "أيقونة التثبيت",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "تثبيت Privacy Magic في شريط الأدوات",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "أخفِ عنوان IP الخاص بك باستخدام VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 دقائق",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "يوفر Privacy Magic حماية على مستوى المتصفح. لكن كل موقع تزوره وكل متتبع مضمّن فيه قد يظل قادرًا على رؤية عنوان IP الخاص بك، ما قد يكشف هويتك وموقعك. <strong>لإخفاء عنوان IP الخاص بك، ستحتاج إلى VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN مقترح",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "خاضع لتدقيق مستقل، مفتوح المصدر، ولا يحتفظ بسجلات لتصفحك. أحد أكثر خدمات VPN موثوقية.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "احصل على Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "يتلقى Privacy Magic عمولة تساعد على دعم عملنا.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "لا شكرًا، سأستخدم VPN آخر",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "تعطيل مزامنة سجل المتصفح",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 دقيقة",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "إذا كانت مزامنة السجل مفعلة، <strong>قد يرسل Chrome سجل تصفحك إلى خوادم Google.</strong> تعطيل المزامنة يجعل سجل التصفح أكثر خصوصية.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "هل تريد المساعدة في تعطيل مزامنة السجل؟",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "نعم، أرني",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "لا، سأتولى الأمر بنفسي",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "هذا كل شيء! استمتع بخصوصيتك.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "الشفرة المصدرية",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "انقر على <strong>اللغز</strong> {puzzleIcon} في شريط أدوات Chrome لرؤية الإضافات. ابحث عن <strong>Privacy Magic</strong> في القائمة ثم انقر على <strong>أيقونة التثبيت</strong> {pinIcon} بجانبه. بعد تثبيت زر Privacy Magic {hamsaIcon}، يمكنك النقر عليه في أي وقت لمعرفة كيفية حمايتك والتحكم في وسائل الحماية الفردية.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

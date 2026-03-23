@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic شما را در حین وب‌گردی از نظارت محافظت می‌کند.", "description": "The description of the extension" },
-  "settingsButton": { "message": "تنظیمات", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "سلام، Privacy Magic می‌گوید!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "فعال‌سازی دنبال نکن", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "غیرفعال کردن کوکی‌های شخص ثالث", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "غیرفعال کردن ممیزی ابرپیوند", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "غیرفعال کردن Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "غیرفعال کردن FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "غیرفعال کردن اندازه‌گیری تبلیغات", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "غیرفعال کردن مجموعه‌های سایت مرتبط", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "غیرفعال کردن WebRTC UDP بدون پراکسی", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "محافظت‌های حریم خصوصی روشن", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "مسدود کردن محتوای ردیابی", "description": "Category for content blocking settings" },
-  "navigation": { "message": "حذف ردپای ردیابی", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "محافظت از اطلاعات سیستم", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "مسدود کردن تبلیغات و ردیاب‌ها", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "پارامترهای ردیابی", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "فعال‌سازی دنبال نکن", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "صفحه‌نمایش", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "نام پنجره", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ترجیحات مرورگر", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "پیش‌فرض سایت", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "بازنشانی به پیش‌فرض", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "باتری", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "مرورگر", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "غیرفعال کردن صفحات خطای جایگزین", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "غیرفعال کردن گزارش‌دهی گسترده مرور امن", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "غیرفعال کردن سرویس املا", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "غیرفعال کردن پیشنهاد جستجو", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "ارجاع‌دهنده", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "صفحه‌کلید", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "زمان‌بندی", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "متوقف کردن نشت وب", "description": "Category for leaky web features settings" },
-  "audio": { "message": "صدا", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "نمایش", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "دستگاه", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "حافظه", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "دیسک", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "گرافیک", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "فونت", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "زبان", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "پردازنده", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "ریاضیات", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "منطقه زمانی", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "لمس", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "شبکه", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "برگه‌های سبک", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic شما را در حین وب‌گردی از نظارت محافظت می‌کند.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "تنظیمات",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "سلام، Privacy Magic می‌گوید!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "فعال‌سازی دنبال نکن",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "غیرفعال کردن کوکی‌های شخص ثالث",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "غیرفعال کردن ممیزی ابرپیوند",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "غیرفعال کردن Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "غیرفعال کردن FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "غیرفعال کردن اندازه‌گیری تبلیغات",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "غیرفعال کردن مجموعه‌های سایت مرتبط",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "غیرفعال کردن WebRTC UDP بدون پراکسی",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "محافظت‌های حریم خصوصی روشن",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "مسدود کردن محتوای ردیابی",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "حذف ردپای ردیابی",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "محافظت از اطلاعات سیستم",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "مسدود کردن تبلیغات و ردیاب‌ها",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "پارامترهای ردیابی",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "فعال‌سازی دنبال نکن",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "صفحه‌نمایش",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "نام پنجره",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ترجیحات مرورگر",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "پیش‌فرض سایت",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "بازنشانی به پیش‌فرض",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "باتری",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "مرورگر",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "غیرفعال کردن صفحات خطای جایگزین",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "غیرفعال کردن گزارش‌دهی گسترده مرور امن",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "غیرفعال کردن سرویس املا",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "غیرفعال کردن پیشنهاد جستجو",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "ارجاع‌دهنده",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "صفحه‌کلید",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "زمان‌بندی",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "متوقف کردن نشت وب",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "صدا",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "نمایش",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "دستگاه",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "حافظه",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "دیسک",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "گرافیک",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "فونت",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "زبان",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "پردازنده",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "ریاضیات",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "منطقه زمانی",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "لمس",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "شبکه",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "برگه‌های سبک",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "به Privacy Magic خوش آمدید",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "از نصب Privacy Magic متشکریم!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "برای تکمیل راه‌اندازی، این مراحل سریع را دنبال کنید.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic را به نوار ابزار سنجاق کنید",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "۱ دقیقه",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "آیکون پازل",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "آیکون سنجاق",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "سنجاق کردن Privacy Magic به نوار ابزار",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "آدرس IP خود را با VPN پنهان کنید",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "۵ دقیقه",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic شما را در سطح مرورگر محافظت می‌کند. اما هر سایتی که بازدید می‌کنید و هر رهگیری که در آن تعبیه شده است، همچنان می‌تواند آدرس IP شما را ببیند که ممکن است هویت و موقعیت شما را آشکار کند. <strong>برای پنهان کردن آدرس IP خود به VPN نیاز دارید.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN پیشنهادی",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "به‌صورت مستقل ممیزی شده، متن‌باز و بدون نگهداری لاگ از مرور شما. یکی از قابل‌اعتمادترین VPNهای موجود.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "دریافت Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic کمیسیونی دریافت می‌کند که به تداوم کار ما کمک می‌کند.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "نه ممنون، از VPN دیگری استفاده می‌کنم",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "همگام‌سازی تاریخچه مرورگر را غیرفعال کنید",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "۱ دقیقه",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "اگر همگام‌سازی تاریخچه فعال باشد، <strong>Chrome ممکن است تاریخچه مرور شما را به سرورهای Google ارسال کند.</strong> غیرفعال کردن همگام‌سازی، تاریخچه شما را خصوصی‌تر نگه می‌دارد.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "آیا برای غیرفعال کردن همگام‌سازی تاریخچه کمک می‌خواهید؟",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "بله، نشانم بده",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "نه، خودم انجام می‌دهم",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "تمام شد! از حریم خصوصی‌تان لذت ببرید.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "کد منبع",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "روی <strong>پازل</strong> {puzzleIcon} در نوار ابزار Chrome کلیک کنید تا افزونه‌هایتان را ببینید. در فهرست، <strong>Privacy Magic</strong> را پیدا کنید و روی <strong>سنجاق</strong> {pinIcon} کنار آن کلیک کنید. وقتی دکمه Privacy Magic {hamsaIcon} سنجاق شد، هر زمان می‌توانید روی آن کلیک کنید تا ببینید چگونه محافظت می‌شوید و حفاظت‌های جداگانه را مدیریت کنید.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

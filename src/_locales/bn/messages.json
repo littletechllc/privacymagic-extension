@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic ওয়েব ব্রাউজ করার সময় আপনাকে নজরদারি থেকে রক্ষা করে।", "description": "The description of the extension" },
-  "settingsButton": { "message": "সেটিংস", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "হ্যালো, Privacy Magic বলছে!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "ট্র্যাক করবেন না সক্ষম করুন", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "তৃতীয় পক্ষের কুকি নিষ্ক্রিয় করুন", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "হাইপারলিঙ্ক অডিটিং নিষ্ক্রিয় করুন", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API নিষ্ক্রিয় করুন", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE নিষ্ক্রিয় করুন", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "বিজ্ঞাপন পরিমাপ নিষ্ক্রিয় করুন", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "সম্পর্কিত ওয়েবসাইট সেট নিষ্ক্রিয় করুন", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC নন-প্রক্সি UDP নিষ্ক্রিয় করুন", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "গোপনীয়তা সুরক্ষা চালু", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "ট্র্যাকিং কন্টেন্ট ব্লক করুন", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ট্র্যাকিং ব্রেডক্রাম্ব সরান", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "সিস্টেম তথ্য রক্ষা করুন", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "বিজ্ঞাপন ও ট্র্যাকার ব্লক করুন", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "ট্র্যাকিং প্যারামিটার", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "ট্র্যাক করবেন না সক্ষম করুন", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "স্ক্রিন", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "উইন্ডো নাম", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ব্রাউজার পছন্দসমূহ", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "সাইট ডিফল্ট", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "ডিফল্টে রিসেট করুন", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "ব্যাটারি", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ব্রাউজার", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "অল্টারনেট এরর পেজ নিষ্ক্রিয় করুন", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "সেফ ব্রাউজিং এক্সটেন্ডেড রিপোর্টিং নিষ্ক্রিয় করুন", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "বানান পরিষেবা নিষ্ক্রিয় করুন", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "সার্চ সাজেস্ট নিষ্ক্রিয় করুন", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "রেফারার", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "কীবোর্ড", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "টাইমিং", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "ওয়েব লিক বন্ধ করুন", "description": "Category for leaky web features settings" },
-  "audio": { "message": "অডিও", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "ডিসপ্লে", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "ডিভাইস", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "মেমরি", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ডিস্ক", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "গ্রাফিক্স", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ফন্ট", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "ভাষা", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "প্রসেসর", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "গণিত", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "টাইম জোন", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "টাচ", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "নেটওয়ার্ক", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "স্টাইলশীট", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic ওয়েব ব্রাউজ করার সময় আপনাকে নজরদারি থেকে রক্ষা করে।",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "সেটিংস",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "হ্যালো, Privacy Magic বলছে!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "ট্র্যাক করবেন না সক্ষম করুন",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "তৃতীয় পক্ষের কুকি নিষ্ক্রিয় করুন",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "হাইপারলিঙ্ক অডিটিং নিষ্ক্রিয় করুন",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API নিষ্ক্রিয় করুন",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE নিষ্ক্রিয় করুন",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "বিজ্ঞাপন পরিমাপ নিষ্ক্রিয় করুন",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "সম্পর্কিত ওয়েবসাইট সেট নিষ্ক্রিয় করুন",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC নন-প্রক্সি UDP নিষ্ক্রিয় করুন",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "গোপনীয়তা সুরক্ষা চালু",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "ট্র্যাকিং কন্টেন্ট ব্লক করুন",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ট্র্যাকিং ব্রেডক্রাম্ব সরান",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "সিস্টেম তথ্য রক্ষা করুন",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "বিজ্ঞাপন ও ট্র্যাকার ব্লক করুন",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "ট্র্যাকিং প্যারামিটার",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "ট্র্যাক করবেন না সক্ষম করুন",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "স্ক্রিন",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "উইন্ডো নাম",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ব্রাউজার পছন্দসমূহ",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "সাইট ডিফল্ট",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "ডিফল্টে রিসেট করুন",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "ব্যাটারি",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ব্রাউজার",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "অল্টারনেট এরর পেজ নিষ্ক্রিয় করুন",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "সেফ ব্রাউজিং এক্সটেন্ডেড রিপোর্টিং নিষ্ক্রিয় করুন",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "বানান পরিষেবা নিষ্ক্রিয় করুন",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "সার্চ সাজেস্ট নিষ্ক্রিয় করুন",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "রেফারার",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "কীবোর্ড",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "টাইমিং",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "ওয়েব লিক বন্ধ করুন",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "অডিও",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "ডিসপ্লে",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "ডিভাইস",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "মেমরি",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ডিস্ক",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "গ্রাফিক্স",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ফন্ট",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "ভাষা",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "প্রসেসর",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "গণিত",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "টাইম জোন",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "টাচ",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "নেটওয়ার্ক",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "স্টাইলশীট",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic-এ স্বাগতম",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic ইনস্টল করার জন্য ধন্যবাদ!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "সেটআপ শেষ করতে এই দ্রুত ধাপগুলো অনুসরণ করুন।",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic টুলবারে পিন করুন",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "১ মিনিট",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "পাজল আইকন",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "পিন আইকন",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic টুলবারে পিন করা",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN দিয়ে আপনার IP ঠিকানা লুকান",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "৫ মিনিট",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic ব্রাউজার স্তরে আপনাকে সুরক্ষা দেয়। তবে আপনি যে ওয়েবসাইটে যান এবং সেখানে থাকা ট্র্যাকারগুলো এখনও আপনার IP ঠিকানা দেখতে পারে। <strong>IP ঠিকানা লুকাতে আপনার একটি VPN দরকার হবে।</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "প্রস্তাবিত VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "স্বাধীনভাবে অডিট করা, ওপেন সোর্স এবং আপনার ব্রাউজিংয়ের লগ সংরক্ষণ করে না।",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN নিন →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic একটি কমিশন পায় যা আমাদের কাজ টিকিয়ে রাখতে সাহায্য করে।",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "না ধন্যবাদ, আমি অন্য VPN ব্যবহার করব",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ব্রাউজার ইতিহাস সিঙ্ক বন্ধ করুন",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "১ মিনিট",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "ইতিহাস সিঙ্ক চালু থাকলে <strong>Chrome আপনার ব্রাউজিং ইতিহাস Google সার্ভারে পাঠাতে পারে।</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "ইতিহাস সিঙ্ক বন্ধ করতে সাহায্য চান?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "হ্যাঁ, দেখান",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "না, আমি নিজেই করব",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "এটাই সব! আপনার গোপনীয়তা উপভোগ করুন।",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "সোর্স কোড",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "আপনার এক্সটেনশন দেখতে Chrome টুলবারের <strong>পাজল</strong> {puzzleIcon}-এ ক্লিক করুন। তালিকায় <strong>Privacy Magic</strong> খুঁজে এর পাশে <strong>পিন</strong> {pinIcon}-এ ক্লিক করুন। Privacy Magic বোতাম {hamsaIcon} পিন হয়ে গেলে, আপনি যেকোনো সময় ক্লিক করে সুরক্ষা অবস্থা দেখতে এবং পৃথক সুরক্ষাগুলো নিয়ন্ত্রণ করতে পারবেন।",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

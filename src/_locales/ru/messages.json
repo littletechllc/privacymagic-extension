@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic защищает вас от слежки при просмотре веб-страниц.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Настройки", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Привет, говорит Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Включить «Не отслеживать»", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Отключить сторонние cookie", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Отключить аудит гиперссылок", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Отключить Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Отключить FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Отключить измерение рекламы", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Отключить наборы связанных сайтов", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Отключить WebRTC UDP без прокси", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Защита конфиденциальности включена", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Блокировать отслеживающий контент", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Удалять следы отслеживания", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Защита системной информации", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Блокировать рекламу и трекеры", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Параметры отслеживания", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Включить «Не отслеживать»", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Экран", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Имя окна", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Настройки браузера", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Настройки сайта по умолчанию", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Сбросить по умолчанию", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Батарея", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Браузер", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Отключить альтернативные страницы ошибок", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Отключить расширенную отчётность безопасного просмотра", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Отключить службу проверки орфографии", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Отключить подсказки поиска", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Реферер", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Клавиатура", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Тайминг", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Остановить утечки в веб", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Аудио", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Дисплей", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Устройство", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Память", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Диск", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Графика", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Шрифты", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Язык", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Процессор", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Математика", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Часовой пояс", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Сенсор", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Сеть", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Таблицы стилей", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic защищает вас от слежки при просмотре веб-страниц.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Настройки",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Привет, говорит Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Включить «Не отслеживать»",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Отключить сторонние cookie",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Отключить аудит гиперссылок",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Отключить Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Отключить FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Отключить измерение рекламы",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Отключить наборы связанных сайтов",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Отключить WebRTC UDP без прокси",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Защита конфиденциальности включена",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Блокировать отслеживающий контент",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Удалять следы отслеживания",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Защита системной информации",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Блокировать рекламу и трекеры",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Параметры отслеживания",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Включить «Не отслеживать»",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Экран",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Имя окна",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Настройки браузера",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Настройки сайта по умолчанию",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Сбросить по умолчанию",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Батарея",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Браузер",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Отключить альтернативные страницы ошибок",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Отключить расширенную отчётность безопасного просмотра",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Отключить службу проверки орфографии",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Отключить подсказки поиска",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Реферер",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Клавиатура",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Тайминг",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Остановить утечки в веб",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Аудио",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Дисплей",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Устройство",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Память",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Диск",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Графика",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Шрифты",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Язык",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Процессор",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Математика",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Часовой пояс",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Сенсор",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Сеть",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Таблицы стилей",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Добро пожаловать в Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Спасибо за установку Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Чтобы завершить настройку, выполните эти быстрые шаги.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Закрепите Privacy Magic на панели инструментов",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 мин",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "значок пазла",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "значок закрепления",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Закрепление Privacy Magic на панели инструментов",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Скройте свой IP-адрес с помощью VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 мин",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic защищает вас на уровне браузера. Но каждый сайт, который вы посещаете, и каждый встроенный в него трекер всё ещё могут видеть ваш IP-адрес, который может раскрыть вашу личность и местоположение. <strong>Чтобы скрыть свой IP-адрес, вам понадобится VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Рекомендуемый VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Независимо проверен, с открытым исходным кодом и без журналов вашей активности. Один из самых надёжных VPN-сервисов.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Получить Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic получает комиссию, которая помогает поддерживать нашу работу.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Нет, спасибо, я буду использовать другой VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Отключите синхронизацию истории браузера",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 мин",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Если синхронизация истории включена, <strong>Chrome может отправлять вашу историю просмотров на серверы Google.</strong> Отключение синхронизации делает вашу историю более приватной.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Хотите помощь в отключении синхронизации истории?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Да, показать",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Нет, я сделаю это сам",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Вот и всё! Наслаждайтесь своей приватностью.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Исходный код",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Нажмите на <strong>пазл</strong> {puzzleIcon} на панели инструментов Chrome, чтобы увидеть ваши расширения. Найдите <strong>Privacy Magic</strong> в списке и нажмите на <strong>значок закрепления</strong> {pinIcon} рядом. Когда кнопка Privacy Magic {hamsaIcon} будет закреплена, вы сможете нажимать на неё в любое время, чтобы видеть, как вы защищены, и управлять отдельными защитами.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

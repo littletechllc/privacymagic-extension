@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic bảo vệ bạn khỏi sự giám sát khi bạn duyệt web.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Cài đặt", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Xin chào, Privacy Magic nói!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Bật Không theo dõi", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Tắt cookie bên thứ ba", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Tắt kiểm tra siêu liên kết", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Tắt Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Tắt FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Tắt đo lường quảng cáo", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Tắt tập trang web liên quan", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Tắt WebRTC UDP không qua proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Bảo vệ quyền riêng tư đang bật", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Chặn nội dung theo dõi", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Xóa dấu vết theo dõi", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Bảo vệ thông tin hệ thống", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Chặn quảng cáo và trình theo dõi", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Tham số theo dõi", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Bật Không theo dõi", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Màn hình", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Tên cửa sổ", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Tùy chọn trình duyệt", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Mặc định trang", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Đặt lại về mặc định", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Pin", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Trình duyệt", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Tắt trang lỗi thay thế", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Tắt báo cáo mở rộng duyệt web an toàn", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Tắt dịch vụ chính tả", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Tắt gợi ý tìm kiếm", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Người giới thiệu", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Bàn phím", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Thời gian", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Chặn rò rỉ web", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Âm thanh", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Hiển thị", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Thiết bị", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Bộ nhớ", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Đĩa", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Đồ họa", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Phông chữ", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Ngôn ngữ", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Bộ xử lý", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Toán", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Múi giờ", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Cảm ứng", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Mạng", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Biểu định kiểu", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic bảo vệ bạn khỏi sự giám sát khi bạn duyệt web.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Cài đặt",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Xin chào, Privacy Magic nói!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Bật Không theo dõi",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Tắt cookie bên thứ ba",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Tắt kiểm tra siêu liên kết",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Tắt Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Tắt FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Tắt đo lường quảng cáo",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Tắt tập trang web liên quan",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Tắt WebRTC UDP không qua proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Bảo vệ quyền riêng tư đang bật",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Chặn nội dung theo dõi",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Xóa dấu vết theo dõi",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Bảo vệ thông tin hệ thống",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Chặn quảng cáo và trình theo dõi",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Tham số theo dõi",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Bật Không theo dõi",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Màn hình",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Tên cửa sổ",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Tùy chọn trình duyệt",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Mặc định trang",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Đặt lại về mặc định",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Pin",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Trình duyệt",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Tắt trang lỗi thay thế",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Tắt báo cáo mở rộng duyệt web an toàn",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Tắt dịch vụ chính tả",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Tắt gợi ý tìm kiếm",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Người giới thiệu",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Bàn phím",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Thời gian",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Chặn rò rỉ web",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Âm thanh",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Hiển thị",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Thiết bị",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Bộ nhớ",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Đĩa",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Đồ họa",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Phông chữ",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Ngôn ngữ",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Bộ xử lý",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Toán",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Múi giờ",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Cảm ứng",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Mạng",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Biểu định kiểu",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Chào mừng đến với Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Cảm ơn bạn đã cài đặt Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Để hoàn tất thiết lập, vui lòng làm theo các bước nhanh sau.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Ghim Privacy Magic vào thanh công cụ",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 phút",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "biểu tượng mảnh ghép",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "biểu tượng ghim",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Ghim Privacy Magic vào thanh công cụ",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Ẩn địa chỉ IP của bạn bằng VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 phút",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic bảo vệ bạn ở cấp trình duyệt. Nhưng mọi trang web bạn truy cập và mọi trình theo dõi nhúng trong đó vẫn có thể thấy địa chỉ IP của bạn. <strong>Để ẩn địa chỉ IP, bạn sẽ cần VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN được đề xuất",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Được kiểm toán độc lập, mã nguồn mở và không lưu nhật ký duyệt web của bạn.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Nhận Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic nhận hoa hồng giúp duy trì công việc của chúng tôi.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Không, cảm ơn, tôi sẽ dùng VPN khác",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Tắt đồng bộ lịch sử trình duyệt",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 phút",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Nếu đồng bộ lịch sử được bật, <strong>Chrome có thể gửi lịch sử duyệt web của bạn đến máy chủ của Google.</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Bạn có muốn trợ giúp tắt đồng bộ lịch sử không?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Có, hãy chỉ tôi",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Không, tôi tự làm",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Vậy là xong! Hãy tận hưởng quyền riêng tư của bạn.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Mã nguồn",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Nhấp vào <strong>mảnh ghép</strong> {puzzleIcon} trên thanh công cụ Chrome để xem các tiện ích mở rộng. Tìm <strong>Privacy Magic</strong> trong danh sách và nhấp vào <strong>ghim</strong> {pinIcon} bên cạnh. Khi nút Privacy Magic {hamsaIcon} đã được ghim, bạn có thể nhấp bất cứ lúc nào để xem cách bạn được bảo vệ và kiểm soát từng biện pháp bảo vệ.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

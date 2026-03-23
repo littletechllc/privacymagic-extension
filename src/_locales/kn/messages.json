@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic ನೀವು ವೆಬ್ ಬ್ರೌಸ್ ಮಾಡುವಾಗ ನಿಗಾವಣೆಯಿಂದ ನಿಮ್ಮನ್ನು ರಕ್ಷಿಸುತ್ತದೆ।", "description": "The description of the extension" },
-  "settingsButton": { "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "ನಮಸ್ಕಾರ, Privacy Magic ಹೇಳುತ್ತದೆ!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "ಟ್ರ್ಯಾಕ್ ಮಾಡಬೇಡಿ ಸಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "ತೃತೀಯ ಪಕ್ಷ ಕುಕೀಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "ಹೈಪರ್‌ಲಿಂಕ್ ಲೆಕ್ಕಪರಿಶೋಧನೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "ಜಾಹೀರಾತು ಮಾಪನ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "ಸಂಬಂಧಿತ ವೆಬ್‌ಸೈಟ್ ಸೆಟ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC ನಾನ್-ಪ್ರಾಕ್ಸಿ UDP ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "ಗೌಪ್ಯತೆ ರಕ್ಷಣೆಗಳು ಚಾಲೂ", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ವಿಷಯವನ್ನು ನಿರ್ಬಂಧಿಸಿ", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ಬ್ರೆಡ್‌ಕ್ರಂಬ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಿ", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "ಸಿಸ್ಟಮ್ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಿ", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "ಜಾಹೀರಾತುಗಳು ಮತ್ತು ಟ್ರ್ಯಾಕರ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ನಿಯತಾಂಕಗಳು", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "ಟ್ರ್ಯಾಕ್ ಮಾಡಬೇಡಿ ಸಕ್ರಿಯಗೊಳಿಸಿ", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "ತೆರೆ", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "ವಿಂಡೋ ಹೆಸರು", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ಬ್ರೌಸರ್ ಆದ್ಯತೆಗಳು", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "ಸೈಟ್ ಡಿಫಾಲ್ಟ್", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸಿ", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "ಬ್ಯಾಟರಿ", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ಬ್ರೌಸರ್", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "ಪರ್ಯಾಯ ದೋಷ ಪುಟಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "ಸುರಕ್ಷಿತ ಬ್ರೌಸಿಂಗ್ ವಿಸ್ತೃತ ವರದಿ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "ಅಕ್ಷರ ವಿನ್ಯಾಸ ಸೇವೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "ಹುಡುಕಾಟ ಸೂಚನೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "ರೆಫರರ್", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "ಕೀಬೋರ್ಡ್", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "ಟೈಮಿಂಗ್", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "ವೆಬ್ ಸೋರಿಕೆ ನಿಲ್ಲಿಸಿ", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ಆಡಿಯೋ", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "ಡಿಸ್ಪ್ಲೇ", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "ಸಾಧನ", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "ಮೆಮೊರಿ", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ಡಿಸ್ಕ್", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "ಗ್ರಾಫಿಕ್ಸ್", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ಫಾಂಟ್‌ಗಳು", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "ಭಾಷೆ", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "ಪ್ರಾಸೆಸರ್", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "ಗಣಿತ", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "ಸಮಯ ವಲಯ", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "ಟಚ್", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "ನೆಟ್‌ವರ್ಕ್", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "ಸ್ಟೈಲ್‌ಶೀಟ್‌ಗಳು", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic ನೀವು ವೆಬ್ ಬ್ರೌಸ್ ಮಾಡುವಾಗ ನಿಗಾವಣೆಯಿಂದ ನಿಮ್ಮನ್ನು ರಕ್ಷಿಸುತ್ತದೆ।",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "ನಮಸ್ಕಾರ, Privacy Magic ಹೇಳುತ್ತದೆ!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "ಟ್ರ್ಯಾಕ್ ಮಾಡಬೇಡಿ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "ತೃತೀಯ ಪಕ್ಷ ಕುಕೀಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "ಹೈಪರ್‌ಲಿಂಕ್ ಲೆಕ್ಕಪರಿಶೋಧನೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "ಜಾಹೀರಾತು ಮಾಪನ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "ಸಂಬಂಧಿತ ವೆಬ್‌ಸೈಟ್ ಸೆಟ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC ನಾನ್-ಪ್ರಾಕ್ಸಿ UDP ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "ಗೌಪ್ಯತೆ ರಕ್ಷಣೆಗಳು ಚಾಲೂ",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ವಿಷಯವನ್ನು ನಿರ್ಬಂಧಿಸಿ",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ಬ್ರೆಡ್‌ಕ್ರಂಬ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಿ",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "ಸಿಸ್ಟಮ್ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಿ",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "ಜಾಹೀರಾತುಗಳು ಮತ್ತು ಟ್ರ್ಯಾಕರ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ನಿಯತಾಂಕಗಳು",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "ಟ್ರ್ಯಾಕ್ ಮಾಡಬೇಡಿ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "ತೆರೆ",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "ವಿಂಡೋ ಹೆಸರು",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ಬ್ರೌಸರ್ ಆದ್ಯತೆಗಳು",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "ಸೈಟ್ ಡಿಫಾಲ್ಟ್",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸಿ",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "ಬ್ಯಾಟರಿ",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ಬ್ರೌಸರ್",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "ಪರ್ಯಾಯ ದೋಷ ಪುಟಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "ಸುರಕ್ಷಿತ ಬ್ರೌಸಿಂಗ್ ವಿಸ್ತೃತ ವರದಿ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "ಅಕ್ಷರ ವಿನ್ಯಾಸ ಸೇವೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "ಹುಡುಕಾಟ ಸೂಚನೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "ರೆಫರರ್",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "ಕೀಬೋರ್ಡ್",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "ಟೈಮಿಂಗ್",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "ವೆಬ್ ಸೋರಿಕೆ ನಿಲ್ಲಿಸಿ",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ಆಡಿಯೋ",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "ಡಿಸ್ಪ್ಲೇ",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "ಸಾಧನ",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "ಮೆಮೊರಿ",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ಡಿಸ್ಕ್",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "ಗ್ರಾಫಿಕ್ಸ್",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ಫಾಂಟ್‌ಗಳು",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "ಭಾಷೆ",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "ಪ್ರಾಸೆಸರ್",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "ಗಣಿತ",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "ಸಮಯ ವಲಯ",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "ಟಚ್",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "ನೆಟ್‌ವರ್ಕ್",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "ಸ್ಟೈಲ್‌ಶೀಟ್‌ಗಳು",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic ಗೆ ಸ್ವಾಗತ",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "ಸೆಟಪ್ ಪೂರ್ಣಗೊಳಿಸಲು ಈ ತ್ವರಿತ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ।",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic ಅನ್ನು ಟೂಲ್‌ಬಾರ್‌ಗೆ ಪಿನ್ ಮಾಡಿ",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 ನಿಮಿ",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ಪಜಲ್ ಐಕಾನ್",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ಪಿನ್ ಐಕಾನ್",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic ಅನ್ನು ಟೂಲ್‌ಬಾರ್‌ಗೆ ಪಿನ್ ಮಾಡುವುದು",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN ಮೂಲಕ ನಿಮ್ಮ IP ವಿಳಾಸವನ್ನು ಮರೆಮಾಡಿ",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 ನಿಮಿ",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic ಬ್ರೌಸರ್ ಮಟ್ಟದಲ್ಲಿ ರಕ್ಷಿಸುತ್ತದೆ। ಆದರೆ ನೀವು ಭೇಟಿ ನೀಡುವ ಪ್ರತಿಯೊಂದು ವೆಬ್‌ಸೈಟ್ ಮತ್ತು ಟ್ರ್ಯಾಕರ್‌ಗಳು ಇನ್ನೂ ನಿಮ್ಮ IP ವಿಳಾಸವನ್ನು ನೋಡಬಹುದು। <strong>IP ವಿಳಾಸವನ್ನು ಮರೆಮಾಡಲು VPN ಅಗತ್ಯವಿದೆ।</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "ಶಿಫಾರಸು ಮಾಡಿದ VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "ಸ್ವತಂತ್ರವಾಗಿ ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟ, ಓಪನ್ ಸೋರ್ಸ್ ಮತ್ತು ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಲಾಗ್‌ಗಳನ್ನು ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ।",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN ಪಡೆಯಿರಿ →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ಕಮಿಷನ್ ಪಡೆಯುತ್ತದೆ, ಇದು ನಮ್ಮ ಕೆಲಸಕ್ಕೆ ಬೆಂಬಲ ನೀಡುತ್ತದೆ।",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "ಬೇಡ ಧನ್ಯವಾದಗಳು, ನಾನು ಇನ್ನೊಂದು VPN ಬಳಸುತ್ತೇನೆ",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ಬ್ರೌಸರ್ ಇತಿಹಾಸ ಸಿಂಕ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 ನಿಮಿ",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "ಇತಿಹಾಸ ಸಿಂಕ್ ಸಕ್ರಿಯವಾಗಿದ್ದರೆ <strong>Chrome ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Google ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸಬಹುದು।</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "ಇತಿಹಾಸ ಸಿಂಕ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಸಹಾಯ ಬೇಕೆ?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "ಹೌದು, ತೋರಿಸಿ",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "ಬೇಡ, ನಾನು ಸ್ವತಃ ಮಾಡುತ್ತೇನೆ",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "ಅಷ್ಟೇ! ನಿಮ್ಮ ಗೌಪ್ಯತೆಯನ್ನು ಆನಂದಿಸಿ।",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "ಮೂಲ ಕೋಡ್",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು Chrome ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>ಪಜಲ್</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>ಪಿನ್</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

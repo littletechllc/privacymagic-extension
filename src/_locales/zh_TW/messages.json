@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic 在您瀏覽網頁時保護您免受監控。", "description": "The description of the extension" },
-  "settingsButton": { "message": "設定", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "你好，Privacy Magic 說！", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "啟用請勿追蹤", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "停用第三方 Cookie", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "停用超連結稽核", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "停用 Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "停用 FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "停用廣告衡量", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "停用相關網站集", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "停用 WebRTC 非代理 UDP", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "隱私保護已開啟", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "封鎖追蹤內容", "description": "Category for content blocking settings" },
-  "navigation": { "message": "移除追蹤痕跡", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "保護系統資訊", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "封鎖廣告與追蹤器", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "追蹤參數", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "啟用請勿追蹤", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "螢幕", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "視窗名稱", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "瀏覽器偏好設定", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "網站預設", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "恢復預設值", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "電池", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "瀏覽器", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "停用替代錯誤頁面", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "停用安全瀏覽擴充報告", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "停用拼字檢查服務", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "停用搜尋建議", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "參照來源", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "鍵盤", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "計時", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "阻止網路洩漏", "description": "Category for leaky web features settings" },
-  "audio": { "message": "音訊", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "顯示", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "裝置", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "記憶體", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "磁碟", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "圖形", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "字型", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "語言", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "處理器", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "數學", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "時區", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "觸控", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "網路", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "樣式表", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic 在您瀏覽網頁時保護您免受監控。",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "設定",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "你好，Privacy Magic 說！",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "啟用請勿追蹤",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "停用第三方 Cookie",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "停用超連結稽核",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "停用 Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "停用 FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "停用廣告衡量",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "停用相關網站集",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "停用 WebRTC 非代理 UDP",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "隱私保護已開啟",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "封鎖追蹤內容",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "移除追蹤痕跡",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "保護系統資訊",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "封鎖廣告與追蹤器",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "追蹤參數",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "啟用請勿追蹤",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "螢幕",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "視窗名稱",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "瀏覽器偏好設定",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "網站預設",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "恢復預設值",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "電池",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "瀏覽器",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "停用替代錯誤頁面",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "停用安全瀏覽擴充報告",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "停用拼字檢查服務",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "停用搜尋建議",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "參照來源",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "鍵盤",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "計時",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "阻止網路洩漏",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "音訊",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "顯示",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "裝置",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "記憶體",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "磁碟",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "圖形",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "字型",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "語言",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "處理器",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "數學",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "時區",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "觸控",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "網路",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "樣式表",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "歡迎使用 Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "感謝安裝 Privacy Magic！",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "請依照以下快速步驟完成設定。",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "將 Privacy Magic 釘選到工具列",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 分鐘",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "拼圖圖示",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "圖釘圖示",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "將 Privacy Magic 釘選到工具列",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "使用 VPN 隱藏您的 IP 位址",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 分鐘",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic 在瀏覽器層級保護您。但您造訪的每個網站及其內嵌追蹤器仍可能看到您的 IP 位址，進而揭露您的身分與位置。<strong>若要隱藏 IP 位址，您需要使用 VPN。</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "建議 VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "經獨立稽核、開源，且不保留您的瀏覽記錄。是最值得信賴的 VPN 之一。",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "取得 Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic 會獲得佣金，以支持我們的工作。",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "不用了，我會使用其他 VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "停用瀏覽器歷史記錄同步",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 分鐘",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "若啟用歷史記錄同步，<strong>Chrome 可能會將您的瀏覽歷史傳送到 Google 伺服器。</strong>停用同步可讓您的瀏覽歷史更私密。",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "需要協助停用歷史記錄同步嗎？",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "是，請告訴我",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "不用了，我自己處理",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "就這樣！享受您的隱私保護。",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "原始碼",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "點選 Chrome 工具列中的<strong>拼圖</strong>{puzzleIcon}以查看擴充功能。在清單中找到<strong>Privacy Magic</strong>，然後點選旁邊的<strong>圖釘</strong>{pinIcon}。當 Privacy Magic 按鈕 {hamsaIcon} 已釘選後，您可隨時點擊查看保護狀態並管理各項保護。",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

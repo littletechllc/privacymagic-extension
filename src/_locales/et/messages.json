@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic kaitseb teid järelevalve eest veebi sirvides.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Seaded", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Tere, Privacy Magic ütleb!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Luba Ära jälgi", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Keela kolmandate osapoolte küpsised", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Keela hüperlingi auditeerimine", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Keela Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Keela FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Keela reklaamide mõõtmine", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Keela seotud veebisaidikogumid", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Keela WebRTC proxyta UDP", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Privaatsusekaitse sisse lülitatud", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Blokeeri jälgimise sisu", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Eemalda jälgimise jäljed", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Kaitsta süsteemi teavet", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Blokeeri reklaamid ja jälgijad", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Jälgimise parameetrid", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Luba Ära jälgi", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Ekraan", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Akna nimi", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Brauseri eelistused", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Vaikeseaded saidile", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Taasta vaikeväärtused", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Patarei", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Brauser", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Keela asendusvea leheküljed", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Keela turvalise sirvimise laiendatud aruandlus", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Keela õigekirja teenus", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Keela otsingu soovitused", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Viitaja", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Klaviatuur", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Ajastus", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Peata veebilekked", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Heli", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Kuva", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Seade", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Mälu", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Ketas", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Graafika", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fondid", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Keel", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Protsessor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matemaatika", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Ajavöönd", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Puudutus", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Võrk", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stiililehed", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic kaitseb teid järelevalve eest veebi sirvides.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Seaded",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Tere, Privacy Magic ütleb!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Luba Ära jälgi",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Keela kolmandate osapoolte küpsised",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Keela hüperlingi auditeerimine",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Keela Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Keela FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Keela reklaamide mõõtmine",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Keela seotud veebisaidikogumid",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Keela WebRTC proxyta UDP",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Privaatsusekaitse sisse lülitatud",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Blokeeri jälgimise sisu",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Eemalda jälgimise jäljed",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Kaitsta süsteemi teavet",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Blokeeri reklaamid ja jälgijad",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Jälgimise parameetrid",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Luba Ära jälgi",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Ekraan",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Akna nimi",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Brauseri eelistused",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Vaikeseaded saidile",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Taasta vaikeväärtused",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Patarei",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Brauser",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Keela asendusvea leheküljed",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Keela turvalise sirvimise laiendatud aruandlus",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Keela õigekirja teenus",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Keela otsingu soovitused",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Viitaja",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Klaviatuur",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Ajastus",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Peata veebilekked",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Heli",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Kuva",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Seade",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Mälu",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Ketas",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Graafika",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fondid",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Keel",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Protsessor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matemaatika",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Ajavöönd",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Puudutus",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Võrk",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stiililehed",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Tere tulemast Privacy Magicusse",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Aitäh, et paigaldasite Privacy Magicu!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Seadistuse lõpetamiseks järgige neid kiireid samme.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Kinnita Privacy Magic tööriistaribale",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "pusleikoon",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "nõelaikoon",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magicu kinnitamine tööriistaribale",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Peitke oma IP-aadress VPN-iga",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic kaitseb teid brauseri tasandil. Kuid iga veebisait, mida külastate, ja iga sinna manustatud jälgija võib siiski näha teie IP-aadressi, mis võib paljastada teie identiteedi ja asukoha. <strong>IP-aadressi peitmiseks vajate VPN-i.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Soovitatud VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Sõltumatult auditeeritud, avatud lähtekoodiga ja ei pea teie sirvimise kohta logisid. Üks usaldusväärsemaid saadaolevaid VPN-e.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Hangi Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic saab komisjonitasu, mis aitab toetada meie tööd.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Ei aitäh, kasutan teist VPN-i",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Keelake brauseri ajaloo sünkroonimine",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Kui ajaloo sünkroonimine on sisse lülitatud, <strong>võib Chrome saata teie sirvimisajaloo Google'i serveritesse.</strong> Sünkroonimise keelamine hoiab teie ajaloo privaatsemana.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Kas soovite abi ajaloo sünkroonimise keelamisel?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Jah, näita mulle",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Ei, teen selle ise",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "See on kõik! Nautige oma privaatsust.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Lähtekood",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Klõpsake Chrome'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>nõela</strong> {pinIcon}. Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -4,6 +4,7 @@ const ATTR_MAP: Record<string, Applicator> = {
   'data-i18n':             (el, msg) => { el.textContent = msg; },
   'data-i18n-html':        (el, msg) => { el.innerHTML = msg; },
   'data-i18n-title':       (el, msg) => { el.title = msg; },
+  'data-i18n-alt':         (el, msg) => { el.setAttribute('alt', msg); },
   'data-i18n-placeholder': (el, msg) => { (el as HTMLInputElement).placeholder = msg; },
   'data-i18n-aria-label':  (el, msg) => { el.setAttribute('aria-label', msg); },
 };

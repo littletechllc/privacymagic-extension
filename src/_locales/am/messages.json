@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic እያሰራጩ በድር ሲጎብኙ ከተጣራ ጣልቃ ገብነት ይጠብቅዎታል።", "description": "The description of the extension" },
-  "settingsButton": { "message": "ቅንብሮች", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "ሰላም፣ Privacy Magic ይላል!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "እንዳይከታተል አንቃ", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "የሦስተኛ ወገን ኩኪዎችን አጥፋ", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "የሃይፐርሊንክ ኦዲትን አጥፋ", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API አጥፋ", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE አጥፋ", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "የማስታወቂያ መለኪያን አጥፋ", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "ተዛማጅ ድር ጣቢያ ስብስቦችን አጥፋ", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC ያልተመካ ዩዲፒን አጥፋ", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "የግላዊነት ጥበቃ በር", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "የክትትል ይዘትን እገዳ", "description": "Category for content blocking settings" },
-  "navigation": { "message": "የክትትል እርምጃዎችን አስወግድ", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "የስርዓት መረጃን ጥበቃ", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "ማስታወቂያዎችን እና ክትትል አጥፋ", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "የክትትል መለኪያዎች", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "እንዳይከታተል አንቃ", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "ማያ", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "የመስኮት ስም", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "የብራውዘር ምርጫዎች", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "ነባሪ ቅንብር", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "ወደ ነባሪ መልስ", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "ባትሪ", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ብራውዘር", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "ተለዋጭ ስህተት ገጾችን አጥፋ", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "የደህን ማሰስ የተራዘመ ሪፖርት አጥፋ", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "የፊደል ልክነት አገልግሎትን አጥፋ", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "የፍለጋ ምክርን አጥፋ", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "ማጣቀሻ", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "ቁልፍ ሰሌዳ", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "ጊዜ", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "የድር ማጠላለጎችን አቁም", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ድምፅ", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "ማሳያ", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "መሣሪያ", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "ማህደር", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ዲስክ", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "ግራፊክስ", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ቅርጸቶች", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "ቋንቋ", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "ፕሮሰሰር", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "ሂሳብ", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "ጊዜ ቀጠና", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "ታክ", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "ኔትወርክ", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "ቅጥ ገጾች", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic እያሰራጩ በድር ሲጎብኙ ከተጣራ ጣልቃ ገብነት ይጠብቅዎታል።",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "ቅንብሮች",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "ሰላም፣ Privacy Magic ይላል!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "እንዳይከታተል አንቃ",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "የሦስተኛ ወገን ኩኪዎችን አጥፋ",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "የሃይፐርሊንክ ኦዲትን አጥፋ",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API አጥፋ",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE አጥፋ",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "የማስታወቂያ መለኪያን አጥፋ",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "ተዛማጅ ድር ጣቢያ ስብስቦችን አጥፋ",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC ያልተመካ ዩዲፒን አጥፋ",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "የግላዊነት ጥበቃ በር",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "የክትትል ይዘትን እገዳ",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "የክትትል እርምጃዎችን አስወግድ",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "የስርዓት መረጃን ጥበቃ",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "ማስታወቂያዎችን እና ክትትል አጥፋ",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "የክትትል መለኪያዎች",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "እንዳይከታተል አንቃ",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "ማያ",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "የመስኮት ስም",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "የብራውዘር ምርጫዎች",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "ነባሪ ቅንብር",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "ወደ ነባሪ መልስ",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "ባትሪ",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ብራውዘር",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "ተለዋጭ ስህተት ገጾችን አጥፋ",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "የደህን ማሰስ የተራዘመ ሪፖርት አጥፋ",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "የፊደል ልክነት አገልግሎትን አጥፋ",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "የፍለጋ ምክርን አጥፋ",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "ማጣቀሻ",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "ቁልፍ ሰሌዳ",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "ጊዜ",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "የድር ማጠላለጎችን አቁም",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ድምፅ",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "ማሳያ",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "መሣሪያ",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "ማህደር",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ዲስክ",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "ግራፊክስ",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ቅርጸቶች",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "ቋንቋ",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "ፕሮሰሰር",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "ሂሳብ",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "ጊዜ ቀጠና",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "ታክ",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "ኔትወርክ",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "ቅጥ ገጾች",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "ወደ Privacy Magic እንኳን በደህና መጡ",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic ስለጫኑ እናመሰግናለን!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "ማቀናበሪያውን ለማጠናቀቅ እባክዎን እነዚህን ፈጣን ደረጃዎች ይከተሉ።",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic ወደ መሳሪያ አሞሌ ያጣብቁ",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 ደቂቃ",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "የፓዝል ምልክት",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "የፒን ምልክት",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic ወደ መሳሪያ አሞሌ መጣበቅ",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "IP አድራሻዎን በVPN ይደብቁ",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 ደቂቃ",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic በአሳሽ ደረጃ ይጠብቅዎታል። ግን የሚጎበኙት ድር ጣቢያ እያንዳንዱ እና በውስጡ የተካተተ ተከታታይ አሁንም IP አድራሻዎን ሊያይ ይችላል። <strong>IP አድራሻዎን ለመደበቅ VPN ያስፈልግዎታል።</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "የሚመከር VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "በገለልተኛ ሁኔታ የተመረመረ፣ ክፍት ምንጭ፣ የእርስዎን አሰሳ መዝገብ አይያዝም።",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN ያግኙ →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ሥራችንን ለመደገፍ የሚረዳ ኮሚሽን ይቀበላል።",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "አይ፣ ሌላ VPN እጠቀማለሁ",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "የአሳሽ ታሪክ ማመሳሰልን ያሰናክሉ",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 ደቂቃ",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "የታሪክ ማመሳሰል ከተነቃ <strong>Chrome የእርስዎን የአሰሳ ታሪክ ወደ Google አገልጋዮች ሊልክ ይችላል።</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "የታሪክ ማመሳሰልን ለማሰናከል እገዛ ይፈልጋሉ?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "አዎ፣ አሳየኝ",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "አይ፣ ራሴ እችላለሁ",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "ያስፈልገው ይህ ብቻ ነው! የግላዊነትዎን ይዝናኑ።",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "ምንጭ ኮድ",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "ቅጥያዎችዎን ለማየት በChrome መሳሪያ አሞሌ ያለውን <strong>ፓዝል</strong> {puzzleIcon} ጠቅ ያድርጉ። በዝርዝሩ ውስጥ <strong>Privacy Magic</strong> ያግኙ እና ከጎኑ ያለውን <strong>ፒን</strong> {pinIcon} ጠቅ ያድርጉ። የPrivacy Magic አዝራር {hamsaIcon} ከተጣበቀ በኋላ በማንኛውም ጊዜ ጠቅ በማድረግ እንዴት እንደሚጠበቁ ማየት እና ግለሰብ ጥበቃዎችን መቆጣጠር ይችላሉ።",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

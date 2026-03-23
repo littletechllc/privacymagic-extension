@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic वेब ब्राउझ करताना तुम्हाला निरीक्षणापासून संरक्षण देते.", "description": "The description of the extension" },
-  "settingsButton": { "message": "सेटिंग्ज", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "नमस्कार, Privacy Magic म्हणतो!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "ट्रॅक न करा सक्षम करा", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "तृतीय पक्ष कुकीज अक्षम करा", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "हायपरलिंक ऑडिटिंग अक्षम करा", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API अक्षम करा", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE अक्षम करा", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "जाहिरात मापन अक्षम करा", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "संबंधित वेबसाइट सेट अक्षम करा", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC नॉन-प्रॉक्सी UDP अक्षम करा", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "गोपनीयता संरक्षण चालू", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "ट्रॅकिंग कंटेंट ब्लॉक करा", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ट्रॅकिंग ब्रेडक्रंब काढा", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "सिस्टम माहिती संरक्षित करा", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "जाहिराती आणि ट्रॅकर ब्लॉक करा", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "ट्रॅकिंग पॅरामीटर्स", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "ट्रॅक न करा सक्षम करा", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "स्क्रीन", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "विंडो नाव", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ब्राउझर प्राधान्ये", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "साइट डिफॉल्ट", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "डिफॉल्टवर रीसेट करा", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "बॅटरी", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ब्राउझर", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "पर्यायी एरर पेज अक्षम करा", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "सुरक्षित ब्राउझिंग विस्तारित अहवाल अक्षम करा", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "स्पेलिंग सेवा अक्षम करा", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "शोध सूचना अक्षम करा", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "रेफरर", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "कीबोर्ड", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "टाइमिंग", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "वेब लीक थांबवा", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ऑडिओ", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "डिस्प्ले", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "डिव्हाइस", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "मेमरी", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "डिस्क", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "ग्राफिक्स", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "फॉन्ट्स", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "भाषा", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "प्रोसेसर", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "गणित", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "टाइम झोन", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "टच", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "नेटवर्क", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "स्टाइलशीट", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic वेब ब्राउझ करताना तुम्हाला निरीक्षणापासून संरक्षण देते.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "सेटिंग्ज",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "नमस्कार, Privacy Magic म्हणतो!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "ट्रॅक न करा सक्षम करा",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "तृतीय पक्ष कुकीज अक्षम करा",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "हायपरलिंक ऑडिटिंग अक्षम करा",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API अक्षम करा",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE अक्षम करा",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "जाहिरात मापन अक्षम करा",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "संबंधित वेबसाइट सेट अक्षम करा",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC नॉन-प्रॉक्सी UDP अक्षम करा",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "गोपनीयता संरक्षण चालू",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "ट्रॅकिंग कंटेंट ब्लॉक करा",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ट्रॅकिंग ब्रेडक्रंब काढा",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "सिस्टम माहिती संरक्षित करा",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "जाहिराती आणि ट्रॅकर ब्लॉक करा",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "ट्रॅकिंग पॅरामीटर्स",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "ट्रॅक न करा सक्षम करा",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "स्क्रीन",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "विंडो नाव",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ब्राउझर प्राधान्ये",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "साइट डिफॉल्ट",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "डिफॉल्टवर रीसेट करा",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "बॅटरी",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ब्राउझर",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "पर्यायी एरर पेज अक्षम करा",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "सुरक्षित ब्राउझिंग विस्तारित अहवाल अक्षम करा",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "स्पेलिंग सेवा अक्षम करा",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "शोध सूचना अक्षम करा",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "रेफरर",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "कीबोर्ड",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "टाइमिंग",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "वेब लीक थांबवा",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ऑडिओ",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "डिस्प्ले",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "डिव्हाइस",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "मेमरी",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "डिस्क",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "ग्राफिक्स",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "फॉन्ट्स",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "भाषा",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "प्रोसेसर",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "गणित",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "टाइम झोन",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "टच",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "नेटवर्क",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "स्टाइलशीट",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic मध्ये स्वागत आहे",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic इन्स्टॉल केल्याबद्दल धन्यवाद!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "सेटअप पूर्ण करण्यासाठी कृपया हे जलद टप्पे अनुसरा।",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic टूलबारमध्ये पिन करा",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 मि",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "पझल चिन्ह",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "पिन चिन्ह",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic टूलबारमध्ये पिन करणे",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN सह आपला IP पत्ता लपवा",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 मि",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic आपल्याला ब्राउझर पातळीवर संरक्षण देते। परंतु आपण भेट देणारी प्रत्येक वेबसाइट आणि ट्रॅकर आपला IP पत्ता पाहू शकतात। <strong>IP पत्ता लपवण्यासाठी VPN आवश्यक आहे।</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "सुचवलेले VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "स्वतंत्र ऑडिट केलेले, ओपन सोर्स, आणि ब्राउझिंग लॉग न ठेवणारे।",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN मिळवा →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ला कमिशन मिळते, ज्यामुळे आमचे काम टिकून राहते।",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "नको धन्यवाद, मी दुसरे VPN वापरेन",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ब्राउझर इतिहास सिंक बंद करा",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 मि",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "जर इतिहास सिंक सक्षम असेल तर <strong>Chrome आपला ब्राउझिंग इतिहास Google सर्व्हरवर पाठवू शकतो।</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "इतिहास सिंक बंद करण्यासाठी मदत हवी आहे का?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "हो, दाखवा",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "नको, मी स्वतः करेन",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "इतकेच! आपल्या गोपनीयतेचा आनंद घ्या।",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "स्रोत कोड",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "आपले एक्स्टेन्शन पाहण्यासाठी Chrome टूलबारमधील <strong>पझल</strong> {puzzleIcon} वर क्लिक करा। यादीत <strong>Privacy Magic</strong> शोधा आणि त्याच्या शेजारील <strong>पिन</strong> {pinIcon} वर क्लिक करा। Privacy Magic बटण {hamsaIcon} पिन झाल्यावर, आपण कधीही क्लिक करून संरक्षण कसे होत आहे ते पाहू शकता आणि स्वतंत्र संरक्षणे नियंत्रित करू शकता।",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

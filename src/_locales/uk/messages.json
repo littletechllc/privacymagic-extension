@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic захищає вас від стеження під час перегляду в мережі.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Налаштування", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Привіт, каже Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Увімкнути «Не відстежувати»", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Вимкнути сторонні cookie", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Вимкнути аудит гіперпосилань", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Вимкнути Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Вимкнути FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Вимкнути вимірювання реклами", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Вимкнути набори пов’язаних сайтів", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Вимкнути WebRTC UDP без проксі", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Захист конфіденційності увімкнено", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Блокувати контент відстеження", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Видаляти сліди відстеження", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Захищати системну інформацію", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Блокувати рекламу та трекери", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Параметри відстеження", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Увімкнути «Не відстежувати»", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Екран", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Ім'я вікна", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Налаштування браузера", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "За замовчуванням для сайту", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Скинути за замовчуванням", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Батарея", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Браузер", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Вимкнути альтернативні сторінки помилок", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Вимкнути розширену звітність безпечного перегляду", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Вимкнути службу перевірки орфографії", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Вимкнути підказки пошуку", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Реферер", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Клавіатура", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Таймінг", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Зупинити витоки в мережі", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Аудіо", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Дисплей", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Пристрій", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Пам'ять", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Диск", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Графіка", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Шрифти", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Мова", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Процесор", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Математика", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Часовий пояс", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Сенсор", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Мережа", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Таблиці стилів", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic захищає вас від стеження під час перегляду в мережі.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Налаштування",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Привіт, каже Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Увімкнути «Не відстежувати»",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Вимкнути сторонні cookie",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Вимкнути аудит гіперпосилань",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Вимкнути Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Вимкнути FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Вимкнути вимірювання реклами",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Вимкнути набори пов’язаних сайтів",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Вимкнути WebRTC UDP без проксі",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Захист конфіденційності увімкнено",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Блокувати контент відстеження",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Видаляти сліди відстеження",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Захищати системну інформацію",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Блокувати рекламу та трекери",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Параметри відстеження",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Увімкнути «Не відстежувати»",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Екран",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Ім'я вікна",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Налаштування браузера",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "За замовчуванням для сайту",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Скинути за замовчуванням",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Батарея",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Браузер",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Вимкнути альтернативні сторінки помилок",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Вимкнути розширену звітність безпечного перегляду",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Вимкнути службу перевірки орфографії",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Вимкнути підказки пошуку",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Реферер",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Клавіатура",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Таймінг",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Зупинити витоки в мережі",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Аудіо",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Дисплей",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Пристрій",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Пам'ять",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Диск",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Графіка",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Шрифти",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Мова",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Процесор",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Математика",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Часовий пояс",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Сенсор",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Мережа",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Таблиці стилів",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Ласкаво просимо до Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Дякуємо, що встановили Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Щоб завершити налаштування, виконайте ці швидкі кроки.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Закріпіть Privacy Magic на панелі інструментів",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 хв",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "значок пазла",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "значок шпильки",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Закріплення Privacy Magic на панелі інструментів",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Приховайте свою IP-адресу за допомогою VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 хв",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic захищає вас на рівні браузера. Але кожен сайт, який ви відвідуєте, і кожен вбудований у нього трекер все ще можуть бачити вашу IP-адресу, яка може розкрити вашу особу та місцезнаходження. <strong>Щоб приховати свою IP-адресу, вам знадобиться VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Рекомендований VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Незалежно перевірений, з відкритим кодом і без журналів вашого перегляду. Один із найнадійніших доступних VPN.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Отримати Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic отримує комісію, що допомагає підтримувати нашу роботу.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Ні, дякую, я використаю інший VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Вимкніть синхронізацію історії браузера",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 хв",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Якщо синхронізацію історії ввімкнено, <strong>Chrome може надсилати вашу історію переглядів на сервери Google.</strong> Вимкнення синхронізації робить вашу історію приватнішою.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Хочете допомогу з вимкненням синхронізації історії?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Так, покажіть мені",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Ні, я зроблю це сам",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Ось і все! Насолоджуйтесь своєю приватністю.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Вихідний код",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Натисніть на <strong>пазл</strong> {puzzleIcon} на панелі інструментів Chrome, щоб побачити свої розширення. Знайдіть <strong>Privacy Magic</strong> у списку та натисніть на <strong>шпильку</strong> {pinIcon} поруч. Коли кнопку Privacy Magic {hamsaIcon} буде закріплено, ви зможете натискати її будь-коли, щоб бачити, як вас захищено, і керувати окремими захистами.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

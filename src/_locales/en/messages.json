@@ -218,5 +218,117 @@
   "policy": {
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Welcome to Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Thank you for installing Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "To finish setting up, please follow these quick steps.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Pin Privacy Magic to your toolbar",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "puzzle icon",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "pin icon",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Pinning Privacy Magic to the toolbar",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Hide your IP address with a VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it, can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address, you'll need a VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Suggested VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Independently audited, open source, and keeps no logs of your browsing. One of the most trusted VPNs available.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Get Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic receives a commission which helps sustain our work.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "No thanks, I'll use another VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Disable browser history syncing",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "If history syncing is enabled, <strong>Chrome may send your browsing history to Google's servers.</strong> Disabling syncing keeps your browsing history more private.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Would you like help disabling history syncing?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Yes, show me",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "No, I'll handle it myself",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "That's it! Enjoy your privacy.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Source Code",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Click the <strong>puzzle</strong> {puzzleIcon} in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> {pinIcon} next to it. Once the Privacy Magic button {hamsaIcon} is pinned, you can click it anytime to see how you're being protected and to control individual protections.",
+    "description": "Step 1 body text with named icon tokens for i18n"
   }
 }

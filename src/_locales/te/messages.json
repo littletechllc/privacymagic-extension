@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic మీరు వెబ్ బ్రౌజ్ చేసేటప్పుడు నిఘా నుండి మిమ్మల్ని రక్షిస్తుంది.", "description": "The description of the extension" },
-  "settingsButton": { "message": "సెట్టింగ్‌లు", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "నమస్కారం, Privacy Magic చెప్పుతుంది!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "ట్రాక్ చేయవద్దు ప్రారంభించు", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "మూడవ పక్ష కుకీలను నిలిపివేయి", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "హైపర్‌లింక్ ఆడిటింగ్‌ను నిలిపివేయి", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API నిలిపివేయి", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE నిలిపివేయి", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "యాడ్ మెజర్‌మెంట్ నిలిపివేయి", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "సంబంధిత వెబ్‌సైట్ సెట్‌లను నిలిపివేయి", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC ప్రాక్సీ లేని UDP నిలిపివేయి", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "ప్రైవసీ రక్షణలు ఆన్", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "ట్రాకింగ్ కంటెంట్‌ను బ్లాక్ చేయి", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ట్రాకింగ్ బ్రెడ్‌క్రంబ్‌లను తొలగించు", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "సిస్టమ్ సమాచారాన్ని రక్షించు", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "యాడ్‌లు మరియు ట్రాకర్‌లను బ్లాక్ చేయి", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "ట్రాకింగ్ పారామీటర్లు", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "ట్రాక్ చేయవద్దు ప్రారంభించు", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "స్క్రీన్", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "విండో పేరు", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "బ్రౌజర్ ప్రాధాన్యతలు", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "సైట్ డిఫాల్ట్", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "డిఫాల్ట్‌లకు రీసెట్ చేయి", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "బ్యాటరీ", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "బ్రౌజర్", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "ఆల్టర్నేట్ ఎర్రర్ పేజీలను నిలిపివేయి", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "సేఫ్ బ్రౌజింగ్ ఎక్స్టెండెడ్ రిపోర్టింగ్ నిలిపివేయి", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "స్పెల్లింగ్ సర్వీస్ నిలిపివేయి", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "సెర్చ్ సజెస్ట్ నిలిపివేయి", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "రెఫెరర్", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "కీబోర్డ్", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "టైమింగ్", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "వెబ్ లీక్‌లను ఆపు", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ఆడియో", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "డిస్ప్లే", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "డివైస్", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "మెమరీ", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "డిస్క్", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "గ్రాఫిక్స్", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ఫాంట్లు", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "భాష", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "ప్రాసెసర్", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "గణితం", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "టైమ్ జోన్", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "టచ్", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "నెట్‌వర్క్", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "స్టైల్ షీట్లు", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic మీరు వెబ్ బ్రౌజ్ చేసేటప్పుడు నిఘా నుండి మిమ్మల్ని రక్షిస్తుంది.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "సెట్టింగ్‌లు",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "నమస్కారం, Privacy Magic చెప్పుతుంది!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "ట్రాక్ చేయవద్దు ప్రారంభించు",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "మూడవ పక్ష కుకీలను నిలిపివేయి",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "హైపర్‌లింక్ ఆడిటింగ్‌ను నిలిపివేయి",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API నిలిపివేయి",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE నిలిపివేయి",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "యాడ్ మెజర్‌మెంట్ నిలిపివేయి",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "సంబంధిత వెబ్‌సైట్ సెట్‌లను నిలిపివేయి",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC ప్రాక్సీ లేని UDP నిలిపివేయి",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "ప్రైవసీ రక్షణలు ఆన్",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "ట్రాకింగ్ కంటెంట్‌ను బ్లాక్ చేయి",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ట్రాకింగ్ బ్రెడ్‌క్రంబ్‌లను తొలగించు",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "సిస్టమ్ సమాచారాన్ని రక్షించు",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "యాడ్‌లు మరియు ట్రాకర్‌లను బ్లాక్ చేయి",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "ట్రాకింగ్ పారామీటర్లు",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "ట్రాక్ చేయవద్దు ప్రారంభించు",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "స్క్రీన్",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "విండో పేరు",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "బ్రౌజర్ ప్రాధాన్యతలు",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "సైట్ డిఫాల్ట్",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "డిఫాల్ట్‌లకు రీసెట్ చేయి",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "బ్యాటరీ",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "బ్రౌజర్",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "ఆల్టర్నేట్ ఎర్రర్ పేజీలను నిలిపివేయి",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "సేఫ్ బ్రౌజింగ్ ఎక్స్టెండెడ్ రిపోర్టింగ్ నిలిపివేయి",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "స్పెల్లింగ్ సర్వీస్ నిలిపివేయి",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "సెర్చ్ సజెస్ట్ నిలిపివేయి",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "రెఫెరర్",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "కీబోర్డ్",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "టైమింగ్",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "వెబ్ లీక్‌లను ఆపు",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ఆడియో",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "డిస్ప్లే",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "డివైస్",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "మెమరీ",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "డిస్క్",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "గ్రాఫిక్స్",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ఫాంట్లు",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "భాష",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "ప్రాసెసర్",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "గణితం",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "టైమ్ జోన్",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "టచ్",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "నెట్‌వర్క్",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "స్టైల్ షీట్లు",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic కు స్వాగతం",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic ఇన్‌స్టాల్ చేసినందుకు ధన్యవాదాలు!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "సెట్టప్ పూర్తి చేయడానికి ఈ త్వరిత దశలను అనుసరించండి.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic ను టూల్‌బార్‌లో పిన్ చేయండి",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 నిమి",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "పజిల్ ఐకాన్",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "పిన్ ఐకాన్",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic ను టూల్‌బార్‌లో పిన్ చేయడం",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN తో మీ IP చిరునామాను దాచండి",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 నిమి",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic మీను బ్రౌజర్ స్థాయిలో రక్షిస్తుంది. కానీ మీరు సందర్శించే ప్రతి సైట్, అందులోని ట్రాకర్‌లు ఇంకా మీ IP చిరునామా చూడగలవు. <strong>మీ IP చిరునామాను దాచడానికి VPN అవసరం.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "సూచించిన VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "స్వతంత్రంగా ఆడిట్ చేయబడింది, ఓపెన్ సోర్స్, మీ బ్రౌజింగ్ లాగ్‌లు నిల్వ చేయదు.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN పొందండి →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic కమిషన్ పొందుతుంది, ఇది మా పనిని కొనసాగించడంలో సహాయపడుతుంది.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "లేదు, నేను వేరే VPN వాడుతాను",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "బ్రౌజర్ హిస్టరీ సింక్‌ను నిలిపివేయండి",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 నిమి",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "హిస్టరీ సింక్ ప్రారంభించబడితే <strong>Chrome మీ బ్రౌజింగ్ హిస్టరీని Google సర్వర్లకు పంపవచ్చు.</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "హిస్టరీ సింక్ నిలిపివేయడానికి సహాయం కావాలా?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "అవును, చూపించండి",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "లేదు, నేనే చేస్తాను",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "ఇంతే! మీ గోప్యతను ఆస్వాదించండి.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "మూల కోడ్",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "మీ ఎక్స్టెన్షన్లు చూడటానికి Chrome టూల్‌బార్‌లోని <strong>పజిల్</strong> {puzzleIcon} పై క్లిక్ చేయండి. జాబితాలో <strong>Privacy Magic</strong> ను కనుగొని పక్కన ఉన్న <strong>పిన్</strong> {pinIcon} పై క్లిక్ చేయండి. Privacy Magic బటన్ {hamsaIcon} పిన్ అయిన తర్వాత, మీరు ఎప్పుడైనా క్లిక్ చేసి రక్షణ స్థితిని చూసి వ్యక్తిగత రక్షణలను నియంత్రించవచ్చు.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

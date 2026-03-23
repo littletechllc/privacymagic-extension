@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic은 웹을 탐색할 때 감시로부터 당신을 보호합니다.", "description": "The description of the extension" },
-  "settingsButton": { "message": "설정", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "안녕하세요, Privacy Magic입니다!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "추적 안 함 사용", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "서드 파티 쿠키 비활성화", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "하이퍼링크 감사 비활성화", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API 비활성화", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE 비활성화", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "광고 측정 비활성화", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "관련 웹사이트 세트 비활성화", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC 비프록시 UDP 비활성화", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "개인정보 보호 사용", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "추적 콘텐츠 차단", "description": "Category for content blocking settings" },
-  "navigation": { "message": "추적 흔적 제거", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "시스템 정보 보호", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "광고 및 추적기 차단", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "추적 매개변수", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "추적 안 함 사용", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "화면", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "창 이름", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "브라우저 기본설정", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "사이트 기본값", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "기본값으로 재설정", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "배터리", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "브라우저", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "대체 오류 페이지 비활성화", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "안전한 검색 확장 보고 비활성화", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "맞춤법 검사 서비스 비활성화", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "검색 제안 비활성화", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "리퍼러", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "키보드", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "타이밍", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "웹 유출 중지", "description": "Category for leaky web features settings" },
-  "audio": { "message": "오디오", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "디스플레이", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "기기", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "메모리", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "디스크", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "그래픽", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "글꼴", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "언어", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "프로세서", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "수학", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "시간대", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "터치", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "네트워크", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "스타일시트", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic은 웹을 탐색할 때 감시로부터 당신을 보호합니다.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "설정",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "안녕하세요, Privacy Magic입니다!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "추적 안 함 사용",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "서드 파티 쿠키 비활성화",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "하이퍼링크 감사 비활성화",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API 비활성화",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE 비활성화",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "광고 측정 비활성화",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "관련 웹사이트 세트 비활성화",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC 비프록시 UDP 비활성화",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "개인정보 보호 사용",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "추적 콘텐츠 차단",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "추적 흔적 제거",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "시스템 정보 보호",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "광고 및 추적기 차단",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "추적 매개변수",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "추적 안 함 사용",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "화면",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "창 이름",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "브라우저 기본설정",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "사이트 기본값",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "기본값으로 재설정",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "배터리",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "브라우저",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "대체 오류 페이지 비활성화",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "안전한 검색 확장 보고 비활성화",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "맞춤법 검사 서비스 비활성화",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "검색 제안 비활성화",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "리퍼러",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "키보드",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "타이밍",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "웹 유출 중지",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "오디오",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "디스플레이",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "기기",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "메모리",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "디스크",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "그래픽",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "글꼴",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "언어",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "프로세서",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "수학",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "시간대",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "터치",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "네트워크",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "스타일시트",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic에 오신 것을 환영합니다",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic을 설치해 주셔서 감사합니다!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "설정을 완료하려면 다음 빠른 단계를 따라주세요.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic을 도구 모음에 고정",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1분",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "퍼즐 아이콘",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "핀 아이콘",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic을 도구 모음에 고정",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN으로 IP 주소 숨기기",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5분",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic은 브라우저 수준에서 사용자를 보호합니다. 하지만 방문하는 모든 웹사이트와 그 안의 추적기는 여전히 IP 주소를 볼 수 있으며, 이를 통해 신원과 위치가 노출될 수 있습니다. <strong>IP 주소를 숨기려면 VPN이 필요합니다.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "추천 VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "독립 감사 완료, 오픈 소스, 브라우징 로그를 저장하지 않습니다. 가장 신뢰할 수 있는 VPN 중 하나입니다.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN 받기 →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic은 수수료를 받아 활동 유지에 사용합니다.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "아니요, 다른 VPN을 사용하겠습니다",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "브라우저 방문 기록 동기화 비활성화",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1분",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "방문 기록 동기화가 활성화되어 있으면 <strong>Chrome이 방문 기록을 Google 서버로 전송할 수 있습니다.</strong> 동기화를 끄면 방문 기록이 더 비공개로 유지됩니다.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "방문 기록 동기화를 끄는 데 도움이 필요하신가요?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "예, 보여주세요",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "아니요, 제가 직접 하겠습니다",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "끝났습니다! 프라이버시를 즐기세요.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "소스 코드",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Chrome 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>핀</strong> {pinIcon}을 클릭하세요. Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic aizsargā jūs no uzraudzības, pārlūkojot tīmekli.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Iestatījumi", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Sveiki, saka Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Iespējot Neseko man", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Atspējot trešo pušu sīkdatnes", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Atspējot hipersaites auditu", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Atspējot Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Atspējot FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Atspējot reklāmu mērīšanu", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Atspējot saistītās vietņu kopas", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Atspējot WebRTC bez starpniekservera UDP", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Privātuma aizsardzība ieslēgta", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Bloķēt izsekošanas saturu", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Noņemt izsekošanas pēdas", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Aizsargāt sistēmas informāciju", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Bloķēt reklāmas un izsekotājus", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Izsekošanas parametri", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Iespējot Neseko man", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Ekrāns", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Loga nosaukums", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Pārlūka preferences", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Noklusējums vietnei", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Atiestatīt uz noklusējumu", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Baterija", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Pārlūks", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Atspējot alternatīvās kļūdu lapas", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Atspējot drošās pārlūkošanas paplašināto ziņošanu", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Atspējot pareizrakstības pakalpojumu", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Atspējot meklēšanas ieteikumus", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Atsauce", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Tastatūra", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Laiks", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Apturēt tīmekļa noplūdes", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Audio", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Displejs", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Ierīce", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Atmiņa", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disks", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafika", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Šrifti", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Valoda", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Procesors", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matemātika", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Laika zona", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Pieskāriens", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Tīkls", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stilu lapas", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic aizsargā jūs no uzraudzības, pārlūkojot tīmekli.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Iestatījumi",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Sveiki, saka Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Iespējot Neseko man",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Atspējot trešo pušu sīkdatnes",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Atspējot hipersaites auditu",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Atspējot Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Atspējot FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Atspējot reklāmu mērīšanu",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Atspējot saistītās vietņu kopas",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Atspējot WebRTC bez starpniekservera UDP",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Privātuma aizsardzība ieslēgta",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Bloķēt izsekošanas saturu",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Noņemt izsekošanas pēdas",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Aizsargāt sistēmas informāciju",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Bloķēt reklāmas un izsekotājus",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Izsekošanas parametri",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Iespējot Neseko man",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Ekrāns",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Loga nosaukums",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Pārlūka preferences",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Noklusējums vietnei",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Atiestatīt uz noklusējumu",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Baterija",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Pārlūks",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Atspējot alternatīvās kļūdu lapas",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Atspējot drošās pārlūkošanas paplašināto ziņošanu",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Atspējot pareizrakstības pakalpojumu",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Atspējot meklēšanas ieteikumus",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Atsauce",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Tastatūra",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Laiks",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Apturēt tīmekļa noplūdes",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Displejs",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Ierīce",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Atmiņa",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disks",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafika",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Šrifti",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Valoda",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Procesors",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matemātika",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Laika zona",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Pieskāriens",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Tīkls",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stilu lapas",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Laipni lūdzam Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Paldies, ka instalējāt Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Lai pabeigtu iestatīšanu, izpildiet šīs ātrās darbības.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Piespraudiet Privacy Magic rīkjoslā",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "puzles ikona",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "piespraudes ikona",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic piespraušana rīkjoslā",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Paslēpiet savu IP adresi ar VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic aizsargā jūs pārlūka līmenī. Taču katra vietne, ko apmeklējat, un katrs tajā iegultais izsekotājs joprojām var redzēt jūsu IP adresi, kas var atklāt jūsu identitāti un atrašanās vietu. <strong>Lai paslēptu savu IP adresi, jums būs nepieciešams VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Ieteiktais VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Neatkarīgi auditēts, atvērtā koda un neglabā jūsu pārlūkošanas žurnālus. Viens no uzticamākajiem pieejamajiem VPN.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Iegūstiet Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic saņem komisiju, kas palīdz uzturēt mūsu darbu.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Nē, paldies, es izmantošu citu VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Atspējojiet pārlūkošanas vēstures sinhronizāciju",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Ja vēstures sinhronizācija ir ieslēgta, <strong>Chrome var sūtīt jūsu pārlūkošanas vēsturi uz Google serveriem.</strong> Sinhronizācijas atspējošana saglabā jūsu vēsturi privātāku.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Vai vēlaties palīdzību vēstures sinhronizācijas atspējošanā?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Jā, parādiet man",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Nē, es to izdarīšu pats",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Tas arī viss! Izbaudiet savu privātumu.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Avota kods",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Noklikšķiniet uz <strong>puzles</strong> {puzzleIcon} Chrome rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>piespraudes</strong> {pinIcon} blakus tam. Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -218,5 +218,117 @@
   "policy": {
     "message": "Gizlilik Sinyalleri",
     "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic'e hoş geldiniz",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic'i yüklediğiniz için teşekkürler!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Kurulumu tamamlamak için lütfen bu hızlı adımları izleyin.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic'i araç çubuğunuza sabitleyin",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 dk",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "yapboz simgesi",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "iğne simgesi",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic'i araç çubuğuna sabitleme",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "IP adresinizi bir VPN ile gizleyin",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 dk",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic sizi tarayıcı düzeyinde korur. Ancak ziyaret ettiğiniz her web sitesi ve içine gömülü her izleyici IP adresinizi görebilir; bu da kimliğinizi ve konumunuzu ortaya çıkarabilir. <strong>IP adresinizi gizlemek için bir VPN'e ihtiyacınız olacak.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Önerilen VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Bağımsız olarak denetlenmiş, açık kaynaklıdır ve gezinme kayıtlarınızı tutmaz. Mevcut en güvenilir VPN'lerden biri.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN edin →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic, çalışmalarımızı sürdürmemize yardımcı olan bir komisyon alır.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Hayır teşekkürler, başka bir VPN kullanacağım",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Tarayıcı geçmişi senkronizasyonunu devre dışı bırakın",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 dk",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Geçmiş senkronizasyonu açıksa, <strong>Chrome tarama geçmişinizi Google sunucularına gönderebilir.</strong> Senkronizasyonu kapatmak geçmişinizi daha gizli tutar.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Geçmiş senkronizasyonunu kapatmak için yardım ister misiniz?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Evet, göster",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Hayır, kendim hallederim",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Hepsi bu kadar! Gizliliğinizin tadını çıkarın.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Kaynak Kodu",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Uzantılarınızı görmek için Chrome araç çubuğundaki <strong>yapboz</strong> {puzzleIcon} simgesine tıklayın. Listede <strong>Privacy Magic</strong>'i bulun ve yanındaki <strong>iğne</strong> {pinIcon} simgesine tıklayın. Privacy Magic düğmesi {hamsaIcon} sabitlendiğinde, nasıl korunduğunuzu görmek ve tek tek korumaları yönetmek için istediğiniz zaman tıklayabilirsiniz.",
+    "description": "Step 1 body text with named icon tokens for i18n"
   }
 }

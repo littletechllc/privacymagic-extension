@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Το Privacy Magic σας προστατεύει από την παρακολούθηση καθώς πλοηγείστε στο διαδίκτυο.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Ρυθμίσεις", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Γεια, λέει το Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Ενεργοποίηση Μην με παρακολουθείτε", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Απενεργοποίηση cookies τρίτων", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Απενεργοποίηση ελέγχου υπερσυνδέσμων", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Απενεργοποίηση Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Απενεργοποίηση FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Απενεργοποίηση μέτρησης διαφημίσεων", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Απενεργοποίηση σχετικών συνόλων ιστοτόπων", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Απενεργοποίηση WebRTC UDP χωρίς proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Προστασία απορρήτου ενεργή", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Αποκλεισμός περιεχομένου παρακολούθησης", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Αφαίρεση ίχνους παρακολούθησης", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Προστασία πληροφοριών συστήματος", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Αποκλεισμός διαφημίσεων και παρακολουθητών", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Παράμετροι παρακολούθησης", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Ενεργοποίηση Μην με παρακολουθείτε", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Οθόνη", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Όνομα παραθύρου", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Προτιμήσεις προγράμματος περιήγησης", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Προεπιλογή ιστοτόπου", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Επαναφορά σε προεπιλογή", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Μπαταρία", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Πρόγραμμα περιήγησης", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Απενεργοποίηση εναλλακτικών σελίδων σφάλματος", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Απενεργοποίηση εκτεταμένης αναφοράς ασφαλούς περιήγησης", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Απενεργοποίηση υπηρεσίας ορθογραφίας", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Απενεργοποίηση προτάσεων αναζήτησης", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Αναφορά", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Πληκτρολόγιο", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Χρονομέτρηση", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Διακοπή διαρροών web", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Ήχος", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Οθόνη", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Συσκευή", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Μνήμη", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Δίσκος", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Γραφικά", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Γραμματοσειρές", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Γλώσσα", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Επεξεργαστής", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Μαθηματικά", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Ζώνη ώρας", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Αφή", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Δίκτυο", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Φύλλα στυλ", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Το Privacy Magic σας προστατεύει από την παρακολούθηση καθώς πλοηγείστε στο διαδίκτυο.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Ρυθμίσεις",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Γεια, λέει το Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Ενεργοποίηση Μην με παρακολουθείτε",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Απενεργοποίηση cookies τρίτων",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Απενεργοποίηση ελέγχου υπερσυνδέσμων",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Απενεργοποίηση Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Απενεργοποίηση FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Απενεργοποίηση μέτρησης διαφημίσεων",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Απενεργοποίηση σχετικών συνόλων ιστοτόπων",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Απενεργοποίηση WebRTC UDP χωρίς proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Προστασία απορρήτου ενεργή",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Αποκλεισμός περιεχομένου παρακολούθησης",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Αφαίρεση ίχνους παρακολούθησης",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Προστασία πληροφοριών συστήματος",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Αποκλεισμός διαφημίσεων και παρακολουθητών",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Παράμετροι παρακολούθησης",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Ενεργοποίηση Μην με παρακολουθείτε",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Οθόνη",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Όνομα παραθύρου",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Προτιμήσεις προγράμματος περιήγησης",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Προεπιλογή ιστοτόπου",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Επαναφορά σε προεπιλογή",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Μπαταρία",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Πρόγραμμα περιήγησης",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Απενεργοποίηση εναλλακτικών σελίδων σφάλματος",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Απενεργοποίηση εκτεταμένης αναφοράς ασφαλούς περιήγησης",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Απενεργοποίηση υπηρεσίας ορθογραφίας",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Απενεργοποίηση προτάσεων αναζήτησης",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Αναφορά",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Πληκτρολόγιο",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Χρονομέτρηση",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Διακοπή διαρροών web",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Ήχος",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Οθόνη",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Συσκευή",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Μνήμη",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Δίσκος",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Γραφικά",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Γραμματοσειρές",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Γλώσσα",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Επεξεργαστής",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Μαθηματικά",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Ζώνη ώρας",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Αφή",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Δίκτυο",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Φύλλα στυλ",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Καλώς ήρθατε στο Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Ευχαριστούμε που εγκαταστήσατε το Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Για να ολοκληρώσετε τη ρύθμιση, ακολουθήστε αυτά τα γρήγορα βήματα.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Καρφιτσώστε το Privacy Magic στη γραμμή εργαλείων",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 λεπτό",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "εικονίδιο παζλ",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "εικονίδιο καρφίτσας",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Καρφίτσωμα του Privacy Magic στη γραμμή εργαλείων",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Αποκρύψτε τη διεύθυνση IP σας με VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 λεπτά",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Το Privacy Magic σας προστατεύει στο επίπεδο του προγράμματος περιήγησης. Όμως κάθε ιστότοπος που επισκέπτεστε και κάθε ιχνηλάτης που είναι ενσωματωμένος σε αυτόν μπορεί ακόμη να βλέπει τη διεύθυνση IP σας, η οποία μπορεί να αποκαλύψει την ταυτότητα και την τοποθεσία σας. <strong>Για να αποκρύψετε τη διεύθυνση IP σας, θα χρειαστείτε VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Προτεινόμενο VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Ανεξάρτητα ελεγμένο, ανοιχτού κώδικα και χωρίς καταγραφή της περιήγησής σας. Ένα από τα πιο αξιόπιστα διαθέσιμα VPN.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Αποκτήστε Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Το Privacy Magic λαμβάνει προμήθεια που βοηθά στη στήριξη του έργου μας.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Όχι ευχαριστώ, θα χρησιμοποιήσω άλλο VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Απενεργοποιήστε τον συγχρονισμό ιστορικού περιήγησης",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 λεπτό",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Αν ο συγχρονισμός ιστορικού είναι ενεργός, <strong>το Chrome μπορεί να στέλνει το ιστορικό περιήγησής σας στους διακομιστές της Google.</strong> Η απενεργοποίηση του συγχρονισμού διατηρεί το ιστορικό σας πιο ιδιωτικό.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Θέλετε βοήθεια για να απενεργοποιήσετε τον συγχρονισμό ιστορικού;",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ναι, δείξτε μου",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Όχι, θα το κάνω μόνος μου",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Αυτό ήταν! Απολαύστε την ιδιωτικότητά σας.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Πηγαίος κώδικας",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Κάντε κλικ στο <strong>παζλ</strong> {puzzleIcon} στη γραμμή εργαλείων του Chrome για να δείτε τις επεκτάσεις σας. Βρείτε το <strong>Privacy Magic</strong> στη λίστα και κάντε κλικ στην <strong>καρφίτσα</strong> {pinIcon} δίπλα του. Μόλις το κουμπί Privacy Magic {hamsaIcon} καρφιτσωθεί, μπορείτε να το πατάτε οποιαδήποτε στιγμή για να δείτε πώς προστατεύεστε και να ελέγχετε επιμέρους προστασίες.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

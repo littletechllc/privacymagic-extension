@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic vas ščiti pred nadzorom med brskanjem po spletu.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Nastavitve", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Pozdravljeni, pravi Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Omogoči Ne sledi", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Onemogoči piškotke tretjih strani", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Onemogoči revizijo hiperpovezav", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Onemogoči Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Onemogoči FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Onemogoči merjenje oglasov", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Onemogoči nize povezanih spletnih mest", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Onemogoči WebRTC neproksirani UDP", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Zaščita zasebnosti vklopljena", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Blokiraj vsebino sledenja", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Odstrani sledi sledenja", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Zaščiti sistemske informacije", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Blokiraj oglase in sledilce", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Parametri sledenja", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Omogoči Ne sledi", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Zaslon", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Ime okna", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Nastavitve brskalnika", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Privzeto za splet", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Ponastavi na privzeto", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Baterija", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Brskalnik", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Onemogoči nadomestne strani z napakami", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Onemogoči razširjeno poročanje varnega brskanja", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Onemogoči storitev preverjanja črkovanja", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Onemogoči predloge iskanja", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Napotitelj", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Tipkovnica", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Časovni zamik", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Ustavi spletne uhajanja", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Zvok", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Prikaz", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Naprava", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Pomnilnik", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disk", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafika", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Pisave", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Jezik", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Procesor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematika", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Časovni pas", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Dotek", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Omrežje", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Slogovne predloge", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic vas ščiti pred nadzorom med brskanjem po spletu.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Nastavitve",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Pozdravljeni, pravi Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Omogoči Ne sledi",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Onemogoči piškotke tretjih strani",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Onemogoči revizijo hiperpovezav",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Onemogoči Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Onemogoči FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Onemogoči merjenje oglasov",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Onemogoči nize povezanih spletnih mest",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Onemogoči WebRTC neproksirani UDP",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Zaščita zasebnosti vklopljena",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Blokiraj vsebino sledenja",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Odstrani sledi sledenja",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Zaščiti sistemske informacije",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Blokiraj oglase in sledilce",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Parametri sledenja",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Omogoči Ne sledi",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Zaslon",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Ime okna",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Nastavitve brskalnika",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Privzeto za splet",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Ponastavi na privzeto",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Baterija",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Brskalnik",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Onemogoči nadomestne strani z napakami",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Onemogoči razširjeno poročanje varnega brskanja",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Onemogoči storitev preverjanja črkovanja",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Onemogoči predloge iskanja",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Napotitelj",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Tipkovnica",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Časovni zamik",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Ustavi spletne uhajanja",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Zvok",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Prikaz",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Naprava",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Pomnilnik",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disk",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafika",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Pisave",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Jezik",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Procesor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematika",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Časovni pas",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Dotek",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Omrežje",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Slogovne predloge",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Dobrodošli v Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Hvala, ker ste namestili Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Za dokončanje nastavitve sledite tem hitrim korakom.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Pripnite Privacy Magic v orodno vrstico",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ikona sestavljanke",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ikona zatiča",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Pripenjanje Privacy Magic v orodno vrstico",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Skrijte svoj IP naslov z VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic vas ščiti na ravni brskalnika. Toda vsako spletno mesto, ki ga obiščete, in vsak sledilnik, vgrajen vanj, lahko še vedno vidi vaš IP naslov, ki lahko razkrije vašo identiteto in lokacijo. <strong>Za skrivanje IP naslova boste potrebovali VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Predlagani VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Neodvisno revidiran, odprtokoden in ne hrani dnevnikov vašega brskanja. Eden najbolj zaupanja vrednih razpoložljivih VPN-jev.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Pridobite Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic prejme provizijo, ki pomaga podpirati naše delo.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Ne hvala, uporabil bom drug VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Onemogočite sinhronizacijo zgodovine brskalnika",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Če je sinhronizacija zgodovine omogočena, <strong>lahko Chrome pošilja vašo zgodovino brskanja na strežnike Google.</strong> Onemogočanje sinhronizacije ohranja vašo zgodovino bolj zasebno.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Želite pomoč pri onemogočanju sinhronizacije zgodovine?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Da, pokažite mi",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Ne, uredil bom sam",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "To je to! Uživajte v svoji zasebnosti.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Izvorna koda",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Kliknite na <strong>sestavljanko</strong> {puzzleIcon} v orodni vrstici Chrome, da vidite svoje razširitve. Na seznamu poiščite <strong>Privacy Magic</strong> in kliknite <strong>zatič</strong> {pinIcon} poleg njega. Ko je gumb Privacy Magic {hamsaIcon} pripet, ga lahko kadarkoli kliknete, da vidite, kako ste zaščiteni, in upravljate posamezne zaščite.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

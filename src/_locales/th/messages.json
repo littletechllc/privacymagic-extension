@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ", "description": "The description of the extension" },
-  "settingsButton": { "message": "การตั้งค่า", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "สวัสดี Privacy Magic พูด!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "เปิดใช้ ไม่ติดตาม", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "ปิดการใช้งานคุกกี้ของบุคคลที่สาม", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "ปิดการตรวจสอบไฮเปอร์ลิงก์", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "ปิด Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "ปิด FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "ปิดการวัดโฆษณา", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "ปิดชุดเว็บไซต์ที่เกี่ยวข้อง", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "ปิด WebRTC UDP ที่ไม่ผ่านพร็อกซี", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "การป้องกันความเป็นส่วนตัวเปิดอยู่", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "บล็อกเนื้อหาการติดตาม", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ลบร่องรอยการติดตาม", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "ปกป้องข้อมูลระบบ", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "บล็อกโฆษณาและตัวติดตาม", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "พารามิเตอร์ติดตาม", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "เปิดใช้ ไม่ติดตาม", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "หน้าจอ", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "ชื่อหน้าต่าง", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "การตั้งค่าเบราว์เซอร์", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "ค่าเริ่มต้นไซต์", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "รีเซ็ตเป็นค่าเริ่มต้น", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "แบตเตอรี่", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "เบราว์เซอร์", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "ปิดหน้าข้อผิดพลาดทางเลือก", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "ปิดการรายงานขยายการท่องเว็บอย่างปลอดภัย", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "ปิดบริการตรวจการสะกด", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "ปิดคำแนะนำการค้นหา", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "ผู้ส่งต่อ", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "แป้นพิมพ์", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "ไทมิง", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "หยุดการรั่วไหลบนเว็บ", "description": "Category for leaky web features settings" },
-  "audio": { "message": "เสียง", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "จอแสดงผล", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "อุปกรณ์", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "หน่วยความจำ", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ดิสก์", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "กราฟิก", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ฟอนต์", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "ภาษา", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "โปรเซสเซอร์", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "คณิตศาสตร์", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "เขตเวลา", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "การสัมผัส", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "เครือข่าย", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "สไตล์ชีต", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "การตั้งค่า",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "สวัสดี Privacy Magic พูด!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "เปิดใช้ ไม่ติดตาม",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "ปิดการใช้งานคุกกี้ของบุคคลที่สาม",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "ปิดการตรวจสอบไฮเปอร์ลิงก์",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "ปิด Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "ปิด FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "ปิดการวัดโฆษณา",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "ปิดชุดเว็บไซต์ที่เกี่ยวข้อง",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "ปิด WebRTC UDP ที่ไม่ผ่านพร็อกซี",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "การป้องกันความเป็นส่วนตัวเปิดอยู่",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "บล็อกเนื้อหาการติดตาม",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ลบร่องรอยการติดตาม",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "ปกป้องข้อมูลระบบ",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "บล็อกโฆษณาและตัวติดตาม",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "พารามิเตอร์ติดตาม",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "เปิดใช้ ไม่ติดตาม",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "หน้าจอ",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "ชื่อหน้าต่าง",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "การตั้งค่าเบราว์เซอร์",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "ค่าเริ่มต้นไซต์",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "รีเซ็ตเป็นค่าเริ่มต้น",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "แบตเตอรี่",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "เบราว์เซอร์",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "ปิดหน้าข้อผิดพลาดทางเลือก",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "ปิดการรายงานขยายการท่องเว็บอย่างปลอดภัย",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "ปิดบริการตรวจการสะกด",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "ปิดคำแนะนำการค้นหา",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "ผู้ส่งต่อ",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "แป้นพิมพ์",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "ไทมิง",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "หยุดการรั่วไหลบนเว็บ",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "เสียง",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "จอแสดงผล",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "อุปกรณ์",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "หน่วยความจำ",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ดิสก์",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "กราฟิก",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ฟอนต์",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "ภาษา",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "โปรเซสเซอร์",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "คณิตศาสตร์",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "เขตเวลา",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "การสัมผัส",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "เครือข่าย",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "สไตล์ชีต",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "ยินดีต้อนรับสู่ Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "ขอบคุณที่ติดตั้ง Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "เพื่อให้การตั้งค่าเสร็จสมบูรณ์ โปรดทำตามขั้นตอนสั้นๆ เหล่านี้",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "ปักหมุด Privacy Magic ไว้ที่แถบเครื่องมือ",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 นาที",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ไอคอนจิ๊กซอว์",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ไอคอนปักหมุด",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "การปักหมุด Privacy Magic ไปที่แถบเครื่องมือ",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "ซ่อนที่อยู่ IP ของคุณด้วย VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 นาที",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic ปกป้องคุณในระดับเบราว์เซอร์ แต่เว็บไซต์และตัวติดตามที่ฝังอยู่ยังคงเห็นที่อยู่ IP ของคุณได้ <strong>หากต้องการซ่อนที่อยู่ IP คุณต้องใช้ VPN</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN ที่แนะนำ",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "ผ่านการตรวจสอบอิสระ โอเพนซอร์ส และไม่เก็บบันทึกการท่องเว็บของคุณ",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "รับ Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ได้รับค่าคอมมิชชันซึ่งช่วยสนับสนุนงานของเรา",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "ไม่ ขอบคุณ ฉันจะใช้ VPN อื่น",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ปิดการซิงค์ประวัติเบราว์เซอร์",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 นาที",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "หากเปิดการซิงค์ประวัติไว้ <strong>Chrome อาจส่งประวัติการท่องเว็บของคุณไปยังเซิร์ฟเวอร์ของ Google</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "ต้องการความช่วยเหลือในการปิดการซิงค์ประวัติหรือไม่?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "ใช่ แสดงให้ฉันดู",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "ไม่ ฉันจัดการเอง",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "เรียบร้อย! ขอให้เพลิดเพลินกับความเป็นส่วนตัวของคุณ",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "ซอร์สโค้ด",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "คลิก <strong>จิ๊กซอว์</strong> {puzzleIcon} บนแถบเครื่องมือ Chrome เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>ปักหมุด</strong> {pinIcon} ข้างๆ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

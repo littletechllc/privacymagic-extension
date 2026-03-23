@@ -68,6 +68,10 @@ const builds = [
   {
     entryPoints: ['src/privacymagic/welcome.ts'],
     outfile: 'dist/privacymagic/welcome.js'
+  },
+  {
+    entryPoints: ['src/privacymagic/i18n.ts'],
+    outfile: 'dist/privacymagic/i18n.js'
   }
 ]
 

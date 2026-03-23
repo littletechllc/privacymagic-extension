@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic beschermt je tegen surveillance tijdens het browsen op het web.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Instellingen", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Hallo, zegt Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Volg mij niet inschakelen", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Cookies van derden uitschakelen", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Controle van hyperlinks uitschakelen", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API uitschakelen", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE uitschakelen", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Advertentiemeting uitschakelen", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Gerelateerde websitesets uitschakelen", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC niet-proxy UDP uitschakelen", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Privacybescherming aan", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Trackinginhoud blokkeren", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Trackingsporen verwijderen", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Systeeminformatie beschermen", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Advertenties en trackers blokkeren", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Trackingparameters", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Volg mij niet inschakelen", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Scherm", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Vensternaam", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Browservoorkeuren", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Site-standaard", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Standaard herstellen", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Batterij", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Browser", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Alternatieve foutpagina's uitschakelen", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Uitgebreide rapportage veilig browsen uitschakelen", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Spellingscontrole uitschakelen", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Zoeksuggesties uitschakelen", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Verwijzer", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Toetsenbord", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Timing", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Weblekken stoppen", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Audio", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Weergave", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Apparaat", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Geheugen", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Schijf", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafisch", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Lettertypen", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Taal", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Processor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Wiskunde", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Tijdzone", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Aanraking", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Netwerk", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stylesheets", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic beschermt je tegen surveillance tijdens het browsen op het web.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Instellingen",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Hallo, zegt Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Volg mij niet inschakelen",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Cookies van derden uitschakelen",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Controle van hyperlinks uitschakelen",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API uitschakelen",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE uitschakelen",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Advertentiemeting uitschakelen",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Gerelateerde websitesets uitschakelen",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC niet-proxy UDP uitschakelen",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Privacybescherming aan",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Trackinginhoud blokkeren",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Trackingsporen verwijderen",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Systeeminformatie beschermen",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Advertenties en trackers blokkeren",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Trackingparameters",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Volg mij niet inschakelen",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Scherm",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Vensternaam",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Browservoorkeuren",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Site-standaard",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Standaard herstellen",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Batterij",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Browser",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Alternatieve foutpagina's uitschakelen",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Uitgebreide rapportage veilig browsen uitschakelen",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Spellingscontrole uitschakelen",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Zoeksuggesties uitschakelen",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Verwijzer",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Toetsenbord",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Timing",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Weblekken stoppen",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Weergave",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Apparaat",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Geheugen",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Schijf",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafisch",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Lettertypen",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Taal",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Processor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Wiskunde",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Tijdzone",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Aanraking",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Netwerk",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stylesheets",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Welkom bij Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Bedankt voor het installeren van Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Volg deze snelle stappen om de installatie af te ronden.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Zet Privacy Magic vast op je werkbalk",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "puzzelpictogram",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "pinpictogram",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic vastzetten op de werkbalk",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Verberg je IP-adres met een VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic beschermt je op browserniveau. Maar elke website die je bezoekt, en elke tracker die daarin is ingesloten, kan nog steeds je IP-adres zien, wat je identiteit en locatie kan onthullen. <strong>Om je IP-adres te verbergen, heb je een VPN nodig.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Aanbevolen VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Onafhankelijk gecontroleerd, open source en houdt geen logs van je browsegedrag bij. Een van de meest vertrouwde VPN's die beschikbaar zijn.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Neem Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ontvangt een commissie die helpt om ons werk te ondersteunen.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Nee bedankt, ik gebruik een andere VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Browsersynchronisatie van geschiedenis uitschakelen",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Als synchronisatie van geschiedenis is ingeschakeld, <strong>kan Chrome je browsegeschiedenis naar de servers van Google sturen.</strong> Door synchronisatie uit te schakelen blijft je geschiedenis privéer.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Wil je hulp bij het uitschakelen van synchronisatie van geschiedenis?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ja, laat het me zien",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Nee, ik regel het zelf",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Dat is alles! Geniet van je privacy.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Broncode",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Klik op de <strong>puzzel</strong> {puzzleIcon} in je Chrome-werkbalk om je extensies te zien. Zoek <strong>Privacy Magic</strong> in de lijst en klik op de <strong>pin</strong> {pinIcon} ernaast. Zodra de Privacy Magic-knop {hamsaIcon} is vastgezet, kun je er op elk moment op klikken om te zien hoe je beschermd wordt en om individuele beschermingen te beheren.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

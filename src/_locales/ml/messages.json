@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic വെബ് ബ്രൗസ് ചെയ്യുമ്പോൾ നിങ്ങളെ നിരീക്ഷണത്തിൽ നിന്ന് പരിരക്ഷിക്കുന്നു.", "description": "The description of the extension" },
-  "settingsButton": { "message": "ക്രമീകരണങ്ങൾ", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "നമസ്കാരം, Privacy Magic പറയുന്നു!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "ട്രാക്ക് ചെയ്യരുത് പ്രവർത്തനക്ഷമമാക്കുക", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "തൃതീയ കുക്കികൾ നിർജ്ജീവമാക്കുക", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "ഹൈപ്പർലിങ്ക് ഓഡിറ്റിംഗ് നിർജ്ജീവമാക്കുക", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API നിർജ്ജീവമാക്കുക", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE നിർജ്ജീവമാക്കുക", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "പരസ്യ അളവ് നിർജ്ജീവമാക്കുക", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "ബന്ധപ്പെട്ട വെബ്സൈറ്റ് സെറ്റുകൾ നിർജ്ജീവമാക്കുക", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC നോൺ-പ്രോക്സി UDP നിർജ്ജീവമാക്കുക", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "സ്വകാര്യതാ സംരക്ഷണങ്ങൾ ഓണാണ്", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "ട്രാക്കിംഗ് ഉള്ളടക്കം തടയുക", "description": "Category for content blocking settings" },
-  "navigation": { "message": "ട്രാക്കിംഗ് ബ്രെഡ്ക്രംബുകൾ നീക്കം ചെയ്യുക", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "സിസ്റ്റം വിവരങ്ങൾ സംരക്ഷിക്കുക", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "പരസ്യങ്ങളും ട്രാക്കറുകളും തടയുക", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "ട്രാക്കിംഗ് പാരാമീറ്ററുകൾ", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "ട്രാക്ക് ചെയ്യരുത് പ്രവർത്തനക്ഷമമാക്കുക", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "സ്ക്രീൻ", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "വിൻഡോ പേര്", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ബ്രൗസർ മുൻഗണനകൾ", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "സൈറ്റ് ഡിഫോൾട്ട്", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "ഡിഫോൾട്ടിലേക്ക് പുനഃക്രമീകരിക്കുക", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "ബാറ്ററി", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ബ്രൗസർ", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "ബദൽ എറ്രർ പേജുകൾ നിർജ്ജീവമാക്കുക", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "സേഫ് ബ്രൗസിംഗ് വിപുലീകൃത റിപ്പോർട്ടിംഗ് നിർജ്ജീവമാക്കുക", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "അക്ഷരവിന്യാസ സേവനം നിർജ്ജീവമാക്കുക", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "തിരയൽ നിർദ്ദേശം നിർജ്ജീവമാക്കുക", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "റെഫറർ", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "കീബോർഡ്", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "ടൈമിംഗ്", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "വെബ് ലീക്കുകൾ നിർത്തുക", "description": "Category for leaky web features settings" },
-  "audio": { "message": "ഓഡിയോ", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "ഡിസ്പ്ലേ", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "ഉപകരണം", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "മെമ്മറി", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ഡിസ്ക്", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "ഗ്രാഫിക്സ്", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "ഫോണ്ടുകൾ", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "ഭാഷ", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "പ്രോസസർ", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "ഗണിതം", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "ടൈം സോൺ", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "ടച്ച്", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "നെറ്റ്‌വർക്ക്", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "സ്റ്റൈൽഷീറ്റുകൾ", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic വെബ് ബ്രൗസ് ചെയ്യുമ്പോൾ നിങ്ങളെ നിരീക്ഷണത്തിൽ നിന്ന് പരിരക്ഷിക്കുന്നു.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "ക്രമീകരണങ്ങൾ",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "നമസ്കാരം, Privacy Magic പറയുന്നു!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "ട്രാക്ക് ചെയ്യരുത് പ്രവർത്തനക്ഷമമാക്കുക",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "തൃതീയ കുക്കികൾ നിർജ്ജീവമാക്കുക",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "ഹൈപ്പർലിങ്ക് ഓഡിറ്റിംഗ് നിർജ്ജീവമാക്കുക",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API നിർജ്ജീവമാക്കുക",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE നിർജ്ജീവമാക്കുക",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "പരസ്യ അളവ് നിർജ്ജീവമാക്കുക",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "ബന്ധപ്പെട്ട വെബ്സൈറ്റ് സെറ്റുകൾ നിർജ്ജീവമാക്കുക",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC നോൺ-പ്രോക്സി UDP നിർജ്ജീവമാക്കുക",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "സ്വകാര്യതാ സംരക്ഷണങ്ങൾ ഓണാണ്",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "ട്രാക്കിംഗ് ഉള്ളടക്കം തടയുക",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "ട്രാക്കിംഗ് ബ്രെഡ്ക്രംബുകൾ നീക്കം ചെയ്യുക",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "സിസ്റ്റം വിവരങ്ങൾ സംരക്ഷിക്കുക",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "പരസ്യങ്ങളും ട്രാക്കറുകളും തടയുക",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "ട്രാക്കിംഗ് പാരാമീറ്ററുകൾ",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "ട്രാക്ക് ചെയ്യരുത് പ്രവർത്തനക്ഷമമാക്കുക",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "സ്ക്രീൻ",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "വിൻഡോ പേര്",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ബ്രൗസർ മുൻഗണനകൾ",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "സൈറ്റ് ഡിഫോൾട്ട്",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "ഡിഫോൾട്ടിലേക്ക് പുനഃക്രമീകരിക്കുക",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "ബാറ്ററി",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ബ്രൗസർ",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "ബദൽ എറ്രർ പേജുകൾ നിർജ്ജീവമാക്കുക",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "സേഫ് ബ്രൗസിംഗ് വിപുലീകൃത റിപ്പോർട്ടിംഗ് നിർജ്ജീവമാക്കുക",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "അക്ഷരവിന്യാസ സേവനം നിർജ്ജീവമാക്കുക",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "തിരയൽ നിർദ്ദേശം നിർജ്ജീവമാക്കുക",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "റെഫറർ",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "കീബോർഡ്",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "ടൈമിംഗ്",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "വെബ് ലീക്കുകൾ നിർത്തുക",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "ഓഡിയോ",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "ഡിസ്പ്ലേ",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "ഉപകരണം",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "മെമ്മറി",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ഡിസ്ക്",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "ഗ്രാഫിക്സ്",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "ഫോണ്ടുകൾ",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "ഭാഷ",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "പ്രോസസർ",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "ഗണിതം",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "ടൈം സോൺ",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "ടച്ച്",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "നെറ്റ്‌വർക്ക്",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "സ്റ്റൈൽഷീറ്റുകൾ",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic ലേക്ക് സ്വാഗതം",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic ഇൻസ്റ്റാൾ ചെയ്തതിന് നന്ദി!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "സെറ്റപ്പ് പൂർത്തിയാക്കാൻ ഈ വേഗത്തിലുള്ള ഘട്ടങ്ങൾ പിന്തുടരുക।",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic ടൂൾബാറിൽ പിന്‍ ചെയ്യുക",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 മിനിറ്റ്",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "പസിൽ ഐക്കൺ",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "പിൻ ഐക്കൺ",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic ടൂൾബാറിൽ പിൻ ചെയ്യൽ",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN ഉപയോഗിച്ച് നിങ്ങളുടെ IP വിലാസം മറയ്ക്കുക",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 മിനിറ്റ്",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic ബ്രൗസർ തലത്തിൽ നിങ്ങളെ സംരക്ഷിക്കുന്നു। പക്ഷേ നിങ്ങൾ സന്ദർശിക്കുന്ന എല്ലാ സൈറ്റുകളും ട്രാക്കറുകളും നിങ്ങളുടെ IP വിലാസം കാണാൻ കഴിയും। <strong>IP വിലാസം മറയ്ക്കാൻ VPN ആവശ്യമാണ്।</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "ശുപാർശ ചെയ്യുന്ന VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "സ്വതന്ത്രമായി ഓഡിറ്റ് ചെയ്‌തതും ഓപ്പൺ സോഴ്‌സും, നിങ്ങളുടെ ബ്രൗസിംഗ് ലോഗ് സൂക്ഷിക്കാത്തതുമാണ്।",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN നേടുക →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic ഒരു കമ്മീഷൻ ലഭിക്കുന്നു, ഇത് ഞങ്ങളുടെ പ്രവർത്തനം തുടരാൻ സഹായിക്കുന്നു।",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "വേണ്ട, ഞാൻ മറ്റൊരു VPN ഉപയോഗിക്കും",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ബ്രൗസർ ചരിത്ര സിങ്ക് പ്രവർത്തനരഹിതമാക്കുക",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 മിനിറ്റ്",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "ചരിത്ര സിങ്ക് പ്രവർത്തനക്ഷമമാണെങ്കിൽ <strong>Chrome നിങ്ങളുടെ ബ്രൗസിംഗ് ചരിത്രം Google സർവറുകളിലേക്ക് അയയ്ക്കാം।</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "ചരിത്ര സിങ്ക് ഓഫ് ചെയ്യാൻ സഹായമോ?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "അതെ, കാണിക്കൂ",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "വേണ്ട, ഞാൻ തന്നെ ചെയ്യും",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "അത്രയേ ഉള്ളൂ! നിങ്ങളുടെ സ്വകാര്യത ആസ്വദിക്കുക।",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "സോഴ്‌സ് കോഡ്",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "നിങ്ങളുടെ എക്സ്റ്റെൻഷനുകൾ കാണാൻ Chrome ടൂൾബാറിലെ <strong>പസിൽ</strong> {puzzleIcon} ക്ലിക്ക് ചെയ്യുക। ലിസ്റ്റിൽ <strong>Privacy Magic</strong> കണ്ടെത്തി സമീപമുള്ള <strong>പിൻ</strong> {pinIcon} ക്ലിക്ക് ചെയ്യുക। Privacy Magic ബട്ടൺ {hamsaIcon} പിൻ ചെയ്താൽ, നിങ്ങൾക്ക് എപ്പോഴും ക്ലിക്ക് ചെയ്ത് സംരക്ഷണം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് കാണാനും വ്യക്തിഗത സംരക്ഷണങ്ങൾ നിയന്ത്രിക്കാനും കഴിയും।",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

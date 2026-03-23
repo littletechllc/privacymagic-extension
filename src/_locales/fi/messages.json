@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic suojela sinua valvonnalta selatessasi verkkoa.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Asetukset", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Hei, Privacy Magic sanoo!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Ota Älä seuraa käyttöön", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Poista kolmannen osapuolen evästeet käytöstä", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Poista hyperlinkkien tarkastus käytöstä", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Poista Topics API käytöstä", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Poista FLEDGE käytöstä", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Poista mainosten mittaus käytöstä", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Poista liittyvät verkkosivustojoukot käytöstä", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Poista WebRTC-välityspalveluttoman UDP:n käyttö", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Yksityisyyden suojaus päällä", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Estä seurantasisältö", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Poista seurannan jäljet", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Suojaa järjestelmätiedot", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Estä mainokset ja seuraimet", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Seurantaparametrit", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Ota Älä seuraa käyttöön", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Näyttö", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Ikkunan nimi", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Selaimen asetukset", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Sivuston oletus", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Palauta oletukset", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Paristi", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Selain", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Poista vaihtoehtoiset virhesivut käytöstä", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Poista turvallisen selaamisen laajennettu raportointi käytöstä", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Poista oikeinkirjoituksen tarkistus käytöstä", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Poista hakuehdotukset käytöstä", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Viittaaja", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Näppäimistö", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Ajoitus", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Lopeta web-vuodot", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Ääni", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Näyttö", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Laite", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Muisti", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Levy", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafiikka", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fontit", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Kieli", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Prosessori", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematiikka", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Aikavyöhyke", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Kosketus", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Verkko", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Tyylitiedostot", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic suojela sinua valvonnalta selatessasi verkkoa.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Asetukset",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Hei, Privacy Magic sanoo!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Ota Älä seuraa käyttöön",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Poista kolmannen osapuolen evästeet käytöstä",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Poista hyperlinkkien tarkastus käytöstä",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Poista Topics API käytöstä",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Poista FLEDGE käytöstä",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Poista mainosten mittaus käytöstä",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Poista liittyvät verkkosivustojoukot käytöstä",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Poista WebRTC-välityspalveluttoman UDP:n käyttö",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Yksityisyyden suojaus päällä",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Estä seurantasisältö",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Poista seurannan jäljet",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Suojaa järjestelmätiedot",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Estä mainokset ja seuraimet",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Seurantaparametrit",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Ota Älä seuraa käyttöön",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Näyttö",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Ikkunan nimi",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Selaimen asetukset",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Sivuston oletus",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Palauta oletukset",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Paristi",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Selain",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Poista vaihtoehtoiset virhesivut käytöstä",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Poista turvallisen selaamisen laajennettu raportointi käytöstä",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Poista oikeinkirjoituksen tarkistus käytöstä",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Poista hakuehdotukset käytöstä",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Viittaaja",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Näppäimistö",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Ajoitus",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Lopeta web-vuodot",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Ääni",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Näyttö",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Laite",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Muisti",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Levy",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafiikka",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fontit",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Kieli",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Prosessori",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematiikka",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Aikavyöhyke",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Kosketus",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Verkko",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Tyylitiedostot",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Tervetuloa Privacy Magiciin",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Kiitos, että asensit Privacy Magicin!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Viimeistele käyttöönotto näiden nopeiden vaiheiden avulla.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Kiinnitä Privacy Magic työkalupalkkiin",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "palapelikuvake",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "nuppineulakuvake",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magicin kiinnittäminen työkalupalkkiin",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Piilota IP-osoitteesi VPN:n avulla",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic suojaa sinua selaintasolla. Mutta jokainen vierailemasi verkkosivusto ja siihen upotettu seurain näkee yhä IP-osoitteesi, mikä voi paljastaa henkilöllisyytesi ja sijaintisi. <strong>Piilottaaksesi IP-osoitteesi tarvitset VPN:n.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Suositeltu VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Riippumattomasti auditoitu, avoimen lähdekoodin ja ei pidä lokeja selaamisestasi. Yksi luotettavimmista saatavilla olevista VPN-palveluista.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Hanki Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic saa komission, joka auttaa ylläpitämään työtämme.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Ei kiitos, käytän toista VPN:ää",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Poista selaushistorian synkronointi käytöstä",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Jos historian synkronointi on käytössä, <strong>Chrome voi lähettää selaushistoriasi Googlen palvelimille.</strong> Synkronoinnin poistaminen käytöstä pitää selaushistoriasi yksityisempänä.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Haluatko apua historian synkronoinnin poistamiseen käytöstä?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Kyllä, näytä minulle",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Ei, hoidan sen itse",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Siinä kaikki! Nauti yksityisyydestäsi.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Lähdekoodi",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Napsauta <strong>palapeliä</strong> {puzzleIcon} Chromen työkalupalkissa nähdäksesi laajennuksesi. Etsi listasta <strong>Privacy Magic</strong> ja napsauta sen vieressä olevaa <strong>nuppineulaa</strong> {pinIcon}. Kun Privacy Magic -painike {hamsaIcon} on kiinnitetty, voit klikata sitä milloin tahansa nähdäksesi, miten sinua suojataan, ja hallitaksesi yksittäisiä suojauksia.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

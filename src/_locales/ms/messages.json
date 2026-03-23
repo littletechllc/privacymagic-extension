@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic melindungi anda daripada pengawasan semasa anda melayari web.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Tetapan", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Helo, kata Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Dayakan Jangan Jejaki", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Lumpuhkan kuki pihak ketiga", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Lumpuhkan audit hiperpautan", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Lumpuhkan Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Lumpuhkan FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Lumpuhkan pengukuran iklan", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Lumpuhkan set laman web berkaitan", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Lumpuhkan WebRTC UDP tanpa proksi", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Perlindungan privasi hidup", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Sekat kandungan penjejakan", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Buang jejak penjejakan", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Lindungi maklumat sistem", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Sekat iklan dan penjejak", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Parameter penjejakan", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Dayakan Jangan Jejaki", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Skrin", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Nama tetingkap", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Keutamaan pelayar", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Lalai laman", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Set semula ke lalai", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Bateri", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Pelayar", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Lumpuhkan halaman ralat alternatif", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Lumpuhkan laporan lanjutan pelayaran selamat", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Lumpuhkan perkhidmatan ejaan", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Lumpuhkan cadangan carian", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Perujuk", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Papan kekunci", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Timing", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Hentikan kebocoran web", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Audio", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Paparan", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Peranti", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Memori", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Cakera", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafik", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fon", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Bahasa", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Pemproses", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematik", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Zon masa", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Sentuhan", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Rangkaian", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stylesheet", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic melindungi anda daripada pengawasan semasa anda melayari web.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Tetapan",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Helo, kata Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Dayakan Jangan Jejaki",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Lumpuhkan kuki pihak ketiga",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Lumpuhkan audit hiperpautan",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Lumpuhkan Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Lumpuhkan FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Lumpuhkan pengukuran iklan",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Lumpuhkan set laman web berkaitan",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Lumpuhkan WebRTC UDP tanpa proksi",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Perlindungan privasi hidup",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Sekat kandungan penjejakan",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Buang jejak penjejakan",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Lindungi maklumat sistem",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Sekat iklan dan penjejak",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Parameter penjejakan",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Dayakan Jangan Jejaki",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Skrin",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Nama tetingkap",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Keutamaan pelayar",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Lalai laman",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Set semula ke lalai",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Bateri",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Pelayar",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Lumpuhkan halaman ralat alternatif",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Lumpuhkan laporan lanjutan pelayaran selamat",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Lumpuhkan perkhidmatan ejaan",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Lumpuhkan cadangan carian",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Perujuk",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Papan kekunci",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Timing",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Hentikan kebocoran web",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Audio",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Paparan",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Peranti",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Memori",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Cakera",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafik",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fon",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Bahasa",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Pemproses",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematik",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Zon masa",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Sentuhan",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Rangkaian",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stylesheet",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Selamat datang ke Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Terima kasih kerana memasang Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Untuk melengkapkan persediaan, sila ikuti langkah pantas ini.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Sematkan Privacy Magic pada bar alat anda",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ikon puzzle",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ikon pin",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Menyemat Privacy Magic pada bar alat",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Sembunyikan alamat IP anda dengan VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic melindungi anda pada peringkat pelayar. Namun setiap laman web dan penjejak yang dibenamkan masih boleh melihat alamat IP anda. <strong>Untuk menyembunyikan alamat IP, anda memerlukan VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN disyorkan",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Diaudit secara bebas, sumber terbuka, dan tidak menyimpan log pelayaran anda.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Dapatkan Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic menerima komisen yang membantu menyokong kerja kami.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Tidak, terima kasih, saya akan guna VPN lain",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Lumpuhkan penyegerakan sejarah pelayar",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Jika penyegerakan sejarah diaktifkan, <strong>Chrome mungkin menghantar sejarah pelayaran anda ke pelayan Google.</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Mahukan bantuan untuk melumpuhkan penyegerakan sejarah?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ya, tunjukkan saya",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Tidak, saya akan urus sendiri",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Itu sahaja! Nikmati privasi anda.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Kod Sumber",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Klik <strong>puzzle</strong> {puzzleIcon} pada bar alat Chrome untuk melihat sambungan anda. Cari <strong>Privacy Magic</strong> dalam senarai dan klik <strong>pin</strong> {pinIcon} di sebelahnya. Setelah butang Privacy Magic {hamsaIcon} disematkan, anda boleh klik pada bila-bila masa untuk melihat cara anda dilindungi dan mengawal perlindungan individu.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

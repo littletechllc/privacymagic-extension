@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magicは、ウェブを閲覧する際の監視からあなたを守ります。", "description": "The description of the extension" },
-  "settingsButton": { "message": "設定", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "こんにちは、Privacy Magic です！", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "トラック拒否を有効にする", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "サードパーティ Cookie を無効にする", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "ハイパーリンク監査を無効にする", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Topics API を無効にする", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "FLEDGE を無効にする", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "広告測定を無効にする", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "関連ウェブサイトセットを無効にする", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "WebRTC 非プロキシ UDP を無効にする", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "プライバシー保護オン", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "トラッキングコンテンツをブロック", "description": "Category for content blocking settings" },
-  "navigation": { "message": "トラッキングの痕跡を削除", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "システム情報を保護", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "広告とトラッカーをブロック", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "トラッキングパラメータ", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "トラック拒否を有効にする", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "画面", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "ウィンドウ名", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "ブラウザの設定", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "サイトの既定", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "デフォルトに戻す", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "バッテリー", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "ブラウザ", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "代替エラーページを無効にする", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "セーフブラウジング拡張レポートを無効にする", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "スペルチェックサービスを無効にする", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "検索候補を無効にする", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "リファラー", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "キーボード", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "タイミング", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "ウェブの漏洩を止める", "description": "Category for leaky web features settings" },
-  "audio": { "message": "オーディオ", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "表示", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "デバイス", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "メモリ", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "ディスク", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "グラフィックス", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "フォント", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "言語", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "プロセッサ", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "数学", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "タイムゾーン", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "タッチ", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "ネットワーク", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "スタイルシート", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magicは、ウェブを閲覧する際の監視からあなたを守ります。",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "設定",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "こんにちは、Privacy Magic です！",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "トラック拒否を有効にする",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "サードパーティ Cookie を無効にする",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "ハイパーリンク監査を無効にする",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Topics API を無効にする",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "FLEDGE を無効にする",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "広告測定を無効にする",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "関連ウェブサイトセットを無効にする",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "WebRTC 非プロキシ UDP を無効にする",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "プライバシー保護オン",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "トラッキングコンテンツをブロック",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "トラッキングの痕跡を削除",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "システム情報を保護",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "広告とトラッカーをブロック",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "トラッキングパラメータ",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "トラック拒否を有効にする",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "画面",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "ウィンドウ名",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "ブラウザの設定",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "サイトの既定",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "デフォルトに戻す",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "バッテリー",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "ブラウザ",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "代替エラーページを無効にする",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "セーフブラウジング拡張レポートを無効にする",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "スペルチェックサービスを無効にする",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "検索候補を無効にする",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "リファラー",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "キーボード",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "タイミング",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "ウェブの漏洩を止める",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "オーディオ",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "表示",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "デバイス",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "メモリ",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "ディスク",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "グラフィックス",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "フォント",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "言語",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "プロセッサ",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "数学",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "タイムゾーン",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "タッチ",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "ネットワーク",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "スタイルシート",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Privacy Magic へようこそ",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Privacy Magic をインストールしていただきありがとうございます！",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "設定を完了するには、次の簡単な手順に従ってください。",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Privacy Magic をツールバーに固定する",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1分",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "パズルアイコン",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ピンアイコン",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Privacy Magic をツールバーに固定",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "VPN で IP アドレスを隠す",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5分",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic はブラウザレベルで保護します。しかし、訪問する各サイトや埋め込まれたトラッカーは、依然としてあなたの IP アドレスを確認でき、本人や場所を特定できる可能性があります。<strong>IP アドレスを隠すには VPN が必要です。</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "おすすめの VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "独立監査済み、オープンソース、閲覧ログを保存しません。信頼性の高い VPN のひとつです。",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Proton VPN を入手 →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic は手数料を受け取り、活動の継続に役立てています。",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "いいえ、別の VPN を使います",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "ブラウザ履歴の同期を無効にする",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1分",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "履歴同期が有効な場合、<strong>Chrome は閲覧履歴を Google のサーバーに送信する可能性があります。</strong>同期を無効にすると、履歴のプライバシーが向上します。",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "履歴同期を無効にする手順の案内が必要ですか？",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "はい、表示する",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "いいえ、自分で行います",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "以上です！プライバシーをお楽しみください。",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "ソースコード",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Chrome のツールバーにある<strong>パズル</strong>{puzzleIcon}をクリックして拡張機能を表示します。一覧で<strong>Privacy Magic</strong>を見つけ、横の<strong>ピン</strong>{pinIcon}をクリックします。Privacy Magic ボタン{hamsaIcon}が固定されたら、いつでもクリックして保護状況を確認し、個別の保護設定を管理できます。",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

@@ -210,5 +210,117 @@
   "touch": {
     "message": "Táctil",
     "description": "Setting to block touch support fingerprinting"
+  },
+  "welcomePageTitle": {
+    "message": "Bienvenido a Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "¡Gracias por instalar Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Para terminar la configuración, sigue estos pasos rápidos.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Fija Privacy Magic en tu barra de herramientas",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "icono de rompecabezas",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "icono de pin",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Fijar Privacy Magic en la barra de herramientas",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Oculta tu dirección IP con una VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic te protege a nivel del navegador. Pero cada sitio web que visitas, y cada rastreador incrustado en él, aún puede ver tu dirección IP, lo que puede revelar tu identidad y ubicación. <strong>Para ocultar tu dirección IP, necesitarás una VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN sugerida",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Auditada de forma independiente, de código abierto y sin registros de tu navegación. Una de las VPN más confiables disponibles.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Obtener Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic recibe una comisión que ayuda a sostener nuestro trabajo.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "No, gracias, usaré otra VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Desactivar la sincronización del historial del navegador",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Si la sincronización del historial está activada, <strong>Chrome puede enviar tu historial de navegación a los servidores de Google.</strong> Desactivar la sincronización mantiene tu historial más privado.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "¿Te gustaría ayuda para desactivar la sincronización del historial?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Sí, muéstrame",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "No, yo me encargo",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "¡Eso es todo! Disfruta de tu privacidad.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Código fuente",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} de tu barra de herramientas de Chrome para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>pin</strong> {pinIcon} junto a ella. Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo te protege y controlar protecciones individuales.",
+    "description": "Step 1 body text with named icon tokens for i18n"
   }
 }

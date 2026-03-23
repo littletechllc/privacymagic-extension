@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic vás chrání před sledováním při prohlížení webu.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Nastavení", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Ahoj, říká Privacy Magic!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Zapnout Nesledovat", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Vypnout cookies třetích stran", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Vypnout auditování odkazů", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Vypnout Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Vypnout FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Vypnout měření reklam", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Vypnout související sady webů", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Vypnout WebRTC UDP bez proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Ochrana soukromí zapnuta", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Blokovat sledovací obsah", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Odstranit stopy sledování", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Chránit systémové informace", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Blokovat reklamy a sledovače", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Parametry sledování", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Zapnout Nesledovat", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Obrazovka", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Název okna", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Předvolby prohlížeče", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Výchozí webu", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Obnovit výchozí", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Baterie", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Prohlížeč", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Vypnout alternativní chybové stránky", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Vypnout rozšířené hlášení bezpečného prohlížení", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Vypnout službu kontroly pravopisu", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Vypnout návrhy vyhledávání", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Referrer", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Klávesnice", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Časování", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Zastavit úniky na webu", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Zvuk", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Zobrazení", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Zařízení", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Paměť", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Disk", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Grafika", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Písma", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Jazyk", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Procesor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Matematika", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Časové pásmo", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Dotek", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Síť", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stylové předlohy", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic vás chrání před sledováním při prohlížení webu.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Nastavení",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Ahoj, říká Privacy Magic!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Zapnout Nesledovat",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Vypnout cookies třetích stran",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Vypnout auditování odkazů",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Vypnout Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Vypnout FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Vypnout měření reklam",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Vypnout související sady webů",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Vypnout WebRTC UDP bez proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Ochrana soukromí zapnuta",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Blokovat sledovací obsah",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Odstranit stopy sledování",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Chránit systémové informace",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Blokovat reklamy a sledovače",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Parametry sledování",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Zapnout Nesledovat",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Obrazovka",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Název okna",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Předvolby prohlížeče",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Výchozí webu",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Obnovit výchozí",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Baterie",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Prohlížeč",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Vypnout alternativní chybové stránky",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Vypnout rozšířené hlášení bezpečného prohlížení",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Vypnout službu kontroly pravopisu",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Vypnout návrhy vyhledávání",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Referrer",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Klávesnice",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Časování",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Zastavit úniky na webu",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Zvuk",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Zobrazení",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Zařízení",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Paměť",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Disk",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Grafika",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Písma",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Jazyk",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Procesor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Matematika",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Časové pásmo",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Dotek",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Síť",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stylové předlohy",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Vítejte v Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Děkujeme za instalaci Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Dokončete nastavení podle těchto rychlých kroků.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Připněte Privacy Magic na panel nástrojů",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ikona puzzle",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ikona špendlíku",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Připnutí Privacy Magic na panel nástrojů",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Skryjte svou IP adresu pomocí VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "5 min",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic vás chrání na úrovni prohlížeče. Každý web, který navštívíte, a každý tracker v něm vložený však stále může vidět vaši IP adresu, která může odhalit vaši identitu a polohu. <strong>Chcete-li skrýt svou IP adresu, budete potřebovat VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "Doporučená VPN",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Nezávisle auditovaná, open source a bez ukládání záznamů o vašem prohlížení. Jedna z nejdůvěryhodnějších dostupných VPN.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Získat Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic získává provizi, která pomáhá financovat naši práci.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Ne, děkuji, použiji jinou VPN",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Vypněte synchronizaci historie prohlížeče",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "1 min",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Pokud je synchronizace historie zapnutá, <strong>Chrome může odesílat vaši historii prohlížení na servery Google.</strong> Vypnutí synchronizace udrží vaši historii soukromější.",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Chcete pomoci s vypnutím synchronizace historie?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ano, ukažte mi",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Ne, zvládnu to sám",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "To je vše! Užívejte si své soukromí.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Zdrojový kód",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Klikněte na <strong>puzzle</strong> {puzzleIcon} na panelu nástrojů Chrome, abyste viděli svá rozšíření. Najděte <strong>Privacy Magic</strong> v seznamu a klikněte na <strong>špendlík</strong> {pinIcon} vedle. Jakmile je tlačítko Privacy Magic {hamsaIcon} připnuté, můžete na něj kdykoli kliknout, abyste viděli, jak jste chráněni, a spravovali jednotlivé ochrany.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }

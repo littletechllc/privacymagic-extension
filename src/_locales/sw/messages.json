@@ -1,57 +1,334 @@
 {
-  "extensionName": { "message": "Privacy Magic", "description": "The name of the extension" },
-  "extensionDescription": { "message": "Privacy Magic inalinda wewe dhidi ya ufuatiliaji unapovinjari wavuti.", "description": "The description of the extension" },
-  "settingsButton": { "message": "Mipangilio", "description": "Text for the settings button in the popup" },
-  "popupTitle": { "message": "Privacy Magic", "description": "Title shown in the popup" },
-  "popupGreeting": { "message": "Habari, Privacy Magic inasema!", "description": "Greeting message in the popup" },
-  "doNotTrackEnabled": { "message": "Washa Usifuatilie", "description": "Label for the Do Not Track pref" },
-  "thirdPartyCookiesAllowed": { "message": "Zima Vidakuzi vya Wahusika wa Tatu", "description": "Label for the third-party cookies pref" },
-  "hyperlinkAuditingEnabled": { "message": "Zima Ukaguzi wa Viungo", "description": "Label for the hyperlink auditing pref" },
-  "topicsEnabled": { "message": "Zima Topics API", "description": "Label for the Topics API pref" },
-  "fledgeEnabled": { "message": "Zima FLEDGE", "description": "Label for the FLEDGE pref" },
-  "adMeasurementEnabled": { "message": "Zima Kupima Matangazo", "description": "Label for the Ad Measurement pref" },
-  "relatedWebsiteSetsEnabled": { "message": "Zima Seti za Tovuti Zinazohusiana", "description": "Label for the Related Website Sets pref" },
-  "webRTCIPHandlingPolicy": { "message": "Zima WebRTC UDP isiyo-proxy", "description": "Label for the WebRTC IP handling policy pref" },
-  "masterSwitch": { "message": "Ulinzi wa Faragha Umewashwa", "description": "Label for the master switch toggle" },
-  "blocking": { "message": "Zuia maudhui ya ufuatiliaji", "description": "Category for content blocking settings" },
-  "navigation": { "message": "Ondoa Alama za Ufuatiliaji", "description": "Category for navigation protection settings" },
-  "fingerprinting": { "message": "Linda Taarifa za Mfumo", "description": "Category for fingerprinting protection settings" },
-  "ads": { "message": "Zuia Matangazo na Wafuatiliaji", "description": "Setting to block advertisements" },
-  "queryParameters": { "message": "Vigezo vya Ufuatiliaji", "description": "Setting to block tracking query parameters" },
-  "doNotTrack": { "message": "Washa Usifuatilie", "description": "Setting to enable Do Not Track header" },
-  "screen": { "message": "Skrini", "description": "Setting to block screen fingerprinting" },
-  "windowName": { "message": "Jina la Dirisha", "description": "Setting to block window name tracking" },
-  "browserPreferences": { "message": "Mapendeleo ya Kivinjari", "description": "Title for browser preferences section" },
-  "websiteDefaultSettings": { "message": "Chaguo-msingi ya Tovuti", "description": "Title for website default settings section" },
-  "resetToDefaults": { "message": "Weka Upya kwa Chaguo-msingi", "description": "Text for the reset button" },
-  "gpc": { "message": "GPC", "description": "Setting to enable global privacy control" },
-  "battery": { "message": "Betri", "description": "Setting to enable battery API fingerprinting protection" },
-  "useragent": { "message": "Kivinjari", "description": "Setting to enable user-agent fingerprinting protection" },
-  "alternateErrorPagesEnabled": { "message": "Zima Kurasa za Makosa Mbadala", "description": "Setting to enable alternate error pages" },
-  "safeBrowsingExtendedReportingEnabled": { "message": "Zima Ripoti Iliyopanuliwa ya Uvinjari Salama", "description": "Setting to enable safe browsing extended reporting" },
-  "spellingServiceEnabled": { "message": "Zima Huduma ya Kuangalia Orthografia", "description": "Setting to enable spelling service" },
-  "searchSuggestEnabled": { "message": "Zima Mapendekezo ya Utafuti", "description": "Setting to enable search suggest" },
-  "referrerPolicy": { "message": "Mrejeshi", "description": "Setting to tighten referrer policy" },
-  "keyboard": { "message": "Kibodi", "description": "Setting to block keyboard fingerprinting" },
-  "timer": { "message": "Muda", "description": "Setting to inhibit timing-based fingerprinting" },
-  "serviceWorker": { "message": "Service Workers", "description": "Setting to block service workers" },
-  "sharedStorage": { "message": "Shared Storage", "description": "Setting to block shared storage" },
-  "leakyFeatures": { "message": "Simama Vuvio vya Wavuti", "description": "Category for leaky web features settings" },
-  "audio": { "message": "Sauti", "description": "Setting to block audio fingerprinting" },
-  "display": { "message": "Onyesho", "description": "Setting to block display preferences fingerprinting" },
-  "device": { "message": "Kifaa", "description": "Setting to block device version fingerprinting" },
-  "memory": { "message": "Kumbukumbu", "description": "Setting to block device memory fingerprinting" },
-  "disk": { "message": "Diski", "description": "Setting to block disk space fingerprinting" },
-  "gpu": { "message": "Graphics", "description": "Setting to block graphics chip fingerprinting" },
-  "fonts": { "message": "Fonti", "description": "Setting to block fingerprinting of fonts on the device" },
-  "language": { "message": "Lugha", "description": "Setting to block language fingerprinting" },
-  "cpu": { "message": "Processor", "description": "Setting to block main chip fingerprinting" },
-  "math": { "message": "Hisabati", "description": "Setting to block math processing fingerprinting" },
-  "timezone": { "message": "Ukanda wa Saa", "description": "Setting to block time-zone fingerprinting" },
-  "touch": { "message": "Mguso", "description": "Setting to block touch support fingerprinting" },
-  "worker": { "message": "Web Workers", "description": "Setting to harden web workers" },
-  "iframe": { "message": "Iframes", "description": "Setting to harden sandboxed iframes" },
-  "network": { "message": "Mtandao", "description": "Setting to block network information fingerprinting" },
-  "css": { "message": "Stylesheets", "description": "Setting to harden stylesheets" },
-  "policy": { "message": "Privacy Signals", "description": "Category for privacy policy protection settings" }
+  "extensionName": {
+    "message": "Privacy Magic",
+    "description": "The name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Privacy Magic inalinda wewe dhidi ya ufuatiliaji unapovinjari wavuti.",
+    "description": "The description of the extension"
+  },
+  "settingsButton": {
+    "message": "Mipangilio",
+    "description": "Text for the settings button in the popup"
+  },
+  "popupTitle": {
+    "message": "Privacy Magic",
+    "description": "Title shown in the popup"
+  },
+  "popupGreeting": {
+    "message": "Habari, Privacy Magic inasema!",
+    "description": "Greeting message in the popup"
+  },
+  "doNotTrackEnabled": {
+    "message": "Washa Usifuatilie",
+    "description": "Label for the Do Not Track pref"
+  },
+  "thirdPartyCookiesAllowed": {
+    "message": "Zima Vidakuzi vya Wahusika wa Tatu",
+    "description": "Label for the third-party cookies pref"
+  },
+  "hyperlinkAuditingEnabled": {
+    "message": "Zima Ukaguzi wa Viungo",
+    "description": "Label for the hyperlink auditing pref"
+  },
+  "topicsEnabled": {
+    "message": "Zima Topics API",
+    "description": "Label for the Topics API pref"
+  },
+  "fledgeEnabled": {
+    "message": "Zima FLEDGE",
+    "description": "Label for the FLEDGE pref"
+  },
+  "adMeasurementEnabled": {
+    "message": "Zima Kupima Matangazo",
+    "description": "Label for the Ad Measurement pref"
+  },
+  "relatedWebsiteSetsEnabled": {
+    "message": "Zima Seti za Tovuti Zinazohusiana",
+    "description": "Label for the Related Website Sets pref"
+  },
+  "webRTCIPHandlingPolicy": {
+    "message": "Zima WebRTC UDP isiyo-proxy",
+    "description": "Label for the WebRTC IP handling policy pref"
+  },
+  "masterSwitch": {
+    "message": "Ulinzi wa Faragha Umewashwa",
+    "description": "Label for the master switch toggle"
+  },
+  "blocking": {
+    "message": "Zuia maudhui ya ufuatiliaji",
+    "description": "Category for content blocking settings"
+  },
+  "navigation": {
+    "message": "Ondoa Alama za Ufuatiliaji",
+    "description": "Category for navigation protection settings"
+  },
+  "fingerprinting": {
+    "message": "Linda Taarifa za Mfumo",
+    "description": "Category for fingerprinting protection settings"
+  },
+  "ads": {
+    "message": "Zuia Matangazo na Wafuatiliaji",
+    "description": "Setting to block advertisements"
+  },
+  "queryParameters": {
+    "message": "Vigezo vya Ufuatiliaji",
+    "description": "Setting to block tracking query parameters"
+  },
+  "doNotTrack": {
+    "message": "Washa Usifuatilie",
+    "description": "Setting to enable Do Not Track header"
+  },
+  "screen": {
+    "message": "Skrini",
+    "description": "Setting to block screen fingerprinting"
+  },
+  "windowName": {
+    "message": "Jina la Dirisha",
+    "description": "Setting to block window name tracking"
+  },
+  "browserPreferences": {
+    "message": "Mapendeleo ya Kivinjari",
+    "description": "Title for browser preferences section"
+  },
+  "websiteDefaultSettings": {
+    "message": "Chaguo-msingi ya Tovuti",
+    "description": "Title for website default settings section"
+  },
+  "resetToDefaults": {
+    "message": "Weka Upya kwa Chaguo-msingi",
+    "description": "Text for the reset button"
+  },
+  "gpc": {
+    "message": "GPC",
+    "description": "Setting to enable global privacy control"
+  },
+  "battery": {
+    "message": "Betri",
+    "description": "Setting to enable battery API fingerprinting protection"
+  },
+  "useragent": {
+    "message": "Kivinjari",
+    "description": "Setting to enable user-agent fingerprinting protection"
+  },
+  "alternateErrorPagesEnabled": {
+    "message": "Zima Kurasa za Makosa Mbadala",
+    "description": "Setting to enable alternate error pages"
+  },
+  "safeBrowsingExtendedReportingEnabled": {
+    "message": "Zima Ripoti Iliyopanuliwa ya Uvinjari Salama",
+    "description": "Setting to enable safe browsing extended reporting"
+  },
+  "spellingServiceEnabled": {
+    "message": "Zima Huduma ya Kuangalia Orthografia",
+    "description": "Setting to enable spelling service"
+  },
+  "searchSuggestEnabled": {
+    "message": "Zima Mapendekezo ya Utafuti",
+    "description": "Setting to enable search suggest"
+  },
+  "referrerPolicy": {
+    "message": "Mrejeshi",
+    "description": "Setting to tighten referrer policy"
+  },
+  "keyboard": {
+    "message": "Kibodi",
+    "description": "Setting to block keyboard fingerprinting"
+  },
+  "timer": {
+    "message": "Muda",
+    "description": "Setting to inhibit timing-based fingerprinting"
+  },
+  "serviceWorker": {
+    "message": "Service Workers",
+    "description": "Setting to block service workers"
+  },
+  "sharedStorage": {
+    "message": "Shared Storage",
+    "description": "Setting to block shared storage"
+  },
+  "leakyFeatures": {
+    "message": "Simama Vuvio vya Wavuti",
+    "description": "Category for leaky web features settings"
+  },
+  "audio": {
+    "message": "Sauti",
+    "description": "Setting to block audio fingerprinting"
+  },
+  "display": {
+    "message": "Onyesho",
+    "description": "Setting to block display preferences fingerprinting"
+  },
+  "device": {
+    "message": "Kifaa",
+    "description": "Setting to block device version fingerprinting"
+  },
+  "memory": {
+    "message": "Kumbukumbu",
+    "description": "Setting to block device memory fingerprinting"
+  },
+  "disk": {
+    "message": "Diski",
+    "description": "Setting to block disk space fingerprinting"
+  },
+  "gpu": {
+    "message": "Graphics",
+    "description": "Setting to block graphics chip fingerprinting"
+  },
+  "fonts": {
+    "message": "Fonti",
+    "description": "Setting to block fingerprinting of fonts on the device"
+  },
+  "language": {
+    "message": "Lugha",
+    "description": "Setting to block language fingerprinting"
+  },
+  "cpu": {
+    "message": "Processor",
+    "description": "Setting to block main chip fingerprinting"
+  },
+  "math": {
+    "message": "Hisabati",
+    "description": "Setting to block math processing fingerprinting"
+  },
+  "timezone": {
+    "message": "Ukanda wa Saa",
+    "description": "Setting to block time-zone fingerprinting"
+  },
+  "touch": {
+    "message": "Mguso",
+    "description": "Setting to block touch support fingerprinting"
+  },
+  "worker": {
+    "message": "Web Workers",
+    "description": "Setting to harden web workers"
+  },
+  "iframe": {
+    "message": "Iframes",
+    "description": "Setting to harden sandboxed iframes"
+  },
+  "network": {
+    "message": "Mtandao",
+    "description": "Setting to block network information fingerprinting"
+  },
+  "css": {
+    "message": "Stylesheets",
+    "description": "Setting to harden stylesheets"
+  },
+  "policy": {
+    "message": "Privacy Signals",
+    "description": "Category for privacy policy protection settings"
+  },
+  "welcomePageTitle": {
+    "message": "Karibu kwenye Privacy Magic",
+    "description": "Title of the welcome page"
+  },
+  "welcomeHeading": {
+    "message": "Asante kwa kusakinisha Privacy Magic!",
+    "description": "Main heading on the welcome page"
+  },
+  "welcomeSubheading": {
+    "message": "Ili kukamilisha usanidi, tafadhali fuata hatua hizi fupi.",
+    "description": "Subheading on the welcome page"
+  },
+  "welcomeStep1Title": {
+    "message": "Bandika Privacy Magic kwenye upau wa zana",
+    "description": "Step 1 title on the welcome page"
+  },
+  "welcomeStep1Time": {
+    "message": "Dakika 1",
+    "description": "Estimated time for step 1"
+  },
+  "welcomePuzzleIconAlt": {
+    "message": "ikoni ya fumbo",
+    "description": "Alt text for puzzle icon in step 1"
+  },
+  "welcomeBrandName": {
+    "message": "Privacy Magic",
+    "description": "Brand name shown in welcome content"
+  },
+  "welcomePinIconAlt": {
+    "message": "ikoni ya pini",
+    "description": "Alt text for pin icon in step 1"
+  },
+  "welcomePinActionImageAlt": {
+    "message": "Kubandika Privacy Magic kwenye upau wa zana",
+    "description": "Alt text for pinning animation image"
+  },
+  "welcomeStep2Title": {
+    "message": "Ficha anwani yako ya IP kwa VPN",
+    "description": "Step 2 title on the welcome page"
+  },
+  "welcomeStep2Time": {
+    "message": "Dakika 5",
+    "description": "Estimated time for step 2"
+  },
+  "welcomeStep2Body": {
+    "message": "Privacy Magic hukulinda katika kiwango cha kivinjari. Lakini kila tovuti unayotembelea na kila kifuatiliaji kilichopachikwa bado kinaweza kuona anwani yako ya IP. <strong>Ili kuficha anwani yako ya IP, utahitaji VPN.</strong>",
+    "description": "Main explanatory text for step 2"
+  },
+  "welcomeSuggestedVpnLabel": {
+    "message": "VPN iliyopendekezwa",
+    "description": "Label above recommended VPN card"
+  },
+  "welcomeSuggestedVpnName": {
+    "message": "Proton VPN",
+    "description": "Name of suggested VPN provider"
+  },
+  "welcomeSuggestedVpnDescription": {
+    "message": "Imekaguliwa kwa kujitegemea, ni chanzo huria, na haihifadhi kumbukumbu za kuvinjari kwako.",
+    "description": "Description of suggested VPN provider"
+  },
+  "welcomeGetProtonVpnCta": {
+    "message": "Pata Proton VPN →",
+    "description": "Primary call to action for suggested VPN"
+  },
+  "welcomeAffiliateNote": {
+    "message": "Privacy Magic hupokea kamisheni inayosaidia kuendeleza kazi yetu.",
+    "description": "Affiliate disclosure on step 2"
+  },
+  "welcomeUseAnotherVpnCta": {
+    "message": "Hapana asante, nitatumia VPN nyingine",
+    "description": "Secondary call to action for step 2"
+  },
+  "welcomeStep3Title": {
+    "message": "Zima usawazishaji wa historia ya kivinjari",
+    "description": "Step 3 title on the welcome page"
+  },
+  "welcomeStep3Time": {
+    "message": "Dakika 1",
+    "description": "Estimated time for step 3"
+  },
+  "welcomeStep3BodyLead": {
+    "message": "Ikiwa usawazishaji wa historia umewashwa, <strong>Chrome inaweza kutuma historia yako ya kuvinjari kwenye seva za Google.</strong>",
+    "description": "Main explanatory text for step 3"
+  },
+  "welcomeStep3BodyQuestion": {
+    "message": "Unataka msaada wa kuzima usawazishaji wa historia?",
+    "description": "Question text in step 3"
+  },
+  "welcomeShowMeCta": {
+    "message": "Ndiyo, nionyeshe",
+    "description": "Primary call to action for step 3"
+  },
+  "welcomeHandleMyselfCta": {
+    "message": "Hapana, nitafanya mwenyewe",
+    "description": "Secondary call to action for step 3"
+  },
+  "welcomeClosing": {
+    "message": "Hiyo ndiyo! Furahia faragha yako.",
+    "description": "Closing text on welcome page"
+  },
+  "welcomeFooterCopyright": {
+    "message": "&copy; 2026 Little Tech LLC",
+    "description": "Copyright text in welcome page footer"
+  },
+  "welcomeSourceCodeLink": {
+    "message": "Msimbo Chanzo",
+    "description": "Label for source code link in welcome footer"
+  },
+  "welcomeStep1BodyWithIcons": {
+    "message": "Bofya <strong>fumbo</strong> {puzzleIcon} kwenye upau wa zana wa Chrome ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>pini</strong> {pinIcon} iliyo kando yake. Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
+    "description": "Step 1 body text with named icon tokens for i18n"
+  }
 }
