@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Spustelėkite <strong>dėlionę</strong> {puzzleIcon} Chrome įrankių juostoje, kad pamatytumėte plėtinius. Sąraše raskite <strong>Privacy Magic</strong> ir spustelėkite šalia esantį <strong>smeigtuką</strong> {pinIcon}. Kai Privacy Magic mygtukas {hamsaIcon} bus prisegtas, galėsite jį spustelėti bet kada, kad pamatytumėte, kaip esate apsaugoti, ir valdytumėte atskiras apsaugas.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(užbaigta)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

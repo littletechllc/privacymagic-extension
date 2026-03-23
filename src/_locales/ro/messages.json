@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Fă clic pe <strong>puzzle</strong> {puzzleIcon} din bara de instrumente Chrome pentru a-ți vedea extensiile. Găsește <strong>Privacy Magic</strong> în listă și fă clic pe <strong>ac</strong> {pinIcon} de lângă el. După ce butonul Privacy Magic {hamsaIcon} este fixat, poți face clic pe el oricând pentru a vedea cum ești protejat și pentru a controla protecțiile individuale.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(finalizat)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

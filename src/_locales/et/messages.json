@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Klõpsake Chrome'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>nõela</strong> {pinIcon}. Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(lõpetatud)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

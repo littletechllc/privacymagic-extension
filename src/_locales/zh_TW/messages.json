@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "點選 Chrome 工具列中的<strong>拼圖</strong>{puzzleIcon}以查看擴充功能。在清單中找到<strong>Privacy Magic</strong>，然後點選旁邊的<strong>圖釘</strong>{pinIcon}。當 Privacy Magic 按鈕 {hamsaIcon} 已釘選後，您可隨時點擊查看保護狀態並管理各項保護。",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "（已完成）",
+    "description": "Suffix shown on a completed setup step"
   }
 }

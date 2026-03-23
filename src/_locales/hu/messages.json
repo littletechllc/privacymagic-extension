@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Kattints a <strong>kirakó</strong> {puzzleIcon} ikonra a Chrome eszköztárán a bővítményeid megtekintéséhez. Keresd meg a listában a <strong>Privacy Magicet</strong>, és kattints a mellette lévő <strong>gombostűre</strong> {pinIcon}. Ha a Privacy Magic gomb {hamsaIcon} ki van tűzve, bármikor rákattinthatsz, hogy lásd, hogyan véd, és kezeld az egyes védelmeket.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(kész)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

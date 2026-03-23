@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Klik <strong>puzzle</strong> {puzzleIcon} pada bar alat Chrome untuk melihat sambungan anda. Cari <strong>Privacy Magic</strong> dalam senarai dan klik <strong>pin</strong> {pinIcon} di sebelahnya. Setelah butang Privacy Magic {hamsaIcon} disematkan, anda boleh klik pada bila-bila masa untuk melihat cara anda dilindungi dan mengawal perlindungan individu.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(selesai)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

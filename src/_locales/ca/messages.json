@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Fes clic al <strong>trencaclosques</strong> {puzzleIcon} de la barra d'eines de Chrome per veure les teves extensions. Troba <strong>Privacy Magic</strong> a la llista i fes clic a la <strong>xinxeta</strong> {pinIcon} del costat. Quan el botó de Privacy Magic {hamsaIcon} estigui fixat, hi podràs fer clic en qualsevol moment per veure com estàs protegit i controlar les proteccions individuals.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(completat)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

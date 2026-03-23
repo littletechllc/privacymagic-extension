@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "ቅጥያዎችዎን ለማየት በChrome መሳሪያ አሞሌ ያለውን <strong>ፓዝል</strong> {puzzleIcon} ጠቅ ያድርጉ። በዝርዝሩ ውስጥ <strong>Privacy Magic</strong> ያግኙ እና ከጎኑ ያለውን <strong>ፒን</strong> {pinIcon} ጠቅ ያድርጉ። የPrivacy Magic አዝራር {hamsaIcon} ከተጣበቀ በኋላ በማንኛውም ጊዜ ጠቅ በማድረግ እንዴት እንደሚጠበቁ ማየት እና ግለሰብ ጥበቃዎችን መቆጣጠር ይችላሉ።",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(ተጠናቋል)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

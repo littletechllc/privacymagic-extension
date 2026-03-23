@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Kliknite na <strong>puzzle</strong> {puzzleIcon} na paneli nástrojov Chrome, aby ste videli svoje rozšírenia. Nájdite v zozname <strong>Privacy Magic</strong> a kliknite na <strong>pripnutie</strong> {pinIcon} vedľa neho. Keď bude tlačidlo Privacy Magic {hamsaIcon} pripnuté, môžete naň kliknúť kedykoľvek, aby ste videli, ako ste chránení, a spravovali jednotlivé ochrany.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(dokončené)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

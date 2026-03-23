@@ -26,6 +26,13 @@ const applyStep1MessageTokens = (): void => {
   el.innerHTML = translated
 }
 
+const applyCompletedLabels = (): void => {
+  const localized = chrome.i18n.getMessage('welcomeCompletedSuffix') || '(completed)'
+  document.querySelectorAll<HTMLElement>('.step-title').forEach((title) => {
+    title.setAttribute('data-completed-label', localized)
+  })
+}
+
 const step: (HTMLElement | null)[] = [null]
 step[1] = document.getElementById('step1')
 step[2] = document.getElementById('step2')
@@ -75,3 +82,4 @@ document.querySelectorAll('.step-header').forEach((stepHeader, index) => {
 })
 
 applyStep1MessageTokens()
+applyCompletedLabels()

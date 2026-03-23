@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು Chrome ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>ಪಜಲ್</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>ಪಿನ್</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(ಪೂರ್ಣಗೊಂಡಿದೆ)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

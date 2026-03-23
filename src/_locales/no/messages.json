@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Klikk på <strong>puslespillet</strong> {puzzleIcon} i Chrome-verktøylinjen for å se utvidelsene dine. Finn <strong>Privacy Magic</strong> i listen og klikk på <strong>nålen</strong> {pinIcon} ved siden av. Når Privacy Magic-knappen {hamsaIcon} er festet, kan du klikke på den når som helst for å se hvordan du blir beskyttet og styre individuelle beskyttelser.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(fullført)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

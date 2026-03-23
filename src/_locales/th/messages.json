@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "คลิก <strong>จิ๊กซอว์</strong> {puzzleIcon} บนแถบเครื่องมือ Chrome เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>ปักหมุด</strong> {pinIcon} ข้างๆ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(เสร็จสิ้น)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

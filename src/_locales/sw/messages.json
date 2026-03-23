@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Bofya <strong>fumbo</strong> {puzzleIcon} kwenye upau wa zana wa Chrome ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>pini</strong> {pinIcon} iliyo kando yake. Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(imekamilika)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

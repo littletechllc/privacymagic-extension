@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "I-click ang <strong>puzzle</strong> {puzzleIcon} sa Chrome toolbar para makita ang iyong mga extension. Hanapin ang <strong>Privacy Magic</strong> sa listahan at i-click ang <strong>pin</strong> {pinIcon} sa tabi nito. Kapag na-pin na ang button ng Privacy Magic {hamsaIcon}, maaari mo itong i-click anumang oras para makita kung paano ka pinoprotektahan at kontrolin ang mga indibidwal na proteksyon.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(kumpleto)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

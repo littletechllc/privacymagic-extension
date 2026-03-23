@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של Chrome כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>הנעיצה</strong> {pinIcon} לידו. לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(הושלם)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

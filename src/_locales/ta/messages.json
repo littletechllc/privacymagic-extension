@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க Chrome கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>பின்</strong> {pinIcon} ஐ கிளிக் செய்யவும். Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(முடிந்தது)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

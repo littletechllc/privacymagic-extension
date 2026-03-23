@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Noklikšķiniet uz <strong>puzles</strong> {puzzleIcon} Chrome rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>piespraudes</strong> {pinIcon} blakus tam. Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(pabeigts)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

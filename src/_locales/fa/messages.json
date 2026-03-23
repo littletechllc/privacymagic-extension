@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "روی <strong>پازل</strong> {puzzleIcon} در نوار ابزار Chrome کلیک کنید تا افزونه‌هایتان را ببینید. در فهرست، <strong>Privacy Magic</strong> را پیدا کنید و روی <strong>سنجاق</strong> {pinIcon} کنار آن کلیک کنید. وقتی دکمه Privacy Magic {hamsaIcon} سنجاق شد، هر زمان می‌توانید روی آن کلیک کنید تا ببینید چگونه محافظت می‌شوید و حفاظت‌های جداگانه را مدیریت کنید.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(تکمیل شد)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

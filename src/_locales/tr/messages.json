@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Uzantılarınızı görmek için Chrome araç çubuğundaki <strong>yapboz</strong> {puzzleIcon} simgesine tıklayın. Listede <strong>Privacy Magic</strong>'i bulun ve yanındaki <strong>iğne</strong> {pinIcon} simgesine tıklayın. Privacy Magic düğmesi {hamsaIcon} sabitlendiğinde, nasıl korunduğunuzu görmek ve tek tek korumaları yönetmek için istediğiniz zaman tıklayabilirsiniz.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(tamamlandı)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

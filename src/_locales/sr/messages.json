@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Kliknite na <strong>slagalicu</strong> {puzzleIcon} na traci sa alatkama Chrome-а da biste videli proširenja. Pronađite <strong>Privacy Magic</strong> na listi i kliknite na <strong>čiodu</strong> {pinIcon} pored njega. Kada je dugme Privacy Magic {hamsaIcon} zakačeno, možete da ga kliknete bilo kada da vidite kako ste zaštićeni i upravljate pojedinačnim zaštitama.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(završeno)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

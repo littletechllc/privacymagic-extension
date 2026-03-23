@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Klik op de <strong>puzzel</strong> {puzzleIcon} in je Chrome-werkbalk om je extensies te zien. Zoek <strong>Privacy Magic</strong> in de lijst en klik op de <strong>pin</strong> {pinIcon} ernaast. Zodra de Privacy Magic-knop {hamsaIcon} is vastgezet, kun je er op elk moment op klikken om te zien hoe je beschermd wordt en om individuele beschermingen te beheren.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(voltooid)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

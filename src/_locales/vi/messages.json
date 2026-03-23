@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Nhấp vào <strong>mảnh ghép</strong> {puzzleIcon} trên thanh công cụ Chrome để xem các tiện ích mở rộng. Tìm <strong>Privacy Magic</strong> trong danh sách và nhấp vào <strong>ghim</strong> {pinIcon} bên cạnh. Khi nút Privacy Magic {hamsaIcon} đã được ghim, bạn có thể nhấp bất cứ lúc nào để xem cách bạn được bảo vệ và kiểm soát từng biện pháp bảo vệ.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(đã hoàn tất)",
+    "description": "Suffix shown on a completed setup step"
   }
 }

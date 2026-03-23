@@ -330,5 +330,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Chrome のツールバーにある<strong>パズル</strong>{puzzleIcon}をクリックして拡張機能を表示します。一覧で<strong>Privacy Magic</strong>を見つけ、横の<strong>ピン</strong>{pinIcon}をクリックします。Privacy Magic ボタン{hamsaIcon}が固定されたら、いつでもクリックして保護状況を確認し、個別の保護設定を管理できます。",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "（完了）",
+    "description": "Suffix shown on a completed setup step"
   }
 }

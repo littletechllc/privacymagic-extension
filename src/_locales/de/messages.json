@@ -326,5 +326,9 @@
   "welcomeStep1BodyWithIcons": {
     "message": "Klicke auf das <strong>Puzzle</strong> {puzzleIcon} in deiner Chrome-Symbolleiste, um deine Erweiterungen zu sehen. Finde <strong>Privacy Magic</strong> in der Liste und klicke auf die <strong>Anheften-Schaltfläche</strong> {pinIcon} daneben. Sobald die Privacy Magic-Schaltfläche {hamsaIcon} angeheftet ist, kannst du sie jederzeit anklicken, um zu sehen, wie du geschützt wirst, und um einzelne Schutzfunktionen zu steuern.",
     "description": "Step 1 body text with named icon tokens for i18n"
+  },
+  "welcomeCompletedSuffix": {
+    "message": "(abgeschlossen)",
+    "description": "Suffix shown on a completed setup step"
   }
 }
