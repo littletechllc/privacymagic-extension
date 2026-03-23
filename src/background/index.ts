@@ -106,6 +106,10 @@ const initializePersistentResources = async (): Promise<void> => {
   await setupRules()
 }
 
+const showWelcomePage = async (): Promise<void> => {
+  await chrome.tabs.create({ url: 'privacymagic/welcome.html' })
+}
+
 chrome.runtime.onInstalled.addListener((details) => {
   handleAsync(async () => {
     console.log('onInstalled details:', details)
@@ -114,6 +118,9 @@ chrome.runtime.onInstalled.addListener((details) => {
     await resetAllPrefsToDefaults()
     // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)
     await initializePersistentResources()
+    if (details.reason === 'install') {
+      await showWelcomePage()
+    }
   }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details)
