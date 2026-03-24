@@ -1,5 +1,5 @@
 import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
-import { createSafeMethod, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeMethod, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
 import { ContentSettingId } from '@src/common/setting-ids'
 
 const sanitizeGetHighEntropyValues = (globalObject: GlobalScope, disabledSettings: (Exclude<ContentSettingId, 'masterSwitch'>)[]): void => {
@@ -19,10 +19,10 @@ const sanitizeGetHighEntropyValues = (globalObject: GlobalScope, disabledSetting
     wow64: 'device',
   }
   const spoofVersion = (version: string): string => {
-    return version.replace(/\.\d+/, '0')
+    return version.replaceAll(/\.\d+/g, '.0')
   }
   const platform = globalObject.navigator.platform === 'Win32' ? 'Windows' : globalObject.navigator.platform
-  redefinePropertyValues(globalObject.NavigatorUAData.prototype, {
+  redefineMethods(globalObject.NavigatorUAData.prototype, {
     // This might throw an error if the hints are not permitted by the user;
     // we let the error bubble up to the caller.
     getHighEntropyValues: async function (this: NavigatorUAData, hints: HighEntropyHint[]): Promise<HighEntropyValues> {

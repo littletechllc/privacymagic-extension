@@ -1,8 +1,8 @@
-import { redefineNavigatorProperties } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
 import type { GlobalScope } from '../helpers/globalObject'
 
 const memory = (globalObject: GlobalScope): void => {
-  redefineNavigatorProperties(globalObject, {
+  redefineNavigatorFields(globalObject, {
     // Cover Your Tracks: 1 in 1.93 browsers have this value:
     deviceMemory: undefined
   })

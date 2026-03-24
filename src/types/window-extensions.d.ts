@@ -3,14 +3,19 @@ export {}
 declare global {
 
   class BatteryManager extends EventTarget {
-    charging: boolean
-    chargingTime: number
-    dischargingTime: number
-    level: number
+    readonly charging: boolean
+    readonly chargingTime: number
+    readonly dischargingTime: number
+    readonly level: number
+    onchargingchange: ((this: BatteryManager, ev: Event) => unknown) | null
+    onchargingtimechange: ((this: BatteryManager, ev: Event) => unknown) | null
+    ondischargingtimechange: ((this: BatteryManager, ev: Event) => unknown) | null
+    onlevelchange: ((this: BatteryManager, ev: Event) => unknown) | null
   }
 
   class DevicePosture extends EventTarget {
     readonly type: string
+    onchange: ((this: DevicePosture, ev: Event) => unknown) | null
   }
 
   class LayoutShift extends PerformanceEntry {
@@ -38,7 +43,7 @@ declare global {
     readonly mobile: boolean
     readonly platform: string
     getHighEntropyValues: (hints: HighEntropyHint[]) => Promise<HighEntropyValues>
-    toJSON: {
+    toJSON: () => {
       brands: Array<{ brand: string, version: string }>
       mobile: boolean
       platform: string
@@ -62,6 +67,7 @@ declare global {
     forcedStyleAndLayoutDuration: number
     pauseDuration: number
   }
+
 
   class SharedStorage extends EventTarget {
     has: (key: string) => boolean
@@ -126,6 +132,7 @@ declare global {
 
   interface Navigator {
     userAgentData?: NavigatorUAData
+    devicePosture?: DevicePosture
   }
 
   interface Uint8ArrayConstructor {
@@ -136,6 +143,11 @@ declare global {
     add(font: FontFace): void
     clear(): void
     delete(font: FontFace): void
+  }
+
+  interface Screen {
+    readonly availTop: number
+    readonly availLeft: number
   }
 
   class NotAllowedError extends Error {

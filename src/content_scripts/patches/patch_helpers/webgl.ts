@@ -1,4 +1,4 @@
-import { createSafeMethod, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeMethod, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../../helpers/globalObject'
 
 // Based on results from https://camoufox.com/webgl-research/
@@ -31,7 +31,7 @@ export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
     const userAgentData: NavigatorUAData = globalObject.navigator.userAgentData
     const platform = userAgentData.platform
     if (platform === 'MacIntel' || platform === 'macOS') {
-      redefinePropertyValues(globalObject.WebGLRenderingContext.prototype, {
+      redefineMethods(globalObject.WebGLRenderingContext.prototype, {
         getParameter: function (this: WebGLRenderingContext, constant: number) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const originalValue = originalGetParameterSafe(this, constant)

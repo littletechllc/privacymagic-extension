@@ -1,4 +1,4 @@
-import { redefinePropertyValues, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineMethods, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const timezone = (globalObject: GlobalScope): void => {
@@ -355,7 +355,7 @@ const timezone = (globalObject: GlobalScope): void => {
   const originalMathTrunc = Math.trunc
   const originalDateGetTimezoneOffsetSafe = createSafeMethod(globalObject.Date, 'getTimezoneOffset')
   const OriginalDate = Date
-  redefinePropertyValues(globalObject.Intl.DateTimeFormat.prototype, {
+  redefineMethods(globalObject.Intl.DateTimeFormat.prototype, {
     resolvedOptions: function (this: Intl.DateTimeFormat) {
       const options = originalResolvedOptionsSafe(this)
       const now = new OriginalDate()

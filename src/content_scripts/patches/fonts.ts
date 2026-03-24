@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from "../helpers/monkey-patch"
+import { redefineMethods } from "../helpers/monkey-patch"
 import { isAllowedFont } from "@src/common/font-filter"
 import { stringReplaceSafe } from "@src/content_scripts/helpers/safe"
 import { GlobalScope } from "../helpers/globalObject"
@@ -116,7 +116,7 @@ const fonts = (globalObject: GlobalScope): void => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const clearOriginal = globalObject.document.fonts.clear
 
-  redefinePropertyValues(Object.getPrototypeOf(globalObject.document.fonts), {
+  redefineMethods(Object.getPrototypeOf(globalObject.document.fonts), {
     delete: function (this: FontFaceSet, font: FontFace) {
       deleteOriginal.call(this, font)
       if (DISALLOWED_FONTS.includes(font.family.toLowerCase()) && !isAllowedFont(font.family)) {

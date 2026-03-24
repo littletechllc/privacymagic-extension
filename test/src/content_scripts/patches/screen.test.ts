@@ -1,4 +1,5 @@
-import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
+import {describe, it, expect, beforeEach } from '@jest/globals'
+import { defineMockProperties } from '@test/mocks/define'
 import screenPatch from '@src/content_scripts/patches/screen'
 
 // Patch uses spoofScreenSize(innerWidth, innerHeight); 800x600 => [1920, 1080]
@@ -19,47 +20,29 @@ const leakyScreenTop = 60
 const leakyOuterWidth = 1280
 const leakyOuterHeight = 1024
 
-const screenProp = (key: string, value: number): void => {
-  Object.defineProperty(self.screen, key, { value, configurable: true, enumerable: true })
-}
-const selfProp = (key: string, value: number): void => {
-  Object.defineProperty(self, key, { value, configurable: true, enumerable: true })
-}
-
-const SCREEN_LEAKY_KEYS = ['width', 'height', 'availWidth', 'availHeight', 'availLeft', 'availTop', 'colorDepth', 'pixelDepth'] as const
-const SELF_LEAKY_KEYS = ['devicePixelRatio', 'screenLeft', 'screenTop', 'screenX', 'screenY', 'outerWidth', 'outerHeight'] as const
 
 describe('screen patch', () => {
-  const selfObj = self as unknown as Record<string, unknown>
-  const screenObj = self.screen as unknown as Record<string, unknown>
-
   beforeEach(() => {
-    Object.defineProperty(self, 'innerWidth', { value: mockInnerWidth, configurable: true, enumerable: true })
-    Object.defineProperty(self, 'innerHeight', { value: mockInnerHeight, configurable: true, enumerable: true })
-    if (self.Screen !== undefined) {
-      screenProp('width', leakyScreenWidth)
-      screenProp('height', leakyScreenHeight)
-      screenProp('availWidth', leakyScreenWidth)
-      screenProp('availHeight', leakyScreenHeight)
-      screenProp('availLeft', leakyAvailLeft)
-      screenProp('availTop', leakyAvailTop)
-      screenProp('colorDepth', leakyColorDepth)
-      screenProp('pixelDepth', leakyColorDepth)
-    }
-    selfProp('devicePixelRatio', leakyDevicePixelRatio)
-    selfProp('screenLeft', leakyScreenLeft)
-    selfProp('screenTop', leakyScreenTop)
-    selfProp('screenX', leakyScreenLeft)
-    selfProp('screenY', leakyScreenTop)
-    selfProp('outerWidth', leakyOuterWidth)
-    selfProp('outerHeight', leakyOuterHeight)
-  })
-
-  afterEach(() => {
-    delete selfObj.innerWidth
-    delete selfObj.innerHeight
-    SCREEN_LEAKY_KEYS.forEach(k => delete screenObj[k])
-    SELF_LEAKY_KEYS.forEach(k => delete selfObj[k])
+    defineMockProperties(self, {
+      devicePixelRatio: leakyDevicePixelRatio,
+      screenLeft: leakyScreenLeft,
+      screenTop: leakyScreenTop,
+      screenX: leakyScreenLeft,
+      screenY: leakyScreenTop,
+      outerWidth: leakyOuterWidth,
+      outerHeight: leakyOuterHeight,
+      innerWidth: mockInnerWidth,
+      innerHeight: mockInnerHeight
+    })
+    defineMockProperties(self.Screen.prototype, {
+      width: leakyScreenWidth,
+      height: leakyScreenHeight,
+      availWidth: leakyScreenWidth,
+      availHeight: leakyScreenHeight,
+      availLeft: leakyAvailLeft,
+      availTop: leakyAvailTop,
+      colorDepth: leakyColorDepth,
+      pixelDepth: leakyColorDepth })
   })
 
   describe('without patch', () => {
@@ -93,14 +76,11 @@ describe('screen patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      if (self.Screen === undefined) return
-      // Remove leaky instance props so prototype/self patch takes effect
-      SCREEN_LEAKY_KEYS.forEach(k => delete screenObj[k])
-      SELF_LEAKY_KEYS.forEach(k => delete selfObj[k])
+
       if (typeof self.matchMedia !== 'function') {
         const stub = (_q: string): MediaQueryList =>
           ({ matches: false, media: '', addListener: () => {}, removeListener: () => {}, addEventListener: () => {}, removeEventListener: () => {}, dispatchEvent: () => true, onchange: null })
-        Object.defineProperty(self, 'matchMedia', { value: stub, configurable: true, writable: true })
+        defineMockProperties(self, { matchMedia: stub })
       }
       screenPatch(self)
     })

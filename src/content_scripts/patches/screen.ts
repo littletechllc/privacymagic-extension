@@ -1,15 +1,9 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineFields, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const screen = (globalObject: GlobalScope): void => {
   if (globalObject.Screen === undefined || globalObject.matchMedia === undefined) {
     return
-  }
-  const oldMatchMedia = globalObject.matchMedia
-  const mediaDeviceToViewport = (mediaQueryString: string): string => {
-    return mediaQueryString
-      ?.replaceAll('device-width', 'width')
-      ?.replaceAll('device-height', 'height') ?? ''
   }
   const allowedScreenSizes: Array<[number, number]> = [
     [1920, 1080],
@@ -27,7 +21,7 @@ const screen = (globalObject: GlobalScope): void => {
   const innerW = globalObject.innerWidth ?? 1920
   const innerH = globalObject.innerHeight ?? 1080
   const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerW, innerH)
-  redefinePropertyValues(globalObject.Screen.prototype, {
+  redefineFields(globalObject.Screen.prototype, {
     availHeight: spoofedScreenHeight,
     availLeft: 0,
     availTop: 0,
@@ -37,9 +31,8 @@ const screen = (globalObject: GlobalScope): void => {
     pixelDepth: 24,
     width: spoofedScreenWidth
   })
-  redefinePropertyValues(globalObject, {
+  redefineFields(globalObject, {
     devicePixelRatio: 2,
-    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(mediaQueryString)),
     outerHeight: globalObject.innerHeight ?? 1080,
     outerWidth: globalObject.innerWidth ?? 1920,
     screenLeft: 0,
@@ -47,13 +40,19 @@ const screen = (globalObject: GlobalScope): void => {
     screenX: 0,
     screenY: 0
   })
+  const oldMatchMedia = globalObject.matchMedia
+  const mediaDeviceToViewport = (mediaQueryString: string): string => {
+    return mediaQueryString
+      ?.replaceAll('device-width', 'width')
+      ?.replaceAll('device-height', 'height') ?? ''
+  }
   // Match (color-gamut: srgb)
   const regex = /\(\s*color-gamut\s*:\s*([^)]+)\)/gi
-  const matchMediaClean = (mediaQueryString: string): string =>
+  const spoofColorGamut = (mediaQueryString: string): string =>
     mediaQueryString.replace(regex, (_, value: string) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ')
-  redefinePropertyValues(globalObject, {
-    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(matchMediaClean(mediaQueryString))
+  redefineMethods(globalObject, {
+    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(spoofColorGamut(mediaQueryString)))
   })
 }
 

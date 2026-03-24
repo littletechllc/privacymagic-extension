@@ -1,4 +1,4 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const serviceWorker = (globalObject: GlobalScope): void => {
@@ -7,7 +7,7 @@ const serviceWorker = (globalObject: GlobalScope): void => {
   }
 
   const DOMExceptionSafe = globalObject.DOMException
-  redefinePropertyValues(globalObject.ServiceWorkerContainer.prototype, {
+  redefineMethods(globalObject.ServiceWorkerContainer.prototype, {
     // eslint-disable-next-line @typescript-eslint/require-await
     register: async (/* ignore */) => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError')

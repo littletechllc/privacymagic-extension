@@ -3,17 +3,25 @@ import battery from '@src/content_scripts/patches/battery'
 
 // Mock BatteryManager class
 class MockBatteryManager {
-  charging = false
-  chargingTime = 3600
-  dischargingTime = 7200
-  level = 0.75
-  addEventListener = (_type: string, _listener: EventListener) => {}
-  removeEventListener = (_type: string, _listener: EventListener) => {}
-  dispatchEvent = (_event: Event) => false
-  onchargingchange: ((this: MockBatteryManager, ev: Event) => unknown) | null = null
-  onchargingtimechange: ((this: MockBatteryManager, ev: Event) => unknown) | null = null
-  ondischargingtimechange: ((this: MockBatteryManager, ev: Event) => unknown) | null = null
-  onlevelchange: ((this: MockBatteryManager, ev: Event) => unknown) | null = null
+  get charging() { return false }
+  get chargingTime() { return 3600 }
+  get dischargingTime() { return 7200 }
+  get level() { return 0.75 }
+  addEventListener(_type: string, _listener: EventListener): void {}
+  removeEventListener(_type: string, _listener: EventListener): void {}
+  dispatchEvent(_event: Event): boolean { return false }
+  onchargingchange_ : ((this: MockBatteryManager, ev: Event) => unknown) | null = null
+  get onchargingchange() { return this.onchargingchange_ }
+  set onchargingchange(value: ((this: MockBatteryManager, ev: Event) => unknown) | null) { this.onchargingchange_ = value }
+  onchargingtimechange_ : ((this: MockBatteryManager, ev: Event) => unknown) | null = null
+  get onchargingtimechange() { return this.onchargingtimechange_ }
+  set onchargingtimechange(value: ((this: MockBatteryManager, ev: Event) => unknown) | null) { this.onchargingtimechange_ = value }
+  ondischargingtimechange_ : ((this: MockBatteryManager, ev: Event) => unknown) | null = null
+  get ondischargingtimechange() { return this.ondischargingtimechange_ }
+  set ondischargingtimechange(value: ((this: MockBatteryManager, ev: Event) => unknown) | null) { this.ondischargingtimechange_ = value }
+  onlevelchange_ : ((this: MockBatteryManager, ev: Event) => unknown) | null = null
+  get onlevelchange() { return this.onlevelchange_ }
+  set onlevelchange(value: ((this: MockBatteryManager, ev: Event) => unknown) | null) { this.onlevelchange_ = value }
 }
 
 // Type helper for accessing BatteryManager on self

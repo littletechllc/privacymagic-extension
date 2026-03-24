@@ -1,5 +1,4 @@
 import { ContentSettingId, CONTENT_SETTING_IDS } from "@src/common/setting-ids"
-import { createSafeGetter } from "./monkey-patch"
 import { GlobalScope } from "./globalObject"
 
 export const spoofMediaQuery = (globalObject: GlobalScope, key: string, spoofValue: string, targetDefault = false): void => {
@@ -61,11 +60,8 @@ export const getDisabledSettings = (): ContentSettingId[] => {
   return __disabledSettings
 }
 
-const URLSafe = self.URL
-const URLhrefSafe = createSafeGetter(URL, 'href')
-
-export const resolveAbsoluteUrl = (path: string | URL, baseURL: string | URL): string => {
-  return URLhrefSafe(new URLSafe(path, baseURL))
-}
-
 export type FetchID = string
+
+export const objectGetEntriesSafe = <K extends string, V>(object: Record<K, V>): [K, V][] => {
+  return Object.entries(object) as [K, V][]
+}

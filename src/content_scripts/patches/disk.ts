@@ -1,9 +1,9 @@
-import { redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineFields } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const disk = (globalObject: GlobalScope): void => {
   if (globalObject.StorageManager == null) return
-  redefinePropertyValues(globalObject.StorageManager.prototype, {
+  redefineFields(globalObject.StorageManager.prototype, {
     estimate: async () => await Promise.resolve({
       // Never report any usage
       usage: 0,

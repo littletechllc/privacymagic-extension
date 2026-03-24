@@ -1,4 +1,4 @@
-import { createSafeSetter, redefinePropertyValues, reflectApplySafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeSetter, redefineMethods, reflectApplySafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, reflectConstructSafe } from '@src/content_scripts/helpers/safe'
 import { GlobalScope } from '../../helpers/globalObject'
 
@@ -32,6 +32,14 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type CommandArgs = any[]
+
+  // `Parameters<>` only reflects the last overload; these unions match lib.dom.d.ts.
+  type CanvasIsPointInPathArgs =
+    | [x: number, y: number, fillRule?: CanvasFillRule]
+    | [path: Path2D, x: number, y: number, fillRule?: CanvasFillRule]
+  type CanvasIsPointInStrokeArgs =
+    | [x: number, y: number]
+    | [path: Path2D, x: number, y: number]
 
   type CommandType = 'call' | 'set'
 
@@ -108,12 +116,19 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
       return originalContextMeasureTextSafe(this.replayCommands(), ...args)
     }
 
-    context2dIsPointInPath (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInPath>): boolean {
-      return originalContextIsPointInPathSafe(this.replayCommands(), ...args)
+    context2dIsPointInPath (...args: CanvasIsPointInPathArgs): boolean {
+      return originalContextIsPointInPathSafe(
+        this.replayCommands(),
+        // createSafeMethod is typed from a single overload; all runtime shapes are valid.
+        ...(args as Parameters<CanvasRenderingContext2D['isPointInPath']>)
+      )
     }
 
-    context2dIsPointInStroke (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInStroke>): boolean {
-      return originalContextIsPointInStrokeSafe(this.replayCommands(), ...args)
+    context2dIsPointInStroke (...args: CanvasIsPointInStrokeArgs): boolean {
+      return originalContextIsPointInStrokeSafe(
+        this.replayCommands(),
+        ...(args as Parameters<CanvasRenderingContext2D['isPointInStroke']>)
+      )
     }
 
     canvasToDataURL (type: string, quality: number): string {
@@ -200,7 +215,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
   }
 
   const enableReadingFromContext2dCommandRecorder = (): void => {
-    redefinePropertyValues(globalObject.CanvasRenderingContext2D.prototype, {
+    redefineMethods(globalObject.CanvasRenderingContext2D.prototype, {
       getImageData: function (this: CanvasRenderingContext2D, sx: number, sy: number, sw: number, sh: number, settings: ImageDataSettings) {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
@@ -228,27 +243,31 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           }
         }
       },
-      isPointInPath: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInPath>) {
+      isPointInPath: (function (
+        this: CanvasRenderingContext2D,
+        ...args: CanvasIsPointInPathArgs
+      ): boolean {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dIsPointInPath(...args)
-        } else {
-          return false
         }
-      },
-      isPointInStroke: function (this: CanvasRenderingContext2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.isPointInStroke>) {
+        return false
+      }) as CanvasRenderingContext2D['isPointInPath'],
+      isPointInStroke: (function (
+        this: CanvasRenderingContext2D,
+        ...args: CanvasIsPointInStrokeArgs
+      ): boolean {
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dIsPointInStroke(...args)
-        } else {
-          return false
         }
-      }
+        return false
+      }) as CanvasRenderingContext2D['isPointInStroke']
     })
   }
 
   const enableCanvasCommandRecording = (): void => {
-    redefinePropertyValues(globalObject.HTMLCanvasElement.prototype, {
+    redefineMethods(globalObject.HTMLCanvasElement.prototype, {
       getContext: function (this: HTMLCanvasElement, contextType: string, contextAttributes: CanvasRenderingContext2DSettings) {
         const context = originalGetContextSafe(this, contextType, contextAttributes)
         if (context != null && contextType === '2d') {

@@ -1,28 +1,16 @@
 import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
 import cpu from '@src/content_scripts/patches/cpu'
+import { defineMockProperties } from '@test/mocks/define'
 
 const mockHardwareConcurrency = 8
 const mockCpuClass = 'arm'
 
 describe('cpu patch', () => {
-  const nav = navigator as unknown as Record<string, unknown>
-
   beforeEach(() => {
-    Object.defineProperty(navigator, 'hardwareConcurrency', {
-      value: mockHardwareConcurrency,
-      configurable: true,
-      enumerable: true
+    defineMockProperties(self.Navigator.prototype, {
+      hardwareConcurrency: mockHardwareConcurrency,
+      cpuClass: mockCpuClass
     })
-    Object.defineProperty(navigator, 'cpuClass', {
-      value: mockCpuClass,
-      configurable: true,
-      enumerable: true
-    })
-  })
-
-  afterEach(() => {
-    delete nav.hardwareConcurrency
-    delete nav.cpuClass
   })
 
   describe('without patch', () => {
@@ -34,8 +22,6 @@ describe('cpu patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      delete nav.hardwareConcurrency
-      delete nav.cpuClass
       cpu(self)
     })
 

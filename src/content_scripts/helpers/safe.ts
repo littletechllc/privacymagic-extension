@@ -1,5 +1,5 @@
 
-import { createSafeMethod } from "./monkey-patch"
+import { createSafeGetter, createSafeMethod } from "./monkey-patch"
 
 export const reflectConstructSafe = Reflect.construct
 
@@ -17,3 +17,10 @@ export const stringReplaceSafe = createSafeMethod(String, 'replace')
 
 export const documentSafe = self.document !== undefined ? self.document : undefined
 export const CustomEventSafe = self.CustomEvent !== undefined ? self.CustomEvent : undefined
+
+const URLSafe = self.URL
+const URLhrefSafe = createSafeGetter(URL, 'href')
+
+export const resolveAbsoluteUrl = (path: string | URL, baseURL: string | URL): string => {
+  return URLhrefSafe(new URLSafe(path, baseURL))
+}

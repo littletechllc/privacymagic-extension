@@ -1,24 +1,23 @@
 import { getNavigatorConstructor, GlobalScope } from "./globalObject"
+import { objectGetEntriesSafe } from "./helpers"
 
-// Type for methods of an object (union of all methods).
-type MethodOf<TThis> = {
-  [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
-}[keyof TThis]
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyFunction = (...args: any[]) => any
 
+// Keys of T whose values are functions.
+type MethodKey<T> = { [P in keyof T]: T[P] extends AnyFunction ? P : never }[keyof T]
+
+// Type for methods of an object
+export type MethodOf<T> = T[MethodKey<T>] & AnyFunction
+
+// Type of method of specific key
 type MethodOfKey<T, K extends keyof T> = T[K] extends (...args: infer Args) => infer Return
   ? (...args: Args) => Return
   : never
 
-// Type for method keys of an object.
-type MethodKey<T> = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [P in keyof T]: T[P] extends (...args: any[]) => any ? P : never
-}[keyof T]
-
-// Type for keys that are NOT methods (could be getters or value properties)
-type NonMethodPropertyKey<T> = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [P in keyof T]: T[P] extends (...args: any[]) => any ? never : P
+// Keys of T whose values are not functions (could be getters or value properties)
+type FieldKey<T> = {
+  [P in keyof T]: T[P] extends AnyFunction ? never : P
 }[keyof T]
 
 // Safe version of Reflect.apply; can be called even after site scripts have
@@ -63,7 +62,7 @@ export const createSafeMethod = <T, K extends MethodKey<T>>(
 // Create a safe getter that can be called even after site scripts have
 // overwritten the getter. Compile-time check that the propertyName points to a
 // getter of the object.
-export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
+export const createSafeGetter = <T, K extends FieldKey<T>>(
   object: { prototype: T },
   propertyName: K,
 ) => {
@@ -85,7 +84,7 @@ export const createSafeGetter = <T, K extends NonMethodPropertyKey<T>>(
   }
 }
 
-export const createSafeSetter = <T, K extends NonMethodPropertyKey<T>>(
+export const createSafeSetter = <T, K extends FieldKey<T>>(
   object: { prototype: T },
   propertyName: K,
 ) => {
@@ -105,29 +104,63 @@ export const createSafeSetter = <T, K extends NonMethodPropertyKey<T>>(
 
 export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined, configurable: true }
 
-export const redefinePropertyValues = <T>(obj: T, propertyMap: { [key: string]: unknown }): void => {
-  const originalProperties: PropertyDescriptorMap = {}
-  const newProperties: PropertyDescriptorMap = {}
-  for (const [prop, value] of Object.entries(propertyMap)) {
-    const originalDescriptor = Object.getOwnPropertyDescriptor(obj, prop)
-    originalProperties[prop] = originalDescriptor != null ? originalDescriptor : nonProperty
-    if (value === undefined) {
-      newProperties[prop] = nonProperty
+/**
+ * Redefine fields of an object.
+ * @param obj - The object to redefine fields of (usually an object's prototype).
+ * @param fieldMap - A map of field names to new field values. Each new field value
+ * must be a value that can be assigned to the field.
+ */
+export const redefineFields = <T, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>): void => {
+  const newFields: PropertyDescriptorMap = {}
+  for (const [fieldName, newFieldValue] of objectGetEntriesSafe(fieldMap)) {
+    const originalDescriptor = objectGetOwnPropertyDescriptorSafe(obj, fieldName)
+    // Do not treat `undefined` as missing: callers may set a data property to `undefined` (e.g. `navigator.keyboard`).
+    if (originalDescriptor == null) {
+      throw new Error(`Property ${String(fieldName)} is not a field`)
+    }
+    if (originalDescriptor.get != null) {
+      // Accessor property: set to a getter that returns the new value.
+      newFields[fieldName] = { ...originalDescriptor, get: () => newFieldValue, set: () => { /* do nothing */ } }
     } else {
-      if (originalDescriptor == null) {
-        newProperties[prop] = { configurable: true, get: () => value, set: () => { /* do nothing */ } }
-      } else if (originalDescriptor.value !== undefined) {
-        newProperties[prop] = { ...originalDescriptor, value }
-      } else {
-        newProperties[prop] = { ...originalDescriptor, get: () => value, set: () => { /* do nothing */ } }
-      }
+      // Data property: set to the new value.
+      newFields[fieldName] = { ...originalDescriptor, value: newFieldValue }
     }
   }
-  objectDefinePropertiesSafe(obj, newProperties)
+  objectDefinePropertiesSafe(obj, newFields)
 }
 
-export const redefineNavigatorProperties = (globalObject: GlobalScope, propertyMap: { [key: string]: unknown }): void => {
+/**
+ * Original implementation of Function.prototype.toString.
+ */
+const originalToString = createSafeMethod(Function, 'toString')
+
+/**
+ * Redefine methods of an object.
+ * @param obj - The object to redefine methods of (usually an object's prototype).
+ * @param newMethodMap - A map of method names to new methods. Each new method
+ * must be a function that takes the same arguments as the original method.
+ */
+export const redefineMethods = <T, K extends MethodKey<T>>(obj: T, newMethodMap: Partial<Record<K, MethodOf<T>>>): void => {
+  const newMethods: PropertyDescriptorMap = {}
+  for (const [methodName, method] of objectGetEntriesSafe(newMethodMap)) {
+    if (method == null) {
+      throw new Error(`Definition for new method ${String(methodName)} is undefined`)
+    }
+    const originalDescriptor = Object.getOwnPropertyDescriptor(obj, methodName)
+    const originalMethod = originalDescriptor?.value as MethodOf<T> | undefined
+    if (originalDescriptor == null || originalMethod == null || typeof originalMethod !== 'function') {
+      throw new Error(`Original method ${String(methodName)} not found`)
+    }
+    // Override the method's toString to return the original toString implementation.
+    // This is to prevent the method from being detected as monkey-patched.
+    method.toString = () => originalToString(originalMethod as AnyFunction)
+    newMethods[methodName] = { ...originalDescriptor, value: method }
+  }
+  objectDefinePropertiesSafe(obj, newMethods)
+}
+
+export const redefineNavigatorFields = <T, K extends FieldKey<T>>(globalObject: GlobalScope, propertyMap: Partial<Record<K, T[K]>>): void => {
   const NavigatorConstructor = getNavigatorConstructor(globalObject)
-  redefinePropertyValues(NavigatorConstructor.prototype, propertyMap)
+  redefineFields(NavigatorConstructor.prototype, propertyMap)
 }
 

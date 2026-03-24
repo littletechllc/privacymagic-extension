@@ -1,4 +1,4 @@
-import { redefineNavigatorProperties, redefinePropertyValues } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineFields, redefineMethods, redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 const spoofPlatforms: Record<string, string> = {
@@ -12,17 +12,21 @@ const spoofPlatforms: Record<string, string> = {
 const useragent = (globalObject: GlobalScope): void => {
   if (globalObject.NavigatorUAData === undefined) return
   const platform = spoofPlatforms[globalObject.navigator.userAgentData?.platform ?? 'Win32']
-  redefineNavigatorProperties(globalObject, {
+  redefineNavigatorFields(globalObject, {
     platform,
   })
   const mobile = false
-  redefinePropertyValues(globalObject.NavigatorUAData.prototype, {
+  redefineFields(globalObject.NavigatorUAData.prototype, {
     mobile,
     platform,
-    toJSON: {
-      mobile,
-      platform
-    },
+  })
+  redefineMethods(globalObject.NavigatorUAData.prototype, {
+    toJSON: function (this: NavigatorUAData) {
+      return {
+        mobile,
+        platform
+      }
+    }
   })
 }
 

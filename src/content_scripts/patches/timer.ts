@@ -1,4 +1,4 @@
-import { redefinePropertyValues, reflectApplySafe, nonProperty, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineMethods, reflectApplySafe, nonProperty, createSafeMethod, type MethodOf } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const timer = (globalObject: GlobalScope): void => {
@@ -9,7 +9,7 @@ const timer = (globalObject: GlobalScope): void => {
     throw new Error('Performance.now not found')
   }
   const originalNow = nowDescriptor.value as (this: Performance) => number
-  redefinePropertyValues(globalObject.Performance.prototype, {
+  redefineMethods(globalObject.Performance.prototype, {
     now: function (this: Performance) {
       return mathRoundSafe(reflectApplySafe(originalNow, this, []))
     }
@@ -22,7 +22,11 @@ const timer = (globalObject: GlobalScope): void => {
   }
   const arrayMapValue = mapDescriptor.value as <T, U>(this: T[], callback: (value: T, index: number, array: T[]) => U) => U[]
   const arrayMapSafe = <T, U>(array: T[], callback: (value: T, index: number, array: T[]) => U): U[] => {
-    return reflectApplySafe(arrayMapValue, array, [callback] as Parameters<typeof arrayMapValue>) as U[]
+    return reflectApplySafe(
+      arrayMapValue as MethodOf<T[]>,
+      array,
+      [callback] as unknown as Parameters<MethodOf<T[]>>
+    ) as U[]
   }
   const getPropertyValueSafe = <T, K extends keyof T>(object: T, property: K): T[K] | undefined => {
     try {

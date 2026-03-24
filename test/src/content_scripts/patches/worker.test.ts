@@ -1,31 +1,19 @@
-import { describe, it, expect, beforeEach, beforeAll, jest } from '@jest/globals'
+import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
+import type { ContentSettingId } from '@src/common/setting-ids'
+import worker, { type WorkerPatchDeps } from '@src/content_scripts/patches/worker'
 
-const makeBundleForInjectionMock = jest.fn().mockReturnValue('/* hardening */')
-const getDisabledSettingsMock = jest.fn().mockReturnValue([])
-const resolveAbsoluteUrlMock = jest.fn((url: string) => url)
-const getTrustedTypePolicyForObjectMock = jest.fn().mockReturnValue(undefined)
+self.__disabledSettings = [] as ContentSettingId[]
+
+const makeBundleForInjectionMock = jest.fn((_: string[]) => '/* hardening */')
+const getDisabledSettingsMock = jest.fn((): ContentSettingId[] => [])
 const prepareInjectionForTrustedTypesMock = jest.fn()
-const createSafeMethodMock = jest.fn().mockImplementation((..._args: unknown[]) => {
-  return (str: string, prefix: string) => String.prototype.startsWith.call(str, prefix)
-})
 
-jest.unstable_mockModule('@src/content_scripts/helpers/helpers', () => ({
+const workerDeps: WorkerPatchDeps = {
   makeBundleForInjection: makeBundleForInjectionMock,
   getDisabledSettings: getDisabledSettingsMock,
-  resolveAbsoluteUrl: resolveAbsoluteUrlMock
-}))
-
-jest.unstable_mockModule('@src/content_scripts/helpers/trusted-types', () => ({
-  getTrustedTypePolicyForObject: getTrustedTypePolicyForObjectMock,
   prepareInjectionForTrustedTypes: prepareInjectionForTrustedTypesMock
-}))
-
-jest.unstable_mockModule('@src/content_scripts/helpers/monkey-patch', () => ({
-  createSafeMethod: createSafeMethodMock
-}))
-
-let workerPatch: (globalObject: GlobalScope) => void
+}
 
 function makeFakeURL () {
   const createObjectURL = jest.fn().mockReturnValue('blob:https://example.com/uuid')
@@ -36,39 +24,40 @@ function makeFakeURL () {
   }) as unknown as typeof globalThis.URL
 }
 
-beforeAll(async () => {
-  const mod = await import('@src/content_scripts/patches/worker')
-  workerPatch = mod.default
-})
+function makeFakeGlobalScope (overrides?: Partial<{
+  Worker: GlobalScope['Worker']
+  /** Test doubles may not match full `Blob` typing */
+  Blob: typeof globalThis.Blob
+  URL: typeof globalThis.URL
+}>): GlobalScope {
+  return {
+    Worker: undefined,
+    Blob: class Blob {},
+    URL: makeFakeURL(),
+    location: { href: 'https://example.com/' },
+    crypto: { randomUUID: () => 'test-uuid' },
+    BroadcastChannel: globalThis.BroadcastChannel,
+    TrustedScriptURL: undefined,
+    ...overrides
+  } as unknown as GlobalScope
+}
 
 describe('worker patch', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    makeBundleForInjectionMock.mockReturnValue('/* hardening */')
-    getDisabledSettingsMock.mockReturnValue([])
-    resolveAbsoluteUrlMock.mockImplementation((url: string) => url)
-    getTrustedTypePolicyForObjectMock.mockReturnValue(undefined)
-    createSafeMethodMock.mockImplementation((..._args: unknown[]) => {
-      return (str: string, prefix: string) => String.prototype.startsWith.call(str, prefix)
-    })
+    makeBundleForInjectionMock.mockImplementation((_: string[]) => '/* hardening */')
+    getDisabledSettingsMock.mockImplementation((): ContentSettingId[] => [])
+    prepareInjectionForTrustedTypesMock.mockImplementation(() => {})
   })
 
   it('should be a no-op for Worker when Worker is undefined', () => {
-    const fakeGlobal = {
-      Worker: undefined,
-      Blob: class Blob {},
-      URL: makeFakeURL(),
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    const fakeGlobal = makeFakeGlobalScope()
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
     expect(fakeGlobal.Worker).toBeUndefined()
     expect(makeBundleForInjectionMock).toHaveBeenCalled()
-    expect(prepareInjectionForTrustedTypesMock).toHaveBeenCalledWith(fakeGlobal, '/* hardening */')
+    expect(prepareInjectionForTrustedTypesMock.mock.calls[0]).toEqual([fakeGlobal, '/* hardening */'])
   })
 
   it('should replace Worker with a Proxy when Worker is defined', () => {
@@ -76,17 +65,9 @@ describe('worker patch', () => {
       return {}
     }
     const OriginalWorkerSpy = jest.fn().mockImplementation(OriginalWorker)
-    const fakeGlobal = {
-      Worker: OriginalWorkerSpy,
-      Blob: class Blob {},
-      URL: makeFakeURL(),
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    const fakeGlobal = makeFakeGlobalScope({ Worker: OriginalWorkerSpy as GlobalScope['Worker'] })
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
     expect(fakeGlobal.Worker).toBeDefined()
     expect(fakeGlobal.Worker).not.toBe(OriginalWorkerSpy)
@@ -99,20 +80,10 @@ describe('worker patch', () => {
       return {}
     }
     const OriginalWorkerMock = jest.fn().mockImplementation(OriginalWorker)
-    const fakeGlobal = {
-      Worker: OriginalWorkerMock,
-      Blob: class Blob {},
-      URL: makeFakeURL(),
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    const fakeGlobal = makeFakeGlobalScope({ Worker: OriginalWorkerMock as GlobalScope['Worker'] })
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
-    // Call the proxied Worker constructor; we only care that the original
-    // constructor sees the original URLs, not the returned instance shape.
     const WorkerCtor = fakeGlobal.Worker as new (url: string) => unknown
     void new WorkerCtor('chrome://extension/id/script.js')
     void new WorkerCtor('chrome-extension://extension-id/script.js')
@@ -126,17 +97,12 @@ describe('worker patch', () => {
       constructor (public parts: BlobPart[], public options?: BlobPropertyBag) {}
     }
     function MockWorker (this: void) { return {} }
-    const fakeGlobal = {
-      Worker: jest.fn().mockImplementation(MockWorker),
-      Blob: OriginalBlob,
-      URL: makeFakeURL(),
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    const fakeGlobal = makeFakeGlobalScope({
+      Worker: jest.fn().mockImplementation(MockWorker) as unknown as GlobalScope['Worker'],
+      Blob: OriginalBlob as unknown as typeof globalThis.Blob
+    })
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
     expect(fakeGlobal.Blob).not.toBe(OriginalBlob)
     const BlobCtor = fakeGlobal.Blob as new (parts: BlobPart[], options?: BlobPropertyBag) => Blob
@@ -148,35 +114,22 @@ describe('worker patch', () => {
     const fakeURL = makeFakeURL()
     const revokeSpy = jest.spyOn(fakeURL, 'revokeObjectURL')
     function MockWorker (this: void) { return {} }
-    const fakeGlobal = {
-      Worker: jest.fn().mockImplementation(MockWorker),
-      Blob: class Blob {},
-      URL: fakeURL,
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    const fakeGlobal = makeFakeGlobalScope({
+      Worker: jest.fn().mockImplementation(MockWorker) as unknown as GlobalScope['Worker'],
+      URL: fakeURL
+    })
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
     fakeGlobal.URL.revokeObjectURL('blob:https://example.com/uuid')
     expect(revokeSpy).toHaveBeenCalledWith('blob:https://example.com/uuid')
   })
 
   it('should call makeBundleForInjection with getDisabledSettings result', () => {
-    getDisabledSettingsMock.mockReturnValue(['math', 'gpc'])
-    const fakeGlobal = {
-      Worker: undefined,
-      Blob: class Blob {},
-      URL: makeFakeURL(),
-      location: { href: 'https://example.com/' },
-      crypto: { randomUUID: () => 'test-uuid' },
-      BroadcastChannel: globalThis.BroadcastChannel,
-      TrustedScriptURL: undefined
-    } as unknown as GlobalScope
+    getDisabledSettingsMock.mockImplementation((): ContentSettingId[] => ['math', 'gpc'])
+    const fakeGlobal = makeFakeGlobalScope()
 
-    workerPatch(fakeGlobal)
+    worker(fakeGlobal, workerDeps)
 
     expect(getDisabledSettingsMock).toHaveBeenCalled()
     expect(makeBundleForInjectionMock).toHaveBeenCalledWith(['math', 'gpc'])

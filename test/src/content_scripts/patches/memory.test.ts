@@ -1,21 +1,14 @@
 import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
 import memory from '@src/content_scripts/patches/memory'
+import { defineMockProperties } from '@test/mocks/define'
 
 const mockDeviceMemory = 8
 
 describe('memory patch', () => {
-  const nav = navigator as unknown as Record<string, unknown>
 
   beforeEach(() => {
-    Object.defineProperty(navigator, 'deviceMemory', {
-      value: mockDeviceMemory,
-      configurable: true,
-      enumerable: true
-    })
-  })
-
-  afterEach(() => {
-    delete nav.deviceMemory
+    // Match `redefineNavigatorFields`: own props on `Navigator.prototype` (not the `navigator` instance).
+    defineMockProperties(self.Navigator.prototype, { deviceMemory: mockDeviceMemory })
   })
 
   describe('without patch', () => {
@@ -26,7 +19,6 @@ describe('memory patch', () => {
 
   describe('with patch enabled', () => {
     beforeEach(() => {
-      delete nav.deviceMemory
       memory(self)
     })
 

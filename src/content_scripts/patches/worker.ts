@@ -1,9 +1,21 @@
-import { makeBundleForInjection, getDisabledSettings, resolveAbsoluteUrl } from '@src/content_scripts/helpers/helpers'
+import type { ContentSettingId } from '@src/common/setting-ids'
+import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
 
-const worker = (globalObject: GlobalScope): void => {
+/** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
+export type WorkerPatchDeps = {
+  makeBundleForInjection?: (disabledSettings: string[]) => string
+  getDisabledSettings?: () => ContentSettingId[]
+  prepareInjectionForTrustedTypes?: (globalObject: GlobalScope, hardeningCode: string) => void
+}
+
+const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
+  const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
+  const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
+  const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
   // Spoof the worker's location object to return the original URL, and modify various
   // other objects to be relative to the original URL. This function is serialized
   // and injected into the worker context; it receives the worker global and the absolute URL as args.
@@ -304,8 +316,8 @@ const worker = (globalObject: GlobalScope): void => {
     })
   }
 
-  const hardeningCode = makeBundleForInjection(getDisabledSettings())
-  prepareInjectionForTrustedTypes(globalObject, hardeningCode)
+  const hardeningCode = makeBundle(getDisabled())
+  prepareTrustedTypesInjection(globalObject, hardeningCode)
   prepareInjectionForWorker(hardeningCode)
 }
 

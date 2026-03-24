@@ -1,5 +1,5 @@
 import type { GlobalScope } from './globalObject'
-import { createSafeMethod, redefinePropertyValues } from './monkey-patch'
+import { createSafeMethod, redefineMethods } from './monkey-patch'
 import { weakMapGetSafe, weakMapSetSafe } from './safe'
 
 export type TrustedObjectType = TrustedHTML | TrustedScript | TrustedScriptURL
@@ -18,18 +18,18 @@ export const prepareInjectionForTrustedTypes = (globalObject: GlobalScope, harde
 
   // Modify the TrustedTypePolicy prototype to keep track of the trusted type policy
   // that generated each trusted object.
-  redefinePropertyValues(globalObject.TrustedTypePolicy.prototype, {
-    createHTML: function (this: TrustedTypePolicy, input: string): TrustedHTML {
+  redefineMethods(globalObject.TrustedTypePolicy.prototype, {
+    createHTML: function (this: TrustedTypePolicy, input: string | TrustedHTML): TrustedHTML {
       const trustedHTML = createHTMLSafe(this, input)
       weakMapSetSafe(trustedObjectsToPolicy, trustedHTML, this)
       return trustedHTML
     },
-    createScript: function (this: TrustedTypePolicy, input: string): TrustedScript {
+    createScript: function (this: TrustedTypePolicy, input: string | TrustedScript): TrustedScript {
       const trustedScript = createScriptSafe(this, input)
       weakMapSetSafe(trustedObjectsToPolicy, trustedScript, this)
       return trustedScript
     },
-    createScriptURL: function (this: TrustedTypePolicy, input: string): TrustedScriptURL {
+    createScriptURL: function (this: TrustedTypePolicy, input: string | TrustedScriptURL): TrustedScriptURL {
       const trustedScriptURL = createScriptURLSafe(this, input)
       weakMapSetSafe(trustedObjectsToPolicy, trustedScriptURL, this)
       return trustedScriptURL
@@ -38,7 +38,7 @@ export const prepareInjectionForTrustedTypes = (globalObject: GlobalScope, harde
 
   // Modify the TrustedTypePolicyFactory prototype to create a trusted type policy
   // that will pass the hardening code unchanged into a TrustedScript.
-  redefinePropertyValues(globalObject.TrustedTypePolicyFactory.prototype, {
+  redefineMethods(globalObject.TrustedTypePolicyFactory.prototype, {
     createPolicy: function (
       this: TrustedTypePolicyFactory, policyName: string, policyOptions: TrustedTypePolicyOptions
     ): TrustedTypePolicy {

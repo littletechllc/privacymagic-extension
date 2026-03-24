@@ -1,45 +1,70 @@
-import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
+import {describe, it, expect, beforeAll, beforeEach} from '@jest/globals'
 import device from '@src/content_scripts/patches/device'
+import { defineMockProperties } from '@test/mocks/define'
 
 const leakyType = 'folded'
-const leakyChange = 'folded'
+const unpatchedMessage = 'DevicePosture unpatched'
+const unpatchedError = (): Error => new Error(unpatchedMessage)
 
-class MockDevicePosture {
-  type = leakyType
-  addEventListener = (_type: string, _listener: EventListenerOrEventListenerObject): void => {}
-  removeEventListener = (_type: string, _listener: EventListenerOrEventListenerObject): void => {}
-  dispatchEvent = (_event: Event): boolean => false
-  get change(): { posture: string } | null {
-    return { posture: leakyChange }
+/**
+ * Runtime `extends EventTarget` (jsdom has no `DevicePosture` constructor).
+ * `implements DevicePosture` links the class to the global type from `window-extensions.d.ts`.
+ */
+class DevicePostureMock extends EventTarget implements DevicePosture {
+  readonly type: string
+  onchange: ((this: DevicePosture, ev: Event) => unknown) | null
+  constructor() {
+    super()
+    this.type = 'folded'
+    this.onchange = () => { throw new Error('onchange not implemented') }
   }
 }
 
-type SelfWithDevicePosture = { DevicePosture?: typeof MockDevicePosture }
-
-describe('device patch', () => {
-  let originalDevicePosture: typeof MockDevicePosture | undefined
-
-  beforeEach(() => {
-    const selfWith = self as unknown as SelfWithDevicePosture
-    originalDevicePosture = selfWith.DevicePosture
-    selfWith.DevicePosture = MockDevicePosture
-  })
-
-  afterEach(() => {
-    const selfWith = self as unknown as SelfWithDevicePosture
-    if (originalDevicePosture !== undefined) {
-      selfWith.DevicePosture = originalDevicePosture
-    } else {
-      delete selfWith.DevicePosture
+/** Baseline prototype before `device()`; runs each test so `device()` mutations don’t leak across tests. */
+function seedDevicePosturePrototype (): void {
+  const proto = self.DevicePosture!.prototype
+  defineMockProperties(proto, {
+    type: leakyType,
+    onchange: null,
+    addEventListener: function (_type: string, _listener: EventListenerOrEventListenerObject): void {
+      throw unpatchedError()
+    },
+    removeEventListener: function (_type: string, _listener: EventListenerOrEventListenerObject): void {
+      throw unpatchedError()
+    },
+    dispatchEvent: function (_event: Event): boolean {
+      throw unpatchedError()
     }
   })
+}
 
+describe('device patch', () => {
+  /** Once per suite: env must not ship `DevicePosture`; then install the mock for the whole file. */
+  beforeAll(() => {
+    const w = self as Window & { DevicePosture?: typeof DevicePosture }
+    expect(w.DevicePosture).toBeUndefined()
+    w.DevicePosture = DevicePostureMock as unknown as typeof DevicePosture
+  })
+
+  beforeEach(() => {
+    seedDevicePosturePrototype()
+    const posture = Object.create(self.DevicePosture!.prototype) as DevicePosture
+    defineMockProperties(self.navigator, { devicePosture: posture })
+  })
+
+  // Unpatched cases first: nested `with patch` runs `device()` after seed.
   describe('without patch', () => {
     it('should leak DevicePosture type and change', () => {
-      const posture = new MockDevicePosture()
+      const posture = self.navigator.devicePosture!
       expect(posture.type).toBe(leakyType)
-      expect(posture.change).not.toBeNull()
-      expect(posture.change?.posture).toBe(leakyChange)
+      expect(posture.onchange).toBeNull()
+    })
+
+    it('should throw from addEventListener (unpatched vs patched no-op)', () => {
+      const posture = self.navigator.devicePosture!
+      expect(() => {
+        posture.addEventListener('change', () => {})
+      }).toThrow(unpatchedMessage)
     })
   })
 
@@ -49,21 +74,17 @@ describe('device patch', () => {
     })
 
     it('should spoof type to continuous', () => {
-      const posture = new (self as unknown as SelfWithDevicePosture).DevicePosture!()
-      expect(posture.type).toBe('continuous')
+      expect(self.navigator.devicePosture!.type).toBe('continuous')
     })
 
-    it('should spoof change to null', () => {
-      const posture = new (self as unknown as SelfWithDevicePosture).DevicePosture!()
-      // redefinePropertyValues wraps the descriptor as the value; the getter inside it returns null
-      const changeDesc = posture.change as { get?: () => unknown }
-      expect(typeof changeDesc.get).toBe('function')
-      expect(changeDesc.get!()).toBeNull()
+    it('should set onchange to null', () => {
+      expect(self.navigator.devicePosture!.onchange).toBeNull()
     })
 
     it('should no-op addEventListener', () => {
-      const posture = new (self as unknown as SelfWithDevicePosture).DevicePosture!()
-      expect(() => posture.addEventListener('change', () => {})).not.toThrow()
+      expect(() => {
+        self.navigator.devicePosture!.addEventListener('change', () => {})
+      }).not.toThrow()
     })
   })
 })
