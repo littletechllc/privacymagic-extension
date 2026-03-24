@@ -31,7 +31,7 @@ declare global {
     wow64?: boolean
   }
 
-  type HighEntropyHint = 'architecture' | 'bitness' | 'brands' | 'formFactors' | 'fullVersionList' | 'mobile' | 'model' | 'platform' | 'platformVersion' | 'uaFullVersion' | 'wow64'
+  type HighEntropyHint = keyof HighEntropyValues
 
   class NavigatorUAData extends EventTarget {
     readonly brands: Array<{ brand: string, version: string }>
@@ -121,6 +121,7 @@ declare global {
 
   interface WorkerGlobalScope {
     trustedTypes?: TrustedTypePolicyFactory
+    console: Console
   }
 
   interface Navigator {

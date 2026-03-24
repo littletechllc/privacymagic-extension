@@ -69,13 +69,12 @@ describe('patch_helpers/highEntropy', () => {
       return new C()
     }
 
-    it('should throw NotAllowedError when disabledSettings is empty and a controlled hint is requested', async () => {
+    it('should spoof architecture and bitness when disabledSettings is empty and a controlled hint is requested', async () => {
       sanitizeGetHighEntropyValues(globalThis as unknown as GlobalScope, [])
       const ua = getUA()
-      await expect(ua.getHighEntropyValues(['architecture'])).rejects.toMatchObject({
-        name: 'NotAllowedError',
-        message: 'Not allowed'
-      })
+      const result = await ua.getHighEntropyValues(['architecture', 'bitness'])
+      expect(result.architecture).toBe('x86')
+      expect(result.bitness).toBe('64')
     })
 
     it('should allow hints not present in hintControlMap (e.g. platform)', async () => {
