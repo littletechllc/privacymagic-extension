@@ -2,6 +2,9 @@ import { redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-pat
 import type { GlobalScope } from '../helpers/globalObject'
 
 const keyboard = (globalObject: GlobalScope): void => {
+  if (globalObject.navigator.keyboard == null) {
+    return
+  }
   redefineNavigatorFields(globalObject, {
     keyboard: undefined
   })

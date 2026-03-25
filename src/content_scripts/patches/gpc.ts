@@ -5,8 +5,11 @@ import type { GlobalScope } from '../helpers/globalObject'
 // selling or sharing their personal information with third parties.
 // https://globalprivacycontrol.org/
 const gpc = (globalObject: GlobalScope): void => {
-  redefineNavigatorFields(globalObject, {
-    globalPrivacyControl: true
+  Object.defineProperty(globalObject.navigator, 'globalPrivacyControl', {
+    value: true,
+    writable: false,
+    enumerable: true,
+    configurable: true
   })
 }
 

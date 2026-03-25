@@ -3,7 +3,6 @@ import type { GlobalScope } from '../helpers/globalObject'
 
 const cpu = (globalObject: GlobalScope): void => {
   redefineNavigatorFields(globalObject, {
-    cpuClass: undefined,
     hardwareConcurrency: 4
   })
 }

@@ -135,6 +135,22 @@ export const redefineFields = <T, K extends FieldKey<T>>(obj: T, fieldMap: Parti
 const originalToString = createSafeMethod(Function, 'toString')
 
 /**
+ * Like `Object.getOwnPropertyDescriptor`, but also searches `[[Prototype]]` so inherited
+ * own data properties (e.g. `EventTarget.prototype.addEventListener` on a subclass prototype) resolve.
+ */
+const getOwnPropertyDescriptorInPrototypeChain = (obj: object, key: PropertyKey): PropertyDescriptor | undefined => {
+  let current: object | null = obj
+  while (current != null) {
+    const d = objectGetOwnPropertyDescriptorSafe(current, key)
+    if (d !== undefined) {
+      return d
+    }
+    current = Object.getPrototypeOf(current) as object | null
+  }
+  return undefined
+}
+
+/**
  * Redefine methods of an object.
  * @param obj - The object to redefine methods of (usually an object's prototype).
  * @param newMethodMap - A map of method names to new methods. Each new method
@@ -146,7 +162,7 @@ export const redefineMethods = <T, K extends MethodKey<T>>(obj: T, newMethodMap:
     if (method == null) {
       throw new Error(`Definition for new method ${String(methodName)} is undefined`)
     }
-    const originalDescriptor = Object.getOwnPropertyDescriptor(obj, methodName)
+    const originalDescriptor = getOwnPropertyDescriptorInPrototypeChain(obj as object, methodName)
     const originalMethod = originalDescriptor?.value as MethodOf<T> | undefined
     if (originalDescriptor == null || originalMethod == null || typeof originalMethod !== 'function') {
       throw new Error(`Original method ${String(methodName)} not found`)

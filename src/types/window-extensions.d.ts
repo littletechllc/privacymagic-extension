@@ -133,6 +133,7 @@ declare global {
   interface Navigator {
     userAgentData?: NavigatorUAData
     devicePosture?: DevicePosture
+    keyboard?: Keyboard
   }
 
   interface Uint8ArrayConstructor {
