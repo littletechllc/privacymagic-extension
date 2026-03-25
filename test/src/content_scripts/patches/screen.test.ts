@@ -20,9 +20,17 @@ const leakyScreenTop = 60
 const leakyOuterWidth = 1280
 const leakyOuterHeight = 1024
 
-
 describe('screen patch', () => {
   beforeEach(() => {
+    defineMockProperties(self.Screen.prototype, {
+      width: leakyScreenWidth,
+      height: leakyScreenHeight,
+      availWidth: leakyScreenWidth,
+      availHeight: leakyScreenHeight,
+      availLeft: leakyAvailLeft,
+      availTop: leakyAvailTop,
+      colorDepth: leakyColorDepth,
+      pixelDepth: leakyColorDepth })
     defineMockProperties(self, {
       devicePixelRatio: leakyDevicePixelRatio,
       screenLeft: leakyScreenLeft,
@@ -34,15 +42,6 @@ describe('screen patch', () => {
       innerWidth: mockInnerWidth,
       innerHeight: mockInnerHeight
     })
-    defineMockProperties(self.Screen.prototype, {
-      width: leakyScreenWidth,
-      height: leakyScreenHeight,
-      availWidth: leakyScreenWidth,
-      availHeight: leakyScreenHeight,
-      availLeft: leakyAvailLeft,
-      availTop: leakyAvailTop,
-      colorDepth: leakyColorDepth,
-      pixelDepth: leakyColorDepth })
   })
 
   describe('without patch', () => {
@@ -108,6 +107,11 @@ describe('screen patch', () => {
     })
 
     it('should set devicePixelRatio to 2', () => {
+      expect(self.devicePixelRatio).toBe(2)
+    })
+
+    it('should not throw when reading devicePixelRatio', () => {
+      expect(() => self.devicePixelRatio).not.toThrow()
       expect(self.devicePixelRatio).toBe(2)
     })
 
