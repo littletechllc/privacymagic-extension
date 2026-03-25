@@ -121,6 +121,11 @@ export const redefineFields = <T, K extends FieldKey<T>>(obj: T, fieldMap: Parti
     if (originalDescriptor.get != null) {
       // Accessor property: set to a getter that returns the new value.
       newFields[fieldName] = { ...originalDescriptor, get: () => newFieldValue, set: () => { /* do nothing */ } }
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      Object.defineProperties(newFields[fieldName].get, {
+        name: { value: `get ${fieldName}` },
+        toString: { value: () => `function get ${fieldName}() { [native code] }` }
+      })
     } else {
       // Data property: set to the new value.
       newFields[fieldName] = { ...originalDescriptor, value: newFieldValue }
