@@ -1,9 +1,9 @@
-import { redefineFields, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
+import { redefinePrototypeFields, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const device = (globalObject: GlobalScope): void => {
   if (globalObject.DevicePosture != null) {
-    redefineFields(globalObject.DevicePosture.prototype, {
+    redefinePrototypeFields(globalObject.DevicePosture, {
       type: 'continuous',
       onchange: null
     })

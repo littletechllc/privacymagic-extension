@@ -1,4 +1,4 @@
-import { redefineFields, redefineMethods, redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
+import { redefinePrototypeFields, redefineMethods, redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 const spoofPlatforms: Record<string, string> = {
@@ -16,7 +16,7 @@ const useragent = (globalObject: GlobalScope): void => {
     platform,
   })
   const mobile = false
-  redefineFields(globalObject.NavigatorUAData.prototype, {
+  redefinePrototypeFields(globalObject.NavigatorUAData, {
     mobile,
     platform,
   })

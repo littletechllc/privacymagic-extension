@@ -1,11 +1,11 @@
 import { GlobalScope } from "../helpers/globalObject"
-import { redefineFields } from "../helpers/monkey-patch"
+import { redefinePrototypeFields } from "../helpers/monkey-patch"
 
 const network = (globalObject: GlobalScope): void => {
   if (globalObject.NetworkInformation == null) {
     return
   }
-  redefineFields(globalObject.NetworkInformation.prototype, {
+  redefinePrototypeFields(globalObject.NetworkInformation, {
     downlink: 100,
     effectiveType: '4g',
     rtt: 100,

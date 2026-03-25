@@ -112,7 +112,7 @@ export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined,
  * @param fieldMap - A map of field names to new field values. Each new field value
  * must be a value that can be assigned to the field.
  */
-export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>): void => {
+const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>, expectPrototype: boolean): void => {
   const newFields: PropertyDescriptorMap = {}
   for (const [fieldName, newFieldValue] of objectGetEntriesSafe(fieldMap)) {
     const originalDescriptor = objectGetOwnPropertyDescriptorSafe(obj, fieldName)
@@ -125,7 +125,7 @@ export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, 
       newFields[fieldName] = {
         ...originalDescriptor,
         get: function (this) {
-          if (!objectIsPrototypeOfSafe(obj, this)) {
+          if (expectPrototype && !objectIsPrototypeOfSafe(obj, this)) {
             throw new TypeError('Illegal invocation')
           }
           return newFieldValue
@@ -142,6 +142,14 @@ export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, 
     }
   }
   objectDefinePropertiesSafe(obj, newFields)
+}
+
+export const redefinePrototypeFields = <T extends object, K extends FieldKey<T>>(obj: { prototype: T }, fieldMap: Partial<Record<K, T[K]>>): void => {
+  redefineFields(obj.prototype, fieldMap, true)
+}
+
+export const redefineGlobalFields = <T extends object, K extends FieldKey<T>>(globalObject: GlobalScope, fieldMap: Partial<Record<K, T[K]>>): void => {
+  redefineFields(globalObject, fieldMap, false)
 }
 
 /**
@@ -192,6 +200,6 @@ export const redefineMethods = <T, K extends MethodKey<T>>(obj: T, newMethodMap:
 
 export const redefineNavigatorFields = <T, K extends FieldKey<T>>(globalObject: GlobalScope, propertyMap: Partial<Record<K, T[K]>>): void => {
   const NavigatorConstructor = getNavigatorConstructor(globalObject)
-  redefineFields(NavigatorConstructor.prototype, propertyMap)
+  redefinePrototypeFields(NavigatorConstructor, propertyMap)
 }
 

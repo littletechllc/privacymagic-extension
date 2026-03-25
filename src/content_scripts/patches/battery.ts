@@ -1,9 +1,9 @@
-import { redefineMethods, redefineFields } from '@src/content_scripts/helpers/monkey-patch'
+import { redefineMethods, redefinePrototypeFields } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const battery = (globalObject: GlobalScope): void => {
   if (globalObject.BatteryManager != null) {
-    redefineFields(globalObject.BatteryManager.prototype, {
+    redefinePrototypeFields(globalObject.BatteryManager, {
       charging: true,
       chargingTime: 0,
       dischargingTime: Infinity,

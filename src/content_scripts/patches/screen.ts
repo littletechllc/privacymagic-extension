@@ -1,4 +1,4 @@
-import { redefineFields, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
+import { redefinePrototypeFields, redefineMethods, redefineGlobalFields } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const screen = (globalObject: GlobalScope): void => {
@@ -21,7 +21,7 @@ const screen = (globalObject: GlobalScope): void => {
   const innerW = globalObject.innerWidth ?? 1920
   const innerH = globalObject.innerHeight ?? 1080
   const [spoofedScreenWidth, spoofedScreenHeight] = spoofScreenSize(innerW, innerH)
-  redefineFields(globalObject.Screen.prototype, {
+  redefinePrototypeFields(globalObject.Screen, {
     availHeight: spoofedScreenHeight,
     availLeft: 0,
     availTop: 0,
@@ -31,7 +31,7 @@ const screen = (globalObject: GlobalScope): void => {
     pixelDepth: 24,
     width: spoofedScreenWidth
   })
-  redefineFields(globalObject, {
+  redefineGlobalFields(globalObject, {
     devicePixelRatio: 2,
     outerHeight: globalObject.innerHeight ?? 1080,
     outerWidth: globalObject.innerWidth ?? 1920,
