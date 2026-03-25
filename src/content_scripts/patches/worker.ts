@@ -83,6 +83,10 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           : new URLSafe(firstArg.toString(), absoluteUrl)
         return await origFetch(...args)
       }
+      Object.defineProperties(workerGlobal.fetch, {
+        name: { value: 'fetch' },
+        toString: { value: () => 'function fetch() { [native code] }' }
+      })
     }
     const spoofImportScripts = (): void => {
       const origImportScripts = workerGlobal.importScripts
@@ -98,6 +102,10 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
         }
         return origImportScripts(...resolvedPaths)
       }
+      Object.defineProperties(workerGlobal.importScripts, {
+        name: { value: 'importScripts' },
+        toString: { value: () => 'function importScripts() { [native code] }' }
+      })
     }
     const spoofNetworkObjects = (): void => {
       const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
