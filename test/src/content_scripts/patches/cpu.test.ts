@@ -1,4 +1,4 @@
-import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
+import {describe, it, expect, beforeEach } from '@jest/globals'
 import cpu from '@src/content_scripts/patches/cpu'
 import { defineMockProperties } from '@test/mocks/define'
 
