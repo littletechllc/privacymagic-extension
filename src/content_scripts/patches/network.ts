@@ -7,11 +7,9 @@ const network = (globalObject: GlobalScope): void => {
   }
   redefineFields(globalObject.NetworkInformation.prototype, {
     downlink: 100,
-    downlinkMax: 100,
     effectiveType: '4g',
     rtt: 100,
-    saveData: false,
-    type: 'wifi'
+    saveData: false
   })
 }
 

@@ -118,7 +118,7 @@ export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, 
     const originalDescriptor = objectGetOwnPropertyDescriptorSafe(obj, fieldName)
     // Do not treat `undefined` as missing: callers may set a data property to `undefined` (e.g. `navigator.keyboard`).
     if (originalDescriptor == null) {
-      throw new Error(`Property ${String(fieldName)} is not a field`)
+      throw new Error(`Field '${String(fieldName)}' not found`)
     }
     if (originalDescriptor.get != null) {
       // Accessor property: set to a getter that returns the new value.
