@@ -16,6 +16,7 @@ import keyboard from '@src/content_scripts/patches/keyboard'
 import language from '@src/content_scripts/patches/language'
 import math from '@src/content_scripts/patches/math'
 import memory from '@src/content_scripts/patches/memory'
+import network from '@src/content_scripts/patches/network'
 import screen from '@src/content_scripts/patches/screen'
 import serviceWorker from '@src/content_scripts/patches/serviceWorker'
 import sharedStorage from '@src/content_scripts/patches/sharedStorage'
@@ -48,6 +49,7 @@ const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, Pat
   language,
   math,
   memory,
+  network,
   screen,
   serviceWorker,
   sharedStorage,

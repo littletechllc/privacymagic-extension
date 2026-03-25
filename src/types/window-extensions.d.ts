@@ -50,6 +50,15 @@ declare global {
     }
   }
 
+  class NetworkInformation extends EventTarget {
+    readonly downlink: number
+    readonly downlinkMax: number
+    readonly effectiveType: string
+    readonly rtt: number
+    readonly saveData: boolean
+    readonly type: string
+  }
+
   class PerformanceLongAnimationFrameTiming extends PerformanceEntry {
     blockingDuration: number
     firstUIEventTimestamp: number
@@ -113,6 +122,7 @@ declare global {
     BatteryManager?: typeof BatteryManager
     DevicePosture?: typeof DevicePosture
     LayoutShift?: typeof LayoutShift
+    NetworkInformation?: typeof NetworkInformation
     PerformanceLongAnimationFrameTiming?: typeof PerformanceLongAnimationFrameTiming
     PerformanceLongTaskTiming?: typeof PerformanceLongTaskTiming
     PerformanceScriptTiming?: typeof PerformanceScriptTiming
@@ -126,6 +136,7 @@ declare global {
   }
 
   interface WorkerGlobalScope {
+    NetworkInformation?: typeof NetworkInformation
     trustedTypes?: TrustedTypePolicyFactory
     console: Console
   }

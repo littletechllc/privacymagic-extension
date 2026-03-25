@@ -35,6 +35,7 @@ export const CONTENT_SETTING_IDS = [
   'masterSwitch',
   'math',
   'memory',
+  'network',
   'screen',
   'serviceWorker',
   'sharedStorage',
