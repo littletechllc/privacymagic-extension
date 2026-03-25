@@ -156,7 +156,7 @@
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Ecrã",
+    "message": "Definições de ecrã",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {

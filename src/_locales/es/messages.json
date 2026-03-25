@@ -164,11 +164,11 @@
     "description": "Setting to block audio fingerprinting"
   },
   "browser": {
-    "message": "Navegador",
+    "message": "Versión del navegador",
     "description": "Setting to block browser version fingerprinting"
   },
   "display": {
-    "message": "Pantalla",
+    "message": "Visualización",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {

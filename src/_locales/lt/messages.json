@@ -156,7 +156,7 @@
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Ekranas",
+    "message": "Ekrano nustatymai",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {

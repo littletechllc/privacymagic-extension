@@ -22,7 +22,7 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Vremenska zona
   · Vremensko mjerjenje
   · Zaslon
-  · Zaslon
+  · Postavke zaslona
 - Uklanja tragove praćenja
   · Naziv prozora
   · Parametri praćenja

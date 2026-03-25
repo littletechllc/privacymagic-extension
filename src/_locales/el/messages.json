@@ -156,7 +156,7 @@
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Οθόνη",
+    "message": "Ρυθμίσεις οθόνης",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {

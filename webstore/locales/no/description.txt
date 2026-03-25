@@ -17,7 +17,7 @@ For å beskytte ditt personvern tilbyr Privacy Magic:
   · Nettverk
   · Prosessor
   · Skjerm
-  · Skjerm
+  · Skjerminnstillinger
   · Skrifter
   · Språk
   · Tastatur

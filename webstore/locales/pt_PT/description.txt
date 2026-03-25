@@ -11,7 +11,7 @@ Para defender a sua privacidade, o Privacy Magic:
   · Disco
   · Dispositivo
   · Ecrã
-  · Ecrã
+  · Definições de ecrã
   · Fontes
   · Fuso horário
   · Gráficos

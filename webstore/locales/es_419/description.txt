@@ -17,7 +17,7 @@ Para defender tu privacidad, Privacy Magic:
   · Memoria
   · Navegador
   · Pantalla
-  · Pantalla
+  · Visualización
   · Procesador
   · Red
   · Táctil

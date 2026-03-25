@@ -156,7 +156,7 @@
     "description": "Setting to block audio fingerprinting"
   },
   "display": {
-    "message": "Zaslon",
+    "message": "Postavke zaslona",
     "description": "Setting to block display preferences fingerprinting"
   },
   "device": {

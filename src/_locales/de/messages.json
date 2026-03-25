@@ -116,7 +116,7 @@
     "description": "Setting to enable battery API fingerprinting protection"
   },
   "useragent": {
-    "message": "Browserversion",
+    "message": "Browser",
     "description": "Setting to enable user-agent fingerprinting protection"
   },
   "alternateErrorPagesEnabled": {
@@ -168,7 +168,7 @@
     "description": "Setting to block audio fingerprinting"
   },
   "browser": {
-    "message": "Browserversion",
+    "message": "Browser-Version",
     "description": "Setting to block browser version fingerprinting"
   },
   "display": {

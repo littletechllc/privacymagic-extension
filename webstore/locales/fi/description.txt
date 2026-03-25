@@ -18,7 +18,7 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Muisti
   · Näppäimistö
   · Näyttö
-  · Näyttö
+  · Näyttöasetukset
   · Paristi
   · Prosessori
   · Selain
