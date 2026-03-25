@@ -1,8 +1,6 @@
 import { getNavigatorConstructor, GlobalScope } from "./globalObject"
 import { objectGetEntriesSafe } from "./helpers"
 
-const objectIsPrototypeOfSafe = (maybePrototype: object, obj: object): boolean => Object.prototype.isPrototypeOf.call(maybePrototype, obj)
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyFunction = (...args: any[]) => any
 
@@ -112,7 +110,7 @@ export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined,
  * @param fieldMap - A map of field names to new field values. Each new field value
  * must be a value that can be assigned to the field.
  */
-export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>): void => {
+export const redefineFields = <T, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>): void => {
   const newFields: PropertyDescriptorMap = {}
   for (const [fieldName, newFieldValue] of objectGetEntriesSafe(fieldMap)) {
     const originalDescriptor = objectGetOwnPropertyDescriptorSafe(obj, fieldName)
@@ -122,15 +120,7 @@ export const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, 
     }
     if (originalDescriptor.get != null) {
       // Accessor property: set to a getter that returns the new value.
-      newFields[fieldName] = {
-        ...originalDescriptor,
-        get: function (this) {
-          if (!objectIsPrototypeOfSafe(obj, this)) {
-            throw new TypeError('Illegal invocation')
-          }
-          return newFieldValue
-        }
-      }
+      newFields[fieldName] = { ...originalDescriptor, get: () => newFieldValue, set: () => { /* do nothing */ } }
       // eslint-disable-next-line @typescript-eslint/unbound-method
       Object.defineProperties(newFields[fieldName].get, {
         name: { value: `get ${fieldName}` },
