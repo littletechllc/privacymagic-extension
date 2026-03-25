@@ -1,13 +1,18 @@
-import { redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
 import type { GlobalScope } from '../helpers/globalObject'
+import { getNavigatorConstructor } from '../helpers/globalObject'
 
 // Global Privacy Control is a signal that allows users to opt out of websites
 // selling or sharing their personal information with third parties.
 // https://globalprivacycontrol.org/
 const gpc = (globalObject: GlobalScope): void => {
-  Object.defineProperty(globalObject.navigator, 'globalPrivacyControl', {
-    value: true,
-    writable: false,
+  const getter = function() { return true }
+  Object.defineProperties(getter, {
+    name: { value: 'get globalPrivacyControl' },
+    toString: { value: () => 'function get globalPrivacyControl() { [native code] }' }
+  })
+  Object.defineProperty(getNavigatorConstructor(globalObject).prototype, 'globalPrivacyControl', {
+    get: getter,
+    set: () => { /* do nothing */ },
     enumerable: true,
     configurable: true
   })
