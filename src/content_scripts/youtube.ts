@@ -1,135 +1,232 @@
-//import { createSafeMethod } from "./helpers/monkey-patch"
+import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 
-const waitForVideoPlayerElement = (): Promise<HTMLDivElement> => {
-  return new Promise((resolve) => {
-    const interval = setInterval(() => {
-      const player = document.getElementsByClassName('html5-video-player')[0] as HTMLDivElement | null
-      if (player != null) {
-        clearInterval(interval)
-        resolve(player)
+type UnknownRecord = Record<string, unknown>
+
+/** Object keys removed from InnerTube / page JSON when present (ad-related API surface). */
+const adKeys = [
+  'adPlacements',
+  'adPlacementRenderer',
+  'playerAds',
+  'playerLegacyDesktopWatchAdsRenderer',
+  'adSlots',
+  'adSlotMetadata',
+  'adLayoutMetadata',
+  'adSlotAndLayoutMetadata',
+  'adBreakHeartbeatParams',
+  'adSafetyReason',
+  'ad3Module',
+  'adParams',
+  'playerAdParams',
+  'adsControlFlowOpportunityReceivedCommand',
+  'adsEngagementPanelContentRenderer'
+]
+
+/** If the URL contains `youtube.com` and any of these substrings, JSON responses may be stripped of `adKeys`. */
+const SANITIZED_URL_PATH_INCLUDES : string[] = [
+  '/youtubei/v1/player',
+  '/youtubei/v1/get_watch',
+  '/youtubei/v1/reel/reel_watch_sequence'
+]
+
+const isRecord = (value: unknown): value is UnknownRecord =>
+  typeof value === 'object' && value !== null
+
+/** Walk nested objects/arrays and delete known ad keys. Returns total key removals (including nested). */
+const stripAdsDeep = (value: unknown): number => {
+  if (!isRecord(value)) return 0
+
+  let removedCount = 0
+  const stack: Array<{ node: UnknownRecord; depth: number }> = [{ node: value, depth: 0 }]
+
+  while (stack.length > 0) {
+    const current = stack.pop()
+    if (current == null) continue
+    const { node, depth } = current
+
+    for (const key of adKeys) {
+      if (key in node) {
+        delete node[key]
+        removedCount += 1
       }
-    }, 30)
-  })
+    }
+
+    for (const nestedValue of Object.values(node)) {
+      if (Array.isArray(nestedValue)) {
+        const nestedItems = nestedValue as unknown[]
+        for (let i = 0; i < nestedItems.length; i += 1) {
+          const item = nestedItems[i]
+          if (isRecord(item)) {
+            stack.push({ node: item, depth: depth + 1 })
+          }
+        }
+        continue
+      }
+      if (isRecord(nestedValue)) {
+        stack.push({ node: nestedValue, depth: depth + 1 })
+      }
+    }
+  }
+
+  return removedCount
 }
 
+const shouldSanitizeUrlString = (url: string): boolean => {
+  if (!url.includes('youtube.com')) {
+    return false
+  }
+  return SANITIZED_URL_PATH_INCLUDES.some((path) => url.includes(path))
+}
 
-const skipVideoIfAd = (player: HTMLDivElement): void => {
-  const video = player.querySelector('video')
-  if (video == null) return
-  if (player.classList.contains('ad-interrupting') || player.classList.contains('ad-showing')) {
-    console.log('ad detected:', performance.now(), video.duration, video.src)
-    if (isNaN(video.duration)) {
-      console.log(player)
-      return
+const shouldSanitizeFetchResponse = (input: RequestInfo | URL): boolean => {
+  if (typeof input === 'string') {
+    return shouldSanitizeUrlString(input)
+  }
+  if (input instanceof URL) {
+    return shouldSanitizeUrlString(input.href)
+  }
+  return shouldSanitizeUrlString(input.url)
+}
+
+/** Avoid substring `"ad"` alone — it matches `adaptiveFormats` and forces a full parse. */
+const textMayContainAdPayload = (text: string): boolean =>
+  adKeys.some((key) => text.includes(`"${key}"`))
+
+/** Parse JSON, strip ad keys in place, re-serialize. Caller should only invoke when `textMayContainAdPayload` is true. */
+const sanitizeJsonText = (text: string): string => {
+  if (!textMayContainAdPayload(text)) {
+    return text
+  }
+  const parsed = JSON.parse(text) as unknown
+  stripAdsDeep(parsed)
+  return JSON.stringify(parsed)
+}
+
+const patchFetch = (): void => {
+  const originalFetch = window.fetch.bind(window)
+  window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    const response = await originalFetch(input, init)
+    if (!shouldSanitizeFetchResponse(input)) {
+      return response
     }
-    if (!isNaN(video.duration) && video.duration > 0 && video.currentTime < video.duration - 0.15) {
-      video.muted = true
-      video.currentTime = Math.max(0, video.duration - 0.1)
-      const adSkipBtn = document.querySelector('.ytp-ad-skip-button, .ytp-ad-skip-button-modern');
-
-      if (adSkipBtn != null) {
-        (adSkipBtn as HTMLElement).click();
+    try {
+      const text = await response.clone().text()
+      const sanitizedText = sanitizeJsonText(text)
+      if (sanitizedText === text) {
+        return response
       }
+      return new Response(sanitizedText, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers
+      })
+    } catch {
+      return response
     }
   }
 }
 
-/*
+const patchXhr = (): void => {
+  const originalOpen = createSafeMethod(XMLHttpRequest, 'open')
+  const originalSend = createSafeMethod(XMLHttpRequest, 'send')
 
-const modifyEventListeners = (): void => {
-  const originalAddEventListener = createSafeMethod(EventTarget, 'addEventListener')
-  Object.defineProperty(EventTarget.prototype, 'addEventListener', {
-    value: function (this: EventTarget, type: string, listener: EventListener, options: boolean | AddEventListenerOptions) {
-      console.log('maybe adding event listener:', type)
-      originalAddEventListener(this, type, listener, options)
-    }
-  })
-}
+  XMLHttpRequest.prototype.open = function (
+    this: XMLHttpRequest,
+    method: string,
+    url: string | URL,
+    async?: boolean,
+    username?: string | null,
+    password?: string | null
+  ): void {
+    const parsedUrl = String(url)
+    ;(this as XMLHttpRequest & { __pmShouldSanitize?: boolean }).__pmShouldSanitize =
+      shouldSanitizeUrlString(parsedUrl)
+    originalOpen(this, method, String(url), async ?? true, username, password)
+  }
 
-const interceptClassListChanges = (callback: () => void): void => {
-  const originalAdd = createSafeMethod(DOMTokenList, 'add')
-  Object.defineProperty(DOMTokenList.prototype, 'add', {
-    value: function (this: DOMTokenList, value: string) {
-      if (value === 'ad-showing' || value === 'ad-interrupting') {
-        console.log('detected ad class:', value)
-        callback()
+  const xhrGetResponseTextSafe = createSafeGetter(XMLHttpRequest, 'responseText')
+  const xhrGetResponseSafe = createSafeGetter(XMLHttpRequest, 'response')
+  const xhrGetResponseTypeSafe = createSafeGetter(XMLHttpRequest, 'responseType')
+
+  XMLHttpRequest.prototype.send = function (
+    this: XMLHttpRequest,
+    body?: XMLHttpRequestBodyInit | null
+  ): void {
+    this.addEventListener('readystatechange', function onReadyStateChange() {
+      const xhr = this as XMLHttpRequest & { __pmShouldSanitize?: boolean }
+      if (xhr.readyState !== 4 || !xhr.__pmShouldSanitize) {
         return
       }
-      return originalAdd(this, value)
+      try {
+        let sanitizedText : string | undefined
+        Object.defineProperty(xhr, 'responseText', {
+          get(this: XMLHttpRequest) {
+            const originalResponseText = xhrGetResponseTextSafe(this)
+            sanitizedText ??= sanitizeJsonText(originalResponseText)
+            return sanitizedText
+          },
+          configurable: true
+        })
+        Object.defineProperty(xhr, 'response', {
+          get(this: XMLHttpRequest) {
+            const originalResponse: unknown = xhrGetResponseSafe(this)
+            switch (xhrGetResponseTypeSafe(this)) {
+              case 'arraybuffer':
+              case 'blob':
+              case 'document':
+                return originalResponse
+              case 'json':
+                return stripAdsDeep(originalResponse)
+              case '':
+              default:
+                return sanitizeJsonText(String(originalResponse))
+            }
+          },
+          configurable: true
+        })
+      } catch {
+        // Non-JSON or locked response objects.
+      }
+    })
+    originalSend(this, body)
+  }
+}
+
+const patchGlobalObjectSetter = (propertyName: 'ytInitialPlayerResponse' | 'ytInitialData'): void => {
+  let internalValue: unknown = undefined
+  Object.defineProperty(window, propertyName, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      return internalValue
+    },
+    set(value: unknown) {
+      stripAdsDeep(value)
+      internalValue = value
     }
   })
 }
 
-const modifyFetch = (): void => {
-  const originalFetch = window.fetch
-  window.fetch = async function (input: RequestInfo | URL, init?: RequestInit) {
-    const response = await originalFetch(input, init)
-    const data = await response.json() as Record<string, unknown>;
-
-    if (data.playerResponse) {
-      const pr = data.playerResponse as Record<string, unknown>;
-
-      // 1. Kill the ad schedule
-      if (pr.adPlacements) {
-        console.log("Blocking ad schedule...");
-        delete pr.adPlacements;
-      }
-
-      // 2. Kill the ad UI config
-      if (pr.playerAds) {
-        console.log("Blocking ad UI...");
-        delete pr.playerAds;
-      }
-
-      // 3. Clean up the "Playability Status"
-      // Sometimes YouTube marks a video as 'UNPLAYABLE' if ads fail.
-      // We force it back to 'OK'.
-     // if (pr.playabilityStatus && pr.playabilityStatus.status !== "OK") {
-     //   pr.playabilityStatus.status = "OK";
-     // }
-    }
-    return new Response(JSON.stringify(data), { ...response });
+const sanitizeInitialPlayerResponse = (): void => {
+  const initialResponse = (window as Window & { ytInitialPlayerResponse?: unknown }).ytInitialPlayerResponse
+  if (initialResponse) {
+    stripAdsDeep(initialResponse)
   }
 }
 
-const sanitizeBuiltIn = () => {
-  const ytInitialPlayerResponse = window.ytInitialPlayerResponse as Record<string, unknown>;
-  if (ytInitialPlayerResponse) {
-    ytInitialPlayerResponse.adPlacements = [];
-    ytInitialPlayerResponse.playerAds = [];
-    console.log("Sanitized Initial Player Response");
-  } else {
-    requestAnimationFrame(() => {
-      sanitizeBuiltIn()
-    })
+const sanitizeInitialData = (): void => {
+  const initialData = (window as Window & { ytInitialData?: unknown }).ytInitialData
+  if (initialData) {
+    stripAdsDeep(initialData)
   }
 }
-*/
 
-const main = async (): Promise<void> => {
- // modifyEventListeners()
-  const player = await waitForVideoPlayerElement()
-  console.log('player:', player)
-  //interceptClassListChanges(() => {
-    skipVideoIfAd(player)
-  //})
-  //modifyFetch()
-  //sanitizeBuiltIn()
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-       // console.log('mutation:', mutation, (mutation.target as Element).classList)
-        const target = mutation.target
-        if (!(target instanceof Element)) return
-        skipVideoIfAd(target as HTMLDivElement)
-      }
-    })
-  })
-  observer.observe(player, {
-    attributes: true,
-    attributeOldValue: true,
-    attributeFilter: ['class']
-  })
+const main = (): void => {
+  patchGlobalObjectSetter('ytInitialPlayerResponse')
+  patchGlobalObjectSetter('ytInitialData')
+  patchFetch()
+  patchXhr()
+  sanitizeInitialPlayerResponse()
+  sanitizeInitialData()
 }
 
-void main()
+main()
