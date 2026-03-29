@@ -35,7 +35,8 @@
     "scripting",
     "sidePanel",
     "storage",
-    "webNavigation"
+    "webNavigation",
+    "webRequest"
   ],
   "host_permissions": [
     "*://*/*"

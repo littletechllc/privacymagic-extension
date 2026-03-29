@@ -4,6 +4,7 @@ import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, registrableDomainFromUrl, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '@src/common/messages'
 import { updateRules, setupRules } from './dnr/rule-manager'
+import { showBlockedRequests } from './monitor-blocking'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateDynamicRules({
@@ -92,9 +93,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 const initializeListeners = (): void => {
   try {
     injectCssForCosmeticFilters()
-    // Debug functions available in debug.ts:
-    // import { logMatchingRulesInDevMode, testHttpBehavior } from './debug'
-    // logMatchingRulesInDevMode()
+    showBlockedRequests()
   } catch (error) {
     logError(error, 'error initializing listeners')
   }
