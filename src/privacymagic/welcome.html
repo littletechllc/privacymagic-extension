@@ -18,9 +18,7 @@
     --text-muted: #3a5070;
     --text-hint: #7a96b8;
     --bg: #fdfcfa;
-    --bg-card: #ffffff;
     --border: rgba(26,92,168,0.1);
-    --red: #e05555;
     --radius: 16px;
   }
 
@@ -67,15 +65,6 @@
     pointer-events: none;
   }
 
-  .logo-name {
-    font-family: 'Fondamento', cursive;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: var(--blue-dark);
-    line-height: 1;
-    letter-spacing: 0.01em;
-  }
-
   .welcome-msg {
     position: relative;
     z-index: 2;
@@ -87,13 +76,6 @@
     margin-top: 3rem;
     line-height: 1.4;
     text-shadow: 0 0 16px #fefcf8, 0 0 24px #fefcf8, 0 0 32px #fefcf8;
-  }
-
-  .welcome-msg .logo-name {
-    font-size: inherit;
-    color: var(--blue-dark);
-    line-height: inherit;
-    margin-bottom: 0;
   }
 
   .welcome-msg em {
@@ -120,13 +102,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-  }
-
-  .steps-intro {
-    text-align: center;
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
   }
 
   .step-card {
@@ -225,7 +200,10 @@
     }
   }
 
-  /* VPN recommendation */
+  /*
+   * VPN recommendation — uncomment this block when the step 2 card is
+   * uncommented in the HTML below.
+   *
   .vpn-box {
     background: var(--blue-light);
     border-radius: 10px;
@@ -275,6 +253,14 @@
     margin-bottom: 0;
   }
 
+  .affiliate-note {
+    font-size: 0.78rem;
+    color: var(--text-hint);
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+  */
+
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -318,42 +304,6 @@
     gap: 0.75rem;
     flex-wrap: wrap;
   }
-
-  .affiliate-note {
-    font-size: 0.78rem;
-    color: var(--text-hint);
-    margin-top: 0.75rem;
-    font-style: italic;
-  }
-
-  /* History sync step */
-  .history-explanation {
-    background: #fff8f8;
-    border-left: 3px solid var(--red);
-    border-radius: 0 8px 8px 0;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* Progress dots */
-  .progress {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .progress-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--blue-mid);
-    opacity: 0.3;
-  }
-
-  .progress-dot.active { background: var(--blue); opacity: 1; }
 
   footer {
     text-align: center;
