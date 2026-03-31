@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="welcomeStep3Title">Disable history syncing</title>
+  <script src="./i18n.js" type="module"></script>
+  <link href="./shared.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .content {
+      background: #ffffff;
+      border: 1px solid rgba(26, 92, 168, 0.12);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .setup-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+    }
+
+    .setup-header h1 {
+      margin: 0;
+      font-family: 'Lora', serif;
+      font-size: clamp(1.4rem, 3.4vw, 2rem);
+      font-weight: 600;
+      color: #0f3d72;
+      line-height: 1.2;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      margin: 0 0 14px;
+    }
+
+    .first-instruction {
+      margin-top: 32px;
+    }
+
+    .sync-preview {
+      width: fit-content;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 8px;
+      margin: 8px 0 64px;
+      padding: 24px 32px 24px 10px;
+    }
+
+    .sync-preview-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: rgb(31, 31, 31);
+    }
+
+    .sync-preview-icon-cell {
+      width: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sync-preview-row + .sync-preview-row {
+      margin-top: 4px;
+    }
+
+    .sync-preview-unselected {
+      width: 22px;
+      height: 24px;
+      object-fit: contain;
+      transform: translateY(1px);
+    }
+
+    .sync-preview-selected {
+      width: 41px;
+      height: 50px;
+      object-fit: contain;
+      transform: translateY(4px);
+    }
+
+    .history-preview {
+      width: fit-content;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 8px;
+      margin: 8px 0 0;
+      padding: 24px;
+    }
+
+    .history-preview-heading {
+      margin: 0 0 10px;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgb(90, 90, 90);
+      line-height: 1.3;
+    }
+
+    .history-preview-row {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      margin-left: 28px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: rgb(31, 31, 31);
+      line-height: 1.2;
+    }
+
+    .history-preview-toggle {
+      width: 35px;
+      height: 44px;
+      object-fit: contain;
+      transform: translateY(8px);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="setup-header">
+      <img class="logo-icon" src="../logo/logo.svg" alt="Privacy Magic logo" />
+      <h1>Privacy Magic Setup</h1>
+    </header>
+    <main class="content">
+    <h1 class="step-title" data-i18n="welcomeStep3Title">Disable history syncing</h1>
+    <p class="first-instruction" data-i18n-html="welcomeStep3SyncOptionInstruction" data-i18n-args="chromium_7399045143794278225">
+      First, click on <strong>Customize Sync</strong>:
+    </p>
+    <div class="sync-preview" role="img" aria-label="Sync options preview">
+      <div class="sync-preview-row">
+        <span class="sync-preview-icon-cell">
+          <img class="sync-preview-unselected" src="../assets/images/sync-radio-unselected.png" alt="" aria-hidden="true" />
+        </span>
+        <span data-i18n="chromium_4684427112815847243">Sync everything</span>
+      </div>
+      <div class="sync-preview-row">
+        <span class="sync-preview-icon-cell">
+          <img class="sync-preview-selected" src="../assets/images/sync-radio-selected-clicked.png" alt="" aria-hidden="true" />
+        </span>
+        <span data-i18n="chromium_7399045143794278225">Customize sync</span>
+      </div>
+    </div>
+    <p data-i18n-html="welcomeStep3HistoryToggleInstruction" data-i18n-args="chromium_7044606776288350625, chromium_1644574205037202324">
+      Under <strong>Sync Data</strong>, click on <strong>History</strong> to disable it (grey).
+    </p>
+    <div class="history-preview" role="img" aria-label="History sync toggle preview">
+      <div class="history-preview-heading" data-i18n="chromium_7044606776288350625">Sync data</div>
+      <div class="history-preview-row">
+        <span data-i18n="chromium_1644574205037202324">History</span>
+        <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+      </div>
+    </div>
+    </main>
+  </div>
+</body>
+</html>

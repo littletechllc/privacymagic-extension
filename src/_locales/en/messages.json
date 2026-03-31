@@ -292,7 +292,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Disable browser history syncing",
+    "message": "Disable history syncing",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -306,6 +306,30 @@
   "welcomeStep3BodyQuestion": {
     "message": "Would you like help disabling history syncing?",
     "description": "Question text in step 3"
+  },
+  "welcomeStep3SyncOptionInstruction": {
+    "message": "First, click on <strong>$sync_option$</strong>:",
+    "description": "Instruction for selecting a sync option in step 3",
+    "placeholders": {
+      "sync_option": {
+        "content": "$1",
+        "example": "Customize sync"
+      }
+    }
+  },
+  "welcomeStep3HistoryToggleInstruction": {
+    "message": "Under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History syncing in step 3",
+    "placeholders": {
+      "sync_data": {
+        "content": "$1",
+        "example": "Sync data"
+      },
+      "history": {
+        "content": "$2",
+        "example": "History"
+      }
+    }
   },
   "welcomeShowMeCta": {
     "message": "Yes, show me",

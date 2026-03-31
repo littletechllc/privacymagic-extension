@@ -1,0 +1,27 @@
+@import url("../assets/fonts/fonts.css");
+
+:root {
+  --blue: #1a5ca8;
+  --blue-dark: #0f3d72;
+  --blue-light: #e8f0fb;
+  --blue-mid: #8ab0e0;
+  --text: #0d1f3c;
+  --text-muted: #3a5070;
+  --text-hint: #7a96b8;
+  --bg: #fdfcfa;
+  --border: rgba(26, 92, 168, 0.1);
+  --radius: 16px;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
