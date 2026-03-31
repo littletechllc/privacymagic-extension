@@ -299,6 +299,10 @@
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
+  "welcomeStep3Intro": {
+    "message": "Let's make sure your browser keeps your browsing history private on your computer.",
+    "description": "Introductory sentence for history sync setup panel"
+  },
   "welcomeStep3BodyLead": {
     "message": "If history syncing is enabled, <strong>Chrome may send your browsing history to Google's servers.</strong> Disabling syncing keeps your browsing history more private.",
     "description": "Main explanatory text for step 3"
