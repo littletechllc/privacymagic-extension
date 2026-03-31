@@ -334,5 +334,21 @@
   "welcomeCompletedSuffix": {
     "message": "（已完成）",
     "description": "Suffix shown on a completed setup step"
+  },
+  "chromium_1644574205037202324": {
+    "message": "历史记录",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "chromium_4684427112815847243": {
+    "message": "同步所有数据",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
+  },
+  "chromium_7399045143794278225": {
+    "message": "自定义同步",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7399045143794278225"
+  },
+  "chromium_7044606776288350625": {
+    "message": "同步数据",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   }
 }

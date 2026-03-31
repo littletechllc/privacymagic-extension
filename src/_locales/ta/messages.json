@@ -334,5 +334,21 @@
   "welcomeCompletedSuffix": {
     "message": "(முடிந்தது)",
     "description": "Suffix shown on a completed setup step"
+  },
+  "chromium_1644574205037202324": {
+    "message": "இதுவரை பார்த்தவை",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "chromium_4684427112815847243": {
+    "message": "அனைத்தையும் ஒத்திசை",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
+  },
+  "chromium_7399045143794278225": {
+    "message": "ஒத்திசைவைப் பிரத்தியேகமாக்கு",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7399045143794278225"
+  },
+  "chromium_7044606776288350625": {
+    "message": "தரவை ஒத்திசைத்தல்",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   }
 }

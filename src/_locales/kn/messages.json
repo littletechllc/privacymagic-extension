@@ -334,5 +334,21 @@
   "welcomeCompletedSuffix": {
     "message": "(ಪೂರ್ಣಗೊಂಡಿದೆ)",
     "description": "Suffix shown on a completed setup step"
+  },
+  "chromium_1644574205037202324": {
+    "message": "ಇತಿಹಾಸ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "chromium_4684427112815847243": {
+    "message": "ಪ್ರತಿಯೊಂದನ್ನು ಸಿಂಕ್ ಮಾಡಿ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
+  },
+  "chromium_7399045143794278225": {
+    "message": "ಸಿಂಕ್ ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7399045143794278225"
+  },
+  "chromium_7044606776288350625": {
+    "message": "ಡೇಟಾ ಸಿಂಕ್ ಮಾಡಿ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   }
 }

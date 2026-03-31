@@ -334,5 +334,21 @@
   "welcomeCompletedSuffix": {
     "message": "(đã hoàn tất)",
     "description": "Suffix shown on a completed setup step"
+  },
+  "chromium_1644574205037202324": {
+    "message": "Nhật ký",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "chromium_4684427112815847243": {
+    "message": "Đồng bộ hoá mọi thứ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
+  },
+  "chromium_7399045143794278225": {
+    "message": "Tuỳ chỉnh dữ liệu đồng bộ hoá",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7399045143794278225"
+  },
+  "chromium_7044606776288350625": {
+    "message": "Dữ liệu đồng bộ hoá",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   }
 }

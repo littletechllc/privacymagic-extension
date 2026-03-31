@@ -334,5 +334,21 @@
   "welcomeCompletedSuffix": {
     "message": "(tamamlandı)",
     "description": "Suffix shown on a completed setup step"
+  },
+  "chromium_1644574205037202324": {
+    "message": "Geçmiş",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "chromium_4684427112815847243": {
+    "message": "Her şeyi senkronize et",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
+  },
+  "chromium_7399045143794278225": {
+    "message": "Senkronizasyonu özelleştir",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7399045143794278225"
+  },
+  "chromium_7044606776288350625": {
+    "message": "Verileri senkronize et",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   }
 }
