@@ -37,6 +37,15 @@ const toLegacyChromeMessageKey = (translationId: string): string => {
   return `chrome_${translationId}`
 }
 
+const normalizeEnUsSpelling = (locale: string, message: string): string => {
+  if (locale !== 'en') {
+    return message
+  }
+  return message
+    .replaceAll('Customise', 'Customize')
+    .replaceAll('customise', 'customize')
+}
+
 const stripXmlTags = (raw: string): string => {
   return raw.replaceAll(/<[^>]+>/g, '')
 }
@@ -156,10 +165,11 @@ const syncChromeLocaleString = async (): Promise<void> => {
           if (translation === undefined || translation.length === 0) {
             throw new Error(`Missing translation id ${target.translationId}`)
           }
+          const normalizedTranslation = normalizeEnUsSpelling(locale, translation)
           return {
             translationId: target.translationId,
             key: toChromiumMessageKey(target.translationId),
-            message: translation,
+            message: normalizedTranslation,
             description: `Imported from Chromium ${target.filePathTemplate} id ${target.translationId}`
           }
         })
