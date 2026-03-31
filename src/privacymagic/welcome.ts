@@ -17,8 +17,8 @@ const applyStep1MessageTokens = (): void => {
   const pinIconAlt = chrome.i18n.getMessage('welcomePinIconAlt') || 'pin icon'
 
   const tokenMap: Record<string, string> = {
-    puzzleIcon: buildWelcomeInlineIconHtml(puzzleIconAlt, '../assets/puzzle.svg'),
-    pinIcon: buildWelcomeInlineIconHtml(pinIconAlt, '../assets/pin.svg'),
+    puzzleIcon: buildWelcomeInlineIconHtml(puzzleIconAlt, '../assets/images/puzzle.svg'),
+    pinIcon: buildWelcomeInlineIconHtml(pinIconAlt, '../assets/images/pin.svg'),
     hamsaIcon: buildHamsaIconHtml()
   }
 
