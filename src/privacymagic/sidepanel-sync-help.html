@@ -143,6 +143,14 @@
       object-fit: contain;
       transform: translateY(8px);
     }
+
+    .sync-help-pending-actions {
+      margin-top: 20px;
+    }
+
+    .sync-help-actions {
+      margin-top: 64px;
+    }
   </style>
 </head>
 <body>
@@ -153,37 +161,51 @@
     </header>
     <main class="content">
     <h1 class="step-title" data-i18n="welcomeStep3Title">Disable history syncing</h1>
-    <p data-i18n="welcomeStep3Intro">
-      Let's make sure your browser keeps your browsing history local on your computer.
-    </p>
-    <p class="first-instruction" data-i18n-html="welcomeStep3SyncOptionInstruction" data-i18n-args="chromium_7399045143794278225">
-      First, click on <strong>Customize Sync</strong>:
-    </p>
-    <div class="sync-preview" role="img" aria-label="Sync options preview">
-      <div class="sync-preview-row">
-        <span class="sync-preview-icon-cell">
-          <img class="sync-preview-unselected" src="../assets/images/sync-radio-unselected.png" alt="" aria-hidden="true" />
-        </span>
-        <span data-i18n="chromium_4684427112815847243">Sync everything</span>
-      </div>
-      <div class="sync-preview-row">
-        <span class="sync-preview-icon-cell">
-          <img class="sync-preview-selected" src="../assets/images/sync-radio-selected-clicked.png" alt="" aria-hidden="true" />
-        </span>
-        <span data-i18n="chromium_7399045143794278225">Customize sync</span>
+    <div id="syncHelpPhasePending">
+      <p data-i18n="welcomeStep3IntroSidepanelPending">
+        We'll open the Sync settings page so you can make the necessary adjustments.
+      </p>
+      <div class="btn-row sync-help-pending-actions">
+        <button type="button" class="btn-primary" id="syncHelpOpenSettingsBtn" data-i18n="welcomeStep3OpenSyncSettingsCta">Open settings</button>
       </div>
     </div>
-    <p data-i18n-html="welcomeStep3HistoryToggleInstruction" data-i18n-args="chromium_7044606776288350625, chromium_1644574205037202324">
-      Under <strong>Sync Data</strong>, click on <strong>History</strong> to disable it (grey).
-    </p>
-    <div class="history-preview" role="img" aria-label="History sync toggle preview">
-      <div class="history-preview-heading" data-i18n="chromium_7044606776288350625">Sync data</div>
-      <div class="history-preview-row">
-        <span data-i18n="chromium_1644574205037202324">History</span>
-        <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+    <div id="syncHelpPhaseReady" hidden>
+      <p data-i18n="welcomeStep3IntroSidepanel">
+        Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.
+      </p>
+      <p class="first-instruction" data-i18n-html="welcomeStep3SyncOptionInstruction" data-i18n-args="chromium_7399045143794278225">
+        First, click on <strong>Customize Sync</strong>:
+      </p>
+      <div class="sync-preview" role="img" aria-label="Sync options preview">
+        <div class="sync-preview-row">
+          <span class="sync-preview-icon-cell">
+            <img class="sync-preview-unselected" src="../assets/images/sync-radio-unselected.png" alt="" aria-hidden="true" />
+          </span>
+          <span data-i18n="chromium_4684427112815847243">Sync everything</span>
+        </div>
+        <div class="sync-preview-row">
+          <span class="sync-preview-icon-cell">
+            <img class="sync-preview-selected" src="../assets/images/sync-radio-selected-clicked.png" alt="" aria-hidden="true" />
+          </span>
+          <span data-i18n="chromium_7399045143794278225">Customize sync</span>
+        </div>
+      </div>
+      <p data-i18n-html="welcomeStep3HistoryToggleInstruction" data-i18n-args="chromium_7044606776288350625, chromium_1644574205037202324">
+        Next, under <strong>Sync Data</strong>, click on <strong>History</strong> to disable it (grey).
+      </p>
+      <div class="history-preview" role="img" aria-label="History sync toggle preview">
+        <div class="history-preview-heading" data-i18n="chromium_7044606776288350625">Sync data</div>
+        <div class="history-preview-row">
+          <span data-i18n="chromium_1644574205037202324">History</span>
+          <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+        </div>
+      </div>
+      <div class="btn-row sync-help-actions">
+        <button type="button" class="btn-primary" id="syncHelpAllDoneBtn" data-i18n="welcomeStep3AllDoneCta">All done!</button>
       </div>
     </div>
     </main>
   </div>
+  <script src="./sidepanel-sync-help.js" type="module"></script>
 </body>
 </html>

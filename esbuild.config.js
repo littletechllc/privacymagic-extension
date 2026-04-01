@@ -70,6 +70,10 @@ const builds = [
     outfile: 'dist/privacymagic/welcome.js'
   },
   {
+    entryPoints: ['src/privacymagic/sidepanel-sync-help.ts'],
+    outfile: 'dist/privacymagic/sidepanel-sync-help.js'
+  },
+  {
     entryPoints: ['src/privacymagic/i18n.ts'],
     outfile: 'dist/privacymagic/i18n.js'
   }

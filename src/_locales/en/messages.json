@@ -300,11 +300,23 @@
     "description": "Estimated time for step 3"
   },
   "welcomeStep3Intro": {
-    "message": "Let's make sure your browser keeps your browsing history private on your computer.",
-    "description": "Introductory sentence for history sync setup panel"
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+  },
+  "welcomeStep3IntroSidepanelPending": {
+    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+  },
+  "welcomeStep3IntroSidepanel": {
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
+  },
+  "welcomeStep3OpenSyncSettingsCta": {
+    "message": "Open settings",
+    "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "If history syncing is enabled, <strong>Chrome may send your browsing history to Google's servers.</strong> Disabling syncing keeps your browsing history more private.",
+    "message": "You can prevent that from happening in Chrome's sync settings: it only takes a minute.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
@@ -322,7 +334,7 @@
     }
   },
   "welcomeStep3HistoryToggleInstruction": {
-    "message": "Under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
       "sync_data": {
@@ -334,6 +346,10 @@
         "example": "History"
       }
     }
+  },
+  "welcomeStep3AllDoneCta": {
+    "message": "All done!",
+    "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {
     "message": "Yes, show me",

@@ -6,6 +6,7 @@ export type Message =
   | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'getDomainForTab', tabId: number }
   | { type: 'reloadTab', tabId: number }
+  | { type: 'disableSyncSettingsDone', tabId: number }
 
 export type SuccessResponse = { success: true }
 export type DomainResponse = { success: true, domain: string }
@@ -58,6 +59,14 @@ export const getDomainForTabMessageRemote = async (tabId: number): Promise<strin
 export const reloadTabRemote = async (tabId: number): Promise<void> => {
   console.log('sending reloadTab message to background script', tabId)
   const message: Message = { type: 'reloadTab', tabId }
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
+  if (!response.success) {
+    throw new Error(response.error)
+  }
+}
+
+export const disableSyncSettingsDoneRemote = async (tabId: number): Promise<void> => {
+  const message: Message = { type: 'disableSyncSettingsDone', tabId }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
   if (!response.success) {
     throw new Error(response.error)

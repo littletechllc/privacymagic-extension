@@ -245,50 +245,6 @@
   }
   */
 
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--blue);
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    padding: 0.65rem 1.5rem;
-    border-radius: 999px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    color: var(--text-muted);
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 0.65rem 1.25rem;
-    border-radius: 999px;
-    border: 1px solid var(--blue-mid);
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .btn-secondary:hover { background: var(--blue-light); transform: translateY(-1px); }
-
-  .btn-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
   footer {
     text-align: center;
     padding: 1.5rem;
@@ -410,8 +366,8 @@
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p data-i18n-html="welcomeStep3BodyLead">If history syncing is enabled, <strong>Chrome may send your browsing history to Google's servers.</strong>
-        Disabling syncing keeps your browsing history more private.</p>
+      <p data-i18n="welcomeStep3Intro">Let's make sure this browser doesn't leak your browsing history to Google's servers.</p>
+      <p data-i18n-html="welcomeStep3BodyLead">You can prevent that from happening in Chrome's sync settings: it only takes a minute.</p>
       <p data-i18n="welcomeStep3BodyQuestion">Would you like help disabling history syncing?</p>
       <div class="btn-row">
         <a href="#" class="btn-primary" data-i18n="welcomeShowMeCta">Yes, show me</a>

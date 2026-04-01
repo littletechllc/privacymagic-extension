@@ -3,6 +3,7 @@ import { getAllSettings, setSetting } from '@src/common/settings'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, registrableDomainFromUrl, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type DomainResponse, type ContentResponse, type ErrorResponse } from '@src/common/messages'
+import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRules, setupRules } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 
@@ -51,6 +52,9 @@ const handleMessage = async (
     } else if (message.type === 'reloadTab') {
       await chrome.tabs.reload(message.tabId)
       console.log('reloaded tab', message.tabId)
+      sendResponse({ success: true } as SuccessResponse)
+    } else if (message.type === 'disableSyncSettingsDone') {
+      await disableSyncSettingsDone(message.tabId)
       sendResponse({ success: true } as SuccessResponse)
     } else {
       // Exhaustive check: all message types should be handled above
