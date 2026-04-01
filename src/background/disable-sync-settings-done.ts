@@ -43,7 +43,7 @@ const focusOrOpenWelcomeTab = async (windowId: number): Promise<void> => {
 }
 
 /**
- * Persists welcome step-3 completion, closes the sync-help side panel, optionally removes the
+ * Persists welcome step disableHistorySync completion, closes the sync-help side panel, optionally removes the
  * Chrome sync settings tab, and focuses or opens the welcome page.
  */
 export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {

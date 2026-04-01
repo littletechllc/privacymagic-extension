@@ -137,5 +137,5 @@ handleAsync(async () => {
     updateStep('disableHistorySync', true)
   }
 }, (error) => {
-  logError(error, 'error checking profile sign-in for welcome step 3')
+  logError(error, 'error checking profile sign-in for welcome step disableHistorySync')
 })
