@@ -4,6 +4,13 @@ import { getDisableHistorySyncDone, onDisableHistorySyncDoneChanged } from '@src
 const BLANK_TAB_URL = 'about:blank'
 const SYNC_HELP_SIDE_PANEL_PATH = 'privacymagic/sidepanel-sync-help.html'
 
+const STEP_IDS = ['pin', 'vpn', 'disableHistorySync'] as const
+type StepId = (typeof STEP_IDS)[number]
+
+const getStepElement = (stepId: StepId): HTMLElement | null => {
+  return document.getElementById(`step_${stepId}`)
+}
+
 const buildWelcomeInlineIconHtml = (altText: string, iconPath: string): string =>
   `<img src="${iconPath}" alt="${altText}" style="width:20px; height:20px; display:inline-block; vertical-align:middle; position:relative; top:-1px; margin:0 3px;" />`
 
@@ -36,8 +43,8 @@ const applyCompletedLabels = (): void => {
   })
 }
 
-const updateStep = (stepId: number, completed: boolean) => {
-  const el = document.getElementById(`step${stepId}`)
+const updateStep = (stepId: StepId, completed: boolean) => {
+  const el = getStepElement(stepId)
   if (el == null) {
     return
   }
@@ -51,24 +58,23 @@ const updateStep = (stepId: number, completed: boolean) => {
 chrome.action.onUserSettingsChanged.addListener(
   (details) => {
     console.log('User settings changed:', details);
-    updateStep(1, details.isOnToolbar ?? false)
+    updateStep('pin', details.isOnToolbar ?? false)
   }
 )
 
 chrome.action.getUserSettings().then((userSettings) => {
-  updateStep(1, userSettings.isOnToolbar ?? false)
+  updateStep('pin', userSettings.isOnToolbar ?? false)
 }).catch((error) => {
   console.error('Error getting user settings:', error)
 })
 
-document.querySelector('#step2 .btn-secondary')
-  ?.addEventListener('click', (event: Event) => {
-    event.preventDefault()
-    event.stopPropagation()
-  updateStep(2, true)
+getStepElement('vpn')?.querySelector('.btn-secondary')?.addEventListener('click', (event: Event) => {
+  event.preventDefault()
+  event.stopPropagation()
+  updateStep('vpn', true)
 })
 
-document.querySelector('#step3 .btn-primary')
+getStepElement('disableHistorySync')?.querySelector('.btn-primary')
   ?.addEventListener('click', (event: Event) => {
     event.preventDefault()
     event.stopPropagation()
@@ -84,41 +90,33 @@ document.querySelector('#step3 .btn-primary')
         enabled: true
       })
       await chrome.sidePanel.open({ tabId })
-      updateStep(3, true)
+      updateStep('disableHistorySync', true)
     }, (error) => {
       logError(error, 'error opening sync settings and side panel', event)
     })
   })
 
-document.querySelector('#step3 .btn-secondary')
+getStepElement('disableHistorySync')?.querySelector('.btn-secondary')
  ?.addEventListener('click', (event: Event) => {
   event.preventDefault()
   event.stopPropagation()
-  updateStep(3, true)
+  updateStep('disableHistorySync', true)
 })
 
-document.querySelectorAll('.step-header').forEach((stepHeader) => {
-  stepHeader.addEventListener('click', (event: Event) => {
+for (const step of STEP_IDS) {
+  getStepElement(step)?.addEventListener('click', (event: Event) => {
     event.preventDefault()
     event.stopPropagation()
-    const card = stepHeader.closest('.step-card')
-    if (card == null) {
-      return
-    }
-    const m = /^step(\d+)$/.exec(card.id)
-    if (m == null) {
-      return
-    }
-    updateStep(parseInt(m[1], 10), false)
+    updateStep(step, false)
   })
-})
+}
 
 applyStep1MessageTokens()
 applyCompletedLabels()
 
 handleAsync(async () => {
   if (await getDisableHistorySyncDone()) {
-    updateStep(3, true)
+    updateStep('disableHistorySync', true)
   }
 }, (error) => {
   logError(error, 'error reading welcome history-sync completion from storage')
@@ -128,7 +126,7 @@ onDisableHistorySyncDoneChanged((done) => {
   if (!done) {
     return
   }
-  updateStep(3, true)
+  updateStep('disableHistorySync', true)
 })
 
 handleAsync(async () => {
@@ -136,7 +134,7 @@ handleAsync(async () => {
   if (email.length === 0 && id.length === 0) {
     // User is not signed in, so we can skip the step to
     // disable history syncing.
-    updateStep(3, true)
+    updateStep('disableHistorySync', true)
   }
 }, (error) => {
   logError(error, 'error checking profile sign-in for welcome step 3')
