@@ -134,6 +134,8 @@ onDisableHistorySyncDoneChanged((done) => {
 handleAsync(async () => {
   const { email, id } = await chrome.identity.getProfileUserInfo({ accountStatus: 'ANY' })
   if (email.length === 0 && id.length === 0) {
+    // User is not signed in, so we can skip the step to
+    // disable history syncing.
     updateStep(3, true)
   }
 }, (error) => {
