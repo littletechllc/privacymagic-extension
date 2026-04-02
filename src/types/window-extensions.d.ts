@@ -103,9 +103,9 @@ declare global {
 
   class TrustedTypePolicy {
     name: string
-    createHTML: (input: string | TrustedHTML) => TrustedHTML
-    createScript: (input: string | TrustedScript) => TrustedScript
-    createScriptURL: (input: string | TrustedScriptURL) => TrustedScriptURL
+    createHTML: (input: string | TrustedHTML, ...rest: unknown[]) => TrustedHTML
+    createScript: (input: string | TrustedScript, ...rest: unknown[]) => TrustedScript
+    createScriptURL: (input: string | TrustedScriptURL, ...rest: unknown[]) => TrustedScriptURL
   }
 
   type TrustedTypePolicyOptions = {
@@ -138,7 +138,17 @@ declare global {
   interface WorkerGlobalScope {
     NetworkInformation?: typeof NetworkInformation
     trustedTypes?: TrustedTypePolicyFactory
+    TrustedTypePolicy: typeof TrustedTypePolicy
     console: Console
+    TrustedScriptURL: typeof TrustedScriptURL
+    WorkerLocation: typeof WorkerLocation
+    Request: typeof Request
+    Response: typeof Response
+    fetch: typeof fetch
+    importScripts: (...paths: Array<string | URL | TrustedScriptURL>) => void
+    XMLHttpRequest: typeof XMLHttpRequest
+    EventSource: typeof EventSource
+    WebSocket: typeof WebSocket
   }
 
   interface Navigator {

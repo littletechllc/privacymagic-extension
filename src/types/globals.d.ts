@@ -8,4 +8,6 @@ declare global {
   var __disabledSettings: ContentSettingId[]
 
   var __PRIVACY_MAGIC_INJECT__: (disabledSettings: ContentSettingId[]) => void
+
+  var __PRIVACY_MAGIC_WORKER_URL__: string
 }

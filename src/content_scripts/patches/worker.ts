@@ -16,125 +16,6 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
   const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
   const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
-  // Spoof the worker's location object to return the original URL, and modify various
-  // other objects to be relative to the original URL. This function is serialized
-  // and injected into the worker context; it receives the worker global and the absolute URL as args.
-  const spoofLocationInsideWorkerFunction = (
-    workerGlobal: Pick<GlobalScope, 'WorkerLocation' | 'Request' | 'Response' | 'fetch' | 'importScripts' | 'XMLHttpRequest' | 'EventSource' | 'WebSocket' | 'TrustedScriptURL' | 'URL'> & { [k: string]: unknown },
-    absoluteUrl: string
-  ): void => {
-    // We need to define these functions here because they are not available in the worker context.
-    type MethodOf<TThis> = {
-      [K in keyof TThis]: TThis[K] extends (...args: unknown[]) => unknown ? TThis[K] : never
-    }[keyof TThis]
-    const reflectApplySafe = Reflect.apply as <
-      TThis,
-      TMethod extends MethodOf<TThis>,
-      TMethodArgs extends Parameters<TMethod>,
-      TReturn extends ReturnType<TMethod>
-    >(
-      method: TMethod,
-      thisArg: TThis,
-      args: TMethodArgs
-    ) => TReturn
-    const URLSafe = workerGlobal.URL
-    const hrefDescriptor = Object.getOwnPropertyDescriptor(URLSafe.prototype, 'href')
-    if (hrefDescriptor?.get === undefined) {
-      throw new Error('URL.href getter not found')
-    }
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const URLhrefGetter = hrefDescriptor.get as (this: URL) => string
-    const URLhrefSafe = (url: URL): string => reflectApplySafe(URLhrefGetter, url, [])
-    const spoofWorkerLocation = (): void => {
-      const absoluteUrlObject = new URLSafe(absoluteUrl)
-      const WorkerLocation = workerGlobal.WorkerLocation
-      if (WorkerLocation == null) return
-      const descriptors = Object.getOwnPropertyDescriptors(WorkerLocation.prototype)
-      for (const [key, descriptor] of Object.entries(descriptors)) {
-        if (descriptor.get != null && key in absoluteUrlObject) {
-          descriptor.get = () => absoluteUrlObject[key as keyof URL]
-        }
-      }
-      Object.defineProperties(WorkerLocation.prototype, descriptors)
-    }
-    const spoofRequest = (): void => {
-      const Request = workerGlobal.Request
-      if (Request == null) return
-      const requestUrlDescriptor = Object.getOwnPropertyDescriptor(Request.prototype, 'url')
-      if (requestUrlDescriptor?.get === undefined) {
-        throw new Error('Request.url getter not found')
-      }
-    }
-    const spoofResponse = (): void => {
-      const Response = workerGlobal.Response
-      if (Response == null) return
-      const responseUrlDescriptor = Object.getOwnPropertyDescriptor(Response.prototype, 'url')
-      if (responseUrlDescriptor?.get === undefined) {
-        throw new Error('Response.url getter not found')
-      }
-    }
-    const spoofFetch = (): void => {
-      const origFetch = workerGlobal.fetch
-      if (origFetch == null) return
-      workerGlobal.fetch = async (...args: Parameters<typeof origFetch>) => {
-        const firstArg = args[0]
-        args[0] = firstArg instanceof workerGlobal.Request
-          ? firstArg
-          : new URLSafe(firstArg.toString(), absoluteUrl)
-        return await origFetch(...args)
-      }
-      Object.defineProperties(workerGlobal.fetch, {
-        name: { value: 'fetch' },
-        toString: { value: () => 'function fetch() { [native code] }' }
-      })
-    }
-    const spoofImportScripts = (): void => {
-      const origImportScripts = workerGlobal.importScripts
-      if (origImportScripts == null) return
-      workerGlobal.importScripts = (...paths: Array<string | URL | TrustedScriptURL>) => {
-        const resolvedPaths: Array<string | URL> = []
-        for (const path of paths) {
-          if (workerGlobal.TrustedScriptURL != null && path instanceof workerGlobal.TrustedScriptURL) {
-            resolvedPaths.push(path.toString())
-          } else {
-            resolvedPaths.push(URLhrefSafe(new URLSafe(path.toString(), absoluteUrl)))
-          }
-        }
-        return origImportScripts(...resolvedPaths)
-      }
-      Object.defineProperties(workerGlobal.importScripts, {
-        name: { value: 'importScripts' },
-        toString: { value: () => 'function importScripts() { [native code] }' }
-      })
-    }
-    const spoofNetworkObjects = (): void => {
-      const constructorNames = ['XMLHttpRequest', 'EventSource', 'WebSocket'] as const
-      for (const objectName of constructorNames) {
-        const OriginalConstructor = workerGlobal[objectName]
-        if (OriginalConstructor == null) continue
-        Object.defineProperty(workerGlobal, objectName, {
-          value: new Proxy(OriginalConstructor, {
-            construct (
-              Target,
-              [url, options]: [string | URL, EventSourceInit & (string | string[] | undefined)]
-            ) {
-              const resolvedUrl = URLhrefSafe(new URLSafe(url, absoluteUrl))
-              return new Target(resolvedUrl, options)
-            }
-          }),
-          writable: true,
-          configurable: true
-        })
-      }
-    }
-    spoofWorkerLocation()
-    spoofRequest()
-    spoofResponse()
-    spoofFetch()
-    spoofImportScripts()
-    spoofNetworkObjects()
-  }
-
   const blobScriptCache = new WeakMap<Blob, string>()
   const blobURLScriptCache = new Map<string, string>()
   const BlobSafe = globalObject.Blob
@@ -297,8 +178,8 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           : 'importScripts'
         // Semicolon separated code to avoid issues with line continuations.
         const bundleWrapper = (script: string) => `
+          ;__PRIVACY_MAGIC_WORKER_URL__ = ${jsonStringifySafe(absoluteUrl)}
           ;${hardeningCode}
-          ;(${spoofLocationInsideWorkerFunction.toString()})(self, ${jsonStringifySafe(absoluteUrl)});\n
           ;${script}\n
           ;${completionCallbackCode}\n
           `
