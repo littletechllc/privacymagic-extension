@@ -17,7 +17,7 @@ export const getSetting = async (domain: string, settingId: SettingId): Promise<
     [SETTINGS_KEY_PREFIX, domain, settingId]
   )
   if (domainSpecificSetting === undefined) {
-    const disabledByRemoteConfig = await getSettingDisabledByRemoteConfig(domain, settingId)
+    const disabledByRemoteConfig = getSettingDisabledByRemoteConfig(domain, settingId)
     if (disabledByRemoteConfig) {
       return false
     }
@@ -27,12 +27,10 @@ export const getSetting = async (domain: string, settingId: SettingId): Promise<
   }
   // If a setting has been set for the domain-specific settings,
   // then we return it.
-  console.log('getSetting', domain, settingId, domainSpecificSetting)
   return domainSpecificSetting
 }
 
 export const setSetting = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
-  console.log('setSetting', domain, settingId, value)
   // If the domain is the global domain, then we set the setting value.
   // We remove the setting if the value is being set to true, since
   // the default value is true.
@@ -45,7 +43,7 @@ export const setSetting = async (domain: string, settingId: SettingId, value: bo
     return
   }
   // If the setting status is the same as the remote status, then we remove the domain-specific setting.
-  const disabledByRemoteConfig = await getSettingDisabledByRemoteConfig(domain, settingId)
+  const disabledByRemoteConfig = getSettingDisabledByRemoteConfig(domain, settingId)
   if ((value === false && disabledByRemoteConfig) || (value === true && !disabledByRemoteConfig)) {
     await storage.local.remove([SETTINGS_KEY_PREFIX, domain, settingId])
     return
@@ -64,7 +62,7 @@ export const getAllSettings = async (): Promise<Array<[string, SettingId, boolea
       alreadySeenSettings.add(`${domain}:${settingId}`)
     }
   }
-  const allSettingsDisabledByRemoteConfig = await getAllSettingsDisabledByRemoteConfig()
+  const allSettingsDisabledByRemoteConfig = getAllSettingsDisabledByRemoteConfig()
   for (const [domain, settingIds] of Object.entries(allSettingsDisabledByRemoteConfig)) {
     for (const settingId of settingIds) {
         if (!alreadySeenSettings.has(`${domain}:${settingId}`)) {
@@ -73,7 +71,6 @@ export const getAllSettings = async (): Promise<Array<[string, SettingId, boolea
         }
     }
   }
-  console.log('getAllSettings', allSettings)
   return allSettings
 }
 

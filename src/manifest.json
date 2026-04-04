@@ -27,6 +27,7 @@
   },
   "permissions": [
     "action",
+    "alarms",
     "browsingData",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",

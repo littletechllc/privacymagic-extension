@@ -6,6 +6,7 @@ import { type Message, type ResponseSendFunction, type SuccessResponse, type Dom
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRules, setupRules } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
+import { startWatchingRemoteConfig } from '@src/common/remote'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateDynamicRules({
@@ -98,6 +99,7 @@ const initializeListeners = (): void => {
   try {
     injectCssForCosmeticFilters()
     showBlockedRequests()
+    startWatchingRemoteConfig()
   } catch (error) {
     logError(error, 'error initializing listeners')
   }
