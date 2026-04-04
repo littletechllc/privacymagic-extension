@@ -11,17 +11,21 @@ type RemoteConfig = {
 
 let latestRemoteConfig: RemoteConfig | undefined
 
-const initializeRemoteConfig = async (): Promise<void> => {
-  if (latestRemoteConfig == null) {
-    const { remoteConfig } = await chrome.storage.local.get({ remoteConfig: undefined })
-    latestRemoteConfig = remoteConfig as RemoteConfig
-  }
-}
 
 const fetchAndStoreRemoteConfig = async (): Promise<void> => {
   const response = await fetch(REMOTE_CONFIG_URL, { cache: 'no-store' })
   latestRemoteConfig = await response.json() as RemoteConfig
   await chrome.storage.local.set({ remoteConfig: latestRemoteConfig })
+}
+
+const initializeRemoteConfig = async (): Promise<void> => {
+  if (latestRemoteConfig == null) {
+    const { remoteConfig } = await chrome.storage.local.get({ remoteConfig: undefined })
+    latestRemoteConfig = remoteConfig as RemoteConfig
+    if (latestRemoteConfig == null) {
+      void fetchAndStoreRemoteConfig()
+    }
+  }
 }
 
 const ensureAlarmExists = async (): Promise<void> => {
@@ -40,7 +44,7 @@ const onAlarm = (alarm: chrome.alarms.Alarm): void => {
 export const startWatchingRemoteConfig = (): void => {
   chrome.alarms.onAlarm.addListener(onAlarm)
   void ensureAlarmExists()
-  void initializeRemoteConfig().then(fetchAndStoreRemoteConfig)
+  void initializeRemoteConfig()
 }
 
 export const getSettingDisabledByRemoteConfig = (domain: string, settingId: SettingId): boolean => {
