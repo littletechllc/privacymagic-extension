@@ -4,7 +4,11 @@ import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const setupAdvancedSettingsLink = (): void => {
-  document.getElementById('advancedSettingsLinkContainer')?.addEventListener('click', (event) => {
+  const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
+  safeLocalPage.style.display = 'none'
+  const advancedSettingsLinkContainer = document.getElementById('advancedSettingsLinkContainer') as HTMLElement
+  advancedSettingsLinkContainer.style.display = 'flex'
+  advancedSettingsLinkContainer.addEventListener('click', (event) => {
     handleAsync(async () => {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs[0]
@@ -29,7 +33,6 @@ const setupAdvancedSettingsLink = (): void => {
 }
 
 document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
-  setupAdvancedSettingsLink()
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
   if (tab == null) {
@@ -40,10 +43,14 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
     throw new Error('No active tab found')
   }
   const domain = await getDomainForTabMessageRemote(tabId)
+  if (domain == null) {
+    return
+  }
   await updateSiteInfo(domain)
   const masterSwitchToggle = await createMasterSwitch(domain)
   const toggleContainer = document.querySelector('.toggle-container')
   toggleContainer?.appendChild(masterSwitchToggle)
+  setupAdvancedSettingsLink()
 }, (error: unknown) => {
   logError(error, 'error responding to DOMContentLoaded on current tab', event)
 }))

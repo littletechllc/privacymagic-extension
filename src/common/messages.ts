@@ -47,11 +47,11 @@ export const getRemoteStyleSheetContentRemote = async (
   return response.content
 }
 
-export const getDomainForTabMessageRemote = async (tabId: number): Promise<string> => {
+export const getDomainForTabMessageRemote = async (tabId: number): Promise<string | undefined> => {
   const message: Message = { type: 'getDomainForTab', tabId }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as DomainResponse | ErrorResponse
   if (!response.success) {
-    throw new Error(response.error)
+    return undefined
   }
   return response.domain
 }
