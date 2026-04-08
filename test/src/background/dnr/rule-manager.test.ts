@@ -1,4 +1,4 @@
-import '@test/mocks/globals'
+import { REMOTE_CONFIG_STORAGE_MOCK } from '@test/mocks/globals'
 import { getDynamicRulesMock, storageLocalGetMock, updateDynamicRulesMock } from '@test/mocks/web-extension'
 import { updateRules, setupRules } from '@src/background/dnr/rule-manager'
 import { SETTINGS_KEY_PREFIX } from '@src/common/settings'
@@ -113,6 +113,7 @@ describe('setupRules', () => {
     // - gpc: Both ContentSettingId and NetworkSettingId
     // - queryParameters: NetworkSettingId only
     const storageData: Record<string, unknown> = {
+      ...REMOTE_CONFIG_STORAGE_MOCK,
       [`${SETTINGS_KEY_PREFIX}:${domain}:battery`]: false, // ContentSettingId only - protection disabled
       [`${SETTINGS_KEY_PREFIX}:${domain}:gpc`]: false, // Both ContentSettingId and NetworkSettingId - protection disabled
       [`${SETTINGS_KEY_PREFIX}:${domain}:queryParameters`]: false // NetworkSettingId only - protection disabled
@@ -146,6 +147,7 @@ describe('setupRules', () => {
   it('should call updateDynamicRules once for multiple stored settings', async () => {
     // Mock storage to return settings in the format: key is "_SETTINGS_:domain:settingId", value is boolean
     const storageData: Record<string, unknown> = {
+      ...REMOTE_CONFIG_STORAGE_MOCK,
       [`${SETTINGS_KEY_PREFIX}:example.com:gpc`]: true, // protection enabled
       [`${SETTINGS_KEY_PREFIX}:test.com:css`]: false, // protection disabled
       [`${SETTINGS_KEY_PREFIX}:another.com:masterSwitch`]: true // protection enabled
@@ -176,8 +178,8 @@ describe('setupRules', () => {
   })
 
   it('should call updateDynamicRules once even when getAllSettings returns empty', async () => {
-    // Empty storage means getAllSettings returns empty array
-    storageLocalGetMock.mockResolvedValue({})
+    // No domain settings; remote exceptions still come from storage (same as after fetch in production).
+    storageLocalGetMock.mockResolvedValue({ ...REMOTE_CONFIG_STORAGE_MOCK })
     getDynamicRulesMock.mockResolvedValue([])
 
     await setupRules()

@@ -2,9 +2,15 @@
 
 // Mock fetch for tests that use remote config (e.g. rule-manager calling getAllSettings).
 // Returns the same shape as remote/remote.json so getAllSettingsDisabledByRemoteConfig works.
-const REMOTE_CONFIG_MOCK = {
+export const REMOTE_CONFIG_MOCK = {
   version: '1',
   setting_exceptions: { 'google.com': ['css', 'iframe'] }
+}
+
+/** What chrome.storage.local holds after a successful fetch — getSettingDisabledByRemoteConfig reads from storage, not fetch. */
+export const REMOTE_CONFIG_STORAGE_MOCK = {
+  remoteConfig: REMOTE_CONFIG_MOCK,
+  remoteConfigTimestamp: 17_000_000_000_000
 }
 
 if (global.fetch === undefined) {
