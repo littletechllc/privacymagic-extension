@@ -3,17 +3,12 @@ import { handleAsync, logError } from '@src/common/util'
 import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { updateSiteInfo } from '@src/common/site-info'
 
-const updateUI = async (tabId: number): Promise<string> => {
-  const domain = await getDomainForTabMessageRemote(tabId)
-  if (domain == null) {
-    throw new Error('domain not found')
-  }
+const updateUI = async (domain: string): Promise<void> => {
   await setupSettingsUI(domain)
   await updateSiteInfo(domain)
-  return domain
 }
 
-const watchForNavigations = (tabId: number, originalDomain: string): void => {
+const watchForNavigations = (tabId: number, originalDomain: string | undefined): void => {
   chrome.webNavigation.onCommitted.addListener((details) => handleAsync(
     async () => {
       if (details.tabId !== tabId) {
@@ -59,9 +54,15 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
   if (isNaN(tabId)) {
     throw new Error('tabId is not a number')
   }
-  const originalDomain = await updateUI(tabId)
-  watchForNavigations(tabId, originalDomain)
+  const domain = await getDomainForTabMessageRemote(tabId)
+  if (domain != null) {
+    await updateUI(domain)
+  }
+  watchForNavigations(tabId, domain)
   watchForTabChanges(tabId)
+  if (domain == null) {
+    return
+  }
   setupGlobalOptionsLink()
 }, (error: unknown) => {
   logError(error, 'error setting up sidepanel', event)
