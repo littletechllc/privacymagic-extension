@@ -227,12 +227,12 @@ const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
   const type = line.startsWith('@@') ? 'allow' : 'block'
   const action: RuleAction = { type }
   const cleanLine = line.startsWith('@@') ? line.substring(2) : line
-  const isRegexFilter = line.startsWith('/') && line.endsWith('/')
+  const isRegexFilter = cleanLine.startsWith('/') && cleanLine.endsWith('/')
   if (isRegexFilter) {
     return { priority, action, condition: { regexFilter: cleanLine } }
   }
-  if (line.includes('$')) {
-    const [rawUrlFilter, typeOptionsString] = splitAtFirst(line, '$')
+  if (cleanLine.includes('$')) {
+    const [rawUrlFilter, typeOptionsString] = splitAtFirst(cleanLine, '$')
     const { condition, options } = parseTypeOptionsString(typeOptionsString)
     const urlFilter = rawUrlFilter.trim()
     if (urlFilter.length > 0) {
@@ -264,7 +264,7 @@ const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
     const result: Omit<Rule, 'id'> = { priority, action, condition }
     return result
   }
-  return { priority, action, condition: { urlFilter: line } }
+  return { priority, action, condition: { urlFilter: cleanLine } }
 }
 
 interface ContentFilterBody {
