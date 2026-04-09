@@ -67,6 +67,14 @@ const RESOURCE_TYPE_EQUIVALENCES: Record<string, ResourceTypeValue> = {
   xhr: 'xmlhttprequest'
 }
 
+const splitAtFirst = (s: string, separator: string): [string, string] => {
+  const index = s.indexOf(separator)
+  if (index === -1) {
+    return [s, '']
+  }
+  return [s.substring(0, index), s.substring(index + separator.length)]
+}
+
 // Fetch the lines from the given URL
 const getLines = async (url: string): Promise<string[]> => {
   const response = await fetch(url)
@@ -224,9 +232,12 @@ const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
     return { priority, action, condition: { regexFilter: cleanLine } }
   }
   if (line.includes('$')) {
-    const [rawUrlFilter, typeOptionsString] = line.split('$')
-    const urlFilter = rawUrlFilter.trim()
+    const [rawUrlFilter, typeOptionsString] = splitAtFirst(line, '$')
     const { condition, options } = parseTypeOptionsString(typeOptionsString)
+    const urlFilter = rawUrlFilter.trim()
+    if (urlFilter.length > 0) {
+      condition.urlFilter = urlFilter
+    }
     if (options?.badFilter !== undefined) {
       return undefined
     }
@@ -251,9 +262,6 @@ const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
       }
     }
     const result: Omit<Rule, 'id'> = { priority, action, condition }
-    if (urlFilter.length > 0) {
-      result.condition.urlFilter = urlFilter
-    }
     return result
   }
   return { priority, action, condition: { urlFilter: line } }
