@@ -32,6 +32,7 @@ const fetchAndStoreRemoteConfig = async (): Promise<void> => {
       typeof remoteConfig.setting_exceptions !== 'object') {
     throw new Error('Invalid remote config')
   }
+  console.log('remote config fetched:', remoteConfig)
   await storeRemoteConfig(remoteConfig)
 }
 
