@@ -19,6 +19,14 @@
     "message": "Hello, sabi ng Privacy Magic!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Ligtas na lokal na pahina",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Masulong",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Paganahin ang Huwag Sundan",
     "description": "Label for the Do Not Track pref"

@@ -19,6 +19,14 @@
     "message": "നമസ്കാരം, Privacy Magic പറയുന്നു!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "സുരക്ഷിതമായ പ്രാദേശിക പേജ്",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "വിപുലമായ",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "ട്രാക്ക് ചെയ്യരുത് പ്രവർത്തനക്ഷമമാക്കുക",
     "description": "Label for the Do Not Track pref"

@@ -19,6 +19,14 @@
     "message": "నమస్కారం, Privacy Magic చెప్పుతుంది!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "సురక్షిత స్థానిక పేజీ",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "ఉన్నత",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "ట్రాక్ చేయవద్దు ప్రారంభించు",
     "description": "Label for the Do Not Track pref"

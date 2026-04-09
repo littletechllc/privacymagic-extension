@@ -19,6 +19,14 @@
     "message": "Merhaba, Privacy Magic diyor!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Güvenli yerel sayfa",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Gelişmiş",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Takip Etmeyi Etkinleştir",
     "description": "Label for the Do Not Track pref"

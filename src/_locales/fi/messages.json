@@ -19,6 +19,14 @@
     "message": "Hei, Privacy Magic sanoo!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Turvallinen paikallinen sivu",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Edistynyt",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Ota Älä seuraa käyttöön",
     "description": "Label for the Do Not Track pref"

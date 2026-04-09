@@ -19,6 +19,14 @@
     "message": "નમસ્તે, Privacy Magic કહે છે!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "સુરક્ષિત સ્થાનિક પૃષ્ઠ",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "અદ્યતન",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "ટ્રેક ન કરો સક્ષમ કરો",
     "description": "Label for the Do Not Track pref"

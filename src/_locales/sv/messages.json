@@ -19,6 +19,14 @@
     "message": "Hej, säger Privacy Magic!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Säker lokal sida",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Avancerat",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Aktivera Spåra inte",
     "description": "Label for the Do Not Track pref"

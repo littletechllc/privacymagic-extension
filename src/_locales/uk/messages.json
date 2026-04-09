@@ -19,6 +19,14 @@
     "message": "Привіт, каже Privacy Magic!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Безпечна локальна сторінка",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Додатково",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Увімкнути «Не відстежувати»",
     "description": "Label for the Do Not Track pref"

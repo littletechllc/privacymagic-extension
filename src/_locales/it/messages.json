@@ -19,6 +19,14 @@
     "message": "Ciao, dice Privacy Magic!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Pagina locale sicura",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Avanzate",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Attiva Non tracciare",
     "description": "Label for the Do Not Track pref"

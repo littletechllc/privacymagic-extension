@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../common/settings.css">
     <title>Privacy Magic</title>
+    <script src="./i18n.js" type="module"></script>
 </head>
 
 <body>
@@ -15,11 +16,11 @@
         </div>
         <div id="settings" class="toggle-box toggle-container"></div>
     </div>
-    <div id="safeLocalPage">(safe local page)</div> 
+    <div id="safeLocalPage" data-i18n="safeLocalPage"></div>
     <div class="link-container" id="advancedSettingsLinkContainer" style="display: none;">
-        <img src="../assets/images/toggles.svg" alt="Advanced" class="togglesIcon" />
-        <a href="#" id="advancedSettingsLink">Advanced</a>
-        <img src="../assets/images/right_panel_open.svg" alt="Advanced" id="advancedSettingsIcon" />
+        <img src="../assets/images/toggles.svg" alt="" class="togglesIcon" data-i18n-alt="advancedSettingsLink" />
+        <a href="#" id="advancedSettingsLink" data-i18n="advancedSettingsLink"></a>
+        <img src="../assets/images/right_panel_open.svg" alt="" id="advancedSettingsIcon" data-i18n-alt="advancedSettingsLink" />
     </div>
 
     <script defer src="./popup.js" type="module"></script>

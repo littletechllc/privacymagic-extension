@@ -19,6 +19,14 @@
     "message": "Xin chào, Privacy Magic nói!",
     "description": "Greeting message in the popup"
   },
+  "safeLocalPage": {
+    "message": "Trang cục bộ an toàn",
+    "description": "Shown in the toolbar popup when the active tab is a local or restricted URL where per-site protections do not apply"
+  },
+  "advancedSettingsLink": {
+    "message": "Nâng cao",
+    "description": "Link in the toolbar popup to open the side panel with full site settings"
+  },
   "doNotTrackEnabled": {
     "message": "Bật Không theo dõi",
     "description": "Label for the Do Not Track pref"
