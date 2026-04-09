@@ -78,5 +78,9 @@ export const applyPatchesToGlobalObject = (globalObject: GlobalScope): void => {
       console.error('error running patch', patcherId, error)
     }
   }
-  sanitizeGetHighEntropyValues(globalObject, disabledPatches as Exclude<ContentSettingId, 'masterSwitch'>[])
+  try {
+    sanitizeGetHighEntropyValues(globalObject, disabledPatches as Exclude<ContentSettingId, 'masterSwitch'>[])
+  } catch (error) {
+    console.error('error running sanitizeGetHighEntropyValues', error)
+  }
 }
