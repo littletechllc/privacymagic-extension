@@ -1,3 +1,5 @@
+Privacy Magic is in early access -- we would love your feedback! contact@littletechllc.com
+
 The Web is a wonderful thing: it gives you access to the world's information. It's an essential part of modern life. Unfortunately, the Web is also a vehicle for mass surveillance. Everything you do online is being collected, stored, and analyzed by corporations and governments.
 
 Privacy Magic provides thorough, layered protections to shield you from surveillance.
@@ -47,4 +49,5 @@ To defend your privacy, Privacy Magic:
   · Ad Measurement API
   · Protected Audience API
   · Topics API
+- Helps you disable history syncing
 
