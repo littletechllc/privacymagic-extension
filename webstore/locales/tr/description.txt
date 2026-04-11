@@ -1,3 +1,5 @@
+Privacy Magic erken erişimdedir — geri bildiriminizi bekliyoruz! contact@littletechllc.com
+
 Web harika bir şeydir: size dünyanın bilgisine erişim sağlar. Modern yaşamın vazgeçilmez bir parçasıdır. Ne yazık ki web aynı zamanda kitlesel gözetimin aracıdır. Çevrimiçi yaptığınız her şey şirketler ve hükümetler tarafından toplanıyor, depolanıyor ve analiz ediliyor.
 
 Privacy Magic, sizi gözetimden korumak için kapsamlı, katmanlı koruma sağlar.
@@ -47,4 +49,4 @@ Gizliliğinizi korumak için Privacy Magic:
   · Protected Audience API
   · Reklam ölçümü
   · Topics API
-
+- Geçmiş senkronizasyonunu kapatmanıza yardımcı olur

@@ -1,3 +1,5 @@
+Privacy Magic je v zgodnjem dostopu — veseli bomo vaših povratnih informacij! contact@littletechllc.com
+
 Splet je čudovita stvar: omogoča vam dostop do informacij sveta. Bistveni del je modernega življenja. Žal je splet tudi orodje za množično nadzorstvo. Vse, kar počnete na spletu, zbere, shrani in analizirajo korporacije in vlade.
 
 Privacy Magic zagotavlja temeljito, večplastno zaščito pred nadzorstvom.
@@ -47,4 +49,4 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Merjenje oglasov
   · Protected Audience API
   · Topics API
-
+- Pomaga izklopiti sinhronizacijo zgodovine

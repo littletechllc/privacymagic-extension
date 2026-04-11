@@ -1,3 +1,5 @@
+Privacy Magic on varajases juurdepääsus — ootame hea meelega tagasisidet! contact@littletechllc.com
+
 Veeb on imeline: see annab teile juurdepääsu maailma teadmistele. See on oluline osa kaasajast elust. Kahjuks on veeb ka massilise järelevalve vahend. Kõik, mida te võrgus teete, kogub, salvestab ja analüüsib ettevõtteid ja valitsusi.
 
 Privacy Magic pakub põhjalikke, kihiliselt kaitseid järelevalve eest.
@@ -47,4 +49,4 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Protected Audience API
   · Reklaamide mõõtmine
   · Topics API
-
+- Aitab ajaloo sünkroonimise välja lülitada

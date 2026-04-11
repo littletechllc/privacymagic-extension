@@ -1,3 +1,5 @@
+Privacy Magic ir agrīnā piekļuvē — gaidām jūsu atsauksmes! contact@littletechllc.com
+
 Tīmeklis ir brīnišķīga lieta: tas sniedz jums piekļuvi pasaules informācijai. Tas ir būtiska mūsdienu dzīves sastāvdaļa. Diemžēl tīmeklis ir arī masu uzraudzības līdzeklis. Viss, ko darāt tiešsaistē, tiek vākts, glabāts un analizēts korporācijām un valdībām.
 
 Privacy Magic nodrošina rūpīgu, daudzslāņu aizsardzību pret uzraudzību.
@@ -47,4 +49,4 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Protected Audience API
   · Reklāmu mērīšana
   · Topics API
-
+- Palīdz izslēgt vēstures sinhronizāciju

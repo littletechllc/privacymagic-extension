@@ -1,3 +1,5 @@
+Privacy Magic yra ankstyvoje prieigoje — lauksime jūsų atsiliepimų! contact@littletechllc.com
+
 Žiniatinklis yra nuostabus: jis suteikia jums prieigą prie pasaulio informacijos. Tai esminė šiuolaikinio gyvenimo dalis. Deja, žiniatinklis taip pat yra masinės priežiūros priemonė. Viskas, ką darote internete, renka, saugo ir analizuoja korporacijos ir vyriausybės.
 
 Privacy Magic suteikia nuodugnų, sluoksniuotą apsaugą nuo priežiūros.
@@ -47,4 +49,4 @@ Jūsų privatumui ginti Privacy Magic:
   · Protected Audience API
   · Reklamų matavimas
   · Topics API
-
+- Padeda išjungti istorijos sinchronizavimą

@@ -1,3 +1,5 @@
+Privacy Magic er i tidlig adgang — vi vil meget gerne høre din feedback! contact@littletechllc.com
+
 Internettet er en fantastisk ting: det giver dig adgang til verdens information. Det er en væsentlig del af det moderne liv. Desværre er internettet også et redskab til masseovervågning. Alt hvad du gør online, bliver indsamlet, gemt og analyseret af virksomheder og regeringer.
 
 Privacy Magic giver grundig, lagdelt beskyttelse mod overvågning.
@@ -47,4 +49,4 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Annoncemåling
   · Protected Audience API
   · Topics API
-
+- Hjælper dig med at deaktivere synkronisering af historik

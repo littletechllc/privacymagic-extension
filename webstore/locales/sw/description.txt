@@ -1,3 +1,5 @@
+Privacy Magic iko katika ufikiaji wa mapema — tungependa maoni yako! contact@littletechllc.com
+
 Wavuti ni jambo la ajabu: inakupa ufikiaji wa taarifa za ulimwengu. Ni sehemu muhimu ya maisha ya kisasa. Kwa bahati mbaya, wavuti pia ni chombo cha ufuatiliaji wa wingi. Kila unachofanya mtandaoni kinakusanywa, kuhifadhiwa na kuchambuliwa na mashirika na serikali.
 
 Privacy Magic inatoa ulinzi kamili na wa tabaka dhidi ya ufuatiliaji.
@@ -47,4 +49,4 @@ Ili kulinda faragha yako, Privacy Magic:
   · Kupima Matangazo
   · Protected Audience API
   · Topics API
-
+- Inakusaidia kuzima usawazishaji wa historia

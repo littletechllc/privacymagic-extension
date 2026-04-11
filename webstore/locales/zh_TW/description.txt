@@ -1,3 +1,5 @@
+Privacy Magic 目前為搶先體驗階段——非常期待您的意見回饋！contact@littletechllc.com
+
 網路為我們帶來了便利：它讓您能夠取得世界各地的資訊，已成為現代生活不可或缺的一部分。遺憾的是，網路也是大規模監控的管道。您在網上的一舉一動都在被企業與政府收集、儲存與分析。
 
 Privacy Magic 提供全面、多層次的保護，助您抵禦監控。
@@ -47,4 +49,4 @@ Privacy Magic 提供全面、多層次的保護，助您抵禦監控。
   · 廣告衡量
   · Protected Audience API
   · Topics API
-
+- 協助您停用瀏覽記錄同步

@@ -1,3 +1,5 @@
+Privacy Magic este în acces timpuriu — așteptăm feedback-ul dumneavoastră! contact@littletechllc.com
+
 Web-ul este minunat: vă oferă acces la informațiile lumii. Este o parte esențială a vieții moderne. Din păcate, web-ul este și un vehicul pentru supraveghere în masă. Tot ce faceți online este colectat, stocat și analizat de corporații și guverne.
 
 Privacy Magic oferă protecții temeinice, pe straturi, împotriva supravegherii.
@@ -47,4 +49,4 @@ Pentru a vă apăra confidențialitatea, Privacy Magic:
   · Măsurarea reclamelor
   · Protected Audience API
   · Topics API
-
+- Vă ajută să dezactivați sincronizarea istoricului

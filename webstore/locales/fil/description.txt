@@ -1,3 +1,5 @@
+Ang Privacy Magic ay nasa maagang access — gusto naming marinig ang iyong feedback! contact@littletechllc.com
+
 Ang web ay kahanga-hanga: binibigyan ka nito ng access sa impormasyon ng mundo. Mahalagang bahagi ito ng modernong buhay. Sa kasamaang-palad, ang web ay daluyan din ng mass surveillance. Lahat ng ginagawa mo online ay kinokolekta, iniimbak at sinusuri ng mga korporasyon at gobyerno.
 
 Nagbibigay ang Privacy Magic ng masinsinan, patong-patong na proteksyon laban sa surveillance.
@@ -47,4 +49,4 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
   · Ad Measurement API
   · Protected Audience API
   · Topics API
-
+- Tumutulong na patayin ang history syncing

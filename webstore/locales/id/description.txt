@@ -1,3 +1,5 @@
+Privacy Magic dalam akses awal — kami sangat ingin mendengar masukan Anda! contact@littletechllc.com
+
 Web adalah hal yang luar biasa: memberi Anda akses ke informasi dunia. Ini bagian penting dari kehidupan modern. Sayangnya, web juga menjadi sarana pengawasan massal. Semua yang Anda lakukan daring dikumpulkan, disimpan, dan dianalisis oleh perusahaan dan pemerintah.
 
 Privacy Magic menyediakan perlindungan menyeluruh dan berlapis dari pengawasan.
@@ -47,4 +49,4 @@ Untuk membela privasi Anda, Privacy Magic:
   · Pengukuran iklan
   · Protected Audience API
   · Topics API
-
+- Membantu Anda menonaktifkan sinkronisasi riwayat

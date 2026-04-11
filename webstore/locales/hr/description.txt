@@ -1,3 +1,5 @@
+Privacy Magic je u ranom pristupu — rado čujemo vaše povratne informacije! contact@littletechllc.com
+
 Web je divan: daje vam pristup informacijama svijeta. Bitni je dio modernog života. Nažalost, web je i sredstvo masovnog nadzora. Sve što radite online prikupljaju, pohranjuju i analiziraju korporacije i vlade.
 
 Privacy Magic pruža temeljitu, slojevitu zaštitu od nadzora.
@@ -47,4 +49,4 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Mjerenje oglasa
   · Protected Audience API
   · Topics API
-
+- Pomaže isključiti sinkronizaciju povijesti

@@ -1,3 +1,5 @@
+Privacy Magic is in vroege toegang — we horen graag je feedback! contact@littletechllc.com
+
 Het web is iets wonderlijks: het geeft u toegang tot de informatie van de wereld. Het is een essentieel onderdeel van het moderne leven. Helaas is het web ook een middel voor massasurveillance. Alles wat u online doet, wordt verzameld, opgeslagen en geanalyseerd door bedrijven en overheden.
 
 Privacy Magic biedt grondige, gelaagde bescherming om u te beschermen tegen surveillance.
@@ -47,4 +49,4 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
   · Advertentiemeting
   · Protected Audience API
   · Topics API
-
+- Helpt je synchronisatie van geschiedenis uit te schakelen

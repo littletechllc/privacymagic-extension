@@ -1,3 +1,5 @@
+Privacy Magic je v skorom prístupe — radi dostaneme vašu spätnú väzbu! contact@littletechllc.com
+
 Web je úžasná vec: dáva vám prístup k informáciám sveta. Je neoddeliteľnou súčasťou moderného života. Bohužiaľ web je tiež nástrojom hromadného sledovania. Všetko, čo robíte online, je zbierané, ukladané a analyzované korporáciami a vládami.
 
 Privacy Magic poskytuje dôkladnú, vrstvenú ochranu pred sledovaním.
@@ -47,4 +49,4 @@ Pre obranu vášho súkromia Privacy Magic:
   · Meranie reklám
   · Protected Audience API
   · Topics API
-
+- Pomôže vypnúť synchronizáciu histórie

@@ -1,3 +1,5 @@
+Privacy Magic er i tidlig tilgang — vi vil gjerne ha tilbakemeldingen din! contact@littletechllc.com
+
 Nettet er en fantastisk ting: det gir deg tilgang til verdens informasjon. Det er en viktig del av det moderne livet. Dessverre er nettet også et verktøy for masseovervåking. Alt du gjør på nettet, blir samlet inn, lagret og analysert av selskaper og myndigheter.
 
 Privacy Magic gir grundig, lagdelt beskyttelse mot overvåking.
@@ -47,4 +49,4 @@ For å beskytte ditt personvern tilbyr Privacy Magic:
   · Annonsemåling
   · Protected Audience API
   · Topics API
-
+- Hjelper deg med å slå av synkronisering av historikk

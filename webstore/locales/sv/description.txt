@@ -1,3 +1,5 @@
+Privacy Magic är i tidig åtkomst — vi vill gärna ha din feedback! contact@littletechllc.com
+
 Webben är en fantastisk sak: den ger dig tillgång till världens information. Det är en väsentlig del av det moderna livet. Tyvärr är webben också ett verktyg för massövervakning. Allt du gör online samlas in, lagras och analyseras av företag och regeringar.
 
 Privacy Magic ger grundlig, skiktad skydd mot övervakning.
@@ -47,4 +49,4 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Annonsmätning
   · Protected Audience API
   · Topics API
-
+- Hjälper dig att stänga av synkronisering av historik

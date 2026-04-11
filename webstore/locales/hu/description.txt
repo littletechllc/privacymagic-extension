@@ -1,3 +1,5 @@
+A Privacy Magic korai hozzáférésű — szívesen fogadunk visszajelzést! contact@littletechllc.com
+
 A web csodálatos dolog: hozzáférést biztosít a világ információihoz. Lényeges része a modern életnek. Sajnos a web egyben tömeges megfigyelés eszköze is. Minden, amit online csinálsz, gyűjtésre, tárolásra és elemzésre kerül vállalatok és kormányok által.
 
 A Privacy Magic átfogó, rétegezett védelmet nyújt a megfigyelés ellen.
@@ -47,4 +49,4 @@ Az adatvédelem érdekében a Privacy Magic:
   · Hirdetésmérés
   · Protected Audience API
   · Topics API
-
+- Segít kikapcsolni az előzmények szinkronizálását

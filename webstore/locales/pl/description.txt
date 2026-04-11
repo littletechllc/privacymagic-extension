@@ -1,3 +1,5 @@
+Privacy Magic jest we wczesnym dostępie — chętnie poznamy Twoją opinię! contact@littletechllc.com
+
 Internet to wspaniała rzecz: daje dostęp do informacji z całego świata. To nieodzowna część współczesnego życia. Niestety, internet jest także narzędziem masowej inwigilacji. Wszystko, co robisz online, jest zbierane, przechowywane i analizowane przez korporacje i rządy.
 
 Privacy Magic zapewnia wszechstronną, wielowarstwową ochronę przed inwigilacją.
@@ -47,4 +49,4 @@ Aby chronić Twoją prywatność, Privacy Magic:
   · Pomiar reklam
   · Protected Audience API
   · Topics API
-
+- Pomaga wyłączyć synchronizację historii

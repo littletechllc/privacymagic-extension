@@ -1,3 +1,5 @@
+Privacy Magic está em acesso antecipado — gostaríamos muito do seu feedback! contact@littletechllc.com
+
 A Web é uma coisa maravilhosa: dá-lhe acesso à informação do mundo. É uma parte essencial da vida moderna. Infelizmente, a Web é também um veículo de vigilância em massa. Tudo o que faz online está a ser recolhido, armazenado e analisado por empresas e governos.
 
 O Privacy Magic fornece proteções completas e em camadas para o proteger da vigilância.
@@ -47,4 +49,4 @@ Para defender a sua privacidade, o Privacy Magic:
   · Medição de anúncios
   · Protected Audience API
   · Topics API
-
+- Ajuda-o a desativar a sincronização do histórico

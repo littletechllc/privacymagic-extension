@@ -1,3 +1,5 @@
+Privacy Magic on ennakkojulkaisussa — otamme mielellämme vastaan palautetta! contact@littletechllc.com
+
 Verkko on ihmeellinen asia: se antaa sinulle pääsyn maailman tietoihin. Se on olennainen osa nykypäivän elämää. Valitettavasti verkko on myös massavalvonnan väline. Kaikki mitä teet verkossa kerätään, tallennetaan ja analysoidaan yritysten ja hallitusten toimesta.
 
 Privacy Magic tarjoaa perusteellisen, kerrostetun suojan valvonnalta.
@@ -47,4 +49,4 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Mainosten mittaus
   · Protected Audience API
   · Topics API
-
+- Auttaa poistamaan historian synkronoinnin käytöstä
