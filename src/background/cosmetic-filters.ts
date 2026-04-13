@@ -1,4 +1,5 @@
-import { registrableDomainFromUrl, logError, handleAsync } from '@src/common/util'
+import { logError, handleAsync } from '@src/common/util'
+import { registrableDomainFromUrl } from '@src/common/registrable-domain'
 import { getSetting } from '@src/common/settings'
 
 const fileExists = async (path: string): Promise<boolean> => {

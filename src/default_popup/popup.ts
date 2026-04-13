@@ -1,11 +1,9 @@
 import { handleAsync, logError } from '@src/common/util'
+import { registrableDomainFromUrl } from '@src/common/registrable-domain'
 import { updateSiteInfo } from '@src/common/site-info'
-import { getDomainForTabMessageRemote } from '@src/common/messages'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const setupAdvancedSettingsLink = (): void => {
-  const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
-  safeLocalPage.style.display = 'none'
   const advancedSettingsLinkContainer = document.getElementById('advancedSettingsLinkContainer') as HTMLElement
   advancedSettingsLinkContainer.style.display = 'flex'
   advancedSettingsLinkContainer.addEventListener('click', (event) => {
@@ -42,10 +40,12 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   if (tabId == null) {
     throw new Error('No active tab found')
   }
-  const domain = await getDomainForTabMessageRemote(tabId)
+  const domain = registrableDomainFromUrl(tab.url ?? '')
   if (domain == null) {
     return
   }
+  const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
+  safeLocalPage.style.display = 'none'
   await updateSiteInfo(domain)
   const masterSwitchToggle = await createMasterSwitch(domain)
   const toggleContainer = document.querySelector('.toggle-container')
