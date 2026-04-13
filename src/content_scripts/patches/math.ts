@@ -1,5 +1,6 @@
 import mathWasmBase64 from '@math/math.wasm'
 import { GlobalScope } from '../helpers/globalObject'
+import { redefineMethods } from '../helpers/monkey-patch'
 
 const math = (globalObject: GlobalScope): void => {
   type MathFunctionName = keyof Math
@@ -17,11 +18,7 @@ const math = (globalObject: GlobalScope): void => {
   ]
 
   const redefineMathFunction = (name: MathFunctionName, value: MathFunction): void => {
-    Object.defineProperty(globalObject.Math, name, {
-      value: value,
-      writable: true,
-      configurable: true
-    })
+    redefineMethods(globalObject.Math, { [name]: value})
   }
 
   for (const name of mathFunctionNames) {
