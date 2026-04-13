@@ -1,6 +1,6 @@
 import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
-import { getDomainForTabMessageRemote } from '@src/common/messages'
+import { registrableDomainFromUrl } from '@src/common/registrable-domain'
 import { updateSiteInfo } from '@src/common/site-info'
 
 const updateUI = async (domain: string): Promise<void> => {
@@ -8,23 +8,19 @@ const updateUI = async (domain: string): Promise<void> => {
   await updateSiteInfo(domain)
 }
 
-const watchForNavigations = (tabId: number, originalDomain: string | undefined): void => {
-  chrome.webNavigation.onCommitted.addListener((details) => handleAsync(
-    async () => {
-      if (details.tabId !== tabId) {
-        return
-      }
-      if (details.frameId !== 0 && details.frameId !== undefined) {
-        return
-      }
-      const latestDomain = await getDomainForTabMessageRemote(tabId)
-      if (latestDomain !== originalDomain) {
-        void chrome.sidePanel.setOptions({ enabled: false, tabId });
-      }
-    }, (error: unknown) => {
-      logError(error, 'error watching for navigations', details)
-    })
-  )
+const watchForNavigations = (tabId: number, originalDomain: string | null): void => {
+  chrome.webNavigation.onCommitted.addListener((details) => {
+    if (details.tabId !== tabId) {
+      return
+    }
+    if (details.frameId !== 0 && details.frameId !== undefined) {
+      return
+    }
+    const latestDomain = registrableDomainFromUrl(details.url)
+    if (latestDomain !== originalDomain) {
+      void chrome.sidePanel.setOptions({ enabled: false, tabId });
+    }
+  })
 }
 
 const watchForTabChanges = (tabId: number): void => {
@@ -54,7 +50,12 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
   if (isNaN(tabId)) {
     throw new Error('tabId is not a number')
   }
-  const domain = await getDomainForTabMessageRemote(tabId)
+  const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
+  const tab = tabs[0]
+  if (tab == null) {
+    throw new Error('No active tab found')
+  }
+  const domain = registrableDomainFromUrl(tab.url ?? '')
   if (domain != null) {
     await updateUI(domain)
   }

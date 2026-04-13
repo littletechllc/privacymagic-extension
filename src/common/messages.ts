@@ -4,19 +4,16 @@ import { SettingId } from './setting-ids'
 export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
   | { type: 'getRemoteStyleSheetContent', url: string }
-  | { type: 'getDomainForTab', tabId: number }
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
 
 export type SuccessResponse = { success: true }
-export type DomainResponse = { success: true, domain: string }
 export type ContentResponse = { success: true, content: string }
 export type ErrorResponse = { success: false, error: string }
 
 // Response types for each message type
 export type MessageResponse =
   | SuccessResponse
-  | DomainResponse
   | ContentResponse
   | ErrorResponse
 
@@ -45,15 +42,6 @@ export const getRemoteStyleSheetContentRemote = async (
     throw new Error(response.error)
   }
   return response.content
-}
-
-export const getDomainForTabMessageRemote = async (tabId: number): Promise<string | undefined> => {
-  const message: Message = { type: 'getDomainForTab', tabId }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as DomainResponse | ErrorResponse
-  if (!response.success) {
-    return undefined
-  }
-  return response.domain
 }
 
 export const reloadTabRemote = async (tabId: number): Promise<void> => {

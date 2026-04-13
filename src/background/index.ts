@@ -37,20 +37,6 @@ const handleMessage = async (
       const response = await fetch(message.url, { headers: { "Content-Type": "text/css" } })
       const content = await response.text()
       sendResponse({ success: true, content } as ContentResponse)
-    } else if (message.type === 'getDomainForTab') {
-      const tabId = message.tabId
-      const tab = await chrome.tabs.get(tabId)
-      if (tab == null) {
-        sendResponse({ success: false, error: 'tab not found' } as ErrorResponse)
-        return
-      }
-      const url = tab.url ?? ''
-      const domain = registrableDomainFromUrl(url)
-      if (domain === null) {
-        sendResponse({ success: false, error: 'Failed to get domain for current tab' } as ErrorResponse)
-        return
-      }
-      sendResponse({ success: true, domain } as DomainResponse)
     } else if (message.type === 'reloadTab') {
       await chrome.tabs.reload(message.tabId)
       console.log('reloaded tab', message.tabId)
