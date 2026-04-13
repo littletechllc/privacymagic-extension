@@ -6,14 +6,14 @@ export const ALL_DOMAINS = '_ALL_DOMAINS_'
 export const SETTINGS_KEY_PREFIX = '_SETTINGS_'
 
 export const getSetting = async (domain: string, settingId: SettingId): Promise<boolean> => {
-  const globalSetting = await storage.local.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
+  const globalSetting = await storage.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
   // If a setting has been set to false for the global settings,
   // then it overrides the domain-specific setting and we return
   // false regardless of the domain-specific value.
   if (globalSetting === false) {
     return false
   }
-  const domainSpecificSetting = await storage.local.get(
+  const domainSpecificSetting = await storage.get(
     [SETTINGS_KEY_PREFIX, domain, settingId]
   )
   if (domainSpecificSetting === undefined) {
@@ -36,24 +36,24 @@ export const setSetting = async (domain: string, settingId: SettingId, value: bo
   // the default value is true.
   if (domain === ALL_DOMAINS) {
     if (value === true) {
-      await storage.local.remove([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
+      await storage.remove([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
     } else {
-      await storage.local.set([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId], false)
+      await storage.set([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId], false)
     }
     return
   }
   // If the setting status is the same as the remote status, then we remove the domain-specific setting.
   const disabledByRemoteConfig = await getSettingDisabledByRemoteConfig(domain, settingId)
   if ((value === false && disabledByRemoteConfig) || (value === true && !disabledByRemoteConfig)) {
-    await storage.local.remove([SETTINGS_KEY_PREFIX, domain, settingId])
+    await storage.remove([SETTINGS_KEY_PREFIX, domain, settingId])
     return
   }
   // Otherwise, we set the domain-specific setting value.
-  await storage.local.set([SETTINGS_KEY_PREFIX, domain, settingId], value)
+  await storage.set([SETTINGS_KEY_PREFIX, domain, settingId], value)
 }
 
 export const getAllSettings = async (): Promise<Array<[string, SettingId, boolean]>> => {
-  const storedSettings = await storage.local.getAll()
+  const storedSettings = await storage.getAll()
   const allSettings: Array<[string, SettingId, boolean]> = []
   const alreadySeenSettings : Set<string> = new Set()
   for (const [[type, domain, settingId], value] of storedSettings as Array<[KeyPath, boolean]>) {
@@ -75,10 +75,10 @@ export const getAllSettings = async (): Promise<Array<[string, SettingId, boolea
 }
 
 export const resetAllSettingsToDefaults = async (domain: string): Promise<void> => {
-  const items = await storage.local.getAll()
+  const items = await storage.getAll()
   for (const [keyPath] of items) {
     if (keyPath[0] === '_SETTINGS_' && keyPath[1] === domain) {
-      await storage.local.remove(keyPath)
+      await storage.remove(keyPath)
     }
   }
 }

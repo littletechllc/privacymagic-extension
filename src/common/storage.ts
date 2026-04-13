@@ -9,54 +9,70 @@ const keyPathToKey = (keyPath: KeyPath): string => {
 }
 
 export class StorageProxy {
-  storage: chrome.storage.StorageArea
+  storageLocal: chrome.storage.StorageArea
+  storageSession: chrome.storage.StorageArea
 
-  constructor (storageType: 'local' | 'sync' | 'session' | 'managed') {
-    this.storage = chrome.storage[storageType]
+  constructor () {
+    this.storageLocal = chrome.storage.local
+    this.storageSession = chrome.storage.session
   }
 
-  async set (keyPath: KeyPath, value: boolean): Promise<void> {
+  async startup (): Promise<void> {
+    const items = await this.storageLocal.get()
+    for (const [key, value] of Object.entries(items)) {
+      await this.storageSession.set({ [key]: value })
+    }
+  }
+
+  async set (keyPath: KeyPath, value: unknown): Promise<void> {
     const key = keyPathToKey(keyPath)
-    return (await this.storage.set({ [key]: value }))
+    void this.storageLocal.set({ [key]: value })
+    await this.storageSession.set({ [key]: value })
   }
 
   async get (keyPath: KeyPath): Promise<undefined | boolean> {
     const key = keyPathToKey(keyPath)
-    return (await this.storage.get(key))[key] as undefined | boolean
+    return (await this.storageSession.get(key))[key] as undefined | boolean
   }
 
   async remove (keyPath: KeyPath): Promise<void> {
     const key = keyPathToKey(keyPath)
-    return (await this.storage.remove(key))
+    void this.storageLocal.remove(key)
+    await this.storageSession.remove(key)
   }
 
   async clear (): Promise<void> {
-    return (await this.storage.clear())
+    void this.storageLocal.clear()
+    await this.storageSession.clear()
   }
 
   async getAll (): Promise<Array<[KeyPath, unknown]>> {
-    const values = await this.storage.get()
+    const values = await this.storageSession.get()
     return Object.entries(values).map(([key, value]) => [key.split(KEY_SEPARATOR), value])
   }
 
   listenForChanges (keyPath: KeyPath, callback: (value: boolean | undefined) => void): void {
-    this.storage.onChanged.addListener((changes) => {
+    this.storageSession.onChanged.addListener((changes) => {
       try {
         const key = keyPathToKey(keyPath)
         if (changes[key] !== undefined) {
-          callback(changes[key].newValue as boolean | undefined)
+          window.setTimeout(() => {
+            callback(changes[key].newValue as boolean | undefined)
+          }, 0)
         }
       } catch (error) {
-        logError(error, 'error responsding to storage changes', { keyPath, changes })
+        logError(error, 'error responding to storage changes', { keyPath, changes })
       }
     })
   }
 
   listenForAnyChanges (callback: (changes: Array<[KeyPath, unknown]>) => void): void {
-    this.storage.onChanged.addListener((change) => {
+    this.storageSession.onChanged.addListener((change) => {
       try {
-        callback(Object.entries(change).map(
+        window.setTimeout(() => {
+          callback(Object.entries(change).map(
           ([key, value]) => [key.split(KEY_SEPARATOR), value.newValue]))
+        }, 0)
       } catch (error) {
         logError(error, 'error responding to any storage changes', change)
       }
@@ -64,34 +80,5 @@ export class StorageProxy {
   }
 }
 
-let storageLocal: StorageProxy | null = null
-let storageSession: StorageProxy | null = null
-let storageSync: StorageProxy | null = null
-let storageManaged: StorageProxy | null = null
 
-export const storage = {
-  get local () {
-    if (storageLocal == null) {
-      storageLocal = new StorageProxy('local')
-    }
-    return storageLocal
-  },
-  get sync () {
-    if (storageSync == null) {
-      storageSync = new StorageProxy('sync')
-    }
-    return storageSync
-  },
-  get session () {
-    if (storageSession == null) {
-      storageSession = new StorageProxy('session')
-    }
-    return storageSession
-  },
-  get managed () {
-    if (storageManaged == null) {
-      storageManaged = new StorageProxy('managed')
-    }
-    return storageManaged
-  }
-}
+export const storage = new StorageProxy()

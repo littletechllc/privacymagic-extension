@@ -126,7 +126,7 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
 }
 
 export const createMasterSwitch = async (domain: string): Promise<HTMLElement> => {
-  const masterSwitchToggle = await createToggleWithBinding(storage.local, domain, 'masterSwitch')
+  const masterSwitchToggle = await createToggleWithBinding(storage, domain, 'masterSwitch')
   return masterSwitchToggle
 }
 
@@ -135,12 +135,12 @@ const createSubswitchesContainer = async (domain: string): Promise<HTMLElement> 
   subswitchesContainer.className = 'subswitches-container'
   const keyPath = [SETTINGS_KEY_PREFIX, domain, 'masterSwitch']
   const updateOpacity = async () => {
-    const masterSwitchValue = await storage.local.get(keyPath)
+    const masterSwitchValue = await storage.get(keyPath)
     subswitchesContainer.style.opacity = masterSwitchValue === false ? '0.4' : '1';
     subswitchesContainer.style.pointerEvents = masterSwitchValue === false ? 'none' : 'auto';
   }
   await updateOpacity()
-  storage.local.listenForChanges(keyPath, () => handleAsync(updateOpacity))
+  storage.listenForChanges(keyPath, () => handleAsync(updateOpacity))
   return subswitchesContainer
 }
 
@@ -154,7 +154,7 @@ export const setupSettingsUI = async (domain: string): Promise<void> => {
   const subswitchesContainer = await createSubswitchesContainer(domain)
   settingsContainer.appendChild(subswitchesContainer)
   for (const [categoryId, settingIds] of objectEntries(PRIVACY_SETTINGS_CONFIG)) {
-    const toggleCategory = await createToggleCategory(storage.local, domain, settingIds, categoryId)
+    const toggleCategory = await createToggleCategory(storage, domain, settingIds, categoryId)
     subswitchesContainer.appendChild(toggleCategory)
   }
 }

@@ -7,6 +7,7 @@ import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRules, setupRules } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { addRemoteConfigListener, startWatchingRemoteConfig } from '@src/common/remote'
+import { storage } from '@src/common/storage'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateDynamicRules({
@@ -105,6 +106,7 @@ const showWelcomePage = async (): Promise<void> => {
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
+  void storage.startup()
   handleAsync(async () => {
     console.log('onInstalled details:', details)
     // Reset prefs to defaults on install/update
@@ -123,6 +125,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 chrome.runtime.onStartup.addListener(() => {
   console.log('onStartup')
+  void storage.startup()
 })
 
 initializeListeners()
