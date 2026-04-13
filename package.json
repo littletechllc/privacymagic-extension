@@ -8,6 +8,7 @@
     "format": "eslint . --fix --format eslint-formatter-unix && tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "sync:chrome-locale-strings": "npx tsx tools/sync-chrome-locale-string.ts",
+    "webstore:update-listing-descriptions": "npx tsx webstore/update-listing-descriptions.ts",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
     "build": "npx tsx tools/adblock-list-processor.ts && NODE_ENV=production npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts --filename privacymagic.zip",
