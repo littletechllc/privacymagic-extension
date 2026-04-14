@@ -58,7 +58,7 @@
     background: rgba(255, 255, 255, 1);
     position: relative;
     top: calc(0.1 * var(--height));
-    left: calc(0.1 * var(--height));
+    inset-inline-start: calc(0.1 * var(--height));
 
     &::before, &::after {
       content: '';
@@ -71,14 +71,14 @@
       height: calc(0.6 * var(--height));
       width: calc(0.1 * var(--height));
       top: calc(50% - calc(0.3 * var(--height)));
-      left: calc(50% - calc(0.05 * var(--height)));
+      inset-inline-start: calc(50% - calc(0.05 * var(--height)));
     }
 
     &::after {
       height: calc(0.1 * var(--height));
       width: calc(0.6 * var(--height));
       top: calc(50% - 0.05 * var(--height));
-      left: calc(50% - 0.30 * var(--height));
+      inset-inline-start: calc(50% - 0.30 * var(--height));
     }
   }
 
@@ -90,23 +90,26 @@
   }
 
   input[type="checkbox"]:checked ~ .box .switch {
-    left: calc(1.1 * var(--height));
+    inset-inline-start: calc(1.1 * var(--height));
 
     &::before, &::after {
-      transform: rotate(45deg); 
       background: var(--checked-color);
+    }
+
+    [dir="ltr"] &::before, [dir="ltr"] &::after {
+      transform: rotate(45deg); 
     }
     
     &::before{
       height: calc(0.5 * var(--height));
       top: calc(50% - 0.24 * var(--height));
-      left: calc(60% - 0.07 * var(--height));
+      inset-inline-start: calc(60% - 0.07 * var(--height));
     }
 
     &::after{
       width: calc(0.25 * var(--height));
       top: calc(95% - 0.315 * var(--height));
-      left: calc(22.5% - 0.06 * var(--height));
+      inset-inline-start: calc(22.5% - 0.06 * var(--height));
     }
   }
 }
