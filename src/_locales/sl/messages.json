@@ -307,6 +307,22 @@
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
+  "welcomeStep3Intro": {
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+  },
+  "welcomeStep3IntroSidepanelPending": {
+    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+  },
+  "welcomeStep3IntroSidepanel": {
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
+  },
+  "welcomeStep3OpenSyncSettingsCta": {
+    "message": "Open settings",
+    "description": "Button to navigate the paired tab to Chrome sync settings"
+  },
   "welcomeStep3BodyLead": {
     "message": "Če je sinhronizacija zgodovine omogočena, <strong>lahko Chrome pošilja vašo zgodovino brskanja na strežnike Google.</strong> Onemogočanje sinhronizacije ohranja vašo zgodovino bolj zasebno.",
     "description": "Main explanatory text for step 3"
@@ -314,6 +330,34 @@
   "welcomeStep3BodyQuestion": {
     "message": "Želite pomoč pri onemogočanju sinhronizacije zgodovine?",
     "description": "Question text in step 3"
+  },
+  "welcomeStep3SyncOptionInstruction": {
+    "message": "First, click on <strong>$sync_option$</strong>:",
+    "description": "Instruction for selecting a sync option in step 3",
+    "placeholders": {
+      "sync_option": {
+        "content": "$1",
+        "example": "Customize sync"
+      }
+    }
+  },
+  "welcomeStep3HistoryToggleInstruction": {
+    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History syncing in step 3",
+    "placeholders": {
+      "sync_data": {
+        "content": "$1",
+        "example": "Sync data"
+      },
+      "history": {
+        "content": "$2",
+        "example": "History"
+      }
+    }
+  },
+  "welcomeStep3AllDoneCta": {
+    "message": "All done!",
+    "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {
     "message": "Da, pokažite mi",

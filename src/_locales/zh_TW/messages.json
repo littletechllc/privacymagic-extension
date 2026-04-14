@@ -307,6 +307,22 @@
     "message": "1 分鐘",
     "description": "Estimated time for step 3"
   },
+  "welcomeStep3Intro": {
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+  },
+  "welcomeStep3IntroSidepanelPending": {
+    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+  },
+  "welcomeStep3IntroSidepanel": {
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
+  },
+  "welcomeStep3OpenSyncSettingsCta": {
+    "message": "Open settings",
+    "description": "Button to navigate the paired tab to Chrome sync settings"
+  },
   "welcomeStep3BodyLead": {
     "message": "若啟用歷史記錄同步，<strong>Chrome 可能會將您的瀏覽歷史傳送到 Google 伺服器。</strong>停用同步可讓您的瀏覽歷史更私密。",
     "description": "Main explanatory text for step 3"
@@ -314,6 +330,34 @@
   "welcomeStep3BodyQuestion": {
     "message": "需要協助停用歷史記錄同步嗎？",
     "description": "Question text in step 3"
+  },
+  "welcomeStep3SyncOptionInstruction": {
+    "message": "First, click on <strong>$sync_option$</strong>:",
+    "description": "Instruction for selecting a sync option in step 3",
+    "placeholders": {
+      "sync_option": {
+        "content": "$1",
+        "example": "Customize sync"
+      }
+    }
+  },
+  "welcomeStep3HistoryToggleInstruction": {
+    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History syncing in step 3",
+    "placeholders": {
+      "sync_data": {
+        "content": "$1",
+        "example": "Sync data"
+      },
+      "history": {
+        "content": "$2",
+        "example": "History"
+      }
+    }
+  },
+  "welcomeStep3AllDoneCta": {
+    "message": "All done!",
+    "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {
     "message": "是，請告訴我",
@@ -327,7 +371,7 @@
     "message": "就這樣！享受您的隱私保護。",
     "description": "Closing text on welcome page"
   },
-    "welcomeInDevelopment": {
+  "welcomeInDevelopment": {
     "message": "此外掛程式仍在開發中。",
     "description": "Message shown when the extension is in development"
   },
@@ -335,7 +379,7 @@
     "message": "也請告訴我們您的想法！",
     "description": "Message to ask for feedback on the extension"
   },
-"welcomeFooterCopyright": {
+  "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"
   },
