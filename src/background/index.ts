@@ -108,15 +108,14 @@ const showWelcomePage = async (): Promise<void> => {
 chrome.runtime.onInstalled.addListener((details) => {
   void storage.startup()
   handleAsync(async () => {
-    console.log('onInstalled details:', details)
+    if (details.reason === 'install') {
+      await showWelcomePage()
+    }
     // Reset prefs to defaults on install/update
     // TODO: only reset prefs on first install
     await resetAllPrefsToDefaults()
     // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)
     await initializePersistentResources()
-    if (details.reason === 'install') {
-      await showWelcomePage()
-    }
   }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details)
