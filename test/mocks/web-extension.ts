@@ -53,11 +53,25 @@ if (global.chrome?.declarativeNetRequest?.ResourceType === undefined) {
 
   // Mock chrome.storage if not already set up
   if (global.chrome.storage === undefined) {
+    const onChanged = {
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      hasListener: jest.fn()
+    }
+    // StorageProxy reads/writes chrome.storage.session for get/getAll; local is still updated in parallel.
+    // Tests use storageLocalGetMock etc. — same jest.fn instances so session.get() is covered.
     const mockStorageLocal = {
       get: mockStorageGet as unknown as typeof chrome.storage.local.get,
       set: mockStorageSet as unknown as typeof chrome.storage.local.set,
       remove: mockStorageRemove as unknown as typeof chrome.storage.local.remove,
       clear: mockStorageClear as unknown as typeof chrome.storage.local.clear,
+      onChanged
+    }
+    const mockStorageSession = {
+      get: mockStorageGet as unknown as typeof chrome.storage.session.get,
+      set: mockStorageSet as unknown as typeof chrome.storage.session.set,
+      remove: mockStorageRemove as unknown as typeof chrome.storage.session.remove,
+      clear: mockStorageClear as unknown as typeof chrome.storage.session.clear,
       onChanged: {
         addListener: jest.fn(),
         removeListener: jest.fn(),
@@ -65,7 +79,8 @@ if (global.chrome?.declarativeNetRequest?.ResourceType === undefined) {
       }
     }
     global.chrome.storage = {
-      local: mockStorageLocal
+      local: mockStorageLocal,
+      session: mockStorageSession
     } as unknown as typeof chrome.storage
   }
 }
