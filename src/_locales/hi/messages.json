@@ -308,19 +308,19 @@
     "description": "Estimated time for step 3"
   },
   "welcomeStep3Intro": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "message": "आइए सुनिश्चित करें कि यह ब्राउज़र आपका ब्राउज़िंग इतिहास Google के सर्वरों पर न भेजे।",
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "message": "हम सिंक सेटिंग्स पृष्ठ खोलेंगे ताकि आप आवश्यक बदलाव कर सकें।",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "message": "आइए सुनिश्चित करें कि यह ब्राउज़र आपका ब्राउज़िंग इतिहास Google के सर्वरों पर न भेजे। हमने सिंक सेटिंग्स पृष्ठ खोल दी है ताकि आप आवश्यक बदलाव कर सकें।",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
-    "message": "Open settings",
+    "message": "सेटिंग्स खोलें",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
@@ -332,31 +332,31 @@
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {
-    "message": "First, click on <strong>$sync_option$</strong>:",
+    "message": "पहले, <strong>$sync_option$</strong> पर क्लिक करें:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
       "sync_option": {
         "content": "$1",
-        "example": "Customize sync"
+        "example": "सिंक कस्टमाइज़ करें"
       }
     }
   },
   "welcomeStep3HistoryToggleInstruction": {
-    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "message": "फिर <strong>$sync_data$</strong> के नीचे, <strong>$history$</strong> पर क्लिक करके इसे बंद करें (ग्रे होने तक)।",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
       "sync_data": {
         "content": "$1",
-        "example": "Sync data"
+        "example": "सिंक डेटा"
       },
       "history": {
         "content": "$2",
-        "example": "History"
+        "example": "इतिहास"
       }
     }
   },
   "welcomeStep3AllDoneCta": {
-    "message": "All done!",
+    "message": "हो गया!",
     "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {

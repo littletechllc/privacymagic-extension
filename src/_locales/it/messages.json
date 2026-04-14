@@ -308,19 +308,19 @@
     "description": "Estimated time for step 3"
   },
   "welcomeStep3Intro": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "message": "Assicuriamoci che questo browser non invii la cronologia di navigazione ai server di Google.",
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "message": "Apriremo la pagina delle impostazioni di sincronizzazione così potrai fare le modifiche necessarie.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "message": "Assicuriamoci che questo browser non invii la cronologia di navigazione ai server di Google. Abbiamo aperto la pagina delle impostazioni di sincronizzazione così potrai fare le modifiche necessarie.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
-    "message": "Open settings",
+    "message": "Apri le impostazioni",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
@@ -332,31 +332,31 @@
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {
-    "message": "First, click on <strong>$sync_option$</strong>:",
+    "message": "Per prima cosa, fai clic su <strong>$sync_option$</strong>:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
       "sync_option": {
         "content": "$1",
-        "example": "Customize sync"
+        "example": "Personalizza sincronizzazione"
       }
     }
   },
   "welcomeStep3HistoryToggleInstruction": {
-    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Poi, in <strong>$sync_data$</strong>, fai clic su <strong>$history$</strong> per disattivarlo (grigio).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
       "sync_data": {
         "content": "$1",
-        "example": "Sync data"
+        "example": "Dati di sincronizzazione"
       },
       "history": {
         "content": "$2",
-        "example": "History"
+        "example": "Cronologia"
       }
     }
   },
   "welcomeStep3AllDoneCta": {
-    "message": "All done!",
+    "message": "Fatto!",
     "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {

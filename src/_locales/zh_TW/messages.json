@@ -308,19 +308,19 @@
     "description": "Estimated time for step 3"
   },
   "welcomeStep3Intro": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "message": "請確保這個瀏覽器不會將您的瀏覽記錄傳送到 Google 的伺服器。",
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "message": "我們將開啟同步處理設定頁面，讓您進行必要的調整。",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "message": "請確保這個瀏覽器不會將您的瀏覽記錄傳送到 Google 的伺服器。我們已開啟同步處理設定頁面，讓您進行必要的調整。",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
-    "message": "Open settings",
+    "message": "開啟設定",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
@@ -332,31 +332,31 @@
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {
-    "message": "First, click on <strong>$sync_option$</strong>:",
+    "message": "首先，請按一下 <strong>$sync_option$</strong>：",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
       "sync_option": {
         "content": "$1",
-        "example": "Customize sync"
+        "example": "自訂同步功能"
       }
     }
   },
   "welcomeStep3HistoryToggleInstruction": {
-    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "message": "接著在 <strong>$sync_data$</strong> 底下按一下 <strong>$history$</strong> 以關閉（灰色）。",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
       "sync_data": {
         "content": "$1",
-        "example": "Sync data"
+        "example": "同步資料"
       },
       "history": {
         "content": "$2",
-        "example": "History"
+        "example": "紀錄"
       }
     }
   },
   "welcomeStep3AllDoneCta": {
-    "message": "All done!",
+    "message": "完成！",
     "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {

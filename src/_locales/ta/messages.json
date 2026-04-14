@@ -308,19 +308,19 @@
     "description": "Estimated time for step 3"
   },
   "welcomeStep3Intro": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
+    "message": "இந்த உலாவி Google சேவையகங்களுக்கு உங்கள் உலாவல் வரலாற்றை அனுப்பாது என்பதை உறுதிப்போம்.",
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "message": "தேவையான மாற்றங்களைச் செய்ய சிங்க் அமைப்புகள் பக்கத்தைத் திறக்கவும்.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "message": "இந்த உலாவி Google சேவையகங்களுக்கு உங்கள் உலாவல் வரலாற்றை அனுப்பாது என்பதை உறுதிப்போம். தேவையான மாற்றங்களைச் செய்ய சிங்க் அமைப்பு பக்கத்தைத் திறந்துள்ளோம்.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
-    "message": "Open settings",
+    "message": "அமைப்புகளைத் திறக்கவும்",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
@@ -332,31 +332,31 @@
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {
-    "message": "First, click on <strong>$sync_option$</strong>:",
+    "message": "முதலில், <strong>$sync_option$</strong> மீது கிளிக் செய்யவும்:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
       "sync_option": {
         "content": "$1",
-        "example": "Customize sync"
+        "example": "சிங்கை தனிப்பயனாக்கு"
       }
     }
   },
   "welcomeStep3HistoryToggleInstruction": {
-    "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
+    "message": "பின்னர், <strong>$sync_data$</strong> கீழ், <strong>$history$</strong> மீது கிளிக் செய்து முடக்கவும் (சாம்பல்).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
       "sync_data": {
         "content": "$1",
-        "example": "Sync data"
+        "example": "சிங்க் டேடா"
       },
       "history": {
         "content": "$2",
-        "example": "History"
+        "example": "வரலாற்று"
       }
     }
   },
   "welcomeStep3AllDoneCta": {
-    "message": "All done!",
+    "message": "முடிந்தது!",
     "description": "Done button on history sync help side panel"
   },
   "welcomeShowMeCta": {
