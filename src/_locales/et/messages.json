@@ -327,6 +327,14 @@
     "message": "See on kõik! Nautige oma privaatsust.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "See laiendus on arenduses.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Anna meile teada, mida arvad!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

@@ -327,6 +327,14 @@
     "message": "Iyan na! Enjoy ang iyong privacy.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Ang extension na ito ay nasa pag-unlad pa.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Sabihin sa amin kung ano ang iniisip mo!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

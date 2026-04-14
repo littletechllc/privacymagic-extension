@@ -327,6 +327,14 @@
     "message": "就这些！尽享您的隐私保护。",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "此扩展程序正在开发中。",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "欢迎告诉我们您的想法！",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

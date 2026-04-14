@@ -327,6 +327,14 @@
     "message": "Dat is alles! Geniet van je privacy.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Deze extensie is in ontwikkeling.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Laat weten wat je ervan vindt!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

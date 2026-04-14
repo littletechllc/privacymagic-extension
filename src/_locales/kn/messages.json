@@ -327,7 +327,15 @@
     "message": "ಅಷ್ಟೇ! ನಿಮ್ಮ ಗೌಪ್ಯತೆಯನ್ನು ಆನಂದಿಸಿ।",
     "description": "Closing text on welcome page"
   },
-  "welcomeFooterCopyright": {
+    "welcomeInDevelopment": {
+    "message": "ಈ ವಿಸ್ತರಣೆ ಅಭಿವೃದ್ಧಿಯಲ್ಲಿದೆ.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಮಗೆ ತಿಳಿಸಿ!",
+    "description": "Message to ask for feedback on the extension"
+  },
+"welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"
   },

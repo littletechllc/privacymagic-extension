@@ -327,6 +327,14 @@
     "message": "เรียบร้อย! ขอให้เพลิดเพลินกับความเป็นส่วนตัวของคุณ",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "ส่วนขยายนี้อยู่ระหว่างการพัฒนา",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "บอกเราว่าคุณคิดอย่างไร!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

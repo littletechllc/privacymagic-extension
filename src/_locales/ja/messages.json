@@ -327,7 +327,15 @@
     "message": "以上です！プライバシーをお楽しみください。",
     "description": "Closing text on welcome page"
   },
-  "welcomeFooterCopyright": {
+    "welcomeInDevelopment": {
+    "message": "この拡張機能は開発中です。",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "ご意見をお聞かせください！",
+    "description": "Message to ask for feedback on the extension"
+  },
+"welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"
   },

@@ -327,6 +327,14 @@
     "message": "To je všetko! Užite si svoje súkromie.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Toto rozšírenie je vo vývoji.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Dajte nám vedieť, čo si o ňom myslíte!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

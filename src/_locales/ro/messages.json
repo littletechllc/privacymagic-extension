@@ -327,6 +327,14 @@
     "message": "Asta e tot! Bucură-te de confidențialitatea ta.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Această extensie este în dezvoltare.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Spune-ne ce crezi!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

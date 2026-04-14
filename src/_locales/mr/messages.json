@@ -327,6 +327,14 @@
     "message": "इतकेच! आपल्या गोपनीयतेचा आनंद घ्या।",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "हे एक्सटेंशन विकासात आहे.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "तुमचे मत आम्हाला कळवा!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

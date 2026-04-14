@@ -327,7 +327,15 @@
     "message": "ఇంతే! మీ గోప్యతను ఆస్వాదించండి.",
     "description": "Closing text on welcome page"
   },
-  "welcomeFooterCopyright": {
+    "welcomeInDevelopment": {
+    "message": "ఈ పోడిగింపు అభివృద్ధిలో ఉంది.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "మీ అభిప్రాయం మాకు తెలియజేయండి!",
+    "description": "Message to ask for feedback on the extension"
+  },
+"welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"
   },

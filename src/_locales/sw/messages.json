@@ -327,6 +327,14 @@
     "message": "Hiyo ndiyo! Furahia faragha yako.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Kiendelezi hiki bado kinatengenezwa.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Tuambie unachofikiria!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

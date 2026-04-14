@@ -327,6 +327,14 @@
     "message": "ያስፈልገው ይህ ብቻ ነው! የግላዊነትዎን ይዝናኑ።",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "ይህ ቅጥያ በማሻሻያ ላይ ነው።",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "ሀሳብዎን ያጋሩን።",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

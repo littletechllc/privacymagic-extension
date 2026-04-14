@@ -327,6 +327,14 @@
     "message": "Vậy là xong! Hãy tận hưởng quyền riêng tư của bạn.",
     "description": "Closing text on welcome page"
   },
+  "welcomeInDevelopment": {
+    "message": "Tiện ích mở rộng này đang được phát triển.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "Hãy cho chúng tôi biết ý kiến của bạn!",
+    "description": "Message to ask for feedback on the extension"
+  },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"

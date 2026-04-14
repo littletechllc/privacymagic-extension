@@ -327,7 +327,15 @@
     "message": "അത്രയേ ഉള്ളൂ! നിങ്ങളുടെ സ്വകാര്യത ആസ്വദിക്കുക।",
     "description": "Closing text on welcome page"
   },
-  "welcomeFooterCopyright": {
+    "welcomeInDevelopment": {
+    "message": "ഈ എക്സ്ടെന്ഷൻ വികസനത്തിലാണ്.",
+    "description": "Message shown when the extension is in development"
+  },
+  "welcomeLetUsKnow": {
+    "message": "നിങ്ങളുടെ അഭിപ്രായം ഞങ്ങളെ അറിയിക്കുക!",
+    "description": "Message to ask for feedback on the extension"
+  },
+"welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
     "description": "Copyright text in welcome page footer"
   },
