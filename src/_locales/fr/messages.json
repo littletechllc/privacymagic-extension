@@ -15,6 +15,16 @@
     "message": "Privacy Magic",
     "description": "Title shown in the popup"
   },
+  "optionsPageTitle": {
+    "message": "Options de $brand$",
+    "description": "Extension options page document title, main heading, and logo alt text; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "popupGreeting": {
     "message": "Bonjour, dit Privacy Magic !",
     "description": "Greeting message in the popup"
