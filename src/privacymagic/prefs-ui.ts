@@ -28,8 +28,7 @@ export const setupPrefsUI = async (): Promise<void> => {
   if (prefsContainer == null) {
     throw new Error('Prefs container not found')
   }
-  // Clear container and add title
-  prefsContainer.innerHTML = '<h1>Browser Preferences</h1>'
+  // Title comes from options.html (data-i18n="browserPreferences"); append toggles only.
   // Create toggles for each preference
   for (const [prefName, { locked, inverted }] of objectEntries(PRIVACY_PREFS_CONFIG)) {
     const toggle = createToggle(prefName, locked)
