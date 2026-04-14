@@ -12,7 +12,7 @@ const getStepElement = (stepId: StepId): HTMLElement | null => {
 }
 
 const buildWelcomeInlineIconHtml = (altText: string, iconPath: string): string =>
-  `<img src="${iconPath}" alt="${altText}" style="width:20px; height:20px; display:inline-block; vertical-align:middle; position:relative; top:-1px; margin:0 3px;" />`
+  `<span style="unicode-bidi:isolate;display:inline-block;vertical-align:middle;margin:0 3px"><img src="${iconPath}" alt="${altText}" style="width:20px;height:20px;display:block;position:relative;top:-1px" /></span>`
 
 const applyStep1MessageTokens = (): void => {
   const el = document.getElementById('welcomeStep1Body')

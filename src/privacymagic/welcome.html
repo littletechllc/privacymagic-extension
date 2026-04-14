@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -168,7 +168,7 @@
       content: attr(data-completed-label);
       font-size: 0.9rem;
       font-weight: 400;
-      margin-left: 0.5rem;
+      margin-inline-start: 0.35em;
     }
 
     .step-body-container {
@@ -264,8 +264,8 @@
     </span>
   </a>
 
-  <h1 class="welcome-msg" data-i18n="welcomeHeading" style="position:relative; z-index:2; background:transparent;">Thank you for installing Privacy Magic!</h1>
-  <p class="welcome-sub" data-i18n="welcomeSubheading" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
+  <h1 class="welcome-msg" data-i18n="welcomeHeading" dir="auto" style="position:relative; z-index:2; background:transparent;">Thank you for installing Privacy Magic!</h1>
+  <p class="welcome-sub" data-i18n="welcomeSubheading" dir="auto" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
 </header>
 <script src="./welcome.js" type="module"></script>
 <div class="steps-container">
@@ -278,7 +278,7 @@
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p id="welcomeStep1Body" data-i18n-html="welcomeStep1BodyWithIcons">Click the <strong>puzzle</strong> {puzzleIcon} in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> {pinIcon} next to it. Once the Privacy Magic button {hamsaIcon} is pinned, you can click it anytime to see how you're being protected and to control individual protections.</p>
+      <p id="welcomeStep1Body" data-i18n-html="welcomeStep1BodyWithIcons" dir="auto">Click the <strong>puzzle</strong> {puzzleIcon} in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> {pinIcon} next to it. Once the Privacy Magic button {hamsaIcon} is pinned, you can click it anytime to see how you're being protected and to control individual protections.</p>
       <img src="../assets/images/pin_action_button.gif" data-i18n-alt="welcomePinActionImageAlt" alt="Pinning Privacy Magic to the toolbar"
         style="border-color:rgb(224, 224, 224); border-radius:30px; border-style:solid; border-width:1px; display:block; margin:auto; margin-top:1rem;" />
     </div>
@@ -327,9 +327,9 @@
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p data-i18n="welcomeStep3Intro">Let's make sure this browser doesn't leak your browsing history to Google's servers.</p>
-      <p data-i18n-html="welcomeStep3BodyLead">You can prevent that from happening in Chrome's sync settings: it only takes a minute.</p>
-      <p data-i18n="welcomeStep3BodyQuestion">Would you like help disabling history syncing?</p>
+      <p data-i18n="welcomeStep3Intro" dir="auto">Let's make sure this browser doesn't leak your browsing history to Google's servers.</p>
+      <p data-i18n-html="welcomeStep3BodyLead" dir="auto">You can prevent that from happening in Chrome's sync settings: it only takes a minute.</p>
+      <p data-i18n="welcomeStep3BodyQuestion" dir="auto">Would you like help disabling history syncing?</p>
       <div class="btn-row">
         <a href="#" class="btn-primary" data-i18n="welcomeShowMeCta">Yes, show me</a>
         <div style="flex:1;"></div>
@@ -342,11 +342,11 @@
 </div>
 
 <div style="text-align:center; padding: 3rem 2rem 1rem;">
-  <p data-i18n="welcomeClosing" style="font-family:'Lora',serif; font-size:clamp(1.2rem, 2.5vw, 1.7rem); color:var(--text-muted);">That's it! Enjoy your privacy.</p>
+  <p data-i18n="welcomeClosing" dir="auto" style="font-family:'Lora',serif; font-size:clamp(1.2rem, 2.5vw, 1.7rem); color:var(--text-muted);">That's it! Enjoy your privacy.</p>
 </div>
 
 <div style="text-align:center; padding: 1rem 2rem 1rem;">
-  <p data-i18n="welcomeInDevelopment" style="font-family:'Lora',serif; font-size:clamp(1rem, 1.8vw, 1.2rem); color:var(--text-muted);">This extension is in development.</p>
+  <p data-i18n="welcomeInDevelopment" dir="auto" style="font-family:'Lora',serif; font-size:clamp(1rem, 1.8vw, 1.2rem); color:var(--text-muted);">This extension is in development.</p>
   <p style="font-family:'Lora',serif; font-size:clamp(1rem, 1.8vw, 1.2rem); color:var(--text-muted);">
     <a data-i18n="welcomeLetUsKnow" href="mailto:contact@privacymagic.com" style="color:var(--blue); text-decoration:underline;">Let us know what you think!</a>
   </p>

@@ -1,5 +1,17 @@
 type Applicator = (el: HTMLElement, msg: string) => void;
 
+/** BCP 47 base language codes that use right-to-left UI in this extension. */
+const RTL_LANGUAGE_BASES = new Set([
+  'ar', 'dv', 'fa', 'he', 'iw', 'ku', 'ps', 'sd', 'ug', 'ur', 'yi'
+])
+
+const applyDocumentLanguageAndDirection = (): void => {
+  const ui = chrome.i18n.getUILanguage()
+  document.documentElement.lang = ui.replace('_', '-')
+  const base = ui.split(/[-_]/)[0]?.toLowerCase() ?? 'en'
+  document.documentElement.dir = RTL_LANGUAGE_BASES.has(base) ? 'rtl' : 'ltr'
+}
+
 const ATTR_MAP: Record<string, Applicator> = {
   'data-i18n':             (el, msg) => { el.textContent = msg; },
   'data-i18n-html':        (el, msg) => { el.innerHTML = msg; },
@@ -30,6 +42,8 @@ function applyI18n(root: Document | HTMLElement = document): void {
     });
   }
 }
+
+applyDocumentLanguageAndDirection()
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => applyI18n());
