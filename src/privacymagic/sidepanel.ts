@@ -2,33 +2,11 @@ import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
 import { registrableDomainFromUrl } from '@src/common/registrable-domain'
 import { updateSiteInfo } from '@src/common/site-info'
+import { prepareToCloseSidePanel } from '@src/common/sidepanel'
 
 const updateUI = async (domain: string): Promise<void> => {
   await setupSettingsUI(domain)
   await updateSiteInfo(domain)
-}
-
-const watchForNavigations = (tabId: number, originalDomain: string | null): void => {
-  chrome.webNavigation.onCommitted.addListener((details) => {
-    if (details.tabId !== tabId) {
-      return
-    }
-    if (details.frameId !== 0 && details.frameId !== undefined) {
-      return
-    }
-    const latestDomain = registrableDomainFromUrl(details.url)
-    if (latestDomain !== originalDomain) {
-      void chrome.sidePanel.setOptions({ enabled: false, tabId });
-    }
-  })
-}
-
-const watchForTabChanges = (tabId: number): void => {
-  chrome.tabs.onActivated.addListener((activeInfo) => {
-    if (activeInfo.tabId !== tabId) {
-      void chrome.sidePanel.setOptions({ enabled: false });
-    }
-  })
 }
 
 const setupGlobalOptionsLink = (): void => {
@@ -59,8 +37,7 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
   if (domain != null) {
     await updateUI(domain)
   }
-  watchForNavigations(tabId, domain)
-  watchForTabChanges(tabId)
+  prepareToCloseSidePanel(tabId, domain)
   if (domain == null) {
     return
   }

@@ -1,5 +1,6 @@
 import { handleAsync, logError } from '@src/common/util'
 import { disableSyncSettingsDoneRemote } from '@src/common/messages'
+import { prepareToCloseSidePanel } from '@src/common/sidepanel'
 
 const SYNC_SETTINGS_URL = 'chrome://settings/syncSetup/advanced'
 
@@ -50,4 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
       logError(error, 'error handling All done on sync help side panel', event)
     })
   })
+
+  prepareToCloseSidePanel(tabId, null)
 })
