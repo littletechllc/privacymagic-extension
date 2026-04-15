@@ -20,7 +20,7 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
     if (details.frameId !== 0 && details.frameId !== undefined) {
       return
     }
-    const latestDomain = registrableDomainFromUrl(details.url)e
+    const latestDomain = registrableDomainFromUrl(details.url)
     if (latestDomain !== originalDomain) {
       void chrome.sidePanel.setOptions({ enabled: false, tabId });
     }
