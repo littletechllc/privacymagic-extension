@@ -245,6 +245,16 @@
     "message": "Privacy Magic ഇൻസ്റ്റാൾ ചെയ്തതിന് നന്ദി!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ സജ്ജീകരണം",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "സെറ്റപ്പ് പൂർത്തിയാക്കാൻ ഈ വേഗത്തിലുള്ള ഘട്ടങ്ങൾ പിന്തുടരുക।",
     "description": "Subheading on the welcome page"

@@ -245,6 +245,16 @@
     "message": "ขอบคุณที่ติดตั้ง Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ การตั้งค่า",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "เพื่อให้การตั้งค่าเสร็จสมบูรณ์ โปรดทำตามขั้นตอนสั้นๆ เหล่านี้",
     "description": "Subheading on the welcome page"

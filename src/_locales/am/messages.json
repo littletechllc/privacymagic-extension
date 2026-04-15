@@ -245,6 +245,16 @@
     "message": "Privacy Magic ስለጫኑ እናመሰግናለን!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ ማዋቀር",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "ማቀናበሪያውን ለማጠናቀቅ እባክዎን እነዚህን ፈጣን ደረጃዎች ይከተሉ።",
     "description": "Subheading on the welcome page"

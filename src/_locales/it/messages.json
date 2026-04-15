@@ -245,6 +245,16 @@
     "message": "Grazie per aver installato Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Configurazione",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Per completare la configurazione, segui questi rapidi passaggi.",
     "description": "Subheading on the welcome page"

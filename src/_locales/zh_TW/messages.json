@@ -245,6 +245,16 @@
     "message": "感謝安裝 Privacy Magic！",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ 設定",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "請依照以下快速步驟完成設定。",
     "description": "Subheading on the welcome page"

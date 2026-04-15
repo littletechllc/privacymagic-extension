@@ -245,6 +245,16 @@
     "message": "Privacy Magic ఇన్‌స్టాల్ చేసినందుకు ధన్యవాదాలు!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ సెటప్",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "సెట్టప్ పూర్తి చేయడానికి ఈ త్వరిత దశలను అనుసరించండి.",
     "description": "Subheading on the welcome page"

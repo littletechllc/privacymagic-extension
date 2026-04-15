@@ -245,6 +245,16 @@
     "message": "Paldies, ka instalējāt Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Iestatīšana",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Lai pabeigtu iestatīšanu, izpildiet šīs ātrās darbības.",
     "description": "Subheading on the welcome page"

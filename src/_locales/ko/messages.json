@@ -245,6 +245,16 @@
     "message": "Privacy Magic을 설치해 주셔서 감사합니다!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ 설정",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "설정을 완료하려면 다음 빠른 단계를 따라주세요.",
     "description": "Subheading on the welcome page"

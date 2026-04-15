@@ -245,6 +245,16 @@
     "message": "Privacy Magic'i yüklediğiniz için teşekkürler!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Kurulum",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Kurulumu tamamlamak için lütfen bu hızlı adımları izleyin.",
     "description": "Subheading on the welcome page"

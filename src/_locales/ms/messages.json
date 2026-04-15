@@ -245,6 +245,16 @@
     "message": "Terima kasih kerana memasang Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Persediaan",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Untuk melengkapkan persediaan, sila ikuti langkah pantas ini.",
     "description": "Subheading on the welcome page"

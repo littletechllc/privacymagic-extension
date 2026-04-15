@@ -245,6 +245,16 @@
     "message": "Aitäh, et paigaldasite Privacy Magicu!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Seadistus",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Seadistuse lõpetamiseks järgige neid kiireid samme.",
     "description": "Subheading on the welcome page"

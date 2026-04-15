@@ -245,6 +245,16 @@
     "message": "Cảm ơn bạn đã cài đặt Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "Thiết lập của $brand$",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Để hoàn tất thiết lập, vui lòng làm theo các bước nhanh sau.",
     "description": "Subheading on the welcome page"

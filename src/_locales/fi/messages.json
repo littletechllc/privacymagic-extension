@@ -245,6 +245,16 @@
     "message": "Kiitos, että asensit Privacy Magicin!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "$brand$ Määritys",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "Viimeistele käyttöönotto näiden nopeiden vaiheiden avulla.",
     "description": "Subheading on the welcome page"

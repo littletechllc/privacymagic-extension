@@ -245,6 +245,16 @@
     "message": "תודה שהתקנתם את Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
+  "welcomeSetupHeading": {
+    "message": "הגדרה של $brand$",
+    "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1",
+        "example": "Privacy Magic"
+      }
+    }
+  },
   "welcomeSubheading": {
     "message": "כדי להשלים את ההגדרה, בצעו את השלבים המהירים הבאים.",
     "description": "Subheading on the welcome page"
