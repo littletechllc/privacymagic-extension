@@ -1,20 +1,8 @@
 import { handleAsync, logError } from '@src/common/util'
 import { disableSyncSettingsDoneRemote } from '@src/common/messages'
-import { prepareToCloseSidePanel } from '@src/common/sidepanel'
+import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
 
 const SYNC_SETTINGS_URL = 'chrome://settings/syncSetup/advanced'
-
-const tabIdFromQuery = (): number => {
-  const raw = new URLSearchParams(window.location.search).get('tabId')
-  if (raw == null) {
-    throw new Error('tabId is required')
-  }
-  const n = parseInt(raw, 10)
-  if (Number.isNaN(n)) {
-    throw new Error('tabId is not a number')
-  }
-  return n
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabId = tabIdFromQuery()
