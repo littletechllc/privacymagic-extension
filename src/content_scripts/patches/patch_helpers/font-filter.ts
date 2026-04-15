@@ -1,5 +1,5 @@
 import { stringTrimSafe } from "@src/content_scripts/helpers/safe"
-import { getOperatingSystem } from "@src/common/operating-system"
+import { getOperatingSystem } from "./operating-system"
 
 const makeLowerCaseSet = (fontNames: string[]): Set<string> =>
   new Set(fontNames.map(fontName => fontName.toLowerCase()))

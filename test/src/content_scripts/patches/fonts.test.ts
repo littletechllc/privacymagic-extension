@@ -3,7 +3,7 @@ import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 const isAllowedFontMock = jest.fn()
 
-jest.unstable_mockModule('@src/common/font-filter', () => ({
+jest.unstable_mockModule('@src/content_scripts/patches/patch_helpers/font-filter', () => ({
   isAllowedFont: (fontName: string) => isAllowedFontMock(fontName)
 }))
 

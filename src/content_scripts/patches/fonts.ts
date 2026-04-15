@@ -1,5 +1,5 @@
 import { redefineMethods } from "../helpers/monkey-patch"
-import { isAllowedFont } from "@src/common/font-filter"
+import { isAllowedFont } from "@src/content_scripts/patches/patch_helpers/font-filter"
 import { stringReplaceSafe } from "@src/content_scripts/helpers/safe"
 import { GlobalScope } from "../helpers/globalObject"
 
