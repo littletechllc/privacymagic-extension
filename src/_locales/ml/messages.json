@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic ഈ ശുപാർശകൾക്ക് പണം സ്വീകരിക്കുന്നില്ല, Privacy Guides-മായി ബന്ധപ്പെട്ടതല്ല.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic Privacy Guides-മായി ബന്ധപ്പെട്ടതല്ല, അവരിൽ നിന്ന് പണം സ്വീകരിക്കുന്നുമില്ല.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "എനിക്ക് VPN ഉണ്ട്!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "അത്രയേ ഉള്ളൂ! നിങ്ങളുടെ സ്വകാര്യത ആസ്വദിക്കുക।",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "ഈ എക്സ്ടെന്ഷൻ വികസനത്തിലാണ്.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "നിങ്ങളുടെ അഭിപ്രായം ഞങ്ങളെ അറിയിക്കുക!",

@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic не получава възнаграждение за тези препоръки и не е свързан с Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic не е свързан с Privacy Guides и не получава от тях никакво плащане.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Имам VPN!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Това е всичко! Наслаждавайте се на поверителността си.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Това разширение е в процес на разработка.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Кажете ни какво мислите!",

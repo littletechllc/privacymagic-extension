@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic은 이러한 권장에 대한 대가를 받지 않으며 Privacy Guides와 제휴하지 않습니다.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic은 Privacy Guides와 제휴하지 않으며 해당 측으로부터 어떠한 대금도 받지 않습니다.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "VPN 있어요!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "끝났습니다! 프라이버시를 즐기세요.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "이 확장 프로그램은 개발 중입니다.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "의견을 들려주세요!",

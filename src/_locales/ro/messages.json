@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic nu primește compensații pentru aceste recomandări și nu este afiliat cu Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic nu este afiliat cu Privacy Guides și nu primește nicio plată de la ei.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Am deja un VPN!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Asta e tot! Bucură-te de confidențialitatea ta.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Această extensie este în dezvoltare.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Spune-ne ce crezi!",

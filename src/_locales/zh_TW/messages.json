@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/zh-TW/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic 不會因這些推薦獲得報酬，也不附屬於 Privacy Guides。",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic 不附屬於 Privacy Guides，也不會從他們那裡獲得任何付款。",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "我已經有 VPN 了！",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "就這樣！享受您的隱私保護。",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "此外掛程式仍在開發中。",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "也請告訴我們您的想法！",

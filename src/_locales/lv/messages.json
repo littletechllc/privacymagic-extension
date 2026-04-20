@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic nesaņem atlīdzību par šiem ieteikumiem un nav saistīts ar Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic nav saistīts ar Privacy Guides un no tiem nesaņem maksājumu.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Man ir VPN!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Tas arī viss! Izbaudiet savu privātumu.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Šis paplašinājums ir izstrādē.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Pastāsti, ko domā!",

@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "A Privacy Magic nem kap juttatást ezekért az ajánlásokért, és nem áll kapcsolatban a Privacy Guides-szal.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "A Privacy Magic nem áll kapcsolatban a Privacy Guides-szal, és tőlük nem kap fizetséget.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Van már VPN-em!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Ennyi volt! Élvezd a magánszférádat.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Ez a bővítmény fejlesztés alatt áll.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Oszd meg velünk a véleményedet!",

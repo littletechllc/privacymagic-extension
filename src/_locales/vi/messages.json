@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic không nhận thù lao cho các đề xuất này và không liên kết với Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic không liên kết với Privacy Guides và không nhận bất kỳ khoản thanh toán nào từ họ.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Tôi đã có VPN!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Vậy là xong! Hãy tận hưởng quyền riêng tư của bạn.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Tiện ích mở rộng này đang được phát triển.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Hãy cho chúng tôi biết ý kiến của bạn!",

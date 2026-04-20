@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic या शिफारशींसाठी कोणतेही मोबदला घेत नाही आणि Privacy Guides शी संलग्न नाही.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic Privacy Guides शी संलग्न नाही आणि त्यांच्याकडून कोणतेही पैसे घेत नाही.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "माझ्याकडे VPN आहे!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "इतकेच! आपल्या गोपनीयतेचा आनंद घ्या।",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "हे एक्सटेंशन विकासात आहे.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "तुमचे मत आम्हाला कळवा!",

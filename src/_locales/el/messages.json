@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Το Privacy Magic δεν λαμβάνει αμοιβή για αυτές τις προτάσεις και δεν συνδέεται με το Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Το Privacy Magic δεν συνδέεται με το Privacy Guides και δεν λαμβάνει καμία πληρωμή από αυτούς.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "Έχω ήδη VPN!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Αυτό ήταν! Απολαύστε την ιδιωτικότητά σας.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Αυτή η επέκταση βρίσκεται σε ανάπτυξη.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Πείτε μας τη γνώμη σας!",

@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Ang Privacy Magic ay hindi tumatanggap ng bayad para sa mga rekomendasyong ito at hindi kaakibat ng Privacy Guides.",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Ang Privacy Magic ay hindi kaakibat ng Privacy Guides at hindi tumatanggap ng anumang bayad mula sa kanila.",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "May VPN na ako!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "Iyan na! Enjoy ang iyong privacy.",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "Ang extension na ito ay nasa pag-unlad pa.",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "Sabihin sa amin kung ano ang iniisip mo!",

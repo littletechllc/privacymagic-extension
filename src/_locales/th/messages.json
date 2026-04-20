@@ -315,9 +315,9 @@
     "message": "https://www.privacyguides.org/en/vpn/",
     "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
-  "welcomeAffiliateNote": {
-    "message": "Privacy Magic ไม่ได้รับค่าตอบแทนจากคำแนะนำเหล่านี้และไม่มีส่วนเกี่ยวข้องกับ Privacy Guides",
-    "description": "Affiliate disclosure on step 2"
+  "welcomePrivacyGuidesNote": {
+    "message": "Privacy Magic ไม่มีส่วนเกี่ยวข้องกับ Privacy Guides และไม่ได้รับการชำระเงินจากพวกเขา",
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
   },
   "welcomeGotVpnCta": {
     "message": "ฉันมี VPN แล้ว!",
@@ -394,10 +394,6 @@
   "welcomeClosing": {
     "message": "เรียบร้อย! ขอให้เพลิดเพลินกับความเป็นส่วนตัวของคุณ",
     "description": "Closing text on welcome page"
-  },
-  "welcomeInDevelopment": {
-    "message": "ส่วนขยายนี้อยู่ระหว่างการพัฒนา",
-    "description": "Message shown when the extension is in development"
   },
   "welcomeLetUsKnow": {
     "message": "บอกเราว่าคุณคิดอย่างไร!",
