@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic melindungi anda pada peringkat pelayar. Namun setiap laman web dan penjejak yang dibenamkan masih boleh melihat alamat IP anda. <strong>Untuk menyembunyikan alamat IP, anda memerlukan VPN.</strong>",
+    "message": "Privacy Magic melindungi anda di peringkat pelayar. Tetapi setiap laman yang anda lawati, dan setiap penjejak terbenam, masih boleh melihat alamat IP anda, yang mendedahkan identiti dan lokasi. <strong>Untuk menyembunyikan alamat IP, anda memerlukan VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN disyorkan",
+    "message": "VPN yang dicadangkan",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Diaudit secara bebas, sumber terbuka, dan tidak menyimpan log pelayaran anda.",
+    "message": "Pasukan Privacy Guides telah menyemak dan mengesyorkan tiga VPN sumber terbuka dengan komitmen teguh terhadap privasi.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Dapatkan Proton VPN →",
+    "message": "Lihat syoran VPN Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic menerima komisen yang membantu menyokong kerja kami.",
+    "message": "Privacy Magic tidak menerima bayaran untuk syoran ini dan tidak berafiliasi dengan Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Tidak, terima kasih, saya akan guna VPN lain",
+  "welcomeGotVpnCta": {
+    "message": "Saya sudah ada VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic beschermt je op browserniveau. Maar elke website die je bezoekt, en elke tracker die daarin is ingesloten, kan nog steeds je IP-adres zien, wat je identiteit en locatie kan onthullen. <strong>Om je IP-adres te verbergen, heb je een VPN nodig.</strong>",
+    "message": "Privacy Magic beschermt je op browserniveau. Maar elke website die je bezoekt, en elke ingesloten tracker, kan nog steeds je IP-adres zien, wat je identiteit en locatie kan verraden. <strong>Om je IP-adres te verbergen, heb je een VPN nodig.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Aanbevolen VPN",
+    "message": "Voorgestelde VPN’s",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Onafhankelijk gecontroleerd, open source en houdt geen logs van je browsegedrag bij. Een van de meest vertrouwde VPN's die beschikbaar zijn.",
+    "message": "Het Privacy Guides-team heeft drie VPN’s beoordeeld en aanbevolen: open source en met een strikte toewijding aan privacy.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Neem Proton VPN →",
+    "message": "Bekijk de VPN-aanbevelingen van Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/nl/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic ontvangt een commissie die helpt om ons werk te ondersteunen.",
+    "message": "Privacy Magic ontvangt geen vergoeding voor deze aanbevelingen en is niet gelieerd aan Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nee bedankt, ik gebruik een andere VPN",
+  "welcomeGotVpnCta": {
+    "message": "Ik heb al een VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

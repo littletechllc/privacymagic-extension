@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Pinoprotektahan ka ng Privacy Magic sa browser level. Ngunit bawat website at tracker na binibisita mo ay maaari pa ring makita ang iyong IP address. <strong>Para maitago ang iyong IP address, kakailanganin mo ng VPN.</strong>",
+    "message": "Pinoprotektahan ka ng Privacy Magic sa antas ng browser. Ngunit bawat website na binibisita mo, at bawat naka-embed na tracker, ay makikita pa rin ang iyong IP address, na maaaring ibunyag ang pagkakakilanlan at lokasyon mo. <strong>Para itago ang iyong IP address, kailangan mo ng VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Iminungkahing VPN",
+    "message": "Mga iminungkahing VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Independently audited, open source, at hindi nagtatago ng logs ng iyong pag-browse.",
+    "message": "Suri ng koponan ng Privacy Guides at inirerekomenda ang tatlong VPN na open source at may matibay na pangako sa privacy.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Kunin ang Proton VPN →",
+    "message": "Tingnan ang mga rekomendasyon sa VPN ng Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Tumatanggap ang Privacy Magic ng komisyon na tumutulong sa pagpapatuloy ng aming trabaho.",
+    "message": "Ang Privacy Magic ay hindi tumatanggap ng bayad para sa mga rekomendasyong ito at hindi kaakibat ng Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Hindi salamat, gagamit ako ng ibang VPN",
+  "welcomeGotVpnCta": {
+    "message": "May VPN na ako!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic 在瀏覽器層級保護您。但您造訪的每個網站及其內嵌追蹤器仍可能看到您的 IP 位址，進而揭露您的身分與位置。<strong>若要隱藏 IP 位址，您需要使用 VPN。</strong>",
+    "message": "Privacy Magic 在瀏覽器層級保護您。但您造訪的每個網站及其中嵌入的追蹤器仍可能看到您的 IP 位址，進而暴露身分與位置。<strong>若要隱藏 IP 位址，您需要 VPN。</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "建議 VPN",
+    "message": "推薦的 VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "經獨立稽核、開源，且不保留您的瀏覽記錄。是最值得信賴的 VPN 之一。",
+    "message": "Privacy Guides 團隊已審閱並推薦三個開放原始碼且嚴格重視隱私的 VPN。",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "取得 Proton VPN →",
+    "message": "查看 Privacy Guides 的 VPN 推薦 →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/zh-TW/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic 會獲得佣金，以支持我們的工作。",
+    "message": "Privacy Magic 不會因這些推薦獲得報酬，也不附屬於 Privacy Guides。",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "不用了，我會使用其他 VPN",
+  "welcomeGotVpnCta": {
+    "message": "我已經有 VPN 了！",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

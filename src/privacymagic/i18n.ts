@@ -19,6 +19,7 @@ const ATTR_MAP: Record<string, Applicator> = {
   'data-i18n-alt':         (el, msg) => { el.setAttribute('alt', msg); },
   'data-i18n-placeholder': (el, msg) => { (el as HTMLInputElement).placeholder = msg; },
   'data-i18n-aria-label':  (el, msg) => { el.setAttribute('aria-label', msg); },
+  'data-i18n-href':        (el, msg) => { el.setAttribute('href', msg); },
 };
 
 function applyI18n(root: Document | HTMLElement = document): void {

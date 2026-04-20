@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic et protegeix a nivell del navegador. Però cada lloc web que visites, i cada rastrejador incrustat en ell, encara pot veure la teva adreça IP, que pot revelar la teva identitat i ubicació. <strong>Per amagar la teva adreça IP, necessitaràs una VPN.</strong>",
+    "message": "Privacy Magic et protegeix a nivell de navegador. Però cada lloc web que visites, i cada rastrejador incrustat, encara pot veure la teva adreça IP, que pot revelar la teva identitat i ubicació. <strong>Per amagar la teva adreça IP, necessites una VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN suggerida",
+    "message": "VPN suggerides",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Auditada de manera independent, de codi obert i sense registres de la teva navegació. Una de les VPN més fiables disponibles.",
+    "message": "L'equip de Privacy Guides ha revisat i recomana tres VPN de codi obert amb un compromís estricte amb la privadesa.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Obtenir Proton VPN →",
+    "message": "Consulta les recomanacions de VPN de Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic rep una comissió que ajuda a sostenir la nostra feina.",
+    "message": "Privacy Magic no rep cap compensació per aquestes recomanacions i no està afiliat a Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "No, gràcies, faré servir una altra VPN",
+  "welcomeGotVpnCta": {
+    "message": "Ja tinc una VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

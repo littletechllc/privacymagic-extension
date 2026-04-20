@@ -292,7 +292,7 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic bảo vệ bạn ở cấp trình duyệt. Nhưng mọi trang web bạn truy cập và mọi trình theo dõi nhúng trong đó vẫn có thể thấy địa chỉ IP của bạn. <strong>Để ẩn địa chỉ IP, bạn sẽ cần VPN.</strong>",
+    "message": "Privacy Magic bảo vệ bạn ở cấp trình duyệt. Nhưng mỗi trang bạn truy cập và mọi trình theo dõi nhúng vẫn có thể thấy địa chỉ IP, lộ danh tính và vị trí. <strong>Để ẩn địa chỉ IP, bạn cần VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Được kiểm toán độc lập, mã nguồn mở và không lưu nhật ký duyệt web của bạn.",
+    "message": "Nhóm Privacy Guides đã xem xét và đề xuất ba VPN mã nguồn mở với cam kết mạnh mẽ về quyền riêng tư.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Nhận Proton VPN →",
+    "message": "Xem đề xuất VPN từ Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic nhận hoa hồng giúp duy trì công việc của chúng tôi.",
+    "message": "Privacy Magic không nhận thù lao cho các đề xuất này và không liên kết với Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Không, cảm ơn, tôi sẽ dùng VPN khác",
+  "welcomeGotVpnCta": {
+    "message": "Tôi đã có VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

@@ -292,7 +292,7 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic vas ščiti na ravni brskalnika. Toda vsako spletno mesto, ki ga obiščete, in vsak sledilnik, vgrajen vanj, lahko še vedno vidi vaš IP naslov, ki lahko razkrije vašo identiteto in lokacijo. <strong>Za skrivanje IP naslova boste potrebovali VPN.</strong>",
+    "message": "Privacy Magic vas ščiti na ravni brskalnika. Toda vsaka obiskana stran in vsak vdelan sledilnik še vedno vidi vaš naslov IP, kar lahko razkrije identiteto in lokacijo. <strong>Za skrivanje naslova IP potrebujete VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Neodvisno revidiran, odprtokoden in ne hrani dnevnikov vašega brskanja. Eden najbolj zaupanja vrednih razpoložljivih VPN-jev.",
+    "message": "Ekipa Privacy Guides je pregledala in priporoča tri odprtokodne VPN z močno zavezanostjo zasebnosti.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Pridobite Proton VPN →",
+    "message": "Oglejte si VPN priporočila Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic prejme provizijo, ki pomaga podpirati naše delo.",
+    "message": "Privacy Magic za ta priporočila ne prejema nadomestila in ni povezan s Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Ne hvala, uporabil bom drug VPN",
+  "welcomeGotVpnCta": {
+    "message": "Imam VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

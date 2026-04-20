@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic hukulinda katika kiwango cha kivinjari. Lakini kila tovuti unayotembelea na kila kifuatiliaji kilichopachikwa bado kinaweza kuona anwani yako ya IP. <strong>Ili kuficha anwani yako ya IP, utahitaji VPN.</strong>",
+    "message": "Privacy Magic inakulinda kwa kiwango cha kivinjari. Lakini kila tovuti unayotembelea, na kila kifuatilia kilichojumuishwa, bado kinaweza kuona anwani yako ya IP, ikifichua utambulisho na eneo. <strong>Ili kuficha anwani ya IP, unahitaji VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN iliyopendekezwa",
+    "message": "VPN zilizopendekezwa",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Imekaguliwa kwa kujitegemea, ni chanzo huria, na haihifadhi kumbukumbu za kuvinjari kwako.",
+    "message": "Timu ya Privacy Guides imekagua na inapendekeza VPN tatu za chanzo huria zenye kujitolea kwa faragha.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Pata Proton VPN →",
+    "message": "Tazama mapendekezo ya VPN ya Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic hupokea kamisheni inayosaidia kuendeleza kazi yetu.",
+    "message": "Privacy Magic hulipwi kwa mapendekezo haya na haihusiani na Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Hapana asante, nitatumia VPN nyingine",
+  "welcomeGotVpnCta": {
+    "message": "Nina VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

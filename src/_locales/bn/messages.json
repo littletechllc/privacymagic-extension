@@ -292,7 +292,7 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic ব্রাউজার স্তরে আপনাকে সুরক্ষা দেয়। তবে আপনি যে ওয়েবসাইটে যান এবং সেখানে থাকা ট্র্যাকারগুলো এখনও আপনার IP ঠিকানা দেখতে পারে। <strong>IP ঠিকানা লুকাতে আপনার একটি VPN দরকার হবে।</strong>",
+    "message": "Privacy Magic আপনাকে ব্রাউজার স্তরে সুরক্ষা দেয়। কিন্তু আপনি যে ওয়েবসাইটগুলি দেখেন এবং তার মধ্যে থাকা প্রতিটি ট্র্যাকার এখনও আপনার IP ঠিকানা দেখতে পারে, যা আপনার পরিচয় ও অবস্থান ফাঁস করতে পারে। <strong>আপনার IP ঠিকানা লুকাতে, আপনার একটি VPN প্রয়োজন।</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "স্বাধীনভাবে অডিট করা, ওপেন সোর্স এবং আপনার ব্রাউজিংয়ের লগ সংরক্ষণ করে না।",
+    "message": "Privacy Guides দল তিনটি VPN পর্যালোচনা করেছে এবং সুপারিশ করেছে যা ওপেন সোর্স এবং গোপনীয়তার প্রতি কঠোর প্রতিশ্রুতিবদ্ধ।",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN নিন →",
+    "message": "Privacy Guides-এর VPN সুপারিশ দেখুন →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic একটি কমিশন পায় যা আমাদের কাজ টিকিয়ে রাখতে সাহায্য করে।",
+    "message": "Privacy Magic এই সুপারিশের জন্য কোনো পারিশ্রমিক পায় না এবং Privacy Guides-এর সঙ্গে সম্পর্কিত নয়।",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "না ধন্যবাদ, আমি অন্য VPN ব্যবহার করব",
+  "welcomeGotVpnCta": {
+    "message": "আমার VPN আছে!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

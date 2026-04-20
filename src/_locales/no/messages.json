@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic beskytter deg på nettlesernivå. Men hvert nettsted du besøker, og hver sporingsmekanisme som er innebygd i det, kan fortsatt se IP-adressen din, som kan avsløre identiteten og plasseringen din. <strong>For å skjule IP-adressen din trenger du en VPN.</strong>",
+    "message": "Privacy Magic beskytter deg på nettlesernivå. Men hvert nettsted du besøker, og hver innebygd sporingskode, kan fortsatt se IP-adressen din, som kan avsløre identitet og plassering. <strong>For å skjule IP-adressen trenger du en VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Anbefalt VPN",
+    "message": "Foreslåtte VPN-er",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Uavhengig revidert, åpen kildekode og fører ingen logger over surfingen din. En av de mest pålitelige VPN-tjenestene som finnes.",
+    "message": "Privacy Guides-teamet har vurdert og anbefaler tre VPN-tjenester som er åpen kildekode og sterkt forpliktet til personvern.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Få Proton VPN →",
+    "message": "Se Privacy Guides’ VPN-anbefalinger →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic mottar en provisjon som bidrar til å støtte arbeidet vårt.",
+    "message": "Privacy Magic mottar ikke godtgjørelse for disse anbefalingene og er ikke tilknyttet Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nei takk, jeg bruker en annen VPN",
+  "welcomeGotVpnCta": {
+    "message": "Jeg har VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

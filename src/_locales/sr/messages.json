@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic vas štiti na nivou pregledača. Ali svaki sajt koji posećujete i svaki ugrađeni tragač i dalje mogu da vide vašu IP adresu, što može otkriti vaš identitet i lokaciju. <strong>Da biste sakrili IP adresu, potreban vam je VPN.</strong>",
+    "message": "Privacy Magic štiti vas na nivou pregledača. Ali svaka poseta sajtu i svaki ugrađeni pratilac i dalje vide vašu IP adresu, što može otkriti identitet i lokaciju. <strong>Da sakrijete IP adresu, potreban vam je VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Predloženi VPN",
+    "message": "Predloženi VPN-ovi",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Nezavisno revidiran, otvorenog koda i ne čuva zapise o vašem pregledanju. Jedan od najpouzdanijih dostupnih VPN-ova.",
+    "message": "Tim Privacy Guides je pregledao i preporučuje tri VPN-a otvorenog koda sa jakom posvećenošću privatnosti.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Preuzmite Proton VPN →",
+    "message": "Pogledajte VPN preporuke Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic dobija proviziju koja pomaže održavanju našeg rada.",
+    "message": "Privacy Magic ne prima naknadu za ove preporuke i nije povezan sa Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Ne hvala, koristiću drugi VPN",
+  "welcomeGotVpnCta": {
+    "message": "Imam VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

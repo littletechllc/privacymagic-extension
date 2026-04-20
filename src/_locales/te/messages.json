@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic మీను బ్రౌజర్ స్థాయిలో రక్షిస్తుంది. కానీ మీరు సందర్శించే ప్రతి సైట్, అందులోని ట్రాకర్‌లు ఇంకా మీ IP చిరునామా చూడగలవు. <strong>మీ IP చిరునామాను దాచడానికి VPN అవసరం.</strong>",
+    "message": "Privacy Magic మిమ్మల్ని బ్రౌజర్ స్థాయిలో రక్షిస్తుంది. కానీ మీరు సందర్శించే ప్రతి వెబ్‌సైట్ మరియు ఎంబెడ్ చేసిన ప్రతి ట్రాకర్ మీ IP చిరునామాను చూడగలదు, గుర్తింపు మరియు స్థానాన్ని బయటపెట్టవచ్చు. <strong>IP చిరునామాను దాచడానికి VPN అవసరం.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "సూచించిన VPN",
+    "message": "సూచించిన VPN లు",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "స్వతంత్రంగా ఆడిట్ చేయబడింది, ఓపెన్ సోర్స్, మీ బ్రౌజింగ్ లాగ్‌లు నిల్వ చేయదు.",
+    "message": "Privacy Guides బృందం మూడు VPN లను సమీక్షించి సిఫార్సు చేసింది; అవి ఓపెన్ సోర్స్ మరియు గోప్యతకు కఠిన ప్రతిబద్ధత కలిగి ఉన్నాయి.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN పొందండి →",
+    "message": "Privacy Guides VPN సిఫార్సులను చూడండి →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic కమిషన్ పొందుతుంది, ఇది మా పనిని కొనసాగించడంలో సహాయపడుతుంది.",
+    "message": "Privacy Magic ఈ సిఫార్సులకు పారితోషికం అందుకోదు మరియు Privacy Guides తో అనుబంధం లేదు.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "లేదు, నేను వేరే VPN వాడుతాను",
+  "welcomeGotVpnCta": {
+    "message": "నాకు VPN ఉంది!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

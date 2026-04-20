@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic በአሳሽ ደረጃ ይጠብቅዎታል። ግን የሚጎበኙት ድር ጣቢያ እያንዳንዱ እና በውስጡ የተካተተ ተከታታይ አሁንም IP አድራሻዎን ሊያይ ይችላል። <strong>IP አድራሻዎን ለመደበቅ VPN ያስፈልግዎታል።</strong>",
+    "message": "Privacy Magic በአሳሽ ደረጃ ይጠብቅዎታል። ነገር ግን የምትጎበኟቸው ድር ጣቢያዎች ሁሉ፣ እና በእነርሱ ውስጥ የተዋህዱ መከታተያዎች፣ አድራሻዎን እንደሚያዩ ሊቆዩ ይችላሉ፣ ይህም ማንነትዎን እና ቦታዎን ሊገልጽ ይችላል። <strong>የአይፒ አድራሻዎን ለመደበቅ፣ VPN ያስፈልግዎታል።</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "የሚመከር VPN",
+    "message": "የተጠቆሙ VPNዎች",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "በገለልተኛ ሁኔታ የተመረመረ፣ ክፍት ምንጭ፣ የእርስዎን አሰሳ መዝገብ አይያዝም።",
+    "message": "የPrivacy Guides ቡድን ሦስት VPNዎችን አጣርቶ ለመመራት ይመርጣል፣ እነዚህም ክፍት ምንጭ ናቸው እና ለግላዊነት ጠንካራ ቁርጠኝነት አላቸው።",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN ያግኙ →",
+    "message": "የPrivacy Guides የVPN ምክሮችን ይመልከቱ →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic ሥራችንን ለመደገፍ የሚረዳ ኮሚሽን ይቀበላል።",
+    "message": "Privacy Magic ለእነዚህ ምክሮች ምንም ክፍያ አይቀበልም እና ከPrivacy Guides ጋር አይተባበርም።",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "አይ፣ ሌላ VPN እጠቀማለሁ",
+  "welcomeGotVpnCta": {
+    "message": "VPN አለኝ!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

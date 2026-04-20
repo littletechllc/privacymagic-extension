@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic vás chráni na úrovni prehliadača. Každá webová stránka, ktorú navštívite, a každý sledovací prvok v nej však stále môže vidieť vašu IP adresu, ktorá môže odhaliť vašu identitu a polohu. <strong>Ak chcete skryť svoju IP adresu, budete potrebovať VPN.</strong>",
+    "message": "Privacy Magic vás chráni na úrovni prehliadača. Ale každá navštívená stránka a každý vložený sledovač stále vidí vašu IP adresu, čo môže prezradiť identitu a polohu. <strong>Na skrytie IP adresy potrebujete VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Odporúčaná VPN",
+    "message": "Odporúčané VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Nezávisle auditovaná, open source a neuchováva záznamy o vašom prehliadaní. Jedna z najdôveryhodnejších dostupných VPN.",
+    "message": "Tím Privacy Guides posúdil a odporúča tri VPN s otvoreným zdrojovým kódom a silným záväzkom k ochrane súkromia.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Získajte Proton VPN →",
+    "message": "Pozrite si odporúčania VPN od Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic získava províziu, ktorá pomáha podporovať našu prácu.",
+    "message": "Privacy Magic za tieto odporúčania nedostáva odmenu a nie je spojený s Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nie, ďakujem, použijem inú VPN",
+  "welcomeGotVpnCta": {
+    "message": "Mám VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

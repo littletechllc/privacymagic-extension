@@ -292,7 +292,7 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic melindungi Anda di tingkat browser. Namun setiap situs yang Anda kunjungi dan pelacak yang tertanam masih dapat melihat alamat IP Anda. <strong>Untuk menyembunyikan alamat IP, Anda memerlukan VPN.</strong>",
+    "message": "Privacy Magic melindungi Anda di tingkat peramban. Tetapi setiap situs yang Anda kunjungi, dan setiap pelacak yang disematkan, masih dapat melihat alamat IP Anda, yang dapat mengungkap identitas dan lokasi Anda. <strong>Untuk menyembunyikan alamat IP, Anda memerlukan VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Diaudit secara independen, sumber terbuka, dan tidak menyimpan log penjelajahan Anda.",
+    "message": "Tim Privacy Guides telah meninjau dan merekomendasikan tiga VPN sumber terbuka dengan komitmen kuat pada privasi.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Dapatkan Proton VPN →",
+    "message": "Lihat rekomendasi VPN Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic menerima komisi yang membantu mendukung pekerjaan kami.",
+    "message": "Privacy Magic tidak menerima kompensasi untuk rekomendasi ini dan tidak berafiliasi dengan Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Tidak, saya akan menggunakan VPN lain",
+  "welcomeGotVpnCta": {
+    "message": "Saya sudah punya VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

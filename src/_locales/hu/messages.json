@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "A Privacy Magic böngészőszinten véd. De minden meglátogatott webhely és minden benne beágyazott nyomkövető továbbra is láthatja az IP-címedet, ami felfedheti a személyazonosságodat és a tartózkodási helyedet. <strong>Az IP-címed elrejtéséhez VPN-re lesz szükséged.</strong>",
+    "message": "A Privacy Magic a böngésző szintjén véd. De minden meglátogatott webhely és minden beágyazott nyomkövető továbbra is látja az IP-címét, ami felfedheti a személyazonosságát és a tartózkodási helyét. <strong>Az IP-cím elrejtéséhez VPN-re van szüksége.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Javasolt VPN",
+    "message": "Javasolt VPN-ek",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Függetlenül auditált, nyílt forráskódú, és nem vezet naplót a böngészésedről. Az egyik legmegbízhatóbb elérhető VPN.",
+    "message": "A Privacy Guides csapata átnézett és három nyílt forráskódú VPN-t ajánl, amelyek szigorúan elkötelezettek a magánélet védelme mellett.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN beszerzése →",
+    "message": "A Privacy Guides VPN-ajánlásainak megtekintése →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "A Privacy Magic jutalékot kap, ami segít fenntartani a munkánkat.",
+    "message": "A Privacy Magic nem kap juttatást ezekért az ajánlásokért, és nem áll kapcsolatban a Privacy Guides-szal.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nem köszönöm, másik VPN-t használok",
+  "welcomeGotVpnCta": {
+    "message": "Van már VPN-em!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

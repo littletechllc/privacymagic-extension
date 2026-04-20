@@ -292,7 +292,7 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic はブラウザレベルで保護します。しかし、訪問する各サイトや埋め込まれたトラッカーは、依然としてあなたの IP アドレスを確認でき、本人や場所を特定できる可能性があります。<strong>IP アドレスを隠すには VPN が必要です。</strong>",
+    "message": "Privacy Magic はブラウザー層で保護します。しかし訪問する各サイトと埋め込まれたトラッカーは、あなたの IP アドレスを依然として見ることができ、身元や所在地が漏れる可能性があります。<strong>IP アドレスを隠すには VPN が必要です。</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "独立監査済み、オープンソース、閲覧ログを保存しません。信頼性の高い VPN のひとつです。",
+    "message": "Privacy Guides チームが検討し、オープンソースでプライバシーへの強いコミットメントを持つ 3 つの VPN を推奨しています。",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN を入手 →",
+    "message": "Privacy Guides の VPN 推奨を見る →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic は手数料を受け取り、活動の継続に役立てています。",
+    "message": "Privacy Magic はこれらの推奨に対する報酬を受け取らず、Privacy Guides と提携していません。",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "いいえ、別の VPN を使います",
+  "welcomeGotVpnCta": {
+    "message": "VPN はもうあります！",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

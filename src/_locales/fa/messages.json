@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic شما را در سطح مرورگر محافظت می‌کند. اما هر سایتی که بازدید می‌کنید و هر رهگیری که در آن تعبیه شده است، همچنان می‌تواند آدرس IP شما را ببیند که ممکن است هویت و موقعیت شما را آشکار کند. <strong>برای پنهان کردن آدرس IP خود به VPN نیاز دارید.</strong>",
+    "message": "Privacy Magic شما را در سطح مرورگر محافظت می‌کند. اما هر وب‌سایتی که بازدید می‌کنید و هر ردیاب جاسازی‌شده هنوز می‌تواند آدرس IP شما را ببیند و هویت و موقعیت شما را افشا کند. <strong>برای پنهان کردن IP، به VPN نیاز دارید.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN پیشنهادی",
+    "message": "VPNهای پیشنهادی",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "به‌صورت مستقل ممیزی شده، متن‌باز و بدون نگهداری لاگ از مرور شما. یکی از قابل‌اعتمادترین VPNهای موجود.",
+    "message": "تیم Privacy Guides سه VPN متن‌باز را بررسی و توصیه کرده که تعهد جدی به حریم خصوصی دارند.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "دریافت Proton VPN →",
+    "message": "مشاهده توصیه‌های VPN از Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic کمیسیونی دریافت می‌کند که به تداوم کار ما کمک می‌کند.",
+    "message": "Privacy Magic برای این توصیه‌ها هیچ وجهی دریافت نمی‌کند و وابسته به Privacy Guides نیست.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "نه ممنون، از VPN دیگری استفاده می‌کنم",
+  "welcomeGotVpnCta": {
+    "message": "VPN دارم!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

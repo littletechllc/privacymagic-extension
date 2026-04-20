@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic ബ്രൗസർ തലത്തിൽ നിങ്ങളെ സംരക്ഷിക്കുന്നു। പക്ഷേ നിങ്ങൾ സന്ദർശിക്കുന്ന എല്ലാ സൈറ്റുകളും ട്രാക്കറുകളും നിങ്ങളുടെ IP വിലാസം കാണാൻ കഴിയും। <strong>IP വിലാസം മറയ്ക്കാൻ VPN ആവശ്യമാണ്।</strong>",
+    "message": "Privacy Magic നിങ്ങളെ ബ്രൗസർ നിലയിൽ സംരക്ഷിക്കുന്നു. എന്നാൽ നിങ്ങൾ സന്ദർശിക്കുന്ന ഓരോ വെബ്സൈറ്റും എംബെഡ് ചെയ്ത ഓരോ ട്രാക്കറും നിങ്ങളുടെ IP വിലാസം കാണാൻ കഴിയും, അത് വ്യക്തിത്വവും സ്ഥാനവും വെളിപ്പെടുത്താം. <strong>IP വിലാസം മറയ്ക്കാൻ VPN ആവശ്യമാണ്.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "ശുപാർശ ചെയ്യുന്ന VPN",
+    "message": "നിർദ്ദേശിച്ച VPN-കൾ",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "സ്വതന്ത്രമായി ഓഡിറ്റ് ചെയ്‌തതും ഓപ്പൺ സോഴ്‌സും, നിങ്ങളുടെ ബ്രൗസിംഗ് ലോഗ് സൂക്ഷിക്കാത്തതുമാണ്।",
+    "message": "Privacy Guides ടീം മൂന്ന് VPN-കൾ അവലോകനം ചെയ്ത് ശുപാർശ ചെയ്തു; അവ ഓപ്പൺ സോഴ്സാണ്, സ്വകാര്യതയോട് കർശന പ്രതിബദ്ധതയുണ്ട്.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN നേടുക →",
+    "message": "Privacy Guides-ന്റെ VPN ശുപാർശകൾ കാണുക →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic ഒരു കമ്മീഷൻ ലഭിക്കുന്നു, ഇത് ഞങ്ങളുടെ പ്രവർത്തനം തുടരാൻ സഹായിക്കുന്നു।",
+    "message": "Privacy Magic ഈ ശുപാർശകൾക്ക് പണം സ്വീകരിക്കുന്നില്ല, Privacy Guides-മായി ബന്ധപ്പെട്ടതല്ല.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "വേണ്ട, ഞാൻ മറ്റൊരു VPN ഉപയോഗിക്കും",
+  "welcomeGotVpnCta": {
+    "message": "എനിക്ക് VPN ഉണ്ട്!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

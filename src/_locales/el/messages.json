@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Το Privacy Magic σας προστατεύει στο επίπεδο του προγράμματος περιήγησης. Όμως κάθε ιστότοπος που επισκέπτεστε και κάθε ιχνηλάτης που είναι ενσωματωμένος σε αυτόν μπορεί ακόμη να βλέπει τη διεύθυνση IP σας, η οποία μπορεί να αποκαλύψει την ταυτότητα και την τοποθεσία σας. <strong>Για να αποκρύψετε τη διεύθυνση IP σας, θα χρειαστείτε VPN.</strong>",
+    "message": "Το Privacy Magic σας προστατεύει σε επίπεδο προγράμματος περιήγησης. Αλλά κάθε ιστότοπος που επισκέπτεστε και κάθε ενσωματωμένος ιχνηλάτης μπορεί ακόμα να δει τη διεύθυνση IP σας, αποκαλύπτοντας ταυτότητα και τοποθεσία. <strong>Για να κρύψετε τη διεύθυνση IP, χρειάζεστε VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Προτεινόμενο VPN",
+    "message": "Προτεινόμενα VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Ανεξάρτητα ελεγμένο, ανοιχτού κώδικα και χωρίς καταγραφή της περιήγησής σας. Ένα από τα πιο αξιόπιστα διαθέσιμα VPN.",
+    "message": "Η ομάδα Privacy Guides έχει αξιολογήσει και προτείνει τρία VPN ανοιχτού κώδικα με αυστηρή δέσμευση στην ιδιωτικότητα.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Αποκτήστε Proton VPN →",
+    "message": "Δείτε τις προτάσεις VPN του Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Το Privacy Magic λαμβάνει προμήθεια που βοηθά στη στήριξη του έργου μας.",
+    "message": "Το Privacy Magic δεν λαμβάνει αμοιβή για αυτές τις προτάσεις και δεν συνδέεται με το Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Όχι ευχαριστώ, θα χρησιμοποιήσω άλλο VPN",
+  "welcomeGotVpnCta": {
+    "message": "Έχω ήδη VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic aizsargā jūs pārlūka līmenī. Taču katra vietne, ko apmeklējat, un katrs tajā iegultais izsekotājs joprojām var redzēt jūsu IP adresi, kas var atklāt jūsu identitāti un atrašanās vietu. <strong>Lai paslēptu savu IP adresi, jums būs nepieciešams VPN.</strong>",
+    "message": "Privacy Magic aizsargā jūs pārlūka līmenī. Bet katra apmeklētā vietne un katrs iegultais izsekotājs joprojām redz jūsu IP adresi, kas var atklāt identitāti un atrašanās vietu. <strong>Lai paslēptu IP adresi, jums nepieciešams VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Ieteiktais VPN",
+    "message": "Ieteiktie VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Neatkarīgi auditēts, atvērtā koda un neglabā jūsu pārlūkošanas žurnālus. Viens no uzticamākajiem pieejamajiem VPN.",
+    "message": "Privacy Guides komanda ir pārskatījusi un iesaka trīs atvērtā koda VPN ar stingru saistību pret privātumu.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Iegūstiet Proton VPN →",
+    "message": "Skatiet Privacy Guides VPN ieteikumus →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic saņem komisiju, kas palīdz uzturēt mūsu darbu.",
+    "message": "Privacy Magic nesaņem atlīdzību par šiem ieteikumiem un nav saistīts ar Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nē, paldies, es izmantošu citu VPN",
+  "welcomeGotVpnCta": {
+    "message": "Man ir VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

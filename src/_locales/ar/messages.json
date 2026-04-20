@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "يوفر Privacy Magic حماية على مستوى المتصفح. لكن كل موقع تزوره وكل متتبع مضمّن فيه قد يظل قادرًا على رؤية عنوان IP الخاص بك، ما قد يكشف هويتك وموقعك. <strong>لإخفاء عنوان IP الخاص بك، ستحتاج إلى VPN.</strong>",
+    "message": "يحميك Privacy Magic على مستوى المتصفح. لكن كل موقع تزوره، وكل متتبع مضمّن فيه، ما يزال بإمكانه رؤية عنوان IP الخاص بك، ما قد يكشف هويتك وموقعك. <strong>لإخفاء عنوان IP، تحتاج إلى VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN مقترح",
+    "message": "شبكات VPN مقترحة",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "خاضع لتدقيق مستقل، مفتوح المصدر، ولا يحتفظ بسجلات لتصفحك. أحد أكثر خدمات VPN موثوقية.",
+    "message": "راجع فريق Privacy Guides واقترح ثلاث شبكات VPN مفتوحة المصدر ولديها التزام صارم بالخصوصية.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "احصل على Proton VPN →",
+    "message": "اطلع على توصيات VPN من Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "يتلقى Privacy Magic عمولة تساعد على دعم عملنا.",
+    "message": "لا يتلقى Privacy Magic أي مقابل عن هذه التوصيات وليس تابعًا لـ Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "لا شكرًا، سأستخدم VPN آخر",
+  "welcomeGotVpnCta": {
+    "message": "لدي VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

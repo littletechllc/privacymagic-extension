@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic आपको ब्राउज़र स्तर पर सुरक्षा देता है। लेकिन जिन वेबसाइटों पर आप जाते हैं और उनमें मौजूद ट्रैकर अभी भी आपका IP पता देख सकते हैं, जिससे आपकी पहचान और स्थान का पता चल सकता है। <strong>अपना IP पता छिपाने के लिए आपको VPN की आवश्यकता होगी।</strong>",
+    "message": "Privacy Magic आपको ब्राउज़र स्तर पर सुरक्षित रखता है। लेकिन आप जिन वेबसाइटों पर जाते हैं और उनमें मौजूद हर ट्रैकर अभी भी आपका IP पता देख सकता है, जिससे आपकी पहचान और स्थान खुल सकता है। <strong>IP पता छिपाने के लिए आपको VPN चाहिए।</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "सुझाया गया VPN",
+    "message": "सुझाए गए VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "स्वतंत्र रूप से ऑडिट किया गया, ओपन सोर्स, और आपकी ब्राउज़िंग का कोई लॉग नहीं रखता। उपलब्ध सबसे भरोसेमंद VPN में से एक।",
+    "message": "Privacy Guides टीम ने तीन VPN की समीक्षा की है और उन्हें सुझाया है जो ओपन सोर्स हैं और गोपनीयता के प्रति सख्त प्रतिबद्ध हैं।",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN प्राप्त करें →",
+    "message": "Privacy Guides की VPN सिफारिशें देखें →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic को कमीशन मिलता है, जो हमारे काम को जारी रखने में मदद करता है।",
+    "message": "Privacy Magic को इन सिफारिशों के लिए कोई भुगतान नहीं मिलता और यह Privacy Guides से संबद्ध नहीं है।",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "नहीं धन्यवाद, मैं दूसरा VPN इस्तेमाल करूँगा",
+  "welcomeGotVpnCta": {
+    "message": "मेरे पास VPN है!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

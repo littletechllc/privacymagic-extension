@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic உங்களை உலாவி மட்டத்தில் பாதுகாக்கிறது. ஆனால் நீங்கள் பார்வையிடும் ஒவ்வொரு தளமும் அதில் உள்ள ட்ராக்கர்களும் இன்னும் உங்கள் IP முகவரியை காணலாம். <strong>உங்கள் IP முகவரியை மறைக்க VPN தேவை.</strong>",
+    "message": "Privacy Magic உங்களை உலாவி நிலையில் பாதுகாக்கிறது. ஆனால் நீங்கள் பார்வையிடும் ஒவ்வொரு இணையதளமும் உட்பொதிக்கப்பட்ட ஒவ்வொரு கண்காணிப்பும் உங்கள் IP முகவரியைக் காண முடியும், அது அடையாளத்தையும் இருப்பிடத்தையும் வெளிப்படுத்தும். <strong>IP முகவரியை மறைக்க VPN தேவை.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "பரிந்துரைக்கப்பட்ட VPN",
+    "message": "பரிந்துரைக்கப்பட்ட VPN கள்",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "சுயாதீனமாக ஆய்வு செய்யப்பட்ட, திறந்த மூலமானது, உலாவல் பதிவுகளைச் சேமிக்காது.",
+    "message": "Privacy Guides குழு மூன்று VPN களை மதிப்பாய்வு செய்து பரிந்துரைக்கிறது; அவை திறந்த மூலமாகவும் தனியுரிமைக்கு கடுமையாக உறுதியளிக்கின்றன.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN பெறுங்கள் →",
+    "message": "Privacy Guides VPN பரிந்துரைகளைக் காண்க →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic கமிஷன் பெறுகிறது; அது எங்கள் பணியைத் தொடர உதவுகிறது.",
+    "message": "Privacy Magic இந்த பரிந்துரைகளுக்கு கட்டணம் பெறுவதில்லை, Privacy Guides உடன் இணைக்கப்படவில்லை.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "வேண்டாம், நான் வேறு VPN பயன்படுத்துவேன்",
+  "welcomeGotVpnCta": {
+    "message": "எனக்கு VPN உள்ளது!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

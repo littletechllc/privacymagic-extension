@@ -149,12 +149,15 @@
 
   .step-body {
     padding: 1.75rem 1.5rem;
-  }
-
-  .step-body p {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.7;
+
+  }
+
+  .step-body > p {
+
+    margin-top: 0rem;
     margin-bottom: 2rem;
   }
 
@@ -187,7 +190,8 @@
   /*
    * VPN recommendation — uncomment this block when the step 2 card is
    * uncommented in the HTML below.
-   *
+   */
+
   .vpn-box {
     background: var(--blue-light);
     border-radius: 10px;
@@ -231,19 +235,16 @@
   }
 
   .vpn-desc {
-    font-size: 0.85rem;
     color: var(--text-muted);
     line-height: 1.5;
     margin-bottom: 0;
   }
 
   .affiliate-note {
-    font-size: 0.78rem;
     color: var(--text-hint);
     margin-top: 0.75rem;
     font-style: italic;
   }
-  */
 
   footer {
     text-align: center;
@@ -285,8 +286,6 @@
   </div>
 </div>
 
-<!-- Step 2 -->
- <!---
 <div class="step-card" id="step_vpn">
   <div class="step-header">
     <div class="step-num">2</div>
@@ -297,31 +296,26 @@
     <div class="step-body">
       <p data-i18n-html="welcomeStep2Body">Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it,
         can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address,
-          you'll need a VPN.</strong></p>
+          you need a VPN.</strong></p>
       <div class="vpn-box">
-        <div class="vpn-box-label" data-i18n="welcomeSuggestedVpnLabel">Suggested VPN</div>
-        <div class="vpn-info">
-          <div class="vpn-name" data-i18n="welcomeSuggestedVpnName">Proton VPN</div>
-          <p class="vpn-desc" data-i18n="welcomeSuggestedVpnDescription">Independently audited, open source, and keeps no logs of your browsing. One of the most
-            trusted VPNs available.</p>
-        </div>
-        <a href="https://protonvpn.com/" class="btn-primary" target="_blank" rel="noopener noreferrer"
-          style="margin-top:0.75rem; align-self:flex-start;" data-i18n="welcomeGetProtonVpnCta">Get Proton VPN →</a>
-        <p class="affiliate-note" data-i18n="welcomeAffiliateNote" style="margin-top:0.5rem;">Privacy Magic receives a commission which helps sustain our
-          work.</p>
+        <div class="vpn-box-label" data-i18n="welcomeSuggestedVpnLabel">Suggested VPNs</div>
+        <p class="vpn-desc" data-i18n="welcomeSuggestedVpnDescription">The Privacy Guides team has reviewed and recommended three VPNs that are open source and have a strict commitment to privacy.</p>
+        <a href="https://www.privacyguides.org/en/vpn/" class="btn-primary" target="_blank" rel="noopener noreferrer"
+          style="margin:1rem 0; align-self:flex-start;" data-i18n="welcomeGetProtonVpnCta"
+          data-i18n-href="welcomePrivacyGuidesVpnUrl">See Privacy Guides' VPN recommendations →</a>
+        <p class="affiliate-note" data-i18n="welcomeAffiliateNote" style="margin-top:0.5rem;">Privacy Magic receives no compensation for these recommendations and is not affiliated with Privacy Guides.</p>
       </div>
       <div class="btn-row" style="justify-content:flex-end;">
-        <a href="#" class="btn-secondary" data-i18n="welcomeUseAnotherVpnCta">No thanks, I'll use another VPN</a>
+        <a href="#" class="btn-secondary" data-i18n="welcomeGotVpnCta">I've got a VPN!</a>
       </div>
     </div>
   </div>
 </div>
--->
 
 <!-- Step 3 -->
 <div class="step-card" id="step_disableHistorySync">
   <div class="step-header">
-    <div class="step-num">2</div>
+    <div class="step-num">3</div>
     <div class="step-title" data-i18n="welcomeStep3Title">Disable history syncing</div>
     <div class="step-time" data-i18n="welcomeStep3Time">1 min</div>
   </div>

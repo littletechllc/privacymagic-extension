@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic sizi tarayıcı düzeyinde korur. Ancak ziyaret ettiğiniz her web sitesi ve içine gömülü her izleyici IP adresinizi görebilir; bu da kimliğinizi ve konumunuzu ortaya çıkarabilir. <strong>IP adresinizi gizlemek için bir VPN'e ihtiyacınız olacak.</strong>",
+    "message": "Privacy Magic sizi tarayıcı düzeyinde korur. Ancak ziyaret ettiğiniz her site ve gömülü her izleyici hâlâ IP adresinizi görebilir; kimliğiniz ve konumunuz açığa çıkabilir. <strong>IP adresinizi gizlemek için bir VPN’e ihtiyacınız var.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Önerilen VPN",
+    "message": "Önerilen VPN’ler",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Bağımsız olarak denetlenmiş, açık kaynaklıdır ve gezinme kayıtlarınızı tutmaz. Mevcut en güvenilir VPN'lerden biri.",
+    "message": "Privacy Guides ekibi, gizliliğe sıkı bağlılığı olan üç açık kaynak VPN’i inceledi ve öneriyor.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Proton VPN edin →",
+    "message": "Privacy Guides VPN önerilerini görüntüle →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic, çalışmalarımızı sürdürmemize yardımcı olan bir komisyon alır.",
+    "message": "Privacy Magic bu öneriler için herhangi bir ücret almaz ve Privacy Guides ile bağlantılı değildir.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Hayır teşekkürler, başka bir VPN kullanacağım",
+  "welcomeGotVpnCta": {
+    "message": "VPN’im var!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

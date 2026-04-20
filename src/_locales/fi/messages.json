@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic suojaa sinua selaintasolla. Mutta jokainen vierailemasi verkkosivusto ja siihen upotettu seurain näkee yhä IP-osoitteesi, mikä voi paljastaa henkilöllisyytesi ja sijaintisi. <strong>Piilottaaksesi IP-osoitteesi tarvitset VPN:n.</strong>",
+    "message": "Privacy Magic suojaa sinua selaintasolla. Mutta jokainen vierailemasi sivusto ja jokainen upotettu seuranta näkee silti IP-osoitteesi, mikä voi paljastaa henkilöllisyytesi ja sijaintisi. <strong>Piilottaaksesi IP-osoitteesi tarvitset VPN:n.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Suositeltu VPN",
+    "message": "Ehdotetut VPN:t",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Riippumattomasti auditoitu, avoimen lähdekoodin ja ei pidä lokeja selaamisestasi. Yksi luotettavimmista saatavilla olevista VPN-palveluista.",
+    "message": "Privacy Guides -tiimi on arvioinut ja suosittelee kolmea avointa VPN:ää, joilla on vahva sitoutuminen yksityisyyteen.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Hanki Proton VPN →",
+    "message": "Katso Privacy Guidesin VPN-suositukset →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic saa komission, joka auttaa ylläpitämään työtämme.",
+    "message": "Privacy Magic ei saa korvausta näistä suosituksista eikä ole sidoksissa Privacy Guidesiin.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Ei kiitos, käytän toista VPN:ää",
+  "welcomeGotVpnCta": {
+    "message": "Minulla on jo VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

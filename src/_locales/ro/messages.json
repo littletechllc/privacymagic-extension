@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic te protejează la nivel de browser. Dar fiecare site pe care îl vizitezi și fiecare tracker încorporat în el îți poate vedea în continuare adresa IP, care îți poate dezvălui identitatea și locația. <strong>Pentru a-ți ascunde adresa IP, ai nevoie de un VPN.</strong>",
+    "message": "Privacy Magic te protejează la nivel de browser. Dar fiecare site pe care îl vizitezi și fiecare tracker încorporat încă îți pot vedea adresa IP, dezvăluind identitatea și locația. <strong>Pentru a ascunde adresa IP, ai nevoie de un VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "VPN recomandat",
+    "message": "VPN-uri recomandate",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Auditat independent, open source și fără jurnale ale navigării tale. Unul dintre cele mai de încredere VPN-uri disponibile.",
+    "message": "Echipa Privacy Guides a analizat și recomandă trei VPN-uri open source cu un angajament ferm față de confidențialitate.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Obține Proton VPN →",
+    "message": "Vezi recomandările VPN de la Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic primește un comision care ajută la susținerea muncii noastre.",
+    "message": "Privacy Magic nu primește compensații pentru aceste recomandări și nu este afiliat cu Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Nu, mulțumesc, voi folosi alt VPN",
+  "welcomeGotVpnCta": {
+    "message": "Am deja un VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {

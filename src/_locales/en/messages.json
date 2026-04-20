@@ -292,32 +292,36 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it, can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address, you'll need a VPN.</strong>",
+    "message": "Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it, can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address, you need a VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Suggested VPN",
-    "description": "Label above recommended VPN card"
+    "message": "Suggested VPNs",
+    "description": "Short label above VPN recommendations on welcome step 2"
   },
   "welcomeSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Independently audited, open source, and keeps no logs of your browsing. One of the most trusted VPNs available.",
-    "description": "Description of suggested VPN provider"
+    "message": "The Privacy Guides team has reviewed and recommended three VPNs that are open source and have a strict commitment to privacy.",
+    "description": "Intro text for Privacy Guides VPN recommendations on welcome step 2"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Get Proton VPN →",
-    "description": "Primary call to action for suggested VPN"
+    "message": "See Privacy Guides' VPN recommendations →",
+    "description": "Link text to Privacy Guides VPN recommendations on welcome step 2"
+  },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
   },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic receives a commission which helps sustain our work.",
-    "description": "Affiliate disclosure on step 2"
+    "message": "Privacy Magic receives no compensation for these recommendations and is not affiliated with Privacy Guides.",
+    "description": "Disclosure that Privacy Magic is not paid for or affiliated with Privacy Guides VPN recommendations"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "No thanks, I'll use another VPN",
-    "description": "Secondary call to action for step 2"
+  "welcomeGotVpnCta": {
+    "message": "I've got a VPN!",
+    "description": "Welcome step 2: user already has a VPN or has just subscribed; completes the step."
   },
   "welcomeStep3Title": {
     "message": "Disable history syncing",

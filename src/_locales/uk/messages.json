@@ -292,11 +292,11 @@
     "description": "Estimated time for step 2"
   },
   "welcomeStep2Body": {
-    "message": "Privacy Magic захищає вас на рівні браузера. Але кожен сайт, який ви відвідуєте, і кожен вбудований у нього трекер все ще можуть бачити вашу IP-адресу, яка може розкрити вашу особу та місцезнаходження. <strong>Щоб приховати свою IP-адресу, вам знадобиться VPN.</strong>",
+    "message": "Privacy Magic захищає вас на рівні браузера. Але кожен відвіданий сайт і кожен вбудований трекер досі бачать вашу IP-адресу, що може розкрити особу та місцезнаходження. <strong>Щоб приховати IP-адресу, вам потрібен VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
   "welcomeSuggestedVpnLabel": {
-    "message": "Рекомендований VPN",
+    "message": "Рекомендовані VPN",
     "description": "Label above recommended VPN card"
   },
   "welcomeSuggestedVpnName": {
@@ -304,19 +304,23 @@
     "description": "Name of suggested VPN provider"
   },
   "welcomeSuggestedVpnDescription": {
-    "message": "Незалежно перевірений, з відкритим кодом і без журналів вашого перегляду. Один із найнадійніших доступних VPN.",
+    "message": "Команда Privacy Guides переглянула та рекомендує три VPN з відкритим кодом і суворою відданістю приватності.",
     "description": "Description of suggested VPN provider"
   },
   "welcomeGetProtonVpnCta": {
-    "message": "Отримати Proton VPN →",
+    "message": "Переглянути рекомендації VPN від Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
+  "welcomePrivacyGuidesVpnUrl": {
+    "message": "https://www.privacyguides.org/en/vpn/",
+    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+  },
   "welcomeAffiliateNote": {
-    "message": "Privacy Magic отримує комісію, що допомагає підтримувати нашу роботу.",
+    "message": "Privacy Magic не отримує винагороди за ці рекомендації та не пов’язаний із Privacy Guides.",
     "description": "Affiliate disclosure on step 2"
   },
-  "welcomeUseAnotherVpnCta": {
-    "message": "Ні, дякую, я використаю інший VPN",
+  "welcomeGotVpnCta": {
+    "message": "У мене вже є VPN!",
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
