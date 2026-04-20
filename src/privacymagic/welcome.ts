@@ -104,7 +104,7 @@ getStepElement('disableHistorySync')?.querySelector('.btn-secondary')
 })
 
 for (const step of STEP_IDS) {
-  getStepElement(step)?.addEventListener('click', (event: Event) => {
+  getStepElement(step)?.addEventListener('click', (_event: Event) => {
     updateStep(step, false)
   })
 }
