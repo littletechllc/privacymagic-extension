@@ -166,7 +166,7 @@
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
-    "message": "Διακοπή διαρροών web",
+    "message": "Σταμάτημα διαρροών στον ιστό",
     "description": "Category for leaky web features settings"
   },
   "audio": {

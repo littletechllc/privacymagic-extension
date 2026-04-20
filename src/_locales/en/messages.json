@@ -167,7 +167,7 @@
   },
   "leakyFeatures": {
     "message": "Stop Web Leaks",
-    "description": "Category for leaky web features settings"
+    "description": "Category title for settings that harden leaky web features against information leaks (not disabling all browser features)"
   },
   "audio": {
     "message": "Audio",

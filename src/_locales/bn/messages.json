@@ -166,7 +166,7 @@
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
-    "message": "ওয়েব লিক বন্ধ করুন",
+    "message": "ওয়েব লিক রোধ করুন",
     "description": "Category for leaky web features settings"
   },
   "audio": {

@@ -166,7 +166,7 @@
     "description": "Setting to block shared storage"
   },
   "leakyFeatures": {
-    "message": "Desactivar Funciones Web con Fugas",
+    "message": "Detener fugas web",
     "description": "Category for leaky web features settings"
   },
   "audio": {
