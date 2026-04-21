@@ -38,6 +38,7 @@ html {
 }
 
 #settings {
+  padding-inline-start: 8px;
   .subswitches-container {
     display: flex;
     flex-direction: column;
@@ -48,9 +49,6 @@ html {
     }
     padding-inline-start: 8px;
     padding-inline-end: 0px;
-  }
-  .settings-toggle-masterSwitch .text {
-    font-size: 20px;
   }
   .settings-toggle-masterSwitch {
     --height: 20px;
