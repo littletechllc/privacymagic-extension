@@ -10,6 +10,16 @@ export const weakMapSetSafe = createSafeMethod(WeakMap, 'set')
 export const weakSetHasSafe = createSafeMethod(WeakSet, 'has')
 export const weakSetAddSafe = createSafeMethod(WeakSet, 'add')
 
+export const MapSafe = self.Map
+export const mapGetSafe = createSafeMethod(Map, 'get')
+export const mapSetSafe = createSafeMethod(Map, 'set')
+export const mapDeleteSafe = createSafeMethod(Map, 'delete')
+
+export const SetSafe = self.Set
+export const setAddSafe = createSafeMethod(Set, 'add')
+export const setDeleteSafe = createSafeMethod(Set, 'delete')
+export const setHasSafe = createSafeMethod(Set, 'has')
+
 export const dispatchEventSafe = self.Document !== undefined ? createSafeMethod(self.Document, 'dispatchEvent') : undefined
 
 export const stringTrimSafe = createSafeMethod(String, 'trim')

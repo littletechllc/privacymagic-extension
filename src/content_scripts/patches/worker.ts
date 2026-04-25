@@ -1,7 +1,7 @@
 import type { ContentSettingId } from '@src/common/setting-ids'
 import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
-import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
+import { resolveAbsoluteUrl, mapSetSafe, mapGetSafe, mapDeleteSafe, setDeleteSafe, setAddSafe, setHasSafe, MapSafe, SetSafe } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
 
@@ -16,16 +16,15 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
   const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
   const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
-  const blobScriptCache = new WeakMap<Blob, string>()
-  const blobURLScriptCache = new Map<string, string>()
+  const blobURLCache = new Map<string, Blob>()
   const BlobSafe = globalObject.Blob
   const URLSafe = globalObject.URL
   const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
   const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
     const originalRevokeObjectURL = globalObject.URL.revokeObjectURL.bind(globalObject.URL)
 
-    const pendingRevocations = new Set<string>()
-    const lockedUrls = new Map<string, number>()
+    const pendingRevocations = new SetSafe<string>()
+    const lockedUrls = new MapSafe<string, number>()
 
     const isLockedObjectUrl = (url: string): boolean => {
       return (lockedUrls.get(url) ?? 0) > 0
@@ -34,8 +33,9 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
     const requestToRevokeObjectUrl = (url: string): void => {
       if (!isLockedObjectUrl(url)) {
         originalRevokeObjectURL(url)
+        mapDeleteSafe(blobURLCache, url)
       } else {
-        pendingRevocations.add(url)
+        setAddSafe(pendingRevocations, url)
       }
     }
 
@@ -46,10 +46,10 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
       const lockCount = lockedUrls.get(url) ?? 0
       if (lockCount <= 1) {
         lockedUrls.delete(url)
-        if (pendingRevocations.has(url)) {
+        if (setHasSafe(pendingRevocations, url)) {
           originalRevokeObjectURL(url)
-          blobURLScriptCache.delete(url)
-          pendingRevocations.delete(url)
+          setDeleteSafe(pendingRevocations, url)
+          mapDeleteSafe(blobURLCache, url)
         }
       } else {
         lockedUrls.set(url, lockCount - 1)
@@ -64,34 +64,11 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
     return { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl }
   })()
 
-  const isPotentialScript = (options: BlobPropertyBag | undefined): boolean => {
-    if (options == null || 'type' in options == null) {
-      return true
-    }
-    return (options.type === 'text/javascript' || options.type === 'application/javascript' || options.type === 'text/plain')
-  }
-
-  globalObject.Blob = new Proxy(globalObject.Blob, {
-    construct (Target, [blobParts, options]: [BlobPart[], BlobPropertyBag?]) {
-      const blob = new Target(blobParts, options)
-      if (isPotentialScript(options)) {
-        const joinedBlobParts = blobParts.filter(x => typeof x === 'string').join('\n')
-        if (joinedBlobParts.length < 5000000) {
-          blobScriptCache.set(blob, joinedBlobParts)
-        }
-      }
-      return blob
-    }
-  })
-
   const originalCreateObjectURL = globalObject.URL.createObjectURL.bind(globalObject.URL)
   globalObject.URL.createObjectURL = (source: Blob | MediaSource): string => {
     const url = originalCreateObjectURL(source)
-    if (source instanceof BlobSafe && blobScriptCache.has(source)) {
-      const cachedScript = blobScriptCache.get(source)
-      if (cachedScript != null) {
-        blobURLScriptCache.set(url, cachedScript)
-      }
+    if (source instanceof BlobSafe) {
+      mapSetSafe(blobURLCache, url, source)
     }
     return url
   }
@@ -100,8 +77,8 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
     requestToRevokeObjectUrl(url)
   }
 
-  const getCachedScript = (url: string): string | undefined => {
-    return blobURLScriptCache.get(url)
+  const getCachedBlob = (url: string): Blob | undefined => {
+    return mapGetSafe(blobURLCache, url)
   }
 
   const generateCompletionCallbackCode = (callback: () => void): string => {
@@ -177,18 +154,15 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           ? 'await import'
           : 'importScripts'
         // Semicolon separated code to avoid issues with line continuations.
-        const bundleWrapper = (script: string) => `
+        const prefix = `
           ;__PRIVACY_MAGIC_WORKER_URL__ = ${jsonStringifySafe(absoluteUrl)}
           ;${hardeningCode}
-          ;${script}\n
-          ;${completionCallbackCode}\n
-          `
-        const cachedScript = getCachedScript(absoluteUrl)
-        let bundle: string
-        if (cachedScript != null) {
-          bundle = bundleWrapper(cachedScript);
-        } else {
-          bundle = bundleWrapper(`
+          ;`
+        const suffix = `
+          ;${completionCallbackCode}`
+        let payload: string | Blob | undefined = getCachedBlob(absoluteUrl);
+        if (payload == null) {
+          payload = `
             const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
             try {
               ${importCommand}(trustedAbsoluteUrl);
@@ -196,9 +170,9 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
             } catch (error) {
               console.error("error in importing: ", error);
             }
-          `);
+          `;
         }
-        const blobUrl = URLcreateObjectURLSafe(new BlobSafe([bundle], { type: 'text/javascript' }))
+        const blobUrl = URLcreateObjectURLSafe(new BlobSafe([prefix, payload, suffix], { type: 'text/javascript' }))
         const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
         return new Target(sanitizedBlobUrl as string, options)
       }

@@ -92,24 +92,6 @@ describe('worker patch', () => {
     expect(constructorArgs[1][0]).toBe('chrome-extension://extension-id/script.js')
   })
 
-  it('should replace Blob with a Proxy', () => {
-    const OriginalBlob = class Blob {
-      constructor (public parts: BlobPart[], public options?: BlobPropertyBag) {}
-    }
-    function MockWorker (this: void) { return {} }
-    const fakeGlobal = makeFakeGlobalScope({
-      Worker: jest.fn().mockImplementation(MockWorker) as unknown as GlobalScope['Worker'],
-      Blob: OriginalBlob as unknown as typeof globalThis.Blob
-    })
-
-    worker(fakeGlobal, workerDeps)
-
-    expect(fakeGlobal.Blob).not.toBe(OriginalBlob)
-    const BlobCtor = fakeGlobal.Blob as new (parts: BlobPart[], options?: BlobPropertyBag) => Blob
-    const blob = new BlobCtor(['const x = 1'], { type: 'text/javascript' })
-    expect(blob).toBeInstanceOf(OriginalBlob)
-  })
-
   it('should patch URL.createObjectURL and URL.revokeObjectURL', () => {
     const fakeURL = makeFakeURL()
     const revokeSpy = jest.spyOn(fakeURL, 'revokeObjectURL')
