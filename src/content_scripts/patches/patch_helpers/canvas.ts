@@ -99,7 +99,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
 
     createShadowContext (): void {
       this.shadowCanvas = createInvisibleCanvas(this.width, this.height)
-      this.shadowContext = this.shadowCanvas.getContext('2d', { ...this.contextAttributes, willReadFrequently: true })
+      this.shadowContext = originalGetContextSafe(this.shadowCanvas, '2d', { ...this.contextAttributes, willReadFrequently: true }) as CanvasRenderingContext2D | null
     }
 
     wipeShadowCanvas (): void {
