@@ -10,7 +10,7 @@ import {
   isNetworkSetting,
   type SettingId
 } from '@src/common/setting-ids'
-import type { DisabledSettingCollection } from '@src/common/settings'
+import type { DisabledSettingCollection } from '@src/common/settings-read'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
 import { updateDynamicRulesMock } from '@test/mocks/web-extension'
 

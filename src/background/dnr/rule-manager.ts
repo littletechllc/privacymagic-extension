@@ -3,7 +3,7 @@ import { computeContentRules } from '@src/background/dnr/content-rules'
 import { computeNetworkRules } from '@src/background/dnr/network-rules'
 import { ensureNonEmptyDomains } from '@src/background/dnr/rule-domains'
 import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
-import { DisabledSettingCollection } from '@src/common/settings'
+import type { DisabledSettingCollection } from '@src/common/settings-read'
 
 export { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
 

@@ -1,6 +1,6 @@
 import { setupPrefsUI } from './prefs-ui'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
-import { resetAllSettingsToRemote } from '@src/common/settings'
+import { resetAllSettingsToRemote } from '@src/background/settings-write'
 import { handleAsync, logError } from '@src/common/util'
 
 document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () => {

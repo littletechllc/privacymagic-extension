@@ -1,6 +1,6 @@
-import { SettingId } from "./setting-ids"
-import { handleAsync, logError } from "./util"
-import { updateRemoteConfig } from "./settings"
+import { SettingId } from '@src/common/setting-ids'
+import { handleAsync, logError } from '@src/common/util'
+import { updateRemoteConfig } from './settings-write'
 
 const REMOTE_CONFIG_URL = "https://raw.githubusercontent.com/littletechllc/privacymagic-extension/refs/heads/main/remote/remote.json"
 const ALARM_NAME = "remote-config-refresh"

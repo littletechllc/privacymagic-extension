@@ -1,12 +1,13 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { getDisabledSettings, getDomainsWhereSettingIsDisabled, setUserDisabledSetting } from '@src/common/settings'
+import { getDisabledSettings, getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
+import { setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type ContentResponse } from '@src/common/messages'
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
-import { startWatchingRemoteConfig } from '@src/common/remote'
+import { startWatchingRemoteConfig } from './remote'
 import { storage } from '@src/common/storage'
 
 const blockAutocomplete = async (): Promise<void> => {

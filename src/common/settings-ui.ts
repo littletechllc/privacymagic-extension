@@ -1,4 +1,4 @@
-import { SETTINGS_KEY, getSettingDisabled } from '@src/common/settings'
+import { SETTINGS_KEY, getSettingDisabled } from '@src/common/settings-read'
 import { getLocalizedText } from '@src/common/i18n'
 import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'

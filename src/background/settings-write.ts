@@ -1,53 +1,23 @@
-import { ALL_SETTING_IDS, SettingId } from './setting-ids'
-import { updateRulesForAllSettings, updateRulesForSetting } from '@src/background/dnr/rule-manager'
+import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import { unique } from '@src/common/data-structures'
+import {
+  SETTINGS_KEY,
+  type DisabledSettingCollection,
+  getDisabledSettingCollection,
+  updateList
+} from '@src/common/settings-read'
+import { updateRulesForAllSettings, updateRulesForSetting } from './dnr/rule-manager'
 
-export const SETTINGS_KEY = '_SETTINGS_'
 const REMOTE_SETTINGS_KEY = '_REMOTE_SETTINGS_'
 const SETTINGS_LOCK_NAME = '_SETTINGS_LOCK_'
 
-export type DisabledSettingCollection = Partial<Record<SettingId, string[]>>
-
-/**
- * Execute a callback with the settings lock. Needed whenever we write
- * to the settings storage.
- * @param callback - The callback to execute with the settings lock.
- * @returns The result of the callback.
- */
 const withSettingsLock = async <T>(callback: () => Promise<T>): Promise<T> => {
   return await navigator.locks.request(SETTINGS_LOCK_NAME, callback)
 }
 
-const isDisabledSetting = (collection: DisabledSettingCollection, domain: string, settingId: SettingId): boolean => {
-  return collection[settingId]?.includes(domain) ?? false
-}
-
-const getDisabledSettingCollection = async(key: string): Promise<DisabledSettingCollection> => {
-  return (await chrome.storage.local.get(key))[key] ?? {}
-}
-
-const updateList = (list: string[], item: string, add: boolean): string[] => {
-  const newList = add ? [...list, item] : list.filter(domain => domain !== item)
-  return unique(newList)
-}
-
-export const getDisabledSettings = async (): Promise<DisabledSettingCollection> => {
-  return await getDisabledSettingCollection(SETTINGS_KEY)
-}
-
-export const getSettingDisabled = async (domain: string, settingId: SettingId): Promise<boolean> => {
-  const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
-  return isDisabledSetting(allUserDisabledSettings, domain, settingId)
-}
-
-export const getDomainsWhereSettingIsDisabled = async (settingId: SettingId): Promise<string[]> => {
-  const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
-  return allUserDisabledSettings[settingId] ?? []
-}
-
 export const setUserDisabledSetting = async (domain: string, settingId: SettingId, disabled: boolean): Promise<void> => {
   await withSettingsLock(async () => {
-    const allUserDisabledSettings : DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
+    const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
     allUserDisabledSettings[settingId] = updateList(allUserDisabledSettings[settingId] ?? [], domain, disabled)
     await chrome.storage.local.set({ [SETTINGS_KEY]: allUserDisabledSettings })
     await updateRulesForSetting(settingId, allUserDisabledSettings[settingId])

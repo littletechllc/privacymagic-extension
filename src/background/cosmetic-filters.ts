@@ -1,6 +1,6 @@
 import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from '@src/common/registrable-domain'
-import { getSettingDisabled } from '@src/common/settings'
+import { getSettingDisabled } from '@src/common/settings-read'
 
 const fileExists = async (path: string): Promise<boolean> => {
   try {
