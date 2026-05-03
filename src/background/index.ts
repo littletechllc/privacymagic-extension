@@ -3,7 +3,8 @@ import { getDisabledSettings, getDomainsWhereSettingIsDisabled } from '@src/comm
 import { setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
-import { type Message, type ResponseSendFunction, type SuccessResponse, type ContentResponse } from '@src/common/messages'
+import { type Message, type ResponseSendFunction, type SuccessResponse, type ContentResponse, type RegistrableDomainSuccessResponse } from '@src/common/messages'
+import { registrableDomainFromUrl } from './registrable-domain'
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
@@ -44,6 +45,14 @@ const handleMessage = async (
     } else if (message.type === 'disableSyncSettingsDone') {
       await disableSyncSettingsDone(message.tabId)
       sendResponse({ success: true } as SuccessResponse)
+    } else if (message.type === 'getRegistrableDomain') {
+      let domain: string | null = null
+      try {
+        domain = registrableDomainFromUrl(message.url)
+      } catch {
+        domain = null
+      }
+      sendResponse({ success: true, domain } as RegistrableDomainSuccessResponse)
     } else {
       // Exhaustive check: all message types should be handled above
       // If this code runs, a new message type was added but not handled

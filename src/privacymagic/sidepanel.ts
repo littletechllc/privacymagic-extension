@@ -1,6 +1,6 @@
 import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
-import { registrableDomainFromUrl } from '@src/common/registrable-domain'
+import { getRegistrableDomainRemote } from '@src/common/messages'
 import { updateSiteInfo } from '@src/common/site-info'
 import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
   if (tab == null) {
     throw new Error('No tab found')
   }
-  const domain = registrableDomainFromUrl(tab.url ?? '')
+  const domain = await getRegistrableDomainRemote(tab.url ?? '')
   if (domain != null) {
     await updateUI(domain)
   }

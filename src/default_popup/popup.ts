@@ -1,5 +1,5 @@
 import { handleAsync, logError } from '@src/common/util'
-import { registrableDomainFromUrl } from '@src/common/registrable-domain'
+import { getRegistrableDomainRemote } from '@src/common/messages'
 import { updateSiteInfo } from '@src/common/site-info'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   if (tabId == null) {
     throw new Error('No active tab found')
   }
-  const domain = registrableDomainFromUrl(tab.url ?? '')
+  const domain = await getRegistrableDomainRemote(tab.url ?? '')
   if (domain == null) {
     return
   }

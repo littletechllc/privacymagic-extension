@@ -6,16 +6,19 @@ export type Message =
   | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
+  | { type: 'getRegistrableDomain', url: string }
 
 // Response types for each message type
 export type SuccessResponse = { success: true }
 export type ContentResponse = { success: true, content: string }
+export type RegistrableDomainSuccessResponse = { success: true, domain: string | null }
 export type ErrorResponse = { success: false, error: string }
 
 // Helper type for the sendResponse function
 export type MessageResponse =
   | SuccessResponse
   | ContentResponse
+  | RegistrableDomainSuccessResponse
   | ErrorResponse
 
 // Helper type for the sendResponse function
@@ -60,4 +63,13 @@ export const disableSyncSettingsDoneRemote = async (tabId: number): Promise<void
   if (!response.success) {
     throw new Error(response.error)
   }
+}
+
+export const getRegistrableDomainRemote = async (url: string): Promise<string | null> => {
+  const message: Message = { type: 'getRegistrableDomain', url }
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as RegistrableDomainSuccessResponse | ErrorResponse
+  if (!response.success) {
+    throw new Error(response.error)
+  }
+  return response.domain
 }

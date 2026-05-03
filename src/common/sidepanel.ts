@@ -1,4 +1,5 @@
-import { registrableDomainFromUrl } from "./registrable-domain"
+import { getRegistrableDomainRemote } from '@src/common/messages'
+import { handleAsync, logError } from '@src/common/util'
 
 export const tabIdFromQuery = (): number => {
   const raw = new URLSearchParams(window.location.search).get('tabId')
@@ -20,10 +21,14 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
     if (details.frameId !== 0 && details.frameId !== undefined) {
       return
     }
-    const latestDomain = registrableDomainFromUrl(details.url)
-    if (latestDomain !== originalDomain) {
-      void chrome.sidePanel.setOptions({ enabled: false, tabId });
-    }
+    handleAsync(async () => {
+      const latestDomain = await getRegistrableDomainRemote(details.url)
+      if (latestDomain !== originalDomain) {
+        void chrome.sidePanel.setOptions({ enabled: false, tabId })
+      }
+    }, (error) => {
+      logError(error, 'getRegistrableDomainRemote in watchForNavigations', details)
+    })
   })
 }
 
