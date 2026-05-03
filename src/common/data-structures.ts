@@ -51,3 +51,16 @@ export const includeInListIfNeeded = <T>(array: T[] | undefined, item: T, includ
  */
 export const objectEntries = <K extends string, V>(obj: Record<K, V>): Array<[K, V]> =>
   Object.entries(obj) as Array<[K, V]>
+
+/**
+ * This is a type-safe wrapper around Object.fromEntries().
+ * @param entries - The entries to convert to an object.
+ * @returns The object created from the entries.
+ * @template K - The type of the object keys (must extend string).
+ * @template V - The type of the object values.
+ */
+export const objectFromEntries = <K extends string, V>(entries: [K, V][]): Record<K, V> => {
+  return Object.fromEntries(entries) as Record<K, V>
+}
+
+export const unique = <T>(array: T[]): T[] => Array.from(new Set(array))

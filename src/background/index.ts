@@ -1,12 +1,12 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { getAllSettings, setSetting } from '@src/common/settings'
+import { getDisabledSettings, getDomainsWhereSettingIsDisabled, setUserDisabledSetting } from '@src/common/settings'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type ContentResponse } from '@src/common/messages'
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
-import { updateRules, setupRules } from './dnr/rule-manager'
+import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
-import { addRemoteConfigListener, startWatchingRemoteConfig } from '@src/common/remote'
+import { startWatchingRemoteConfig } from '@src/common/remote'
 import { storage } from '@src/common/storage'
 
 const blockAutocomplete = async (): Promise<void> => {
@@ -30,8 +30,7 @@ const handleMessage = async (
   sendResponse: ResponseSendFunction): Promise<void> => {
   try {
     if (message.type === 'updateSetting') {
-      await setSetting(message.domain, message.settingId, message.value)
-      await updateRules(message.domain, message.settingId, message.value)
+      await setUserDisabledSetting(message.domain, message.settingId, !message.value)
       sendResponse({ success: true } as SuccessResponse)
     } else if (message.type === 'getRemoteStyleSheetContent') {
       const response = await fetch(message.url, { headers: { "Content-Type": "text/css" } })
@@ -62,12 +61,7 @@ const handleMessage = async (
 }
 
 const removeAllServiceWorkers = async (): Promise<void> => {
-  const excludedDomains = new Set<string>()
-  for (const [domain, settingId, value] of await getAllSettings()) {
-    if (settingId === 'serviceWorker' && value === false) {
-      excludedDomains.add(domain)
-    }
-  }
+  const excludedDomains = await getDomainsWhereSettingIsDisabled('serviceWorker')
   const excludeOrigins = [...excludedDomains].map(domain => `https://${domain}`)
   chrome.browsingData.removeServiceWorkers({ excludeOrigins }, () => {
     console.log('service workers removed, except for domains:', [...excludedDomains].join(', '))
@@ -87,9 +81,6 @@ const initializeListeners = (): void => {
     injectCssForCosmeticFilters()
     showBlockedRequests()
     startWatchingRemoteConfig()
-    addRemoteConfigListener(() => {
-      void setupRules()
-    })
   } catch (error) {
     logError(error, 'error initializing listeners')
   }
@@ -98,7 +89,7 @@ const initializeListeners = (): void => {
 // Functions that set up persistent resources (dynamic DNR rules persist across sessions)
 const initializePersistentResources = async (): Promise<void> => {
   await blockAutocomplete()
-  await setupRules()
+  await updateRulesForAllSettings(await getDisabledSettings())
 }
 
 const showWelcomePage = async (): Promise<void> => {

@@ -36,27 +36,31 @@ export const makeBundleForInjection = (disabledSettings: string[]): string => {
 
 export const getDisabledSettings = (): ContentSettingId[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
+    // __disabledSettings has been set by a parent frame or worker.
     return __disabledSettings
   }
-  let result: string[] = []
+  // Gather disabled settings from the cookie.
+  const result: ContentSettingId[] = []
   try {
-    document.cookie.split(';').forEach(cookie => {
+    const cookieItems = document.cookie.split(';')
+    for (const cookie of cookieItems) {
       const [key, value] = cookie.trim().split('=')
-      if (key === '__pm__disabled_settings' && value !== undefined) {
-        result = value.split(',')
+      if (key.startsWith('__pm_setting__')) {
+        // Clear the cookie.
+        document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
+        // Add the setting ID to the list of disabled settings if the value is '0'.
+        if (value === '0') {
+          const settingId = key.split('__pm_setting__')[1]
+          if (settingId != null && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
+            result.push(settingId as ContentSettingId)
+          }
+        }
       }
-    })
-    document.cookie = '__pm__disabled_settings=; Secure; SameSite=None; Path=/; Partitioned; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
-    if (result.length === 1 && result[0] === '') {
-      result = []
     }
-    result = result.filter((setting): setting is ContentSettingId =>
-      (CONTENT_SETTING_IDS as readonly string[]).includes(setting))
   } catch (error) {
     console.error('error getting disabled settings from cookie:', error)
   }
-
-  __disabledSettings = result as ContentSettingId[]
+  __disabledSettings = result
   return __disabledSettings
 }
 

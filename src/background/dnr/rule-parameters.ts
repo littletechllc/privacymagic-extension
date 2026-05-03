@@ -1,3 +1,5 @@
+import { SettingId } from "@src/common/setting-ids";
+
 /**
  * Globally-defined priorities for DNR rules.
  */
@@ -12,7 +14,7 @@ export enum DNR_RULE_PRIORITIES {
 /**
  * Valid category IDs for DNR rules.
  */
-export type CategoryId = 'content_rule' | 'network_rule' | 'allow_rule' | 'http_warnings'
+export type CategoryId = 'content_rule' | 'network_rule' | 'allow_rule'
 
 const encoderForFnv1a = new TextEncoder();
 
@@ -21,7 +23,7 @@ const encoderForFnv1a = new TextEncoder();
  * @param str - The string to hash.
  * @returns The hash value.
  */
-function fnv1a(str: string): number {
+const fnv1a = (str: string): number => {
   const bytes = encoderForFnv1a.encode(str);
   let hash = 0x811c9dc5;
   for (let i = 0; i < bytes.length; i++) {
@@ -40,8 +42,8 @@ function fnv1a(str: string): number {
  * @param ruleName - The name of the rule (arbitrary string).
  * @returns A unique numeric ID for the rule.
  */
-export const dnrRuleIdForName = (category: CategoryId, ruleName: string): number => {
-  const key = JSON.stringify([category, ruleName])
+export const dnrRuleIdForName = (category: CategoryId, settingId: SettingId, index?: number): number => {
+  const key = JSON.stringify([category, settingId, index])
   // Keep range of IDs to fit into 32 bit integer comfortably.
   return (fnv1a(key) % 1_000_000_000) + 1
 }

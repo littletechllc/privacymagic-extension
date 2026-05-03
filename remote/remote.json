@@ -1,7 +1,9 @@
 {
   "version": "1",
   "setting_exceptions": {
-    "example.com": ["css","iframe"],
-    "petco.com": ["cpu", "screen"]
+    "css": ["example.com"],
+    "iframe": ["example.com"],
+    "cpu": ["petco.com"],
+    "screen": ["petco.com"]
   }
 }

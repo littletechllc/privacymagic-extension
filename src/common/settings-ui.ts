@@ -1,4 +1,4 @@
-import { SETTINGS_KEY_PREFIX, getSetting } from '@src/common/settings'
+import { SETTINGS_KEY, getSettingDisabled } from '@src/common/settings'
 import { getLocalizedText } from '@src/common/i18n'
 import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'
@@ -75,15 +75,15 @@ const bindToggleToStorage = async (
   if (input == null) {
     throw new Error('Input not found')
   }
-  const keyPath = [SETTINGS_KEY_PREFIX, domain, settingId]
+  const keyPath = [SETTINGS_KEY, domain, settingId]
   // Use effective setting (getSetting) so remote-disabled shows as off; raw storage has no key when remote disables.
-  const effectiveValue = await getSetting(domain, settingId)
-  input.checked = effectiveValue
+  const isDisabled = await getSettingDisabled(domain, settingId)
+  input.checked = !isDisabled
   store.listenForChanges(keyPath, (value) => {
     if (value !== undefined) {
       input.checked = value
     } else {
-      void getSetting(domain, settingId).then((v) => { input.checked = v })
+      void getSettingDisabled(domain, settingId).then((isDisabled) => { input.checked = !isDisabled })
     }
   })
   input.addEventListener('change', (event) => {
@@ -133,7 +133,7 @@ export const createMasterSwitch = async (domain: string): Promise<HTMLElement> =
 const createSubswitchesContainer = async (domain: string): Promise<HTMLElement> => {
   const subswitchesContainer = document.createElement('div')
   subswitchesContainer.className = 'subswitches-container'
-  const keyPath = [SETTINGS_KEY_PREFIX, domain, 'masterSwitch']
+  const keyPath = [SETTINGS_KEY, domain, 'masterSwitch']
   const updateOpacity = async () => {
     const masterSwitchValue = await storage.get(keyPath)
     subswitchesContainer.style.opacity = masterSwitchValue === false ? '0.4' : '1';

@@ -1,198 +1,154 @@
-import { REMOTE_CONFIG_STORAGE_MOCK } from '@test/mocks/globals'
-import { getDynamicRulesMock, storageLocalGetMock, updateDynamicRulesMock } from '@test/mocks/web-extension'
-import { updateRules, setupRules } from '@src/background/dnr/rule-manager'
-import { SETTINGS_KEY_PREFIX } from '@src/common/settings'
+import '@test/mocks/globals'
+import '@test/mocks/web-extension'
+import { RULE_DOMAIN_PLACEHOLDER, updateRulesForSetting, updateRulesForAllSettings } from '@src/background/dnr/rule-manager'
+import { NETWORK_PROTECTION_DEFS } from '@src/background/dnr/network-rule-defs'
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-parameters'
+import {
+  ALL_SETTING_IDS,
+  isBlockerSetting,
+  isContentSetting,
+  isNetworkSetting,
+  type SettingId
+} from '@src/common/setting-ids'
+import type { DisabledSettingCollection } from '@src/common/settings'
 import { describe, it, expect, beforeEach, jest } from '@jest/globals'
-import { NETWORK_PROTECTION_DEFS } from '@src/background/dnr/network-rules'
+import { updateDynamicRulesMock } from '@test/mocks/web-extension'
 
-const countNetworkRules = (): number => {
-  let count = 0
-  for (const rules of Object.values(NETWORK_PROTECTION_DEFS)) {
-    count += rules.length
+const ruleCountForSetting = (settingId: SettingId): number => {
+  let n = 0
+  if (isContentSetting(settingId)) {
+    n += 2
   }
-  return count
+  if (isNetworkSetting(settingId)) {
+    n += NETWORK_PROTECTION_DEFS[settingId].length
+  }
+  if (isBlockerSetting(settingId)) {
+    n += 1
+  }
+  return n
 }
 
-const totalDefaultNetworkRulesCount = countNetworkRules()
-const totalDefaultContentRulesCount = 1
-
-const getUpdateDynamicRulesCall = () => {
-  expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
-  const call = updateDynamicRulesMock.mock.calls[0]?.[0]
-  expect(call).toHaveProperty('removeRuleIds')
-  expect(call).toHaveProperty('addRules')
-  return call as { removeRuleIds: number[], addRules: chrome.declarativeNetRequest.Rule[] }
-}
-
-const expectRuleCounts = (call: { removeRuleIds: number[], addRules: chrome.declarativeNetRequest.Rule[] }, expectedRemoveCount: number, expectedAddCount: number): void => {
-  expect(call.removeRuleIds.length).toBe(expectedRemoveCount)
-  expect(call.addRules.length).toBe(expectedAddCount)
-}
+const totalRuleCountAllSettings = (): number =>
+  ALL_SETTING_IDS.reduce((sum, id) => sum + ruleCountForSetting(id), 0)
 
 beforeEach(() => {
   jest.clearAllMocks()
-  // Mock storage.local.get() and
-  // chrome.declarativeNetRequest.getDynamicRules
-  // to return empty results by default
-  storageLocalGetMock.mockResolvedValue({})
-  getDynamicRulesMock.mockResolvedValue([])
 })
 
-describe('updateRules', () => {
+const getSingleUpdateCall = (): chrome.declarativeNetRequest.UpdateRuleOptions => {
+  expect(updateDynamicRulesMock).toHaveBeenCalledTimes(1)
+  const call = updateDynamicRulesMock.mock.calls[0]?.[0]
+  expect(call).toBeDefined()
+  expect(call).toHaveProperty('removeRuleIds')
+  expect(call).toHaveProperty('addRules')
+  if (call == null) {
+    throw new Error('expected updateDynamicRules payload')
+  }
+  return call
+}
+
+describe('updateRulesForSetting', () => {
   const domain = 'example.com'
 
-  it('should call updateDynamicRules once for gpc with batched content and network rules', async () => {
-    getDynamicRulesMock
-      .mockResolvedValueOnce([]) // content rule for domain
-      .mockResolvedValueOnce([]) // content rule default
-      .mockResolvedValueOnce([]) // network rule for gpc
+  it('calls updateDynamicRules once with batched content and network rules for gpc', async () => {
+    await updateRulesForSetting('gpc', [domain])
 
-    await updateRules(domain, 'gpc', true)
+    const call = getSingleUpdateCall()
+    const expected = ruleCountForSetting('gpc')
+    expect(call.removeRuleIds).toHaveLength(expected)
+    expect(call.addRules).toHaveLength(expected)
+    expect(call.removeRuleIds).toEqual(call.addRules?.map(r => r.id))
 
-    const call = getUpdateDynamicRulesCall()
-    expect(Array.isArray(call.removeRuleIds)).toBe(true)
-    expect(Array.isArray(call.addRules)).toBe(true)
-    // Content rules: remove 2 IDs (domain + default), add 1 rule (default only, since protection enabled removes the setting)
-    // Network rule: remove 1 ID, add 1 rule (updated without domain in excludedTopDomains)
-    expectRuleCounts(call, 3, 2)
+    const networkRules = call.addRules?.filter(r => r.priority === DNR_RULE_PRIORITIES.NETWORK) ?? []
+    expect(networkRules).toHaveLength(1)
+    expect(networkRules[0]?.condition.excludedTopDomains).toEqual([domain])
   })
 
-  it('should call updateDynamicRules once for masterSwitch with batched content and allow rules', async () => {
-    getDynamicRulesMock
-      .mockResolvedValueOnce([]) // content rule for domain
-      .mockResolvedValueOnce([]) // content rule default
-      .mockResolvedValueOnce([]) // allow rule for masterSwitch
+  it('uses dummy-domain in rule conditions when disabled-domain list is empty', async () => {
+    await updateRulesForSetting('gpc', [])
 
-    await updateRules(domain, 'masterSwitch', true)
-
-    const call = getUpdateDynamicRulesCall()
-    // Content rules: remove 2 IDs (domain + default), add 1 rule (default only, since protection enabled removes the setting)
-    // Allow rule: remove 1 ID, add 0 rules (rule removed when protection enabled and topDomains becomes empty)
-    expectRuleCounts(call, 3, 1)
+    const call = getSingleUpdateCall()
+    const networkRules = call.addRules?.filter(r => r.priority === DNR_RULE_PRIORITIES.NETWORK) ?? []
+    expect(networkRules[0]?.condition.excludedTopDomains).toEqual([RULE_DOMAIN_PLACEHOLDER])
   })
 
-  it('should call updateDynamicRules once for math with only content rule', async () => {
-    getDynamicRulesMock
-      .mockResolvedValueOnce([]) // content rule for domain
-      .mockResolvedValueOnce([]) // content rule default
+  it('calls updateDynamicRules once for masterSwitch with content and allow rules', async () => {
+    await updateRulesForSetting('masterSwitch', [domain])
 
-    await updateRules(domain, 'math', true)
+    const call = getSingleUpdateCall()
+    expectRuleBatch(call, ruleCountForSetting('masterSwitch'))
 
-    const call = getUpdateDynamicRulesCall()
-    // Content rules: remove 2 IDs (domain + default), add 1 rule (default only, since protection enabled removes the setting)
-    expectRuleCounts(call, 2, 1)
+    const allowRules = call.addRules?.filter(r => r.action.type === 'allow') ?? []
+    expect(allowRules).toHaveLength(1)
+    expect(allowRules[0]?.condition.topDomains).toEqual([domain])
   })
 
-  it('should call updateDynamicRules once for ads with only allow rule', async () => {
-    getDynamicRulesMock.mockResolvedValueOnce([]) // allow rule for ads
+  it('calls updateDynamicRules once for math with only content rules', async () => {
+    await updateRulesForSetting('math', [domain])
 
-    await updateRules(domain, 'ads', true)
-
-    const call = getUpdateDynamicRulesCall()
-    // Allow rule: remove 1 ID, add 0 rules (rule removed when protection enabled and topDomains becomes empty)
-    expectRuleCounts(call, 1, 0)
+    const call = getSingleUpdateCall()
+    expectRuleBatch(call, ruleCountForSetting('math'))
+    expect(call.addRules?.every(r => r.priority === DNR_RULE_PRIORITIES.CONTENT_SCRIPTS)).toBe(true)
   })
 
-  it('should call updateDynamicRules once for queryParameters with only network rule', async () => {
-    getDynamicRulesMock.mockResolvedValueOnce([]) // network rule for queryParameters
+  it('calls updateDynamicRules once for ads with only allow rule', async () => {
+    await updateRulesForSetting('ads', [domain])
 
-    await updateRules(domain, 'queryParameters', true)
+    const call = getSingleUpdateCall()
+    expectRuleBatch(call, ruleCountForSetting('ads'))
+    expect(call.addRules?.every(r => r.action.type === 'allow')).toBe(true)
+  })
 
-    const call = getUpdateDynamicRulesCall()
-    const queryParamsRuleCount = NETWORK_PROTECTION_DEFS.queryParameters.length
-    // Network rule: remove/add one rule per query param (updated without domain in excludedTopDomains)
-    expectRuleCounts(call, queryParamsRuleCount, queryParamsRuleCount)
+  it('calls updateDynamicRules once for queryParameters with one network rule per param pattern', async () => {
+    const n = NETWORK_PROTECTION_DEFS.queryParameters.length
+    await updateRulesForSetting('queryParameters', [domain])
+
+    const call = getSingleUpdateCall()
+    expectRuleBatch(call, ruleCountForSetting('queryParameters'))
+    const networkRules = call.addRules?.filter(r => r.priority === DNR_RULE_PRIORITIES.NETWORK) ?? []
+    expect(networkRules).toHaveLength(n)
   })
 })
 
-describe('setupRules', () => {
-  it('should call updateDynamicRules once with all batched rule updates', async () => {
-    const domain = 'example.com'
-    // Mock stored settings:
-    // - battery: ContentSettingId only
-    // - gpc: Both ContentSettingId and NetworkSettingId
-    // - queryParameters: NetworkSettingId only
-    const storageData: Record<string, unknown> = {
-      ...REMOTE_CONFIG_STORAGE_MOCK,
-      [`${SETTINGS_KEY_PREFIX}:${domain}:battery`]: false, // ContentSettingId only - protection disabled
-      [`${SETTINGS_KEY_PREFIX}:${domain}:gpc`]: false, // Both ContentSettingId and NetworkSettingId - protection disabled
-      [`${SETTINGS_KEY_PREFIX}:${domain}:queryParameters`]: false // NetworkSettingId only - protection disabled
-    }
-    storageLocalGetMock.mockResolvedValue(storageData)
-    getDynamicRulesMock.mockResolvedValue([])
+function expectRuleBatch (
+  call: chrome.declarativeNetRequest.UpdateRuleOptions,
+  expectedCount: number
+): void {
+  expect(call.removeRuleIds).toHaveLength(expectedCount)
+  expect(call.addRules).toHaveLength(expectedCount)
+  expect(call.removeRuleIds).toEqual(call.addRules?.map(r => r.id))
+}
 
-    await setupRules()
+describe('updateRulesForAllSettings', () => {
+  it('calls updateDynamicRules once with rules for every setting id', async () => {
+    const total = totalRuleCountAllSettings()
+    const collection: DisabledSettingCollection = {}
 
-    expect(storageLocalGetMock).toHaveBeenCalled()
-    const call = getUpdateDynamicRulesCall()
-    expect(Array.isArray(call.removeRuleIds)).toBe(true)
-    expect(Array.isArray(call.addRules)).toBe(true)
+    await updateRulesForAllSettings(collection)
 
-    // Default rules: 1 content + totalDefaultNetworkRulesCount network
-    // Stored settings (all on same domain 'example.com', all protection disabled):
-    //   - battery: content rule removes [domainContentRuleId, defaultContentRuleId], adds [defaultRule, domainRule]
-    //   - gpc: content rule removes [domainContentRuleId, defaultContentRuleId], adds [defaultRule, domainRule]
-    //   - gpc: network rule removes [gpcNetworkRuleId], adds [gpcNetworkRule] (same ID as default, deduplicated)
-    //   - queryParameters: network rule removes [queryParametersNetworkRuleId], adds [queryParametersNetworkRule] (same ID as default, deduplicated)
-    // removeRuleIds deduplicated: 1 (default content, appears 3 times) + totalDefaultNetworkRulesCount (default network, includes gpc and queryParameters IDs) + 1 (domain content, appears 2 times) = totalDefaultNetworkRulesCount + 2
-    // addRules deduplicated: 1 (default content, last wins) + totalDefaultNetworkRulesCount (default network) + 1 (domain content with battery+gpc, last wins) + 1 (gpc network, last wins, replaces default) + 1 (queryParameters network, last wins, replaces default) = totalDefaultNetworkRulesCount + 4
-    // But gpc and queryParameters network rules replace their defaults, so: totalDefaultNetworkRulesCount + 2
-    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
-    expectRuleCounts(call, totalDefaultNetworkRulesCount + 3, totalDefaultNetworkRulesCount + 3)
-    // Verify removeRuleIds are deduplicated (no duplicates)
-    const uniqueRemoveIds = new Set(call.removeRuleIds)
-    expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
+    const call = getSingleUpdateCall()
+    expectRuleBatch(call, total)
   })
 
-  it('should call updateDynamicRules once for multiple stored settings', async () => {
-    // Mock storage to return settings in the format: key is "_SETTINGS_:domain:settingId", value is boolean
-    const storageData: Record<string, unknown> = {
-      ...REMOTE_CONFIG_STORAGE_MOCK,
-      [`${SETTINGS_KEY_PREFIX}:example.com:gpc`]: true, // protection enabled
-      [`${SETTINGS_KEY_PREFIX}:test.com:css`]: false, // protection disabled
-      [`${SETTINGS_KEY_PREFIX}:another.com:masterSwitch`]: true // protection enabled
+  it('passes stored domain lists into compiled rules', async () => {
+    const collection: DisabledSettingCollection = {
+      gpc: ['example.com'],
+      ads: ['shop.example']
     }
-    storageLocalGetMock.mockResolvedValue(storageData)
-    getDynamicRulesMock.mockResolvedValue([])
 
-    await setupRules()
+    await updateRulesForAllSettings(collection)
 
-    expect(storageLocalGetMock).toHaveBeenCalled()
-    const call = getUpdateDynamicRulesCall()
+    const call = getSingleUpdateCall()
+    const gpcNetwork = call.addRules?.find(
+      r =>
+        r.priority === DNR_RULE_PRIORITIES.NETWORK &&
+        r.condition.excludedTopDomains?.includes('example.com')
+    )
+    expect(gpcNetwork).toBeDefined()
 
-    // Default rules: 1 content + totalDefaultNetworkRulesCount network
-    // Stored settings:
-    //   - gpc (enabled): content rule removes [example.comContentRuleId, defaultContentRuleId], adds [defaultRule]
-    //     - network rule removes [gpcNetworkRuleId], adds [gpcNetworkRule] (same ID as default, deduplicated)
-    //   - css (disabled): content rule only (css has no network rules in NETWORK_PROTECTION_DEFS when commented out)
-    //     - content rule removes [test.comContentRuleId, defaultContentRuleId], adds [defaultRule, test.comRule]
-    //   - masterSwitch (enabled): content rule removes [another.comContentRuleId, defaultContentRuleId], adds [defaultRule]
-    //     - allow rule removes [masterSwitchAllowRuleId], adds [] (empty topDomains)
-    // Remote config adds google.com: css, iframe (one domain, two settings → same content rule ID removed once after dedupe).
-    // removeRuleIds deduplicated: 1 (default content) + totalDefaultNetworkRulesCount (default network) + 4 (domain content: example, test, another, google) + 1 (masterSwitch allow) = totalDefaultNetworkRulesCount + 6, but one fewer unique after dedupe when google.com appears twice (css, iframe).
-    // addRules: default content + default network + 1 domain content (test.com) + gpc network; css has no network rules when commented out, so one fewer add than older formula.
-    expectRuleCounts(call, totalDefaultNetworkRulesCount + 5, totalDefaultNetworkRulesCount + 2)
-    // Verify removeRuleIds are deduplicated
-    const uniqueRemoveIds = new Set(call.removeRuleIds)
-    expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
-  })
-
-  it('should call updateDynamicRules once even when getAllSettings returns empty', async () => {
-    // No domain settings; remote exceptions still come from storage (same as after fetch in production).
-    storageLocalGetMock.mockResolvedValue({ ...REMOTE_CONFIG_STORAGE_MOCK })
-    getDynamicRulesMock.mockResolvedValue([])
-
-    await setupRules()
-
-    expect(storageLocalGetMock).toHaveBeenCalled()
-    const call = getUpdateDynamicRulesCall()
-
-    // Only default rules: 1 content + totalDefaultNetworkRulesCount network
-    // +1 remove and +1 add from remote config (google.com: css, iframe) in test fetch mock
-    expectRuleCounts(call, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 1, totalDefaultContentRulesCount + totalDefaultNetworkRulesCount + 1)
-    // Verify removeRuleIds are deduplicated
-    const uniqueRemoveIds = new Set(call.removeRuleIds)
-    expect(uniqueRemoveIds.size).toBe(call.removeRuleIds.length)
+    const adsAllow = call.addRules?.find(
+      r => r.action.type === 'allow' && r.condition.topDomains?.includes('shop.example')
+    )
+    expect(adsAllow).toBeDefined()
   })
 })
-

@@ -1,84 +1,95 @@
-import { storage, KeyPath } from './storage'
-import { SettingId } from './setting-ids'
-import { getAllSettingsDisabledByRemoteConfig, getSettingDisabledByRemoteConfig } from './remote'
+import { ALL_SETTING_IDS, SettingId } from './setting-ids'
+import { updateRulesForAllSettings, updateRulesForSetting } from '@src/background/dnr/rule-manager'
+import { unique } from '@src/common/data-structures'
 
-export const ALL_DOMAINS = '_ALL_DOMAINS_'
-export const SETTINGS_KEY_PREFIX = '_SETTINGS_'
+export const SETTINGS_KEY = '_SETTINGS_'
+const REMOTE_SETTINGS_KEY = '_REMOTE_SETTINGS_'
+const SETTINGS_LOCK_NAME = '_SETTINGS_LOCK_'
 
-export const getSetting = async (domain: string, settingId: SettingId): Promise<boolean> => {
-  const globalSetting = await storage.get([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
-  // If a setting has been set to false for the global settings,
-  // then it overrides the domain-specific setting and we return
-  // false regardless of the domain-specific value.
-  if (globalSetting === false) {
-    return false
-  }
-  const domainSpecificSetting = await storage.get(
-    [SETTINGS_KEY_PREFIX, domain, settingId]
-  )
-  if (domainSpecificSetting === undefined) {
-    const disabledByRemoteConfig = await getSettingDisabledByRemoteConfig(domain, settingId)
-    if (disabledByRemoteConfig) {
-      return false
-    }
-    // If a setting hasn't been set for either the default or
-    // domain-specific settings, then we assume it's enabled.
-    return true
-  }
-  // If a setting has been set for the domain-specific settings,
-  // then we return it.
-  return domainSpecificSetting
+export type DisabledSettingCollection = Partial<Record<SettingId, string[]>>
+
+/**
+ * Execute a callback with the settings lock. Needed whenever we write
+ * to the settings storage.
+ * @param callback - The callback to execute with the settings lock.
+ * @returns The result of the callback.
+ */
+const withSettingsLock = async <T>(callback: () => Promise<T>): Promise<T> => {
+  return await navigator.locks.request(SETTINGS_LOCK_NAME, callback)
 }
 
-export const setSetting = async (domain: string, settingId: SettingId, value: boolean): Promise<void> => {
-  // If the domain is the global domain, then we set the setting value.
-  // We remove the setting if the value is being set to true, since
-  // the default value is true.
-  if (domain === ALL_DOMAINS) {
-    if (value === true) {
-      await storage.remove([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId])
-    } else {
-      await storage.set([SETTINGS_KEY_PREFIX, ALL_DOMAINS, settingId], false)
-    }
-    return
-  }
-  // If the setting status is the same as the remote status, then we remove the domain-specific setting.
-  const disabledByRemoteConfig = await getSettingDisabledByRemoteConfig(domain, settingId)
-  if ((value === false && disabledByRemoteConfig) || (value === true && !disabledByRemoteConfig)) {
-    await storage.remove([SETTINGS_KEY_PREFIX, domain, settingId])
-    return
-  }
-  // Otherwise, we set the domain-specific setting value.
-  await storage.set([SETTINGS_KEY_PREFIX, domain, settingId], value)
+const isDisabledSetting = (collection: DisabledSettingCollection, domain: string, settingId: SettingId): boolean => {
+  return collection[settingId]?.includes(domain) ?? false
 }
 
-export const getAllSettings = async (): Promise<Array<[string, SettingId, boolean]>> => {
-  const storedSettings = await storage.getAll()
-  const allSettings: Array<[string, SettingId, boolean]> = []
-  const alreadySeenSettings : Set<string> = new Set()
-  for (const [[type, domain, settingId], value] of storedSettings as Array<[KeyPath, boolean]>) {
-    if (type === SETTINGS_KEY_PREFIX) {
-      allSettings.push([domain, settingId as SettingId, value])
-      alreadySeenSettings.add(`${domain}:${settingId}`)
-    }
-  }
-  const allSettingsDisabledByRemoteConfig = await getAllSettingsDisabledByRemoteConfig()
-  for (const [domain, settingIds] of Object.entries(allSettingsDisabledByRemoteConfig)) {
-    for (const settingId of settingIds) {
-        if (!alreadySeenSettings.has(`${domain}:${settingId}`)) {
-          allSettings.push([domain, settingId, false])
-          alreadySeenSettings.add(`${domain}:${settingId}`)
-        }
-    }
-  }
-  return allSettings
+const getDisabledSettingCollection = async(key: string): Promise<DisabledSettingCollection> => {
+  return (await chrome.storage.local.get(key))[key] ?? {}
 }
 
-export const resetAllSettingsToDefaults = async (domain: string): Promise<void> => {
-  const items = await storage.getAll()
-  for (const [keyPath] of items) {
-    if (keyPath[0] === '_SETTINGS_' && keyPath[1] === domain) {
-      await storage.remove(keyPath)
+const updateList = (list: string[], item: string, add: boolean): string[] => {
+  const newList = add ? [...list, item] : list.filter(domain => domain !== item)
+  return unique(newList)
+}
+
+export const getDisabledSettings = async (): Promise<DisabledSettingCollection> => {
+  return await getDisabledSettingCollection(SETTINGS_KEY)
+}
+
+export const getSettingDisabled = async (domain: string, settingId: SettingId): Promise<boolean> => {
+  const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
+  return isDisabledSetting(allUserDisabledSettings, domain, settingId)
+}
+
+export const getDomainsWhereSettingIsDisabled = async (settingId: SettingId): Promise<string[]> => {
+  const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
+  return allUserDisabledSettings[settingId] ?? []
+}
+
+export const setUserDisabledSetting = async (domain: string, settingId: SettingId, disabled: boolean): Promise<void> => {
+  await withSettingsLock(async () => {
+    const allUserDisabledSettings : DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
+    allUserDisabledSettings[settingId] = updateList(allUserDisabledSettings[settingId] ?? [], domain, disabled)
+    await chrome.storage.local.set({ [SETTINGS_KEY]: allUserDisabledSettings })
+    await updateRulesForSetting(settingId, allUserDisabledSettings[settingId])
+  })
+}
+
+/**
+ * Update the remote config in storage. If the remote config has been updated, the user settings are
+ * updated to reflect the new remote config. Specifically, if a setting is disabled by the remote config,
+ * it is added to the user settings. If a setting is enabled by the remote config, it is removed from the
+ * user setting. That's because the remote setting changes can override the user settings.
+ * @param newRemoteConfig - The new remote config to update storage with.
+ */
+export const updateRemoteConfig = async (newRemoteConfig: DisabledSettingCollection): Promise<void> => {
+  await withSettingsLock(async () => {
+    const oldRemoteConfig: DisabledSettingCollection = await getDisabledSettingCollection(REMOTE_SETTINGS_KEY)
+    const userDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
+    for (const settingId of ALL_SETTING_IDS) {
+      const oldDomainsWhereSettingIsDisabled = oldRemoteConfig[settingId] ?? []
+      const newDomainsWhereSettingIsDisabled = newRemoteConfig[settingId] ?? []
+      const addedDomainsWhereSettingIsDisabled = newDomainsWhereSettingIsDisabled.filter(domain => !oldDomainsWhereSettingIsDisabled.includes(domain))
+      const removedDomainsWhereSettingIsDisabled = oldDomainsWhereSettingIsDisabled.filter(domain => !newDomainsWhereSettingIsDisabled.includes(domain))
+      if (addedDomainsWhereSettingIsDisabled.length > 0) {
+        userDisabledSettings[settingId] = unique(
+          [...(userDisabledSettings[settingId] ?? []),
+          ...addedDomainsWhereSettingIsDisabled])
+      }
+      if (removedDomainsWhereSettingIsDisabled.length > 0) {
+        userDisabledSettings[settingId] = (userDisabledSettings[settingId] ?? [])
+          .filter(domain => !removedDomainsWhereSettingIsDisabled.includes(domain))
+      }
     }
-  }
+    await chrome.storage.local.set({ [SETTINGS_KEY]: userDisabledSettings })
+    await chrome.storage.local.set({ [REMOTE_SETTINGS_KEY]: newRemoteConfig })
+    await updateRulesForAllSettings(userDisabledSettings)
+  })
+}
+
+export const resetAllSettingsToRemote = async (): Promise<void> => {
+  await withSettingsLock(async () => {
+    const remoteConfig = await getDisabledSettingCollection(REMOTE_SETTINGS_KEY)
+    await chrome.storage.local.set({ [SETTINGS_KEY]: remoteConfig })
+    await updateRulesForAllSettings(remoteConfig)
+  })
 }

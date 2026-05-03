@@ -1,22 +1,18 @@
 import '@test/mocks/globals'
 import '@test/mocks/web-extension'
-import { computeAllowRuleUpdates } from '@src/background/dnr/allow-rules'
+import { computeAllowRules } from '@src/background/dnr/allow-rules'
+import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
 import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
 import type { SettingId } from '@src/common/setting-ids'
-import { describe, it, expect, beforeEach, jest } from '@jest/globals'
-import { getDynamicRulesMock } from '@test/mocks/web-extension'
+import { describe, it, expect } from '@jest/globals'
 
-beforeEach(() => {
-  jest.clearAllMocks()
-  getDynamicRulesMock.mockResolvedValue([])
-})
+const category = 'allow_rule' as const
 
-// Helper function to create a rule for testing
-const createRule = (
+const allowRule = (
   ruleId: number,
   priority: DNR_RULE_PRIORITIES,
-  topDomains: string[] | undefined
+  topDomains: string[]
 ): chrome.declarativeNetRequest.Rule => ({
   id: ruleId,
   priority,
@@ -27,16 +23,13 @@ const createRule = (
   }
 })
 
-describe('computeAllowRuleUpdates', () => {
-  const category = 'allow_rule'
+describe('computeAllowRules', () => {
   const domain = 'example.com'
 
-  describe('when setting is not in BASE_RULES', () => {
-    it('should return undefined without calling any chrome APIs', async () => {
-      const result = await computeAllowRuleUpdates(domain, 'audio' as SettingId, true)
-
-      expect(result).toBeUndefined()
-      expect(getDynamicRulesMock).not.toHaveBeenCalled()
+  describe('when setting is not a blocker setting', () => {
+    it('should return empty array', () => {
+      const result = computeAllowRules('audio' as SettingId, [domain])
+      expect(result).toEqual([])
     })
   })
 
@@ -44,64 +37,28 @@ describe('computeAllowRuleUpdates', () => {
     const setting: SettingId = 'masterSwitch'
     const ruleId = dnrRuleIdForName(category, setting)
 
-    it('should create new rule when rule does not exist and protection is disabled', async () => {
-      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+    it('should return one allow rule with given topDomains', () => {
+      const result = computeAllowRules(setting, [domain])
 
-      const result = await computeAllowRuleUpdates(domain, setting, false)
-
-      expect(getDynamicRulesMock).toHaveBeenCalledWith({ ruleIds: [ruleId] })
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])]
-      })
+      expect(result).toEqual([
+        allowRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])
+      ])
     })
 
-    it('should remove rule when protection is enabled and rule has only this domain', async () => {
-      const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])
-      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+    it('should use placeholder topDomains when no real domains (manager normalization)', () => {
+      const result = computeAllowRules(setting, [RULE_DOMAIN_PLACEHOLDER])
 
-      const result = await computeAllowRuleUpdates(domain, setting, true)
-
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: []
-      })
+      expect(result).toEqual([
+        allowRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [RULE_DOMAIN_PLACEHOLDER])
+      ])
     })
 
-    it('should update existing rule when protection is disabled and rule already exists', async () => {
-      const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com'])
-      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+    it('should pass multiple domains through unchanged', () => {
+      const result = computeAllowRules(setting, ['other.com', domain])
 
-      const result = await computeAllowRuleUpdates(domain, setting, false)
-
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', domain])]
-      })
-    })
-
-    it('should remove domain from existing rule when protection is enabled', async () => {
-      const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', domain, 'another.com'])
-      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
-
-      const result = await computeAllowRuleUpdates(domain, setting, true)
-
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', 'another.com'])]
-      })
-    })
-
-    it('should not add duplicate domain when protection is disabled', async () => {
-      const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])
-      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
-
-      const result = await computeAllowRuleUpdates(domain, setting, false)
-
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, [domain])]
-      })
+      expect(result).toEqual([
+        allowRule(ruleId, DNR_RULE_PRIORITIES.MASTER_SWITCH, ['other.com', domain])
+      ])
     })
   })
 
@@ -109,28 +66,20 @@ describe('computeAllowRuleUpdates', () => {
     const setting: SettingId = 'ads'
     const ruleId = dnrRuleIdForName(category, setting)
 
-    it('should create new rule when rule does not exist and protection is disabled', async () => {
-      getDynamicRulesMock.mockResolvedValue([] as chrome.declarativeNetRequest.Rule[])
+    it('should return one allow rule with blocker exception priority', () => {
+      const result = computeAllowRules(setting, [domain])
 
-      const result = await computeAllowRuleUpdates(domain, setting, false)
-
-      expect(getDynamicRulesMock).toHaveBeenCalledWith({ ruleIds: [ruleId] })
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: [createRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [domain])]
-      })
+      expect(result).toEqual([
+        allowRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [domain])
+      ])
     })
 
-    it('should remove rule when protection is enabled and rule has only this domain', async () => {
-      const existingRule = createRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [domain])
-      getDynamicRulesMock.mockResolvedValue([existingRule] as chrome.declarativeNetRequest.Rule[])
+    it('should use placeholder topDomains when none are disabled for ads (manager normalization)', () => {
+      const result = computeAllowRules(setting, [RULE_DOMAIN_PLACEHOLDER])
 
-      const result = await computeAllowRuleUpdates(domain, setting, true)
-
-      expect(result).toEqual({
-        removeRuleIds: [ruleId],
-        addRules: []
-      })
+      expect(result).toEqual([
+        allowRule(ruleId, DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS, [RULE_DOMAIN_PLACEHOLDER])
+      ])
     })
   })
 })

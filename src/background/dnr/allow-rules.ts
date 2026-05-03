@@ -3,43 +3,30 @@
 // for which the corresponding setting is disabled.
 
 import { ALL_RESOURCE_TYPES } from "@src/common/util";
-import { includeInListIfNeeded } from "@src/common/data-structures";
 import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from "@src/background/dnr/rule-parameters";
-import { BlockerSettingId, SettingId } from "@src/common/setting-ids";
+import { BlockerSettingId, isBlockerSetting, SettingId } from "@src/common/setting-ids";
+import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
 
-const category: CategoryId = 'allow_rule'
+const ALLOW_RULE_CATEGORY: CategoryId = 'allow_rule'
 
-const BASE_RULES: Record<BlockerSettingId, chrome.declarativeNetRequest.Rule> = {
-  masterSwitch: {
-    id: dnrRuleIdForName(category, 'masterSwitch'),
+const BASE_RULES: Record<BlockerSettingId, (topDomains: NonEmptyDomainList) => chrome.declarativeNetRequest.Rule> = {
+  masterSwitch: (topDomains: NonEmptyDomainList) => ({
+    id: dnrRuleIdForName(ALLOW_RULE_CATEGORY, 'masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
     action: { type: 'allow' },
-    condition: { topDomains: undefined, resourceTypes: ALL_RESOURCE_TYPES }
-  },
-  ads: {
-    id: dnrRuleIdForName(category, 'ads'),
+    condition: { topDomains: [...topDomains], resourceTypes: ALL_RESOURCE_TYPES }
+  }),
+  ads: (topDomains: NonEmptyDomainList) => ({
+    id: dnrRuleIdForName(ALLOW_RULE_CATEGORY, 'ads'),
     priority: DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS,
     action: { type: 'allow' },
-    condition: { topDomains: undefined, resourceTypes: ALL_RESOURCE_TYPES }
-  }
+    condition: { topDomains: [...topDomains], resourceTypes: ALL_RESOURCE_TYPES }
+  }),
 }
 
-const isBlockerSetting = (setting: SettingId): setting is BlockerSettingId => {
-  return setting in BASE_RULES
-}
-
-export const computeAllowRuleUpdates = async (domain: string, setting: SettingId, protectionEnabled: boolean): Promise<chrome.declarativeNetRequest.UpdateRuleOptions | undefined> => {
+export const computeAllowRules = (setting: SettingId, domainsWhereSettingIsDisabled: NonEmptyDomainList): chrome.declarativeNetRequest.Rule[] => {
   if (!isBlockerSetting(setting)) {
-    return undefined
+    return []
   }
-  const ruleId = dnrRuleIdForName(category, setting)
-  const oldRules = await chrome.declarativeNetRequest.getDynamicRules({ruleIds: [ruleId]})
-  const rule = oldRules.length ? oldRules[0] : BASE_RULES[setting]
-  rule.condition.topDomains = includeInListIfNeeded<string>(rule.condition.topDomains, domain, !protectionEnabled)
-  const ruleIsInUse = rule.condition.topDomains !== undefined && rule.condition.topDomains.length > 0
-  const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-    removeRuleIds: [rule.id],
-    addRules: ruleIsInUse ? [rule] : []
-  }
-  return updateRuleOptions
+  return [BASE_RULES[setting](domainsWhereSettingIsDisabled)]
 }

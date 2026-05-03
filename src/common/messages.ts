@@ -7,11 +7,12 @@ export type Message =
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
 
+// Response types for each message type
 export type SuccessResponse = { success: true }
 export type ContentResponse = { success: true, content: string }
 export type ErrorResponse = { success: false, error: string }
 
-// Response types for each message type
+// Helper type for the sendResponse function
 export type MessageResponse =
   | SuccessResponse
   | ContentResponse

@@ -6,3 +6,7 @@ export const isMain = (importMeta: ImportMeta): boolean => process.argv[1] === f
 export const entries = <K extends string, V>(obj: Record<K, V>): Array<[K, V]> => {
   return Object.entries(obj) as Array<[K, V]>
 }
+
+export const fromEntries = <K extends string, V>(entries: [K, V][]): Record<K, V> => {
+  return Object.fromEntries(entries) as Record<K, V>
+}

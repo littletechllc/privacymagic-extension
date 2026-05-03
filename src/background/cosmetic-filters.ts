@@ -1,6 +1,6 @@
 import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from '@src/common/registrable-domain'
-import { getSetting } from '@src/common/settings'
+import { getSettingDisabled } from '@src/common/settings'
 
 const fileExists = async (path: string): Promise<boolean> => {
   try {
@@ -25,12 +25,12 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
   if (topLevelDomain === null) {
     return
   }
-  const masterSwitch = await getSetting(topLevelDomain, 'masterSwitch')
-  if (!masterSwitch) {
+  const masterSwitchDisabled = await getSettingDisabled(topLevelDomain, 'masterSwitch')
+  if (masterSwitchDisabled) {
     return
   }
-  const setting = await getSetting(topLevelDomain, 'ads')
-  if (!setting) {
+  const adsDisabled = await getSettingDisabled(topLevelDomain, 'ads')
+  if (adsDisabled) {
     return
   }
   const files = [
