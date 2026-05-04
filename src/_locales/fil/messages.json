@@ -438,5 +438,9 @@
   "syncHelpReturnToSetupCta": {
     "message": "Bumalik sa setup",
     "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+  },
+  "welcomeStep3AllDoneCta": {
+    "message": "Tapos na!",
+    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   }
 }

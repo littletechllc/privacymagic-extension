@@ -379,6 +379,10 @@
       }
     }
   },
+  "welcomeStep3AllDoneCta": {
+    "message": "All done!",
+    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
   "syncHelpSyncOffTitle": {
     "message": "Sync is off",
     "description": "Title on sync help side panel when history sync is already disabled"
@@ -389,7 +393,7 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "Return to setup",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel (sync-off phase) to return to welcome setup"
   },
   "welcomeShowMeCta": {
     "message": "Yes, show me",

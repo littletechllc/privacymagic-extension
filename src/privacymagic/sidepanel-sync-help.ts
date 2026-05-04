@@ -23,15 +23,14 @@ const setSyncHelpMode = (mode: SyncHelpMode, dom: SyncHelpDom): void => {
   dom.headingSyncOff.hidden = mode !== 'syncOff'
 }
 
-const wireReturnToSetupButtons = (): void => {
-  const returnButtons = document.querySelectorAll<HTMLButtonElement>('.sync-help-return-to-setup-btn')
-  returnButtons.forEach((btn) => {
+const wireFinishSetupButtons = (): void => {
+  document.querySelectorAll<HTMLButtonElement>('.sync-help-finish-setup-btn').forEach((btn) => {
     btn.addEventListener('click', (event: Event) => {
       event.preventDefault()
       handleAsync(async () => {
         await disableSyncSettingsDoneRemote(tabIdFromQuery())
       }, (error) => {
-        logError(error, 'error handling Return to setup on sync help side panel', event)
+        logError(error, 'error finishing sync help side panel (all done / return to setup)', event)
       })
     })
   })
@@ -84,6 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  wireReturnToSetupButtons()
+  wireFinishSetupButtons()
   prepareToCloseSidePanel(tabId, null)
 })
