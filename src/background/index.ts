@@ -1,5 +1,5 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
-import { getDisabledSettings, getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
+import { getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
 import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
