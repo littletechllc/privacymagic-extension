@@ -48,6 +48,22 @@ const getSingleUpdateCall = (): chrome.declarativeNetRequest.UpdateRuleOptions =
   return call
 }
 
+/**
+ * `updateRulesForAllSettings` first calls `updateRules` (remove + add full batch), then
+ * `removeObsoleteSettingsRules` (remove-only). The batch with `addRules` is always the first call.
+ */
+const getFullBatchUpdateCall = (): chrome.declarativeNetRequest.UpdateRuleOptions => {
+  expect(updateDynamicRulesMock).toHaveBeenCalledTimes(2)
+  const call = updateDynamicRulesMock.mock.calls[0]?.[0]
+  expect(call).toBeDefined()
+  expect(call).toHaveProperty('removeRuleIds')
+  expect(call).toHaveProperty('addRules')
+  if (call == null) {
+    throw new Error('expected first updateDynamicRules payload (full batch)')
+  }
+  return call
+}
+
 describe('updateRulesForSetting', () => {
   const domain = 'example.com'
 
@@ -121,14 +137,17 @@ function expectRuleBatch (
 }
 
 describe('updateRulesForAllSettings', () => {
-  it('calls updateDynamicRules once with rules for every setting id', async () => {
+  it('applies the full rule batch then prunes obsolete settings rules', async () => {
     const total = totalRuleCountAllSettings()
     const collection: DisabledSettingCollection = {}
 
     await updateRulesForAllSettings(collection)
 
-    const call = getSingleUpdateCall()
+    const call = getFullBatchUpdateCall()
     expectRuleBatch(call, total)
+
+    const pruneCall = updateDynamicRulesMock.mock.calls[1]?.[0]
+    expect(pruneCall).toEqual({ removeRuleIds: [] })
   })
 
   it('passes stored domain lists into compiled rules', async () => {
@@ -139,7 +158,7 @@ describe('updateRulesForAllSettings', () => {
 
     await updateRulesForAllSettings(collection)
 
-    const call = getSingleUpdateCall()
+    const call = getFullBatchUpdateCall()
     const gpcNetwork = call.addRules?.find(
       r =>
         r.priority === DNR_RULE_PRIORITIES.NETWORK &&

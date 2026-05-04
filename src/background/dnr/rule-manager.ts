@@ -25,18 +25,19 @@ export const updateRulesForSetting = async (setting: SettingId, domainsWhereSett
   await updateRules(computeRules(setting, domainsWhereSettingIsDisabled))
 }
 
-export const removeAllSettingsRules = async (): Promise<void> => {
-  const rules = await chrome.declarativeNetRequest.getDynamicRules({})
+export const removeObsoleteSettingsRules = async (exceptForRuleIds: number[]): Promise<void> => {
+  const rules = (await chrome.declarativeNetRequest.getDynamicRules({})) ?? []
   const ruleIds = rules.map(rule => rule.id)
-  const removeRuleIds = ruleIds.filter(id => id >= MINIMUM_SETTINGS_RULE_ID)
+  const removeRuleIds = ruleIds.filter(id => id >= MINIMUM_SETTINGS_RULE_ID && !exceptForRuleIds.includes(id))
   await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds })
 }
 
 export const updateRulesForAllSettings = async (domainsWhereSettingsAreDisabled: DisabledSettingCollection): Promise<void> => {
   const rules: chrome.declarativeNetRequest.Rule[] = []
-  await removeAllSettingsRules()
   for (const settingId of ALL_SETTING_IDS) {
     rules.push(...computeRules(settingId, domainsWhereSettingsAreDisabled[settingId] ?? []))
   }
   await updateRules(rules)
+  // Remove all settings rules that are no longer needed
+  await removeObsoleteSettingsRules(rules.map(rule => rule.id))
 }

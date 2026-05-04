@@ -4,7 +4,9 @@
 import { jest } from '@jest/globals'
 
 // Create mock functions with proper types
-const mockGetDynamicRules = jest.fn<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>()
+const mockGetDynamicRules = jest
+  .fn<(filter?: chrome.declarativeNetRequest.GetRulesFilter) => Promise<chrome.declarativeNetRequest.Rule[]>>()
+  .mockResolvedValue([])
 const mockUpdateDynamicRules = jest.fn<(options: chrome.declarativeNetRequest.UpdateRuleOptions) => Promise<void>>()
 const mockStorageGet = jest.fn<(keys?: string | string[] | Record<string, unknown> | null) => Promise<Record<string, unknown>>>()
 const mockStorageSet = jest.fn<(items: Record<string, unknown>) => Promise<void>>()
