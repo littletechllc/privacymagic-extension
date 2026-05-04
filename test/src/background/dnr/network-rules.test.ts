@@ -2,12 +2,11 @@ import '@test/mocks/globals'
 import '@test/mocks/web-extension'
 import { computeNetworkRules } from '@src/background/dnr/network-rules'
 import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
+import { networkRuleId } from '@src/background/dnr/rule-ids'
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { ALL_RESOURCE_TYPES } from '@src/common/util'
 import type { SettingId } from '@src/common/setting-ids'
 import { describe, it, expect } from '@jest/globals'
-
-const category = 'network_rule' as const
 
 describe('computeNetworkRules', () => {
   const domain = 'example.com'
@@ -21,7 +20,7 @@ describe('computeNetworkRules', () => {
 
   describe('when setting is gpc', () => {
     const setting: SettingId = 'gpc'
-    const ruleId = dnrRuleIdForName(category, setting, 0)
+    const ruleId = networkRuleId('gpc')
 
     it('should emit one rule with placeholder excludedTopDomains when no real domains are disabled', () => {
       const result = computeNetworkRules(setting, [RULE_DOMAIN_PLACEHOLDER])
@@ -70,8 +69,8 @@ describe('computeNetworkRules', () => {
 
   describe('when setting is referrerPolicy (multiple partial rules)', () => {
     const setting: SettingId = 'referrerPolicy'
-    const ruleId0 = dnrRuleIdForName(category, setting, 0)
-    const ruleId1 = dnrRuleIdForName(category, setting, 1)
+    const ruleId0 = networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin')
+    const ruleId1 = networkRuleId('referrerPolicyStrictOrigin')
 
     it('should emit both rules with shared excludedTopDomains', () => {
       const result = computeNetworkRules(setting, [RULE_DOMAIN_PLACEHOLDER])

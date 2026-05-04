@@ -1,6 +1,7 @@
 import { NetworkSettingId } from '@src/common/setting-ids'
+import { networkRuleId, queryParametersRuleId } from './rule-ids'
 
-const disallowedQueryParams = [
+export const disallowedQueryParams = [
   '__hsfp',
   '__hssc',
   '__hstc',
@@ -26,6 +27,8 @@ const disallowedQueryParams = [
   'yclid'
 ]
 
+export type DisallowedQueryParam = typeof disallowedQueryParams[number]
+
 const setHeaders = (headers: Record<string, string>): chrome.declarativeNetRequest.ModifyHeaderInfo[] =>
   Object.entries(headers).map(
     ([header, value]: [string, string]) => ({ operation: 'set', header, value }))
@@ -36,10 +39,12 @@ const removeHeaders = (list: string[]): chrome.declarativeNetRequest.ModifyHeade
 export type NetworkPartialRule = {
   condition?: chrome.declarativeNetRequest.RuleCondition
   action: chrome.declarativeNetRequest.RuleAction
+  id: number
 }
 
 export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRule[]> = {
   gpc: [{
+    id: networkRuleId('gpc'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: [
@@ -48,6 +53,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   useragent: [{
+    id: networkRuleId('useragent'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -60,6 +66,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
   // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
   // so "ads off" per-site would never unblock requests that were already redirected.
   queryParameters: disallowedQueryParams.map(param => ({
+    id: queryParametersRuleId(param),
     action: {
       type: 'redirect',
       redirect: {
@@ -75,6 +82,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     }
   })),
   network: [{
+    id: networkRuleId('network'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -87,6 +95,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   screen: [{
+    id: networkRuleId('screen'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -101,6 +110,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   display: [{
+    id: networkRuleId('display'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -111,6 +121,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   language: [{
+    id: networkRuleId('language'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
@@ -119,6 +130,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   memory: [{
+    id: networkRuleId('memory'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -147,6 +159,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     }
   }], */
   referrerPolicy: [{
+    id: networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin'),
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -162,6 +175,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       }]
     }
   }, {
+    id: networkRuleId('referrerPolicyStrictOrigin'),
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{
@@ -178,6 +192,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     }
   }],
   cpu: [{
+    id: networkRuleId('cpu'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([
@@ -187,6 +202,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     },
   }],
   device: [{
+    id: networkRuleId('device'),
     action: {
       type: 'modifyHeaders',
       requestHeaders: removeHeaders([

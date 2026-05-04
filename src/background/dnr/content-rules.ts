@@ -4,16 +4,15 @@
 // separate rule for enabled and disabled states.
 
 import { isContentSetting, ContentSettingId, SettingId } from '@src/common/setting-ids'
-import { CategoryId, DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
+import { contentRuleId } from '@src/background/dnr/rule-ids'
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
-
-const CONTENT_RULE_CATEGORY: CategoryId = 'content_rule'
 
 const createContentRule = (settingId: ContentSettingId, domainsWhereSettingIsDisabled: NonEmptyDomainList, enabled: boolean): chrome.declarativeNetRequest.Rule => {
   const cookieKeyVal = `__pm_setting__${settingId}=${enabled ? '1' : '0'}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
   return {
-    id: dnrRuleIdForName(CONTENT_RULE_CATEGORY, settingId, enabled ? 1 : 0),
+    id: contentRuleId(settingId, enabled),
     action: {
       type: 'modifyHeaders',
       responseHeaders: [{

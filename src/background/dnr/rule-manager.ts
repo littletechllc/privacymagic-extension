@@ -4,6 +4,7 @@ import { computeNetworkRules } from '@src/background/dnr/network-rules'
 import { ensureNonEmptyDomains } from '@src/background/dnr/rule-domains'
 import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import type { DisabledSettingCollection } from '@src/common/settings-read'
+import { MINIMUM_SETTINGS_RULE_ID } from './rule-ids'
 
 const computeRules = (setting: SettingId, domainsWhereSettingIsDisabled: string[]): chrome.declarativeNetRequest.Rule[] => {
   const domains = ensureNonEmptyDomains(domainsWhereSettingIsDisabled)
@@ -24,8 +25,16 @@ export const updateRulesForSetting = async (setting: SettingId, domainsWhereSett
   await updateRules(computeRules(setting, domainsWhereSettingIsDisabled))
 }
 
+export const removeAllSettingsRules = async (): Promise<void> => {
+  const rules = await chrome.declarativeNetRequest.getDynamicRules({})
+  const ruleIds = rules.map(rule => rule.id)
+  const removeRuleIds = ruleIds.filter(id => id >= MINIMUM_SETTINGS_RULE_ID)
+  await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds })
+}
+
 export const updateRulesForAllSettings = async (domainsWhereSettingsAreDisabled: DisabledSettingCollection): Promise<void> => {
   const rules: chrome.declarativeNetRequest.Rule[] = []
+  await removeAllSettingsRules()
   for (const settingId of ALL_SETTING_IDS) {
     rules.push(...computeRules(settingId, domainsWhereSettingsAreDisabled[settingId] ?? []))
   }

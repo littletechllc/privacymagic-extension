@@ -2,11 +2,10 @@ import '@test/mocks/globals'
 import '@test/mocks/web-extension'
 import { computeContentRules } from '@src/background/dnr/content-rules'
 import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
-import { DNR_RULE_PRIORITIES, dnrRuleIdForName } from '@src/background/dnr/rule-parameters'
+import { contentRuleId } from '@src/background/dnr/rule-ids'
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import type { ContentSettingId, SettingId } from '@src/common/setting-ids'
 import { describe, it, expect } from '@jest/globals'
-
-const category = 'content_rule' as const
 
 const cookieHeaderValue = (settingId: ContentSettingId, enabled: boolean): string =>
   `__pm_setting__${settingId}=${enabled ? '1' : '0'}; Secure; SameSite=None; Path=/; Partitioned`
@@ -28,7 +27,7 @@ describe('computeContentRules', () => {
 
       expect(result).toEqual([
         {
-          id: dnrRuleIdForName(category, setting, 1),
+          id: contentRuleId(setting, true),
           priority: DNR_RULE_PRIORITIES.CONTENT_SCRIPTS,
           action: {
             type: 'modifyHeaders',
@@ -44,7 +43,7 @@ describe('computeContentRules', () => {
           }
         },
         {
-          id: dnrRuleIdForName(category, setting, 0),
+          id: contentRuleId(setting, false),
           priority: DNR_RULE_PRIORITIES.CONTENT_SCRIPTS,
           action: {
             type: 'modifyHeaders',
