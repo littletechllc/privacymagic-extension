@@ -1,4 +1,4 @@
-import punycode from "punycode-npm"
+import punycode from 'punycode'
 
 const faviconURL = (pageUrl: string): string => {
   const url = new URL(chrome.runtime.getURL('/_favicon/'))
