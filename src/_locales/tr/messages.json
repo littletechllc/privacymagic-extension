@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "Tamam!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "Evet, göster",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "Verileri senkronize et",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "Eşitleme kapalı",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "Eşitleme zaten kapalı; bu nedenle geçmişiniz Google sunucularına gönderilmiyor. Her şey hazır!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "Kuruluma dön",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

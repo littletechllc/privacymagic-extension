@@ -160,7 +160,8 @@
       <h1 data-i18n="welcomeSetupHeading" data-i18n-args="welcomeBrandName" dir="auto">Privacy Magic Setup</h1>
     </header>
     <main class="content">
-    <h1 class="step-title" data-i18n="welcomeStep3Title" dir="auto">Disable history syncing</h1>
+    <h1 class="step-title" id="syncHelpHeadingDefault" data-i18n="welcomeStep3Title" dir="auto">Disable history syncing</h1>
+    <h1 class="step-title" id="syncHelpHeadingSyncOff" hidden data-i18n="syncHelpSyncOffTitle" dir="auto">Sync is off</h1>
     <div id="syncHelpPhasePending">
       <p data-i18n="welcomeStep3IntroSidepanelPending" dir="auto">
         We'll open the Sync settings page so you can make the necessary adjustments.
@@ -201,7 +202,15 @@
         </div>
       </div>
       <div class="btn-row sync-help-actions">
-        <button type="button" class="btn-primary" id="syncHelpAllDoneBtn" data-i18n="welcomeStep3AllDoneCta">All done!</button>
+        <button type="button" class="btn-primary sync-help-return-to-setup-btn" data-i18n="syncHelpReturnToSetupCta">Return to setup</button>
+      </div>
+    </div>
+    <div id="syncHelpPhaseSyncOff" hidden>
+      <p data-i18n="syncHelpSyncOffBody" dir="auto">
+        Sync is already disabled, so your history isn't being sent to Google's servers. You're all set!
+      </p>
+      <div class="btn-row sync-help-pending-actions">
+        <button type="button" class="btn-primary sync-help-return-to-setup-btn" data-i18n="syncHelpReturnToSetupCta">Return to setup</button>
       </div>
     </div>
     </main>

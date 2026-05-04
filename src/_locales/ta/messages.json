@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "முடிந்தது!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "ஆம், காண்பிக்கவும்",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "தரவை ஒத்திசைத்தல்",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "ஒத்திசைவு அணைக்கப்பட்டுள்ளது",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "ஒத்திசைவு ஏற்கனவே அணைக்கப்பட்டுள்ளது, எனவே உங்கள் வரலாறு Google சேவையகங்களுக்கு அனுப்பப்படவில்லை. நீங்கள் தயார்!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "அமைப்புக்குத் திரும்பு",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

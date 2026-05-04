@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "Xong!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "Có, hãy chỉ tôi",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "Dữ liệu đồng bộ hoá",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "Đồng bộ đang tắt",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "Đồng bộ đã được tắt, vì vậy lịch sử duyệt web của bạn không được gửi tới máy chủ của Google. Bạn đã sẵn sàng!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "Quay lại phần thiết lập",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "Gata!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "Da, arată-mi",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "Sincronizează datele",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "Sincronizarea este oprită",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "Sincronizarea este deja oprită, deci istoricul tău nu este trimis la serverele Google. Totul e gata!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "Înapoi la configurare",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

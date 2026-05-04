@@ -379,9 +379,17 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "All done!",
-    "description": "Done button on history sync help side panel"
+  "syncHelpSyncOffTitle": {
+    "message": "Sync is off",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "Sync is already disabled, so your history isn't being sent to Google's servers. You're all set!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "Return to setup",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   },
   "welcomeShowMeCta": {
     "message": "Yes, show me",

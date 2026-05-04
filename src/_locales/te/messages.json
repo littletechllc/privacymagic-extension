@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "పూర్తైంది!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "అవును, చూపించండి",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "డేటా సింక్",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "సింక్ ఆఫ్‌లో ఉంది",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "సింక్ ఇప్పటికే ఆఫ్‌లో ఉంది, కాబట్టి మీ చరిత్ర Google సర్వర్‌లకు పంపబడదు. మీరు సిద్ధంగా ఉన్నారు!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "సెటప్‌కు తిరిగి వెళ్ళు",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

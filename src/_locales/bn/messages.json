@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "হয়ে গেল!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "হ্যাঁ, দেখান",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "ডেটা সিঙ্ক করুন",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "সিঙ্ক বন্ধ আছে",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "সিঙ্ক ইতিমধ্যে বন্ধ আছে, তাই আপনার ইতিহাস Google-এর সার্ভারে পাঠানো হচ্ছে না। সব ঠিক আছে!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "সেটআপে ফিরে যান",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

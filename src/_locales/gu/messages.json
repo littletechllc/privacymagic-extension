@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "થઈ ગયું!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "હા, બતાવો",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "ડેટા સિંક કરો",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "સિંક બંધ છે",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "સિંક પહેલેથી જ બંધ છે, તેથી તમારો ઇતિહાસ Googleના સર્વર પર મોકલાતો નથી. તમે તૈયાર છો!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "સેટઅપ પર પાછા ફરો",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

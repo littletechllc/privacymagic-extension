@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "เสร็จแล้ว!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "ใช่ แสดงให้ฉันดู",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "ซิงค์ข้อมูล",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "การซิงค์ปิดอยู่",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "การซิงค์ถูกปิดอยู่แล้ว ดังนั้นประวัติการเข้าชมของคุณจะไม่ถูกส่งไปยังเซิร์ฟเวอร์ของ Google พร้อมแล้ว!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "กลับไปที่การตั้งค่า",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }

@@ -379,10 +379,6 @@
       }
     }
   },
-  "welcomeStep3AllDoneCta": {
-    "message": "ಆಗಿದೆ!",
-    "description": "Done button on history sync help side panel"
-  },
   "welcomeShowMeCta": {
     "message": "ಹೌದು, ತೋರಿಸಿ",
     "description": "Primary call to action for step 3"
@@ -430,5 +426,17 @@
   "chromium_7044606776288350625": {
     "message": "ಡೇಟಾ ಸಿಂಕ್ ಮಾಡಿ",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "ಸಿಂಕ್ ಆಫ್ ಆಗಿದೆ",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "ಸಿಂಕ್ ಈಗಾಗಲೇ ಆಫ್ ಆಗಿದೆ, ಆದ್ದರಿಂದ ನಿಮ್ಮ ಇತಿಹಾಸವನ್ನು Google ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸಲಾಗುವುದಿಲ್ಲ. ನೀವು ಸಿದ್ಧರಾಗಿದ್ದೀರಿ!",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "ಸೆಟಪ್‌ಗೆ ಹಿಂತಿರುಗಿ",
+    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
   }
 }
