@@ -1,6 +1,6 @@
 import { injectCssForCosmeticFilters } from './cosmetic-filters'
 import { getDisabledSettings, getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
-import { setUserDisabledSetting } from './settings-write'
+import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, type SuccessResponse, type ContentResponse, type RegistrableDomainSuccessResponse } from '@src/common/messages'
@@ -98,7 +98,8 @@ const initializeListeners = (): void => {
 // Functions that set up persistent resources (dynamic DNR rules persist across sessions)
 const initializePersistentResources = async (): Promise<void> => {
   await blockAutocomplete()
-  await updateRulesForAllSettings(await getDisabledSettings())
+  const settings = await copySettingsFromLocalToSessionStorage()
+  await updateRulesForAllSettings(settings)
 }
 
 const showWelcomePage = async (): Promise<void> => {

@@ -15,11 +15,20 @@ const withSettingsLock = async <T>(callback: () => Promise<T>): Promise<T> => {
   return await navigator.locks.request(SETTINGS_LOCK_NAME, callback)
 }
 
+const storageSet = async <T>(key: string, value: T): Promise<void> => {
+  // Set the value in both local and session storage. We use session storage
+  // to improve read performance and local storage for persistence.
+  await Promise.all([
+    chrome.storage.local.set({ [key]: value }),
+    chrome.storage.session.set({ [key]: value })
+  ])
+}
+
 export const setUserDisabledSetting = async (domain: string, settingId: SettingId, disabled: boolean): Promise<void> => {
   await withSettingsLock(async () => {
     const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
     allUserDisabledSettings[settingId] = updateList(allUserDisabledSettings[settingId] ?? [], domain, disabled)
-    await chrome.storage.local.set({ [SETTINGS_KEY]: allUserDisabledSettings })
+    await storageSet(SETTINGS_KEY, allUserDisabledSettings)
     await updateRulesForSetting(settingId, allUserDisabledSettings[settingId])
   })
 }
@@ -50,8 +59,8 @@ export const updateRemoteConfig = async (newRemoteConfig: DisabledSettingCollect
           .filter(domain => !removedDomainsWhereSettingIsDisabled.includes(domain))
       }
     }
-    await chrome.storage.local.set({ [SETTINGS_KEY]: userDisabledSettings })
-    await chrome.storage.local.set({ [REMOTE_SETTINGS_KEY]: newRemoteConfig })
+    await storageSet(SETTINGS_KEY, userDisabledSettings)
+    await storageSet(REMOTE_SETTINGS_KEY, newRemoteConfig)
     await updateRulesForAllSettings(userDisabledSettings)
   })
 }
@@ -59,7 +68,16 @@ export const updateRemoteConfig = async (newRemoteConfig: DisabledSettingCollect
 export const resetAllSettingsToRemote = async (): Promise<void> => {
   await withSettingsLock(async () => {
     const remoteConfig = await getDisabledSettingCollection(REMOTE_SETTINGS_KEY)
-    await chrome.storage.local.set({ [SETTINGS_KEY]: remoteConfig })
+    await storageSet(SETTINGS_KEY, remoteConfig)
     await updateRulesForAllSettings(remoteConfig)
   })
+}
+
+export const copySettingsFromLocalToSessionStorage = async (): Promise<DisabledSettingCollection> => {
+  let localSettings: DisabledSettingCollection = {}
+  await withSettingsLock(async () => {
+    localSettings = (await chrome.storage.local.get(SETTINGS_KEY))[SETTINGS_KEY] ?? {}
+    await chrome.storage.session.set({ [SETTINGS_KEY]: localSettings })
+  })
+  return localSettings
 }

@@ -5,12 +5,16 @@ export const SETTINGS_KEY = '_SETTINGS_'
 
 export type DisabledSettingCollection = Partial<Record<SettingId, string[]>>
 
+const storageGet = async <T>(key: keyof T): Promise<T> => {
+  return (await chrome.storage.session.get(key))
+}
+
 const isDisabledSetting = (collection: DisabledSettingCollection, domain: string, settingId: SettingId): boolean => {
   return collection[settingId]?.includes(domain) ?? false
 }
 
 export const getDisabledSettingCollection = async (key: string): Promise<DisabledSettingCollection> => {
-  return (await chrome.storage.local.get(key))[key] ?? {}
+  return (await storageGet(key))[key] ?? {}
 }
 
 /** Add or remove a domain in a setting’s disabled-domain list (deduped). */
@@ -35,11 +39,7 @@ export const getDomainsWhereSettingIsDisabled = async (settingId: SettingId): Pr
 
 export const listenForSettingsChanges = (callback: () => void): void => {
   chrome.storage.onChanged.addListener((changes, areaName) => {
-    console.log('storage changed', changes, areaName)
-    if (areaName !== 'local') {
-      return
-    }
-    if (changes[SETTINGS_KEY] == null) {
+    if (areaName !== 'session' || changes[SETTINGS_KEY] == null) {
       return
     }
     callback()

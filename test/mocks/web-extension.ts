@@ -60,7 +60,6 @@ if (global.chrome?.declarativeNetRequest?.ResourceType === undefined) {
       removeListener: jest.fn(),
       hasListener: jest.fn()
     }
-    // StorageProxy reads/writes chrome.storage.session for get/getAll; local is still updated in parallel.
     // Tests use storageLocalGetMock etc. — same jest.fn instances so session.get() is covered.
     const mockStorageLocal = {
       get: mockStorageGet as unknown as typeof chrome.storage.local.get,
