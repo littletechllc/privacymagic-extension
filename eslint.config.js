@@ -19,7 +19,7 @@ export default [
     files: ["src/**/*.ts", "tools/**/*.ts", "test/**/*.ts", "webstore/**/*.ts", "*.config.js"],
     languageOptions: {
       parserOptions: {
-        project: "./tsconfig.json",
+        projectService: true,
         tsconfigRootDir: import.meta.dirname
       }
     },
