@@ -4,8 +4,8 @@
  */
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { isValid } from 'psl'
-import { describe, it, expect } from '@jest/globals'
+import { isValid as isValidRegistrableDomain } from 'psl'
+import { describe, it, expect, beforeAll } from '@jest/globals'
 import { ALL_SETTING_IDS, type SettingId } from '@src/common/setting-ids'
 
 const REMOTE_JSON_PATH = join(process.cwd(), 'remote', 'remote.json')
@@ -17,27 +17,29 @@ const isKnownSettingId = (key: string): key is SettingId =>
   (ALL_SETTING_IDS as readonly string[]).includes(key)
 
 describe('remote/remote.json', () => {
-  it('is valid JSON and parses to a plain object', () => {
+  let parsed: Record<string, unknown>
+  let exceptions: unknown
+
+  beforeAll(() => {
     const raw = readFileSync(REMOTE_JSON_PATH, 'utf8')
-    let parsed: unknown
-    expect(() => {
-      parsed = JSON.parse(raw) as unknown
-    }).not.toThrow()
+    parsed = JSON.parse(raw) as Record<string, unknown>
+    exceptions = parsed[SETTING_EXCEPTIONS_KEY]
+  })
+
+  it('is valid JSON and parses to a plain object', () => {
     expect(parsed).not.toBeNull()
     expect(typeof parsed).toBe('object')
     expect(Array.isArray(parsed)).toBe(false)
   })
 
-  it('has setting_exceptions with only valid SettingId keys and string[] registrable domains', () => {
-    const raw = readFileSync(REMOTE_JSON_PATH, 'utf8')
-    const parsed = JSON.parse(raw) as Record<string, unknown>
-
+  it('has setting_exceptions as a non-null object record (not an array)', () => {
     expect(parsed).toHaveProperty(SETTING_EXCEPTIONS_KEY)
-    const exceptions = parsed[SETTING_EXCEPTIONS_KEY]
     expect(exceptions).not.toBeNull()
     expect(typeof exceptions).toBe('object')
     expect(Array.isArray(exceptions)).toBe(false)
+  })
 
+  it('each setting_exceptions entry uses a known SettingId and string[] registrable domains', () => {
     const entries = Object.entries(exceptions as Record<string, unknown>)
     for (const [settingId, domains] of entries) {
       expect(isKnownSettingId(settingId)).toBe(true)
@@ -45,7 +47,7 @@ describe('remote/remote.json', () => {
       expect(Array.isArray(domains)).toBe(true)
       for (const item of domains as unknown[]) {
         expect(typeof item).toBe('string')
-        expect(isValid(item as string)).toBe(true)
+        expect(isValidRegistrableDomain(item as string)).toBe(true)
       }
     }
   })

@@ -1,4 +1,4 @@
-import { get } from 'psl'
+import { get as getRegistrableDomain } from 'psl'
 
 export const registrableDomainFromUrl = (url: string): string | null =>
-  get(new URL(url).hostname)
+  getRegistrableDomain(new URL(url).hostname)
