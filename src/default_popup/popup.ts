@@ -30,6 +30,12 @@ const setupAdvancedSettingsLink = (): void => {
   })
 }
 
+const setupMasterSwitch = async (domain: string): Promise<void> => {
+  const masterSwitchToggle = await createMasterSwitch(domain)
+  const toggleContainer = document.querySelector('.toggle-container')
+  toggleContainer?.appendChild(masterSwitchToggle)
+}
+
 document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
@@ -46,11 +52,8 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   }
   const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
   safeLocalPage.style.display = 'none'
-  await updateSiteInfo(domain)
-  const masterSwitchToggle = await createMasterSwitch(domain)
-  const toggleContainer = document.querySelector('.toggle-container')
-  toggleContainer?.appendChild(masterSwitchToggle)
   setupAdvancedSettingsLink()
+  await Promise.all([updateSiteInfo(domain), setupMasterSwitch(domain)])
 }, (error: unknown) => {
   logError(error, 'error responding to DOMContentLoaded on current tab', event)
 }))

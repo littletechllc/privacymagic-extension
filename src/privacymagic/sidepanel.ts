@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', (event) => handleAsync(async () =>
     throw new Error('No tab found')
   }
   const domain = await getRegistrableDomainRemote(tab.url ?? '')
-  if (domain != null) {
-    await updateUI(domain)
-  }
   prepareToCloseSidePanel(tabId, domain)
   if (domain == null) {
     return
   }
   setupGlobalOptionsLink()
+  void updateUI(domain).catch((error) => {
+    logError(error, 'error updating UI', event)
+  })
 }, (error: unknown) => {
   logError(error, 'error setting up sidepanel', event)
 }))
