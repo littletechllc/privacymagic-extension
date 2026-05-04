@@ -1,11 +1,10 @@
-import { SETTINGS_KEY, getSettingDisabled } from '@src/common/settings-read'
+import { getSettingDisabled, listenForSettingsChanges } from '@src/common/settings-read'
 import { getLocalizedText } from '@src/common/i18n'
 import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'
 import { objectEntries } from '@src/common/data-structures'
 import { SettingId } from '@src/common/setting-ids'
 import { updateSettingRemote, reloadTabRemote } from '@src/common/messages'
-import { StorageProxy, storage } from '@src/common/storage'
 
 type SettingsCategory =
   'masterSwitch' |
@@ -64,9 +63,8 @@ const sortBy = <T>(array: T[], keyFn: (item: T) => string): T[] => {
   })
 }
 
-const bindToggleToStorage = async (
+const bindToggleToSetting = async (
   toggle: HTMLElement,
-  store: StorageProxy,
   domain: string,
   settingId: SettingId,
   _defaultValue: boolean
@@ -75,16 +73,10 @@ const bindToggleToStorage = async (
   if (input == null) {
     throw new Error('Input not found')
   }
-  const keyPath = [SETTINGS_KEY, domain, settingId]
-  // Use effective setting (getSetting) so remote-disabled shows as off; raw storage has no key when remote disables.
   const isDisabled = await getSettingDisabled(domain, settingId)
   input.checked = !isDisabled
-  store.listenForChanges(keyPath, (value) => {
-    if (value !== undefined) {
-      input.checked = value
-    } else {
-      void getSettingDisabled(domain, settingId).then((isDisabled) => { input.checked = !isDisabled })
-    }
+  listenForSettingsChanges(() => {
+    void getSettingDisabled(domain, settingId).then((isDisabled) => { input.checked = !isDisabled })
   })
   input.addEventListener('change', (event) => {
     handleAsync(async () => {
@@ -104,13 +96,13 @@ const bindToggleToStorage = async (
   })
 }
 
-export const createToggleWithBinding = async (store: StorageProxy, domain: string, settingId: SettingId): Promise<HTMLElement> => {
+export const createToggleWithBinding = async (domain: string, settingId: SettingId): Promise<HTMLElement> => {
   const toggle = createToggle(settingId)
-  await bindToggleToStorage(toggle, store, domain, settingId, true)
+  await bindToggleToSetting(toggle, domain, settingId, true)
   return toggle
 }
 
-const createToggleCategory = async (store: StorageProxy, domain: string, settingIds: SettingId[], categoryId: SettingsCategory): Promise<HTMLElement> => {
+const createToggleCategory = async (domain: string, settingIds: SettingId[], categoryId: SettingsCategory): Promise<HTMLElement> => {
   const category = document.createElement('div')
   category.id = categoryId
   category.className = 'toggle-box'
@@ -119,28 +111,27 @@ const createToggleCategory = async (store: StorageProxy, domain: string, setting
   category.appendChild(categoryTitle)
   const sortedSettingIds = sortBy(settingIds, (settingId) => getLocalizedText(settingId))
   for (const settingId of sortedSettingIds) {
-    const toggle = await createToggleWithBinding(store, domain, settingId)
+    const toggle = await createToggleWithBinding(domain, settingId)
     category.appendChild(toggle)
   }
   return category
 }
 
 export const createMasterSwitch = async (domain: string): Promise<HTMLElement> => {
-  const masterSwitchToggle = await createToggleWithBinding(storage, domain, 'masterSwitch')
+  const masterSwitchToggle = await createToggleWithBinding(domain, 'masterSwitch')
   return masterSwitchToggle
 }
 
 const createSubswitchesContainer = async (domain: string): Promise<HTMLElement> => {
   const subswitchesContainer = document.createElement('div')
   subswitchesContainer.className = 'subswitches-container'
-  const keyPath = [SETTINGS_KEY, domain, 'masterSwitch']
   const updateOpacity = async () => {
-    const masterSwitchValue = await storage.get(keyPath)
-    subswitchesContainer.style.opacity = masterSwitchValue === false ? '0.4' : '1';
-    subswitchesContainer.style.pointerEvents = masterSwitchValue === false ? 'none' : 'auto';
+    const masterSwitchDisabled = await getSettingDisabled(domain, 'masterSwitch')
+    subswitchesContainer.style.opacity = masterSwitchDisabled ? '0.4' : '1';
+    subswitchesContainer.style.pointerEvents = masterSwitchDisabled ? 'none' : 'auto';
   }
   await updateOpacity()
-  storage.listenForChanges(keyPath, () => handleAsync(updateOpacity))
+  listenForSettingsChanges(() => handleAsync(updateOpacity))
   return subswitchesContainer
 }
 
@@ -154,7 +145,7 @@ export const setupSettingsUI = async (domain: string): Promise<void> => {
   const subswitchesContainer = await createSubswitchesContainer(domain)
   settingsContainer.appendChild(subswitchesContainer)
   for (const [categoryId, settingIds] of objectEntries(PRIVACY_SETTINGS_CONFIG)) {
-    const toggleCategory = await createToggleCategory(storage, domain, settingIds, categoryId)
+    const toggleCategory = await createToggleCategory(domain, settingIds, categoryId)
     subswitchesContainer.appendChild(toggleCategory)
   }
 }

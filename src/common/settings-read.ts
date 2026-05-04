@@ -32,3 +32,16 @@ export const getDomainsWhereSettingIsDisabled = async (settingId: SettingId): Pr
   const allUserDisabledSettings: DisabledSettingCollection = await getDisabledSettingCollection(SETTINGS_KEY)
   return allUserDisabledSettings[settingId] ?? []
 }
+
+export const listenForSettingsChanges = (callback: () => void): void => {
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    console.log('storage changed', changes, areaName)
+    if (areaName !== 'local') {
+      return
+    }
+    if (changes[SETTINGS_KEY] == null) {
+      return
+    }
+    callback()
+  })
+}
