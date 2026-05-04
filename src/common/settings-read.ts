@@ -1,5 +1,4 @@
 import { SettingId } from './setting-ids'
-import { unique } from '@src/common/data-structures'
 
 export const SETTINGS_KEY = '_SETTINGS_'
 
@@ -15,12 +14,6 @@ const isDisabledSetting = (collection: DisabledSettingCollection, domain: string
 
 export const getDisabledSettingCollection = async (key: string): Promise<DisabledSettingCollection> => {
   return (await storageGet(key))[key] ?? {}
-}
-
-/** Add or remove a domain in a setting’s disabled-domain list (deduped). */
-export const updateList = (list: string[], item: string, add: boolean): string[] => {
-  const newList = add ? [...list, item] : list.filter(domain => domain !== item)
-  return unique(newList)
 }
 
 export const getDisabledSettings = async (): Promise<DisabledSettingCollection> => {

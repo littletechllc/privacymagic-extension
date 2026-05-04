@@ -4,7 +4,6 @@ import {
   SETTINGS_KEY,
   type DisabledSettingCollection,
   getDisabledSettingCollection,
-  updateList
 } from '@src/common/settings-read'
 import { updateRulesForAllSettings, updateRulesForSetting } from './dnr/rule-manager'
 
@@ -22,6 +21,12 @@ const storageSet = async <T>(key: string, value: T): Promise<void> => {
     chrome.storage.local.set({ [key]: value }),
     chrome.storage.session.set({ [key]: value })
   ])
+}
+
+/** Add or remove a domain in a setting’s disabled-domain list (deduped). */
+const updateList = (list: string[], item: string, add: boolean): string[] => {
+  const newList = add ? [...list, item] : list.filter(domain => domain !== item)
+  return unique(newList)
 }
 
 export const setUserDisabledSetting = async (domain: string, settingId: SettingId, disabled: boolean): Promise<void> => {
