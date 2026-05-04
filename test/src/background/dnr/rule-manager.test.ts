@@ -1,6 +1,7 @@
 import '@test/mocks/globals'
 import '@test/mocks/web-extension'
-import { RULE_DOMAIN_PLACEHOLDER, updateRulesForSetting, updateRulesForAllSettings } from '@src/background/dnr/rule-manager'
+import { updateRulesForSetting, updateRulesForAllSettings } from '@src/background/dnr/rule-manager'
+import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
 import { NETWORK_PROTECTION_DEFS } from '@src/background/dnr/network-rule-defs'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-parameters'
 import {

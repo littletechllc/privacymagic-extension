@@ -5,8 +5,6 @@ import { ensureNonEmptyDomains } from '@src/background/dnr/rule-domains'
 import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import type { DisabledSettingCollection } from '@src/common/settings-read'
 
-export { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
-
 const computeRules = (setting: SettingId, domainsWhereSettingIsDisabled: string[]): chrome.declarativeNetRequest.Rule[] => {
   const domains = ensureNonEmptyDomains(domainsWhereSettingIsDisabled)
   const contentRuleUpdates = computeContentRules(setting, domains)
