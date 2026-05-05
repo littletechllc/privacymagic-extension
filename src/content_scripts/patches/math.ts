@@ -1,52 +1,48 @@
-import mathWasmBase64 from '@math/math.wasm'
-import { GlobalScope } from '../helpers/globalObject'
+import * as mathJs from '@math/math.min.js'
+import type { GlobalScope } from '../helpers/globalObject'
 import { redefineMethods } from '../helpers/monkey-patch'
 
 const math = (globalObject: GlobalScope): void => {
-  type MathFunctionName = keyof Math
-  type MathFunction = (...args: number[]) => number
-
-  const mathWasmBuffer = Uint8Array.fromBase64(mathWasmBase64)
-  const mathWasmModule = new globalObject.WebAssembly.Module(mathWasmBuffer)
-  const mathWasmInstance = new globalObject.WebAssembly.Instance(mathWasmModule)
-  const mathWasmExports = mathWasmInstance.exports
-
-  const mathFunctionNames: readonly MathFunctionName[] = [
-    'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'cbrt', 'cos', 'cosh',
-    'exp', 'expm1', 'log', 'log10', 'log1p', 'log2', 'pow', 'sin', 'sinh',
-    'sqrt', 'tan', 'tanh'
-  ]
-
-  const redefineMathFunction = (name: MathFunctionName, value: MathFunction): void => {
-    redefineMethods(globalObject.Math, { [name]: value})
-  }
-
-  for (const name of mathFunctionNames) {
-    redefineMathFunction(name, mathWasmExports[name as string] as MathFunction)
-  }
 
   const hypot = (...args: number[]): number => {
-    const len = args.length
-    if (len === 0) {
+    if (args.length === 0) {
       return 0
     }
-    if (len === 1) {
-      return args[0]
+    if (args.length === 1) {
+      return Math.abs(args[0])
     }
-    const exports = mathWasmExports as {
-      memory: WebAssembly.Memory
-      malloc: (bytes: number) => number
-      free: (ptr: number) => void
-      math_hypot: (count: number, ptr: number) => number
+    let max = 0
+    let hasNaN = false
+    for (const x of args) {
+      if (isNaN(x)) {
+        hasNaN = true
+        continue
+      }
+      const abs = Math.abs(x)
+      if (abs > max) {
+        max = abs
+      }
     }
-    const ptr = exports.malloc(len * Float64Array.BYTES_PER_ELEMENT)
-    new Float64Array(exports.memory.buffer, ptr, len).set(args)
-    const result = exports.math_hypot(len, ptr)
-    exports.free(ptr)
-    return result
+    if (!isFinite(max)) {
+      return Infinity
+    }
+    if (hasNaN) {
+      return NaN
+    }
+    if (max === 0) {
+      return 0
+    }
+    let sum = 0
+    for (const x of args) {
+      const scaled = x / max
+      sum = sum + scaled * scaled
+    }
+    return max * Math.sqrt(sum)
   }
 
-  redefineMathFunction('hypot', hypot)
+  const { _emscripten_stack_restore, emscripten_stack_get_current, memory, ...limitedMathJs } = mathJs
+  redefineMethods(globalObject.Math, { ...limitedMathJs, hypot })
+
 }
 
 export default math

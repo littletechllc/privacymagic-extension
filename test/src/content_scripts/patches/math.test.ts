@@ -161,4 +161,8 @@ describe('math patch', () => {
   it('Math.tanh(Math.PI)', () => {
     expect(Math.tanh(Math.PI)).toBe(0.99627207622075)
   })
+
+  it('Math.cos(1e15)', () => {
+    expect(Math.cos(1e15)).toBe(-0.5131937377869702)
+  })
 })

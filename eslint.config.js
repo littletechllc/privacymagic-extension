@@ -12,11 +12,26 @@ const noRestrictedBrowserGlobals = browserOnlyGlobalNames.map((name) => ({
 
 export default [
   {
-    ignores: ["artifacts/**", "dist/**", "node_modules/**"]
+    ignores: [
+      "artifacts/**",
+      "dist/**",
+      "node_modules/**",
+      // Generated wasm2js — huge, not typed as TS; keep sibling math.min.d.ts in the program instead.
+      "math/math.js",
+      "math/math.min.js",
+      "math/math.wasm"
+    ]
   },
   ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ["src/**/*.ts", "tools/**/*.ts", "test/**/*.ts", "webstore/**/*.ts", "*.config.js"],
+    files: [
+      "src/**/*.ts",
+      "math/**/*.d.ts",
+      "tools/**/*.ts",
+      "test/**/*.ts",
+      "webstore/**/*.ts",
+      "*.config.js"
+    ],
     languageOptions: {
       parserOptions: {
         projectService: true,

@@ -16,7 +16,7 @@ export default {
   },
   moduleNameMapper: {
     '^@src/(.*)$': '<rootDir>/src/$1',
-    '^@math/math.wasm$': '<rootDir>/test/mocks/math-wasm.ts',
+    '^@math/math\\.min\\.js$': '<rootDir>/math/math.min.js',
     '^@tools/(.*)$': '<rootDir>/tools/$1',
     '^@test/(.*)$': '<rootDir>/test/$1'
   },

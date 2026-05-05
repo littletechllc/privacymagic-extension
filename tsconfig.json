@@ -20,5 +20,12 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["./src/**/*", "./tools/**/*", "./webstore/**/*.ts", "*.config.js", "./test/**/*"]
+  "include": [
+    "./src/**/*",
+    "./math/**/*.d.ts",
+    "./tools/**/*",
+    "./webstore/**/*.ts",
+    "*.config.js",
+    "./test/**/*"
+  ]
 }
