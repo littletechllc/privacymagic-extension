@@ -12,11 +12,11 @@ const baseBuildOptions = {
   target: /** @type {const} */ ('es2020'),
   platform: /** @type {const} */ ('browser'),
   minifyIdentifiers: isProduction,
-  // Don't minify syntax/whitespace to avoid inlining helper functions
+  // Don't minify syntax to avoid inlining helper functions
   // which could make us vulnerable to monkey patching
   // TODO: re-examine what kind of minification is safe to do
   minifySyntax: false,
-  minifyWhitespace: false,
+  minifyWhitespace: true,
   legalComments: /** @type {const} */ ('none'),
   treeShaking: true,
   // Node resolution for browser environment
