@@ -11,8 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  wasm:
-    name: Build WASM
+  asmjs:
+    name: Build asmjs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,21 +24,25 @@ jobs:
           cd emsdk
           ./emsdk install latest
           ./emsdk activate latest
-      - name: Compile WASM
+      - name: Compile asmjs
         run: |
           source /home/runner/emsdk/emsdk_env.sh
+          # wasm2js is part of Binaryen bundled with emsdk; keep the same toolchain as emcc.
+          export PATH="/home/runner/emsdk/upstream/bin:$PATH"
+          command -v wasm2js
+          wasm2js --version
           cd math
           chmod +x build.sh
           ./build.sh
-      - name: Upload math WASM
+      - name: Upload math asmjs
         uses: actions/upload-artifact@v4
         with:
-          name: math-wasm
-          path: math/math.wasm
+          name: math-asmjs
+          path: math/math.min.js
 
   lint:
     name: Lint
-    needs: wasm
+    needs: asmjs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -47,12 +51,12 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: '22.x'
-      - name: Restore math WASM
+      - name: Restore math asmjs
         uses: actions/download-artifact@v4
         with:
-          name: math-wasm
-      - name: Place WASM in math directory
-        run: mv math.wasm math/
+          name: math-asmjs
+      - name: Place asmjs in math directory
+        run: mv math.min.js math/
       - name: Install modules
         run: npm install
       - name: Run ESLint
@@ -60,7 +64,7 @@ jobs:
 
   test:
     name: Test
-    needs: wasm
+    needs: asmjs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -70,12 +74,12 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'npm'
-      - name: Restore math WASM
+      - name: Restore math asmjs
         uses: actions/download-artifact@v4
         with:
-          name: math-wasm
-      - name: Place WASM in math directory
-        run: mv math.wasm math/
+          name: math-asmjs
+      - name: Place asmjs in math directory
+        run: mv math.min.js math/
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -83,7 +87,7 @@ jobs:
 
   build:
     name: Build extension
-    needs: wasm
+    needs: asmjs
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     steps:
@@ -93,12 +97,12 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: '22.x'
-      - name: Restore math WASM
+      - name: Restore math asmjs
         uses: actions/download-artifact@v4
         with:
-          name: math-wasm
-      - name: Place WASM in math directory
-        run: mv math.wasm math/
+          name: math-asmjs
+      - name: Place asmjs in math directory
+        run: mv math.min.js math/
       - name: Clean artifacts folder
         run: rm -rf ./artifacts && mkdir ./artifacts
       - name: Install dependencies
