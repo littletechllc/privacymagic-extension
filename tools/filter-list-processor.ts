@@ -2,9 +2,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { isMain } from './util'
 import { fileURLToPath } from 'url'
-import { type NetworkRuleWithoutId, parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
-import { type CosmeticFilter, parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
-import { type ScriptletInvocation, parseScriptletLine, generateScriptletRulesFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
+import { parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
+import { parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
+import { parseScriptletLine, generateScriptletRulesFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,46 +28,25 @@ const getAllLines = async (urls: string[]): Promise<string[]> => {
   return results.flat()
 }
 
-// Remove comments from the given lines
-const removeComments = (lines: string[]): string[] =>
-  lines.filter(line => {
-    const trimmed = line.trim()
-    return !trimmed.startsWith('!')
-  }).slice(1)
+const isCodingLine = (line: string): boolean => {
+  const trimmed = line.trim()
+  return !trimmed.startsWith('!') && trimmed.length > 0
+}
 
-const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], cosmeticFilters: CosmeticFilter[], networkFilters: NetworkRuleWithoutId[] } => {
-  const codingLines = removeComments(lines).filter(line => line.length > 0)
-  const scriptlets: ScriptletInvocation[] = []
-  const cosmeticFilters: CosmeticFilter[] = []
-  const networkFilters: NetworkRuleWithoutId[] = []
-  for (const line of codingLines) {
-    try {
-      if (isScriptletLine(line)) {
-        const scriptlet = parseScriptletLine(line)
-        if (scriptlet !== undefined) {
-          scriptlets.push(scriptlet)
-        }
-      } else if (isCosmeticFilterLine(line)) {
-        const cosmeticFilter = parseCosmeticFilterLine(line)
-        if (cosmeticFilter !== undefined) {
-          cosmeticFilters.push(cosmeticFilter)
-        }
-      } else if (isNetworkFilterLine(line)) {
-        const networkFilter = parseNetworkFilterLine(line)
-        if (networkFilter !== undefined) {
-          networkFilters.push(networkFilter)
-        }
-      } else {
-        console.log("unsupported line:", line)
-      }
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        e.message = `Error in line '${line}':\n${e.message}`
-      }
-      throw e
+const separateLines = (lines: string[]): { scriptletsLines: string[], cosmeticFiltersLines: string[], networkFiltersLines: string[] } => {
+  const scriptletsLines: string[] = []
+  const cosmeticFiltersLines: string[] = []
+  const networkFiltersLines: string[] = []
+  for (const line of lines) {
+    if (isScriptletLine(line)) {
+      scriptletsLines.push(line)
+    } else if (isCosmeticFilterLine(line)) {
+      cosmeticFiltersLines.push(line)
+    } else if (isNetworkFilterLine(line)) {
+      networkFiltersLines.push(line)
     }
   }
-  return { scriptlets, cosmeticFilters, networkFilters }
+  return { scriptletsLines, cosmeticFiltersLines, networkFiltersLines }
 }
 
 const isGoodLine = (x: string): boolean => {
@@ -96,8 +75,11 @@ const dist = (localPath: string): string => {
 
 export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
-  const linesFiltered = lines.filter(isGoodLine)
-  const { scriptlets, cosmeticFilters, networkFilters } = parseLines(linesFiltered)
+  const linesFiltered = lines.filter(isGoodLine).filter(isCodingLine)
+  const { scriptletsLines, cosmeticFiltersLines, networkFiltersLines } = separateLines(linesFiltered)
+  const scriptlets = scriptletsLines.map(parseScriptletLine).filter(scriptlet => scriptlet !== undefined)
+  const cosmeticFilters = cosmeticFiltersLines.map(parseCosmeticFilterLine).filter(cosmeticFilter => cosmeticFilter !== undefined)
+  const networkFilters = networkFiltersLines.map(parseNetworkFilterLine).filter(networkFilter => networkFilter !== undefined)
   const blockingRulesFileContent = generateBlockingRulesFile(networkFilters)
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
