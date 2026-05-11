@@ -86,6 +86,12 @@ const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: Cosmeti
 }
 
 const enforceProceduralFilter = (selector: string, hasText: string, style: string) => {
+  const matchesText = (text: string, hasTextContent: string): boolean => {
+    if (hasTextContent.startsWith('/') && hasTextContent.endsWith('/')) {
+      return new RegExp(hasTextContent.slice(1, -1)).test(text)
+    }
+    return text.includes(hasTextContent)
+  }
   const applyStyleToElement = (element: Element) => {
     const originalStyle = element.getAttribute('style')
     if (originalStyle?.includes(style)) {
@@ -99,7 +105,10 @@ const enforceProceduralFilter = (selector: string, hasText: string, style: strin
       ...(root.matches(selector) ? [root] : []),
       ...Array.from(root.querySelectorAll(selector))
     ]
-    return Array.from(possibleElements).filter(element => element.textContent?.includes(hasText))
+    return Array.from(possibleElements).filter(element => {
+      const textContent = element.textContent ?? ''
+      return matchesText(textContent, hasText)
+    })
   }
   const applyStylesToMatchingElements = (root: Element) => {
     findMatchingElements(root).forEach(applyStyleToElement)
