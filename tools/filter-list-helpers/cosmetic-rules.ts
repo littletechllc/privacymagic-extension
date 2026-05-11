@@ -2,22 +2,22 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { entries } from '../util'
 
-export type ContentFilterBody = {
+export type CosmeticFilterBody = {
   style: string
   selector: string
 }
 
-export type ContentFilter = {
+export type CosmeticFilter = {
   domains: string[]
   separator: string
-  body: ContentFilterBody
+  body: CosmeticFilterBody
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
 
-export const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/
+export const cosmeticFilterSeparatorRegex = /#\?#|#@#|#S#|##/
 
-const parseContentFilterBody = (body: string): ContentFilterBody => {
+const parseCosmeticFilterBody = (body: string): CosmeticFilterBody => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
   if (matches !== null && matches !== undefined) {
     return { selector: matches[1], style: matches[2] }
@@ -25,37 +25,38 @@ const parseContentFilterBody = (body: string): ContentFilterBody => {
   return { selector: body, style: 'display: none !important;' }
 }
 
-export const parseContentFilter = (line: string, separator: string): ContentFilter => {
+export const parseCosmeticFilter = (line: string, separator: string): CosmeticFilter => {
   const [domainsString, body] = line.split(separator)
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))
-  const { selector, style } = parseContentFilterBody(body)
+  const { selector, style } = parseCosmeticFilterBody(body)
   return { domains, separator, body: { selector, style } }
 }
 
-export const generateContentRules = (contentFilters: ContentFilter[]): Record<string, Record<string, string[]>> => {
+const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record<string, Record<string, string[]>> => {
   const cssItemsForDomain: Record<string, Record<string, string[]>> = {}
-  for (const contentFilter of contentFilters) {
-    if (contentFilter.separator !== '##') {
+  for (const cosmeticFilter of cosmeticFilters) {
+    if (cosmeticFilter.separator !== '##') {
       // TODO: handle other separators
-      console.log('skipping non-## separator', contentFilter)
+      console.log('skipping non-## separator', cosmeticFilter)
       continue
     }
-    if (contentFilter.body.selector.includes('has-text') || contentFilter.body.selector.startsWith('+js(')) {
-      console.log('skipping odd selector', contentFilter)
+    if (cosmeticFilter.body.selector.includes('has-text') || cosmeticFilter.body.selector.startsWith('+js(')) {
+      console.log('skipping odd selector', cosmeticFilter)
       continue
     }
-    for (const domain of contentFilter.domains) {
+    for (const domain of cosmeticFilter.domains) {
       cssItemsForDomain[domain] ||= {}
-      cssItemsForDomain[domain][contentFilter.body.style] ||= []
-      cssItemsForDomain[domain][contentFilter.body.style].push(contentFilter.body.selector)
+      cssItemsForDomain[domain][cosmeticFilter.body.style] ||= []
+      cssItemsForDomain[domain][cosmeticFilter.body.style].push(cosmeticFilter.body.selector)
     }
   }
   return cssItemsForDomain
 }
 
-export const generateContentRulesFiles = async (dir: string, cssItemsForDomain: Record<string, Record<string, string[]>>): Promise<string[]> => {
+export const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: CosmeticFilter[]): Promise<string[]> => {
   await fs.mkdir(dir, { recursive: true })
+  const cssItemsForDomain = groupCosmeticFiltersByDomain(cosmeticFilters)
   const files: string[] = []
   for (const [domain, cssItems] of entries(cssItemsForDomain)) {
     const lines = []

@@ -3,7 +3,7 @@ import path from 'node:path'
 import { isMain } from './util'
 import { fileURLToPath } from 'url'
 import { type NetworkRuleWithoutId, parseNetworkFilter, generateBlockingRulesFile } from './filter-list-helpers/network-rules'
-import { type ContentFilter, contentFilterSeparatorRegex, parseContentFilter, generateContentRules, generateContentRulesFiles } from './filter-list-helpers/cosmetic-rules'
+import { type CosmeticFilter, cosmeticFilterSeparatorRegex, parseCosmeticFilter, generateCosmeticFilterFiles } from './filter-list-helpers/cosmetic-rules'
 import { type ScriptletInvocation, parseScriptletLine, generateScriptletRulesFiles } from './filter-list-helpers/scriptlets'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -35,10 +35,10 @@ const removeComments = (lines: string[]): string[] =>
     return !trimmed.startsWith('!')
   }).slice(1)
 
-const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], contentFilters: ContentFilter[], networkFilters: NetworkRuleWithoutId[] } => {
+const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], cosmeticFilters: CosmeticFilter[], networkFilters: NetworkRuleWithoutId[] } => {
   const codingLines = removeComments(lines).filter(line => line.length > 0)
   const scriptlets: ScriptletInvocation[] = []
-  const contentFilters: ContentFilter[] = []
+  const cosmeticFilters: CosmeticFilter[] = []
   const networkFilters: NetworkRuleWithoutId[] = []
   for (const line of codingLines) {
     try {
@@ -48,12 +48,12 @@ const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], conte
           scriptlets.push(scriptlet)
         }
       } else {
-        // Check if the line is a content filter by looking for a separator
-        const separatorMatch = line.match(contentFilterSeparatorRegex)
+        // Check if the line is a cosmetic filter by looking for a separator
+        const separatorMatch = line.match(cosmeticFilterSeparatorRegex)
         if (separatorMatch !== null && separatorMatch !== undefined) {
-          const contentFilter = parseContentFilter(line, separatorMatch[0])
-          if (contentFilter !== undefined) {
-            contentFilters.push(contentFilter)
+          const cosmeticFilter = parseCosmeticFilter(line, separatorMatch[0])
+          if (cosmeticFilter !== undefined) {
+            cosmeticFilters.push(cosmeticFilter)
           }
         } else {
           const networkFilter = parseNetworkFilter(line)
@@ -69,7 +69,7 @@ const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], conte
       throw e
     }
   }
-  return { scriptlets, contentFilters, networkFilters }
+  return { scriptlets, cosmeticFilters, networkFilters }
 }
 
 const isGoodLine = (x: string): boolean => {
@@ -99,13 +99,12 @@ const dist = (localPath: string): string => {
 export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine)
-  const { scriptlets, contentFilters, networkFilters } = parseLines(linesFiltered)
+  const { scriptlets, cosmeticFilters, networkFilters } = parseLines(linesFiltered)
   const blockingRulesFileContent = generateBlockingRulesFile(networkFilters)
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
     blockingRulesFileContent)
-  const contentRules = generateContentRules(contentFilters)
-  await generateContentRulesFiles(dist('content_scripts/adblock_css'), contentRules)
+  await generateCosmeticFilterFiles(dist('content_scripts/adblock_css'), cosmeticFilters)
   await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), scriptlets)
 }
 
