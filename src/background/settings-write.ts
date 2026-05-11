@@ -6,6 +6,7 @@ import {
   getDisabledSettingCollection,
 } from '@src/common/settings-read'
 import { updateRulesForAllSettings, updateRulesForSetting } from './dnr/rule-manager'
+import { updateScriptlet } from './scriptlets'
 
 const REMOTE_SETTINGS_KEY = '_REMOTE_SETTINGS_'
 const SETTINGS_LOCK_NAME = '_SETTINGS_LOCK_'
@@ -35,6 +36,7 @@ export const setUserDisabledSetting = async (domain: string, settingId: SettingI
     allUserDisabledSettings[settingId] = updateList(allUserDisabledSettings[settingId] ?? [], domain, disabled)
     await storageSet(SETTINGS_KEY, allUserDisabledSettings)
     await updateRulesForSetting(settingId, allUserDisabledSettings[settingId])
+    await updateScriptlet(domain, settingId, disabled)
   })
 }
 

@@ -9,6 +9,7 @@ import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
+import { setupScriptlets } from './scriptlets'
 
 const blockAutocomplete = async (): Promise<void> => {
   await chrome.declarativeNetRequest.updateDynamicRules({
@@ -100,6 +101,7 @@ const initializePersistentResources = async (): Promise<void> => {
   await blockAutocomplete()
   const settings = await copySettingsFromLocalToSessionStorage()
   await updateRulesForAllSettings(settings)
+  await setupScriptlets()
 }
 
 const showWelcomePage = async (): Promise<void> => {

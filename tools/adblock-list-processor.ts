@@ -13,6 +13,20 @@ type RequestMethodValue = `${RequestMethod}`
 
 type NetworkRuleWithoutId = Omit<Rule, 'id'>
 
+type ScriptletInvocation = {
+  domains: string[]
+  scriptlet: string
+}
+type ContentFilterBody = {
+  style: string
+  selector: string
+}
+type ContentFilter = {
+  domains: string[]
+  separator: string
+  body: ContentFilterBody
+}
+
 /** Mirror of chrome.declarativeNetRequest.RequestMethod; Record ensures exhaustiveness. */
 const REQUEST_METHOD: Record<RequestMethodValue, RequestMethodValue> = {
   connect: 'connect',
@@ -267,23 +281,12 @@ const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
   return { priority, action, condition: { urlFilter: cleanLine } }
 }
 
-interface ContentFilterBody {
-  style: string
-  selector: string
-}
-
 const parseContentFilterBody = (body: string): ContentFilterBody => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
   if (matches !== null && matches !== undefined) {
     return { selector: matches[1], style: matches[2] }
   }
   return { selector: body, style: 'display: none !important;' }
-}
-
-interface ContentFilter {
-  domains: string[]
-  separator: string
-  body: ContentFilterBody
 }
 
 const parseContentFilter = (line: string, separator: string): ContentFilter => {
@@ -296,20 +299,62 @@ const parseContentFilter = (line: string, separator: string): ContentFilter => {
 
 const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/
 
-interface ParsedLine {
-  parsed: NetworkRuleWithoutId | ContentFilter | undefined
+type ParsedItem = NetworkRuleWithoutId | ContentFilter | ScriptletInvocation | undefined
+
+type ParsedLine = {
+  parsed: ParsedItem
   line: string
 }
 
+const generateScriptlet = (scriptletArguments: string[]): string | undefined => {
+  const scriptletName = scriptletArguments[0]
+  switch (scriptletName) {
+    case 'set-cookie':
+    case 'set-cookie-reload':
+    case 'cookie-remover':
+    case 'cookie-remover.js':
+      return `document.cookie = '${scriptletArguments[1]}=${scriptletArguments[2]}; path=/';`
+    case 'remove-cookie':
+      return `document.cookie = '${scriptletArguments[1]}=; path=/';`
+    case 'set-local-storage-item':
+      return `localStorage.setItem('${scriptletArguments[1]}', '${scriptletArguments[2]}');`
+    case 'set-session-storage-item':
+      return `sessionStorage.setItem('${scriptletArguments[1]}', '${scriptletArguments[2]}');`
+    default:
+      console.log('unknown scriptlet', scriptletName)
+      return undefined
+  }
+}
+
+const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
+  const matches = line.match(/(.*?)##\+js\((.*?)\)/i)
+  if (!Array.isArray(matches) || matches.length < 3) {
+    return undefined
+  }
+  // TODO: handle asterisks in domains
+  const domains = matches[1].split(',').filter(d => !d.endsWith('*'))
+  const scriptletArguments = matches[2].split(',').map(s => s.trim())
+  const scriptlet = generateScriptlet(scriptletArguments)
+  if (scriptlet === undefined) {
+    return undefined
+  }
+  return { domains, scriptlet }
+}
+
 const parseLine = (line: string): ParsedLine => {
-  let parsed: NetworkRuleWithoutId | ContentFilter | undefined
+  let parsed: ParsedItem
   try {
-    // Check if the line is a content filter by looking for a separator
-    const separatorMatch = line.match(contentFilterSeparatorRegex)
-    if (separatorMatch !== null && separatorMatch !== undefined) {
-      parsed = parseContentFilter(line, separatorMatch[0])
+    if (line.includes('##+js(')) {
+      console.log('skipping line with ##+js(', line)
+      parsed = parseScriptletLine(line)
     } else {
-      parsed = parseNetworkFilter(line)
+      // Check if the line is a content filter by looking for a separator
+      const separatorMatch = line.match(contentFilterSeparatorRegex)
+      if (separatorMatch !== null && separatorMatch !== undefined) {
+        parsed = parseContentFilter(line, separatorMatch[0])
+      } else {
+        parsed = parseNetworkFilter(line)
+      }
     }
     return { parsed, line }
   } catch (e: unknown) {
@@ -327,11 +372,25 @@ export const processLines = (lines: string[]): ParsedLine[] => {
   return codingLines.map(parseLine)
 }
 
-const isBlockingFilter = (parsed: NetworkRuleWithoutId | ContentFilter | undefined): parsed is NetworkRuleWithoutId => {
+const isBlockingFilter = (parsed: ParsedItem): parsed is NetworkRuleWithoutId => {
   if (parsed === undefined) {
     return false
   }
   return 'condition' in parsed
+}
+
+const isContentFilter = (parsed: ParsedItem): parsed is ContentFilter => {
+  if (parsed === undefined) {
+    return false
+  }
+  return 'domains' in parsed
+}
+
+const isScriptletInvocation = (parsed: ParsedItem): parsed is ScriptletInvocation => {
+  if (parsed === undefined) {
+    return false
+  }
+  return 'scriptlet' in parsed
 }
 
 const generateBlockingRulesFile = (items: ParsedLine[]): string => {
@@ -345,13 +404,6 @@ const generateBlockingRulesFile = (items: ParsedLine[]): string => {
     }
   }
   return '[\n' + lines.join(',\n') + ']'
-}
-
-const isContentFilter = (parsed: NetworkRuleWithoutId | ContentFilter | undefined): parsed is ContentFilter => {
-  if (parsed === undefined) {
-    return false
-  }
-  return 'domains' in parsed
 }
 
 const generateContentRules = (items: ParsedLine[]): Record<string, Record<string, string[]>> => {
@@ -377,6 +429,28 @@ const generateContentRules = (items: ParsedLine[]): Record<string, Record<string
     }
   }
   return cssItemsForDomain
+}
+
+const generateScriptletRulesFiles = async (dir: string, items: ParsedLine[]): Promise<void> => {
+  await fs.mkdir(dir, { recursive: true })
+  const scriptletRules: Record<string, string> = {}
+  for (const item of items) {
+    if (!isScriptletInvocation(item.parsed)) {
+      continue
+    }
+    const { domains, scriptlet } = item.parsed
+    for (const domain of domains) {
+      if (scriptletRules[domain] === undefined) {
+        scriptletRules[domain] = ''
+      }
+      scriptletRules[domain] += `${scriptlet}\n`
+    }
+  }
+  for (const [domain, scriptlet] of entries(scriptletRules)) {
+    const file = `${domain}_.js`
+    await fs.writeFile(path.join(dir, file), scriptlet)
+  }
+  await fs.writeFile(path.join(dir, 'index.txt'), Object.keys(scriptletRules).sort().join('\n'))
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
@@ -438,6 +512,7 @@ export const processAndWrite = async (): Promise<void> => {
   const contentRules = generateContentRules(results)
   const adblockCssDir = dist('content_scripts/adblock_css')
   /* const cssFiles = */await generateContentRulesFiles(adblockCssDir, contentRules)
+  await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), results)
 }
 
 if (isMain(import.meta)) {
