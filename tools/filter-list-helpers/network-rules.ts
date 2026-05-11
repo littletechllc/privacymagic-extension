@@ -1,3 +1,5 @@
+import { writeFile, logLineErrors } from './util'
+
 type Rule = chrome.declarativeNetRequest.Rule
 type RuleAction = chrome.declarativeNetRequest.RuleAction
 type RuleCondition = chrome.declarativeNetRequest.RuleCondition
@@ -6,7 +8,7 @@ type ResourceTypeValue = `${ResourceType}`
 type RequestMethod = chrome.declarativeNetRequest.RequestMethod
 type RequestMethodValue = `${RequestMethod}`
 
-export type NetworkRuleWithoutId = Omit<Rule, 'id'>
+type NetworkRuleWithoutId = Omit<Rule, 'id'>
 
 /** Mirror of chrome.declarativeNetRequest.RequestMethod; Record ensures exhaustiveness. */
 const REQUEST_METHOD: Record<RequestMethodValue, RequestMethodValue> = {
@@ -192,7 +194,7 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
 }
 
 // Parse the given line into a URL filter and type options
-export const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined => {
+const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined => {
   const priority = 1
   const type = line.startsWith('@@') ? 'allow' : 'block'
   const action: RuleAction = { type }
@@ -237,7 +239,7 @@ export const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | und
   return { priority, action, condition: { urlFilter: cleanLine } }
 }
 
-export const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): string => {
+const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): string => {
   const lines = []
   let id = 0
   for (const networkFilter of networkFilters) {
@@ -246,4 +248,9 @@ export const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]
     lines.push(JSON.stringify(rule))
   }
   return '[\n' + lines.join(',\n') + ']'
+}
+
+export const parseAndGenerateNetworkFilters = async (localDir: string, file: string, lines: string[]): Promise<void> => {
+  const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
+  await writeFile(localDir, file, generateNetworkFilterFile(networkFilters))
 }

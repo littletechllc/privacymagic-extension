@@ -1,13 +1,7 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import { isMain } from './util'
-import { fileURLToPath } from 'url'
-import { parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine, generateNetworkFilterFile } from './filter-list-helpers/network-rules'
-import { parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
-import { parseScriptletLine, generateScriptletFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import { isNetworkFilterLine, parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
+import { isCosmeticFilterLine, parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
+import { isScriptletLine, parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
 
 const BLOCKLISTS: string[] = [
   'https://easylist.to/easylist/easylist.txt',
@@ -44,6 +38,8 @@ const separateLines = (lines: string[]): { scriptletsLines: string[], cosmeticFi
       cosmeticFiltersLines.push(line)
     } else if (isNetworkFilterLine(line)) {
       networkFiltersLines.push(line)
+    } else {
+      console.log("unsupported line:", line)
     }
   }
   return { scriptletsLines, cosmeticFiltersLines, networkFiltersLines }
@@ -69,23 +65,13 @@ const isGoodLine = (x: string): boolean => {
   return result
 }
 
-const dist = (localPath: string): string => {
-  return path.join(__dirname, '../dist/', localPath)
-}
-
 export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine).filter(isCodingLine)
   const { scriptletsLines, cosmeticFiltersLines, networkFiltersLines } = separateLines(linesFiltered)
-  const scriptlets = scriptletsLines.map(parseScriptletLine).filter(scriptlet => scriptlet !== undefined)
-  const cosmeticFilters = cosmeticFiltersLines.map(parseCosmeticFilterLine).filter(cosmeticFilter => cosmeticFilter !== undefined)
-  const networkFilters = networkFiltersLines.map(parseNetworkFilterLine).filter(networkFilter => networkFilter !== undefined)
-  const networkFilterFileContent = generateNetworkFilterFile(networkFilters)
-  await fs.mkdir(dist('rules'), { recursive: true })
-  await fs.writeFile(dist('rules/easylist.json'),
-    networkFilterFileContent)
-  await generateCosmeticFilterFiles(dist('content_scripts/cosmetic_filters'), cosmeticFilters)
-  await generateScriptletFiles(dist('content_scripts/scriptlets'), scriptlets)
+  await parseAndGenerateNetworkFilters('rules', 'easylist.json', networkFiltersLines)
+  await parseAndGenerateCosmeticFilters('content_scripts/cosmetic_filters', cosmeticFiltersLines)
+  await parseAndGenerateScriptlets('content_scripts/scriptlets', scriptletsLines)
 }
 
 if (isMain(import.meta)) {

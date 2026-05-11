@@ -1,8 +1,7 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import { entries } from '../util'
+import { writeFile, logLineErrors } from './util'
 
-export type ScriptletInvocation = {
+type ScriptletInvocation = {
   domains: string[]
   body: string
 }
@@ -97,7 +96,7 @@ const generateScriptlet = (scriptletArguments: string[]): string | undefined => 
   }
 }
 
-export const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
+const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
   const matches = line.match(/(.*?)##\+js\((.*?)\)/i)
   if (!Array.isArray(matches) || matches.length < 3) {
     return undefined
@@ -112,9 +111,8 @@ export const parseScriptletLine = (line: string): ScriptletInvocation | undefine
   return { domains, body: scriptletBody }
 }
 
-export const generateScriptletFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
+const generateScriptletFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
   const scriptletsForDomains: Record<string, string> = {}
-  await fs.mkdir(dir, { recursive: true })
   for (const scriptletRule of scriptlets) {
     for (const domain of scriptletRule.domains) {
       if (scriptletsForDomains[domain] === undefined) {
@@ -125,7 +123,12 @@ export const generateScriptletFiles = async (dir: string, scriptlets: ScriptletI
   }
   for (const [domain, scriptlet] of entries(scriptletsForDomains)) {
     const file = `${domain}_.js`
-    await fs.writeFile(path.join(dir, file), scriptlet)
+    await writeFile(dir, file, scriptlet)
   }
-  await fs.writeFile(path.join(dir, 'index.txt'), Object.keys(scriptletsForDomains).sort().join('\n'))
+  await writeFile(dir, 'index.txt', Object.keys(scriptletsForDomains).sort().join('\n'))
+}
+
+export const parseAndGenerateScriptlets = async (localDir: string, lines: string[]): Promise<void> => {
+  const scriptlets = lines.map(logLineErrors(parseScriptletLine)).filter(scriptlet => scriptlet !== undefined)
+  await generateScriptletFiles(localDir, scriptlets)
 }

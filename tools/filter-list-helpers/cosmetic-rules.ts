@@ -1,6 +1,6 @@
-import fs from 'node:fs/promises'
 import path from 'node:path'
 import { entries } from '../util'
+import { writeFile, logLineErrors } from './util'
 
 export type CosmeticFilter = {
   domains: string[]
@@ -23,7 +23,7 @@ const parseCosmeticFilterBody = (body: string): { selector: string, style: strin
   return { selector: body, style: 'display: none !important;' }
 }
 
-export const parseCosmeticFilterLine = (line: string): CosmeticFilter => {
+const parseCosmeticFilterLine = (line: string): CosmeticFilter => {
   const [domainsString, body] = line.split(SEPARATOR)
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))
@@ -43,8 +43,7 @@ const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record
   return cssItemsForDomain
 }
 
-export const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: CosmeticFilter[]): Promise<string[]> => {
-  await fs.mkdir(dir, { recursive: true })
+const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: CosmeticFilter[]): Promise<string[]> => {
   const cssItemsForDomain = groupCosmeticFiltersByDomain(cosmeticFilters)
   const files: string[] = []
   for (const [domain, cssItems] of entries(cssItemsForDomain)) {
@@ -61,7 +60,12 @@ export const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: 
     const filestem = domain === '' ? '_default' : domain
     const file = `${filestem}_.css`
     files.push(file)
-    await fs.writeFile(path.join(dir, file), lines.join('\n'))
+    await writeFile(dir, file, lines.join('\n'))
   }
   return files
+}
+
+export const parseAndGenerateCosmeticFilters = async (localDir: string, lines: string[]): Promise<void> => {
+  const cosmeticFilters = lines.map(logLineErrors(parseCosmeticFilterLine)).filter(cosmeticFilter => cosmeticFilter !== undefined)
+  await generateCosmeticFilterFiles(localDir, cosmeticFilters)
 }
