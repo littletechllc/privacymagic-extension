@@ -15,7 +15,7 @@ type NetworkRuleWithoutId = Omit<Rule, 'id'>
 
 type ScriptletInvocation = {
   domains: string[]
-  scriptlet: string
+  body: string
 }
 type ContentFilterBody = {
   style: string
@@ -299,13 +299,6 @@ const parseContentFilter = (line: string, separator: string): ContentFilter => {
 
 const contentFilterSeparatorRegex = /#\?#|#@#|#S#|##/
 
-type ParsedItem = NetworkRuleWithoutId | ContentFilter | ScriptletInvocation | undefined
-
-type ParsedLine = {
-  parsed: ParsedItem
-  line: string
-}
-
 const constantValueFrom = (value: string): string => {
   switch (value) {
     case 'noopFunc':
@@ -400,122 +393,98 @@ const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
   // TODO: handle asterisks in domains
   const domains = matches[1].split(',').filter(d => !d.endsWith('*'))
   const scriptletArguments = matches[2].split(',').map(s => s.trim())
-  const scriptlet = generateScriptlet(scriptletArguments)
-  if (scriptlet === undefined) {
+  const scriptletBody = generateScriptlet(scriptletArguments)
+  if (scriptletBody === undefined) {
     return undefined
   }
-  return { domains, scriptlet }
+  return { domains, body: scriptletBody }
 }
 
-const parseLine = (line: string): ParsedLine => {
-  let parsed: ParsedItem
-  try {
-    if (line.includes('##+js(')) {
-      parsed = parseScriptletLine(line)
-    } else {
-      // Check if the line is a content filter by looking for a separator
-      const separatorMatch = line.match(contentFilterSeparatorRegex)
-      if (separatorMatch !== null && separatorMatch !== undefined) {
-        parsed = parseContentFilter(line, separatorMatch[0])
-      } else {
-        parsed = parseNetworkFilter(line)
-      }
-    }
-    return { parsed, line }
-  } catch (e: unknown) {
-    if (e instanceof Error) {
-      e.message = `line '${line}':\n${e.message}`
-    } else {
-      throw new Error(`line '${line}':\n${String(e)}`)
-    }
-    throw e
-  }
-}
-
-export const processLines = (lines: string[]): ParsedLine[] => {
+const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], contentFilters: ContentFilter[], networkFilters: NetworkRuleWithoutId[] } => {
   const codingLines = removeComments(lines).filter(line => line.length > 0)
-  return codingLines.map(parseLine)
-}
-
-const isBlockingFilter = (parsed: ParsedItem): parsed is NetworkRuleWithoutId => {
-  if (parsed === undefined) {
-    return false
+  const scriptlets: ScriptletInvocation[] = []
+  const contentFilters: ContentFilter[] = []
+  const networkFilters: NetworkRuleWithoutId[] = []
+  for (const line of codingLines) {
+    try {
+      if (line.includes('##+js(')) {
+        const scriptlet = parseScriptletLine(line)
+        if (scriptlet !== undefined) {
+          scriptlets.push(scriptlet)
+        }
+      } else {
+        // Check if the line is a content filter by looking for a separator
+        const separatorMatch = line.match(contentFilterSeparatorRegex)
+        if (separatorMatch !== null && separatorMatch !== undefined) {
+          const contentFilter = parseContentFilter(line, separatorMatch[0])
+          if (contentFilter !== undefined) {
+            contentFilters.push(contentFilter)
+          }
+        } else {
+          const networkFilter = parseNetworkFilter(line)
+          if (networkFilter !== undefined) {
+            networkFilters.push(networkFilter)
+          }
+        }
+      }
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        e.message = `Error in line '${line}':\n${e.message}`
+      }
+      throw e
+    }
   }
-  return 'condition' in parsed
+  return { scriptlets, contentFilters, networkFilters }
 }
 
-const isContentFilter = (parsed: ParsedItem): parsed is ContentFilter => {
-  if (parsed === undefined) {
-    return false
-  }
-  return 'body' in parsed
-}
-
-const isScriptletInvocation = (parsed: ParsedItem): parsed is ScriptletInvocation => {
-  if (parsed === undefined) {
-    return false
-  }
-  return 'scriptlet' in parsed
-}
-
-const generateBlockingRulesFile = (items: ParsedLine[]): string => {
+const generateBlockingRulesFile = (networkFilters: NetworkRuleWithoutId[]): string => {
   const lines = []
   let id = 0
-  for (const item of items) {
-    if (isBlockingFilter(item.parsed)) {
-      ++id
-      const rule: Rule = Object.assign({ id }, item.parsed)
-      lines.push(JSON.stringify(rule))
-    }
+  for (const networkFilter of networkFilters) {
+    ++id
+    const rule: Rule = Object.assign({ id }, networkFilter)
+    lines.push(JSON.stringify(rule))
   }
   return '[\n' + lines.join(',\n') + ']'
 }
 
-const generateContentRules = (items: ParsedLine[]): Record<string, Record<string, string[]>> => {
+const generateContentRules = (contentFilters: ContentFilter[]): Record<string, Record<string, string[]>> => {
   const cssItemsForDomain: Record<string, Record<string, string[]>> = {}
-  for (const item of items) {
-    if (!isContentFilter(item.parsed)) {
-      continue
-    }
-    const parsed = item.parsed
-    if (parsed.separator !== '##') {
+  for (const contentFilter of contentFilters) {
+    if (contentFilter.separator !== '##') {
       // TODO: handle other separators
-      console.log('skipping non-## separator', parsed)
+      console.log('skipping non-## separator', contentFilter)
       continue
     }
-    if (parsed.body.selector.includes('has-text') || parsed.body.selector.startsWith('+js(')) {
-      console.log('skipping odd selector', parsed)
+    if (contentFilter.body.selector.includes('has-text') || contentFilter.body.selector.startsWith('+js(')) {
+      console.log('skipping odd selector', contentFilter)
       continue
     }
-    for (const domain of parsed.domains) {
+    for (const domain of contentFilter.domains) {
       cssItemsForDomain[domain] ||= {}
-      cssItemsForDomain[domain][parsed.body.style] ||= []
-      cssItemsForDomain[domain][parsed.body.style].push(parsed.body.selector)
+      cssItemsForDomain[domain][contentFilter.body.style] ||= []
+      cssItemsForDomain[domain][contentFilter.body.style].push(contentFilter.body.selector)
     }
   }
   return cssItemsForDomain
 }
 
-const generateScriptletRulesFiles = async (dir: string, items: ParsedLine[]): Promise<void> => {
+const generateScriptletRulesFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
+  const scriptletsForDomains: Record<string, string> = {}
   await fs.mkdir(dir, { recursive: true })
-  const scriptletRules: Record<string, string> = {}
-  for (const item of items) {
-    if (!isScriptletInvocation(item.parsed)) {
-      continue
-    }
-    const { domains, scriptlet } = item.parsed
-    for (const domain of domains) {
-      if (scriptletRules[domain] === undefined) {
-        scriptletRules[domain] = ''
+  for (const scriptletRule of scriptlets) {
+    for (const domain of scriptletRule.domains) {
+      if (scriptletsForDomains[domain] === undefined) {
+        scriptletsForDomains[domain] = ''
       }
-      scriptletRules[domain] += `${scriptlet}\n`
+      scriptletsForDomains[domain] += `${scriptletRule.body}\n`
     }
   }
-  for (const [domain, scriptlet] of entries(scriptletRules)) {
+  for (const [domain, scriptlet] of entries(scriptletsForDomains)) {
     const file = `${domain}_.js`
     await fs.writeFile(path.join(dir, file), scriptlet)
   }
-  await fs.writeFile(path.join(dir, 'index.txt'), Object.keys(scriptletRules).sort().join('\n'))
+  await fs.writeFile(path.join(dir, 'index.txt'), Object.keys(scriptletsForDomains).sort().join('\n'))
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
@@ -569,15 +538,14 @@ const dist = (localPath: string): string => {
 export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine)
-  const results = processLines(linesFiltered)
-  const blockingRulesFileContent = generateBlockingRulesFile(results)
+  const { scriptlets, contentFilters, networkFilters } = parseLines(linesFiltered)
+  const blockingRulesFileContent = generateBlockingRulesFile(networkFilters)
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
     blockingRulesFileContent)
-  const contentRules = generateContentRules(results)
-  const adblockCssDir = dist('content_scripts/adblock_css')
-  /* const cssFiles = */await generateContentRulesFiles(adblockCssDir, contentRules)
-  await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), results)
+  const contentRules = generateContentRules(contentFilters)
+  await generateContentRulesFiles(dist('content_scripts/adblock_css'), contentRules)
+  await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), scriptlets)
 }
 
 if (isMain(import.meta)) {
