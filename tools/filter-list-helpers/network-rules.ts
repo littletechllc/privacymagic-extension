@@ -1,3 +1,4 @@
+import { FILTER_LIST_DIR, NETWORK_RULES_FILE } from '@src/common/filter-list-paths'
 import { writeFile, logLineErrors } from './util'
 
 type Rule = chrome.declarativeNetRequest.Rule
@@ -250,7 +251,7 @@ const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): stri
   return '[\n' + lines.join(',\n') + ']'
 }
 
-export const parseAndGenerateNetworkFilters = async (localDir: string, file: string, lines: string[]): Promise<void> => {
+export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<void> => {
   const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
-  await writeFile(localDir, file, generateNetworkFilterFile(networkFilters))
+  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(networkFilters))
 }

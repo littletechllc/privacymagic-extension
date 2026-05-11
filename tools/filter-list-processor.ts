@@ -2,7 +2,6 @@ import { isMain } from './util'
 import { isNetworkFilterLine, parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
 import { isCosmeticFilterLine, parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
 import { isScriptletLine, parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
-import { COSMETIC_FILTERS_DIR, FILTER_LIST_DIR, NETWORK_RULES_FILE, SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
 
 const BLOCKLISTS: string[] = [
   'https://easylist.to/easylist/easylist.txt',
@@ -70,9 +69,9 @@ export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine).filter(isCodingLine)
   const { scriptletsLines, cosmeticFiltersLines, networkFiltersLines } = separateLines(linesFiltered)
-  await parseAndGenerateNetworkFilters(FILTER_LIST_DIR, NETWORK_RULES_FILE, networkFiltersLines)
-  await parseAndGenerateCosmeticFilters(COSMETIC_FILTERS_DIR, cosmeticFiltersLines)
-  await parseAndGenerateScriptlets(SCRIPTLETS_DIR, scriptletsLines)
+  await parseAndGenerateNetworkFilters(networkFiltersLines)
+  await parseAndGenerateCosmeticFilters(cosmeticFiltersLines)
+  await parseAndGenerateScriptlets(scriptletsLines)
 }
 
 if (isMain(import.meta)) {

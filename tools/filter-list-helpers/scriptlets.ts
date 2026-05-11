@@ -1,3 +1,4 @@
+import { SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
 import { entries } from '../util'
 import { writeFile, logLineErrors } from './util'
 
@@ -128,7 +129,7 @@ const generateScriptletFiles = async (dir: string, scriptlets: ScriptletInvocati
   await writeFile(dir, 'index.txt', Object.keys(scriptletsForDomains).sort().join('\n'))
 }
 
-export const parseAndGenerateScriptlets = async (localDir: string, lines: string[]): Promise<void> => {
+export const parseAndGenerateScriptlets = async (lines: string[]): Promise<void> => {
   const scriptlets = lines.map(logLineErrors(parseScriptletLine)).filter(scriptlet => scriptlet !== undefined)
-  await generateScriptletFiles(localDir, scriptlets)
+  await generateScriptletFiles(SCRIPTLETS_DIR, scriptlets)
 }
