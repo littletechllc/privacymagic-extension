@@ -2,9 +2,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { isMain } from './util'
 import { fileURLToPath } from 'url'
-import { parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
+import { parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine, generateNetworkFilterFile } from './filter-list-helpers/network-rules'
 import { parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
-import { parseScriptletLine, generateScriptletRulesFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
+import { parseScriptletLine, generateScriptletFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -80,12 +80,12 @@ export const processAndWrite = async (): Promise<void> => {
   const scriptlets = scriptletsLines.map(parseScriptletLine).filter(scriptlet => scriptlet !== undefined)
   const cosmeticFilters = cosmeticFiltersLines.map(parseCosmeticFilterLine).filter(cosmeticFilter => cosmeticFilter !== undefined)
   const networkFilters = networkFiltersLines.map(parseNetworkFilterLine).filter(networkFilter => networkFilter !== undefined)
-  const blockingRulesFileContent = generateBlockingRulesFile(networkFilters)
+  const networkFilterFileContent = generateNetworkFilterFile(networkFilters)
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
-    blockingRulesFileContent)
+    networkFilterFileContent)
   await generateCosmeticFilterFiles(dist('content_scripts/cosmetic_filters'), cosmeticFilters)
-  await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), scriptlets)
+  await generateScriptletFiles(dist('content_scripts/scriptlets'), scriptlets)
 }
 
 if (isMain(import.meta)) {

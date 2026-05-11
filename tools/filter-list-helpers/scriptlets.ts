@@ -112,7 +112,7 @@ export const parseScriptletLine = (line: string): ScriptletInvocation | undefine
   return { domains, body: scriptletBody }
 }
 
-export const generateScriptletRulesFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
+export const generateScriptletFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
   const scriptletsForDomains: Record<string, string> = {}
   await fs.mkdir(dir, { recursive: true })
   for (const scriptletRule of scriptlets) {

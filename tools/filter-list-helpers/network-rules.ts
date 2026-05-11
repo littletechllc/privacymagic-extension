@@ -237,7 +237,7 @@ export const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | und
   return { priority, action, condition: { urlFilter: cleanLine } }
 }
 
-export const generateBlockingRulesFile = (networkFilters: NetworkRuleWithoutId[]): string => {
+export const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): string => {
   const lines = []
   let id = 0
   for (const networkFilter of networkFilters) {
