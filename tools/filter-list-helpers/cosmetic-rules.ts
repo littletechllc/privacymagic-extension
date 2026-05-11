@@ -26,8 +26,12 @@ const parseCosmeticFilterBody = (body: string): { selector: string, style: strin
 }
 
 const hasTextMatch = /^(.*?):has-text\((.*?)\)$/
+const hasTextInsideHasMatch = /:has\([^)]*:has-text\(/
 
 const processProceduralSelector = (selector: string): { processedSelector: string, hasText: string | undefined } => {
+  if (hasTextInsideHasMatch.test(selector)) {
+    return { processedSelector: selector, hasText: undefined }
+  }
   const matches = selector.match(hasTextMatch)
   let processedSelector = selector
   let hasText: string | undefined = undefined
