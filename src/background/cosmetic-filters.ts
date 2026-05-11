@@ -2,6 +2,8 @@ import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 
+const DIRECTORY = 'content_scripts/cosmetic_filters'
+
 const fileExists = async (path: string): Promise<boolean> => {
   try {
     const url = chrome.runtime.getURL(path)
@@ -34,13 +36,13 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
     return
   }
   const files = [
-    'content_scripts/adblock_css/_default_.css'
+    `${DIRECTORY}/_default_.css`
   ]
   const frameDomain = registrableDomainFromUrl(details.url)
   if (frameDomain === null) {
     return
   }
-  const domainSpecificFile = `content_scripts/adblock_css/${frameDomain}_.css`
+  const domainSpecificFile = `${DIRECTORY}/${frameDomain}_.css`
   if (await fileExists(domainSpecificFile)) {
     files.push(domainSpecificFile)
   }

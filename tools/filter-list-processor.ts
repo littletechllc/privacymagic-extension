@@ -84,7 +84,7 @@ export const processAndWrite = async (): Promise<void> => {
   await fs.mkdir(dist('rules'), { recursive: true })
   await fs.writeFile(dist('rules/easylist.json'),
     blockingRulesFileContent)
-  await generateCosmeticFilterFiles(dist('content_scripts/adblock_css'), cosmeticFilters)
+  await generateCosmeticFilterFiles(dist('content_scripts/cosmetic_filters'), cosmeticFilters)
   await generateScriptletRulesFiles(dist('content_scripts/scriptlets'), scriptlets)
 }
 
