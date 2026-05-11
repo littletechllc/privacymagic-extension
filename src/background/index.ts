@@ -11,21 +11,6 @@ import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
 import { setupScriptlets } from './scriptlets'
 
-const blockAutocomplete = async (): Promise<void> => {
-  await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: [400],
-    addRules: [
-      {
-        id: 400,
-        action: { type: 'block' },
-        condition: {
-          urlFilter: 'https://www.google.com/complete/*'
-        }
-      }
-    ]
-  })
-}
-
 const handleMessage = async (
   message: Message,
   _sender: chrome.runtime.MessageSender,
@@ -98,7 +83,6 @@ const initializeListeners = (): void => {
 
 // Functions that set up persistent resources (dynamic DNR rules persist across sessions)
 const initializePersistentResources = async (): Promise<void> => {
-  await blockAutocomplete()
   const settings = await copySettingsFromLocalToSessionStorage()
   await updateRulesForAllSettings(settings)
   await setupScriptlets()
