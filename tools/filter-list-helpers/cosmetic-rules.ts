@@ -69,7 +69,7 @@ const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record
 
 const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: CosmeticFilter[]): Promise<string[]> => {
   const cssItemsForDomain = groupCosmeticFiltersByDomain(cosmeticFilters)
-  const files: string[] = []
+  const filestems = []
   for (const [domain, cssItems] of entries(cssItemsForDomain)) {
     const lines = []
     for (const [style, selectors] of entries(cssItems)) {
@@ -83,10 +83,10 @@ const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: Cosmeti
     }
     const filestem = domain === '' ? '_default' : domain
     const file = `${filestem}_.css`
-    files.push(file)
+    filestems.push(filestem)
     await writeFile(dir, file, lines.join('\n'))
   }
-  return files
+  await writeFile(dir, 'index.txt', filestems.sort().join('\n'))
 }
 
 const enforceProceduralFilter = (selector: string, hasText: string, style: string) => {
@@ -139,6 +139,7 @@ const proceduralPrefix = `const enforceProceduralFilter = ${enforceProceduralFil
 
 const generateProceduralFilterFiles = async (dir: string, proceduralFilters: CosmeticFilter[]): Promise<void> => {
   const proceduralItemsForDomain = groupCosmeticFiltersByDomain(proceduralFilters)
+  const filestems = []
   for (const [domain, proceduralItems] of entries(proceduralItemsForDomain)) {
     const lines = []
     for (const [style, selectors] of entries(proceduralItems)) {
@@ -155,7 +156,9 @@ const generateProceduralFilterFiles = async (dir: string, proceduralFilters: Cos
     const filestem = domain === '' ? '_default' : domain
     const file = `${filestem}_.js`
     await writeFile(dir, file, body)
+    filestems.push(filestem)
   }
+  await writeFile(dir, 'index.txt', filestems.sort().join('\n'))
 }
 
 export const parseAndGenerateCosmeticFilters = async (lines: string[]): Promise<void> => {
