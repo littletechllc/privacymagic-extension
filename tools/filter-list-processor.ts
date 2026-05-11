@@ -2,9 +2,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { isMain } from './util'
 import { fileURLToPath } from 'url'
-import { type NetworkRuleWithoutId, parseNetworkFilter, generateBlockingRulesFile } from './filter-list-helpers/network-rules'
-import { type CosmeticFilter, cosmeticFilterSeparatorRegex, parseCosmeticFilter, generateCosmeticFilterFiles } from './filter-list-helpers/cosmetic-rules'
-import { type ScriptletInvocation, parseScriptletLine, generateScriptletRulesFiles } from './filter-list-helpers/scriptlets'
+import { type NetworkRuleWithoutId, parseNetworkFilter as parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
+import { type CosmeticFilter, parseCosmeticFilter as parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
+import { type ScriptletInvocation, parseScriptletLine, generateScriptletRulesFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -42,25 +42,23 @@ const parseLines = (lines: string[]): { scriptlets: ScriptletInvocation[], cosme
   const networkFilters: NetworkRuleWithoutId[] = []
   for (const line of codingLines) {
     try {
-      if (line.includes('##+js(')) {
+      if (isScriptletLine(line)) {
         const scriptlet = parseScriptletLine(line)
         if (scriptlet !== undefined) {
           scriptlets.push(scriptlet)
         }
-      } else {
-        // Check if the line is a cosmetic filter by looking for a separator
-        const separatorMatch = line.match(cosmeticFilterSeparatorRegex)
-        if (separatorMatch !== null && separatorMatch !== undefined) {
-          const cosmeticFilter = parseCosmeticFilter(line, separatorMatch[0])
-          if (cosmeticFilter !== undefined) {
-            cosmeticFilters.push(cosmeticFilter)
-          }
-        } else {
-          const networkFilter = parseNetworkFilter(line)
-          if (networkFilter !== undefined) {
-            networkFilters.push(networkFilter)
-          }
+      } else if (isCosmeticFilterLine(line)) {
+        const cosmeticFilter = parseCosmeticFilterLine(line)
+        if (cosmeticFilter !== undefined) {
+          cosmeticFilters.push(cosmeticFilter)
         }
+      } else if (isNetworkFilterLine(line)) {
+        const networkFilter = parseNetworkFilterLine(line)
+        if (networkFilter !== undefined) {
+          networkFilters.push(networkFilter)
+        }
+      } else {
+        console.log("unsupported line:", line)
       }
     } catch (e: unknown) {
       if (e instanceof Error) {

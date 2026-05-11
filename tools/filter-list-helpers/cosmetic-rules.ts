@@ -4,14 +4,16 @@ import { entries } from '../util'
 
 export type CosmeticFilter = {
   domains: string[]
-  separator: string
   style: string
   selector: string
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
+const SEPARATOR = '##'
 
-export const cosmeticFilterSeparatorRegex = /#\?#|#@#|#S#|##/
+export const isCosmeticFilterLine = (line: string): boolean => {
+  return line.includes(SEPARATOR)
+}
 
 const parseCosmeticFilterBody = (body: string): { selector: string, style: string } => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
@@ -21,26 +23,17 @@ const parseCosmeticFilterBody = (body: string): { selector: string, style: strin
   return { selector: body, style: 'display: none !important;' }
 }
 
-export const parseCosmeticFilter = (line: string, separator: string): CosmeticFilter => {
-  const [domainsString, body] = line.split(separator)
+export const parseCosmeticFilter = (line: string): CosmeticFilter => {
+  const [domainsString, body] = line.split(SEPARATOR)
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))
   const { selector, style } = parseCosmeticFilterBody(body)
-  return { domains, separator, style, selector }
+  return { domains, style, selector }
 }
 
 const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record<string, Record<string, string[]>> => {
   const cssItemsForDomain: Record<string, Record<string, string[]>> = {}
   for (const cosmeticFilter of cosmeticFilters) {
-    if (cosmeticFilter.separator !== '##') {
-      // TODO: handle other separators
-      console.log('skipping non-## separator', cosmeticFilter)
-      continue
-    }
-    if (cosmeticFilter.selector.includes('has-text') || cosmeticFilter.selector.startsWith('+js(')) {
-      console.log('skipping odd selector', cosmeticFilter)
-      continue
-    }
     for (const domain of cosmeticFilter.domains) {
       cssItemsForDomain[domain] ||= {}
       cssItemsForDomain[domain][cosmeticFilter.style] ||= []

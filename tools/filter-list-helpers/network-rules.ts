@@ -90,6 +90,10 @@ type ParsedTypeOptions = {
   }
 }
 
+export const isNetworkFilterLine = (line: string): boolean => {
+  return !(/##|#@#|#\?#|#@\?#/.test(line))
+}
+
 /**
  * Parse the given type options string into an object with the following keys:
  * - domainType: the type of domain (firstParty or thirdParty)

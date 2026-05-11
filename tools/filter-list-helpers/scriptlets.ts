@@ -7,6 +7,10 @@ export type ScriptletInvocation = {
   body: string
 }
 
+export const isScriptletLine = (line: string): boolean => {
+  return line.includes('##+js(')
+}
+
 const constantValueFrom = (value: string): string => {
   switch (value) {
     case 'noopFunc':
