@@ -192,7 +192,7 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
 }
 
 // Parse the given line into a URL filter and type options
-export const parseNetworkFilter = (line: string): NetworkRuleWithoutId | undefined => {
+export const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined => {
   const priority = 1
   const type = line.startsWith('@@') ? 'allow' : 'block'
   const action: RuleAction = { type }

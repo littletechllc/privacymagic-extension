@@ -23,7 +23,7 @@ const parseCosmeticFilterBody = (body: string): { selector: string, style: strin
   return { selector: body, style: 'display: none !important;' }
 }
 
-export const parseCosmeticFilter = (line: string): CosmeticFilter => {
+export const parseCosmeticFilterLine = (line: string): CosmeticFilter => {
   const [domainsString, body] = line.split(SEPARATOR)
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))

@@ -2,8 +2,8 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { isMain } from './util'
 import { fileURLToPath } from 'url'
-import { type NetworkRuleWithoutId, parseNetworkFilter as parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
-import { type CosmeticFilter, parseCosmeticFilter as parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
+import { type NetworkRuleWithoutId, parseNetworkFilterLine, generateBlockingRulesFile, isNetworkFilterLine } from './filter-list-helpers/network-rules'
+import { type CosmeticFilter, parseCosmeticFilterLine, generateCosmeticFilterFiles, isCosmeticFilterLine } from './filter-list-helpers/cosmetic-rules'
 import { type ScriptletInvocation, parseScriptletLine, generateScriptletRulesFiles, isScriptletLine } from './filter-list-helpers/scriptlets'
 
 const __filename = fileURLToPath(import.meta.url)
