@@ -311,10 +311,10 @@ const generateScriptlet = (scriptletArguments: string[]): string | undefined => 
   switch (scriptletName) {
     case 'set-cookie':
     case 'set-cookie-reload':
-    case 'cookie-remover':
-    case 'cookie-remover.js':
       return `document.cookie = '${scriptletArguments[1]}=${scriptletArguments[2]}; path=/';`
     case 'remove-cookie':
+    case 'cookie-remover':
+    case 'cookie-remover.js':
       return `document.cookie = '${scriptletArguments[1]}=; path=/';`
     case 'set-local-storage-item':
       return `localStorage.setItem('${scriptletArguments[1]}', '${scriptletArguments[2]}');`
@@ -345,7 +345,6 @@ const parseLine = (line: string): ParsedLine => {
   let parsed: ParsedItem
   try {
     if (line.includes('##+js(')) {
-      console.log('skipping line with ##+js(', line)
       parsed = parseScriptletLine(line)
     } else {
       // Check if the line is a content filter by looking for a separator
@@ -383,7 +382,7 @@ const isContentFilter = (parsed: ParsedItem): parsed is ContentFilter => {
   if (parsed === undefined) {
     return false
   }
-  return 'domains' in parsed
+  return 'body' in parsed
 }
 
 const isScriptletInvocation = (parsed: ParsedItem): parsed is ScriptletInvocation => {
