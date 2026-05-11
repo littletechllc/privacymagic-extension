@@ -1,8 +1,7 @@
 import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
-
-const DIRECTORY = 'filter_list/cosmetic_filters'
+import { COSMETIC_FILTERS_DIR } from '@src/common/filter-list-paths'
 
 const fileExists = async (path: string): Promise<boolean> => {
   try {
@@ -36,13 +35,13 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
     return
   }
   const files = [
-    `${DIRECTORY}/_default_.css`
+    `${COSMETIC_FILTERS_DIR}/_default_.css`
   ]
   const frameDomain = registrableDomainFromUrl(details.url)
   if (frameDomain === null) {
     return
   }
-  const domainSpecificFile = `${DIRECTORY}/${frameDomain}_.css`
+  const domainSpecificFile = `${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`
   if (await fileExists(domainSpecificFile)) {
     files.push(domainSpecificFile)
   }

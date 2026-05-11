@@ -1,8 +1,8 @@
 import { SettingId } from '@src/common/setting-ids'
 import { logError } from '@src/common/util'
+import { SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
 
 const WILDCARD_MATCH = '*://*/*'
-const SCRIPTLETS_DIR = 'filter_list/scriptlets'
 const SCRIPTLET_ID_PREFIX = 'scriptlet-'
 
 const fetchLocalFile = async (path: string): Promise<string> => {
