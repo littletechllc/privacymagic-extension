@@ -2,22 +2,18 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { entries } from '../util'
 
-export type CosmeticFilterBody = {
-  style: string
-  selector: string
-}
-
 export type CosmeticFilter = {
   domains: string[]
   separator: string
-  body: CosmeticFilterBody
+  style: string
+  selector: string
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
 
 export const cosmeticFilterSeparatorRegex = /#\?#|#@#|#S#|##/
 
-const parseCosmeticFilterBody = (body: string): CosmeticFilterBody => {
+const parseCosmeticFilterBody = (body: string): { selector: string, style: string } => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
   if (matches !== null && matches !== undefined) {
     return { selector: matches[1], style: matches[2] }
@@ -30,7 +26,7 @@ export const parseCosmeticFilter = (line: string, separator: string): CosmeticFi
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))
   const { selector, style } = parseCosmeticFilterBody(body)
-  return { domains, separator, body: { selector, style } }
+  return { domains, separator, style, selector }
 }
 
 const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record<string, Record<string, string[]>> => {
@@ -41,14 +37,14 @@ const groupCosmeticFiltersByDomain = (cosmeticFilters: CosmeticFilter[]): Record
       console.log('skipping non-## separator', cosmeticFilter)
       continue
     }
-    if (cosmeticFilter.body.selector.includes('has-text') || cosmeticFilter.body.selector.startsWith('+js(')) {
+    if (cosmeticFilter.selector.includes('has-text') || cosmeticFilter.selector.startsWith('+js(')) {
       console.log('skipping odd selector', cosmeticFilter)
       continue
     }
     for (const domain of cosmeticFilter.domains) {
       cssItemsForDomain[domain] ||= {}
-      cssItemsForDomain[domain][cosmeticFilter.body.style] ||= []
-      cssItemsForDomain[domain][cosmeticFilter.body.style].push(cosmeticFilter.body.selector)
+      cssItemsForDomain[domain][cosmeticFilter.style] ||= []
+      cssItemsForDomain[domain][cosmeticFilter.style].push(cosmeticFilter.selector)
     }
   }
   return cssItemsForDomain
