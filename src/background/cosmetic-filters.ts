@@ -2,7 +2,7 @@ import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 
-const DIRECTORY = 'content_scripts/cosmetic_filters'
+const DIRECTORY = 'filter_list/cosmetic_filters'
 
 const fileExists = async (path: string): Promise<boolean> => {
   try {

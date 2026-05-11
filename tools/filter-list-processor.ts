@@ -69,9 +69,9 @@ export const processAndWrite = async (): Promise<void> => {
   const lines = await getAllLines(BLOCKLISTS)
   const linesFiltered = lines.filter(isGoodLine).filter(isCodingLine)
   const { scriptletsLines, cosmeticFiltersLines, networkFiltersLines } = separateLines(linesFiltered)
-  await parseAndGenerateNetworkFilters('rules', 'easylist.json', networkFiltersLines)
-  await parseAndGenerateCosmeticFilters('content_scripts/cosmetic_filters', cosmeticFiltersLines)
-  await parseAndGenerateScriptlets('content_scripts/scriptlets', scriptletsLines)
+  await parseAndGenerateNetworkFilters('filter_list', 'network_rules.json', networkFiltersLines)
+  await parseAndGenerateCosmeticFilters('filter_list/cosmetic_filters', cosmeticFiltersLines)
+  await parseAndGenerateScriptlets('filter_list/scriptlets', scriptletsLines)
 }
 
 if (isMain(import.meta)) {

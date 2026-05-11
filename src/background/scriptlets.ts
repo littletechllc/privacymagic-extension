@@ -2,7 +2,7 @@ import { SettingId } from '@src/common/setting-ids'
 import { logError } from '@src/common/util'
 
 const WILDCARD_MATCH = '*://*/*'
-const SCRIPTLETS_DIR = 'content_scripts/scriptlets'
+const SCRIPTLETS_DIR = 'filter_list/scriptlets'
 const SCRIPTLET_ID_PREFIX = 'scriptlet-'
 
 const fetchLocalFile = async (path: string): Promise<string> => {

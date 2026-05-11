@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { entries } from '../util'
 import { writeFile, logLineErrors } from './util'
 

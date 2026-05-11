@@ -50,7 +50,7 @@
       {
         "id": "ruleset_1",
         "enabled": true,
-        "path": "rules/easylist.json"
+        "path": "filter_list/network_rules.json"
       }
     ]
   },
