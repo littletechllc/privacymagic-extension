@@ -9,6 +9,7 @@ import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
 import { setupAllFilters } from './filters'
+import { injectCssForCosmeticFilters } from './cosmetic-filters'
 
 const handleMessage = async (
   message: Message,
@@ -72,6 +73,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Functions that set up event listeners (need to be re-registered on every background script load)
 const initializeListeners = (): void => {
   try {
+    injectCssForCosmeticFilters()
     showBlockedRequests()
     startWatchingRemoteConfig()
   } catch (error) {

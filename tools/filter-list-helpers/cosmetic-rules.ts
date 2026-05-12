@@ -1,6 +1,11 @@
 import { COSMETIC_FILTERS_DIR, PROCEDURAL_FILTERS_DIR } from '@src/common/filter-list-paths'
 import { entries } from '../util'
-import { writeFile, logLineErrors } from './util'
+import {
+  COSMETIC_SEPARATOR,
+  logLineErrors,
+  PROCEDURAL_COSMETIC_SEPARATOR,
+  writeFile
+} from './util'
 
 export type CosmeticFilter = {
   domains: string[]
@@ -10,12 +15,6 @@ export type CosmeticFilter = {
 }
 
 const SELECTOR_CHUNK_SIZE = 1024
-const SEPARATOR = '##'
-const PROCEDURAL_SEPARATOR = '#?#'
-
-export const isCosmeticFilterLine = (line: string): boolean => {
-  return line.includes(SEPARATOR) || line.includes(PROCEDURAL_SEPARATOR)
-}
 
 const parseCosmeticFilterBody = (body: string): { selector: string, style: string } => {
   const matches = body.match(/(.*?):style\((.*?)\)/)
@@ -44,10 +43,10 @@ const processProceduralSelector = (selector: string): { processedSelector: strin
 
 const parseCosmeticFilterLine = (line: string): CosmeticFilter => {
   let procedural = false
-  if (line.includes(PROCEDURAL_SEPARATOR)) {
+  if (line.includes(PROCEDURAL_COSMETIC_SEPARATOR)) {
     procedural = true
   }
-  const separator = procedural ? PROCEDURAL_SEPARATOR : SEPARATOR
+  const separator = procedural ? PROCEDURAL_COSMETIC_SEPARATOR : COSMETIC_SEPARATOR
   const [domainsString, body] = line.split(separator)
   // TODO: handle asterisks in domainsString
   const domains = domainsString.split(',').filter(d => !d.endsWith('*'))

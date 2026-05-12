@@ -1,7 +1,8 @@
 import { isMain } from './util'
-import { isNetworkFilterLine, parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
-import { isCosmeticFilterLine, parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
-import { isScriptletLine, parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
+import { parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
+import { parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
+import { parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
+import { isCosmeticFilterLine, isNetworkFilterLine, isScriptletLine } from './filter-list-helpers/util'
 
 const BLOCKLISTS: string[] = [
   'https://easylist.to/easylist/easylist.txt',
