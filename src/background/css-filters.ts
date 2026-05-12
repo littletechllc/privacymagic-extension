@@ -2,7 +2,16 @@ import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 import { COSMETIC_FILTERS_DIR } from '@src/common/filter-list-paths'
-import { readIndexFile } from './filter-util'
+
+const fileExists = async (path: string): Promise<boolean> => {
+  try {
+    const url = chrome.runtime.getURL(path)
+    const response = await fetch(url)
+    return response.ok
+  } catch {
+    return false
+  }
+}
 
 const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => handleAsync(async () => {
   // Get the top level domain of the current tab.
@@ -25,16 +34,16 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
   if (adsDisabled) {
     return
   }
-  const files = []
-  const availableDomains = await readIndexFile(COSMETIC_FILTERS_DIR)
-  if (availableDomains.has('_default')) {
-    files.push(`${COSMETIC_FILTERS_DIR}/_default_.css`)
-  }
+  const defaultPath = `${COSMETIC_FILTERS_DIR}/_default_.css`
+  // We know this file exists.
+  const files = [defaultPath]
   const frameDomain = registrableDomainFromUrl(details.url)
   if (frameDomain === null) {
     return
   }
-  if (availableDomains.has(frameDomain)) {
+  const path = `${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`
+  // Check if the file exists.
+  if (await fileExists(path)) {
     files.push(`${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`)
   }
   if (files.length === 0) {
