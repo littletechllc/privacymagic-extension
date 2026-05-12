@@ -1,6 +1,6 @@
 import { SettingId } from '@src/common/setting-ids'
 import { logError } from '@src/common/util'
-import { /*COSMETIC_FILTERS_DIR,*/ PROCEDURAL_FILTERS_DIR, SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
+import { PROCEDURAL_FILTERS_DIR, SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
 import { type DisabledSettingCollection } from '@src/common/settings-read'
 import { unique } from '@src/common/data-structures'
 
@@ -56,9 +56,8 @@ const createFilterRulesForDomain = async (dir: string, domain: string, injection
 
 const createAllFilterRulesForDomain = async (domain: string, domainsWhereFiltersAreDisabled: string[]): Promise<chrome.scripting.RegisteredContentScript[]> => {
   const scriptletRules = await createFilterRulesForDomain(SCRIPTLETS_DIR, domain, 'js', domainsWhereFiltersAreDisabled)
-  //const cosmeticRules = await createFilterRulesForDomain(COSMETIC_FILTERS_DIR, domain, 'css', domainsWhereFiltersAreDisabled)
   const proceduralRules = await createFilterRulesForDomain(PROCEDURAL_FILTERS_DIR, domain, 'js', domainsWhereFiltersAreDisabled)
-  return [...scriptletRules, /*...cosmeticRules,*/ ...proceduralRules]
+  return [...scriptletRules, ...proceduralRules]
 }
 
 export const updateAllFilters = async (settingId: SettingId, domain: string, domainsWhereFiltersAreDisabled: string[]): Promise<void> => {
@@ -83,11 +82,10 @@ export const setupAllFilters = async (settings: DisabledSettingCollection): Prom
 
     const domainsWhereFiltersAreDisabled = unique([...(settings['masterSwitch'] ?? []), ...(settings['ads'] ?? [])])
     const oldFilterRules = await chrome.scripting.getRegisteredContentScripts({})
-    const idsToUnregister = oldFilterRules.map(rule => rule.id).filter(id => id.startsWith(COSMETIC_FILTERS_DIR) || id.startsWith(PROCEDURAL_FILTERS_DIR) || id.startsWith(SCRIPTLETS_DIR))
+    const idsToUnregister = oldFilterRules.map(rule => rule.id).filter(id => id.startsWith(PROCEDURAL_FILTERS_DIR) || id.startsWith(SCRIPTLETS_DIR))
     const scriptletRules = await createAllFilterRules(SCRIPTLETS_DIR, 'js', domainsWhereFiltersAreDisabled)
-    //const cosmeticRules = await createAllFilterRules(COSMETIC_FILTERS_DIR, 'css', domainsWhereFiltersAreDisabled)
     const proceduralRules = await createAllFilterRules(PROCEDURAL_FILTERS_DIR, 'js', domainsWhereFiltersAreDisabled)
-    const allRules = [...scriptletRules, /*...cosmeticRules,*/ ...proceduralRules]
+    const allRules = [...scriptletRules, ...proceduralRules]
     if (idsToUnregister.length > 0) {
       await chrome.scripting.unregisterContentScripts({ ids: idsToUnregister })
     }
