@@ -87,6 +87,7 @@ const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: Cosmeti
     await writeFile(dir, file, lines.join('\n'))
   }
   await writeFile(dir, 'index.txt', filestems.sort().join('\n'))
+  return filestems
 }
 
 const enforceProceduralFilter = (selector: string, hasText: string, style: string) => {

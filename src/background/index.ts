@@ -1,4 +1,3 @@
-import { injectCssForCosmeticFilters } from './cosmetic-filters'
 import { getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
 import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
@@ -9,7 +8,7 @@ import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
-import { setupScriptlets } from './scriptlets'
+import { setupAllFilters } from './filters'
 
 const handleMessage = async (
   message: Message,
@@ -73,7 +72,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Functions that set up event listeners (need to be re-registered on every background script load)
 const initializeListeners = (): void => {
   try {
-    injectCssForCosmeticFilters()
     showBlockedRequests()
     startWatchingRemoteConfig()
   } catch (error) {
@@ -85,7 +83,7 @@ const initializeListeners = (): void => {
 const initializePersistentResources = async (): Promise<void> => {
   const settings = await copySettingsFromLocalToSessionStorage()
   await updateRulesForAllSettings(settings)
-  await setupScriptlets()
+  await setupAllFilters(settings)
 }
 
 const showWelcomePage = async (): Promise<void> => {
