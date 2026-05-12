@@ -8,8 +8,8 @@ import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
-import { setupAllFilters } from './filters'
-import { injectCssForCosmeticFilters } from './cosmetic-filters'
+import { setupAllFilters } from './js-filters'
+import { injectCssForCosmeticFilters } from './css-filters'
 
 const handleMessage = async (
   message: Message,

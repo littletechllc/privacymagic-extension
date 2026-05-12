@@ -2,16 +2,7 @@ import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 import { COSMETIC_FILTERS_DIR } from '@src/common/filter-list-paths'
-
-const fileExists = async (path: string): Promise<boolean> => {
-  try {
-    const url = chrome.runtime.getURL(path)
-    const response = await fetch(url)
-    return response.ok
-  } catch {
-    return false
-  }
-}
+import { readIndexFile } from './filter-util'
 
 const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => handleAsync(async () => {
   // Get the top level domain of the current tab.
@@ -34,16 +25,20 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
   if (adsDisabled) {
     return
   }
-  const files = [
-    `${COSMETIC_FILTERS_DIR}/_default_.css`
-  ]
+  const files = []
+  const availableDomains = await readIndexFile(COSMETIC_FILTERS_DIR)
+  if (availableDomains.has('_default')) {
+    files.push(`${COSMETIC_FILTERS_DIR}/_default_.css`)
+  }
   const frameDomain = registrableDomainFromUrl(details.url)
   if (frameDomain === null) {
     return
   }
-  const domainSpecificFile = `${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`
-  if (await fileExists(domainSpecificFile)) {
-    files.push(domainSpecificFile)
+  if (availableDomains.has(frameDomain)) {
+    files.push(`${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`)
+  }
+  if (files.length === 0) {
+    return
   }
   await chrome.scripting.insertCSS({
     target: {

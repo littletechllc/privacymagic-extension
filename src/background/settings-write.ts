@@ -6,7 +6,7 @@ import {
   getDisabledSettingCollection,
 } from '@src/common/settings-read'
 import { updateRulesForAllSettings, updateRulesForSetting } from './dnr/rule-manager'
-import { setupAllFilters, updateAllFilters } from './filters'
+import { setupAllFilters, updateAllFilters } from './js-filters'
 
 const REMOTE_SETTINGS_KEY = '_REMOTE_SETTINGS_'
 const SETTINGS_LOCK_NAME = '_SETTINGS_LOCK_'
