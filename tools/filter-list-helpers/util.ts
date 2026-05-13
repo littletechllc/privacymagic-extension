@@ -18,10 +18,10 @@ export const isScriptletLine = (line: string): boolean => {
 }
 
 export const isCosmeticFilterLine = (line: string): boolean => {
-  if (line.includes(COSMETIC_EXCEPTION_SEPARATOR) || line.includes(PROCEDURAL_COSMETIC_EXCEPTION_SEPARATOR)) {
+  if (line.includes(PROCEDURAL_COSMETIC_EXCEPTION_SEPARATOR)) {
     return false
   }
-  return line.includes(COSMETIC_SEPARATOR) || line.includes(PROCEDURAL_COSMETIC_SEPARATOR)
+  return line.includes(COSMETIC_SEPARATOR) || line.includes(PROCEDURAL_COSMETIC_SEPARATOR) || line.includes(COSMETIC_EXCEPTION_SEPARATOR)
 }
 
 export const isNetworkFilterLine = (line: string): boolean => {
