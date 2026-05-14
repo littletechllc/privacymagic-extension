@@ -22,6 +22,9 @@ type FieldKey<T> = {
   [P in keyof T]: T[P] extends AnyFunction ? never : P
 }[keyof T]
 
+// Value of a field of an object. Can be a value or a getter that returns a value.
+type FieldValue<T, K extends FieldKey<T>> = T[K] | ((this: T) => T[K])
+
 // Safe version of Reflect.apply; can be called even after site scripts have
 // overwritten Reflect.apply. Also enforces type safety more than the original
 // Reflect.apply.
@@ -33,6 +36,19 @@ export const reflectApplySafe = Reflect.apply as <
   thisArg: TThis,
   args: Parameters<TMethod>
 ) => ReturnType<TMethod>
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Constructable = abstract new (...args: any[]) => any
+
+export const reflectConstructSafe = Reflect.construct as <
+  TConstructor extends Constructable,
+  TArgs extends ConstructorParameters<TConstructor>,
+  TNewTarget extends object,
+>(
+  constructor: TConstructor,
+  args: TArgs,
+  newTarget: TNewTarget
+) => InstanceType<TConstructor>
 
 // Safe version of Object.defineProperties; can be called even after site scripts have
 // overwritten Object.defineProperties.
@@ -112,7 +128,7 @@ export const nonProperty: PropertyDescriptor = { get: undefined, set: undefined,
  * @param fieldMap - A map of field names to new field values. Each new field value
  * must be a value that can be assigned to the field.
  */
-const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, T[K]>>, expectPrototype: boolean): void => {
+const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMap: Partial<Record<K, FieldValue<T, K>>>, expectPrototype: boolean): void => {
   const newFields: PropertyDescriptorMap = {}
   for (const [fieldName, newFieldValue] of objectGetEntriesSafe(fieldMap)) {
     const originalDescriptor = objectGetOwnPropertyDescriptorSafe(obj, fieldName)
@@ -124,11 +140,13 @@ const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMa
       // Accessor property: set to a getter that returns the new value.
       newFields[fieldName] = {
         ...originalDescriptor,
-        get: function (this) {
+        get: function (this: T): T[K] {
           if (expectPrototype && !objectIsPrototypeOfSafe(obj, this)) {
             throw new TypeError('Illegal invocation')
           }
-          return newFieldValue
+          return typeof newFieldValue === 'function'
+            ? (newFieldValue as (this: T) => T[K]).call(this)
+            : newFieldValue
         }
       }
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -144,11 +162,11 @@ const redefineFields = <T extends object, K extends FieldKey<T>>(obj: T, fieldMa
   objectDefinePropertiesSafe(obj, newFields)
 }
 
-export const redefinePrototypeFields = <T extends object, K extends FieldKey<T>>(obj: { prototype: T }, fieldMap: Partial<Record<K, T[K]>>): void => {
+export const redefinePrototypeFields = <T extends object, K extends FieldKey<T>>(obj: { prototype: T }, fieldMap: Partial<Record<K, FieldValue<T, K>>>): void => {
   redefineFields(obj.prototype, fieldMap, true)
 }
 
-export const redefineGlobalFields = <T extends object, K extends FieldKey<T>>(globalObject: GlobalScope, fieldMap: Partial<Record<K, T[K]>>): void => {
+export const redefineGlobalFields = <T extends object, K extends FieldKey<T>>(globalObject: GlobalScope, fieldMap: Partial<Record<K, FieldValue<T, K>>>): void => {
   redefineFields(globalObject, fieldMap, false)
 }
 
@@ -203,3 +221,20 @@ export const redefineNavigatorFields = <T, K extends FieldKey<T>>(globalObject: 
   redefinePrototypeFields(NavigatorConstructor, propertyMap)
 }
 
+export const modifyConstructorArguments = <
+  K extends keyof GlobalScope,
+  T extends GlobalScope[K] & Constructable,
+>(
+  globalObject: GlobalScope,
+  constructorName: K,
+  modifyArguments: (...args: ConstructorParameters<T>) => ConstructorParameters<T>,
+): void => {
+  const originalConstructor = globalObject[constructorName]
+  const proxiedConstructor = new Proxy(originalConstructor, {
+    construct(_target, argList, newTarget) {
+      const newCallArgs = modifyArguments(...argList as ConstructorParameters<T>)
+      return reflectConstructSafe(originalConstructor, newCallArgs, newTarget) as object
+    },
+  })
+  globalObject[constructorName] = proxiedConstructor
+}

@@ -19,7 +19,7 @@ const PRIVACY_SETTINGS_CONFIG: Record<Exclude<SettingsCategory, 'masterSwitch'>,
     'ads'
   ],
   fingerprinting: [
-    // 'audio',
+    'audio',
     'battery',
     'cpu',
     'device',

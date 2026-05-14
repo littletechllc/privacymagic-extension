@@ -66,6 +66,6 @@ export const getDisabledSettings = (): ContentSettingId[] => {
 
 export type FetchID = string
 
-export const objectGetEntriesSafe = <K extends string, V>(object: Record<K, V>): [K, V][] => {
+export const objectGetEntriesSafe = <K extends string, V>(object: Partial<Record<K, V>>): [K, V][] => {
   return Object.entries(object) as [K, V][]
 }
