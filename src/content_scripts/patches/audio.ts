@@ -109,6 +109,8 @@ const audio = (globalObject: GlobalScope): void => {
   modifyConstructorArguments(globalObject, 'AudioContext', (options?: AudioContextOptions): [AudioContextOptions] => {
     return [{ ...options, sampleRate: SPOOFED_AUDIO_CONTEXT_SAMPLE_RATE }]
   })
+
+  // TODO: AudioWorklet
 }
 
 export default audio
