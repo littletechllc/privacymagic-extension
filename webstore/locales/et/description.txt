@@ -14,6 +14,7 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Ekraan
   · Fondid
   · Graafika
+  · Heli
   · Keel
   · Ketas
   · Klaviatuur

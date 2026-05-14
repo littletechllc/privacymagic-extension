@@ -22,6 +22,7 @@ Gizliliğinizi korumak için Privacy Magic:
   · Matematik
   · Pil
   · Saat dilimi
+  · Ses
   · Tarayıcı
   · Yazı tipleri
   · Zamanlama

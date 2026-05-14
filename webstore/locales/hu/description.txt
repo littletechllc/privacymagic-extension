@@ -16,6 +16,7 @@ Az adatvédelem érdekében a Privacy Magic:
   · Eszköz
   · Grafika
   · Hálózat
+  · Hang
   · Időzítés
   · Időzóna
   · Képernyő

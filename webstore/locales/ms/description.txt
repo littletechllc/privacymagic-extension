@@ -8,6 +8,7 @@ Untuk mempertahankan privasi anda, Privacy Magic:
 
 - Menyekat iklan, penjejak dan gangguan
 - Melindungi maklumat sistem (daripada cap jari)
+  · Audio
   · Bahasa
   · Bateri
   · Cakera

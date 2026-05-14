@@ -8,6 +8,7 @@ Para defender tu privacidad, Privacy Magic:
 
 - Bloquea anuncios, rastreadores y molestias
 - Protege la información del sistema (contra la huella digital)
+  · Audio
   · Batería
   · Cronometraje
   · Disco
@@ -19,11 +20,11 @@ Para defender tu privacidad, Privacy Magic:
   · Memoria
   · Navegador
   · Pantalla
-  · Visualización
   · Procesador
   · Red
   · Táctil
   · Teclado
+  · Visualización
   · Zona horaria
 - Quita rastros de navegación
   · Nombre de ventana

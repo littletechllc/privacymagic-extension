@@ -25,6 +25,7 @@ Pro obranu vašeho soukromí Privacy Magic:
   · Síť
   · Zařízení
   · Zobrazení
+  · Zvuk
 - Odstraňuje stopy sledování
   · Název okna
   · Parametry sledování

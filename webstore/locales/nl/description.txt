@@ -10,6 +10,7 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
 - Beschermt systeeminformatie (tegen fingerprinting)
   · Aanraking
   · Apparaat
+  · Audio
   · Batterij
   · Browser
   · Geheugen

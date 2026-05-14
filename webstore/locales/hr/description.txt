@@ -17,6 +17,7 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Matematika
   · Memorija
   · Mreža
+  · Postavke zaslona
   · Preglednik
   · Procesor
   · Tipkovnica
@@ -24,7 +25,7 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Vremenska zona
   · Vremensko mjerjenje
   · Zaslon
-  · Postavke zaslona
+  · Zvuk
 - Uklanja tragove praćenja
   · Naziv prozora
   · Parametri praćenja

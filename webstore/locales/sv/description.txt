@@ -12,6 +12,7 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Disk
   · Enhet
   · Grafik
+  · Ljud
   · Matematik
   · Minne
   · Nätverk

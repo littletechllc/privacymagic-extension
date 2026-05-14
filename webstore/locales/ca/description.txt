@@ -8,6 +8,7 @@ Per defensar la vostra privacitat, Privacy Magic:
 
 - Bloqueja anuncis, seguidors i molesties
 - Protegeix la informació del sistema (contra la presa d'empremtes)
+  · Àudio
   · Bateria
   · Disc
   · Dispositiu

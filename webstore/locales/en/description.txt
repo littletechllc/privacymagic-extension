@@ -8,6 +8,7 @@ To defend your privacy, Privacy Magic:
 
 - Blocks ads, trackers, and annoyances
 - Protects system information (to resist fingerprinting)
+  · Audio
   · Battery
   · Browser
   · Device

@@ -9,6 +9,7 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
 - Bloķē reklāmas, izsekotājus un kaitinājumus
 - Aizsargā sistēmas informāciju (pret pirkstu nospiedumu)
   · Atmiņa
+  · Audio
   · Baterija
   · Disks
   · Displejs

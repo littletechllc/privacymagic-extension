@@ -8,12 +8,13 @@ Para defender a sua privacidade, o Privacy Magic:
 
 - Bloqueia anúncios, rastreadores e incómodos
 - Protege informações do sistema (para resistir ao fingerprinting)
+  · Áudio
   · Bateria
   · Cronometragem
+  · Definições de ecrã
   · Disco
   · Dispositivo
   · Ecrã
-  · Definições de ecrã
   · Fontes
   · Fuso horário
   · Gráficos

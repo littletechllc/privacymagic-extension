@@ -13,6 +13,7 @@ Aby chronić Twoją prywatność, Privacy Magic:
   · Czcionki
   · Dotyk
   · Dysk
+  · Dźwięk
   · Ekran
   · Grafika
   · Język

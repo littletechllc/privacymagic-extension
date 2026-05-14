@@ -8,6 +8,7 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
 
 - Nagba-block ng ads, trackers at mga abala
 - Pinoprotektahan ang system information (laban sa fingerprinting)
+  · Audio
   · Battery
   · Browser
   · Device

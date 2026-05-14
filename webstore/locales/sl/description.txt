@@ -25,6 +25,7 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Procesor
   · Tipkovnica
   · Zaslon
+  · Zvok
 - Odstrani sledi sledenja
   · Ime okna
   · Napotitelj

@@ -25,6 +25,7 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Prosessori
   · Selain
   · Verkko
+  · Ääni
 - Poistaa seurannan jäljet
   · Ikkunan nimi
   · Seurantaparametrit

@@ -10,6 +10,7 @@ Pour défendre votre vie privée, Privacy Magic :
 - Protège les informations système (pour résister au fingerprinting)
   · Affichage
   · Appareil
+  · Audio
   · Batterie
   · Chronométrage
   · Clavier

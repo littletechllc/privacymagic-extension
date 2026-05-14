@@ -8,6 +8,7 @@ Para defender sua privacidade, o Privacy Magic:
 
 - Bloqueia anúncios, rastreadores e incômodos
 - Protege informações do sistema (para resistir à identificação por fingerprinting)
+  · Áudio
   · Bateria
   · Cronometragem
   · Disco

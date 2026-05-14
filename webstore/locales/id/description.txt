@@ -8,6 +8,7 @@ Untuk membela privasi Anda, Privacy Magic:
 
 - Memblokir iklan, pelacak, dan gangguan
 - Melindungi informasi sistem (dari fingerprinting)
+  · Audio
   · Bahasa
   · Baterai
   · Browser

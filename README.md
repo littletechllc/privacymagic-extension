@@ -8,6 +8,7 @@
 * Removes tracking headers
 * Blocks third-party cookies
 * Blocks fingerprinting leaks
+  * audio processing
   * battery status
   * browser version
   * device information

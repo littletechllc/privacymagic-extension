@@ -15,6 +15,7 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Enhed
   · Grafik
   · Hukommelse
+  · Lyd
   · Matematik
   · Netværk
   · Processor

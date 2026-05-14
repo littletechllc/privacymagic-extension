@@ -9,6 +9,7 @@ Pentru a vă apăra confidențialitatea, Privacy Magic:
 - Blochează reclame, trackere și supărări
 - Protejează informațiile de sistem (împotriva fingerprintingului)
   · Afișaj
+  · Audio
   · Baterie
   · Browser
   · Cronometrare

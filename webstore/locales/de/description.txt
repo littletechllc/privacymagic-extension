@@ -9,6 +9,7 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
 - Blockiert Werbung, Tracker und Störungen
 - Schützt Systeminformationen (gegen Fingerprinting)
   · Anzeige
+  · Audio
   · Batterie
   · Bildschirm
   · Browserversion
