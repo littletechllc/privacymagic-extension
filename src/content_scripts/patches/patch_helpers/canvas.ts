@@ -1,5 +1,5 @@
-import { createSafeSetter, redefineMethods, reflectApplySafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
-import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe, reflectConstructSafe } from '@src/content_scripts/helpers/safe'
+import { createSafeSetter, redefineMethods, reflectApplySafe, reflectConstructSafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
+import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe } from '@src/content_scripts/helpers/safe'
 import { GlobalScope } from '../../helpers/globalObject'
 
 export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void => {
