@@ -1,8 +1,9 @@
 {
   "version": "1",
   "setting_exceptions": {
+    "device": ["godaddy.com"],
     "iframe": ["example.com"],
-    "cpu": ["petco.com"],
+    "cpu": ["godaddy.com", "petco.com"],
     "screen": ["petco.com"]
   }
 }
