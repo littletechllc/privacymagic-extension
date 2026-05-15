@@ -1,6 +1,5 @@
 import { getNavigatorConstructor, GlobalScope } from "./globalObject"
 import { objectGetEntriesSafe } from "./helpers"
-import { Constructable, reflectConstructSafe } from "./safe"
 
 const objectIsPrototypeOfSafe = (maybePrototype: object, obj: object): boolean => Object.prototype.isPrototypeOf.call(maybePrototype, obj)
 
@@ -25,6 +24,17 @@ type FieldKey<T> = {
 
 // Value of a field of an object. Can be a value or a getter that returns a value.
 type FieldValue<T, K extends FieldKey<T>> = T[K] | ((this: T) => T[K])
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Constructable = abstract new (...args: any[]) => any
+
+export const reflectConstructSafe = Reflect.construct as <
+  TConstructor extends Constructable,
+  TArgs extends ConstructorParameters<TConstructor>,
+>(
+  constructor: TConstructor,
+  args: TArgs,
+) => InstanceType<TConstructor>
 
 // Safe version of Reflect.apply; can be called even after site scripts have
 // overwritten Reflect.apply. Also enforces type safety more than the original
