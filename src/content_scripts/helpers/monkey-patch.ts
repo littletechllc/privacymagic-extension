@@ -1,5 +1,6 @@
 import { getNavigatorConstructor, GlobalScope } from "./globalObject"
 import { objectGetEntriesSafe } from "./helpers"
+import { Constructable, reflectConstructSafe } from "./safe"
 
 const objectIsPrototypeOfSafe = (maybePrototype: object, obj: object): boolean => Object.prototype.isPrototypeOf.call(maybePrototype, obj)
 
@@ -36,19 +37,6 @@ export const reflectApplySafe = Reflect.apply as <
   thisArg: TThis,
   args: Parameters<TMethod>
 ) => ReturnType<TMethod>
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Constructable = abstract new (...args: any[]) => any
-
-export const reflectConstructSafe = Reflect.construct as <
-  TConstructor extends Constructable,
-  TArgs extends ConstructorParameters<TConstructor>,
-  TNewTarget extends object,
->(
-  constructor: TConstructor,
-  args: TArgs,
-  newTarget: TNewTarget
-) => InstanceType<TConstructor>
 
 // Safe version of Object.defineProperties; can be called even after site scripts have
 // overwritten Object.defineProperties.
@@ -231,9 +219,9 @@ export const modifyConstructorArguments = <
 ): void => {
   const originalConstructor = globalObject[constructorName]
   const proxiedConstructor = new Proxy(originalConstructor, {
-    construct(_target, argList, newTarget) {
+    construct(target, argList, _newTarget) {
       const newCallArgs = modifyArguments(...argList as ConstructorParameters<T>)
-      return reflectConstructSafe(originalConstructor, newCallArgs, newTarget) as object
+      return reflectConstructSafe(target, newCallArgs) as object
     },
   })
   globalObject[constructorName] = proxiedConstructor

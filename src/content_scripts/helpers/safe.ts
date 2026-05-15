@@ -1,7 +1,16 @@
 
 import { createSafeGetter, createSafeMethod } from "./monkey-patch"
 
-export const reflectConstructSafe = Reflect.construct
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Constructable = abstract new (...args: any[]) => any
+
+export const reflectConstructSafe = Reflect.construct as <
+  TConstructor extends Constructable,
+  TArgs extends ConstructorParameters<TConstructor>,
+>(
+  constructor: TConstructor,
+  args: TArgs,
+) => InstanceType<TConstructor>
 
 export const weakMapGetSafe = createSafeMethod(WeakMap, 'get')
 export const weakMapHasSafe = createSafeMethod(WeakMap, 'has')
