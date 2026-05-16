@@ -1,5 +1,6 @@
 {
-  "version": "1",
+  "$schema": "./schema.json",
+  "version": 1,
   "setting_exceptions": {
     "device": ["godaddy.com"],
     "iframe": ["example.com"],
