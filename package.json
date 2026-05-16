@@ -8,6 +8,8 @@
     "format": "eslint . --fix --format eslint-formatter-unix && tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:i18n": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathPatterns=test/i18n/",
+    "generate:remote-schema": "npx tsx tools/generate-remote-schema.ts",
+    "postinstall": "npm run generate:remote-schema",
     "sync:chrome-locale-strings": "npx tsx tools/sync-chrome-locale-string.ts",
     "sync:locale-messages": "npx tsx tools/sync-locale-messages-from-en.ts",
     "webstore:update-listing-descriptions": "npx tsx webstore/update-listing-descriptions.ts",
@@ -41,9 +43,12 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.56.0",
-    "web-ext": "9.3.0"
+    "web-ext": "9.4.0"
   },
   "engines": {
     "node": "22.x"
+  },
+  "overrides": {
+    "yauzl": "3.3.0"
   }
 }
