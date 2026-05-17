@@ -14,6 +14,7 @@
   * device information
   * disk space usage
   * display settings
+  * fonts installed
   * graphics chip specs
   * keyboard layout
   * language settings
