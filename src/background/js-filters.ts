@@ -31,6 +31,7 @@ const getId = (dir: string, domain: string): string => {
 
 const createFilterRule = (dir: string, domain: string, domainsWhereSettingIsDisabled: string[]): chrome.scripting.RegisteredContentScript => {
   const matches = domain === '_default' ? ['*://*/*'] : [`*://${domain}/*`, `*://*.${domain}/*`]
+  // TODO: Change the approach so that we mimic the behavior of excludedTopDomains.
   const excludeMatches = domainsWhereSettingIsDisabled.map(d => [`*://${d}/*`, `*://*.${d}/*`]).flat()
   return {
     allFrames: true,
