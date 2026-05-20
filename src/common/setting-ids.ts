@@ -19,6 +19,7 @@ export const BLOCKER_SETTING_IDS = [
 ] as const
 
 export const CONTENT_SETTING_IDS = [
+  'ads',
   'audio',
   'battery',
   'cpu',
@@ -68,3 +69,5 @@ export const isBlockerSetting = (setting: SettingId): setting is BlockerSettingI
 export const isNetworkSetting = (setting: SettingId): setting is NetworkSettingId => {
   return (NETWORK_SETTING_IDS as readonly string[]).includes(setting)
 }
+
+export const SETTING_COOKIE_PREFIX = '__pm_setting__'

@@ -3,13 +3,13 @@
 // of the web page and any subframes. Each content setting has a
 // separate rule for enabled and disabled states.
 
-import { isContentSetting, ContentSettingId, SettingId } from '@src/common/setting-ids'
+import { isContentSetting, ContentSettingId, SettingId, SETTING_COOKIE_PREFIX } from '@src/common/setting-ids'
 import { contentRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
 
 const createContentRule = (settingId: ContentSettingId, domainsWhereSettingIsDisabled: NonEmptyDomainList, enabled: boolean): chrome.declarativeNetRequest.Rule => {
-  const cookieKeyVal = `__pm_setting__${settingId}=${enabled ? '1' : '0'}`
+  const cookieKeyVal = `${SETTING_COOKIE_PREFIX}${settingId}=${enabled ? '1' : '0'}`
   const headerValue = `${cookieKeyVal}; Secure; SameSite=None; Path=/; Partitioned`
   return {
     id: contentRuleId(settingId, enabled),

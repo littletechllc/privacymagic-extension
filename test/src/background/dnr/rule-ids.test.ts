@@ -36,13 +36,13 @@ describe('DNR_RULE_PRIORITIES', () => {
 })
 
 describe('CONTENT_RULE_IDS', () => {
-  it('should assign 1..25 exactly once per content setting', () => {
+  it('should assign 1..26 exactly once per content setting', () => {
     expect(Object.keys(CONTENT_RULE_SLOTS)).toHaveLength(CONTENT_SETTING_IDS.length)
     for (const id of CONTENT_SETTING_IDS) {
       expect(CONTENT_RULE_SLOTS).toHaveProperty(id)
     }
     const sorted = [...Object.values(CONTENT_RULE_SLOTS)].sort((a, b) => a - b)
-    expect(sorted).toEqual(Array.from({ length: 25 }, (_, i) => i + 1))
+    expect(sorted).toEqual(Array.from({ length: 26 }, (_, i) => i + 1))
   })
 })
 

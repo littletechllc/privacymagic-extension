@@ -108,14 +108,6 @@ describe('updateRulesForSetting', () => {
     expect(call.addRules?.every(r => r.priority === DNR_RULE_PRIORITIES.CONTENT_SCRIPTS)).toBe(true)
   })
 
-  it('calls updateDynamicRules once for ads with only allow rule', async () => {
-    await updateRulesForSetting('ads', [domain])
-
-    const call = getSingleUpdateCall()
-    expectRuleBatch(call, ruleCountForSetting('ads'))
-    expect(call.addRules?.every(r => r.action.type === 'allow')).toBe(true)
-  })
-
   it('calls updateDynamicRules once for queryParameters with one network rule per param pattern', async () => {
     const n = NETWORK_PROTECTION_DEFS.queryParameters.length
     await updateRulesForSetting('queryParameters', [domain])

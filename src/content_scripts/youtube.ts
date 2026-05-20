@@ -1,4 +1,5 @@
 import { createSafeGetter, createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
+import { SETTING_COOKIE_PREFIX } from '@src/common/setting-ids'
 
 type UnknownRecord = Record<string, unknown>
 
@@ -220,6 +221,19 @@ const sanitizeInitialData = (): void => {
   }
 }
 
+const isAdsBlockingDisabled = () : boolean => {
+  const cookieItems = document.cookie.split(';')
+  for (const cookie of cookieItems) {
+    const [key, value] = cookie.trim().split('=')
+    if (key === `${SETTING_COOKIE_PREFIX}ads` || key === `${SETTING_COOKIE_PREFIX}masterSwitch`) {
+      if (value === '0') {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 const main = (): void => {
   patchGlobalObjectSetter('ytInitialPlayerResponse')
   patchGlobalObjectSetter('ytInitialData')
@@ -229,4 +243,6 @@ const main = (): void => {
   sanitizeInitialData()
 }
 
-main()
+if (!isAdsBlockingDisabled()) {
+  main()
+}

@@ -1,4 +1,4 @@
-import { ContentSettingId, CONTENT_SETTING_IDS } from "@src/common/setting-ids"
+import { ContentSettingId, CONTENT_SETTING_IDS, SETTING_COOKIE_PREFIX } from "@src/common/setting-ids"
 import { GlobalScope } from "./globalObject"
 
 export const spoofMediaQuery = (globalObject: GlobalScope, key: string, spoofValue: string, targetDefault = false): void => {
@@ -45,12 +45,12 @@ export const getDisabledSettings = (): ContentSettingId[] => {
     const cookieItems = document.cookie.split(';')
     for (const cookie of cookieItems) {
       const [key, value] = cookie.trim().split('=')
-      if (key.startsWith('__pm_setting__')) {
+      if (key.startsWith(SETTING_COOKIE_PREFIX)) {
         // Clear the cookie.
         document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
         // Add the setting ID to the list of disabled settings if the value is '0'.
         if (value === '0') {
-          const settingId = key.split('__pm_setting__')[1]
+          const settingId = key.split(SETTING_COOKIE_PREFIX)[1]
           if (settingId != null && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
             result.push(settingId as ContentSettingId)
           }
