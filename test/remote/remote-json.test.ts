@@ -26,17 +26,18 @@ describe('remote/remote.json', () => {
     exceptions = parsed[SETTING_EXCEPTIONS_KEY]
   })
 
-  it('is valid JSON and parses to a plain object', () => {
+  it('is valid JSON and parses to a plain object and the right format', () => {
     expect(parsed).not.toBeNull()
     expect(typeof parsed).toBe('object')
     expect(Array.isArray(parsed)).toBe(false)
-  })
-
-  it('has setting_exceptions as a non-null object record (not an array)', () => {
-    expect(parsed).toHaveProperty(SETTING_EXCEPTIONS_KEY)
-    expect(exceptions).not.toBeNull()
-    expect(typeof exceptions).toBe('object')
-    expect(Array.isArray(exceptions)).toBe(false)
+    expect(typeof parsed.version).toBe('number')
+    expect(parsed.version).toBeGreaterThan(0)
+    expect(typeof parsed.setting_exceptions).toBe('object')
+    expect(Array.isArray(parsed.setting_exceptions)).toBe(false)
+    expect(parsed.setting_exceptions).not.toBeNull()
+    expect(typeof parsed.setting_exceptions).toBe('object')
+    expect(Array.isArray(parsed.setting_exceptions)).toBe(false)
+    expect(parsed.setting_exceptions).not.toBeNull()
   })
 
   it('each setting_exceptions entry uses a known SettingId and string[] registrable domains', () => {
