@@ -19,7 +19,7 @@ const adKeys = [
   'adSlotAndLayoutMetadata',
   'adSlotMetadata',
   'adSlots',
-  'enabledEngagementPanels',
+ // 'enabledEngagementPanels',
   'fullerscreenAdPlayerOverlayRenderer',
   'playerAdParams',
   'playerAds',
@@ -91,16 +91,16 @@ const stripAdsDeep = (value: unknown): number => {
   return removedCount
 }
 
-/**
- * If YouTube sets playabilityStatus.status = "UNPLAYABLE" (the enforcement
- * gate), reset it to "OK" and remove the errorScreen that renders the modal.
- */
+const ENFORCEMENT_STATUSES = new Set(['UNPLAYABLE', 'ERROR'])
+
 const sanitizePlayabilityStatus = (value: unknown): void => {
   if (!isRecord(value)) return
   const status = value['playabilityStatus']
-  if (isRecord(status) && status['status'] === 'UNPLAYABLE') {
-    delete status['errorScreen']
-    status['status'] = 'OK'
+  if (isRecord(status) && ENFORCEMENT_STATUSES.has(status['status'] as string)) {
+    if (isRecord(status['errorScreen']) && 'enforcementMessageViewModel' in status['errorScreen']) {
+      delete status['errorScreen']
+      status['status'] = 'OK'
+    }
   }
   const nested = value['playerResponse']
   if (isRecord(nested)) {
@@ -248,8 +248,8 @@ const patchGlobalObjectSetter = (propertyName: 'ytInitialPlayerResponse' | 'ytIn
       return internalValue
     },
     set(value: unknown) {
-      stripAdsDeep(value)
-      sanitizePlayabilityStatus(value)
+ //     stripAdsDeep(value)
+ //     sanitizePlayabilityStatus(value)
       internalValue = value
     }
   })
@@ -258,8 +258,8 @@ const patchGlobalObjectSetter = (propertyName: 'ytInitialPlayerResponse' | 'ytIn
 const sanitizeInitialPlayerResponse = (): void => {
   const initialResponse = (window as Window & { ytInitialPlayerResponse?: unknown }).ytInitialPlayerResponse
   if (initialResponse) {
-    stripAdsDeep(initialResponse)
-    sanitizePlayabilityStatus(initialResponse)
+  //  stripAdsDeep(initialResponse)
+//    sanitizePlayabilityStatus(initialResponse)
   }
 }
 
