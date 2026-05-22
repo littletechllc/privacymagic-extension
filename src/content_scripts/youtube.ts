@@ -5,48 +5,28 @@ type UnknownRecord = Record<string, unknown>
 
 /** Object keys removed from InnerTube / page JSON when present (ad-related API surface). */
 const adKeys = [
-  'ad3Module',
-  'adBreakHeartbeatParams',
-  'adBreakParams',
-  'adBreakServiceRenderer',
-  'adLayoutMetadata',
-  'adParams',
-  'adPlacementRenderer',
   'adPlacements',
-  'adSafetyReason',
-  'adsControlFlowOpportunityReceivedCommand',
-  'adsEngagementPanelContentRenderer',
-  'adSlotAndLayoutMetadata',
-  'adSlotMetadata',
-  'adSlots',
-  'enabledEngagementPanels',
-  'fullerscreenAdPlayerOverlayRenderer',
-  'playerAdParams',
+  'adPlacementRenderer',
   'playerAds',
   'playerLegacyDesktopWatchAdsRenderer',
-  'playerOverlayAdRenderer',
-  'showCompanionAdUrl',
+  'adSlots',
+  'adSlotMetadata',
+  'adLayoutMetadata',
+  'adSlotAndLayoutMetadata',
+  'adBreakHeartbeatParams',
+  'adSafetyReason',
+  'ad3Module',
+  'adParams',
+  'playerAdParams',
+  'adsControlFlowOpportunityReceivedCommand',
+  'adsEngagementPanelContentRenderer'
 ]
 
 /** If the URL contains `youtube.com` and any of these substrings, JSON responses may be stripped of `adKeys`. */
-const SANITIZED_URL_PATH_INCLUDES: string[] = [
+const SANITIZED_URL_PATH_INCLUDES : string[] = [
   '/youtubei/v1/player',
   '/youtubei/v1/get_watch',
-  '/youtubei/v1/reel/reel_watch_sequence',
-  '/youtubei/v1/next',
-  '/youtubei/v1/browse',
-]
-
-const AD_BLOCK_URLS = [
-  '/api/stats/ads',
-  '/pagead/lvz',
-  '/pagead/viewthroughconversion',
-]
-
-const ENFORCEMENT_OVERLAY_SELECTORS = [
-  'ytd-enforcement-message-view-model',
-  'tp-yt-paper-dialog:has(ytd-enforcement-message-view-model)',
-  '.ytd-enforcement-message-view-model',
+  '/youtubei/v1/reel/reel_watch_sequence'
 ]
 
 const isRecord = (value: unknown): value is UnknownRecord =>
@@ -91,23 +71,6 @@ const stripAdsDeep = (value: unknown): number => {
   return removedCount
 }
 
-/**
- * If YouTube sets playabilityStatus.status = "UNPLAYABLE" (the enforcement
- * gate), reset it to "OK" and remove the errorScreen that renders the modal.
- */
-const sanitizePlayabilityStatus = (value: unknown): void => {
-  if (!isRecord(value)) return
-  const status = value['playabilityStatus']
-  if (isRecord(status) && status['status'] === 'UNPLAYABLE') {
-    delete status['errorScreen']
-    status['status'] = 'OK'
-  }
-  const nested = value['playerResponse']
-  if (isRecord(nested)) {
-    sanitizePlayabilityStatus(nested)
-  }
-}
-
 const shouldSanitizeUrlString = (url: string): boolean => {
   if (!url.includes('youtube.com')) {
     return false
@@ -129,26 +92,19 @@ const shouldSanitizeFetchResponse = (input: RequestInfo | URL): boolean => {
 const textMayContainAdPayload = (text: string): boolean =>
   adKeys.some((key) => text.includes(`"${key}"`))
 
-/** Parse JSON, strip ad keys and fix playability in place, re-serialize. */
+/** Parse JSON, strip ad keys in place, re-serialize. Caller should only invoke when `textMayContainAdPayload` is true. */
 const sanitizeJsonText = (text: string): string => {
-  const hasAdPayload = textMayContainAdPayload(text)
-  const hasUnplayable = text.includes('"UNPLAYABLE"')
-  if (!hasAdPayload && !hasUnplayable) {
+  if (!textMayContainAdPayload(text)) {
     return text
   }
   const parsed = JSON.parse(text) as unknown
-  if (hasAdPayload) stripAdsDeep(parsed)
-  if (hasUnplayable) sanitizePlayabilityStatus(parsed)
+  stripAdsDeep(parsed)
   return JSON.stringify(parsed)
 }
 
 const patchFetch = (): void => {
   const originalFetch = window.fetch.bind(window)
   window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
-    const urlString = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url
-    if (AD_BLOCK_URLS.some((u) => urlString.includes(u))) {
-      return new Response('', { status: 200 })
-    }
     const response = await originalFetch(input, init)
     if (!shouldSanitizeFetchResponse(input)) {
       return response
@@ -202,7 +158,7 @@ const patchXhr = (): void => {
         return
       }
       try {
-        let sanitizedText: string | undefined
+        let sanitizedText : string | undefined
         Object.defineProperty(xhr, 'responseText', {
           get(this: XMLHttpRequest) {
             const originalResponseText = xhrGetResponseTextSafe(this)
@@ -219,11 +175,8 @@ const patchXhr = (): void => {
               case 'blob':
               case 'document':
                 return originalResponse
-              case 'json': {
-                stripAdsDeep(originalResponse)
-                sanitizePlayabilityStatus(originalResponse)
-                return originalResponse
-              }
+              case 'json':
+                return stripAdsDeep(originalResponse)
               case '':
               default:
                 return sanitizeJsonText(String(originalResponse))
@@ -249,7 +202,6 @@ const patchGlobalObjectSetter = (propertyName: 'ytInitialPlayerResponse' | 'ytIn
     },
     set(value: unknown) {
       stripAdsDeep(value)
-      sanitizePlayabilityStatus(value)
       internalValue = value
     }
   })
@@ -259,7 +211,6 @@ const sanitizeInitialPlayerResponse = (): void => {
   const initialResponse = (window as Window & { ytInitialPlayerResponse?: unknown }).ytInitialPlayerResponse
   if (initialResponse) {
     stripAdsDeep(initialResponse)
-    sanitizePlayabilityStatus(initialResponse)
   }
 }
 
@@ -270,23 +221,7 @@ const sanitizeInitialData = (): void => {
   }
 }
 
-const removeEnforcementOverlay = (): void => {
-  const observer = new MutationObserver(() => {
-    for (const selector of ENFORCEMENT_OVERLAY_SELECTORS) {
-      document.querySelectorAll(selector).forEach((el) => {
-        const popup = el.closest('ytd-popup-container')
-        if (popup != null) {
-          popup.remove()
-        } else {
-          el.remove()
-        }
-      })
-    }
-  })
-  observer.observe(document.documentElement, { childList: true, subtree: true })
-}
-
-const isAdsBlockingDisabled = (): boolean => {
+const isAdsBlockingDisabled = () : boolean => {
   const cookieItems = document.cookie.split(';')
   for (const cookie of cookieItems) {
     const [key, value] = cookie.trim().split('=')
@@ -306,7 +241,6 @@ const main = (): void => {
   patchXhr()
   sanitizeInitialPlayerResponse()
   sanitizeInitialData()
-  removeEnforcementOverlay()
 }
 
 if (!isAdsBlockingDisabled()) {
