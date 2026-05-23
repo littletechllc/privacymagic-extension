@@ -48,9 +48,14 @@
   "declarative_net_request": {
     "rule_resources": [
       {
-        "id": "ruleset_1",
+        "id": "ruleset_network",
         "enabled": true,
         "path": "filter_list/network_rules.json"
+      },
+      {
+        "id": "ruleset_scriptlet",
+        "enabled": true,
+        "path": "filter_list/scriptlet_rules.json"
       }
     ]
   },
@@ -62,6 +67,19 @@
       "matches": [
         "*://*.youtube.com/*",
         "*://youtube.com/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "js": [
+        "content_scripts/filters.js"
+      ],
+      "matches": [
+        "<all_urls>"
       ],
       "all_frames": true,
       "match_about_blank": true,

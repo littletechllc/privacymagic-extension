@@ -1,6 +1,6 @@
 import { SettingId } from '@src/common/setting-ids'
 import { logError } from '@src/common/util'
-import { PROCEDURAL_FILTERS_DIR, SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
+import { PROCEDURAL_FILTERS_DIR } from '@src/common/filter-list-paths'
 import { type DisabledSettingCollection } from '@src/common/settings-read'
 import { unique } from '@src/common/data-structures'
 
@@ -81,10 +81,9 @@ export const setupAllFilters = async (settings: DisabledSettingCollection): Prom
 
     const domainsWhereFiltersAreDisabled = unique([...(settings['masterSwitch'] ?? []), ...(settings['ads'] ?? [])])
     const oldFilterRules = await chrome.scripting.getRegisteredContentScripts({})
-    const idsToUnregister = oldFilterRules.map(rule => rule.id).filter(id => id.startsWith(PROCEDURAL_FILTERS_DIR) || id.startsWith(SCRIPTLETS_DIR))
-    const scriptletRules = await createAllFilterRules(SCRIPTLETS_DIR, domainsWhereFiltersAreDisabled)
+    const idsToUnregister = oldFilterRules.map(rule => rule.id).filter(id => id.startsWith(PROCEDURAL_FILTERS_DIR))
     const proceduralRules = await createAllFilterRules(PROCEDURAL_FILTERS_DIR, domainsWhereFiltersAreDisabled)
-    const allRules = [...scriptletRules, ...proceduralRules]
+    const allRules = [ ...proceduralRules]
     if (idsToUnregister.length > 0) {
       await chrome.scripting.unregisterContentScripts({ ids: idsToUnregister })
     }

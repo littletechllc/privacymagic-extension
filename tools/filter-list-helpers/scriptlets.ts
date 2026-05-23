@@ -1,99 +1,46 @@
-import { SCRIPTLETS_DIR } from '@src/common/filter-list-paths'
+import { SCRIPTLET_RULES_FILE, FILTER_LIST_DIR } from '@src/common/filter-list-paths'
 import { entries } from '../util'
-import { writeFile, logLineErrors } from './util'
+import { writeFile } from './util'
+import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
+import { ScriptletName } from '@src/common/scriptlet-names'
 
-type ScriptletInvocation = {
-  domains: string[]
-  body: string
-}
-
-const constantValueFrom = (value: string): string => {
-  switch (value) {
-    case 'noopFunc':
-      return `(() => {})`
-    case 'trueFunc':
-      return `(() => true)`
-    default:
-      return value
-  }
-}
-
-const setConstantFunction = (path: string, value: unknown): void => {
-  const parts = path.split('.');
-  let obj: Record<string, unknown> = self as unknown as Record<string, unknown>;
-  for (let i: number = 0; i < parts.length - 1; ++i) {
-    if (obj[parts[i]] == null) {
-      obj[parts[i]] = {};
-    }
-    obj = obj[parts[i]] as Record<string, unknown>;
-  }
-  Object.defineProperty(obj, parts[parts.length - 1], {
-    get: () => value,
-    configurable: false
-  });
-};
-
-const removeClassFunction = (className: string, selector: string, command?: string): void => {
-  const removeClass = (element: Element) => {
-    if (element.matches(selector)) {
-      element.classList.remove(className)
-    }
-  }
-  const removeClassInTree = (element: Element) => {
-    removeClass(element)
-    element.querySelectorAll(selector).forEach(removeClass)
-  }
-  removeClassInTree(document.documentElement)
-  if (command?.includes('stay')) {
-    const observer = new MutationObserver((mutations: MutationRecord[]) => {
-      mutations.forEach(mutation => {
-        if (mutation.type === 'childList') {
-          mutation.addedNodes.forEach(node => {
-            if (node instanceof Element) {
-              removeClassInTree(node)
-            }
-          })
-        } else if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          removeClassInTree(mutation.target as Element)
-        }
-      })
-    })
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class'],
-    })
-  }
-}
-
-const generateScriptlet = (scriptletArguments: string[]): string | undefined => {
-  const scriptletName = scriptletArguments[0]
+const normalizeScriptletName = (scriptletName: string): ScriptletName | undefined => {
   switch (scriptletName) {
     case 'set-cookie':
     case 'set-cookie-reload':
-      return `document.cookie = '${scriptletArguments[1]}=${scriptletArguments[2]}; path=/';`
+      return 'set-cookie'
     case 'remove-cookie':
     case 'cookie-remover':
     case 'cookie-remover.js':
-      return `document.cookie = '${scriptletArguments[1]}=; path=/';`
+      return 'remove-cookie'
     case 'set-local-storage-item':
-      return `localStorage.setItem('${scriptletArguments[1]}', '${scriptletArguments[2]}');`
+      return 'set-local-storage-item'
     case 'set-session-storage-item':
-      return `sessionStorage.setItem('${scriptletArguments[1]}', '${scriptletArguments[2]}');`
+      return 'set-session-storage-item'
     case 'set':
     case 'set-constant':
-      return `(${setConstantFunction.toString()})('${scriptletArguments[1]}', ${constantValueFrom(scriptletArguments[2])});`
+      return 'set-constant'
     case 'remove-class':
     case 'rc':
-      return `(${removeClassFunction.toString()})(${JSON.stringify(scriptletArguments[1])}, ${JSON.stringify(scriptletArguments[2])}, ${JSON.stringify(scriptletArguments[3])});`
+      return 'remove-class'
     default:
-      console.log('unsupported scriptlet', scriptletArguments)
+      console.log('unsupported scriptlet', scriptletName)
       return undefined
   }
 }
 
-const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
+const normalieScriptletCommand = (scriptletCommand: string[]): string[] | undefined => {
+  const scriptletName = normalizeScriptletName(scriptletCommand[0])
+  if (scriptletName === undefined) {
+    return undefined
+  }
+  const args = scriptletCommand.slice(1)
+  return [scriptletName, ...args]
+}
+
+
+const parseScriptletLine = (line: string): { domains: string[], command: string[] } | undefined => {
   const matches = line.match(/(.*?)##\+js\((.*?)\)/i)
   if (!Array.isArray(matches) || matches.length < 3) {
     return undefined
@@ -101,31 +48,59 @@ const parseScriptletLine = (line: string): ScriptletInvocation | undefined => {
   // TODO: handle asterisks in domains
   const domains = matches[1].split(',').filter(d => !d.endsWith('*'))
   const scriptletArguments = matches[2].split(',').map(s => s.trim())
-  const scriptletBody = generateScriptlet(scriptletArguments)
-  if (scriptletBody === undefined) {
+  const scriptletCommand = normalieScriptletCommand(scriptletArguments)
+  if (scriptletCommand === undefined) {
     return undefined
   }
-  return { domains, body: scriptletBody }
+  return { domains, command: scriptletCommand }
 }
 
-const generateScriptletFiles = async (dir: string, scriptlets: ScriptletInvocation[]): Promise<void> => {
-  const scriptletsForDomains: Record<string, string> = {}
-  for (const scriptletRule of scriptlets) {
-    for (const domain of scriptletRule.domains) {
-      if (scriptletsForDomains[domain] === undefined) {
-        scriptletsForDomains[domain] = ''
+const collectScriptletsForDomains = (lines: string[]): Record<string, string[][]> => {
+  const scriptletsForDomains: Record<string, string[][]> = {}
+  for (const line of lines) {
+    const scriptlet = parseScriptletLine(line)
+    if (scriptlet !== undefined) {
+      for (const domain of scriptlet.domains) {
+        scriptletsForDomains[domain] ||= []
+        scriptletsForDomains[domain].push(scriptlet.command)
       }
-      scriptletsForDomains[domain] += `${scriptletRule.body}\n`
     }
   }
-  for (const [domain, scriptlet] of entries(scriptletsForDomains)) {
-    const file = `${domain}_.js`
-    await writeFile(dir, file, scriptlet)
+  return scriptletsForDomains
+}
+
+const generateScriptletRules = (scriptletsForDomains: Record<string, string[][]>): chrome.declarativeNetRequest.Rule[] => {
+  const rules: chrome.declarativeNetRequest.Rule[] = []
+  let id = 0
+  for (const [domain, scriptlets] of entries(scriptletsForDomains)) {
+    ++id
+    rules.push({
+      id,
+      action: {
+        type: 'modifyHeaders',
+        responseHeaders: [{
+          operation: 'append',
+          header: 'Set-Cookie',
+          value: `${SCRIPTLET_COOKIE_KEY}=${btoa(JSON.stringify(scriptlets))}; Secure; SameSite=None; Path=/; Partitioned`
+        }]
+      },
+      priority: DNR_RULE_PRIORITIES.STATIC_RULES,
+      condition: {
+        urlFilter: `||${domain}`,
+        resourceTypes: ['main_frame', 'sub_frame']
+      }
+    })
   }
-  await writeFile(dir, 'index.txt', Object.keys(scriptletsForDomains).sort().join('\n'))
+  return rules
+}
+
+const generateScriptletRulesFile = async (scriptletsForDomains: Record<string, string[][]>): Promise<void> => {
+  const rules = generateScriptletRules(scriptletsForDomains)
+  const scriptletBody = JSON.stringify(rules, null, 2)
+  await writeFile(FILTER_LIST_DIR, SCRIPTLET_RULES_FILE, scriptletBody)
 }
 
 export const parseAndGenerateScriptlets = async (lines: string[]): Promise<void> => {
-  const scriptlets = lines.map(logLineErrors(parseScriptletLine)).filter(scriptlet => scriptlet !== undefined)
-  await generateScriptletFiles(SCRIPTLETS_DIR, scriptlets)
+  const scriptletsForDomains = collectScriptletsForDomains(lines)
+  await generateScriptletRulesFile(scriptletsForDomains)
 }

@@ -71,3 +71,5 @@ export const isNetworkSetting = (setting: SettingId): setting is NetworkSettingI
 }
 
 export const SETTING_COOKIE_PREFIX = '__pm_setting__'
+
+export const SCRIPTLET_COOKIE_KEY = '__pm_scriptlet__'
