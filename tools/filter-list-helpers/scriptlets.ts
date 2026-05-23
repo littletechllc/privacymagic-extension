@@ -3,7 +3,11 @@ import { entries } from '../util'
 import { writeFile } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
-import { ScriptletName } from '@src/common/scriptlet-names'
+import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
+
+const toBase64 = (s: string): string => {
+  return Buffer.from(s, 'utf-8').toString('base64')
+}
 
 const normalizeScriptletName = (scriptletName: string): ScriptletName | undefined => {
   switch (scriptletName) {
@@ -30,7 +34,7 @@ const normalizeScriptletName = (scriptletName: string): ScriptletName | undefine
   }
 }
 
-const normalieScriptletCommand = (scriptletCommand: string[]): string[] | undefined => {
+const normalizeScriptletCommand = (scriptletCommand: string[]): ScriptletCommand | undefined => {
   const scriptletName = normalizeScriptletName(scriptletCommand[0])
   if (scriptletName === undefined) {
     return undefined
@@ -40,7 +44,7 @@ const normalieScriptletCommand = (scriptletCommand: string[]): string[] | undefi
 }
 
 
-const parseScriptletLine = (line: string): { domains: string[], command: string[] } | undefined => {
+const parseScriptletLine = (line: string): { domains: string[], command: ScriptletCommand } | undefined => {
   const matches = line.match(/(.*?)##\+js\((.*?)\)/i)
   if (!Array.isArray(matches) || matches.length < 3) {
     return undefined
@@ -48,15 +52,15 @@ const parseScriptletLine = (line: string): { domains: string[], command: string[
   // TODO: handle asterisks in domains
   const domains = matches[1].split(',').filter(d => !d.endsWith('*'))
   const scriptletArguments = matches[2].split(',').map(s => s.trim())
-  const scriptletCommand = normalieScriptletCommand(scriptletArguments)
+  const scriptletCommand = normalizeScriptletCommand(scriptletArguments)
   if (scriptletCommand === undefined) {
     return undefined
   }
   return { domains, command: scriptletCommand }
 }
 
-const collectScriptletsForDomains = (lines: string[]): Record<string, string[][]> => {
-  const scriptletsForDomains: Record<string, string[][]> = {}
+const collectScriptletsForDomains = (lines: string[]): Record<string, ScriptletCommand[]> => {
+  const scriptletsForDomains: Record<string, ScriptletCommand[]> = {}
   for (const line of lines) {
     const scriptlet = parseScriptletLine(line)
     if (scriptlet !== undefined) {
@@ -69,7 +73,7 @@ const collectScriptletsForDomains = (lines: string[]): Record<string, string[][]
   return scriptletsForDomains
 }
 
-const generateScriptletRules = (scriptletsForDomains: Record<string, string[][]>): chrome.declarativeNetRequest.Rule[] => {
+const generateScriptletRules = (scriptletsForDomains: Record<string, ScriptletCommand[]>): chrome.declarativeNetRequest.Rule[] => {
   const rules: chrome.declarativeNetRequest.Rule[] = []
   let id = 0
   for (const [domain, scriptlets] of entries(scriptletsForDomains)) {
@@ -81,7 +85,7 @@ const generateScriptletRules = (scriptletsForDomains: Record<string, string[][]>
         responseHeaders: [{
           operation: 'append',
           header: 'Set-Cookie',
-          value: `${SCRIPTLET_COOKIE_KEY}=${btoa(JSON.stringify(scriptlets))}; Secure; SameSite=None; Path=/; Partitioned`
+          value: `${SCRIPTLET_COOKIE_KEY}=${toBase64(JSON.stringify(scriptlets))}; Secure; SameSite=None; Path=/; Partitioned`
         }]
       },
       priority: DNR_RULE_PRIORITIES.STATIC_RULES,

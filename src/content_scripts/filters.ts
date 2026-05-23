@@ -1,8 +1,6 @@
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 
-import { ScriptletName } from '@src/common/scriptlet-names'
-
-type ScriptletCommand = [ScriptletName, ...string[]]
+import { ScriptletCommand } from '@src/common/scriptlet-names'
 
 const constantValueFrom = (value: string): unknown => {
   switch (value) {
