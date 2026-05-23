@@ -54,9 +54,8 @@ const createFilterRulesForDomain = async (dir: string, domain: string, domainsWh
 }
 
 const createAllFilterRulesForDomain = async (domain: string, domainsWhereFiltersAreDisabled: string[]): Promise<chrome.scripting.RegisteredContentScript[]> => {
-  const scriptletRules = await createFilterRulesForDomain(SCRIPTLETS_DIR, domain, domainsWhereFiltersAreDisabled)
   const proceduralRules = await createFilterRulesForDomain(PROCEDURAL_FILTERS_DIR, domain, domainsWhereFiltersAreDisabled)
-  return [...scriptletRules, ...proceduralRules]
+  return proceduralRules
 }
 
 export const updateAllFilters = async (settingId: SettingId, domain: string, domainsWhereFiltersAreDisabled: string[]): Promise<void> => {
