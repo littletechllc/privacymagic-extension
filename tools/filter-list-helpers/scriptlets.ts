@@ -98,7 +98,7 @@ const generateScriptletRules = (scriptletsForDomains: Record<string, ScriptletCo
   return rules
 }
 
-const generateScriptletRulesFile = async (scriptletsForDomains: Record<string, string[][]>): Promise<void> => {
+const generateScriptletRulesFile = async (scriptletsForDomains: Record<string, ScriptletCommand[]>): Promise<void> => {
   const rules = generateScriptletRules(scriptletsForDomains)
   const scriptletBody = JSON.stringify(rules, null, 2)
   await writeFile(FILTER_LIST_DIR, SCRIPTLET_RULES_FILE, scriptletBody)
