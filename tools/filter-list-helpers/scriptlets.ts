@@ -4,9 +4,27 @@ import { writeFile } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
+import punycode from 'punycode'
 
 const toBase64 = (s: string): string => {
   return Buffer.from(s, 'utf-8').toString('base64')
+}
+
+/** DNR urlFilter must be ASCII; IDN labels from filter lists are punycode-encoded. */
+const toAsciiDomain = (domain: string): string | undefined => {
+  const trimmed = domain.trim()
+  if (trimmed === '') {
+    return undefined
+  }
+  try {
+    const ascii = punycode.toASCII(trimmed)
+    if (!/^[\x21-\x7E]+$/.test(ascii)) {
+      return undefined
+    }
+    return ascii
+  } catch {
+    return undefined
+  }
 }
 
 const normalizeScriptletName = (scriptletName: string): ScriptletName | undefined => {
@@ -50,10 +68,14 @@ const parseScriptletLine = (line: string): { domains: string[], command: Scriptl
     return undefined
   }
   // TODO: handle asterisks in domains
-  const domains = matches[1].split(',').filter(d => !d.endsWith('*'))
+  const domains = matches[1]
+    .split(',')
+    .filter((d) => !d.endsWith('*'))
+    .map((d) => toAsciiDomain(d))
+    .filter((d): d is string => d !== undefined)
   const scriptletArguments = matches[2].split(',').map(s => s.trim())
   const scriptletCommand = normalizeScriptletCommand(scriptletArguments)
-  if (scriptletCommand === undefined) {
+  if (scriptletCommand === undefined || domains.length === 0) {
     return undefined
   }
   return { domains, command: scriptletCommand }
