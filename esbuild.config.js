@@ -54,6 +54,10 @@ const builds = [
     outfile: 'dist/content_scripts/youtube.js'
   },
   {
+    entryPoints: ['src/content_scripts/filters.ts'],
+    outfile: 'dist/content_scripts/filters.js'
+  },
+  {
     entryPoints: ['src/default_popup/popup.ts'],
     outfile: 'dist/default_popup/popup.js'
   },

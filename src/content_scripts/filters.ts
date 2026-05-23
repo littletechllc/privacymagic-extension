@@ -2,6 +2,10 @@ import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 
 import { ScriptletCommand } from '@src/common/scriptlet-names'
 
+const fromBase64 = (s: string): string => {
+  return Buffer.from(s, 'base64').toString('utf-8')
+}
+
 const constantValueFrom = (value: string): unknown => {
   switch (value) {
     case 'undefined': return undefined
@@ -86,13 +90,22 @@ const splitAtFirst = (s: string, separator: string): [string, string] => {
 const getScriptletCommands = (): ScriptletCommand[] | undefined => {
   for (const cookie of document.cookie.split(';')) {
     const [key, value] = splitAtFirst(cookie, '=')
-    if (key.trim().startsWith(SCRIPTLET_COOKIE_KEY)) {
+    if (key.trim() === SCRIPTLET_COOKIE_KEY) {
       // Decode base64 encoded JSON:
-      const decodedCommands = atob(value.trim())
-      return JSON.parse(decodedCommands) as ScriptletCommand[]
+      try {
+        const decodedCommands = fromBase64(value.trim())
+        return JSON.parse(decodedCommands) as ScriptletCommand[]
+      } catch (error) {
+        console.error('error parsing scriptlet commands:', error)
+        return undefined
+      }
     }
   }
   return undefined
+}
+
+const clearCookieScriptletCommands = (): void => {
+  document.cookie = `${SCRIPTLET_COOKIE_KEY}=; Secure; SameSite=None; Path=/; Partitioned`
 }
 
 const executeScriptletCommands = (commands: ScriptletCommand[]): void => {
@@ -120,6 +133,7 @@ const executeScriptletCommands = (commands: ScriptletCommand[]): void => {
 
 const main = () => {
   const commands = getScriptletCommands()
+  clearCookieScriptletCommands()
   if (commands) {
     executeScriptletCommands(commands)
   }
