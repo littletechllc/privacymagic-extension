@@ -1,4 +1,4 @@
-import { COSMETIC_FILTERS_DIR, PROCEDURAL_FILTERS_DIR } from '@src/common/filter-list-paths'
+import { COSMETIC_FILTERS_DIR, FILTER_LIST_DIR, PROCEDURAL_FILTERS_FILE } from '@src/common/filter-list-paths'
 import { unique } from '@src/common/data-structures'
 import { entries } from '../util'
 import {
@@ -6,8 +6,11 @@ import {
   COSMETIC_EXCEPTION_SEPARATOR,
   PROCEDURAL_COSMETIC_SEPARATOR,
   logLineErrors,
-  writeFile
+  writeFile,
+  appendCookieRule
 } from './util'
+import { PROCEDURAL_FILTERS_COOKIE_KEY } from '@src/common/setting-ids'
+import { jsonToBase64 } from '@src/common/base64'
 
 type FilterType = 'standard' | 'procedural' | 'exception'
 
@@ -111,93 +114,31 @@ const generateCosmeticFilterFiles = async (dir: string, cosmeticFilters: Cosmeti
   return filestems
 }
 
-const enforceProceduralFilter = (selector: string, hasText: string, style: string) => {
-  const matchesText = (text: string, hasTextContent: string): boolean => {
-    if (hasTextContent.startsWith('/') && hasTextContent.endsWith('/')) {
-      return new RegExp(hasTextContent.slice(1, -1)).test(text)
-    }
-    return text.includes(hasTextContent)
-  }
-  const applyStyleToElement = (element: Element) => {
-    const originalStyle = element.getAttribute('style')
-    if (originalStyle?.includes(style)) {
-      return
-    }
-    const newStyle = originalStyle ? originalStyle + ';' + style : style
-    element.setAttribute('style', newStyle)
-  }
-  const findMatchingElements = (root: Element) => {
-    const possibleElements = [
-      ...(root.matches(selector) ? [root] : []),
-      ...Array.from(root.querySelectorAll(selector))
-    ]
-    return Array.from(possibleElements).filter(element => {
-      const textContent = element.textContent ?? ''
-      return matchesText(textContent, hasText)
-    })
-  }
-  const applyStylesToMatchingElements = (root: Element) => {
-    findMatchingElements(root).forEach(applyStyleToElement)
-  }
-  applyStylesToMatchingElements(document.documentElement)
-  const observer = new MutationObserver((mutations: MutationRecord[]) => {
-    mutations.forEach(mutation => {
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
-          if (node instanceof Element) {
-            applyStylesToMatchingElements(node)
-          }
-        })
-      }
-    })
-  })
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  })
-}
 
-const proceduralPrefix = `const enforceProceduralFilter = ${enforceProceduralFilter.toString()}`
-
-const hasTextMatch = /^(.*?):has-text\((.*?)\)$/
-const hasTextInsideHasMatch = /:has\([^)]*:has-text\(/
-
-const processProceduralSelector = (selector: string): { processedSelector: string, hasText: string | undefined } => {
-  if (hasTextInsideHasMatch.test(selector)) {
-    return { processedSelector: selector, hasText: undefined }
-  }
-  const matches = selector.match(hasTextMatch)
-  let processedSelector = selector
-  let hasText: string | undefined = undefined
-  if (matches !== null && matches !== undefined) {
-    processedSelector = matches[1]
-    hasText = matches[2]
-  }
-  return { processedSelector, hasText }
-}
-
-const generateProceduralFilterFiles = async (dir: string, proceduralFilters: CosmeticFilter[]): Promise<void> => {
+const generateProceduralFilterRules = (proceduralFilters: CosmeticFilter[]): chrome.declarativeNetRequest.Rule[] => {
   const proceduralItemsForDomain = groupCosmeticFiltersByDomain(proceduralFilters)
-  const filestems = []
+  const rules: chrome.declarativeNetRequest.Rule[] = []
+  let id = 1
   for (const [domain, proceduralItems] of entries(proceduralItemsForDomain)) {
-    const lines = []
+    const filters = []
     for (const [style, selectors] of entries(proceduralItems)) {
       for (const selector of selectors) {
-        const { processedSelector, hasText } = processProceduralSelector(selector)
-        if (hasText !== undefined) {
-          lines.push(`enforceProceduralFilter(${JSON.stringify(processedSelector)}, ${JSON.stringify(hasText)}, ${JSON.stringify(style)})`)
-        } else {
-          console.log("unsupported procedural filter: ", domain, selector, style)
-        }
+        filters.push([selector, style])
       }
     }
-    const body = [proceduralPrefix, ...lines, ''].join(';\n')
-    const filestem = domain === '' ? '_default' : domain
-    const file = `${filestem}_.js`
-    await writeFile(dir, file, body)
-    filestems.push(filestem)
+    if (filters.length > 0) {
+      const cookieValue = jsonToBase64(filters)
+      rules.push(appendCookieRule(domain,  PROCEDURAL_FILTERS_COOKIE_KEY, cookieValue, id))
+      ++id
+    }
   }
-  await writeFile(dir, 'index.txt', filestems.sort().join('\n'))
+  return rules
+}
+
+const generateProceduralFilterRulesFile = async (proceduralFilters: CosmeticFilter[]): Promise<void> => {
+  const rules = generateProceduralFilterRules(proceduralFilters)
+  const rulesBody = JSON.stringify(rules, null, 2)
+  await writeFile(FILTER_LIST_DIR, PROCEDURAL_FILTERS_FILE, rulesBody)
 }
 
 export const parseAndGenerateCosmeticFilters = async (lines: string[]): Promise<void> => {
@@ -206,5 +147,5 @@ export const parseAndGenerateCosmeticFilters = async (lines: string[]): Promise<
   const proceduralFilters = cosmeticFilters.filter(cosmeticFilter => cosmeticFilter.type === 'procedural')
   const exceptionFilters = cosmeticFilters.filter(cosmeticFilter => cosmeticFilter.type === 'exception')
   await generateCosmeticFilterFiles(COSMETIC_FILTERS_DIR, standardCosmeticFilters, exceptionFilters)
-  await generateProceduralFilterFiles(PROCEDURAL_FILTERS_DIR, proceduralFilters)
+  await generateProceduralFilterRulesFile(proceduralFilters)
 }

@@ -56,6 +56,11 @@
         "id": "ruleset_scriptlet",
         "enabled": true,
         "path": "filter_list/scriptlet_rules.json"
+      },
+      {
+        "id": "ruleset_procedural_filter",
+        "enabled": true,
+        "path": "filter_list/procedural_filters.json"
       }
     ]
   },

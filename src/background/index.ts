@@ -8,7 +8,6 @@ import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
-import { setupAllFilters } from './js-filters'
 import { injectCssForCosmeticFilters } from './css-filters'
 
 const handleMessage = async (
@@ -85,7 +84,6 @@ const initializeListeners = (): void => {
 const initializePersistentResources = async (): Promise<void> => {
   const settings = await copySettingsFromLocalToSessionStorage()
   await updateRulesForAllSettings(settings)
-  await setupAllFilters(settings)
 }
 
 const showWelcomePage = async (): Promise<void> => {

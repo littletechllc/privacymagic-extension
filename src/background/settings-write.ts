@@ -6,7 +6,6 @@ import {
   getDisabledSettingCollection,
 } from '@src/common/settings-read'
 import { updateRulesForAllSettings, updateRulesForSetting } from './dnr/rule-manager'
-import { setupAllFilters, updateAllFilters } from './js-filters'
 
 const REMOTE_SETTINGS_KEY = '_REMOTE_SETTINGS_'
 const SETTINGS_LOCK_NAME = '_SETTINGS_LOCK_'
@@ -36,8 +35,6 @@ export const setUserDisabledSetting = async (domain: string, settingId: SettingI
     allUserDisabledSettings[settingId] = updateList(allUserDisabledSettings[settingId] ?? [], domain, disabled)
     await storageSet(SETTINGS_KEY, allUserDisabledSettings)
     await updateRulesForSetting(settingId, allUserDisabledSettings[settingId])
-    const domainsWhereFiltersAreDisabled = unique([...(allUserDisabledSettings['masterSwitch'] ?? []), ...(allUserDisabledSettings['ads'] ?? [])])
-    await updateAllFilters(settingId, domain, domainsWhereFiltersAreDisabled)
   })
 }
 
@@ -70,7 +67,6 @@ export const updateRemoteConfig = async (newRemoteConfig: DisabledSettingCollect
     await storageSet(SETTINGS_KEY, userDisabledSettings)
     await storageSet(REMOTE_SETTINGS_KEY, newRemoteConfig)
     await updateRulesForAllSettings(userDisabledSettings)
-    await setupAllFilters(userDisabledSettings)
   })
 }
 
@@ -79,7 +75,6 @@ export const resetAllSettingsToRemote = async (): Promise<void> => {
     const remoteConfig = await getDisabledSettingCollection(REMOTE_SETTINGS_KEY)
     await storageSet(SETTINGS_KEY, remoteConfig)
     await updateRulesForAllSettings(remoteConfig)
-    await setupAllFilters(remoteConfig)
   })
 }
 

@@ -1,14 +1,10 @@
 import { SCRIPTLET_RULES_FILE, FILTER_LIST_DIR } from '@src/common/filter-list-paths'
 import { entries } from '../util'
-import { writeFile } from './util'
+import { writeFile, appendCookieRule, removeCookieRule } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
-import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
 import punycode from 'punycode'
-
-const toBase64 = (s: string): string => {
-  return Buffer.from(s, 'utf-8').toString('base64')
-}
+import { jsonToBase64 } from '@src/common/base64'
 
 /** DNR urlFilter must be ASCII; IDN labels from filter lists are punycode-encoded. */
 const toAsciiDomain = (domain: string): string | undefined => {
@@ -95,35 +91,6 @@ const collectScriptletsForDomains = (lines: string[]): Record<string, ScriptletC
   return scriptletsForDomains
 }
 
-const createCookieRule = (domain: string, headerValue: string, id: number): chrome.declarativeNetRequest.Rule => {
-  return {
-    id,
-    action: {
-      type: 'modifyHeaders',
-      responseHeaders: [{
-        operation: 'append',
-        header: 'Set-Cookie',
-        value: headerValue
-      }]
-    },
-    priority: DNR_RULE_PRIORITIES.STATIC_RULES,
-    condition: {
-      urlFilter: `||${domain}`,
-      resourceTypes: ['main_frame', 'sub_frame']
-    }
-  }
-}
-
-const appendCookieRule = (domain: string, cookieKey: string, cookieValue: string, id: number): chrome.declarativeNetRequest.Rule => {
-  const headerValue = `${cookieKey}=${cookieValue}; Secure; SameSite=None; Path=/; Partitioned`
-  return createCookieRule(domain, headerValue, id)
-}
-
-const removeCookieRule = (domain: string, cookieKey: string, id: number): chrome.declarativeNetRequest.Rule => {
-  const headerValue = `${cookieKey}=; Max-Age=0; Secure; SameSite=None; Path=/; Partitioned`
-  return createCookieRule(domain, headerValue, id)
-}
-
 const isCookieScriptlet = (scriptlet: ScriptletCommand): boolean => {
   return scriptlet[0] === 'set-cookie' || scriptlet[0] === 'remove-cookie'
 }
@@ -134,7 +101,7 @@ const generateScriptletRules = (scriptletsForDomains: Record<string, ScriptletCo
   for (const [domain, scriptlets] of entries(scriptletsForDomains)) {
     const noncookieScriptlets = scriptlets.filter(scriptlet => !isCookieScriptlet(scriptlet))
     if (noncookieScriptlets.length > 0) {
-      const cookieValue = toBase64(JSON.stringify(noncookieScriptlets))
+      const cookieValue = jsonToBase64(noncookieScriptlets)
       rules.push(appendCookieRule(domain, SCRIPTLET_COOKIE_KEY, cookieValue, id))
       ++id
     }

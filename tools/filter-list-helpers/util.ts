@@ -1,3 +1,4 @@
+import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -60,4 +61,33 @@ export const logLineErrors = <T>(parseLine: (line: string) => T): (line: string)
       throw e
     }
   }
+}
+
+const createCookieRule = (domain: string, headerValue: string, id: number): chrome.declarativeNetRequest.Rule => {
+  return {
+    id,
+    action: {
+      type: 'modifyHeaders',
+      responseHeaders: [{
+        operation: 'append',
+        header: 'Set-Cookie',
+        value: headerValue
+      }]
+    },
+    priority: DNR_RULE_PRIORITIES.STATIC_RULES,
+    condition: {
+      urlFilter: `||${domain}`,
+      resourceTypes: ['main_frame', 'sub_frame']
+    }
+  }
+}
+
+export const appendCookieRule = (domain: string, cookieKey: string, cookieValue: string, id: number): chrome.declarativeNetRequest.Rule => {
+  const headerValue = `${cookieKey}=${cookieValue}; Secure; SameSite=None; Path=/; Partitioned`
+  return createCookieRule(domain, headerValue, id)
+}
+
+export const removeCookieRule = (domain: string, cookieKey: string, id: number): chrome.declarativeNetRequest.Rule => {
+  const headerValue = `${cookieKey}=; Max-Age=0; Secure; SameSite=None; Path=/; Partitioned`
+  return createCookieRule(domain, headerValue, id)
 }
