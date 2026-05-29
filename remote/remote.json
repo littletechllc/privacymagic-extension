@@ -5,6 +5,7 @@
     "device": ["godaddy.com"],
     "iframe": ["example.com"],
     "cpu": ["godaddy.com", "petco.com"],
-    "screen": ["petco.com"]
+    "screen": ["petco.com"],
+    "ads": ["youtube.com"]
   }
 }
