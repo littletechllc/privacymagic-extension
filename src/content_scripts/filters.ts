@@ -1,5 +1,5 @@
-import { activateScriptlets } from './helpers/scriptlets'
-import { activateProceduralFilters } from './helpers/procedural-filters'
+import { activateScriptlets } from './filters/scriptlets'
+import { activateProceduralFilters } from './filters/procedural-filters'
 
 activateScriptlets()
 activateProceduralFilters()
