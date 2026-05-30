@@ -19,7 +19,6 @@ export const BLOCKER_SETTING_IDS = [
 ] as const
 
 export const CONTENT_SETTING_IDS = [
-  'ads',
   'audio',
   'battery',
   'cpu',

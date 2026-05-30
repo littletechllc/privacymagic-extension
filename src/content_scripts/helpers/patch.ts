@@ -2,7 +2,6 @@ import { getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { type GlobalScope } from '@src/content_scripts/helpers/globalObject'
 import { ContentSettingId } from '@src/common/setting-ids'
 
-import ads from '@src/content_scripts/patches/ads'
 import audio from '@src/content_scripts/patches/audio'
 import battery from '@src/content_scripts/patches/battery'
 import cpu from '@src/content_scripts/patches/cpu'
@@ -35,7 +34,6 @@ type PatchFn<T extends (arg: GlobalScope) => void> =
     : never
 
 const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, PatchFn<(globalObject: GlobalScope) => void>> = {
-  ads,
   audio,
   battery,
   cpu,
