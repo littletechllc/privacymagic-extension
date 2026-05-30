@@ -2,7 +2,7 @@
   "$schema": "./schema.json",
   "version": 1,
   "setting_exceptions": {
-    "device": ["godaddy.com"],
+    "device": ["godaddy.com", "telegraph.co.uk"],
     "iframe": ["example.com"],
     "cpu": ["godaddy.com", "petco.com"],
     "screen": ["petco.com"],
