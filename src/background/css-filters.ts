@@ -2,16 +2,10 @@ import { logError, handleAsync } from '@src/common/util'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 import { COSMETIC_FILTERS_DIR } from '@src/common/filter-list-paths'
-
-const fileExists = async (path: string): Promise<boolean> => {
-  try {
-    const url = chrome.runtime.getURL(path)
-    const response = await fetch(url)
-    return response.ok
-  } catch {
-    return false
-  }
-}
+import {
+  cosmeticFilterExistsForDomain,
+  loadCosmeticDomainIndex
+} from './cosmetic-domain-index'
 
 const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTransitionCallbackDetails) => handleAsync(async () => {
   // Get the top level domain of the current tab.
@@ -35,28 +29,26 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
     return
   }
   const defaultPath = `${COSMETIC_FILTERS_DIR}/_default_.css`
-  // We know this file exists.
-  const files = [defaultPath]
-  const frameDomain = registrableDomainFromUrl(details.url)
-  if (frameDomain === null) {
-    return
-  }
-  const path = `${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`
-  // Check if the file exists.
-  if (await fileExists(path)) {
-    files.push(`${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`)
-  }
-  if (files.length === 0) {
-    return
-  }
-  await chrome.scripting.insertCSS({
+  void chrome.scripting.insertCSS({
     target: {
       tabId: details.tabId,
       frameIds: [details.frameId]
     },
-    files
+    files: [defaultPath]
   })
-  console.log(`injected CSS for cosmetic filters for ${frameDomain}: ${files.join(', ')} in tab ${details.tabId} frame ${details.frameId}`)
+  const frameDomain = registrableDomainFromUrl(details.url)
+  if (frameDomain === null) {
+    return
+  }
+  if (await cosmeticFilterExistsForDomain(frameDomain)) {
+    await chrome.scripting.insertCSS({
+      target: {
+        tabId: details.tabId,
+        frameIds: [details.frameId]
+      },
+      files: [`${COSMETIC_FILTERS_DIR}/${frameDomain}_.css`]
+    })
+  }
 }, (error: unknown) => {
   if (error instanceof Error) {
     if (error.message === `Frame with ID ${details.frameId} was removed.` ||
@@ -70,5 +62,6 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
 })
 
 export const injectCssForCosmeticFilters = (): void => {
+  void loadCosmeticDomainIndex()
   chrome.webNavigation.onCommitted.addListener(cosmeticFiltersListener)
 }
