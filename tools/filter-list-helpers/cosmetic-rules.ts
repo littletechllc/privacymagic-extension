@@ -24,9 +24,21 @@ export type CosmeticFilter = {
 const SELECTOR_CHUNK_SIZE = 1024
 
 const parseCosmeticFilterBody = (body: string): { selector: string, style: string } => {
-  const matches = body.match(/(.*?):style\((.*?)\)/)
-  if (matches !== null && matches !== undefined) {
-    return { selector: matches[1], style: matches[2] }
+  // ABP/uBO: ##selector:style(declarations)
+  const styleParen = body.match(/(.*?):style\((.*?)\)/)
+  if (styleParen !== null) {
+    return { selector: styleParen[1], style: styleParen[2] }
+  }
+  // ABP/uBO: ##selector { declarations } (e.g. EasyList `.nav { top: 0; }`)
+  const styleBrace = body.match(/^(.*?)\s+\{([^}]+)\}\s*$/)
+  if (styleBrace !== null) {
+    const selector = styleBrace[1].trim()
+    const style = styleBrace[2].trim()
+    if (selector.length === 0 || style.length === 0) {
+      console.log('unsupported cosmetic brace filter:', body)
+      return { selector: '', style: '' }
+    }
+    return { selector, style }
   }
   return { selector: body, style: 'display: none !important;' }
 }
