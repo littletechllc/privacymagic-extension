@@ -4,7 +4,6 @@
   "setting_exceptions": {
     "useragent": ["godaddy.com"],
     "device": ["godaddy.com", "telegraph.co.uk"],
-    "iframe": ["example.com"],
     "cpu": ["godaddy.com", "petco.com"],
     "screen": ["petco.com"],
     "ads": ["youtube.com"],
