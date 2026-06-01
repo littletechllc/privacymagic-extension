@@ -7,6 +7,7 @@
     "iframe": ["example.com"],
     "cpu": ["godaddy.com", "petco.com"],
     "screen": ["petco.com"],
-    "ads": ["youtube.com"]
+    "ads": ["youtube.com"],
+    "worker": ["ianonymous3000.github.io"]
   }
 }
