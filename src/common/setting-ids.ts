@@ -69,8 +69,8 @@ export const isNetworkSetting = (setting: SettingId): setting is NetworkSettingI
   return (NETWORK_SETTING_IDS as readonly string[]).includes(setting)
 }
 
-export const SETTING_COOKIE_PREFIX = '__pm_setting__'
+export const SETTING_COOKIE_PREFIX = '__Host-pm-setting__'
 
-export const SCRIPTLET_COOKIE_KEY = '__pm_scriptlet__'
+export const SCRIPTLET_COOKIE_KEY = '__Host-pm-scriptlet__'
 
-export const PROCEDURAL_FILTERS_COOKIE_KEY = '__pm_procedural_filters__'
+export const PROCEDURAL_FILTERS_COOKIE_KEY = '__Host-pm-procedural-filters__'
