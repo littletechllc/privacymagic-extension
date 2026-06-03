@@ -11,38 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  asmjs:
-    name: Build asmjs
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Emscripten
-        run: |
-          cd /home/runner
-          git clone --depth 1 https://github.com/emscripten-core/emsdk.git
-          cd emsdk
-          ./emsdk install latest
-          ./emsdk activate latest
-      - name: Compile asmjs
-        run: |
-          source /home/runner/emsdk/emsdk_env.sh
-          # wasm2js is part of Binaryen bundled with emsdk; keep the same toolchain as emcc.
-          export PATH="/home/runner/emsdk/upstream/bin:$PATH"
-          command -v wasm2js
-          wasm2js --version
-          cd math
-          chmod +x build.sh
-          ./build.sh
-      - name: Upload math asmjs
-        uses: actions/upload-artifact@v4
-        with:
-          name: math-asmjs
-          path: math/math.min.js
-
   lint:
     name: Lint
-    needs: asmjs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -51,12 +21,6 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: '22.x'
-      - name: Restore math asmjs
-        uses: actions/download-artifact@v4
-        with:
-          name: math-asmjs
-      - name: Place asmjs in math directory
-        run: mv math.min.js math/
       - name: Install modules
         run: npm install
       - name: Run ESLint
@@ -64,51 +28,47 @@ jobs:
 
   test:
     name: Test
-    needs: asmjs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Emscripten
+        uses: ./.github/actions/setup-emscripten
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           cache: 'npm'
-      - name: Restore math asmjs
-        uses: actions/download-artifact@v4
-        with:
-          name: math-asmjs
-      - name: Place asmjs in math directory
-        run: mv math.min.js math/
       - name: Install dependencies
         run: npm ci
+      - name: Build math
+        run: |
+          source "$EMSDK_DIR/emsdk_env.sh"
+          npm run build:math
       - name: Run tests
         run: npm test
 
   build:
     name: Build extension
-    needs: asmjs
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Emscripten
+        uses: ./.github/actions/setup-emscripten
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '22.x'
-      - name: Restore math asmjs
-        uses: actions/download-artifact@v4
-        with:
-          name: math-asmjs
-      - name: Place asmjs in math directory
-        run: mv math.min.js math/
       - name: Clean artifacts folder
         run: rm -rf ./artifacts && mkdir ./artifacts
       - name: Install dependencies
         run: npm install
       - name: Build extension
-        run: npm run build
+        run: |
+          source "$EMSDK_DIR/emsdk_env.sh"
+          npm run build
       - name: Get short SHA
         id: sha
         run: echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
