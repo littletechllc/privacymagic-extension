@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '22.x'
       - name: Install modules
-        run: npm install
+        run: npm ci
       - name: Run ESLint
         run: npm run lint
 
@@ -62,7 +62,7 @@ jobs:
       - name: Clean artifacts folder
         run: rm -rf ./artifacts && mkdir ./artifacts
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build extension
         run: npm run build
       - name: Get short SHA
