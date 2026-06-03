@@ -41,6 +41,14 @@
 * Disables Hyperlink Auditing
 * Disables remote Spell Check Service
 
+## Additional planned fingerprinting protections:
+  * SharedWorker
+  * OffscreenCanvas
+  * WebGL2
+  * Non macOS vendor spoofing
+  * AudioWorklet
+  * iframe hardening for contentDocument.defaultView, window.frames[]
+
 ## Features
 
 * Advanced: Enable and disable protections globally in options page
