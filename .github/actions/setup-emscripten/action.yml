@@ -7,10 +7,14 @@ runs:
       shell: bash
       run: |
         EMSDK_VERSION=$(tr -d '[:space:]' < "${{ github.workspace }}/math/EMSDK_VERSION")
+        EMSDK_ROOT="/home/runner/emsdk"
         cd /home/runner
         git clone --depth 1 --branch "$EMSDK_VERSION" https://github.com/emscripten-core/emsdk.git
         cd emsdk
         ./emsdk install "$EMSDK_VERSION"
         ./emsdk activate "$EMSDK_VERSION"
-        echo "EMSDK_DIR=/home/runner/emsdk" >> "$GITHUB_ENV"
-        echo "PATH=/home/runner/emsdk/upstream/bin:${PATH}" >> "$GITHUB_ENV"
+        # emsdk_env.sh adds emscripten to PATH but not upstream/bin (wasm2js).
+        source "$EMSDK_ROOT/emsdk_env.sh"
+        export PATH="$EMSDK_ROOT/upstream/bin:$PATH"
+        echo "EMSDK=$EMSDK_ROOT" >> "$GITHUB_ENV"
+        echo "PATH=$PATH" >> "$GITHUB_ENV"

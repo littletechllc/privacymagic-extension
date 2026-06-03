@@ -42,9 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build math
-        run: |
-          source "$EMSDK_DIR/emsdk_env.sh"
-          npm run build:math
+        run: npm run build:math
       - name: Run tests
         run: npm test
 
@@ -66,9 +64,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build extension
-        run: |
-          source "$EMSDK_DIR/emsdk_env.sh"
-          npm run build
+        run: npm run build
       - name: Get short SHA
         id: sha
         run: echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
