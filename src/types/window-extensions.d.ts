@@ -133,6 +133,7 @@ declare global {
     TrustedTypePolicyFactory?: typeof TrustedTypePolicyFactory
     eval?: (code: string | TrustedScript) => unknown
     trustedTypes?: TrustedTypePolicyFactory
+    sharedStorage?: SharedStorage
   }
 
   interface WorkerGlobalScope {
