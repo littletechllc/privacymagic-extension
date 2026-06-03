@@ -32,11 +32,12 @@ const SANITIZED_URL_PATH_INCLUDES : string[] = [
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null
 
-/** Walk nested objects/arrays and delete known ad keys. Returns total key removals (including nested). */
-const stripAdsDeep = (value: unknown): number => {
-  if (!isRecord(value)) return 0
+/** Walk nested objects/arrays and delete known ad keys.*/
+const stripAdsDeep = <T>(value: T): T => {
+  if (!isRecord(value)) {
+    return value
+  }
 
-  let removedCount = 0
   const stack: Array<{ node: UnknownRecord; depth: number }> = [{ node: value, depth: 0 }]
 
   while (stack.length > 0) {
@@ -47,7 +48,6 @@ const stripAdsDeep = (value: unknown): number => {
     for (const key of adKeys) {
       if (key in node) {
         delete node[key]
-        removedCount += 1
       }
     }
 
@@ -68,7 +68,7 @@ const stripAdsDeep = (value: unknown): number => {
     }
   }
 
-  return removedCount
+  return value
 }
 
 const shouldSanitizeUrlString = (url: string): boolean => {
@@ -159,7 +159,8 @@ const patchXhr = (): void => {
       }
       try {
         let sanitizedText : string | undefined
-        Object.defineProperty(xhr, 'responseText', {
+        Object.defineProperty(xhr, 'responseText',
+           {
           get(this: XMLHttpRequest) {
             const originalResponseText = xhrGetResponseTextSafe(this)
             sanitizedText ??= sanitizeJsonText(originalResponseText)
