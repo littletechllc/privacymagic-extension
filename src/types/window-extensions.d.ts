@@ -128,12 +128,18 @@ declare global {
     PerformanceScriptTiming?: typeof PerformanceScriptTiming
     NavigatorUAData?: typeof NavigatorUAData
     SharedStorage?: typeof SharedStorage
+    SharedStorageAppendMethod?: typeof SharedStorageAppendMethod
+    SharedStorageClearMethod?: typeof SharedStorageClearMethod
+    SharedStorageDeleteMethod?: typeof SharedStorageDeleteMethod
+    SharedStorageModifierMethod?: typeof SharedStorageModifierMethod
+    SharedStorageSetMethod?: typeof SharedStorageSetMethod
+    SharedStorageWorklet?: typeof SharedStorageWorklet
     TrustedScriptURL?: typeof TrustedScriptURL
     TrustedTypePolicy?: typeof TrustedTypePolicy
     TrustedTypePolicyFactory?: typeof TrustedTypePolicyFactory
     eval?: (code: string | TrustedScript) => unknown
-    trustedTypes?: TrustedTypePolicyFactory
     sharedStorage?: SharedStorage
+    trustedTypes?: TrustedTypePolicyFactory
   }
 
   interface WorkerGlobalScope {
