@@ -127,9 +127,15 @@ async function watch () {
   })
 }
 
+/** @param {unknown} error */
+const fail = (error) => {
+  console.error(error)
+  process.exit(1)
+}
+
 const command = process.argv[2]
 if (command === 'watch') {
-  watch().catch(console.error)
+  watch().catch(fail)
 } else {
-  build().catch(console.error)
+  build().catch(fail)
 }
