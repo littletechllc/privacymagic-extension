@@ -99,7 +99,7 @@ const getProceduralFilters = (): string[][] | undefined => {
 }
 
 const clearCookieProceduralFilters = (): void => {
-  document.cookie = `${PROCEDURAL_FILTERS_COOKIE_KEY}=; Secure; SameSite=None; Path=/; Partitioned`
+  document.cookie = `${PROCEDURAL_FILTERS_COOKIE_KEY}=; Max-Age=0; Secure; SameSite=None; Path=/; Partitioned`
 }
 
 export const activateProceduralFilters = () => {

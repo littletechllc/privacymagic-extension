@@ -73,7 +73,7 @@ const getScriptletCommands = (): ScriptletCommand[] | undefined => {
 }
 
 const clearCookieScriptletCommands = (): void => {
-  document.cookie = `${SCRIPTLET_COOKIE_KEY}=; Secure; SameSite=None; Path=/; Partitioned`
+  document.cookie = `${SCRIPTLET_COOKIE_KEY}=; Max-Age=0; Secure; SameSite=None; Path=/; Partitioned`
 }
 
 const executeScriptletCommands = (commands: ScriptletCommand[]): void => {
