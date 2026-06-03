@@ -4,6 +4,7 @@
   "description": "a browser extension that protects your privacy online",
   "main": "index.js",
   "scripts": {
+    "audit:ci": "npm audit --audit-level=low",
     "lint": "eslint . --format eslint-formatter-unix && tsc --noEmit",
     "format": "eslint . --fix --format eslint-formatter-unix && tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",

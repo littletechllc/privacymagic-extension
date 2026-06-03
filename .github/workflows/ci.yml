@@ -23,6 +23,8 @@ jobs:
           node-version: '22.x'
       - name: Install modules
         run: npm ci
+      - name: Dependency audit
+        run: npm run audit:ci
       - name: Run ESLint
         run: npm run lint
 
