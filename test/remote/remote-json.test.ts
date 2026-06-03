@@ -1,55 +1,148 @@
 /**
- * Contract tests for `remote/remote.json` (same shape as `RemoteConfig` in `src/background/remote.ts`).
+ * Contract tests for `remote/remote.json` (same validation as `src/background/remote.ts`).
  * The canonical key is `setting_exceptions` (setting singular), not `settings_exceptions`.
  */
+import '@test/mocks/web-extension'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { isValid as isValidRegistrableDomain } from 'psl'
-import { describe, it, expect, beforeAll } from '@jest/globals'
-import { ALL_SETTING_IDS, type SettingId } from '@src/common/setting-ids'
+import { describe, it, expect } from '@jest/globals'
+import { isValidRemoteConfig, type RemoteConfig } from '@src/background/remote'
 
 const REMOTE_JSON_PATH = join(process.cwd(), 'remote', 'remote.json')
 
-/** Key used in repo and by `remote.ts` / `updateRemoteConfig`. */
-const SETTING_EXCEPTIONS_KEY = 'setting_exceptions'
-
-const isKnownSettingId = (key: string): key is SettingId =>
-  (ALL_SETTING_IDS as readonly string[]).includes(key)
+const validMinimal = (): RemoteConfig => ({
+  version: 1,
+  setting_exceptions: { ads: ['example.com'] }
+})
 
 describe('remote/remote.json', () => {
-  let parsed: Record<string, unknown>
-  let exceptions: unknown
-
-  beforeAll(() => {
+  it('passes isValidRemoteConfig (same checks as background fetch)', () => {
     const raw = readFileSync(REMOTE_JSON_PATH, 'utf8')
-    parsed = JSON.parse(raw) as Record<string, unknown>
-    exceptions = parsed[SETTING_EXCEPTIONS_KEY]
+    const parsed = JSON.parse(raw) as RemoteConfig
+    expect(isValidRemoteConfig(parsed)).toBe(true)
+  })
+})
+
+describe('isValidRemoteConfig', () => {
+  it('accepts a minimal valid config', () => {
+    expect(isValidRemoteConfig(validMinimal())).toBe(true)
   })
 
-  it('is valid JSON and parses to a plain object and the right format', () => {
-    expect(parsed).not.toBeNull()
-    expect(typeof parsed).toBe('object')
-    expect(Array.isArray(parsed)).toBe(false)
-    expect(typeof parsed.version).toBe('number')
-    expect(parsed.version).toBeGreaterThan(0)
-    expect(typeof parsed.setting_exceptions).toBe('object')
-    expect(Array.isArray(parsed.setting_exceptions)).toBe(false)
-    expect(parsed.setting_exceptions).not.toBeNull()
-    expect(typeof parsed.setting_exceptions).toBe('object')
-    expect(Array.isArray(parsed.setting_exceptions)).toBe(false)
-    expect(parsed.setting_exceptions).not.toBeNull()
+  it('accepts empty setting_exceptions', () => {
+    expect(isValidRemoteConfig({ version: 1, setting_exceptions: {} })).toBe(true)
   })
 
-  it('each setting_exceptions entry uses a known SettingId and string[] registrable domains', () => {
-    const entries = Object.entries(exceptions as Record<string, unknown>)
-    for (const [settingId, domains] of entries) {
-      expect(isKnownSettingId(settingId)).toBe(true)
+  it('accepts optional $schema', () => {
+    expect(isValidRemoteConfig({
+      $schema: './schema.json',
+      version: 1,
+      setting_exceptions: { ads: ['example.com'] }
+    })).toBe(true)
+  })
 
-      expect(Array.isArray(domains)).toBe(true)
-      for (const item of domains as unknown[]) {
-        expect(typeof item).toBe('string')
-        expect(isValidRegistrableDomain(item as string)).toBe(true)
-      }
-    }
+  describe('rejects invalid configs', () => {
+    it('null root', () => {
+      expect(isValidRemoteConfig(null as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('missing version', () => {
+      expect(isValidRemoteConfig({ setting_exceptions: {} } as RemoteConfig)).toBe(false)
+    })
+
+    it('null version', () => {
+      expect(isValidRemoteConfig({ version: null, setting_exceptions: {} } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('missing setting_exceptions', () => {
+      expect(isValidRemoteConfig({ version: 1 } as RemoteConfig)).toBe(false)
+    })
+
+    it('null setting_exceptions', () => {
+      expect(isValidRemoteConfig({ version: 1, setting_exceptions: null } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('version is not a number', () => {
+      expect(isValidRemoteConfig({ version: '1', setting_exceptions: {} } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('version is not an integer', () => {
+      expect(isValidRemoteConfig({ version: 1.5, setting_exceptions: {} })).toBe(false)
+    })
+
+    it('extra top-level key', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: {},
+        extra: true
+      } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('version is zero', () => {
+      expect(isValidRemoteConfig({ version: 0, setting_exceptions: {} })).toBe(false)
+    })
+
+    it('version is negative', () => {
+      expect(isValidRemoteConfig({ version: -1, setting_exceptions: {} })).toBe(false)
+    })
+
+    it('setting_exceptions is an array', () => {
+      expect(isValidRemoteConfig({ version: 1, setting_exceptions: [] } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('setting_exceptions is not an object', () => {
+      expect(isValidRemoteConfig({ version: 1, setting_exceptions: 'ads' } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('unknown setting id', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { notARealSetting: ['example.com'] }
+      } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('domains is null', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { ads: null }
+      } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('domains is not an array', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { ads: 'example.com' }
+      } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('domains is an empty array', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { ads: [] }
+      })).toBe(false)
+    })
+
+    it('domain is not a string', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { ads: [123] }
+      } as unknown as RemoteConfig)).toBe(false)
+    })
+
+    it('domain is not a registrable domain', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: { ads: ['not-a-domain'] }
+      })).toBe(false)
+    })
+
+    it('fails when any entry is invalid (valid then bad domain)', () => {
+      expect(isValidRemoteConfig({
+        version: 1,
+        setting_exceptions: {
+          ads: ['example.com'],
+          worker: ['']
+        }
+      })).toBe(false)
+    })
   })
 })

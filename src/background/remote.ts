@@ -1,15 +1,51 @@
-import { SettingId } from '@src/common/setting-ids'
+import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import { handleAsync, logError } from '@src/common/util'
 import { updateRemoteConfig } from './settings-write'
+import { get as getRegistrableDomain } from 'psl'
 
 const REMOTE_CONFIG_URL = "https://raw.githubusercontent.com/littletechllc/privacymagic-extension/refs/heads/main/remote/remote.json"
 const ALARM_NAME = "remote-config-refresh"
 const CACHE_DURATION_MINUTES = 60 * 12 // 12 hours
 const REMOTE_CONFIG_TIMESTAMP_KEY = 'remoteConfigTimestamp'
 
-type RemoteConfig = {
-  version: string
-  setting_exceptions: Record<string, SettingId[]>
+const ALLOWED_REMOTE_CONFIG_KEYS = new Set(['version', 'setting_exceptions', '$schema'])
+
+export type RemoteConfig = {
+  $schema?: string
+  version: number
+  setting_exceptions: Partial<Record<SettingId, string[]>>
+}
+
+export const isValidRemoteConfig = (receivedRemoteConfig: RemoteConfig): boolean => {
+  if (receivedRemoteConfig == null ||
+      receivedRemoteConfig.version == null ||
+      receivedRemoteConfig.setting_exceptions == null ||
+      typeof receivedRemoteConfig.version !== 'number' ||
+      !Number.isInteger(receivedRemoteConfig.version) ||
+      receivedRemoteConfig.version < 1 ||
+      typeof receivedRemoteConfig.setting_exceptions !== 'object' ||
+      Array.isArray(receivedRemoteConfig.setting_exceptions)) {
+    return false
+  }
+  for (const key of Object.keys(receivedRemoteConfig)) {
+    if (!ALLOWED_REMOTE_CONFIG_KEYS.has(key)) {
+      return false
+    }
+  }
+  for (const [settingId, domains] of Object.entries(receivedRemoteConfig.setting_exceptions)) {
+    if (!ALL_SETTING_IDS.includes(settingId as SettingId)) {
+      return false
+    }
+    if (domains == null || !Array.isArray(domains) || domains.length === 0) {
+      return false
+    }
+    for (const domain of domains) {
+      if (typeof domain !== 'string' || getRegistrableDomain(domain) !== domain) {
+        return false
+      }
+    }
+  }
+  return true
 }
 
 const fetchAndStoreRemoteConfig = async (): Promise<void> => {
@@ -18,11 +54,7 @@ const fetchAndStoreRemoteConfig = async (): Promise<void> => {
     throw new Error(`Failed to fetch remote config: ${response.statusText}`)
   }
   const remoteConfig = await response.json() as RemoteConfig
-  if (remoteConfig == null ||
-      remoteConfig.version == null ||
-      remoteConfig.setting_exceptions == null ||
-      typeof remoteConfig.version !== 'number' ||
-      typeof remoteConfig.setting_exceptions !== 'object') {
+  if (!isValidRemoteConfig(remoteConfig)) {
     throw new Error('Invalid remote config')
   }
   await updateRemoteConfig(remoteConfig.setting_exceptions)

@@ -33,6 +33,7 @@ const schema = {
       },
       additionalProperties: {
         type: 'array',
+        minItems: 1,
         items: {
           type: 'string',
         },
