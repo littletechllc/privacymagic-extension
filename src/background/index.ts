@@ -10,10 +10,25 @@ import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
 import { injectCssForCosmeticFilters } from './css-filters'
 
+const isExtensionPageMessageSender = (sender: chrome.runtime.MessageSender): boolean => {
+  if (sender.id !== chrome.runtime.id) {
+    return false
+  }
+  const url = sender.url
+  if (url == null) {
+    return false
+  }
+  return url.startsWith(chrome.runtime.getURL(''))
+}
+
 const handleMessage = async (
   message: Message,
-  _sender: chrome.runtime.MessageSender,
+  sender: chrome.runtime.MessageSender,
   sendResponse: ResponseSendFunction): Promise<void> => {
+  if (!isExtensionPageMessageSender(sender)) {
+    console.log('message not from extension page, ignoring', message)
+    return
+  }
   try {
     if (message.type === 'updateSetting') {
       await setUserDisabledSetting(message.domain, message.settingId, !message.value)
