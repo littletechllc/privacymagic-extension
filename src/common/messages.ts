@@ -3,7 +3,6 @@ import { SettingId } from './setting-ids'
 // Message types that can be sent to the background script
 export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
-  | { type: 'getRemoteStyleSheetContent', url: string }
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
   | { type: 'getRegistrableDomain', url: string }
@@ -35,17 +34,6 @@ export const updateSettingRemote = async (
   if (!response.success) {
     throw new Error(response.error)
   }
-}
-
-export const getRemoteStyleSheetContentRemote = async (
-  url: string
-): Promise<string> => {
-  const message: Message = { type: 'getRemoteStyleSheetContent', url }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as ContentResponse | ErrorResponse
-  if (!response.success) {
-    throw new Error(response.error)
-  }
-  return response.content
 }
 
 export const reloadTabRemote = async (tabId: number): Promise<void> => {

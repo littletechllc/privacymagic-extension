@@ -18,10 +18,6 @@ const handleMessage = async (
     if (message.type === 'updateSetting') {
       await setUserDisabledSetting(message.domain, message.settingId, !message.value)
       sendResponse({ success: true } as SuccessResponse)
-    } else if (message.type === 'getRemoteStyleSheetContent') {
-      const response = await fetch(message.url, { headers: { "Content-Type": "text/css" } })
-      const content = await response.text()
-      sendResponse({ success: true, content } as ContentResponse)
     } else if (message.type === 'reloadTab') {
       await chrome.tabs.reload(message.tabId)
       console.log('reloaded tab', message.tabId)
