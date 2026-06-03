@@ -9,14 +9,12 @@ export type Message =
 
 // Response types for each message type
 export type SuccessResponse = { success: true }
-export type ContentResponse = { success: true, content: string }
 export type RegistrableDomainSuccessResponse = { success: true, domain: string | null }
 export type ErrorResponse = { success: false, error: string }
 
 // Helper type for the sendResponse function
 export type MessageResponse =
   | SuccessResponse
-  | ContentResponse
   | RegistrableDomainSuccessResponse
   | ErrorResponse
 
