@@ -94,10 +94,8 @@ chrome.runtime.onInstalled.addListener((details) => {
   handleAsync(async () => {
     if (details.reason === 'install') {
       await showWelcomePage()
+      await resetAllPrefsToDefaults()
     }
-    // Reset prefs to defaults on install/update
-    // TODO: only reset prefs on first install
-    await resetAllPrefsToDefaults()
     // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)
     await initializePersistentResources()
   }, (error) => {
