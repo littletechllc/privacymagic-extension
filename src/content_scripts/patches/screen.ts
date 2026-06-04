@@ -1,4 +1,4 @@
-import { redefinePrototypeFields, redefineMethods, redefineGlobalFields } from '@src/content_scripts/helpers/monkey-patch'
+import { redefinePrototypeFields, redefineMethods, redefineGlobalFields, type MethodOf } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const screen = (globalObject: GlobalScope): void => {
@@ -52,7 +52,8 @@ const screen = (globalObject: GlobalScope): void => {
     mediaQueryString.replace(regex, (_, value: string) =>
       value.trim().toLowerCase() === 'srgb' ? ' all ' : ' not all ')
   redefineMethods(globalObject, {
-    matchMedia: (mediaQueryString: string): MediaQueryList => oldMatchMedia(mediaDeviceToViewport(spoofColorGamut(mediaQueryString)))
+    matchMedia: ((mediaQueryString: string): MediaQueryList =>
+      oldMatchMedia(mediaDeviceToViewport(spoofColorGamut(mediaQueryString)))) as MethodOf<GlobalScope>
   })
 }
 

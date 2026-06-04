@@ -164,7 +164,10 @@ export const redefinePrototypeFields = <T extends object, K extends FieldKey<T>>
   redefineFields(obj.prototype, fieldMap, true)
 }
 
-export const redefineGlobalFields = <T extends object, K extends FieldKey<T>>(globalObject: GlobalScope, fieldMap: Partial<Record<K, FieldValue<T, K>>>): void => {
+export const redefineGlobalFields = <K extends FieldKey<GlobalScope>>(
+  globalObject: GlobalScope,
+  fieldMap: Partial<Record<K, FieldValue<GlobalScope, K>>>,
+): void => {
   redefineFields(globalObject, fieldMap, false)
 }
 
