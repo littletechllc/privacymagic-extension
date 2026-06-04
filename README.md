@@ -56,11 +56,13 @@ Third-party libraries imported using the npm package manager
 ### psl
 * Copyright: (c) 2017 Lupo Montero lupomontero@gmail.com
 * License: MIT
+* Source: https://www.npmjs.com/package/psl
 * Uses the Public-Suffix List to parse domain names and provide the registrable domain.
 
 ### punycode
 * Copyright Mathias Bynens <https://mathiasbynens.be/>
 * License: MIT
+* Source: https://www.npmjs.com/package/punycode
 * Converts punycode domains to unicode.
 
 ## Third-party lists
