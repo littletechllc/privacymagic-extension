@@ -1,4 +1,4 @@
-import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe } from '@src/content_scripts/helpers/monkey-patch'
+import { objectGetOwnPropertyDescriptorSafe, reflectApplySafe, type MethodOf } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../helpers/globalObject'
 
 const windowName = (globalObject: GlobalScope): void => {
@@ -13,11 +13,14 @@ const windowName = (globalObject: GlobalScope): void => {
     return
   }
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const nameGetter = propDescriptor.get as (this: GlobalScope) => string
-  const nameGetterSafe = (win: GlobalScope): string => reflectApplySafe(nameGetter, win, [])
+  const nameGetter = propDescriptor.get as MethodOf<GlobalScope>
+  const nameGetterSafe = (win: GlobalScope): string =>
+    reflectApplySafe(nameGetter, win, [] as unknown as Parameters<MethodOf<GlobalScope>>) as string
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const nameSetter = propDescriptor.set as (this: GlobalScope, value: string) => void
-  const nameSetterSafe = (win: GlobalScope, value: string): void => reflectApplySafe(nameSetter, win, [value])
+  const nameSetter = propDescriptor.set as MethodOf<GlobalScope>
+  const nameSetterSafe = (win: GlobalScope, value: string): void => {
+    reflectApplySafe(nameSetter, win, [value] as unknown as Parameters<MethodOf<GlobalScope>>)
+  }
   const jsonParseSafe = JSON.parse
   const locationOrigin = globalObject.location.origin
   const StringSafe = String
