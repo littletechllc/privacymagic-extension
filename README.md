@@ -49,12 +49,6 @@
   * AudioWorklet
   * iframe hardening for contentDocument.defaultView, window.frames[]
 
-## Features
-
-* Advanced: Enable and disable protections globally in options page
-* Advanced: Enable and disable protections per-site in popup
-* Protections are applied to top-level documents and iframes (including nested, sandboxed iframes)
-
 ## Third-party libraries
 
 Third-party libraries imported using the npm package manager
