@@ -3,23 +3,27 @@ import { parseAndGenerateNetworkFilters } from './filter-list-helpers/network-ru
 import { parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
 import { parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
 import { isCosmeticFilterLine, isNetworkFilterLine, isScriptletLine } from './filter-list-helpers/util'
+import { readFile } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const BLOCKLISTS: string[] = [
-  'https://easylist.to/easylist/easylist.txt',
-  'https://easylist.to/easylist/easyprivacy.txt',
-  'https://secure.fanboy.co.nz/fanboy-annoyance.txt'
+  'easylist.txt',
+  'easyprivacy.txt',
+  'fanboy-annoyance.txt'
 ]
 
-// Fetch the lines from the given URL
-const getLines = async (url: string): Promise<string[]> => {
-  const response = await fetch(url)
-  const content = await response.text()
-  return content.split('\n')
+// Fetch the lines from the given file
+const getLines = async (file: string): Promise<string[]> => {
+  const buffer = await readFile(path.join(__dirname, '..', 'third_party', 'filter_lists', file))
+  return buffer.toString().split('\n')
 }
 
 // Fetch the lines from all the given URLs
-const getAllLines = async (urls: string[]): Promise<string[]> => {
-  const results = await Promise.all(urls.map(getLines))
+const getAllLines = async (files: string[]): Promise<string[]> => {
+  const results = await Promise.all(files.map(getLines))
   return results.flat()
 }
 
