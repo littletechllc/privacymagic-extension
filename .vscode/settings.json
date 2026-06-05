@@ -1,0 +1,8 @@
+{
+  "standard.engine": "ts-standard",
+  "standard.autoFixOnSave": true,
+  "search.useIgnoreFiles": true,
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "explorer.excludeGitIgnore": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

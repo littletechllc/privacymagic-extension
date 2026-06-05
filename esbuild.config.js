@@ -24,10 +24,10 @@ const baseBuildOptions = {
   mainFields: ['browser', 'module', 'main'],
   conditions: ['browser'],
   alias: {
-    '@src': 'src',
-    '@math': 'math',
-    '@tools': 'tools',
-    '@test': 'test'
+    '@src': './src',
+    '@math': './math',
+    '@tools': './tools',
+    '@test': './test'
   },
   loader: {
     '.wasm': 'base64'

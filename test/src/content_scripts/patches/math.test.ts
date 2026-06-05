@@ -1,12 +1,5 @@
 import { describe, it, expect, beforeAll } from '@jest/globals'
-import { Buffer } from 'buffer'
 import math from '@src/content_scripts/patches/math'
-
-// Polyfill Uint8Array.fromBase64 for Node/jest (declared in window-extensions.d.ts at runtime)
-if (typeof (Uint8Array as unknown as { fromBase64?: (s: string) => Uint8Array }).fromBase64 !== 'function') {
-  ;(Uint8Array as unknown as { fromBase64: (s: string) => Uint8Array }).fromBase64 = (base64: string) =>
-    new Uint8Array(Buffer.from(base64, 'base64'))
-}
 
 // Apply the math patch once so Math.* uses the WASM implementation
 beforeAll(() => {

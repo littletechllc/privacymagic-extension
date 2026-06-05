@@ -164,10 +164,6 @@ declare global {
     keyboard?: Keyboard
   }
 
-  interface Uint8ArrayConstructor {
-    fromBase64: (base64: string) => Uint8Array<ArrayBuffer>
-  }
-
   interface FontFaceSet {
     add(font: FontFace): void
     clear(): void

@@ -43,8 +43,8 @@
     "playwright": "^1.58.2",
     "ts-jest": "29.4.6",
     "tsx": "4.21.0",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.60.1",
     "web-ext": "10.3.0"
   },
   "engines": {
