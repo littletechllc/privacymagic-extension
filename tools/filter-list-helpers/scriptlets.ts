@@ -3,7 +3,7 @@ import { entries } from '../util'
 import { writeFile, appendCookieRule, removeCookieRule } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
-import punycode from 'punycode'
+import { domainToASCII } from 'node:url'
 import { jsonToBase64 } from '@src/common/base64'
 
 /** DNR urlFilter must be ASCII; IDN labels from filter lists are punycode-encoded. */
@@ -12,15 +12,13 @@ const toAsciiDomain = (domain: string): string | undefined => {
   if (trimmed === '') {
     return undefined
   }
-  try {
-    const ascii = punycode.toASCII(trimmed)
-    if (!/^[\x21-\x7E]+$/.test(ascii)) {
-      return undefined
-    }
-    return ascii
-  } catch {
+  const ascii = domainToASCII(trimmed)
+  // DNR urlFilter hostnames must be ASCII. Reject failed conversions and any
+  // leftover non-ASCII: [\x21-\x7E] is printable ASCII from '!' through '~'.
+  if (ascii === '' || !/^[\x21-\x7E]+$/.test(ascii)) {
     return undefined
   }
+  return ascii
 }
 
 const normalizeScriptletName = (scriptletName: string): ScriptletName | undefined => {
