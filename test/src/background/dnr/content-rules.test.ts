@@ -4,7 +4,7 @@ import { computeContentRules } from '@src/background/dnr/content-rules'
 import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
 import { contentRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
-import { SETTING_COOKIE_PREFIX, type ContentSettingId, type SettingId } from '@src/common/setting-ids'
+import { SETTING_COOKIE_PREFIX, type ContentSettingId } from '@src/common/setting-ids'
 import { describe, it, expect } from '@jest/globals'
 
 const cookieHeaderValue = (settingId: ContentSettingId, enabled: boolean): string =>
@@ -16,7 +16,7 @@ describe('computeContentRules', () => {
 
   describe('when setting is not a content setting', () => {
     it('should return empty array', () => {
-      const result = computeContentRules('queryParameters' as SettingId, [domain])
+      const result = computeContentRules('queryParameters', [domain])
       expect(result).toEqual([])
     })
   })
