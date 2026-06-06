@@ -1,13 +1,10 @@
-import { isMain } from './util'
+import { filterListDir, isMain } from './util'
 import { parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
 import { parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
 import { parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
 import { isCosmeticFilterLine, isNetworkFilterLine, isScriptletLine } from './filter-list-helpers/util'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const BLOCKLISTS: string[] = [
   'easylist.txt',
@@ -17,7 +14,7 @@ const BLOCKLISTS: string[] = [
 
 // Fetch the lines from the given file
 const getLines = async (file: string): Promise<string[]> => {
-  const buffer = await readFile(path.join(__dirname, '..', 'third_party', 'filter_lists', file))
+  const buffer = await readFile(path.join(filterListDir, file))
   return buffer.toString().split('\n')
 }
 

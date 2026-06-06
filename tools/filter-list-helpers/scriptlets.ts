@@ -4,7 +4,7 @@ import { writeFile, appendCookieRule, removeCookieRule } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
 import { domainToASCII } from 'node:url'
-import { jsonToBase64Url } from '@src/common/base64'
+import { jsonToBase64Url } from '../base64'
 
 /** DNR urlFilter must be ASCII; IDN labels from filter lists are punycode-encoded. */
 const toAsciiDomain = (domain: string): string | undefined => {

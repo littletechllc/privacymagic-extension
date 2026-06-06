@@ -10,7 +10,7 @@ import {
   appendCookieRule
 } from './util'
 import { PROCEDURAL_FILTERS_COOKIE_KEY } from '@src/common/setting-ids'
-import { jsonToBase64Url } from '@src/common/base64'
+import { jsonToBase64Url } from '../base64'
 
 type FilterType = 'standard' | 'procedural' | 'exception'
 
