@@ -48,7 +48,7 @@
     "web-ext": "10.3.0"
   },
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "overrides": {
     "yauzl": "3.3.0",
