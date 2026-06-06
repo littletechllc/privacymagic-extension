@@ -27,7 +27,7 @@ describe('computeAllowRules', () => {
 
   describe('when setting is not a blocker setting', () => {
     it('should return empty array', () => {
-      const result = computeAllowRules('audio' as SettingId, [domain])
+      const result = computeAllowRules('audio', [domain])
       expect(result).toEqual([])
     })
   })

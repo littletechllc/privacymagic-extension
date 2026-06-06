@@ -18,7 +18,7 @@ if (global.fetch === undefined) {
     Promise.resolve({
       ok: true,
       json: () => Promise.resolve(REMOTE_CONFIG_MOCK)
-    } as unknown as Response)) as typeof fetch
+    } as unknown as Response))
 }
 
 // Polyfill for structuredClone if not available

@@ -16,7 +16,7 @@ describe('timezone patch', () => {
 
     beforeAll(async () => {
       originalResolvedOptions = Object.getOwnPropertyDescriptor(
-        Intl.DateTimeFormat.prototype as object,
+        Intl.DateTimeFormat.prototype,
         'resolvedOptions'
       )
       originalGetTimezoneOffsetDesc = Object.getOwnPropertyDescriptor(Date.prototype, 'getTimezoneOffset')

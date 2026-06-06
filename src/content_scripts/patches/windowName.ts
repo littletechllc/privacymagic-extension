@@ -15,11 +15,11 @@ const windowName = (globalObject: GlobalScope): void => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const nameGetter = propDescriptor.get as MethodOf<GlobalScope>
   const nameGetterSafe = (win: GlobalScope): string =>
-    reflectApplySafe(nameGetter, win, [] as unknown as Parameters<MethodOf<GlobalScope>>) as string
+    reflectApplySafe(nameGetter, win, []) as string
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const nameSetter = propDescriptor.set as MethodOf<GlobalScope>
   const nameSetterSafe = (win: GlobalScope, value: string): void => {
-    reflectApplySafe(nameSetter, win, [value] as unknown as Parameters<MethodOf<GlobalScope>>)
+    reflectApplySafe(nameSetter, win, [value])
   }
   const jsonParseSafe = JSON.parse
   const locationOrigin = globalObject.location.origin

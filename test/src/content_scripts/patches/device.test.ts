@@ -43,7 +43,7 @@ describe('device patch', () => {
   beforeAll(() => {
     const w = self as Window & { DevicePosture?: typeof DevicePosture }
     expect(w.DevicePosture).toBeUndefined()
-    w.DevicePosture = DevicePostureMock as unknown as typeof DevicePosture
+    w.DevicePosture = DevicePostureMock
   })
 
   beforeEach(() => {

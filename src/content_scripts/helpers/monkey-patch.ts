@@ -234,7 +234,7 @@ export const modifyConstructorArguments = <
   const proxiedConstructor = new Proxy(originalConstructor, {
     construct(target, argList, _newTarget) {
       const newCallArgs = modifyArguments(...argList as ConstructorParameters<T>)
-      return reflectConstructSafe(target, newCallArgs) as object
+      return reflectConstructSafe(target, newCallArgs)
     },
   })
   globalObject[constructorName] = proxiedConstructor

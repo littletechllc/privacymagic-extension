@@ -44,13 +44,13 @@ describe('iframe patch', () => {
 
     createSafeGetterMock.mockReturnValue(() => stubContentWindow)
 
-    iframePatch(self as unknown as GlobalScope)
+    iframePatch(self)
 
     const iframe = document.createElement('iframe')
     const result = iframe.contentWindow
 
     expect(createSafeGetterMock).toHaveBeenCalledTimes(1)
-    const expectedCtor = (self as unknown as GlobalScope).HTMLIFrameElement
+    const expectedCtor = (self).HTMLIFrameElement
     expect(createSafeGetterMock.mock.calls[0]).toEqual([expectedCtor, 'contentWindow'])
     expect(result).toBe(stubContentWindow)
   })
@@ -58,7 +58,7 @@ describe('iframe patch', () => {
   it('should not call weakSet when getter returns nullish', () => {
     createSafeGetterMock.mockReturnValue(() => null)
 
-    iframePatch(self as unknown as GlobalScope)
+    iframePatch(self)
 
     const iframe = document.createElement('iframe')
     const result = iframe.contentWindow

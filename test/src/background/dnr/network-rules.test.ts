@@ -13,7 +13,7 @@ describe('computeNetworkRules', () => {
 
   describe('when setting is not a network setting', () => {
     it('should return empty array', () => {
-      const result = computeNetworkRules('audio' as SettingId, [RULE_DOMAIN_PLACEHOLDER])
+      const result = computeNetworkRules('audio', [RULE_DOMAIN_PLACEHOLDER])
       expect(result).toEqual([])
     })
   })

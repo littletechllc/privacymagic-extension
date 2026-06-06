@@ -1,23 +1,24 @@
+import { handleAsync } from '@src/common/util'
+
 export const logMatchingRulesInDevMode = (): void => {
   if (chrome.declarativeNetRequest.onRuleMatchedDebug !== undefined) {
-    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
-      (async ({ request, rule }) => {
-        let ruleContent
-        if (rule.rulesetId === '_session') {
-          const rules = await chrome.declarativeNetRequest.getSessionRules({
-            ruleIds: [rule.ruleId]
-          })
-          ruleContent = rules[0]
-        }
-        if (rule.rulesetId === '_dynamic') {
-          const rules = await chrome.declarativeNetRequest.getDynamicRules({
-            ruleIds: [rule.ruleId]
-          })
-          ruleContent = rules[0]
-        }
-        console.log('rule matched debug:', { request, rule, ruleContent })
-      }) as (info: chrome.declarativeNetRequest.MatchedRuleInfoDebug) => void
-    )
+    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => handleAsync(async () => {
+      const { request, rule } = info
+      let ruleContent
+      if (rule.rulesetId === '_session') {
+        const rules = await chrome.declarativeNetRequest.getSessionRules({
+          ruleIds: [rule.ruleId]
+        })
+        ruleContent = rules[0]
+      }
+      if (rule.rulesetId === '_dynamic') {
+        const rules = await chrome.declarativeNetRequest.getDynamicRules({
+          ruleIds: [rule.ruleId]
+        })
+        ruleContent = rules[0]
+      }
+      console.log('rule matched debug:', { request, rule, ruleContent })
+    }))
   }
 }
 

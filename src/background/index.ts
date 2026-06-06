@@ -2,7 +2,7 @@ import { getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
 import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
-import { type Message, type ResponseSendFunction, type SuccessResponse, type RegistrableDomainSuccessResponse } from '@src/common/messages'
+import { type Message, type ResponseSendFunction } from '@src/common/messages'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
@@ -32,14 +32,14 @@ const handleMessage = async (
   try {
     if (message.type === 'updateSetting') {
       await setUserDisabledSetting(message.domain, message.settingId, !message.value)
-      sendResponse({ success: true } as SuccessResponse)
+      sendResponse({ success: true })
     } else if (message.type === 'reloadTab') {
       await chrome.tabs.reload(message.tabId)
       console.log('reloaded tab', message.tabId)
-      sendResponse({ success: true } as SuccessResponse)
+      sendResponse({ success: true })
     } else if (message.type === 'disableSyncSettingsDone') {
       await disableSyncSettingsDone(message.tabId)
-      sendResponse({ success: true } as SuccessResponse)
+      sendResponse({ success: true })
     } else if (message.type === 'getRegistrableDomain') {
       let domain: string | null = null
       try {
@@ -47,7 +47,7 @@ const handleMessage = async (
       } catch {
         domain = null
       }
-      sendResponse({ success: true, domain } as RegistrableDomainSuccessResponse)
+      sendResponse({ success: true, domain })
     } else {
       // Exhaustive check: all message types should be handled above
       // If this code runs, a new message type was added but not handled
