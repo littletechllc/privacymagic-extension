@@ -10,7 +10,7 @@ import {
   appendCookieRule
 } from './util'
 import { PROCEDURAL_FILTERS_COOKIE_KEY } from '@src/common/setting-ids'
-import { jsonToBase64 } from '@src/common/base64'
+import { jsonToBase64Url } from '@src/common/base64'
 
 type FilterType = 'standard' | 'procedural' | 'exception'
 
@@ -139,7 +139,7 @@ const generateProceduralFilterRules = (proceduralFilters: CosmeticFilter[]): chr
       }
     }
     if (filters.length > 0) {
-      const cookieValue = jsonToBase64(filters)
+      const cookieValue = jsonToBase64Url(filters)
       rules.push(appendCookieRule(domain,  PROCEDURAL_FILTERS_COOKIE_KEY, cookieValue, id))
       ++id
     }

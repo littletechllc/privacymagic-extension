@@ -4,7 +4,7 @@ import { writeFile, appendCookieRule, removeCookieRule } from './util'
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { ScriptletName, ScriptletCommand } from '@src/common/scriptlet-names'
 import { domainToASCII } from 'node:url'
-import { jsonToBase64 } from '@src/common/base64'
+import { jsonToBase64Url } from '@src/common/base64'
 
 /** DNR urlFilter must be ASCII; IDN labels from filter lists are punycode-encoded. */
 const toAsciiDomain = (domain: string): string | undefined => {
@@ -99,7 +99,7 @@ const generateScriptletRules = (scriptletsForDomains: Record<string, ScriptletCo
   for (const [domain, scriptlets] of entries(scriptletsForDomains)) {
     const noncookieScriptlets = scriptlets.filter(scriptlet => !isCookieScriptlet(scriptlet))
     if (noncookieScriptlets.length > 0) {
-      const cookieValue = jsonToBase64(noncookieScriptlets)
+      const cookieValue = jsonToBase64Url(noncookieScriptlets)
       rules.push(appendCookieRule(domain, SCRIPTLET_COOKIE_KEY, cookieValue, id))
       ++id
     }
