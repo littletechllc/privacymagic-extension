@@ -35,80 +35,88 @@ const audio = (globalObject: GlobalScope): void => {
   }
 
   // AudioBuffer.getChannelData, AudioBuffer.copyFromChannel
-  const originalGetChannelData = createSafeMethod(globalObject.AudioBuffer, 'getChannelData')
-  const originalCopyFromChannel = createSafeMethod(globalObject.AudioBuffer, 'copyFromChannel')
-  redefineMethods(globalObject.AudioBuffer.prototype, {
-    getChannelData: function (
-      this: AudioBuffer,
-      channel: number
-    ): Float32Array<ArrayBuffer> {
-      const data = originalGetChannelData(this, channel)
-      quantizeFloat32Array(data)
-      return data
-    },
-    copyFromChannel: function (
-      this: AudioBuffer,
-      destination: Float32Array<ArrayBuffer>,
-      channelNumber: number,
-      startInChannel: number
-    ): void {
-      // We don't copy directly to the destination buffer to avoid
-      // potential security issues with SharedArrayBuffers.
-      const tempBuffer = new Float32Array(destination.length)
-      originalCopyFromChannel(this, tempBuffer, channelNumber, startInChannel)
-      quantizeFloat32Array(tempBuffer)
-      // There's a risk that the destination buffer is longer than
-      // the bytes copied from the source buffer, and because we used
-      // the temporary buffer, the remaining bytes will be zeroed.
-      // For now this is a WONTFIX.
-      destination.set(tempBuffer)
-    }
-  })
+  if (globalObject.AudioBuffer != null) {
+    const originalGetChannelData = createSafeMethod(globalObject.AudioBuffer, 'getChannelData')
+    const originalCopyFromChannel = createSafeMethod(globalObject.AudioBuffer, 'copyFromChannel')
+    redefineMethods(globalObject.AudioBuffer.prototype, {
+      getChannelData: function (
+        this: AudioBuffer,
+        channel: number
+      ): Float32Array<ArrayBuffer> {
+        const data = originalGetChannelData(this, channel)
+        quantizeFloat32Array(data)
+        return data
+      },
+      copyFromChannel: function (
+        this: AudioBuffer,
+        destination: Float32Array<ArrayBuffer>,
+        channelNumber: number,
+        startInChannel: number
+      ): void {
+        // We don't copy directly to the destination buffer to avoid
+        // potential security issues with SharedArrayBuffers.
+        const tempBuffer = new Float32Array(destination.length)
+        originalCopyFromChannel(this, tempBuffer, channelNumber, startInChannel)
+        quantizeFloat32Array(tempBuffer)
+        // There's a risk that the destination buffer is longer than
+        // the bytes copied from the source buffer, and because we used
+        // the temporary buffer, the remaining bytes will be zeroed.
+        // For now this is a WONTFIX.
+        destination.set(tempBuffer)
+      }
+    })
+  }
 
   // AnalyserNode
-  const originalGetFloatFrequencyData = createSafeMethod(globalObject.AnalyserNode, 'getFloatFrequencyData')
-  const originalGetFloatTimeDomainData = createSafeMethod(globalObject.AnalyserNode, 'getFloatTimeDomainData')
-  const originalGetByteFrequencyData = createSafeMethod(globalObject.AnalyserNode, 'getByteFrequencyData')
-  const originalGetByteTimeDomainData = createSafeMethod(globalObject.AnalyserNode, 'getByteTimeDomainData')
-  redefineMethods(globalObject.AnalyserNode.prototype, {
-    getFloatFrequencyData: function (this: AnalyserNode, array: Float32Array): void {
-      const tempArray = new Float32Array(array.length)
-      originalGetFloatFrequencyData(this, tempArray)
-      quantizeFloat32Array(tempArray)
-      array.set(tempArray)
-    },
-    getFloatTimeDomainData: function (this: AnalyserNode, array: Float32Array): void {
-      const tempArray = new Float32Array(array.length)
-      originalGetFloatTimeDomainData(this, tempArray)
-      quantizeFloat32Array(tempArray)
-      array.set(tempArray)
-    },
-    getByteFrequencyData: function (this: AnalyserNode, array: Uint8Array): void {
-      const tempArray = new Uint8Array(array.length)
-      originalGetByteFrequencyData(this, tempArray)
-      quantizeUint8Array(tempArray)
-      array.set(tempArray)
-    },
-    getByteTimeDomainData: function (this: AnalyserNode, array: Uint8Array): void {
-      const tempArray = new Uint8Array(array.length)
-      originalGetByteTimeDomainData(this, tempArray)
-      quantizeUint8Array(tempArray)
-      array.set(tempArray)
-    }
-  })
+  if (globalObject.AnalyserNode != null) {
+    const originalGetFloatFrequencyData = createSafeMethod(globalObject.AnalyserNode, 'getFloatFrequencyData')
+    const originalGetFloatTimeDomainData = createSafeMethod(globalObject.AnalyserNode, 'getFloatTimeDomainData')
+    const originalGetByteFrequencyData = createSafeMethod(globalObject.AnalyserNode, 'getByteFrequencyData')
+    const originalGetByteTimeDomainData = createSafeMethod(globalObject.AnalyserNode, 'getByteTimeDomainData')
+    redefineMethods(globalObject.AnalyserNode.prototype, {
+      getFloatFrequencyData: function (this: AnalyserNode, array: Float32Array): void {
+        const tempArray = new Float32Array(array.length)
+        originalGetFloatFrequencyData(this, tempArray)
+        quantizeFloat32Array(tempArray)
+        array.set(tempArray)
+      },
+      getFloatTimeDomainData: function (this: AnalyserNode, array: Float32Array): void {
+        const tempArray = new Float32Array(array.length)
+        originalGetFloatTimeDomainData(this, tempArray)
+        quantizeFloat32Array(tempArray)
+        array.set(tempArray)
+      },
+      getByteFrequencyData: function (this: AnalyserNode, array: Uint8Array): void {
+        const tempArray = new Uint8Array(array.length)
+        originalGetByteFrequencyData(this, tempArray)
+        quantizeUint8Array(tempArray)
+        array.set(tempArray)
+      },
+      getByteTimeDomainData: function (this: AnalyserNode, array: Uint8Array): void {
+        const tempArray = new Uint8Array(array.length)
+        originalGetByteTimeDomainData(this, tempArray)
+        quantizeUint8Array(tempArray)
+        array.set(tempArray)
+      }
+    })
+  }
 
   // DynamicsCompressorNode.reduction
-  const originalGetReduction = createSafeGetter(globalObject.DynamicsCompressorNode, 'reduction')
-  redefinePrototypeFields(globalObject.DynamicsCompressorNode, {
-    reduction: function (this: DynamicsCompressorNode): number {
-      return quantizeFloat32(originalGetReduction(this))
-    }
-  })
+  if (globalObject.DynamicsCompressorNode != null) {
+    const originalGetReduction = createSafeGetter(globalObject.DynamicsCompressorNode, 'reduction')
+    redefinePrototypeFields(globalObject.DynamicsCompressorNode, {
+      reduction: function (this: DynamicsCompressorNode): number {
+        return quantizeFloat32(originalGetReduction(this))
+      }
+    })
+  }
 
   // AudioContext.sampleRate
-  modifyConstructorArguments(globalObject, 'AudioContext', (options?: AudioContextOptions): [AudioContextOptions] => {
-    return [{ ...options, sampleRate: SPOOFED_AUDIO_CONTEXT_SAMPLE_RATE }]
-  })
+  if (globalObject.AudioContext != null) {
+    modifyConstructorArguments(globalObject, 'AudioContext', (options?: AudioContextOptions): [AudioContextOptions] => {
+      return [{ ...options, sampleRate: SPOOFED_AUDIO_CONTEXT_SAMPLE_RATE }]
+    })
+  }
 
   // TODO: AudioWorklet
 }
