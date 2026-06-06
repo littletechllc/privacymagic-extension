@@ -81,14 +81,6 @@ export const prepareWorker = (workerGlobal: WorkerGlobalScope, absoluteUrl: stri
       return new Target(...args)
     }
   })
-  // Rewrite the createScriptURL method to be relative to the spoofed worker location URL.
-  const origCreateScriptURL = createSafeMethod(workerGlobal.TrustedTypePolicy, 'createScriptURL')
-  redefineMethods(workerGlobal.TrustedTypePolicy.prototype, {
-    createScriptURL: function (this: TrustedTypePolicy, input: string | TrustedScriptURL, ...rest: unknown[]): TrustedScriptURL {
-      const resolvedInput = resolveAbsoluteUrl(String(input), absoluteUrl)
-      return origCreateScriptURL(this, resolvedInput, ...rest)
-    }
-  })
   // Rewrite the importScripts method to be relative to the spoofed worker location URL.
   type ImportScriptsArguments = Array<string | URL | TrustedScriptURL>
   const origImportScripts = (workerGlobal.importScripts as (...paths: ImportScriptsArguments) => void).bind(workerGlobal)
