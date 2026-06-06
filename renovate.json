@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":pinDevDependencies",
+    ":pinDependencies"
+  ],
+  "node": {
+    "supportPolicy": ["lts"]
+  },
+  "packageRules": [
+    {
+      "description": "Group Node pin updates (.nvmrc + engines)",
+      "matchManagers": ["nvm", "npm"],
+      "matchPackageNames": ["node"],
+      "groupName": "Node.js",
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "Group GitHub Actions bumps",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "description": "Group Emscripten pin updates",
+      "matchFileNames": ["math/EMSDK_VERSION"],
+      "groupName": "Emscripten"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^math/EMSDK_VERSION$"],
+      "matchStrings": ["(?<currentValue>\\S+)"],
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "emscripten-core/emsdk",
+      "versioningTemplate": "semver"
+    }
+  ]
+}
