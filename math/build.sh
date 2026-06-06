@@ -13,7 +13,7 @@ if [ "$EMCC_VERSION" != "$EMSDK_VERSION" ]; then
   exit 1
 fi
 
-emcc math.c \
+emcc \
   -Oz \
   -fno-builtin \
   -fno-fast-math \
