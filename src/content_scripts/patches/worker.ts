@@ -5,6 +5,7 @@ import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
 import { enableBlobLockingAndCaching } from './patch_helpers/blob-locking'
+import { generateCompletionCallbackCode } from './patch_helpers/worker-helper'
 
 /** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
 export type WorkerPatchDeps = {
@@ -21,24 +22,6 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const URLSafe = globalObject.URL
   const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
   const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
-
-  const generateCompletionCallbackCode = (callback: () => void): string => {
-    const completionType = 'completion'
-    const broadcastChannelName = '--privacy-magic-completion--' + globalObject.crypto.randomUUID()
-    const BroadcastChannelConstructor = globalObject.BroadcastChannel
-    if (BroadcastChannelConstructor == null) throw new Error('BroadcastChannel not available')
-    const broadcastChannel = new BroadcastChannelConstructor(broadcastChannelName)
-    broadcastChannel.onmessage = (message: MessageEvent) => {
-      const data = message?.data as { type: string } | null
-      if (data?.type === completionType) {
-        callback()
-      }
-    }
-    return `(() => {
-      const broadcastChannel = new BroadcastChannel(${JSON.stringify(broadcastChannelName)});
-      broadcastChannel.postMessage({ type: ${jsonStringifySafe(completionType)} });
-    })();`
-  }
 
   /**
    * Create a function that will make a trusted script URL from a policy name and a URL.
@@ -85,7 +68,7 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
         const absoluteUrl = resolveAbsoluteUrl(url.toString(), locationHref)
         let completionCallbackCode = ''
         if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
-          completionCallbackCode = generateCompletionCallbackCode(() => {
+          completionCallbackCode = generateCompletionCallbackCode(globalObject, () => {
             unlockObjectUrl(absoluteUrl)
           })
           lockObjectUrl(absoluteUrl)
