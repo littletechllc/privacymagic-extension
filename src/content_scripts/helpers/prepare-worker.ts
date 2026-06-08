@@ -1,6 +1,12 @@
 import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields } from "./monkey-patch";
 import { resolveAbsoluteUrl } from "./safe";
 
+/**
+ * Prepare the worker for execution by spoofing the worker's location object and rewriting the Request, Response, Fetch, XMLHttpRequest, EventSource, WebSocket, and importScripts methods to be relative to the spoofed worker location URL.
+ * This function runs in the worker context.
+ * @param workerGlobal - The worker global object.
+ * @param absoluteUrl - The absolute URL of the worker.
+ */
 export const prepareWorker = (workerGlobal: WorkerGlobalScope, absoluteUrl: string): void => {
   // Spoof the worker's location object to return the absoluteURL.
   (() => {
