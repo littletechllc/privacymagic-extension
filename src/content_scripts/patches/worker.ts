@@ -1,9 +1,10 @@
 import type { ContentSettingId } from '@src/common/setting-ids'
 import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
-import { resolveAbsoluteUrl, mapSetSafe, mapGetSafe, mapDeleteSafe, setDeleteSafe, setAddSafe, setHasSafe, MapSafe, SetSafe } from '@src/content_scripts/helpers/safe'
+import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
+import { enableBlobLockingAndCaching } from './patch_helpers/blob-locking'
 
 /** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
 export type WorkerPatchDeps = {
@@ -16,70 +17,10 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
   const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
   const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
-  const blobURLCache = new Map<string, Blob>()
   const BlobSafe = globalObject.Blob
   const URLSafe = globalObject.URL
   const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
-  const { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl } = (() => {
-    const originalRevokeObjectURL = globalObject.URL.revokeObjectURL.bind(globalObject.URL)
-
-    const pendingRevocations = new SetSafe<string>()
-    const lockedUrls = new MapSafe<string, number>()
-
-    const isLockedObjectUrl = (url: string): boolean => {
-      return (lockedUrls.get(url) ?? 0) > 0
-    }
-
-    const requestToRevokeObjectUrl = (url: string): void => {
-      if (!isLockedObjectUrl(url)) {
-        originalRevokeObjectURL(url)
-        mapDeleteSafe(blobURLCache, url)
-      } else {
-        setAddSafe(pendingRevocations, url)
-      }
-    }
-
-    const unlockObjectUrl = (url: string): void => {
-      if (!isLockedObjectUrl(url)) {
-        return
-      }
-      const lockCount = lockedUrls.get(url) ?? 0
-      if (lockCount <= 1) {
-        lockedUrls.delete(url)
-        if (setHasSafe(pendingRevocations, url)) {
-          originalRevokeObjectURL(url)
-          setDeleteSafe(pendingRevocations, url)
-          mapDeleteSafe(blobURLCache, url)
-        }
-      } else {
-        lockedUrls.set(url, lockCount - 1)
-      }
-    }
-
-    const lockObjectUrl = (url: string): void => {
-      const lockCount = lockedUrls.get(url) ?? 0
-      lockedUrls.set(url, lockCount + 1)
-    }
-
-    return { lockObjectUrl, unlockObjectUrl, requestToRevokeObjectUrl }
-  })()
-
-  const originalCreateObjectURL = globalObject.URL.createObjectURL.bind(globalObject.URL)
-  globalObject.URL.createObjectURL = (source: Blob | MediaSource): string => {
-    const url = originalCreateObjectURL(source)
-    if (source instanceof BlobSafe) {
-      mapSetSafe(blobURLCache, url, source)
-    }
-    return url
-  }
-
-  globalObject.URL.revokeObjectURL = (url: string) => {
-    requestToRevokeObjectUrl(url)
-  }
-
-  const getCachedBlob = (url: string): Blob | undefined => {
-    return mapGetSafe(blobURLCache, url)
-  }
+  const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
 
   const generateCompletionCallbackCode = (callback: () => void): string => {
     const completionType = 'completion'
