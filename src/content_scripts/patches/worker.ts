@@ -5,7 +5,7 @@ import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
 import { enableBlobLockingAndCaching } from './patch_helpers/blob-locking'
-import { generateCompletionCallbackCode } from './patch_helpers/worker-helper'
+import { generateCompletionCallbackCode, makeTrustedScriptURLFunction } from './patch_helpers/worker-helper'
 
 /** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
 export type WorkerPatchDeps = {
@@ -22,28 +22,6 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const URLSafe = globalObject.URL
   const URLcreateObjectURLSafe = (source: Blob | MediaSource): string => URLSafe.createObjectURL(source)
   const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
-
-  /**
-   * Create a function that will make a trusted script URL from a policy name and a URL.
-   * This function is serialized and injected into the worker context.
-   * @param policyName - The name of the policy to use.
-   * @param url - The URL to make a trusted script URL from.
-   * @returns A function that will make a trusted script URL from a policy name and a URL.
-   */
-  const makeTrustedScriptURLFunction = (workerGlobal: Pick<GlobalScope, 'trustedTypes'>, policyName: string | undefined, url: string): TrustedScriptURL | string => {
-    if (policyName == null) {
-      policyName = 'default'
-    }
-    if (workerGlobal.trustedTypes == null) {
-      return url
-    }
-    const dummyPolicy = workerGlobal.trustedTypes.createPolicy(policyName, {
-      createScriptURL: (url) => {
-        return url
-      }
-    })
-    return dummyPolicy.createScriptURL(url)
-  }
 
   const stringStartsWithSafe = createSafeMethod(String, 'startsWith')
   const jsonStringifySafe = JSON.stringify
