@@ -65,3 +65,26 @@ export const prepareInjectionForTrustedTypes = (globalObject: GlobalScope, harde
 export const getTrustedTypePolicyForObject = (object: TrustedObjectType): TrustedTypePolicy | undefined => {
   return weakMapGetSafe(trustedObjectsToPolicy, object)
 }
+
+/**
+ * Create a function that will make a trusted script URL from a policy name and a URL.
+ * This function is serialized and injected into the worker context.
+ */
+export const makeTrustedScriptURLFunction = (
+  workerGlobal: Pick<GlobalScope, 'trustedTypes'>,
+  policyName: string | undefined,
+  url: string
+): TrustedScriptURL | string => {
+  if (policyName == null) {
+    policyName = 'default'
+  }
+  if (workerGlobal.trustedTypes == null) {
+    return url
+  }
+  const dummyPolicy = workerGlobal.trustedTypes.createPolicy(policyName, {
+    createScriptURL: (url) => {
+      return url
+    }
+  })
+  return dummyPolicy.createScriptURL(url)
+}

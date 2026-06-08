@@ -1,28 +1,5 @@
 import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
-/**
- * Create a function that will make a trusted script URL from a policy name and a URL.
- * This function is serialized and injected into the worker context.
- */
-export const makeTrustedScriptURLFunction = (
-  workerGlobal: Pick<GlobalScope, 'trustedTypes'>,
-  policyName: string | undefined,
-  url: string
-): TrustedScriptURL | string => {
-  if (policyName == null) {
-    policyName = 'default'
-  }
-  if (workerGlobal.trustedTypes == null) {
-    return url
-  }
-  const dummyPolicy = workerGlobal.trustedTypes.createPolicy(policyName, {
-    createScriptURL: (url) => {
-      return url
-    }
-  })
-  return dummyPolicy.createScriptURL(url)
-}
-
 export const generateCompletionCallbackCode = (
   globalObject: GlobalScope,
   callback: () => void
