@@ -3,6 +3,7 @@ import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, makeTrustedScriptURLFunction } from '@src/content_scripts/helpers/trusted-types'
 import { enableBlobLockingAndCaching } from './blob-locking'
+import { WorkerScriptURL } from './worker-types'
 
 export const generateCompletionCallbackCode = (
   globalObject: GlobalScope,
@@ -25,14 +26,21 @@ export const generateCompletionCallbackCode = (
     })();`
 }
 
-export const makeSanitizedBlobForWorker = ({
+/**
+ * Make a sanitized script for a worker. Returns a blob URL
+ * in the form of a string or a TrustedScriptURL.
+ * If the URL is a blob URL, a completion callback is added to the script
+ * to unlock the blob URL when the script finishes importing.
+ * @returns {string | TrustedScriptURL}
+ */
+export const makeSanitizedScriptForWorker = ({
   url,
   options,
   globalObject,
   hardeningCode,
 }: {
-  url: string | URL | TrustedScriptURL
-  options: WorkerOptions | undefined
+  url: WorkerScriptURL
+  options: WorkerOptions | string | undefined
   globalObject: GlobalScope
   hardeningCode: string
 }): string | TrustedScriptURL => {
@@ -56,7 +64,7 @@ export const makeSanitizedBlobForWorker = ({
     })
     lockObjectUrl(absoluteUrl)
   }
-  const importCommand = options?.type === 'module'
+  const importCommand = typeof options === 'object' && options?.type === 'module'
     ? 'await import'
     : 'importScripts'
   // Semicolon separated code to avoid issues with line continuations.
@@ -72,7 +80,6 @@ export const makeSanitizedBlobForWorker = ({
             const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
             try {
               ${importCommand}(trustedAbsoluteUrl);
-              console.log("finished importing");
             } catch (error) {
               console.error("error in importing: ", error);
             }

@@ -39,6 +39,7 @@ export const CONTENT_SETTING_IDS = [
   'screen',
   'serviceWorker',
   'sharedStorage',
+  'sharedWorker',
   'timezone',
   'timer',
   'touch',

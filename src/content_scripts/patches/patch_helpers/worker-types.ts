@@ -3,10 +3,10 @@ export type WorkerScriptURL = string | URL | TrustedScriptURL
 
 export type WorkerConstructor = {
   prototype: Worker
-  new (scriptURL: WorkerScriptURL, options?: WorkerOptions): Worker
+  new (scriptURL: WorkerScriptURL, options?: WorkerOptions | string): Worker
 }
 
 export type SharedWorkerConstructor = {
   prototype: SharedWorker
-  new (scriptURL: WorkerScriptURL, options?: WorkerOptions): SharedWorker
+  new (scriptURL: WorkerScriptURL, options?: WorkerOptions | string): SharedWorker
 }

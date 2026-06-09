@@ -152,7 +152,7 @@ declare global {
     Request: typeof Request
     Response: typeof Response
     fetch: typeof fetch
-    importScripts: (...paths: Array<string | URL | TrustedScriptURL>) => void
+    importScripts: (...paths: Array<WorkerScriptURL>) => void
     XMLHttpRequest: typeof XMLHttpRequest
     EventSource: typeof EventSource
     WebSocket: typeof WebSocket

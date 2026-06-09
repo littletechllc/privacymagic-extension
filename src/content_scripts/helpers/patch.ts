@@ -20,6 +20,7 @@ import network from '@src/content_scripts/patches/network'
 import screen from '@src/content_scripts/patches/screen'
 import serviceWorker from '@src/content_scripts/patches/serviceWorker'
 import sharedStorage from '@src/content_scripts/patches/sharedStorage'
+import sharedWorker from '@src/content_scripts/patches/sharedWorker'
 import timer from '@src/content_scripts/patches/timer'
 import timezone from '@src/content_scripts/patches/timezone'
 import touch from '@src/content_scripts/patches/touch'
@@ -53,6 +54,7 @@ const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, Pat
   screen,
   serviceWorker,
   sharedStorage,
+  sharedWorker,
   timer,
   timezone,
   touch,

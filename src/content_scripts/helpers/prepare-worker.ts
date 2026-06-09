@@ -1,5 +1,6 @@
 import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields } from "./monkey-patch";
 import { resolveAbsoluteUrl } from "./safe";
+import { WorkerScriptURL } from "../patches/patch_helpers/worker-types";
 
 /**
  * Prepare the worker for execution by spoofing the worker's location object and rewriting the Request, Response, Fetch, XMLHttpRequest, EventSource, WebSocket, and importScripts methods to be relative to the spoofed worker location URL.
@@ -88,7 +89,7 @@ export const prepareWorker = (workerGlobal: WorkerGlobalScope, absoluteUrl: stri
     }
   })
   // Rewrite the importScripts method to be relative to the spoofed worker location URL.
-  type ImportScriptsArguments = Array<string | URL | TrustedScriptURL>
+  type ImportScriptsArguments = Array<WorkerScriptURL>
   const origImportScripts = (workerGlobal.importScripts as (...paths: ImportScriptsArguments) => void).bind(workerGlobal)
   redefineMethods(workerGlobal, {
     importScripts: (...paths: ImportScriptsArguments) => {

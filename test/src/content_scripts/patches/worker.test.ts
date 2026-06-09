@@ -103,6 +103,8 @@ describe('worker patch', () => {
 
     worker(fakeGlobal, workerDeps)
 
+    const WorkerCtor = fakeGlobal.Worker as new (url: string) => unknown
+    void new WorkerCtor('https://example.com/worker.js')
     fakeGlobal.URL.revokeObjectURL('blob:https://example.com/uuid')
     expect(revokeSpy).toHaveBeenCalledWith('blob:https://example.com/uuid')
   })
