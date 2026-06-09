@@ -44,8 +44,13 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
     const absoluteUrl = resolveAbsoluteUrl(url.toString(), globalObject.location.href)
     const name = typeof options === 'string' ? options : options?.name
     const workerType = typeof options === 'string' ? 'classic' : (options?.type ?? 'classic')
-    const KEY = `--privacy-magic-sw:${absoluteUrl}:${workerType}${name ? `:${name}` : ''}--`
-    const stored = globalObject.localStorage.getItem(KEY)
+    const KEY = `--privacy-magic-sw:${absoluteUrl}:${workerType}${name ? `:${JSON.stringify(name)}` : ''}--`
+    let stored: string | null = null
+    try {
+      stored = globalObject.localStorage.getItem(KEY)
+    } catch {
+      // localStorage may be unavailable (SecurityError, disabled storage, etc.)
+    }
     if (stored != null && isBlobUrlAlive(stored)) {
       if (globalObject.TrustedScriptURL != null && url instanceof globalObject.TrustedScriptURL) {
         const policy = getTrustedTypePolicyForObject(url)
@@ -58,7 +63,11 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
     const sanitizedBlobUrl = makeSanitizedScriptForWorker({
       url, options, globalObject, hardeningCode
     })
-    globalObject.localStorage.setItem(KEY, sanitizedBlobUrl.toString())
+    try {
+      globalObject.localStorage.setItem(KEY, sanitizedBlobUrl.toString())
+    } catch {
+      // ignore — still return the hardened URL without caching
+    }
     return sanitizedBlobUrl
   }
 
