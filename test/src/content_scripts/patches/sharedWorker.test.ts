@@ -33,9 +33,10 @@ function makeFakeLocalStorage () {
 
 function makeFakeXMLHttpRequest (status = 200): typeof globalThis.XMLHttpRequest {
   function FakeXMLHttpRequest (this: void) { /* instance */ }
-  FakeXMLHttpRequest.prototype.open = jest.fn()
-  FakeXMLHttpRequest.prototype.send = jest.fn()
-  Object.defineProperty(FakeXMLHttpRequest.prototype, 'status', {
+  const fakeXmlHttpRequestPrototype = FakeXMLHttpRequest.prototype as XMLHttpRequest
+  fakeXmlHttpRequestPrototype.open = jest.fn()
+  fakeXmlHttpRequestPrototype.send = jest.fn()
+  Object.defineProperty(fakeXmlHttpRequestPrototype, 'status', {
     get () { return status },
     configurable: true
   })
@@ -76,31 +77,33 @@ function makeOriginalSharedWorkerSpy () {
 
 function makeStatefulLocalStorage () {
   const store = new Map<string, string>()
-  return {
-    getItem: jest.fn((key: string) => store.get(key) ?? null),
-    setItem: jest.fn((key: string, value: string) => { store.set(key, value) })
-  } as unknown as Storage
+  const getItem = jest.fn((key: string) => store.get(key) ?? null)
+  const setItem = jest.fn((key: string, value: string) => { store.set(key, value) })
+  const localStorage = { getItem, setItem } as unknown as Storage
+  return { localStorage, getItem, setItem }
 }
 
 function makeFakeURLWithSequentialBlobs () {
   let blobCounter = 0
   const createObjectURL = jest.fn(() => `blob:https://example.com/uuid-${++blobCounter}`)
   const revokeObjectURL = jest.fn()
-  return Object.assign(function URL (_url?: string, _base?: string) {}, {
+  const fakeURL = Object.assign(function URL (_url?: string, _base?: string) {}, {
     createObjectURL,
     revokeObjectURL
   }) as unknown as typeof globalThis.URL
+  return { fakeURL, createObjectURL, revokeObjectURL }
 }
 
 function makeCachingTestScope () {
   const { OriginalSharedWorkerSpy, constructorArgs } = makeOriginalSharedWorkerSpy()
-  const fakeURL = makeFakeURLWithSequentialBlobs()
+  const { fakeURL, createObjectURL } = makeFakeURLWithSequentialBlobs()
+  const { localStorage, setItem } = makeStatefulLocalStorage()
   const fakeGlobal = makeFakeGlobalScope({
     SharedWorker: OriginalSharedWorkerSpy as GlobalScope['SharedWorker'],
     URL: fakeURL,
-    localStorage: makeStatefulLocalStorage()
+    localStorage
   })
-  return { fakeGlobal, constructorArgs, fakeURL }
+  return { fakeGlobal, constructorArgs, createObjectURL, setItem }
 }
 
 describe('sharedWorker patch', () => {
@@ -177,7 +180,7 @@ describe('sharedWorker patch', () => {
     const scriptUrl = 'https://example.com/worker.js'
 
     it('should reuse the same hardened URL when the SharedWorker name is the same', () => {
-      const { fakeGlobal, constructorArgs, fakeURL } = makeCachingTestScope()
+      const { fakeGlobal, constructorArgs, createObjectURL, setItem } = makeCachingTestScope()
       sharedWorker(fakeGlobal, sharedWorkerDeps)
 
       const SharedWorkerCtor = fakeGlobal.SharedWorker as new (
@@ -190,12 +193,12 @@ describe('sharedWorker patch', () => {
 
       expect(constructorArgs[0][0]).toBe('blob:https://example.com/uuid-1')
       expect(constructorArgs[1][0]).toBe('blob:https://example.com/uuid-1')
-      expect(fakeURL.createObjectURL).toHaveBeenCalledTimes(1)
-      expect(fakeGlobal.localStorage.setItem).toHaveBeenCalledTimes(1)
+      expect(createObjectURL).toHaveBeenCalledTimes(1)
+      expect(setItem).toHaveBeenCalledTimes(1)
     })
 
     it('should use different hardened URLs when the SharedWorker name is different', () => {
-      const { fakeGlobal, constructorArgs, fakeURL } = makeCachingTestScope()
+      const { fakeGlobal, constructorArgs, createObjectURL, setItem } = makeCachingTestScope()
       sharedWorker(fakeGlobal, sharedWorkerDeps)
 
       const SharedWorkerCtor = fakeGlobal.SharedWorker as new (
@@ -208,8 +211,8 @@ describe('sharedWorker patch', () => {
       expect(constructorArgs[0][0]).toBe('blob:https://example.com/uuid-1')
       expect(constructorArgs[1][0]).toBe('blob:https://example.com/uuid-2')
       expect(constructorArgs[0][0]).not.toBe(constructorArgs[1][0])
-      expect(fakeURL.createObjectURL).toHaveBeenCalledTimes(2)
-      expect(fakeGlobal.localStorage.setItem).toHaveBeenCalledTimes(2)
+      expect(createObjectURL).toHaveBeenCalledTimes(2)
+      expect(setItem).toHaveBeenCalledTimes(2)
     })
   })
 })
