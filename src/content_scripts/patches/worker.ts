@@ -25,11 +25,11 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           // Don't harden chrome:// or chrome-extension:// URLs.
           return new Target(url.toString(), options)
         }
-        const { sanitizedBlobUrl, options: workerOptions } = makeSanitizedBlob(url, options, {
+        const sanitizedBlobUrl = makeSanitizedBlob(url, options, {
           globalObject,
           hardeningCode,
         })
-        return new Target(sanitizedBlobUrl as string, workerOptions)
+        return new Target(sanitizedBlobUrl as string, options)
       }
     })
   }

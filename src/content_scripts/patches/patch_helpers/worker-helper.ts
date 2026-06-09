@@ -32,7 +32,7 @@ export type MakeSanitizedBlobDeps = {
 
 export type SanitizedBlobResult = {
   sanitizedBlobUrl: string | TrustedScriptURL
-  options: WorkerOptions
+  options: WorkerOptions | undefined
 }
 
 export const makeSanitizedBlob = (
@@ -61,8 +61,7 @@ export const makeSanitizedBlob = (
     })
     lockObjectUrl(absoluteUrl)
   }
-  options = options ?? {}
-  const importCommand = ('type' in options && options.type === 'module')
+  const importCommand = options?.type === 'module'
     ? 'await import'
     : 'importScripts'
   // Semicolon separated code to avoid issues with line continuations.
@@ -86,5 +85,5 @@ export const makeSanitizedBlob = (
   }
   const blobUrl = URLSafe.createObjectURL(new BlobSafe([prefix, payload, suffix], { type: 'text/javascript' }))
   const sanitizedBlobUrl = policy ? policy.createScriptURL(blobUrl) : blobUrl
-  return { sanitizedBlobUrl, options }
+  return sanitizedBlobUrl
 }
