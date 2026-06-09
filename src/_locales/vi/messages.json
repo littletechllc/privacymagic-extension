@@ -165,6 +165,10 @@
     "message": "Shared Storage",
     "description": "Setting to block shared storage"
   },
+  "sharedWorker": {
+    "message": "Shared Workers",
+    "description": "Setting to block shared workers"
+  },
   "leakyFeatures": {
     "message": "Chặn rò rỉ web",
     "description": "Category for leaky web features settings"

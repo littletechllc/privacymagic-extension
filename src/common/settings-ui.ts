@@ -48,6 +48,7 @@ const PRIVACY_SETTINGS_CONFIG: Record<Exclude<SettingsCategory, 'masterSwitch'>,
     'iframe',
     'serviceWorker',
     'sharedStorage',
+    'sharedWorker',
     'worker'
   ],
   policy: [

@@ -165,6 +165,10 @@
     "message": "Shared Storage",
     "description": "Setting to block shared storage"
   },
+  "sharedWorker": {
+    "message": "Shared Workers",
+    "description": "Setting to block shared workers"
+  },
   "leakyFeatures": {
     "message": "വെബ് ലീക്കുകൾ നിർത്തുക",
     "description": "Category for leaky web features settings"

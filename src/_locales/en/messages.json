@@ -165,6 +165,10 @@
     "message": "Shared Storage",
     "description": "Setting to block shared storage"
   },
+  "sharedWorker": {
+    "message": "Shared Workers",
+    "description": "Setting to block shared workers"
+  },
   "leakyFeatures": {
     "message": "Stop Web Leaks",
     "description": "Category title for settings that harden leaky web features against information leaks (not disabling all browser features)"
