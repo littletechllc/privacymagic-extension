@@ -25,17 +25,17 @@ export const generateCompletionCallbackCode = (
     })();`
 }
 
-export type MakeSanitizedBlobDeps = {
+export const makeSanitizedBlobForWorker = ({
+  url,
+  options,
+  globalObject,
+  hardeningCode,
+}: {
+  url: string | URL | TrustedScriptURL
+  options: WorkerOptions | undefined
   globalObject: GlobalScope
   hardeningCode: string
-}
-
-export const makeSanitizedBlobForWorker = (
-  url: string | URL | TrustedScriptURL,
-  options: WorkerOptions | undefined,
-  deps: MakeSanitizedBlobDeps
-): string | TrustedScriptURL => {
-  const { globalObject, hardeningCode } = deps
+}): string | TrustedScriptURL => {
   const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
   const BlobSafe = globalObject.Blob
   const URLSafe = globalObject.URL
