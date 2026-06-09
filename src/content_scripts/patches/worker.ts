@@ -2,7 +2,7 @@ import type { ContentSettingId } from '@src/common/setting-ids'
 import { makeBundleForInjection, getDisabledSettings } from '@src/content_scripts/helpers/helpers'
 import { prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { GlobalScope } from '../helpers/globalObject'
-import { makeSanitizedBlob } from './patch_helpers/worker-helper'
+import { makeSanitizedBlobForWorker } from './patch_helpers/worker-helper'
 
 /** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
 export type WorkerPatchDeps = {
@@ -25,7 +25,7 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           // Don't harden chrome:// or chrome-extension:// URLs.
           return new Target(url.toString(), options)
         }
-        const sanitizedBlobUrl = makeSanitizedBlob(url, options, {
+        const sanitizedBlobUrl = makeSanitizedBlobForWorker(url, options, {
           globalObject,
           hardeningCode,
         })

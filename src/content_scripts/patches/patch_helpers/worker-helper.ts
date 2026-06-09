@@ -30,16 +30,11 @@ export type MakeSanitizedBlobDeps = {
   hardeningCode: string
 }
 
-export type SanitizedBlobResult = {
-  sanitizedBlobUrl: string | TrustedScriptURL
-  options: WorkerOptions | undefined
-}
-
-export const makeSanitizedBlob = (
+export const makeSanitizedBlobForWorker = (
   url: string | URL | TrustedScriptURL,
   options: WorkerOptions | undefined,
   deps: MakeSanitizedBlobDeps
-): SanitizedBlobResult => {
+): string | TrustedScriptURL => {
   const { globalObject, hardeningCode } = deps
   const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
   const BlobSafe = globalObject.Blob
