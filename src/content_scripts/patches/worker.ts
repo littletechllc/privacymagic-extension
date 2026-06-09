@@ -13,13 +13,15 @@ export type WorkerPatchDeps = {
 }
 
 const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
+  if (globalObject.Worker === undefined) {
+    return
+  }
   const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
   const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
   const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode: string): void => {
-    if (globalObject.Worker == null) return
     globalObject.Worker = new Proxy(globalObject.Worker, {
       construct (Target: WorkerConstructor, [url, options]: [WorkerScriptURL, WorkerOptions | string | undefined]) {
         if (url.toString().startsWith('chrome:') || url.toString().startsWith('chrome-extension:')) {

@@ -56,8 +56,8 @@ describe('worker patch', () => {
     worker(fakeGlobal, workerDeps)
 
     expect(fakeGlobal.Worker).toBeUndefined()
-    expect(makeBundleForInjectionMock).toHaveBeenCalled()
-    expect(prepareInjectionForTrustedTypesMock.mock.calls[0]).toEqual([fakeGlobal, '/* hardening */'])
+    expect(makeBundleForInjectionMock).not.toHaveBeenCalled()
+    expect(prepareInjectionForTrustedTypesMock).not.toHaveBeenCalled()
   })
 
   it('should replace Worker with a Proxy when Worker is defined', () => {
@@ -111,7 +111,12 @@ describe('worker patch', () => {
 
   it('should call makeBundleForInjection with getDisabledSettings result', () => {
     getDisabledSettingsMock.mockImplementation((): ContentSettingId[] => ['math', 'gpc'])
-    const fakeGlobal = makeFakeGlobalScope()
+    function OriginalWorker (this: unknown, ..._args: unknown[]) {
+      return {}
+    }
+    const fakeGlobal = makeFakeGlobalScope({
+      Worker: jest.fn().mockImplementation(OriginalWorker) as GlobalScope['Worker']
+    })
 
     worker(fakeGlobal, workerDeps)
 
