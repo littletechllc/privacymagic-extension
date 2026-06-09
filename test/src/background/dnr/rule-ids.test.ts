@@ -42,7 +42,7 @@ describe('CONTENT_RULE_IDS', () => {
       expect(CONTENT_RULE_SLOTS).toHaveProperty(id)
     }
     const sorted = [...Object.values(CONTENT_RULE_SLOTS)].sort((a, b) => a - b)
-    expect(sorted).toEqual(Array.from({ length: 25 }, (_, i) => i + 1))
+    expect(sorted).toEqual(Array.from({ length: 26 }, (_, i) => i + 1))
   })
 })
 
