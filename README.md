@@ -32,6 +32,7 @@
 * Blocks window.name tracking
 * Sanitizes IFrames
 * Sanitizes Web Workers
+* Sanitizes SharedWorkers
 * Disables SharedStorage
 * Disables ServiceWorkers
 * Enables Global Privacy Control
@@ -42,7 +43,6 @@
 * Disables remote Spell Check Service
 
 ## Additional planned fingerprinting protections:
-  * SharedWorker
   * OffscreenCanvas
   * WebGL2
   * Non macOS vendor spoofing
