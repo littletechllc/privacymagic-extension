@@ -45,7 +45,6 @@
 ## Additional planned fingerprinting protections:
   * OffscreenCanvas
   * WebGL2
-  * Non macOS vendor spoofing
   * AudioWorklet
   * iframe hardening for contentDocument.defaultView, window.frames[]
 
