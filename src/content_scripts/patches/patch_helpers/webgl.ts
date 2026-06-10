@@ -30,23 +30,21 @@ export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
   if (globalObject.navigator.userAgentData != null) {
     const userAgentData: NavigatorUAData = globalObject.navigator.userAgentData
     const platform = userAgentData.platform
-    if (platform === 'MacIntel' || platform === 'macOS') {
-      redefineMethods(globalObject.WebGLRenderingContext.prototype, {
-        getParameter: function (this: WebGLRenderingContext, constant: number) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const originalValue = originalGetParameterSafe(this, constant)
-          switch (constant) {
-            case 37445: // UNMASKED_VENDOR_WEBGL
-              return webglVendorAndRenderer[platform]?.vendor ?? 'Unknown'
-            case 37446: // UNMASKED_RENDERER_WEBGL
-              return webglVendorAndRenderer[platform]?.renderer ?? 'Unknown'
-            default:
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-              return originalValue
-          }
+    redefineMethods(globalObject.WebGLRenderingContext.prototype, {
+      getParameter: function (this: WebGLRenderingContext, constant: number) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const originalValue = originalGetParameterSafe(this, constant)
+        switch (constant) {
+          case 37445: // UNMASKED_VENDOR_WEBGL
+            return webglVendorAndRenderer[platform]?.vendor ?? 'Unknown'
+          case 37446: // UNMASKED_RENDERER_WEBGL
+            return webglVendorAndRenderer[platform]?.renderer ?? 'Unknown'
+          default:
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+            return originalValue
         }
-      })
-    }
+      }
+    })
   }
 }
 
