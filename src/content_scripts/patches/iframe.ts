@@ -1,4 +1,4 @@
-import { createSafeGetter } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeGetter, redefinePrototypeFields } from '@src/content_scripts/helpers/monkey-patch'
 import { weakSetHasSafe, weakSetAddSafe } from '@src/content_scripts/helpers/safe'
 import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 import { applyPatchesToGlobalObject } from '../helpers/patch'
@@ -10,7 +10,8 @@ const iframe = (globalObject: GlobalScope): undefined => {
 
   // ## iframe hardening ##
   //
-  // In a couple of cases, the iframe's contentWindow property is accessed
+  // In a couple of cases, the iframe's window global object
+  // is accessed, via iframe.contentWindow or iframe.contentDocument.defaultView,
   // before the iframe has been hardened. We need to harden it first.
   //
   // Case #1: https://browserleaks.com/javascript has an
@@ -36,23 +37,27 @@ const iframe = (globalObject: GlobalScope): undefined => {
   const contentWinSet = new WeakSet<Window>()
 
   const getContentWindowSafe = createSafeGetter(globalObject.HTMLIFrameElement, 'contentWindow')
+  const getContentDocumentSafe = createSafeGetter(globalObject.HTMLIFrameElement, 'contentDocument')
+  const getDefaultViewSafe = createSafeGetter(globalObject.Document, 'defaultView')
 
-  // Sometimes the iframe has not yet been hardened, so if the page is trying
-  // to access the contentWindow, we need to harden it first.
-  const getContentWindowAfterHardening = (iframe: HTMLIFrameElement): Window | null => {
-    const contentWin = getContentWindowSafe(iframe)
+  const ensuredContentWindowIsHardened = (contentWin: Window | undefined | null): void => {
     if (contentWin == null || weakSetHasSafe(contentWinSet, contentWin)) {
-      // Nothing to harden or already hardened.
-      return contentWin
+      return
     }
     applyPatchesToGlobalObject(contentWin as GlobalScope)
     weakSetAddSafe(contentWinSet, contentWin)
-    return contentWin
   }
 
-  Object.defineProperty(globalObject.HTMLIFrameElement.prototype, 'contentWindow', {
-    get(this: HTMLIFrameElement) {
-      return getContentWindowAfterHardening(this)
+  redefinePrototypeFields(globalObject.HTMLIFrameElement, {
+    contentWindow(this: HTMLIFrameElement) {
+      const contentWin = getContentWindowSafe(this)
+      ensuredContentWindowIsHardened(contentWin)
+      return contentWin
+    },
+    contentDocument(this: HTMLIFrameElement) {
+      const contentDoc = getContentDocumentSafe(this)
+      ensuredContentWindowIsHardened(contentDoc == null ? undefined : getDefaultViewSafe(contentDoc))
+      return contentDoc
     }
   })
 }
