@@ -28,8 +28,6 @@
     "declarativeNetRequest",
     "declarativeNetRequestFeedback",
     "favicon",
-    "identity",
-    "identity.email",
     "privacy",
     "scripting",
     "sidePanel",
