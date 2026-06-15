@@ -45,7 +45,7 @@
 ## Additional planned fingerprinting protections:
   * OffscreenCanvas
   * AudioWorklet
-  * iframe hardening for contentDocument.defaultView, window.frames[]
+  * iframe hardening window.frames[]
 
 ## Third-party libraries
 
