@@ -43,7 +43,6 @@
 * Disables remote Spell Check Service
 
 ## Additional planned fingerprinting protections:
-  * OffscreenCanvas
   * AudioWorklet
 
 ## Third-party libraries
