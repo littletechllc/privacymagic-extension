@@ -77,6 +77,10 @@
     "message": "Blocca contenuti di tracciamento",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Perdite dalla cache",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Rimuovi tracce di navigazione",
     "description": "Category for navigation protection settings"

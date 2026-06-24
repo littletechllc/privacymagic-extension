@@ -77,6 +77,10 @@
     "message": "トラッキングコンテンツをブロック",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "キャッシュの漏洩",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "トラッキングの痕跡を削除",
     "description": "Category for navigation protection settings"

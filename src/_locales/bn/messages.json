@@ -77,6 +77,10 @@
     "message": "ট্র্যাকিং কন্টেন্ট ব্লক করুন",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "ক্যাশ লিক",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ট্র্যাকিং ব্রেডক্রাম্ব সরান",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "Blokiraj vsebino sledenja",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Curejanje predpomnilnika",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Odstrani sledi sledenja",
     "description": "Category for navigation protection settings"

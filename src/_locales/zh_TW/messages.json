@@ -77,6 +77,10 @@
     "message": "封鎖追蹤內容",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "快取洩漏",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "移除追蹤痕跡",
     "description": "Category for navigation protection settings"

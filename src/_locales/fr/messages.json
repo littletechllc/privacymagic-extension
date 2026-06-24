@@ -77,6 +77,10 @@
     "message": "Bloquer le contenu de suivi",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Fuites de cache",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Supprimer les traces de navigation",
     "description": "Category for navigation protection settings"

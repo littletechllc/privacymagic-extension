@@ -77,6 +77,10 @@
     "message": "Blokuoti sekimo turinį",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Podėlio nutekėjimai",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Pašalinti sekimo pėdsakus",
     "description": "Category for navigation protection settings"

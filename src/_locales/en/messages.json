@@ -77,6 +77,10 @@
     "message": "Block tracking content",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Cache leaks",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Remove Tracking Breadcrumbs",
     "description": "Category for navigation protection settings"

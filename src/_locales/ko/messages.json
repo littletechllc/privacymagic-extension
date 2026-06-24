@@ -77,6 +77,10 @@
     "message": "추적 콘텐츠 차단",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "캐시 유출",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "추적 흔적 제거",
     "description": "Category for navigation protection settings"

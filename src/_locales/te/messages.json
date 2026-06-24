@@ -77,6 +77,10 @@
     "message": "ట్రాకింగ్ కంటెంట్‌ను బ్లాక్ చేయి",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "క్యాష్ లీక్‌లు",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ట్రాకింగ్ బ్రెడ్‌క్రంబ్‌లను తొలగించు",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "கண்காணிப்பு உள்ளடக்கத்தைத் தடு",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "கேஷ் கசிவுகள்",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "கண்காணிப்பு சுவடுகளை அகற்று",
     "description": "Category for navigation protection settings"

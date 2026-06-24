@@ -77,6 +77,10 @@
     "message": "ട്രാക്കിംഗ് ഉള്ളടക്കം തടയുക",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "കാഷ് ലീക്കുകൾ",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ട്രാക്കിംഗ് ബ്രെഡ്ക്രംബുകൾ നീക്കം ചെയ്യുക",
     "description": "Category for navigation protection settings"

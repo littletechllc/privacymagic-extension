@@ -77,6 +77,10 @@
     "message": "Αποκλεισμός περιεχομένου παρακολούθησης",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Διαρροές cache",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Αφαίρεση ίχνους παρακολούθησης",
     "description": "Category for navigation protection settings"

@@ -213,5 +213,19 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
         'Sec-CH-UA-WoW64'
       ])
     },
+  }],
+  cache: [{
+    id: networkRuleId('cache'),
+    action: {
+      type: 'modifyHeaders',
+      responseHeaders: [{
+        operation: 'set',
+        header: 'Cache-Control',
+        value: 'no-store'
+      }]
+    },
+    condition: {
+      resourceTypes: ['stylesheet', 'script', 'image', 'font', 'media']
+    }
   }]
 }

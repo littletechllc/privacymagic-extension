@@ -77,6 +77,10 @@
     "message": "Блокирај садржај праћења",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Цурења кеша",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Уклони трагове праћења",
     "description": "Category for navigation protection settings"

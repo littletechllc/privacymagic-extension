@@ -77,6 +77,10 @@
     "message": "Blockera spårningsinnehåll",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Cache-läckor",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Ta bort spårningsspår",
     "description": "Category for navigation protection settings"

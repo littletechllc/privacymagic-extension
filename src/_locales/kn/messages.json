@@ -77,6 +77,10 @@
     "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ವಿಷಯವನ್ನು ನಿರ್ಬಂಧಿಸಿ",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "ಕ್ಯಾಶ್ ಸೋರಿಕೆಗಳು",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ಟ್ರ್ಯಾಕಿಂಗ್ ಬ್ರೆಡ್‌ಕ್ರಂಬ್‌ಗಳನ್ನು ತೆಗೆದುಹಾಕಿ",
     "description": "Category for navigation protection settings"

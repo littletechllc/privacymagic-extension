@@ -77,6 +77,10 @@
     "message": "Blochează conținutul de urmărire",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Scurgeri din cache",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Elimină urmele de urmărire",
     "description": "Category for navigation protection settings"

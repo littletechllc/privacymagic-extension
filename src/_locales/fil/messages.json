@@ -77,6 +77,10 @@
     "message": "I-block ang tracking content",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Mga cache leak",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Alisin ang tracking breadcrumbs",
     "description": "Category for navigation protection settings"

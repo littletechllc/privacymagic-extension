@@ -77,6 +77,10 @@
     "message": "İzleme içeriğini engelle",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Önbellek sızıntıları",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "İzleme İzlerini Kaldır",
     "description": "Category for navigation protection settings"

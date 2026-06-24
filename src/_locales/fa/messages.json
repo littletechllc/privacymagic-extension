@@ -77,6 +77,10 @@
     "message": "مسدود کردن محتوای ردیابی",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "نشت‌های حافظهٔ نهان",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "حذف ردپای ردیابی",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "Blokiraj sadržaj praćenja",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Curenja predmemorije",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Ukloni tragove praćenja",
     "description": "Category for navigation protection settings"

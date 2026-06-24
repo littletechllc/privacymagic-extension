@@ -77,6 +77,10 @@
     "message": "บล็อกเนื้อหาการติดตาม",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "การรั่วไหลของแคช",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ลบร่องรอยการติดตาม",
     "description": "Category for navigation protection settings"

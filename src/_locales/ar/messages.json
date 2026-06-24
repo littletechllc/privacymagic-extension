@@ -77,6 +77,10 @@
     "message": "حظر محتوى التتبع",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "تسريبات الذاكرة المؤقتة",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "إزالة آثار التتبع",
     "description": "Category for navigation protection settings"

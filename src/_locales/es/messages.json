@@ -77,6 +77,10 @@
     "message": "Bloqueo de Contenido",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Fugas de caché",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Protección de Navegación",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "Követési tartalom blokkolása",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Gyorsítótár-szivárgások",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Követési nyomok eltávolítása",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "Blokir konten pelacakan",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Kebocoran cache",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Hapus jejak pelacakan",
     "description": "Category for navigation protection settings"

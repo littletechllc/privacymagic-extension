@@ -77,6 +77,10 @@
     "message": "Trackinginhoud blokkeren",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Cache-lekken",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Trackingsporen verwijderen",
     "description": "Category for navigation protection settings"

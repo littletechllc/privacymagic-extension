@@ -51,7 +51,8 @@ export const NETWORK_RULE_SLOTS: Record<NetworkRuleId, number> = {
   cpu: 8,
   device: 9,
   referrerPolicyStrictOriginWhenCrossOrigin: 10,
-  referrerPolicyStrictOrigin: 11
+  referrerPolicyStrictOrigin: 11,
+  cache: 12,
 }
 
 export const ALLOW_RULE_SLOTS: Record<BlockerSettingId, number> = {

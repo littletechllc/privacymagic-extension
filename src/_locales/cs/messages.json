@@ -77,6 +77,10 @@
     "message": "Blokovat sledovací obsah",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Úniky mezipaměti",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Odstranit stopy sledování",
     "description": "Category for navigation protection settings"

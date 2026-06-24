@@ -77,6 +77,10 @@
     "message": "Bloqueja el contingut de seguiment",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Fuites de memòria cau",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Elimina les restes de seguiment",
     "description": "Category for navigation protection settings"

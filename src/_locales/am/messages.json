@@ -77,6 +77,10 @@
     "message": "የክትትል ይዘትን እገዳ",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "የመሸጎጫ ማጠራቀሚያ",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "የክትትል እርምጃዎችን አስወግድ",
     "description": "Category for navigation protection settings"

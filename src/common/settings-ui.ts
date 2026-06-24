@@ -39,6 +39,7 @@ const PRIVACY_SETTINGS_CONFIG: Record<Exclude<SettingsCategory, 'masterSwitch'>,
     'useragent'
   ],
   navigation: [
+    'cache',
     'queryParameters',
     'referrerPolicy',
     'windowName'

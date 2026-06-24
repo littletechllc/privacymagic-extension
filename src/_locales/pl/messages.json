@@ -77,6 +77,10 @@
     "message": "Blokuj treści śledzące",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Wycieki pamięci podręcznej",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Usuń ślady śledzenia",
     "description": "Category for navigation protection settings"

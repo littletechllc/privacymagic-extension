@@ -77,6 +77,10 @@
     "message": "Blokeeri jälgimise sisu",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Vahemälu lekked",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Eemalda jälgimise jäljed",
     "description": "Category for navigation protection settings"

@@ -77,6 +77,10 @@
     "message": "Bloker sporingsindhold",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Cache-lækager",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Fjern sporingsspor",
     "description": "Category for navigation protection settings"

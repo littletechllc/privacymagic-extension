@@ -77,6 +77,10 @@
     "message": "Bloķēt izsekošanas saturu",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Kešatmiņas noplūdes",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Noņemt izsekošanas pēdas",
     "description": "Category for navigation protection settings"

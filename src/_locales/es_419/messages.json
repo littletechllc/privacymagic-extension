@@ -77,6 +77,10 @@
     "message": "Bloquear contenido de rastreo",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Fugas de caché",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Quitar rastros de navegación",
     "description": "Category for navigation protection settings"

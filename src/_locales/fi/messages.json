@@ -77,6 +77,10 @@
     "message": "Estä seurantasisältö",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Välimuistivuodot",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Poista seurannan jäljet",
     "description": "Category for navigation protection settings"

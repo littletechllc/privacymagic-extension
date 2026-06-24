@@ -77,6 +77,10 @@
     "message": "Blokovať sledovací obsah",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Úniky vyrovnávacej pamäte",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Odstrániť sledovacie stopy",
     "description": "Category for navigation protection settings"

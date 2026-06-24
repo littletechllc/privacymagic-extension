@@ -77,6 +77,10 @@
     "message": "Zuia maudhui ya ufuatiliaji",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Uvujaji wa akiba",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Ondoa Alama za Ufuatiliaji",
     "description": "Category for navigation protection settings"

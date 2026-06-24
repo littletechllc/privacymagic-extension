@@ -77,6 +77,10 @@
     "message": "Chặn nội dung theo dõi",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Rò rỉ bộ nhớ đệm",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Xóa dấu vết theo dõi",
     "description": "Category for navigation protection settings"

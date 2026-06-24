@@ -77,6 +77,10 @@
     "message": "ट्रैकिंग कंटेंट ब्लॉक करें",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "कैश लीक",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "ट्रैकिंग ब्रेडक्रंब हटाएं",
     "description": "Category for navigation protection settings"

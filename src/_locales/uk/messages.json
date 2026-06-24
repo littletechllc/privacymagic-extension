@@ -77,6 +77,10 @@
     "message": "Блокувати контент відстеження",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "Витоки кешу",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "Видаляти сліди відстеження",
     "description": "Category for navigation protection settings"

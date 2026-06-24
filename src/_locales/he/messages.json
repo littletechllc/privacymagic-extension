@@ -77,6 +77,10 @@
     "message": "חסום תוכן מעקב",
     "description": "Category for content blocking settings"
   },
+  "cache": {
+    "message": "דליפות מטמון",
+    "description": "Setting to prevent cache-based tracking"
+  },
   "navigation": {
     "message": "הסר עקבות ניווט",
     "description": "Category for navigation protection settings"
