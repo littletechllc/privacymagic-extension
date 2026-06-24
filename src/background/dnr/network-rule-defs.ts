@@ -214,6 +214,8 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       ])
     },
   }],
+  // Prevent cache leaks from stylesheets, scripts, images, fonts, and media
+  // observed in Chromium-based browsers.
   cache: [{
     id: networkRuleId('cache'),
     action: {
