@@ -27,6 +27,7 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
   · Weergave
   · Wiskunde
 - Verwijdert trackingsporen
+  · Cache-lekken
   · Trackingparameters
   · Vensternaam
   · Verwijzer
@@ -34,6 +35,7 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Stuurt Global Privacy Control-signaal
 - Schakelt lekkende browserfuncties uit

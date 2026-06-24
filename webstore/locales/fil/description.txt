@@ -27,6 +27,7 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
   · Timing
   · Touch
 - Inaalis ang tracking breadcrumbs
+  · Mga cache leak
   · Referrer
   · Tracking Parameters
   · Window Name
@@ -34,6 +35,7 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Nagpapadala ng Global Privacy Control signal
 - Pinapatay ang mga browser feature na tumatagas

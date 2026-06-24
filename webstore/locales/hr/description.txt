@@ -27,6 +27,7 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Zaslon
   · Zvuk
 - Uklanja tragove praćenja
+  · Curenja predmemorije
   · Naziv prozora
   · Parametri praćenja
   · Referer
@@ -34,6 +35,7 @@ Kako bi obranio vašu privatnost, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Šalje Global Privacy Control signal
 - Onemogućuje funkcije preglednika koje cure

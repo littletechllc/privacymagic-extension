@@ -27,6 +27,7 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Tīkls
   · Valoda
 - Noņem izsekošanas pēdas
+  · Kešatmiņas noplūdes
   · Atsauce
   · Izsekošanas parametri
   · Loga nosaukums
@@ -34,6 +35,7 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Nosūta Global Privacy Control (GPC) signālu
 - Atspējo noplūstošās pārlūka funkcijas

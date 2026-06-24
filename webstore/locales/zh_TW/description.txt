@@ -27,6 +27,7 @@ Privacy Magic 提供全面、多層次的保護，助您抵禦監控。
   · 觸控
   · 顯示
 - 移除追蹤痕跡
+  · 快取洩漏
   · 追蹤參數
   · 參照來源
   · 視窗名稱
@@ -34,6 +35,7 @@ Privacy Magic 提供全面、多層次的保護，助您抵禦監控。
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - 發送 Global Privacy Control 訊號
 - 關閉易洩漏資料的瀏覽器功能

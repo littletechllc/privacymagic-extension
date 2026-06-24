@@ -27,6 +27,7 @@ Jūsų privatumui ginti Privacy Magic:
   · Šriftai
   · Tinklas
 - Pašalina sekimo pėdsakus
+  · Podėlio nutekėjimai
   · Lango pavadinimas
   · Nurodytojas
   · Sekimo parametrai
@@ -34,6 +35,7 @@ Jūsų privatumui ginti Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Siunčia Global Privacy Control (GPC) signalą
 - Išjungia nesandarius naršyklės funkcijas

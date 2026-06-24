@@ -27,6 +27,7 @@ Per difendere la tua privacy, Privacy Magic:
   · Tempi
   · Touch
 - Rimuove le tracce di navigazione
+  · Perdite dalla cache
   · Nome finestra
   · Parametri tracciamento
   · Referrer
@@ -34,6 +35,7 @@ Per difendere la tua privacy, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Invia il segnale Global Privacy Control
 - Disattiva le funzioni del browser che perdono dati

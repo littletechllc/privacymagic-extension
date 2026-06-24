@@ -27,6 +27,7 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Seade
   · Võrk
 - Eemaldab jälgimise jäljed
+  · Vahemälu lekked
   · Akna nimi
   · Jälgimise parameetrid
   · Viitaja
@@ -34,6 +35,7 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Saadab Global Privacy Control (GPC) signaali
 - Keelab lekkivad brauseri funktsioonid

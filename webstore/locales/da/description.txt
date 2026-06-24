@@ -27,6 +27,7 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Timing
   · Visning
 - Fjerner sporingsspor
+  · Cache-lækager
   · Referrer
   · Sporingsparametre
   · Vinduesnavn
@@ -34,6 +35,7 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Sender Global Privacy Control-signal
 - Deaktiverer lækkende browserfunktioner

@@ -27,6 +27,7 @@ Untuk mempertahankan privasi anda, Privacy Magic:
   · Timing
   · Zon masa
 - Membuang jejak penjejakan
+  · Kebocoran cache
   · Nama tetingkap
   · Parameter penjejakan
   · Perujuk
@@ -34,6 +35,7 @@ Untuk mempertahankan privasi anda, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Menghantar isyarat Global Privacy Control
 - Melumpuhkan ciri pelayar yang bocor

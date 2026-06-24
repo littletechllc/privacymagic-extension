@@ -27,6 +27,7 @@ Az adatvédelem érdekében a Privacy Magic:
   · Nyelv
   · Processzor
 - Eltávolítja a követési nyomokat
+  · Gyorsítótár-szivárgások
   · Ablak neve
   · Követési paraméterek
   · Referrer
@@ -34,6 +35,7 @@ Az adatvédelem érdekében a Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Global Privacy Control jelzés küldése
 - Kikapcsolja a szivárgó böngészőfunkciókat

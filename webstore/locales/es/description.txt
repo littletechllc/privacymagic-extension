@@ -27,6 +27,7 @@ Para defender su privacidad, Privacy Magic:
   · Visualización
   · Zona horaria
 - Elimina las huellas de rastreo
+  · Fugas de caché
   · Nombre de ventana
   · Parámetros de rastreo
   · Referrer
@@ -34,6 +35,7 @@ Para defender su privacidad, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Envía la señal Global Privacy Control
 - Desactiva funciones del navegador con fugas

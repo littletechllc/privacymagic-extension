@@ -27,6 +27,7 @@ Per defensar la vostra privacitat, Privacy Magic:
   · Xarxa
   · Zona horària
 - Elimina les restes de seguiment
+  · Fuites de memòria cau
   · Nom de la finestra
   · Paràmetres de seguiment
   · Referent
@@ -34,6 +35,7 @@ Per defensar la vostra privacitat, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Envia el senyal Global Privacy Control
 - Desactiva les funcions del navegador que perden dades

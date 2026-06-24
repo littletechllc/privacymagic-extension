@@ -27,6 +27,7 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Zaslon
   · Zvok
 - Odstrani sledi sledenja
+  · Curejanje predpomnilnika
   · Ime okna
   · Napotitelj
   · Parametri sledenja
@@ -34,6 +35,7 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Pošlje signal Global Privacy Control
 - Onemogoči funkcije brskalnika, ki puščajo

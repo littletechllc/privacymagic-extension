@@ -27,6 +27,7 @@ To defend your privacy, Privacy Magic:
   · Timing
   · Touch
 - Removes tracking breadcrumbs
+  · Cache Leaks
   · Referrer Policy
   · Tracking Parameters
   · Window Name
@@ -34,6 +35,7 @@ To defend your privacy, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Sends Global Privacy Control signal
 - Disables leaky browser features

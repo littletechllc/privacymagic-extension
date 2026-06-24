@@ -27,6 +27,7 @@ Untuk membela privasi Anda, Privacy Magic:
   · Timing
   · Zona waktu
 - Menghapus jejak pelacakan
+  · Kebocoran cache
   · Nama jendela
   · Parameter pelacakan
   · Perujuk
@@ -34,6 +35,7 @@ Untuk membela privasi Anda, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Mengirim sinyal Global Privacy Control (GPC)
 - Menonaktifkan fitur browser yang bocor

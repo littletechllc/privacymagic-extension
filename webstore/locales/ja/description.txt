@@ -27,6 +27,7 @@ Privacy Magic は、監視からあなたを守るための包括的な多層保
   · 数学
   · 表示
 - トラッキングの痕跡を削除
+  · キャッシュの漏洩
   · ウィンドウ名
   · トラッキングパラメータ
   · リファラー
@@ -34,6 +35,7 @@ Privacy Magic は、監視からあなたを守るための包括的な多層保
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Global Privacy Control シグナルを送信
 - データが漏れるブラウザ機能を無効化

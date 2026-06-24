@@ -27,6 +27,7 @@ Para defender a sua privacidade, o Privacy Magic:
   · Teclado
   · Toque
 - Remove rastos de rastreamento
+  · Fugas de cache
   · Nome da janela
   · Parâmetros de rastreamento
   · Política de referência
@@ -34,6 +35,7 @@ Para defender a sua privacidade, o Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Envia o sinal Global Privacy Control
 - Desativa funcionalidades do navegador que revelam dados

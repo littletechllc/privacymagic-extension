@@ -27,6 +27,7 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Verkko
   · Ääni
 - Poistaa seurannan jäljet
+  · Välimuistivuodot
   · Ikkunan nimi
   · Seurantaparametrit
   · Viittaaja
@@ -34,6 +35,7 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Lähettää Global Privacy Control -signaalin
 - Poistaa vuotavat selaintoiminnot käytöstä

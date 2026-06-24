@@ -27,6 +27,7 @@ Ili kulinda faragha yako, Privacy Magic:
   · Skrini
   · Ukanda wa Saa
 - Inaondoa alama za ufuatiliaji
+  · Uvujaji wa akiba
   · Jina la Dirisha
   · Mrejeshi
   · Vigezo vya Ufuatiliaji
@@ -34,6 +35,7 @@ Ili kulinda faragha yako, Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Inatuma ishara ya Global Privacy Control
 - Inazima vipengele vya kivinjari vinavyovuja

@@ -27,6 +27,7 @@ Pour défendre votre vie privée, Privacy Magic :
   · Réseau
   · Tactile
 - Supprime les traces de suivi
+  · Fuites de cache
   · Nom de fenêtre
   · Paramètres de suivi
   · Référent
@@ -34,6 +35,7 @@ Pour défendre votre vie privée, Privacy Magic :
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Envoie le signal Global Privacy Control
 - Désactive les fonctionnalités du navigateur qui fuient

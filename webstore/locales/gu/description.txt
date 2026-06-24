@@ -27,6 +27,7 @@ Privacy Magic દેખરેખથી તમારું રક્ષણ કર
   · સમય ઝોન
   · સ્ક્રીન
 - ટ્રેકિંગ બ્રેડક્રમ્બ્સ દૂર કરે છે
+  · કેશ લીક
   · ટ્રેકિંગ પેરામીટર્સ
   · રેફરર
   · વિંડો નામ
@@ -34,6 +35,7 @@ Privacy Magic દેખરેખથી તમારું રક્ષણ કર
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Global Privacy Control સિગ્નલ મોકલે છે
 - લીક થતી બ્રાઉઝર ફીચર્સ અક્ષમ કરે છે

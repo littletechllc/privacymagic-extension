@@ -27,6 +27,7 @@ Pro obranu vašeho soukromí Privacy Magic:
   · Zobrazení
   · Zvuk
 - Odstraňuje stopy sledování
+  · Úniky mezipaměti
   · Název okna
   · Parametry sledování
   · Referrer
@@ -34,6 +35,7 @@ Pro obranu vašeho soukromí Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Odesílá signál Global Privacy Control
 - Vypíná funkce prohlížeče způsobující úniky

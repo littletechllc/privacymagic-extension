@@ -27,6 +27,7 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Visning
   · Webbläsare
 - Tar bort spårningsspår
+  · Cache-läckor
   · Fönsternamn
   · Referrer
   · Spårningsparametrar
@@ -34,6 +35,7 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Skickar Global Privacy Control-signal
 - Inaktiverar läckande webbläsarfunktioner

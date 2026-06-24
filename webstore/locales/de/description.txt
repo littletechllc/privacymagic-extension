@@ -27,6 +27,7 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
   · Touch
   · Zeitzone
 - Entfernt Tracking-Spuren
+  · Cache-Lecks
   · Fenster-Name
   · Referrer-Richtlinie
   · Tracking-Parameter
@@ -34,6 +35,7 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Sendet Global Privacy Control Signal
 - Deaktiviert undichte Browser-Funktionen

@@ -27,6 +27,7 @@ Gizliliğinizi korumak için Privacy Magic:
   · Yazı tipleri
   · Zamanlama
 - İzleme izlerini kaldırır
+  · Önbellek sızıntıları
   · İzleme parametreleri
   · Pencere adı
   · Yönlendiren
@@ -34,6 +35,7 @@ Gizliliğinizi korumak için Privacy Magic:
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - Global Privacy Control sinyali gönderir
 - Sızdıran tarayıcı özelliklerini devre dışı bırakır

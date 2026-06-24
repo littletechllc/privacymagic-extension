@@ -27,6 +27,7 @@ Privacy Magic ให้การป้องกันที่ครอบคล
   · หน้าจอ
   · อุปกรณ์
 - ลบร่องรอยการติดตาม
+  · การรั่วไหลของแคช
   · ชื่อหน้าต่าง
   · ผู้ส่งต่อ
   · พารามิเตอร์ติดตาม
@@ -34,6 +35,7 @@ Privacy Magic ให้การป้องกันที่ครอบคล
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - ส่งสัญญาณ Global Privacy Control
 - ปิดฟีเจอร์เบราว์เซอร์ที่รั่ว

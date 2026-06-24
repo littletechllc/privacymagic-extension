@@ -27,6 +27,7 @@ Privacy Magic 提供全面、多层次的保护，助您抵御监控。
   · 语言
   · 字体
 - 移除跟踪痕迹
+  · 缓存泄露
   · 窗口名称
   · 跟踪参数
   · 引用来源
@@ -34,6 +35,7 @@ Privacy Magic 提供全面、多层次的保护，助您抵御监控。
   · Iframes
   · Service Workers
   · Shared Storage
+  · Shared Workers
   · Web Workers
 - 发送 Global Privacy Control 信号
 - 关闭易泄露数据的浏览器功能
