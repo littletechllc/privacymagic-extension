@@ -82,3 +82,9 @@ Filter subscriptions downloaded at build time (`tools/filter-list-processor.ts`)
 * License: Creative Commons Attribution 3.0 Unported (<http://creativecommons.org/licenses/by/3.0/>)
 * Source: <https://secure.fanboy.co.nz/fanboy-annoyance.txt>
 * “Annoyance” UI and behavior rules (newsletter overlays, social widgets, cookie-style prompts, and similar page clutter).
+
+### oisd small
+* Copyright: Stephan van Ruth (<https://oisd.nl/>)
+* License: GNU General Public License v3.0 or later (<https://github.com/sjhgvr/oisd/blob/main/LICENSE>)
+* Source: <https://small.oisd.nl/>
+* Domain blocklist for ads, trackers, malware, and telemetry; the small variant is a compact subset that prioritizes functionality over blocking to reduce false positives.

@@ -9,7 +9,8 @@ import path from 'node:path'
 const BLOCKLISTS: string[] = [
   'easylist.txt',
   'easyprivacy.txt',
-  'fanboy-annoyance.txt'
+  'fanboy-annoyance.txt',
+  'small-oisd.txt'
 ]
 
 // Fetch the lines from the given file
