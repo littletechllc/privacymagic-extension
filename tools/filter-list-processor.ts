@@ -1,17 +1,11 @@
 import { filterListDir, isMain } from './util'
+import { FILTER_LIST_URL_MAPPING } from './filter-list-urls'
 import { parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
 import { parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
 import { parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
 import { isCosmeticFilterLine, isNetworkFilterLine, isScriptletLine } from './filter-list-helpers/util'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-
-const BLOCKLISTS: string[] = [
-  'easylist.txt',
-  'easyprivacy.txt',
-  'fanboy-annoyance.txt',
-  'small-oisd.txt'
-]
 
 // Fetch the lines from the given file
 const getLines = async (file: string): Promise<string[]> => {
@@ -69,7 +63,7 @@ const isGoodLine = (x: string): boolean => {
 }
 
 export const processAndWrite = async (): Promise<void> => {
-  const lines = await getAllLines(BLOCKLISTS)
+  const lines = await getAllLines(Object.keys(FILTER_LIST_URL_MAPPING))
   const linesFiltered = lines.filter(isGoodLine).filter(isCodingLine)
   const { scriptletsLines, cosmeticFiltersLines, networkFiltersLines } = separateLines(linesFiltered)
   await parseAndGenerateNetworkFilters(networkFiltersLines)
