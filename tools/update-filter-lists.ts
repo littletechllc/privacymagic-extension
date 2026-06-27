@@ -1,6 +1,6 @@
 import path from "node:path"
 import { filterListDir, isMain } from "./util"
-import { FILTER_LIST_URL_MAPPING } from "./filter-list-urls"
+import { FILTER_LIST_URL_MAPPING } from "./filter-list-url-mapping"
 import { writeFile } from "node:fs/promises"
 
 const fetchFilterLists = async (): Promise<void> => {

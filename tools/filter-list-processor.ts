@@ -1,5 +1,5 @@
 import { filterListDir, isMain } from './util'
-import { FILTER_LIST_URL_MAPPING } from './filter-list-urls'
+import { FILTER_LIST_URL_MAPPING } from './filter-list-url-mapping'
 import { parseAndGenerateNetworkFilters } from './filter-list-helpers/network-rules'
 import { parseAndGenerateCosmeticFilters } from './filter-list-helpers/cosmetic-rules'
 import { parseAndGenerateScriptlets } from './filter-list-helpers/scriptlets'
