@@ -29,10 +29,11 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
   const isBlobUrlAlive = (url: string): boolean => {
     try {
       const xhr = new SafeXMLHttpRequest()
-      safeXhrOpen(xhr, 'HEAD', url, false)
+      safeXhrOpen(xhr, 'GET', url, false)
       safeXhrSend(xhr)
       return safeXhrStatus(xhr) === 200
-    } catch {
+    } catch (error) {
+      globalObject.console.log("blob url error:", error, url)
       return false
     }
   }
@@ -48,6 +49,7 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
     let stored: string | null = null
     try {
       stored = globalObject.localStorage.getItem(KEY)
+      globalObject.console.log('found cached url:', stored)
     } catch {
       // localStorage may be unavailable (SecurityError, disabled storage, etc.)
     }
