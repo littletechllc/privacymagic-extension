@@ -227,7 +227,7 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       }]
     },
     condition: {
-      resourceTypes: ['stylesheet', 'script', 'image', 'font', 'media']
+      resourceTypes: ['stylesheet', 'script', 'image', 'font', 'media', 'other']
     }
   }]
 }
