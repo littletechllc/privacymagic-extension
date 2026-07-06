@@ -61,22 +61,31 @@ function installMockWebGL (selfWith: SelfWithWebGL): typeof WebGLRenderingContex
 function installMockWebGL2 (selfWith: SelfWithWebGLContexts): typeof WebGL2RenderingContext {
   const MockWebGL2 = function (this: WebGL2RenderingContext) {} as unknown as typeof WebGL2RenderingContext
   Object.assign(MockWebGL2, WEBGL2_ENUMS)
+  MockWebGL2.prototype.getParameter = function (constant: number): unknown {
+    if (constant === UNMASKED_VENDOR_WEBGL) return 'LeakyVendor'
+    if (constant === UNMASKED_RENDERER_WEBGL) return 'LeakyRenderer'
+    return null
+  }
   MockWebGL2.prototype.readPixels = function () { /* original */ }
   selfWith.WebGL2RenderingContext = MockWebGL2
   return MockWebGL2
 }
 
-function getPatchedGetParameter (selfWith: SelfWithWebGL): (constant: number) => unknown {
-  const proto = selfWith.WebGLRenderingContext!.prototype
+function getPatchedGetParameter (
+  selfWith: SelfWithWebGL,
+  context: 'WebGLRenderingContext' | 'WebGL2RenderingContext' = 'WebGLRenderingContext'
+): (constant: number) => unknown {
+  const ctor = context === 'WebGL2RenderingContext'
+    ? (selfWith as SelfWithWebGLContexts).WebGL2RenderingContext
+    : selfWith.WebGLRenderingContext
+  const proto = ctor!.prototype
   const ctx = Object.create(proto) as WebGLRenderingContext
-  return (constant: number): unknown => {
-    const result: unknown = proto.getParameter.call(ctx, constant)
-    return result
-  }
+  return (constant: number): unknown => proto.getParameter.call(ctx, constant)
 }
 
 describe('patch_helpers/webgl', () => {
   let originalWebGL: typeof WebGLRenderingContext | undefined
+  let originalWebGL2: typeof WebGL2RenderingContext | undefined
   let originalUserAgentData: unknown
 
   beforeEach(() => {
@@ -89,19 +98,26 @@ describe('patch_helpers/webgl', () => {
     if (originalUserAgentData !== undefined) {
       nav.userAgentData = originalUserAgentData as NavWithUAData['userAgentData']
     }
-    const selfWith = self as unknown as SelfWithWebGL
+    const selfWith = self as unknown as SelfWithWebGLContexts
     if (originalWebGL !== undefined) {
       selfWith.WebGLRenderingContext = originalWebGL
     } else {
       delete selfWith.WebGLRenderingContext
     }
+    if (originalWebGL2 !== undefined) {
+      selfWith.WebGL2RenderingContext = originalWebGL2
+    } else {
+      delete selfWith.WebGL2RenderingContext
+    }
   })
 
   describe('hideWebGLVendorAndRenderer', () => {
     it('should no-op when WebGLRenderingContext is undefined', () => {
-      const selfWith = self as unknown as SelfWithWebGL
+      const selfWith = self as unknown as SelfWithWebGLContexts
       originalWebGL = selfWith.WebGLRenderingContext
+      originalWebGL2 = selfWith.WebGL2RenderingContext
       delete selfWith.WebGLRenderingContext
+      delete selfWith.WebGL2RenderingContext
       expect(() => hideWebGLVendorAndRenderer(self)).not.toThrow()
     })
 
@@ -112,19 +128,38 @@ describe('patch_helpers/webgl', () => {
       expect(() => hideWebGLVendorAndRenderer(self)).not.toThrow()
     })
 
+    it('should not throw when WebGL2RenderingContext is undefined', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      originalWebGL = selfWith.WebGLRenderingContext
+      originalWebGL2 = selfWith.WebGL2RenderingContext
+      installMockWebGL(selfWith)
+      delete selfWith.WebGL2RenderingContext
+
+      const nav = navigator as unknown as NavWithUAData
+      nav.userAgentData = { platform: 'macOS' }
+
+      expect(() => hideWebGLVendorAndRenderer(self)).not.toThrow()
+      const getParameter = getPatchedGetParameter(selfWith)
+      expect(getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Apple')
+    })
+
     describe('when WebGL and userAgentData.platform are available', () => {
       beforeEach(() => {
-        const selfWith = self as unknown as SelfWithWebGL
+        const selfWith = self as unknown as SelfWithWebGLContexts
+        originalWebGL = selfWith.WebGLRenderingContext
+        originalWebGL2 = selfWith.WebGL2RenderingContext
         if (selfWith.WebGLRenderingContext === undefined) {
-          originalWebGL = selfWith.WebGLRenderingContext
           installMockWebGL(selfWith)
+        }
+        if (selfWith.WebGL2RenderingContext === undefined) {
+          installMockWebGL2(selfWith)
         }
       })
 
       it.each(
         Object.entries(webglVendorAndRendererByPlatform)
       )('should spoof UNMASKED_VENDOR_WEBGL and UNMASKED_RENDERER_WEBGL on %s', (platform, expected) => {
-        const selfWith = self as unknown as SelfWithWebGL
+        const selfWith = self as unknown as SelfWithWebGLContexts
         if (selfWith.WebGLRenderingContext === undefined) return
 
         const nav = navigator as unknown as NavWithUAData
@@ -137,8 +172,24 @@ describe('patch_helpers/webgl', () => {
         expect(getParameter(UNMASKED_RENDERER_WEBGL)).toBe(expected.renderer)
       })
 
+      it.each(
+        Object.entries(webglVendorAndRendererByPlatform)
+      )('should spoof WebGL2 UNMASKED_VENDOR_WEBGL and UNMASKED_RENDERER_WEBGL on %s', (platform, expected) => {
+        const selfWith = self as unknown as SelfWithWebGLContexts
+        if (selfWith.WebGL2RenderingContext === undefined) return
+
+        const nav = navigator as unknown as NavWithUAData
+        nav.userAgentData = { platform }
+
+        hideWebGLVendorAndRenderer(self)
+        const getParameter = getPatchedGetParameter(selfWith, 'WebGL2RenderingContext')
+
+        expect(getParameter(UNMASKED_VENDOR_WEBGL)).toBe(expected.vendor)
+        expect(getParameter(UNMASKED_RENDERER_WEBGL)).toBe(expected.renderer)
+      })
+
       it('should return Unknown for an unrecognized platform', () => {
-        const selfWith = self as unknown as SelfWithWebGL
+        const selfWith = self as unknown as SelfWithWebGLContexts
         if (selfWith.WebGLRenderingContext === undefined) return
 
         const nav = navigator as unknown as NavWithUAData
@@ -151,8 +202,22 @@ describe('patch_helpers/webgl', () => {
         expect(getParameter(UNMASKED_RENDERER_WEBGL)).toBe('Unknown')
       })
 
+      it('should return Unknown on WebGL2 for an unrecognized platform', () => {
+        const selfWith = self as unknown as SelfWithWebGLContexts
+        if (selfWith.WebGL2RenderingContext === undefined) return
+
+        const nav = navigator as unknown as NavWithUAData
+        nav.userAgentData = { platform: 'Chrome OS' }
+
+        hideWebGLVendorAndRenderer(self)
+        const getParameter = getPatchedGetParameter(selfWith, 'WebGL2RenderingContext')
+
+        expect(getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Unknown')
+        expect(getParameter(UNMASKED_RENDERER_WEBGL)).toBe('Unknown')
+      })
+
       it('should pass through other getParameter constants', () => {
-        const selfWith = self as unknown as SelfWithWebGL
+        const selfWith = self as unknown as SelfWithWebGLContexts
         if (selfWith.WebGLRenderingContext === undefined) return
 
         const nav = navigator as unknown as NavWithUAData
@@ -160,6 +225,19 @@ describe('patch_helpers/webgl', () => {
 
         hideWebGLVendorAndRenderer(self)
         const getParameter = getPatchedGetParameter(selfWith)
+
+        expect(getParameter(0)).toBe(null)
+      })
+
+      it('should pass through other WebGL2 getParameter constants', () => {
+        const selfWith = self as unknown as SelfWithWebGLContexts
+        if (selfWith.WebGL2RenderingContext === undefined) return
+
+        const nav = navigator as unknown as NavWithUAData
+        nav.userAgentData = { platform: 'macOS' }
+
+        hideWebGLVendorAndRenderer(self)
+        const getParameter = getPatchedGetParameter(selfWith, 'WebGL2RenderingContext')
 
         expect(getParameter(0)).toBe(null)
       })
@@ -177,23 +255,12 @@ describe('patch_helpers/webgl', () => {
       dstOffset?: number
     ) => void
 
-    let originalWebGL2: typeof WebGL2RenderingContext | undefined
-
     beforeEach(() => {
       const selfWith = self as unknown as SelfWithWebGLContexts
       originalWebGL = selfWith.WebGLRenderingContext
       originalWebGL2 = selfWith.WebGL2RenderingContext
       installMockWebGL(selfWith)
       installMockWebGL2(selfWith)
-    })
-
-    afterEach(() => {
-      const selfWith = self as unknown as SelfWithWebGLContexts
-      if (originalWebGL2 !== undefined) {
-        selfWith.WebGL2RenderingContext = originalWebGL2
-      } else {
-        delete selfWith.WebGL2RenderingContext
-      }
     })
 
     it('should respect dstOffset when writing into an ArrayBufferView', () => {

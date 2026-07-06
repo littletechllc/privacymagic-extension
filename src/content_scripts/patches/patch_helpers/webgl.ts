@@ -44,7 +44,9 @@ export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
       }
     }
     redefineMethods(globalObject.WebGLRenderingContext.prototype, { getParameter })
-    redefineMethods(globalObject.WebGL2RenderingContext.prototype, { getParameter })
+    if (globalObject.WebGL2RenderingContext !== undefined) {
+      redefineMethods(globalObject.WebGL2RenderingContext.prototype, { getParameter })
+    }
   }
 }
 
