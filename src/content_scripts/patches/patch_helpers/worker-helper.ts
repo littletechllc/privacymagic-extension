@@ -69,7 +69,7 @@ export const makeSanitizedScriptForWorker = ({
     : 'importScripts'
   // Semicolon separated code to avoid issues with line continuations.
   const prefix = `
-          ;__PRIVACY_MAGIC_WORKER_URL__ = ${jsonStringifySafe(absoluteUrl)}
+          ;self.__PRIVACY_MAGIC_WORKER_URL__ = ${jsonStringifySafe(absoluteUrl)}
           ;${hardeningCode}
           ;`
   const suffix = `
