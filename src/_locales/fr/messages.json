@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - bloquer les pubs, cookies et l'empreinte numérique",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic vous protège de la surveillance lors de votre navigation sur le web.",

@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - bloķēt reklāmas, sīkdatnes un pirkstu nospiedumus",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic aizsargā jūs no uzraudzības, pārlūkojot tīmekli.",

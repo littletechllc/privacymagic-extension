@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - блокировать рекламу, cookie и fingerprinting",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic защищает вас от слежки при просмотре веб-страниц.",

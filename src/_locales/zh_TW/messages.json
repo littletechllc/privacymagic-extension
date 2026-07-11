@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - 封鎖廣告、Cookie 和指紋追蹤",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic 在您瀏覽網頁時保護您免受監控。",

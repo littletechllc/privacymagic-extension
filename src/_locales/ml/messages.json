@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - പരസ്യങ്ങൾ, കുക്കികൾ, ഫിങ്ഗർപ്രിന്റിംഗ് തടയുക",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic വെബ് ബ്രൗസ് ചെയ്യുമ്പോൾ നിങ്ങളെ നിരീക്ഷണത്തിൽ നിന്ന് പരിരക്ഷിക്കുന്നു.",

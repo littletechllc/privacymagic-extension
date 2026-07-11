@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - i-block ang ads, cookies, at fingerprinting",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Pinoprotektahan ka ng Privacy Magic mula sa surveillance habang nagba-browse sa web.",

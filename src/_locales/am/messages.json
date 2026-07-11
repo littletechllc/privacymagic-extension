@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - ማስታወቂያዎችን፣ ኩኪዎችን እና የጣት አትሞቶችን ይከለክሉ",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic እያሰራጩ በድር ሲጎብኙ ከተጣራ ጣልቃ ገብነት ይጠብቅዎታል።",

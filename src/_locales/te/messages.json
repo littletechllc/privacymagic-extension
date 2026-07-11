@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - ప్రకటనలు, కుకీలు మరియు ఫింగర్‌ప్రింటింగ్‌ను నిరోధించండి",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic మీరు వెబ్ బ్రౌజ్ చేసేటప్పుడు నిఘా నుండి మిమ్మల్ని రక్షిస్తుంది.",

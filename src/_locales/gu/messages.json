@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - જાહેરાતો, કુકીઝ અને ફિંગરપ્રિન્ટિંગ અવરોધિત કરો",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic તમને વેબ બ્રાઉઝ કરતી વખતે નિગરાનીમાંથી બચાવે છે.",

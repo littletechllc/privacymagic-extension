@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - जाहिराती, कुकीज आणि फिंगरप्रिंटिंग ब्लॉक करा",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic वेब ब्राउझ करताना तुम्हाला निरीक्षणापासून संरक्षण देते.",

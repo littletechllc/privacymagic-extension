@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - বিজ্ঞাপন, কুকি এবং ফিঙ্গারপ্রিন্টিং ব্লক করুন",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic ওয়েব ব্রাউজ করার সময় আপনাকে নজরদারি থেকে রক্ষা করে।",

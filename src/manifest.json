@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Privacy Magic",
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_shortExtensionName__",
   "description": "__MSG_extensionDescription__",
   "version": "__EXTENSION_VERSION_NUMBER__",
   "version_name": "__EXTENSION_VERSION_NAME__",

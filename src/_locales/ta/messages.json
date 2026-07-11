@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - விளம்பரங்கள், குக்கீகள் மற்றும் கைரேகையைத் தடு",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Privacy Magic நீங்கள் இணையத்தில் உலாவும்போது கண்காணிப்பிலிருந்து உங்களைப் பாதுகாக்கிறது.",

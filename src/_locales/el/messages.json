@@ -1,7 +1,11 @@
 {
   "extensionName": {
-    "message": "Privacy Magic",
+    "message": "Privacy Magic - αποκλεισμός διαφημίσεων, cookies και fingerprinting",
     "description": "The name of the extension"
+  },
+  "shortExtensionName": {
+    "message": "Privacy Magic",
+    "description": "The short name of the extension"
   },
   "extensionDescription": {
     "message": "Το Privacy Magic σας προστατεύει από την παρακολούθηση καθώς πλοηγείστε στο διαδίκτυο.",
