@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Το Privacy Magic σας προστατεύει από την παρακολούθηση καθώς πλοηγείστε στο διαδίκτυο.",
+    "message": "Το Privacy Magic σας προστατεύει από παρακολούθηση. Αποκλείει διαφημίσεις, trackers, fingerprinting, cookies και link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

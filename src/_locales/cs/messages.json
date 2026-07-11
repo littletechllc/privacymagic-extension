@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic vás chrání před sledováním při prohlížení webu.",
+    "message": "Privacy Magic vás chrání před sledováním při prohlížení. Blokuje reklamy, sledovače, fingerprinting, cookies a sledování odkazů.",
     "description": "The description of the extension"
   },
   "settingsButton": {

@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ওয়েব ব্রাউজ করার সময় আপনাকে নজরদারি থেকে রক্ষা করে।",
+    "message": "Privacy Magic ব্রাউজ করার সময় নজরদারি থেকে রক্ষা করে। বিজ্ঞাপন, ট্র্যাকার, fingerprinting, কুকি ও link tracking ব্লক করে।",
     "description": "The description of the extension"
   },
   "settingsButton": {

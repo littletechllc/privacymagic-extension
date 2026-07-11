@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic 在您浏览网页时保护您免受监控。",
+    "message": "Privacy Magic 在您浏览时保护您免受监控。拦截广告、跟踪器、指纹追踪、Cookie 和链接跟踪。",
     "description": "The description of the extension"
   },
   "settingsButton": {

@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic beskytter dig mod overvågning, når du browser på internettet.",
+    "message": "Privacy Magic beskytter dig mod overvågning, når du browser. Blokerer annoncer, trackere, fingerprinting, cookies og linksporing.",
     "description": "The description of the extension"
   },
   "settingsButton": {

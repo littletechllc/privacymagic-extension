@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic يحميك من المراقبة أثناء تصفح الويب.",
+    "message": "Privacy Magic يحميك من المراقبة أثناء تصفح الويب. يحظر الإعلانات والمتتبعات وبصمات المتصفح وملفات تعريف الارتباط وتتبع الروابط.",
     "description": "The description of the extension"
   },
   "settingsButton": {

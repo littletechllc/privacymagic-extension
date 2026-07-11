@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic te protejează de supraveghere în timp ce navighezi pe web.",
+    "message": "Privacy Magic te protejează de supraveghere când navighezi. Blochează reclame, trackere, fingerprinting, cookies și link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

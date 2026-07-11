@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic apsaugo jus nuo priežiūros naršant žiniatinklyje.",
+    "message": "Privacy Magic apsaugo jus nuo stebėjimo naršant. Blokuoja reklamas, sekiklius, fingerprinting, slapukus ir nuorodų sekimą.",
     "description": "The description of the extension"
   },
   "settingsButton": {

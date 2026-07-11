@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ನೀವು ವೆಬ್ ಬ್ರೌಸ್ ಮಾಡುವಾಗ ನಿಗಾವಣೆಯಿಂದ ನಿಮ್ಮನ್ನು ರಕ್ಷಿಸುತ್ತದೆ।",
+    "message": "Privacy Magic ಬ್ರೌಸ್ ಮಾಡುವಾಗ ನಿಗಾವಣೆಯಿಂದ ರಕ್ಷಿಸುತ್ತದೆ. ads, trackers, fingerprinting, cookies, link tracking ಅನ್ನು ನಿರ್ಬಂಧಿಸುತ್ತದೆ.",
     "description": "The description of the extension"
   },
   "settingsButton": {

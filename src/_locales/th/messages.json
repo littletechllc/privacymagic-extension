@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ",
+    "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ บล็อกโฆษณา ตัวติดตาม fingerprinting คุกกี้ และ link tracking",
     "description": "The description of the extension"
   },
   "settingsButton": {

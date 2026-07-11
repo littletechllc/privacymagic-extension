@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic은 웹을 탐색할 때 감시로부터 당신을 보호합니다.",
+    "message": "Privacy Magic은 웹 탐색 중 감시로부터 당신을 보호합니다. 광고, 추적기, fingerprinting, 쿠키, 링크 추적을 차단합니다.",
     "description": "The description of the extension"
   },
   "settingsButton": {

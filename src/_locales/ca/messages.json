@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic us protegeix de la vigilància mentre navegueu per la web.",
+    "message": "Privacy Magic us protegeix de la vigilància en navegar. Bloqueja anuncis, trackers, fingerprinting, galetes i link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

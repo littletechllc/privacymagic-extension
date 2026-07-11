@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic நீங்கள் இணையத்தில் உலாவும்போது கண்காணிப்பிலிருந்து உங்களைப் பாதுகாக்கிறது.",
+    "message": "Privacy Magic உலாவும்போது கண்காணிப்பிலிருந்து பாதுகாக்கிறது. ads, trackers, fingerprinting, cookies, link tracking-ஐத் தடுக்கிறது.",
     "description": "The description of the extension"
   },
   "settingsButton": {

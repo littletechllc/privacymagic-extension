@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic inalinda wewe dhidi ya ufuatiliaji unapovinjari wavuti.",
+    "message": "Privacy Magic inakulinda dhidi ya ufuatiliaji unapovinjari. Inazuia ads, trackers, fingerprinting, cookies na link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

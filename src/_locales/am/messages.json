@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic እያሰራጩ በድር ሲጎብኙ ከተጣራ ጣልቃ ገብነት ይጠብቅዎታል።",
+    "message": "Privacy Magic በድር ሲሰራጩ ከመከታተል ይጠብቅዎታል። ማስታወቂያዎችን፣ trackers፣ fingerprinting፣ cookies እና link trackingን ይከለክላል።",
     "description": "The description of the extension"
   },
   "settingsButton": {

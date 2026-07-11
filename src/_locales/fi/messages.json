@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic suojela sinua valvonnalta selatessasi verkkoa.",
+    "message": "Privacy Magic suojaa sinua valvonnalta selatessasi. Estää mainokset, seuraimet, fingerprinting, evästeet ja linkkiseurannan.",
     "description": "The description of the extension"
   },
   "settingsButton": {

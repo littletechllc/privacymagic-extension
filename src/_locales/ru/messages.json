@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic защищает вас от слежки при просмотре веб-страниц.",
+    "message": "Privacy Magic защищает от слежки при просмотре веб-страниц. Блокирует рекламу, трекеры, fingerprinting, cookies и link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

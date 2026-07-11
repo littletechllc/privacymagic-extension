@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic megvédi a megfigyeléstől a webböngészés során.",
+    "message": "Privacy Magic megvédi a megfigyeléstől böngészés közben. Blokkol ads, trackereket, fingerprintinget, sütiket és link trackinget.",
     "description": "The description of the extension"
   },
   "settingsButton": {

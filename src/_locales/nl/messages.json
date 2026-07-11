@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic beschermt je tegen surveillance tijdens het browsen op het web.",
+    "message": "Privacy Magic beschermt je tegen surveillance tijdens browsen. Blokkeert ads, trackers, fingerprinting, cookies en link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

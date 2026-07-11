@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic vous protège de la surveillance lors de votre navigation sur le web.",
+    "message": "Privacy Magic vous protège de la surveillance en ligne. Il bloque pubs, traceurs, fingerprinting, cookies et suivi de liens.",
     "description": "The description of the extension"
   },
   "settingsButton": {

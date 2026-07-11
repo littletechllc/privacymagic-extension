@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic štiti vas od nadzora tijekom pregledavanja weba.",
+    "message": "Privacy Magic štiti vas od nadzora tijekom pregledavanja. Blokira oglase, trackere, fingerprinting, kolačiće i praćenje linkova.",
     "description": "The description of the extension"
   },
   "settingsButton": {

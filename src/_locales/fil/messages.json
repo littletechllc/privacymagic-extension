@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Pinoprotektahan ka ng Privacy Magic mula sa surveillance habang nagba-browse sa web.",
+    "message": "Pinoprotektahan ka ng Privacy Magic habang nagba-browse. Binabara ang ads, trackers, fingerprinting, cookies at link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

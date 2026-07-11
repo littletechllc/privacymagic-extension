@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic bảo vệ bạn khỏi sự giám sát khi bạn duyệt web.",
+    "message": "Privacy Magic bảo vệ bạn khỏi giám sát khi duyệt web. Chặn quảng cáo, tracker, fingerprinting, cookie và link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

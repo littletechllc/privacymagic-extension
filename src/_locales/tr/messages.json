@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic, web'de gezinirken sizi gözetimden korur.",
+    "message": "Privacy Magic gezinirken sizi gözetimden korur. Reklamları, trackers, fingerprinting, çerezleri ve link tracking engeller.",
     "description": "The description of the extension"
   },
   "settingsButton": {

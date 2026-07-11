@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic protege-o da vigilância enquanto navega na web.",
+    "message": "Privacy Magic protege-o da vigilância ao navegar. Bloqueia anúncios, trackers, fingerprinting, cookies e link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {

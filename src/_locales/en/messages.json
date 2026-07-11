@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic shields you from surveillance as you browse the web.",
+    "message": "Privacy Magic shields you from surveillance as you browse. It blocks ads, trackers, fingerprinting, cookies and link tracking.",
     "description": "The description of the extension"
   },
   "settingsButton": {
