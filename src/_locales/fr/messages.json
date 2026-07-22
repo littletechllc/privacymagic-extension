@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - bloquer les pubs, cookies et l'empreinte numérique",
+    "message": "Privacy Magic - bloquer empreinte, traceurs et pubs",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic vous protège de la surveillance en ligne. Il bloque pubs, traceurs, fingerprinting, cookies et suivi de liens.",
+    "message": "Privacy Magic contre la surveillance : fingerprinting, pubs, traceurs, cookies tiers, liens de suivi, fuites WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

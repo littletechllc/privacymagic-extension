@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - blochează reclame, cookie-uri și amprentare digitală",
+    "message": "Privacy Magic - blochează fingerprint, trackere și reclame",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic te protejează de supraveghere când navighezi. Blochează reclame, trackere, fingerprinting, cookies și link tracking.",
+    "message": "Privacy Magic împotriva supravegherii: fingerprinting, reclame, trackere, cookie-uri terțe, linkuri de urmărire, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

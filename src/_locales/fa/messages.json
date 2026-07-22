@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - مسدود کردن تبلیغات، کوکی‌ها و اثر انگشت",
+    "message": "Privacy Magic - مسدود کردن اثرانگشت، ردیاب‌ها و تبلیغات",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic شما را هنگام مرور از نظارت محافظت می‌کند. تبلیغات، trackers، fingerprinting، کوکی‌ها و link tracking را مسدود می‌کند.",
+    "message": "Privacy Magic علیه نظارت: اثرانگشت، تبلیغات، ردیاب‌ها، کوکی شخص ثالث، پیوند ردیابی، نشت WebRTC، Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

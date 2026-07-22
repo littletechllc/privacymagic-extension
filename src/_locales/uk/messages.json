@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - блокувати рекламу, cookie та відбитки браузера",
+    "message": "Privacy Magic - блокувати fingerprint, трекери та рекламу",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic захищає від стеження під час перегляду в мережі. Блокує рекламу, trackers, fingerprinting, cookies та link tracking.",
+    "message": "Privacy Magic проти стеження: fingerprinting, реклама, трекери, сторонні cookies, посилання відстеження, витоки WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

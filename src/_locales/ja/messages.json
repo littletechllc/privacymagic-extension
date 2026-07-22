@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - 広告、Cookie、フィンガープリントをブロック",
+    "message": "Privacy Magic - 指紋・トラッカー・広告をブロック",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magicは閲覧中の監視からあなたを守ります。広告、トラッカー、フィンガープリント、Cookie、リンク追跡をブロックします。",
+    "message": "Privacy Magicは監視と戦います：フィンガープリント、広告、トラッカー、サードパーティCookie、追跡リンク、WebRTC漏洩、Topics API。",
     "description": "The description of the extension"
   },
   "settingsButton": {

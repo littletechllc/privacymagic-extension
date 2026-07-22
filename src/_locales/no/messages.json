@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - blokker annonser, informasjonskapsler og fingeravtrykk",
+    "message": "Privacy Magic - blokker fingerprint, sporere og annonser",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic beskytter deg mot overvåking når du surfer. Blokkerer annonser, sporere, fingerprinting, cookies og lenkesporing.",
+    "message": "Privacy Magic mot overvåking: fingerprinting, annonser, sporere, tredjepartscookies, sporingslenker, WebRTC-lekkasjer, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

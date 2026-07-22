@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - blokiraj oglase, kolačiće i otisak preglednika",
+    "message": "Privacy Magic - blokiraj fingerprint, trackere i oglase",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic štiti vas od nadzora tijekom pregledavanja. Blokira oglase, trackere, fingerprinting, kolačiće i praćenje linkova.",
+    "message": "Privacy Magic protiv nadzora: fingerprinting, oglasi, trackeri, kolačići trećih strana, tracking linkovi, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

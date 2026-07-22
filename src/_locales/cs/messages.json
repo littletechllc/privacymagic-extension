@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - blokovat reklamy, cookies a fingerprinting",
+    "message": "Privacy Magic - blokovat fingerprint, trackery a reklamy",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic vás chrání před sledováním při prohlížení. Blokuje reklamy, sledovače, fingerprinting, cookies a sledování odkazů.",
+    "message": "Privacy Magic proti sledování: fingerprinting, reklamy, trackery, cookies třetích stran, sledovací odkazy, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

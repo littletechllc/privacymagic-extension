@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - i-block ang ads, cookies, at fingerprinting",
+    "message": "Privacy Magic - i-block ang fingerprint, trackers, at ads",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Pinoprotektahan ka ng Privacy Magic habang nagba-browse. Binabara ang ads, trackers, fingerprinting, cookies at link tracking.",
+    "message": "Labanan ng Privacy Magic ang pagmamatyag: fingerprinting, ads, trackers, 3rd-party cookies, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

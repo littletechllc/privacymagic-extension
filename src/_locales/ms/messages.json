@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - sekat iklan, kuki, dan cap jari",
+    "message": "Privacy Magic - sekat fingerprint, penjejak dan iklan",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic melindungi anda daripada pengawasan semasa melayari. Sekat iklan, trackers, fingerprinting, cookies dan link tracking.",
+    "message": "Privacy Magic melawan pengawasan: fingerprinting, iklan, penjejak, kuki pihak ketiga, pautan penjejakan, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

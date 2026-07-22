@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - บล็อกโฆษณา คุกกี้ และการเก็บข้อมูลลายนิ้วมือ",
+    "message": "Privacy Magic - บล็อกลายนิ้วมือ ตัวติดตาม และโฆษณา",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ป้องกันคุณจากการสอดส่องขณะท่องเว็บ บล็อกโฆษณา ตัวติดตาม fingerprinting คุกกี้ และ link tracking",
+    "message": "Privacy Magic ต่อสู้การสอดแนม: ลายนิ้วมือดิจิทัล โฆษณา ตัวติดตาม คุกกี้บุคคลที่สาม ลิงก์ติดตาม WebRTC Topics API",
     "description": "The description of the extension"
   },
   "settingsButton": {

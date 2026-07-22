@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - বিজ্ঞাপন, কুকি এবং ফিঙ্গারপ্রিন্টিং ব্লক করুন",
+    "message": "Privacy Magic - fingerprint, ট্র্যাকার ও বিজ্ঞাপন ব্লক করুন",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ব্রাউজ করার সময় নজরদারি থেকে রক্ষা করে। বিজ্ঞাপন, ট্র্যাকার, fingerprinting, কুকি ও link tracking ব্লক করে।",
+    "message": "Privacy Magic নজরদারির বিরুদ্ধে: fingerprinting, বিজ্ঞাপন, ট্র্যাকার, থার্ড-পার্টি কুকি, ট্র্যাকিং লিঙ্ক, WebRTC লিক, Topics API।",
     "description": "The description of the extension"
   },
   "settingsButton": {

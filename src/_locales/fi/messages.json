@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - estä mainokset, evästeet ja sormenjälkitunnistus",
+    "message": "Privacy Magic - estä fingerprint, seuraimet ja mainokset",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic suojaa sinua valvonnalta selatessasi. Estää mainokset, seuraimet, fingerprinting, evästeet ja linkkiseurannan.",
+    "message": "Privacy Magic valvontaa vastaan: fingerprinting, mainokset, seuraimet, 3. osapuolen evästeet, seurantalinkit, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

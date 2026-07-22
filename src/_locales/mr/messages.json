@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - जाहिराती, कुकीज आणि फिंगरप्रिंटिंग ब्लॉक करा",
+    "message": "Privacy Magic - fingerprint, ट्रॅकर्स आणि जाहिराती ब्लॉक करा",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ब्राउझ करताना निरीक्षणापासून संरक्षण देते. ads, trackers, fingerprinting, cookies आणि link tracking अवरोधित करते.",
+    "message": "Privacy Magic देखरेखीशी लढते: fingerprinting, जाहिराती, ट्रॅकर्स, तृतीय-पक्ष कुकीज, ट्रॅकिंग लिंक्स, WebRTC लीक्स, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

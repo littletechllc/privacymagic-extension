@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - block ads, cookies, and fingerprinting",
+    "message": "Privacy Magic - block fingerprint, trackers, and ads",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic shields you from surveillance as you browse. It blocks ads, trackers, fingerprinting, cookies and link tracking.",
+    "message": "Privacy Magic fights surveillance: fingerprint, ads, trackers, third-party cookies, tracking links, WebRTC leaks, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - ಜಾಹೀರಾತುಗಳು, ಕುಕೀಗಳು, ಫಿಂಗರ್‌ಪ್ರಿಂಟಿಂಗ್ ನಿರ್ಬಂಧಿಸಿ",
+    "message": "Privacy Magic - fingerprint, trackers ಮತ್ತು ಜಾಹೀರಾತು ನಿರ್ಬಂಧಿಸಿ",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ಬ್ರೌಸ್ ಮಾಡುವಾಗ ನಿಗಾವಣೆಯಿಂದ ರಕ್ಷಿಸುತ್ತದೆ. ads, trackers, fingerprinting, cookies, link tracking ಅನ್ನು ನಿರ್ಬಂಧಿಸುತ್ತದೆ.",
+    "message": "Privacy Magic ನಿಗಾವಣೆ ವಿರುದ್ಧ: fingerprinting, ಜಾಹೀರಾತು, trackers, 3ನೇ-ಪಕ್ಷ cookies, ಟ್ರ್ಯಾಕಿಂಗ್ ಲಿಂಕ್‌ಗಳು, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

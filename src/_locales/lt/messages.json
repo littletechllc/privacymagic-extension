@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - blokuoti reklamas, slapukus ir pirštų atspaudus",
+    "message": "Privacy Magic - blokuoti fingerprint, sekiklius ir reklamas",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic apsaugo jus nuo stebėjimo naršant. Blokuoja reklamas, sekiklius, fingerprinting, slapukus ir nuorodų sekimą.",
+    "message": "Privacy Magic prieš stebėjimą: fingerprinting, reklamos, sekikliai, trečiųjų šalių slapukai, sekimo nuorodos, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

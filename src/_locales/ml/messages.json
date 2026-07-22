@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - പരസ്യങ്ങൾ, കുക്കികൾ, ഫിങ്ഗർപ്രിന്റിംഗ് തടയുക",
+    "message": "Privacy Magic - fingerprint, ട്രാക്കറുകൾ, പരസ്യങ്ങൾ തടയുക",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic ബ്രൗസ് ചെയ്യുമ്പോൾ നിങ്ങളെ പരിരക്ഷിക്കുന്നു. ads, trackers, fingerprinting, cookies, link tracking തടയുന്നു.",
+    "message": "Privacy Magic നിരീക്ഷണത്തിനെതിരെ: fingerprinting, പരസ്യങ്ങൾ, ട്രാക്കറുകൾ, 3rd-party cookies, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

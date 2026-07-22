@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - ప్రకటనలు, కుకీలు మరియు ఫింగర్‌ప్రింటింగ్‌ను నిరోధించండి",
+    "message": "Privacy Magic - fingerprint, ట్రాకర్లు మరియు ప్రకటనలను నిరోధించండి",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic బ్రౌజ్ చేసేటప్పుడు నిఘా నుండి రక్షిస్తుంది. ads, trackers, fingerprinting, cookies, link tracking ను నిరోధిస్తుంది.",
+    "message": "Privacy Magic నిఘా వ్యతిరేకంగా: fingerprinting, ప్రకటనలు, ట్రాకర్లు, మూడవ-పక్ష కుకీలు, ట్రాకింగ్ లింకులు, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

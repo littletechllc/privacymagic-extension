@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - bloķēt reklāmas, sīkdatnes un pirkstu nospiedumus",
+    "message": "Privacy Magic - bloķēt fingerprint, izsekotājus un reklāmas",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic aizsargā jūs no uzraudzības pārlūkojot. Bloķē reklāmas, trackers, fingerprinting, sīkdatnes un link tracking.",
+    "message": "Privacy Magic pret uzraudzību: fingerprinting, reklāmas, izsekotāji, trešo pušu sīkdatnes, izsekošanas saites, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

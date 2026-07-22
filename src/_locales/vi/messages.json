@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - chặn quảng cáo, cookie và fingerprinting",
+    "message": "Privacy Magic - chặn fingerprint, tracker và quảng cáo",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic bảo vệ bạn khỏi giám sát khi duyệt web. Chặn quảng cáo, tracker, fingerprinting, cookie và link tracking.",
+    "message": "Privacy Magic chống giám sát: fingerprinting, quảng cáo, tracker, cookie bên thứ ba, liên kết theo dõi, rò rỉ WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

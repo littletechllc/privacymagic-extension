@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - hirdetések, sütik és ujjlenyomat-blokkolás",
+    "message": "Privacy Magic - fingerprint, trackerek és hirdetések tiltása",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic megvédi a megfigyeléstől böngészés közben. Blokkol ads, trackereket, fingerprintinget, sütiket és link trackinget.",
+    "message": "Privacy Magic a megfigyelés ellen: fingerprinting, hirdetések, trackerek, 3rd-party cookie-k, tracking linkek, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {

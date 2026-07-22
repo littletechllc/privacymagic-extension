@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Privacy Magic - bloqueja anuncis, galetes i empremtes digitals",
+    "message": "Privacy Magic - bloqueja fingerprint, trackers i anuncis",
     "description": "The name of the extension"
   },
   "shortExtensionName": {
@@ -8,7 +8,7 @@
     "description": "The short name of the extension"
   },
   "extensionDescription": {
-    "message": "Privacy Magic us protegeix de la vigilància en navegar. Bloqueja anuncis, trackers, fingerprinting, galetes i link tracking.",
+    "message": "Privacy Magic contra la vigilància: fingerprinting, anuncis, trackers, galetes de tercers, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"
   },
   "settingsButton": {
