@@ -1,10 +1,30 @@
-Privacy Magic erken erişimdedir — geri bildiriminizi bekliyoruz! contact@littletechllc.com
+Bu uzantı, maksimum gizlilik ve kullanılabilirlik için tasarlanmış son teknoloji korumalar sunar. Hemen çalışır: yapılandırma gerekmez!
 
-Web harika bir şeydir: size dünyanın bilgisine erişim sağlar. Modern yaşamın vazgeçilmez bir parçasıdır. Ne yazık ki web aynı zamanda kitlesel gözetimin aracıdır. Çevrimiçi yaptığınız her şey şirketler ve hükümetler tarafından toplanıyor, depolanıyor ve analiz ediliyor.
+TEMEL KORUMALAR
 
-Privacy Magic, sizi gözetimden korumak için kapsamlı, katmanlı koruma sağlar.
+• Reklamları ve izleyicileri engelle: Tarayıcıda gizlilik ihlal eden reklamların, izleme betiklerinin ve piksellerin yüklenmesini durdurur.
+• Gelişmiş parmak izi direnci: Sizi tanımlayabilecek 18+ sistem ve donanım sinyalini (Canvas, WebGL, AudioContext, yazı tipleri, saat dilimi ve daha fazlası) sahteleştirir.
+• İzleri kaldırma: İzleme parametrelerini durdurur, Referer başlıklarını en aza indirir ve önbellek sızıntılarını engeller.
+• Tarayıcı gizliliğini güçlendir: Üçüncü taraf çerezlerini ve Topics API’yi engeller ve Global Privacy Control’ü uygular.
 
-Gizliliğinizi korumak için Privacy Magic:
+SIKI GİZLİLİK GARANTİSİ
+
+• %100 açık kaynak: Kodumuz herkesin incelemesi ve doğrulaması için açıktır.
+• Sıfır veri toplama: Gezinme etkinliğinizi veya kişisel bilgilerinizi kaydetmeyiz, izlemeyiz veya satmayız (ve asla yapmayacağız).
+• Sıfır telemetri: Uzantıda veya sitede Google Analytics ya da başka izleyici yoktur.
+
+Privacy Magic aktif geliştirme aşamasındadır. Geri bildirim veya sorularınız mı var? contact@littletechllc.com adresine yazın.
+
+YAZAR HAKKINDA
+
+Privacy Magic, web gizliliğini savunan açık kaynak yazılım geliştiren yazılım mühendisi Arthur Edelstein tarafından oluşturulmuştur:
+
+• Tor’da Tor Browser’a akış yalıtımını getirdi.
+• Firefox’ta Total Cookie Protection ve HTTPS-Only Mode ekiplerinin ürün yöneticisiydi.
+• Brave’de HTTPS by Default’u getirdi ve tarayıcı gizlilik açıklarına dair araştırmaya ortak yazar oldu.
+• PrivacyTests.org’un yaratıcısı — tarayıcı gizlilik sızıntılarını test eden açık kaynak bir girişim.
+
+TEKNİK ÖZELLİKLER
 
 - Reklamları, izleyicileri ve rahatsızlıkları engeller
 - Sistem bilgisini korur (parmak izine karşı)
@@ -16,19 +36,19 @@ Gizliliğinizi korumak için Privacy Magic:
   · Dokunma
   · Ekran
   · Görüntü
-  · Grafik
+  · Grafik (Canvas, WebGL)
   · İşlemci
   · Klavye
   · Matematik
   · Pil
   · Saat dilimi
-  · Ses
-  · Tarayıcı
+  · Ses (AudioContext)
+  · Tarayıcı (User agent)
   · Yazı tipleri
   · Zamanlama
 - İzleme izlerini kaldırır
-  · Önbellek sızıntıları
   · İzleme parametreleri
+  · Önbellek sızıntıları
   · Pencere adı
   · Yönlendiren
 - Web öğelerini güçlendirir
@@ -50,6 +70,8 @@ Gizliliğinizi korumak için Privacy Magic:
   · Yazım denetimi hizmeti
 - Reklam hedefleme API'lerini devre dışı bırakır
   · Protected Audience API
-  · Reklam ölçümü
+  · Reklam ölçümü API
   · Topics API
 - Geçmiş senkronizasyonunu kapatmanıza yardımcı olur
+
+

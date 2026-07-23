@@ -1,22 +1,42 @@
-A Privacy Magic korai hozzáférésű — szívesen fogadunk visszajelzést! contact@littletechllc.com
+Ez a bővítmény élvonalbeli védelmet nyújt, maximális adatvédelemre és használhatóságra tervezve. Azonnal működik: nincs szükség beállításra!
 
-A web csodálatos dolog: hozzáférést biztosít a világ információihoz. Lényeges része a modern életnek. Sajnos a web egyben tömeges megfigyelés eszköze is. Minden, amit online csinálsz, gyűjtésre, tárolásra és elemzésre kerül vállalatok és kormányok által.
+FŐ VÉDELMEK
 
-A Privacy Magic átfogó, rétegezett védelmet nyújt a megfigyelés ellen.
+• Hirdetések és nyomkövetők blokkolása: Megakadályozza a magánéletet sértő hirdetések, nyomkövető szkriptek és pixelek betöltését a böngészőben.
+• Fejlett ujjlenyomat-védelem: 18+ rendszer- és hardverjelzést (Canvas, WebGL, AudioContext, betűtípusok, időzóna stb.) maszkol, amelyekkel egyébként azonosíthatnának.
+• Nyomok eltávolítása: Leállítja a nyomkövető paramétereket, minimalizálja a Referer fejléceket, és megakadályozza a gyorsítótár-szivárgásokat.
+• Böngésző adatvédelem megerősítése: Blokkolja a harmadik féltől származó cookie-kat és a Topics API-t, és érvényesíti a Global Privacy Controlt.
 
-Az adatvédelem érdekében a Privacy Magic:
+SZIGORÚ ADATVÉDELMI GARANCIA
+
+• 100% nyílt forráskód: Kódunk mindenki számára megvizsgálható és ellenőrizhető.
+• Nulla adatgyűjtés: Nem naplózzuk, követjük vagy adjuk el (és soha nem fogjuk) a böngészési tevékenységét vagy személyes adatait.
+• Nulla telemetria: Sem a bővítményben, sem a webhelyen nincs Google Analytics vagy más nyomkövető.
+
+A Privacy Magic aktív fejlesztés alatt áll. Visszajelzés vagy kérdés? Írjon ide: contact@littletechllc.com.
+
+A SZERZŐRŐL
+
+A Privacy Magicet Arthur Edelstein készíti, szoftvermérnök, aki a webes adatvédelmet szolgáló nyílt forráskódú szoftvert épít:
+
+• A Tornál bevezette a stream izolációt a Tor Browserben.
+• A Firefoxnál a Total Cookie Protection és HTTPS-Only Mode csapatok termékmenedzsere volt.
+• A Bravenél bevezette a HTTPS by Defaultot, és társszerzője volt böngésző-adatvédelmi sebezhetőségekről szóló kutatásnak.
+• A PrivacyTests.org létrehozója — nyílt forráskódú kezdeményezés böngészők adatvédelmi szivárgásainak tesztelésére.
+
+MŰSZAKI ADATOK
 
 - Blokkolja a hirdetéseket, követőket és zaklatásokat
 - Védi a rendszerinformációkat (fingerprinting ellen)
   · Akkumulátor
   · Betűtípusok
   · Billentyűzet
-  · Böngésző
+  · Böngésző (User agent)
   · Érintés
   · Eszköz
-  · Grafika
+  · Grafika (Canvas, WebGL)
   · Hálózat
-  · Hang
+  · Hang (AudioContext)
   · Időzítés
   · Időzóna
   · Képernyő
@@ -27,8 +47,8 @@ Az adatvédelem érdekében a Privacy Magic:
   · Nyelv
   · Processzor
 - Eltávolítja a követési nyomokat
-  · Gyorsítótár-szivárgások
   · Ablak neve
+  · Gyorsítótár-szivárgások
   · Követési paraméterek
   · Referrer
 - Megerősíti a webelemeket
@@ -49,7 +69,9 @@ Az adatvédelem érdekében a Privacy Magic:
   · Helyesírás-ellenőrzés
   · Keresési javaslatok
 - Kikapcsolja a hirdetésközvetítő API-kat
-  · Hirdetésmérés
+  · Hirdetésmérés API
   · Protected Audience API
   · Topics API
 - Segít kikapcsolni az előzmények szinkronizálását
+
+

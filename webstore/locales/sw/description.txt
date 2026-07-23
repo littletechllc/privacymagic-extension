@@ -1,21 +1,41 @@
-Privacy Magic iko katika ufikiaji wa mapema — tungependa maoni yako! contact@littletechllc.com
+Kiendelezi hiki kinatoa ulinzi wa kisasa, uliobuniwa kwa faragha na urahisi wa matumizi wa juu. Hufanya kazi mara moja: hakuna usanidi unaohitajika!
 
-Wavuti ni jambo la ajabu: inakupa ufikiaji wa taarifa za ulimwengu. Ni sehemu muhimu ya maisha ya kisasa. Kwa bahati mbaya, wavuti pia ni chombo cha ufuatiliaji wa wingi. Kila unachofanya mtandaoni kinakusanywa, kuhifadhiwa na kuchambuliwa na mashirika na serikali.
+ULINZI MUHIMU
 
-Privacy Magic inatoa ulinzi kamili na wa tabaka dhidi ya ufuatiliaji.
+• Zuia matangazo na vifuatiliaji: Huzuia matangazo yanayokiuka faragha, skripti za ufuatiliaji na pikseli zisipakiwe kwenye kivinjari.
+• Upinzani wa hali ya juu wa fingerprinting: Huficha ishara 18+ za mfumo na maunzi (Canvas, WebGL, AudioContext, fonti, ukanda wa saa na zaidi) zinazoweza kukutambulisha.
+• Kuondoa athari: Husimamisha vigezo vya ufuatiliaji, hupunguza vichwa vya Referer na kuzuia uvujaji wa akiba.
+• Imarisha faragha ya kivinjari: Huzuia vidakuzi vya wahusika wengine na Topics API, na kutekeleza Global Privacy Control.
 
-Ili kulinda faragha yako, Privacy Magic:
+DHAMANA KALI YA FARAGHA
+
+• 100% chanzo huria: Msimbo wetu uko wazi kwa kila mtu kuchunguza na kuthibitisha.
+• Sifuri data inayokusanywa: Haturekodi, kufuatilia au kuuza (wala hatutafanya) shughuli yako ya kuvinjari au taarifa binafsi.
+• Sifuri telemetria: Hakuna Google Analytics au vifuatiliaji vingine katika kiendelezi au tovuti.
+
+Privacy Magic inatengenezwa kikamilifu. Maoni au maswali? Andika kwa contact@littletechllc.com.
+
+Kuhusu mwandishi
+
+Privacy Magic imeundwa na Arthur Edelstein, mhandisi wa programu anayejenga programu huria inayotetea faragha ya wavuti:
+
+• Katika Tor, alianzisha utengano wa mtiririko katika Tor Browser.
+• Katika Firefox, alikuwa meneja wa bidhaa wa timu za Total Cookie Protection na HTTPS-Only Mode.
+• Katika Brave, alianzisha HTTPS by Default na kuandika pamoja utafiti kuhusu udhaifu wa faragha ya vivinjari.
+• Muundaji wa PrivacyTests.org, mpango wa chanzo huria unaojaribu uvujaji wa faragha ya vivinjari.
+
+VIPIMO VYA KIUFUNDI
 
 - Inazuia matangazo, wafuatiliaji na usumbufu
 - Inalinda taarifa za mfumo (dhidi ya uchukuzi wa alama za vidole)
   · Betri
   · Diski
   · Fonti
-  · Graphics
+  · Graphics (Canvas, WebGL)
   · Hisabati
   · Kibodi
   · Kifaa
-  · Kivinjari
+  · Kivinjari (User agent)
   · Kumbukumbu
   · Lugha
   · Mguso
@@ -23,13 +43,13 @@ Ili kulinda faragha yako, Privacy Magic:
   · Muda
   · Onyesho
   · Processor
-  · Sauti
+  · Sauti (AudioContext)
   · Skrini
   · Ukanda wa Saa
 - Inaondoa alama za ufuatiliaji
-  · Uvujaji wa akiba
   · Jina la Dirisha
   · Mrejeshi
+  · Uvujaji wa akiba
   · Vigezo vya Ufuatiliaji
 - Inaimarisha vipengele vya wavuti
   · Iframes
@@ -49,7 +69,9 @@ Ili kulinda faragha yako, Privacy Magic:
   · Mapendekezo ya Utafuti
   · Ripoti Iliyopanuliwa ya Uvinjari Salama
 - Inazima API za kulenga matangazo
-  · Kupima Matangazo
+  · Kupima Matangazo API
   · Protected Audience API
   · Topics API
 - Inakusaidia kuzima usawazishaji wa historia
+
+

@@ -1,23 +1,43 @@
-Privacy Magic está en acceso anticipado: ¡nos encantaría conocer tu opinión! contact@littletechllc.com
+Esta extensión ofrece protecciones de vanguardia, diseñadas para máxima privacidad y usabilidad. Lista para usar: ¡cero configuración!
 
-La Web es algo maravilloso: le da acceso a la información del mundo. Es una parte esencial de la vida moderna. Lamentablemente, la Web también es un vehículo de vigilancia masiva. Todo lo que hace en línea está siendo recopilado, almacenado y analizado por empresas y gobiernos.
+PROTECCIONES CLAVE
 
-Privacy Magic proporciona protecciones completas y en capas para protegerle de la vigilancia.
+• Bloquear anuncios y rastreadores: Impide que se carguen anuncios invasivos, scripts de seguimiento y píxeles en tu navegador.
+• Resistencia avanzada al fingerprinting: Falsea 18+ señales del sistema y del hardware (Canvas, WebGL, AudioContext, fuentes, zona horaria y más) que de otro modo podrían identificarte.
+• Eliminación de rastros: Detiene parámetros de seguimiento, minimiza cabeceras Referer y evita fugas de caché.
+• Reforzar la privacidad del navegador: Bloquea cookies de terceros y la API Topics, y aplica el Global Privacy Control.
 
-Para defender su privacidad, Privacy Magic:
+GARANTÍA ESTRICTA DE PRIVACIDAD
+
+• 100% código abierto: Nuestro código está abierto para que cualquiera lo examine y verifique.
+• Cero datos recopilados: No registramos, rastreamos ni vendemos (y nunca lo haremos) tu actividad de navegación ni tu información personal.
+• Cero telemetría: No hay Google Analytics ni otros rastreadores en la extensión ni en el sitio web.
+
+Privacy Magic está en desarrollo activo. ¿Tienes comentarios o preguntas? Escríbenos a contact@littletechllc.com.
+
+SOBRE EL AUTOR
+
+Privacy Magic lo crea Arthur Edelstein, ingeniero de software dedicado a construir software de código abierto que defiende la privacidad web:
+
+• En Tor, introdujo el aislamiento de flujos en Tor Browser.
+• En Firefox, fue product manager de los equipos de Total Cookie Protection y HTTPS-Only Mode.
+• En Brave, introdujo HTTPS by Default y coautoró investigación sobre vulnerabilidades de privacidad en navegadores.
+• Creador de PrivacyTests.org, una iniciativa de código abierto que prueba fugas de privacidad en navegadores.
+
+ESPECIFICACIONES TÉCNICAS
 
 - Bloquea anuncios, rastreadores y molestias
 - Protege la información del sistema (para resistir el fingerprinting)
-  · Audio
+  · Audio (AudioContext)
   · Batería
   · Disco
   · Dispositivo
   · Fuentes
-  · Gráficos
+  · Gráficos (Canvas, WebGL)
   · Idioma
   · Matemáticas
   · Memoria
-  · Navegador
+  · Navegador (User agent)
   · Pantalla
   · Procesador
   · Red
@@ -49,7 +69,9 @@ Para defender su privacidad, Privacy Magic:
   · Servicio de corrección ortográfica
   · Sugerencias de búsqueda
 - Desactiva las API de segmentación publicitaria
-  · Medición de anuncios
+  · Medición de anuncios API
   · Protected Audience API
   · Topics API
 - Te ayuda a desactivar la sincronización del historial
+
+

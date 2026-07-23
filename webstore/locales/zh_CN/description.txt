@@ -1,10 +1,30 @@
-Privacy Magic 目前处于抢先体验阶段——非常期待您的反馈！contact@littletechllc.com
+此扩展提供先进的保护，专为最大隐私与易用性而设计。开箱即用：无需配置！
 
-网络为我们带来了便利：它让您能够获取世界各地的信息，已成为现代生活不可或缺的一部分。遗憾的是，网络也是大规模监控的渠道。您在网上的一举一动都在被企业和政府收集、存储和分析。
+核心保护
 
-Privacy Magic 提供全面、多层次的保护，助您抵御监控。
+• 拦截广告与跟踪器：阻止侵犯隐私的广告、跟踪脚本和像素在浏览器中加载。
+• 高级指纹防护：伪装 18+ 项系统与硬件信号（Canvas、WebGL、AudioContext、字体、时区等），防止据此识别您。
+• 清除跟踪痕迹：阻止跟踪参数、最小化 Referer 标头，并防止缓存泄漏。
+• 强化浏览器隐私：拦截第三方 Cookie 与 Topics API，并执行 Global Privacy Control。
 
-为守护您的隐私，Privacy Magic：
+严格隐私保证
+
+• 100% 开源：代码公开，任何人都可以审查与验证。
+• 零数据收集：我们不会（也永远不会）记录、跟踪或出售您的浏览活动或个人信息。
+• 零遥测：扩展与网站中均未嵌入 Google Analytics 或其他跟踪器。
+
+Privacy Magic 正在积极开发中。如有反馈或问题，请发信至 contact@littletechllc.com。
+
+关于作者
+
+Privacy Magic 由软件工程师 Arthur Edelstein 创建，他致力于构建捍卫网络隐私的开源软件：
+
+• 在 Tor，他为 Tor Browser 引入了流隔离。
+• 在 Firefox，他曾任 Total Cookie Protection 与 HTTPS-Only Mode 团队的产品经理。
+• 在 Brave，他引入了 HTTPS by Default，并参与撰写浏览器隐私漏洞相关研究。
+• PrivacyTests.org 的创建者——一个检测浏览器隐私泄漏的开源项目。
+
+技术规格
 
 - 拦截广告、跟踪器和骚扰内容
 - 保护系统信息（防止指纹识别）
@@ -14,22 +34,22 @@ Privacy Magic 提供全面、多层次的保护，助您抵御监控。
   · 电池
   · 计时
   · 键盘
-  · 浏览器
+  · 浏览器 (User agent)
   · 内存
   · 屏幕
   · 设备
   · 时区
   · 数学
-  · 图形
+  · 图形 (Canvas, WebGL)
   · 网络
   · 显示
-  · 音频
+  · 音频 (AudioContext)
   · 语言
   · 字体
 - 移除跟踪痕迹
-  · 缓存泄露
   · 窗口名称
   · 跟踪参数
+  · 缓存泄露
   · 引用来源
 - 加固网页元素
   · Iframes
@@ -49,7 +69,9 @@ Privacy Magic 提供全面、多层次的保护，助您抵御监控。
   · 搜索建议
   · 替代错误页
 - 关闭广告定向 API
-  · 广告衡量
+  · 广告衡量 API
   · Protected Audience API
   · Topics API
 - 帮助您关闭历史记录同步
+
+

@@ -1,21 +1,41 @@
-Privacy Magic er i tidlig adgang — vi vil meget gerne høre din feedback! contact@littletechllc.com
+Denne udvidelse giver avanceret beskyttelse, designet til maksimal privatliv og brugervenlighed. Fungerer med det samme: ingen konfiguration påkrævet!
 
-Internettet er en fantastisk ting: det giver dig adgang til verdens information. Det er en væsentlig del af det moderne liv. Desværre er internettet også et redskab til masseovervågning. Alt hvad du gør online, bliver indsamlet, gemt og analyseret af virksomheder og regeringer.
+NØGLEBESKYTTELSE
 
-Privacy Magic giver grundig, lagdelt beskyttelse mod overvågning.
+• Bloker annoncer og trackere: Stopper privatlivskrænkende annoncer, sporingsscripts og pixels fra at blive indlæst i browseren.
+• Avanceret fingerprinting-modstand: Spoofer 18+ system- og hardwaresignaler (Canvas, WebGL, AudioContext, skrifttyper, tidszone m.m.), der ellers kunne identificere dig.
+• Fjernelse af spor: Stopper sporingsparametre, minimerer Referer-headere og forhindrer cache-lækager.
+• Styrk browserens privatliv: Blokerer tredjepartscookies og Topics API og håndhæver Global Privacy Control.
 
-For at beskytte din privatliv tilbyder Privacy Magic:
+STRENG PRIVATLIVSGARANTI
+
+• 100% open source: Vores kode er åben for alle at undersøge og verificere.
+• Nul dataindsamling: Vi logger, sporer eller sælger ikke (og vil aldrig) din browseraktivitet eller personlige oplysninger.
+• Nul telemetri: Ingen Google Analytics eller andre trackere er indlejret i udvidelsen eller på webstedet.
+
+Privacy Magic er under aktiv udvikling. Feedback eller spørgsmål? Skriv til contact@littletechllc.com.
+
+OM FORFATTEREN
+
+Privacy Magic er skabt af Arthur Edelstein, softwareingeniør der bygger open source-software til webprivatliv:
+
+• Hos Tor indførte han stream-isolation i Tor Browser.
+• Hos Firefox var han produktchef for teams bag Total Cookie Protection og HTTPS-Only Mode.
+• Hos Brave indførte han HTTPS by Default og var medforfatter til forskning om browserprivatlivs-sårbarheder.
+• Skaber af PrivacyTests.org, et open-source-initiativ der tester browsere for privatlivslæk.
+
+TEKNISKE SPECIFIKATIONER
 
 - Blokerer annoncer, sporingsværktøjer og gener
 - Beskytter systemoplysninger (mod fingerprinting)
   · Batteri
   · Berøring
-  · Browser
+  · Browser (User agent)
   · Disk
   · Enhed
-  · Grafik
+  · Grafik (Canvas, WebGL)
   · Hukommelse
-  · Lyd
+  · Lyd (AudioContext)
   · Matematik
   · Netværk
   · Processor
@@ -49,7 +69,9 @@ For at beskytte din privatliv tilbyder Privacy Magic:
   · Søgeforslag
   · Udvidet sikker browsing-rapportering
 - Deaktiverer API'er til annoncemåling
-  · Annoncemåling
+  · Annoncemåling API
   · Protected Audience API
   · Topics API
 - Hjælper dig med at deaktivere synkronisering af historik
+
+

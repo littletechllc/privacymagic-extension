@@ -1,16 +1,36 @@
-Privacy Magic è in accesso anticipato: ci piacerebbe molto il tuo feedback! contact@littletechllc.com
+Questa estensione offre protezioni all'avanguardia, pensate per massima privacy e usabilità. Pronta all'uso: zero configurazione richiesta!
 
-Il Web è una cosa meravigliosa: ti dà accesso alle informazioni del mondo. È una parte essenziale della vita moderna. Purtroppo, il Web è anche un veicolo per la sorveglianza di massa. Tutto ciò che fai online viene raccolto, memorizzato e analizzato da aziende e governi.
+PROTEZIONI CHIAVE
 
-Privacy Magic fornisce protezioni complete e multilivello per proteggerti dalla sorveglianza.
+• Blocca annunci e tracker: Impedisce il caricamento di annunci invasivi, script di tracciamento e pixel nel browser.
+• Resistenza avanzata al fingerprinting: Maschera 18+ segnali di sistema e hardware (Canvas, WebGL, AudioContext, font, fuso orario e altro) che altrimenti potrebbero identificarti.
+• Rimozione delle briciole di tracciamento: Blocca i parametri di tracking, riduce le intestazioni Referer e previene le fughe dalla cache.
+• Rafforza la privacy del browser: Blocca i cookie di terze parti e l'API Topics e applica il Global Privacy Control.
 
-Per difendere la tua privacy, Privacy Magic:
+GARANZIA DI PRIVACY RIGOROSA
+
+• 100% open source: Il nostro codice è aperto a esame e verifica da parte di tutti.
+• Zero dati raccolti: Non registriamo, tracciamo né vendiamo (e non lo faremo mai) la tua attività di navigazione o i tuoi dati personali.
+• Zero telemetria: Nessun Google Analytics o altro tracker è incorporato nell'estensione o nel sito.
+
+Privacy Magic è in sviluppo attivo. Feedback o domande? Scrivici a contact@littletechllc.com.
+
+SULL'AUTORE
+
+Privacy Magic è creato da Arthur Edelstein, ingegnere del software dedicato a software open source che difende la privacy sul web:
+
+• In Tor, ha introdotto lo stream isolation in Tor Browser.
+• In Firefox, è stato product manager dei team di Total Cookie Protection e HTTPS-Only Mode.
+• In Brave, ha introdotto HTTPS by Default e coautore di ricerche sulle vulnerabilità di privacy dei browser.
+• Creatore di PrivacyTests.org, un'iniziativa open source che testa le fughe di privacy dei browser.
+
+SPECIFICHE TECNICHE
 
 - Blocca annunci, tracker e disturbi
 - Protegge le informazioni di sistema (per resistere al fingerprinting)
-  · Audio
+  · Audio (AudioContext)
   · Batteria
-  · Browser
+  · Browser (User agent)
   · Disco
   · Display
   · Dispositivo
@@ -27,9 +47,9 @@ Per difendere la tua privacy, Privacy Magic:
   · Tempi
   · Touch
 - Rimuove le tracce di navigazione
-  · Perdite dalla cache
   · Nome finestra
   · Parametri tracciamento
+  · Perdite dalla cache
   · Referrer
 - Irrobustisce gli elementi web
   · Iframes
@@ -49,7 +69,9 @@ Per difendere la tua privacy, Privacy Magic:
   · Report esteso navigazione sicura
   · Suggerimenti di ricerca
 - Disattiva le API per pubblicità mirata
-  · Misurazione annunci
+  · Misurazione annunci API
   · Protected Audience API
   · Topics API
 - Ti aiuta a disattivare la sincronizzazione della cronologia
+
+

@@ -1,18 +1,38 @@
-Privacy Magic är i tidig åtkomst — vi vill gärna ha din feedback! contact@littletechllc.com
+Det här tillägget ger toppmoderna skydd, utformat för maximal integritet och användbarhet. Fungerar direkt: ingen konfiguration krävs!
 
-Webben är en fantastisk sak: den ger dig tillgång till världens information. Det är en väsentlig del av det moderna livet. Tyvärr är webben också ett verktyg för massövervakning. Allt du gör online samlas in, lagras och analyseras av företag och regeringar.
+NYCKELSKYDD
 
-Privacy Magic ger grundlig, skiktad skydd mot övervakning.
+• Blockera annonser och spårare: Stoppar integritetskränkande annonser, spårningsskript och pixlar från att laddas i webbläsaren.
+• Avancerat fingeravtrycksskydd: Förvränger 18+ system- och hårdvarusignaler (Canvas, WebGL, AudioContext, typsnitt, tidszon med mera) som annars kunde identifiera dig.
+• Borttagning av spår: Stoppar spårningsparametrar, minimerar Referer-rubriker och förhindrar cacheläckor.
+• Stärk webbläsarens integritet: Blockerar tredjepartscookies och Topics API och tillämpar Global Privacy Control.
 
-För att skydda din integritet erbjuder Privacy Magic:
+STRIKT INTEGRITETSGARANTI
+
+• 100% öppen källkod: Vår kod är öppen för alla att granska och verifiera.
+• Noll datainsamling: Vi loggar, spårar eller säljer inte (och kommer aldrig att göra det) din surfaktivitet eller personuppgifter.
+• Noll telemetri: Inget Google Analytics eller andra spårare finns i tillägget eller på webbplatsen.
+
+Privacy Magic utvecklas aktivt. Feedback eller frågor? Skriv till contact@littletechllc.com.
+
+OM FÖRFATTAREN
+
+Privacy Magic skapas av Arthur Edelstein, mjukvaruingenjör som bygger öppen källkod för webbintegritet:
+
+• På Tor införde han strömisolering i Tor Browser.
+• På Firefox var han produktchef för teamen bakom Total Cookie Protection och HTTPS-Only Mode.
+• På Brave införde han HTTPS by Default och var medförfattare till forskning om webbläsares integritetssårbarheter.
+• Skapare av PrivacyTests.org, ett open-source-initiativ som testar webbläsare för integritetsläckor.
+
+TEKNISKA SPECIFIKATIONER
 
 - Blockerar annonser, spårare och störningar
 - Skyddar systeminformation (mot fingerprinting)
   · Batteri
   · Disk
   · Enhet
-  · Grafik
-  · Ljud
+  · Grafik (Canvas, WebGL)
+  · Ljud (AudioContext)
   · Matematik
   · Minne
   · Nätverk
@@ -25,7 +45,7 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Timing
   · Typsnitt
   · Visning
-  · Webbläsare
+  · Webbläsare (User agent)
 - Tar bort spårningsspår
   · Cache-läckor
   · Fönsternamn
@@ -49,7 +69,9 @@ För att skydda din integritet erbjuder Privacy Magic:
   · Sökförslag
   · Utökad rapportering för säker surfning
 - Inaktiverar API:er för annonsmätning
-  · Annonsmätning
+  · Annonsmätning API
   · Protected Audience API
   · Topics API
 - Hjälper dig att stänga av synkronisering av historik
+
+

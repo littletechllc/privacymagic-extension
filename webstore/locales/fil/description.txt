@@ -1,21 +1,41 @@
-Ang Privacy Magic ay nasa maagang access — gusto naming marinig ang iyong feedback! contact@littletechllc.com
+Nagbibigay ang extension na ito ng makabagong proteksyon, idinisenyo para sa maximum na privacy at usability. Agad na gumagana: walang kailangang i-configure!
 
-Ang web ay kahanga-hanga: binibigyan ka nito ng access sa impormasyon ng mundo. Mahalagang bahagi ito ng modernong buhay. Sa kasamaang-palad, ang web ay daluyan din ng mass surveillance. Lahat ng ginagawa mo online ay kinokolekta, iniimbak at sinusuri ng mga korporasyon at gobyerno.
+PANGUNAHING PROTEKSYON
 
-Nagbibigay ang Privacy Magic ng masinsinan, patong-patong na proteksyon laban sa surveillance.
+• I-block ang ads at trackers: Hinaharang ang pag-load ng mapanghimasok na ads, tracking scripts, at pixels sa browser.
+• Advanced fingerprinting resistance: Nagsspoof ng 18+ system at hardware signals (Canvas, WebGL, AudioContext, fonts, time zone at iba pa) na maaaring magamit para makilala ka.
+• Pag-alis ng bakas: Hinaharang ang tracking parameters, minamaliit ang Referer headers, at pinipigilan ang cache leaks.
+• Patibayin ang privacy ng browser: Nagba-block ng third-party cookies at Topics API, at ipinatutupad ang Global Privacy Control.
 
-Para ipagtanggol ang iyong privacy, ang Privacy Magic:
+MAHIGPIT NA GARANTIYA SA PRIVACY
+
+• 100% open source: Bukas ang aming code para suriin at beripikahin ng lahat.
+• Zero data collected: Hindi namin (at hindi kailanman) nilo-log, tina-track, o ibinebenta ang iyong browsing activity o personal na impormasyon.
+• Zero telemetry: Walang Google Analytics o ibang tracker sa extension o website.
+
+Aktibong ginagawa ang Privacy Magic. May feedback o tanong? Sumulat sa contact@littletechllc.com.
+
+TUNGKOL SA MAY-AKDA
+
+Ginawa ang Privacy Magic ni Arthur Edelstein, software engineer na nagtatayo ng open-source software na nagtatanggol sa web privacy:
+
+• Sa Tor, ipinakilala niya ang stream isolation sa Tor Browser.
+• Sa Firefox, siya ang product manager ng mga team ng Total Cookie Protection at HTTPS-Only Mode.
+• Sa Brave, ipinakilala niya ang HTTPS by Default at tumulong magsulat ng pananaliksik sa mga kahinaan sa privacy ng browser.
+• Tagalikha ng PrivacyTests.org, open-source na inisyatiba na sumusubok ng privacy leaks ng mga browser.
+
+MGA TEKNIKAL NA DETALYE
 
 - Nagba-block ng ads, trackers at mga abala
 - Pinoprotektahan ang system information (laban sa fingerprinting)
-  · Audio
+  · Audio (AudioContext)
   · Battery
-  · Browser
+  · Browser (User agent)
   · Device
   · Disk
   · Display
   · Fonts
-  · Graphics
+  · Graphics (Canvas, WebGL)
   · Keyboard
   · Language
   · Matematika
@@ -53,3 +73,5 @@ Para ipagtanggol ang iyong privacy, ang Privacy Magic:
   · Protected Audience API
   · Topics API
 - Tumutulong na patayin ang history syncing
+
+

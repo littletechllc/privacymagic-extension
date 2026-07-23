@@ -1,20 +1,40 @@
-Privacy Magic je v zgodnjem dostopu — veseli bomo vaših povratnih informacij! contact@littletechllc.com
+Ta razširitev zagotavlja najsodobnejšo zaščito, zasnovano za največjo zasebnost in uporabnost. Deluje takoj: konfiguracija ni potrebna!
 
-Splet je čudovita stvar: omogoča vam dostop do informacij sveta. Bistveni del je modernega življenja. Žal je splet tudi orodje za množično nadzorstvo. Vse, kar počnete na spletu, zbere, shrani in analizirajo korporacije in vlade.
+KLJUČNE ZAŠČITE
 
-Privacy Magic zagotavlja temeljito, večplastno zaščito pred nadzorstvom.
+• Blokiraj oglase in sledilce: Ustavi nalaganje vsiljivih oglasov, skript za sledenje in slikovnih pik v brskalniku.
+• Napredna odpornost na fingerprinting: Prikriva 18+ sistemskih in strojnih signalov (Canvas, WebGL, AudioContext, pisave, časovni pas in več), s katerimi bi vas sicer lahko prepoznali.
+• Odstranjevanje sledi: Ustavi parametre sledenja, zmanjša glave Referer in prepreči uhajanje predpomnilnika.
+• Okrepi zasebnost brskalnika: Blokira piškotke tretjih oseb in Topics API ter uveljavlja Global Privacy Control.
 
-Za obrambo vaše zasebnosti Privacy Magic:
+STROGO JAMSTVO ZASEBNOSTI
+
+• 100% odprta koda: Naša koda je odprta za pregled in preverjanje vsem.
+• Nič zbranih podatkov: Ne beležimo, sledimo ali prodajamo (in nikoli ne bomo) vaše dejavnosti brskanja ali osebnih podatkov.
+• Nič telemetrije: V razširitvi ali na spletnem mestu ni Google Analytics ali drugih sledilcev.
+
+Privacy Magic se aktivno razvija. Povratne informacije ali vprašanja? Pišite na contact@littletechllc.com.
+
+O AVTORJU
+
+Privacy Magic ustvarja Arthur Edelstein, programski inženir, posvečen odprtokodni programski opremi, ki brani spletno zasebnost:
+
+• Pri Torju je uvedel izolacijo tokov v Tor Browserju.
+• Pri Firefoxu je bil product manager ekip Total Cookie Protection in HTTPS-Only Mode.
+• Pri Bravu je uvedel HTTPS by Default in soavtoriral raziskave o ranljivostih zasebnosti brskalnikov.
+• Ustvarjalec PrivacyTests.org, odprtokodne pobude, ki testira uhajanja zasebnosti brskalnikov.
+
+TEHNIČNE SPECIFIKACIJE
 
 - Blokira oglase, sledilce in moteče vsebine
 - Zaščiti sistemske informacije (pred fingerprintingom)
   · Baterija
-  · Brskalnik
+  · Brskalnik (User agent)
   · Časovni pas
   · Časovni zamik
   · Disk
   · Dotek
-  · Grafika
+  · Grafika (Canvas, WebGL)
   · Jezik
   · Matematika
   · Naprava
@@ -25,7 +45,7 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Procesor
   · Tipkovnica
   · Zaslon
-  · Zvok
+  · Zvok (AudioContext)
 - Odstrani sledi sledenja
   · Curejanje predpomnilnika
   · Ime okna
@@ -49,7 +69,9 @@ Za obrambo vaše zasebnosti Privacy Magic:
   · Razširjeno poročanje varnega brskanja
   · Storitev preverjanja črkovanja
 - Onemogoči API-je za ciljanje oglasov
-  · Merjenje oglasov
+  · Merjenje oglasov API
   · Protected Audience API
   · Topics API
 - Pomaga izklopiti sinhronizacijo zgodovine
+
+

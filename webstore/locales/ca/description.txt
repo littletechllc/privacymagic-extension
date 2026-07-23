@@ -1,24 +1,44 @@
-Privacy Magic és en accés anticipat: ens encantaria rebre els teus comentaris! contact@littletechllc.com
+Aquesta extensió ofereix proteccions d'avantguarda, dissenyades per a la màxima privadesa i usabilitat. Funciona de seguida: zero configuració!
 
-El web és una cosa meravellosa: us dóna accés a la informació del món. És una part essencial de la vida moderna. Malauradament, el web és també un vehicle de vigilància massiva. Tot el que feu en línia es recull, s'emmagatzema i s'analitza per corporacions i governs.
+PROTECCIONS CLAU
 
-Privacy Magic proporciona proteccions exhaustives i en capes contra la vigilància.
+• Bloqueja anuncis i rastrejadors: Impedeix que es carreguin anuncis invasius, scripts de seguiment i píxels al navegador.
+• Resistència avançada al fingerprinting: Falsifica 18+ senyals del sistema i del maquinari (Canvas, WebGL, AudioContext, tipografies, zona horària i més) que altrament us podrien identificar.
+• Eliminació de rastres: Atura els paràmetres de seguiment, minimitza les capçaleres Referer i evita fuites de memòria cau.
+• Reforça la privadesa del navegador: Bloqueja galetes de tercers i l'API Topics, i aplica el Global Privacy Control.
 
-Per defensar la vostra privacitat, Privacy Magic:
+GARANTIA ESTRICTA DE PRIVADESA
+
+• 100% codi obert: El nostre codi és obert perquè tothom l'examini i el verifiqui.
+• Zero dades recopilades: No registrem, rastregem ni venem (i mai ho farem) la vostra activitat de navegació ni la informació personal.
+• Zero telemetria: No hi ha Google Analytics ni altres rastrejadors a l'extensió ni al lloc web.
+
+Privacy Magic està en desenvolupament actiu. Comentaris o preguntes? Escriviu-nos a contact@littletechllc.com.
+
+SOBRE L'AUTOR
+
+Privacy Magic el crea Arthur Edelstein, enginyer de programari dedicat a programari de codi obert que defensa la privadesa web:
+
+• A Tor, va introduir l'aïllament de fluxos a Tor Browser.
+• A Firefox, va ser product manager dels equips de Total Cookie Protection i HTTPS-Only Mode.
+• A Brave, va introduir HTTPS by Default i va coautorar recerca sobre vulnerabilitats de privadesa dels navegadors.
+• Creador de PrivacyTests.org, una iniciativa de codi obert que prova fuites de privadesa dels navegadors.
+
+ESPECIFICACIONS TÈCNIQUES
 
 - Bloqueja anuncis, seguidors i molesties
 - Protegeix la informació del sistema (contra la presa d'empremtes)
-  · Àudio
+  · Àudio (AudioContext)
   · Bateria
   · Disc
   · Dispositiu
   · Fonts
-  · Gràfics
+  · Gràfics (Canvas, WebGL)
   · Idioma
   · Matemàtiques
   · Memòria
   · Monitor
-  · Navegador
+  · Navegador (User agent)
   · Pantalla
   · Processador
   · Tàctil
@@ -49,7 +69,9 @@ Per defensar la vostra privacitat, Privacy Magic:
   · Servei d'ortografia
   · Suggeriments de cerca
 - Desactiva les API de segmentació d'anuncis
-  · Mesura d'anuncis
+  · Mesura d'anuncis API
   · Protected Audience API
   · Topics API
 - T’ajuda a desactivar la sincronització de l’historial
+
+

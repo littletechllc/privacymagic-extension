@@ -1,21 +1,41 @@
-Privacy Magic is in early access -- we would love your feedback! contact@littletechllc.com
+This extension provides state-of-the-art protections, designed for maximum privacy and usability. Works out of the box: zero configuration required!
 
-The Web is a wonderful thing: it gives you access to the world's information. It's an essential part of modern life. Unfortunately, the Web is also a vehicle for mass surveillance. Everything you do online is being collected, stored, and analyzed by corporations and governments.
+KEY PROTECTIONS
 
-Privacy Magic provides thorough, layered protections to shield you from surveillance.
+• Block Ads & Trackers: Stops privacy-invading ads, tracking scripts and pixels from being loaded in your browser.
+• Advanced Fingerprinting Resistance: Spoofs 18+ system and hardware signals (Canvas, WebGL, AudioContext, Fonts, Time Zone and more) that could otherwise be used to identify you.
+• Breadcrumb Removal: Stops tracking parameters, minimizes referrer headers, and stops cache leaks.
+• Harden Browser Privacy: Blocks third-party cookies and the Topics API, and enforces the Global Privacy Control.
 
-To defend your privacy, Privacy Magic:
+STRICT PRIVACY GUARANTEE
+
+• 100% Open Source: Our code is open for everyone to examine and verify.
+• Zero Data Collected: We do not (and never will) log, track, or sell your browsing activity or personal information.
+• Zero Telemetry: No Google Analytics or other trackers are embedded in the extension or website.
+
+Privacy Magic is in active development. Do you have feedback or questions? We'd love to hear from you! Please write us at contact@littletechllc.com.
+
+ABOUT THE AUTHOR
+
+Privacy Magic is created by Arthur Edelstein, a software engineer dedicated to building open-source software that defends web privacy:
+
+• At Tor, he introduced stream isolation in Tor Browser.
+• At Firefox, he was product manager for the teams that developed Total Cookie Protection and HTTPS-Only Mode.
+• At Brave, he introduced HTTPS by Default and co-authored research on browser privacy vulnerabilities.
+• Creator of PrivacyTests.org, an open-source initiative that tests web browsers for privacy leaks.
+
+TECHNICAL SPECIFICATIONS
 
 - Blocks ads, trackers, and annoyances
 - Protects system information (to resist fingerprinting)
-  · Audio
+  · Audio (AudioContext)
   · Battery
-  · Browser
+  · Browser (User agent)
   · Device
   · Disk
   · Display
   · Fonts
-  · Graphics
+  · Graphics (Canvas, WebGL)
   · Keyboard
   · Language
   · Math
@@ -53,4 +73,5 @@ To defend your privacy, Privacy Magic:
   · Protected Audience API
   · Topics API
 - Helps you disable history syncing
+
 

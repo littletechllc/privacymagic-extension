@@ -1,10 +1,30 @@
-Privacy Magic yra ankstyvoje prieigoje — lauksime jūsų atsiliepimų! contact@littletechllc.com
+Šis plėtinys teikia pažangiausią apsaugą, sukurtą maksimaliam privatumu ir patogumui. Veikia iš karto: konfigūracijos nereikia!
 
-Žiniatinklis yra nuostabus: jis suteikia jums prieigą prie pasaulio informacijos. Tai esminė šiuolaikinio gyvenimo dalis. Deja, žiniatinklis taip pat yra masinės priežiūros priemonė. Viskas, ką darote internete, renka, saugo ir analizuoja korporacijos ir vyriausybės.
+PAGRINDINĖS APSAUGOS
 
-Privacy Magic suteikia nuodugnų, sluoksniuotą apsaugą nuo priežiūros.
+• Blokuoti reklamas ir sekiklius: Sustabdo invazinių reklamų, sekimo scenarijų ir pikselių įkėlimą naršyklėje.
+• Pažangus atsparumas fingerprinting: Užmaskuoja 18+ sistemos ir aparatinės įrangos signalų (Canvas, WebGL, AudioContext, šriftai, laiko juosta ir kt.), kuriais kitaip galėtumėte būti identifikuoti.
+• Pėdsakų šalinimas: Sustabdo sekimo parametrus, sumažina Referer antraštes ir apsaugo nuo podėlio nutekėjimų.
+• Sustiprinti naršyklės privatumą: Blokuoja trečiųjų šalių slapukus ir Topics API bei taiko Global Privacy Control.
 
-Jūsų privatumui ginti Privacy Magic:
+GRIEŽTA PRIVATUMO GARANTIJA
+
+• 100% atvirasis kodas: Mūsų kodas atviras visiems peržiūrėti ir patikrinti.
+• Nulis renkamų duomenų: Mes neregistruojame, nesekame ir neparduodame (ir niekada to nedarysime) jūsų naršymo veiklos ar asmeninių duomenų.
+• Nulis telemetrijos: Plėtinyje ar svetainėje nėra Google Analytics ar kitų sekiklių.
+
+Privacy Magic aktyviai kuriamas. Atsiliepimai ar klausimai? Rašykite contact@littletechllc.com.
+
+APIE AUTORIŲ
+
+Privacy Magic kuria Arthur Edelstein, programinės įrangos inžinierius, kuriantis atvirojo kodo programinę įrangą interneto privatumui ginti:
+
+• Tor įdiegė srautų izoliaciją Tor Browser.
+• Firefox buvo Total Cookie Protection ir HTTPS-Only Mode komandų produktų vadovas.
+• Brave įdiegė HTTPS by Default ir buvo bendraautoris tyrimų apie naršyklių privatumo pažeidžiamumus.
+• PrivacyTests.org kūrėjas — atvirojo kodo iniciatyva, testuojanti naršyklių privatumo nutekėjimus.
+
+TECHNINĖS SPECIFIKACIJOS
 
 - Blokuoja reklamas, sekiklius ir erzinimus
 - Apsaugo sistemos informaciją (nuo pirštų atspaudų)
@@ -13,8 +33,8 @@ Jūsų privatumui ginti Privacy Magic:
   · Diskas
   · Ekranas
   · Ekrano nustatymai
-  · Garsas
-  · Grafika
+  · Garsas (AudioContext)
+  · Grafika (Canvas, WebGL)
   · Įrenginys
   · Kalba
   · Klaviatūra
@@ -22,14 +42,14 @@ Jūsų privatumui ginti Privacy Magic:
   · Laiko juosta
   · Lietimas
   · Matematika
-  · Naršyklė
+  · Naršyklė (User agent)
   · Procesorius
   · Šriftai
   · Tinklas
 - Pašalina sekimo pėdsakus
-  · Podėlio nutekėjimai
   · Lango pavadinimas
   · Nurodytojas
+  · Podėlio nutekėjimai
   · Sekimo parametrai
 - Stiprina žiniatinklio elementus
   · Iframes
@@ -50,6 +70,8 @@ Jūsų privatumui ginti Privacy Magic:
   · Saugaus naršymo išplėstinė ataskaita
 - Išjungia reklamų taikinimo API
   · Protected Audience API
-  · Reklamų matavimas
+  · Reklamų matavimas API
   · Topics API
 - Padeda išjungti istorijos sinchronizavimą
+
+

@@ -1,17 +1,37 @@
-Privacy Magic on ennakkojulkaisussa — otamme mielellämme vastaan palautetta! contact@littletechllc.com
+Tämä laajennus tarjoaa huippuluokan suojauksen, suunniteltu maksimaaliseen yksityisyyteen ja käytettävyyteen. Toimii heti: ei asetuksia tarvita!
 
-Verkko on ihmeellinen asia: se antaa sinulle pääsyn maailman tietoihin. Se on olennainen osa nykypäivän elämää. Valitettavasti verkko on myös massavalvonnan väline. Kaikki mitä teet verkossa kerätään, tallennetaan ja analysoidaan yritysten ja hallitusten toimesta.
+AVAIMET SUOJAUKSET
 
-Privacy Magic tarjoaa perusteellisen, kerrostetun suojan valvonnalta.
+• Estä mainokset ja seuraimet: Estää yksityisyyttä loukkaavien mainosten, seuranta-skriptien ja pikseleiden latautumisen selaimeen.
+• Edistynyt fingerprinting-vastus: Peittää 18+ järjestelmä- ja laitesignaalia (Canvas, WebGL, AudioContext, fontit, aikavyöhyke ym.), joilla sinut muuten voitaisiin tunnistaa.
+• Jälkien poisto: Pysäyttää seuranta-parametrit, minimoi Referer-otsikot ja estää välimuistivuodot.
+• Vahvista selaimen yksityisyyttä: Estää kolmannen osapuolen evästeet ja Topics API:n sekä valvoo Global Privacy Controlia.
 
-Suojatakseen yksityisyyttäsi Privacy Magic:
+TIUKKA YKSITYISYYSTAKUU
+
+• 100% avointa lähdekoodia: Koodimme on avoin kaikkien tarkastettavaksi ja varmennettavaksi.
+• Nolla tietojenkeruuta: Emme kirjaa, seuraa emmekä myy (emmekä koskaan tule) selausaktiviteettiasi tai henkilötietojasi.
+• Nolla telemetriaa: Laajennuksessa tai sivustolla ei ole Google Analyticsia eikä muita seuraimia.
+
+Privacy Magicia kehitetään aktiivisesti. Palautetta tai kysymyksiä? Kirjoita osoitteeseen contact@littletechllc.com.
+
+TEKIJÄSTÄ
+
+Privacy Magicin on luonut Arthur Edelstein, ohjelmistoinsinööri, joka rakentaa avoimen lähdekoodin ohjelmistoa verkon yksityisyyden puolustamiseksi:
+
+• Torissa hän toi stream-eristyksen Tor Browseriin.
+• Firefoxissa hän oli Total Cookie Protectionin ja HTTPS-Only Mode -tiimien tuotejohtaja.
+• Bravessa hän toi HTTPS by Defaultin ja oli mukana selainten yksityisyyshaavoittuvuuksia koskevassa tutkimuksessa.
+• PrivacyTests.orgin luoja — avoimen lähdekoodin hanke, joka testaa selaimia yksityisyysvuotojen varalta.
+
+TEKNISET TIEDOT
 
 - Estää mainokset, seuraimet ja häiriöt
 - Suojaa järjestelmätiedot (fingerprintingia vastaan)
   · Aikavyöhyke
   · Ajoitus
   · Fontit
-  · Grafiikka
+  · Grafiikka (Canvas, WebGL)
   · Kieli
   · Kosketus
   · Laite
@@ -23,14 +43,14 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Näyttöasetukset
   · Paristi
   · Prosessori
-  · Selain
+  · Selain (User agent)
   · Verkko
-  · Ääni
+  · Ääni (AudioContext)
 - Poistaa seurannan jäljet
-  · Välimuistivuodot
   · Ikkunan nimi
   · Seurantaparametrit
   · Viittaaja
+  · Välimuistivuodot
 - Vahvistaa web-elementtejä
   · Iframes
   · Service Workers
@@ -49,7 +69,9 @@ Suojatakseen yksityisyyttäsi Privacy Magic:
   · Turvallisen selaamisen laajennettu raportointi
   · Vaihtoehtoiset virhesivut
 - Poistaa mainosten kohdentamis-API:t käytöstä
-  · Mainosten mittaus
+  · Mainosten mittaus API
   · Protected Audience API
   · Topics API
 - Auttaa poistamaan historian synkronoinnin käytöstä
+
+

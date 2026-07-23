@@ -1,25 +1,45 @@
-Privacy Magic ir agrīnā piekļuvē — gaidām jūsu atsauksmes! contact@littletechllc.com
+Šis paplašinājums nodrošina mūsdienīgu aizsardzību, kas izstrādāta maksimālai privātumam un lietojamībai. Darbojas uzreiz: konfigurācija nav nepieciešama!
 
-Tīmeklis ir brīnišķīga lieta: tas sniedz jums piekļuvi pasaules informācijai. Tas ir būtiska mūsdienu dzīves sastāvdaļa. Diemžēl tīmeklis ir arī masu uzraudzības līdzeklis. Viss, ko darāt tiešsaistē, tiek vākts, glabāts un analizēts korporācijām un valdībām.
+GALVENĀS AIZSARDZĪBAS
 
-Privacy Magic nodrošina rūpīgu, daudzslāņu aizsardzību pret uzraudzību.
+• Bloķēt reklāmas un izsekotājus: Aptur invazīvu reklāmu, izsekošanas skriptu un pikseļu ielādi pārlūkā.
+• Uzlabota pretestība pret fingerprinting: Maskē 18+ sistēmas un aparatūras signālus (Canvas, WebGL, AudioContext, fonti, laika josla u.c.), ar kuriem citādi jūs varētu identificēt.
+• Pēdu noņemšana: Aptur izsekošanas parametrus, samazina Referer galvenes un novērš kešatmiņas noplūdes.
+• Stiprināt pārlūka privātumu: Bloķē trešo pušu sīkdatnes un Topics API un piemēro Global Privacy Control.
 
-Lai aizstāvētu jūsu privātumu, Privacy Magic:
+STROGA PRIVĀTUMA GARANTIJA
+
+• 100% atvērtā pirmkoda: Mūsu kods ir atvērts ikvienam pārbaudei un verificēšanai.
+• Nulle savāktu datu: Mēs nereģistrējam, neizsekojam un nepārdodam (un nekad to nedarīsim) jūsu pārlūkošanas aktivitāti vai personas datus.
+• Nulle telemetrijas: Paplašinājumā vai vietnē nav Google Analytics vai citu izsekotāju.
+
+Privacy Magic tiek aktīvi izstrādāts. Atsauksmes vai jautājumi? Rakstiet uz contact@littletechllc.com.
+
+PAR AUTORU
+
+Privacy Magic veido Arthur Edelstein, programmatūras inženieris, kas veido atvērtā pirmkoda programmatūru tīmekļa privātuma aizsardzībai:
+
+• Tor ieviesa plūsmu izolāciju Tor Browser.
+• Firefox bija Total Cookie Protection un HTTPS-Only Mode komandu produktu vadītājs.
+• Brave ieviesa HTTPS by Default un bija līdzautors pētījumiem par pārlūku privātuma ievainojamībām.
+• PrivacyTests.org veidotājs — atvērtā pirmkoda iniciatīva, kas testē pārlūku privātuma noplūdes.
+
+TEHNISKĀS SPECIFIKĀCIJAS
 
 - Bloķē reklāmas, izsekotājus un kaitinājumus
 - Aizsargā sistēmas informāciju (pret pirkstu nospiedumu)
   · Atmiņa
-  · Audio
+  · Audio (AudioContext)
   · Baterija
   · Disks
   · Displejs
   · Ekrāns
-  · Grafika
+  · Grafika (Canvas, WebGL)
   · Ierīce
   · Laika zona
   · Laiks
   · Matemātika
-  · Pārlūks
+  · Pārlūks (User agent)
   · Pieskāriens
   · Procesors
   · Šrifti
@@ -27,9 +47,9 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Tīkls
   · Valoda
 - Noņem izsekošanas pēdas
-  · Kešatmiņas noplūdes
   · Atsauce
   · Izsekošanas parametri
+  · Kešatmiņas noplūdes
   · Loga nosaukums
 - Stiprina tīmekļa elementus
   · Iframes
@@ -50,6 +70,8 @@ Lai aizstāvētu jūsu privātumu, Privacy Magic:
   · Pareizrakstības pakalpojums
 - Atspējo reklāmu mērķēšanas API
   · Protected Audience API
-  · Reklāmu mērīšana
+  · Reklāmu mērīšana API
   · Topics API
 - Palīdz izslēgt vēstures sinhronizāciju
+
+

@@ -1,27 +1,47 @@
-Privacy Magic est en accès anticipé — nous serions ravis d'avoir vos retours ! contact@littletechllc.com
+Cette extension offre des protections de pointe, conçues pour un maximum de confidentialité et d'utilisabilité. Prête à l'emploi : aucune configuration requise !
 
-Le Web est une merveille : il vous donne accès à l'information du monde. C'est une partie essentielle de la vie moderne. Malheureusement, le Web est aussi un vecteur de surveillance de masse. Tout ce que vous faites en ligne est collecté, stocké et analysé par des entreprises et des gouvernements.
+PROTECTIONS CLÉS
 
-Privacy Magic fournit des protections complètes et multicouches pour vous protéger de la surveillance.
+• Bloquer pubs et traceurs : Empêche le chargement des publicités invasives, scripts de suivi et pixels dans votre navigateur.
+• Résistance avancée au fingerprinting : Usurpe 18+ signaux système et matériels (Canvas, WebGL, AudioContext, polices, fuseau horaire et plus) qui pourraient sinon vous identifier.
+• Suppression des miettes de suivi : Stoppe les paramètres de tracking, minimise les en-têtes Referer et empêche les fuites de cache.
+• Renforcer la confidentialité du navigateur : Bloque les cookies tiers et l'API Topics, et applique le Global Privacy Control.
 
-Pour défendre votre vie privée, Privacy Magic :
+GARANTIE STRICTE DE CONFIDENTIALITÉ
+
+• 100% open source : Notre code est ouvert à l'examen et à la vérification par tous.
+• Zéro donnée collectée : Nous ne journalisons, ne suivons ni ne vendons (et ne le ferons jamais) votre activité de navigation ni vos informations personnelles.
+• Zéro télémétrie : Aucun Google Analytics ni autre traceur n'est intégré dans l'extension ou le site.
+
+Privacy Magic est en développement actif. Des retours ou des questions ? Écrivez-nous à contact@littletechllc.com.
+
+À PROPOS DE L'AUTEUR
+
+Privacy Magic est créé par Arthur Edelstein, ingénieur logiciel dédié aux logiciels open source qui défendent la confidentialité sur le web :
+
+• Chez Tor, il a introduit l'isolation des flux dans Tor Browser.
+• Chez Firefox, il était chef de produit des équipes derrière Total Cookie Protection et HTTPS-Only Mode.
+• Chez Brave, il a introduit HTTPS by Default et coécrit des recherches sur les failles de confidentialité des navigateurs.
+• Créateur de PrivacyTests.org, une initiative open source qui teste les fuites de confidentialité des navigateurs.
+
+SPÉCIFICATIONS TECHNIQUES
 
 - Bloque les publicités, traceurs et nuisances
 - Protège les informations système (pour résister au fingerprinting)
   · Affichage
   · Appareil
-  · Audio
+  · Audio (AudioContext)
   · Batterie
   · Chronométrage
   · Clavier
   · Disque
   · Écran
   · Fuseau horaire
-  · Graphique
+  · Graphique (Canvas, WebGL)
   · Langue
   · Maths
   · Mémoire
-  · Navigateur
+  · Navigateur (User agent)
   · Polices
   · Processeur
   · Réseau
@@ -49,7 +69,9 @@ Pour défendre votre vie privée, Privacy Magic :
   · Rapport étendu de navigation sécurisée
   · Suggestions de recherche
 - Désactive les API de ciblage publicitaire
-  · Mesure publicitaire
+  · Mesure publicitaire API
   · Protected Audience API
   · Topics API
 - Vous aide à désactiver la synchronisation de l'historique
+
+

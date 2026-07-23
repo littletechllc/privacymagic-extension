@@ -1,20 +1,40 @@
-Privacy Magic befindet sich in einem frühen Zugang – wir freuen uns über Ihr Feedback! contact@littletechllc.com
+Diese Erweiterung bietet modernste Schutzmaßnahmen für maximale Privatsphäre und Nutzerfreundlichkeit. Sofort einsatzbereit: keine Konfiguration nötig!
 
-Das Web ist etwas Wunderbares: Es verschafft Ihnen Zugang zu den Informationen der Welt. Es ist ein unverzichtbarer Teil des modernen Lebens. Leider ist das Web auch ein Mittel zur Massenüberwachung. Alles, was Sie online tun, wird von Unternehmen und Behörden gesammelt, gespeichert und ausgewertet.
+SCHUTZFUNKTIONEN
 
-Privacy Magic bietet umfassende, mehrschichtige Schutzmaßnahmen, um Sie vor Überwachung zu schützen.
+• Werbung & Tracker blockieren: Stoppt datenschutzinvasive Werbung, Tracking-Skripte und Pixel, bevor sie in Ihrem Browser geladen werden.
+• Erweiterter Fingerprinting-Schutz: Verschleiert 18+ System- und Hardwaresignale (Canvas, WebGL, AudioContext, Schriftarten, Zeitzone und mehr), mit denen Sie sonst identifiziert werden könnten.
+• Breadcrumb-Entfernung: Stoppt Tracking-Parameter, minimiert Referrer-Header und verhindert Cache-Leaks.
+• Browser-Privatsphäre härten: Blockiert Drittanbieter-Cookies und die Topics API und setzt den Global Privacy Control durch.
 
-Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
+STRIKTE DATENSCHUTZGARANTIE
+
+• 100% Open Source: Unser Code ist offen und kann von jedem geprüft und verifiziert werden.
+• Keine Datenerfassung: Wir protokollieren, verfolgen oder verkaufen Ihre Surfaktivitäten oder personenbezogenen Daten nicht (und werden das nie tun).
+• Keine Telemetrie: Weder in der Erweiterung noch auf der Website ist Google Analytics oder ein anderer Tracker eingebettet.
+
+Privacy Magic wird aktiv weiterentwickelt. Haben Sie Feedback oder Fragen? Wir freuen uns auf Ihre Nachricht! Schreiben Sie uns an contact@littletechllc.com.
+
+ÜBER DEN AUTOR
+
+Privacy Magic wurde von Arthur Edelstein entwickelt, einem Softwareingenieur, der Open-Source-Software zum Schutz der Web-Privatsphäre baut:
+
+• Bei Tor führte er Stream Isolation in Tor Browser ein.
+• Bei Firefox war er Product Manager der Teams hinter Total Cookie Protection und HTTPS-Only Mode.
+• Bei Brave führte er HTTPS by Default ein und war Mitautor von Forschung zu Browser-Privatsphäre-Schwachstellen.
+• Gründer von PrivacyTests.org, einer Open-Source-Initiative, die Browser auf Datenschutzlecks testet.
+
+TECHNISCHE SPEZIFIKATIONEN
 
 - Blockiert Werbung, Tracker und Störungen
 - Schützt Systeminformationen (gegen Fingerprinting)
   · Anzeige
-  · Audio
+  · Audio (AudioContext)
   · Batterie
   · Bildschirm
-  · Browserversion
+  · Browserversion (User agent)
   · Gerät
-  · Grafikchip
+  · Grafikchip (Canvas, WebGL)
   · Mathematik
   · Netzwerk
   · Prozessor
@@ -49,7 +69,9 @@ Um Ihre Privatsphäre zu verteidigen, bietet Privacy Magic:
   · Rechtschreibprüfung
   · Suchvorschläge
 - Deaktiviert API für zielgerichtete Werbung
-  · Anzeigenmessung
+  · Anzeigenmessung API
   · Protected Audience API
   · Topics API
 - Hilft Ihnen, die Verlaufssynchronisierung zu deaktivieren
+
+

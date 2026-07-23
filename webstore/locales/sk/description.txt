@@ -1,10 +1,30 @@
-Privacy Magic je v skorom prístupe — radi dostaneme vašu spätnú väzbu! contact@littletechllc.com
+Toto rozšírenie poskytuje špičkovú ochranu navrhnutú pre maximálne súkromie a použiteľnosť. Funguje hneď: nie je potrebná žiadna konfigurácia!
 
-Web je úžasná vec: dáva vám prístup k informáciám sveta. Je neoddeliteľnou súčasťou moderného života. Bohužiaľ web je tiež nástrojom hromadného sledovania. Všetko, čo robíte online, je zbierané, ukladané a analyzované korporáciami a vládami.
+KĽÚČOVÉ OCHRANY
 
-Privacy Magic poskytuje dôkladnú, vrstvenú ochranu pred sledovaním.
+• Blokovať reklamy a trackery: Zastaví načítanie invazívnych reklám, sledovacích skriptov a pixelov v prehliadači.
+• Pokročilá odolnosť voči fingerprintingu: Maskuje 18+ systémových a hardvérových signálov (Canvas, WebGL, AudioContext, písma, časové pásmo a ďalšie), ktoré by vás inak mohli identifikovať.
+• Odstránenie stôp: Zastaví sledovacie parametre, minimalizuje hlavičky Referer a bráni únikom z vyrovnávacej pamäte.
+• Posilniť súkromie prehliadača: Blokuje cookies tretích strán a Topics API a vynucuje Global Privacy Control.
 
-Pre obranu vášho súkromia Privacy Magic:
+PRÍSNA ZÁRUKA SÚKROMIA
+
+• 100% open source: Náš kód je otvorený na kontrolu a overenie pre každého.
+• Nula zhromažďovaných dát: Neregistrujeme, nesledujeme ani nepredávame (a nikdy nebudeme) vašu aktivitu pri prehliadaní ani osobné údaje.
+• Nula telemetrie: V rozšírení ani na webe nie je Google Analytics ani iné trackery.
+
+Privacy Magic sa aktívne vyvíja. Máte spätnú väzbu alebo otázky? Napíšte na contact@littletechllc.com.
+
+O AUTOROVI
+
+Privacy Magic vytvára Arthur Edelstein, softvérový inžinier budujúci open-source softvér na obranu webového súkromia:
+
+• V Tor zaviedol izoláciu tokov v Tor Browseri.
+• Vo Firefoxe bol product manager tímov Total Cookie Protection a HTTPS-Only Mode.
+• V Brave zaviedol HTTPS by Default a spoluvytvoril výskum zraniteľností súkromia prehliadačov.
+• Tvorca PrivacyTests.org, open-source iniciatívy testujúcej úniky súkromia prehliadačov.
+
+TECHNICKÉ ŠPECIFIKÁCIE
 
 - Blokuje reklamy, sledovače a obťažovanie
 - Chráni systémové informácie (proti fingerprintingu)
@@ -13,24 +33,24 @@ Pre obranu vášho súkromia Privacy Magic:
   · Časové pásmo
   · Disk
   · Dotyková obrazovka
-  · Grafika
+  · Grafika (Canvas, WebGL)
   · Jazyk
   · Klávesnica
   · Matematika
   · Obrazovka
   · Pamäť
   · Písma
-  · Prehliadač
+  · Prehliadač (User agent)
   · Procesor
   · Sieť
   · Zariadenie
   · Zobrazenie
-  · Zvuk
+  · Zvuk (AudioContext)
 - Odstraňuje sledovacie stopy
-  · Úniky vyrovnávacej pamäte
   · Názov okna
   · Parametre sledovania
   · Referrer
+  · Úniky vyrovnávacej pamäte
 - Spevňuje webové prvky
   · Iframes
   · Service Workers
@@ -49,7 +69,9 @@ Pre obranu vášho súkromia Privacy Magic:
   · Rozšírené reportovanie bezpečného prehliadania
   · Služba kontroly pravopisu
 - Vypína API pre cielenie reklám
-  · Meranie reklám
+  · Meranie reklám API
   · Protected Audience API
   · Topics API
 - Pomôže vypnúť synchronizáciu histórie
+
+

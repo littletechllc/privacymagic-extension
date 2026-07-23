@@ -1,24 +1,44 @@
-Privacy Magic dalam akses awal — kami ingin mendengar maklum balas anda! contact@littletechllc.com
+Sambungan ini menyediakan perlindungan terkini, direka untuk privasi dan kebolehgunaan maksimum. Terus berfungsi: tiada konfigurasi diperlukan!
 
-Web ialah sesuatu yang hebat: ia memberi anda akses kepada maklumat dunia. Ia adalah bahagian penting dalam kehidupan moden. Malangnya, web juga merupakan kenderaan untuk pengawasan besar-besaran. Semua yang anda lakukan dalam talian dikumpulkan, disimpan dan dianalisis oleh syarikat dan kerajaan.
+PERLINDUNGAN UTAMA
 
-Privacy Magic menyediakan perlindungan menyeluruh dan berlapis terhadap pengawasan.
+• Sekat iklan & penjejak: Menghentikan iklan invasif, skrip penjejakan dan piksel daripada dimuatkan dalam pelayar.
+• Ketahanan fingerprinting lanjutan: Memalsukan 18+ isyarat sistem dan perkakasan (Canvas, WebGL, AudioContext, fon, zon masa dan lagi) yang boleh mengenal pasti anda.
+• Pembuangan kesan: Menghentikan parameter penjejakan, meminimumkan pengepala Referer dan menghalang kebocoran cache.
+• Kukuhkan privasi pelayar: Menyekat kuki pihak ketiga dan Topics API, serta menguatkuasakan Global Privacy Control.
 
-Untuk mempertahankan privasi anda, Privacy Magic:
+JAMINAN PRIVASI KETAT
+
+• 100% sumber terbuka: Kod kami terbuka untuk sesiapa memeriksa dan mengesahkan.
+• Sifar data dikumpul: Kami tidak merekod, menjejak atau menjual (dan tidak akan) aktiviti pelayaran atau maklumat peribadi anda.
+• Sifar telemetri: Tiada Google Analytics atau penjejak lain dalam sambungan atau laman web.
+
+Privacy Magic sedang dibangunkan secara aktif. Maklum balas atau soalan? Tulis kepada contact@littletechllc.com.
+
+TENTANG PENGARANG
+
+Privacy Magic dicipta oleh Arthur Edelstein, jurutera perisian yang membina perisian sumber terbuka bagi mempertahankan privasi web:
+
+• Di Tor, beliau memperkenalkan pengasingan aliran dalam Tor Browser.
+• Di Firefox, beliau adalah pengurus produk pasukan Total Cookie Protection dan HTTPS-Only Mode.
+• Di Brave, beliau memperkenalkan HTTPS by Default dan bersama menulis penyelidikan tentang kelemahan privasi pelayar.
+• Pencipta PrivacyTests.org, inisiatif sumber terbuka yang menguji kebocoran privasi pelayar.
+
+SPESIFIKASI TEKNIKAL
 
 - Menyekat iklan, penjejak dan gangguan
 - Melindungi maklumat sistem (daripada cap jari)
-  · Audio
+  · Audio (AudioContext)
   · Bahasa
   · Bateri
   · Cakera
   · Fon
-  · Grafik
+  · Grafik (Canvas, WebGL)
   · Matematik
   · Memori
   · Papan kekunci
   · Paparan
-  · Pelayar
+  · Pelayar (User agent)
   · Pemproses
   · Peranti
   · Rangkaian
@@ -49,7 +69,9 @@ Untuk mempertahankan privasi anda, Privacy Magic:
   · Laporan lanjutan pelayaran selamat
   · Perkhidmatan ejaan
 - Melumpuhkan API penargetan iklan
-  · Pengukuran iklan
+  · Pengukuran iklan API
   · Protected Audience API
   · Topics API
 - Membantu anda melumpuhkan penyegerakan sejarah
+
+

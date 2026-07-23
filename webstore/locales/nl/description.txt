@@ -1,20 +1,40 @@
-Privacy Magic is in vroege toegang — we horen graag je feedback! contact@littletechllc.com
+Deze extensie biedt state-of-the-art bescherming, ontworpen voor maximale privacy en bruikbaarheid. Werkt direct: geen configuratie nodig!
 
-Het web is iets wonderlijks: het geeft u toegang tot de informatie van de wereld. Het is een essentieel onderdeel van het moderne leven. Helaas is het web ook een middel voor massasurveillance. Alles wat u online doet, wordt verzameld, opgeslagen en geanalyseerd door bedrijven en overheden.
+BELANGRIJKSTE BESCHERMINGEN
 
-Privacy Magic biedt grondige, gelaagde bescherming om u te beschermen tegen surveillance.
+• Ads & trackers blokkeren: Stopt privacy-invasieve advertenties, tracking-scripts en pixels voordat ze in je browser laden.
+• Geavanceerde fingerprinting-weerstand: Spooft 18+ systeem- en hardwaresignalen (Canvas, WebGL, AudioContext, lettertypen, tijdzone en meer) waarmee je anders geïdentificeerd zou kunnen worden.
+• Breadcrumb-verwijdering: Stopt trackingparameters, minimaliseert Referer-headers en voorkomt cachelekken.
+• Browserprivacy versterken: Blokkeert cookies van derden en de Topics API, en dwingt Global Privacy Control af.
 
-Om uw privacy te verdedigen, biedt Privacy Magic:
+STRIKTE PRIVACYGARANTIE
+
+• 100% open source: Onze code is open voor iedereen om te bekijken en te verifiëren.
+• Geen gegevensverzameling: We loggen, volgen of verkopen je browsegedrag of persoonlijke gegevens niet (en zullen dat nooit doen).
+• Geen telemetrie: Er is geen Google Analytics of andere tracker in de extensie of op de website.
+
+Privacy Magic is in actieve ontwikkeling. Feedback of vragen? Mail ons op contact@littletechllc.com.
+
+OVER DE AUTEUR
+
+Privacy Magic is gemaakt door Arthur Edelstein, software engineer die open-source software bouwt die webprivacy verdedigt:
+
+• Bij Tor introduceerde hij stream isolation in Tor Browser.
+• Bij Firefox was hij productmanager van de teams achter Total Cookie Protection en HTTPS-Only Mode.
+• Bij Brave introduceerde hij HTTPS by Default en was hij mede-auteur van onderzoek naar privacylekken in browsers.
+• Maker van PrivacyTests.org, een open-source initiatief dat browsers test op privacylekken.
+
+TECHNISCHE SPECIFICATIES
 
 - Blokkeert advertenties, trackers en overlast
 - Beschermt systeeminformatie (tegen fingerprinting)
   · Aanraking
   · Apparaat
-  · Audio
+  · Audio (AudioContext)
   · Batterij
-  · Browser
+  · Browser (User agent)
   · Geheugen
-  · Grafisch
+  · Grafisch (Canvas, WebGL)
   · Lettertypen
   · Netwerk
   · Processor
@@ -49,7 +69,9 @@ Om uw privacy te verdedigen, biedt Privacy Magic:
   · Uitgebreide rapportage veilig browsen
   · Zoeksuggesties
 - Schakelt API's voor advertentietargeting uit
-  · Advertentiemeting
+  · Advertentiemeting API
   · Protected Audience API
   · Topics API
 - Helpt je synchronisatie van geschiedenis uit te schakelen
+
+

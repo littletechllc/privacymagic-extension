@@ -1,20 +1,40 @@
-Privacy Magic on varajases juurdepääsus — ootame hea meelega tagasisidet! contact@littletechllc.com
+See laiendus pakub tipptasemel kaitset, mis on loodud maksimaalse privaatsuse ja kasutatavuse jaoks. Töötab kohe: seadistust pole vaja!
 
-Veeb on imeline: see annab teile juurdepääsu maailma teadmistele. See on oluline osa kaasajast elust. Kahjuks on veeb ka massilise järelevalve vahend. Kõik, mida te võrgus teete, kogub, salvestab ja analüüsib ettevõtteid ja valitsusi.
+PEAMISED KAITSED
 
-Privacy Magic pakub põhjalikke, kihiliselt kaitseid järelevalve eest.
+• Blokeeri reklaamid ja jälitajad: Peatab privaatsust riivavate reklaamide, jälgimisskriptide ja pikslite laadimise brausereris.
+• Täiustatud fingerprinting-kaitse: Varjab 18+ süsteemi- ja riistvarasignaali (Canvas, WebGL, AudioContext, fondid, ajavöönd jt), millega teid muidu võidakse tuvastada.
+• Jälgede eemaldamine: Peatab jälgimisparameetrid, minimeerib Referer-päised ja takistab vahemälu lekkeid.
+• Tugevda brausereri privaatsust: Blokeerib kolmanda osapoole küpsised ja Topics API ning rakendab Global Privacy Controli.
 
-Teie privaatsuse kaitsmiseks pakub Privacy Magic:
+RANGE PRIVAATSUSTAGATIS
+
+• 100% avatud lähtekood: Meie kood on kõigile avatud uurimiseks ja kontrollimiseks.
+• Null andmete kogumist: Me ei logi, jälgi ega müü (ega tee seda kunagi) teie sirvimistegevust ega isikuandmeid.
+• Null telemeetriat: Laienduses ega veebisaidil pole Google Analyticsit ega teisi jälitajaid.
+
+Privacy Magic on aktiivses arenduses. Tagasiside või küsimused? Kirjutage aadressile contact@littletechllc.com.
+
+AUTORIST
+
+Privacy Magici looja on Arthur Edelstein, tarkvarainsener, kes ehitab veebiprivaatsust kaitsvat avatud lähtekoodiga tarkvara:
+
+• Toris tõi ta Tor Browserisse voogude isolatsiooni.
+• Firefoxis oli ta Total Cookie Protectioni ja HTTPS-Only Mode meeskondade tootijuht.
+• Braves tõi ta HTTPS by Defaulti ning oli kaasaautor brausererite privaatsuse haavatavuste uuringutes.
+• PrivacyTests.org looja — avatud lähtekoodiga algatus, mis testib brausereid privaatsuslekkete suhtes.
+
+TEHNILISED SPETSIFIKATSIOONID
 
 - Blokeerib reklaame, jälgijaid ja tülikust
 - Kaitseb süsteemi teavet (sõrmejälje võtmise vastu)
   · Ajastus
   · Ajavöönd
-  · Brauser
+  · Brauser (User agent)
   · Ekraan
   · Fondid
-  · Graafika
-  · Heli
+  · Graafika (Canvas, WebGL)
+  · Heli (AudioContext)
   · Keel
   · Ketas
   · Klaviatuur
@@ -27,9 +47,9 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Seade
   · Võrk
 - Eemaldab jälgimise jäljed
-  · Vahemälu lekked
   · Akna nimi
   · Jälgimise parameetrid
+  · Vahemälu lekked
   · Viitaja
 - Tugevdab veebielemente
   · Iframes
@@ -50,6 +70,8 @@ Teie privaatsuse kaitsmiseks pakub Privacy Magic:
   · Õigekirja teenus
 - Keelab reklaamide sihtimise API-d
   · Protected Audience API
-  · Reklaamide mõõtmine
+  · Reklaamide mõõtmine API
   · Topics API
 - Aitab ajaloo sünkroonimise välja lülitada
+
+
