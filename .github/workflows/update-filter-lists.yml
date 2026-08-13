@@ -1,0 +1,48 @@
+name: Update filter lists
+
+on:
+  schedule:
+    # Sundays at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    name: Download, build, and commit filter lists
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Emscripten
+        uses: ./.github/actions/setup-emscripten
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update filter lists
+        run: npm run update-filter-lists
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name 'Privacy Magic'
+          git config user.email 'privacy-magic-bot@users.noreply.github.com'
+          git add third_party/filter_lists
+          if git diff --staged --quiet; then
+            echo 'No filter list changes.'
+            exit 0
+          fi
+          git commit -m "Update third-party filter lists"
+          git push
