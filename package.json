@@ -14,6 +14,7 @@
     "sync:chrome-locale-strings": "npx tsx tools/sync-chrome-locale-string.ts",
     "sync:locale-messages": "npx tsx tools/sync-locale-messages-from-en.ts",
     "webstore:update-listing-descriptions": "npx tsx webstore/update-listing-descriptions.ts",
+    "update-filter-lists": "npx tsx tools/update-filter-lists.ts",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
     "build:math": "bash math/build.sh",
