@@ -1,0 +1,24 @@
+{
+  // $schema provides code completion hints to IDEs.
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  // Match previous `npm audit --audit-level=low` behavior.
+  "low": true,
+  "allowlist": [
+    // image-size via web-ext → addons-linter: no patched release yet (all ≤2.0.2 flagged).
+    // Remove when image-size >2.0.2 ships or addons-linter drops/replaces it.
+    {
+      "GHSA-w3rx-r6r6-pgpr": {
+        "active": true,
+        "notes": "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr — ICNS DoS in image-size (via web-ext)",
+        "expiry": "2026-08-27"
+      }
+    },
+    {
+      "GHSA-5p2g-fcmc-qvqq": {
+        "active": true,
+        "notes": "https://github.com/advisories/GHSA-5p2g-fcmc-qvqq — JXL/HEIF DoS in image-size (via web-ext)",
+        "expiry": "2026-08-27"
+      }
+    }
+  ]
+}
