@@ -64,7 +64,7 @@ function processDescriptionFile(filePath: string, locale: string): void {
     i++;
   }
 
-  fs.writeFileSync(filePath, output.join('\n') + '\n', 'utf8');
+  fs.writeFileSync(filePath, output.join('\n'), 'utf8');
 }
 
 /** Sorts bullet items in every locale's description.txt under webstore/locales/. */
