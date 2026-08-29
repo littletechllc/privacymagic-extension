@@ -91,14 +91,14 @@ async function waitForListingPage(context: BrowserContext, timeoutMs: number): P
   throw new Error(`Timed out waiting for a listing page (${timeoutMs} ms)`)
 }
 
-async function waitForSignedInListingPage(context: BrowserContext, page: Page): Promise<Page> {
-  // Give you time to complete Google sign-in if needed.
-  // If you are already signed in, this returns quickly.
+async function waitForSignedInListingPage(_context: BrowserContext, page: Page): Promise<Page> {
   await page.waitForLoadState('domcontentloaded')
-  const currentUrl = page.url()
-  if (currentUrl.includes('accounts.google.com')) {
+  if (page.url().includes('accounts.google.com')) {
     process.stdout.write('Please sign in to Google in the opened browser tab, then continue.\n')
-    return await waitForListingPage(context, 5 * 60 * 1000)
+    await page.waitForURL(
+      (url) => !url.hostname.includes('accounts.google.com') && url.pathname.includes(devConsolePathFragment),
+      { timeout: 5 * 60 * 1000 }
+    )
   }
   return page
 }
