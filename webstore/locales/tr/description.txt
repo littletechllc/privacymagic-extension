@@ -72,5 +72,3 @@ TEKNİK ÖZELLİKLER
   · Reklam ölçümü API
   · Topics API
 - Geçmiş senkronizasyonunu kapatmanıza yardımcı olur
-
-

@@ -72,5 +72,3 @@ Privacy Magic ಅನ್ನು Arthur Edelstein ರಚಿಸಿದ್ದಾರೆ
   · Protected Audience API
   · Topics API
 - ಇತಿಹಾಸ ಸಿಂಕ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ
-
-

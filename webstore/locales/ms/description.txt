@@ -72,5 +72,3 @@ SPESIFIKASI TEKNIKAL
   · Protected Audience API
   · Topics API
 - Membantu anda melumpuhkan penyegerakan sejarah
-
-

@@ -72,5 +72,3 @@ TECHNINĖS SPECIFIKACIJOS
   · Reklamų matavimas API
   · Topics API
 - Padeda išjungti istorijos sinchronizavimą
-
-

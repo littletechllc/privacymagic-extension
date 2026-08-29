@@ -72,5 +72,3 @@ SPESIFIKASI TEKNIS
   · Protected Audience API
   · Topics API
 - Membantu Anda menonaktifkan sinkronisasi riwayat
-
-

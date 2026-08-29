@@ -72,5 +72,3 @@ SPECIFICHE TECNICHE
   · Protected Audience API
   · Topics API
 - Ti aiuta a disattivare la sincronizzazione della cronologia
-
-

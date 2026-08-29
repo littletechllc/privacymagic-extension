@@ -72,5 +72,3 @@ TECHNISCHE SPECIFICATIES
   · Protected Audience API
   · Topics API
 - Helpt je synchronisatie van geschiedenis uit te schakelen
-
-

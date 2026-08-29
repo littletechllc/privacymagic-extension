@@ -72,5 +72,3 @@ ESPECIFICAÇÕES TÉCNICAS
   · Protected Audience API
   · Topics API
 - Ajuda-o a desativar a sincronização do histórico
-
-

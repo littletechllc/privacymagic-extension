@@ -72,5 +72,3 @@ MŰSZAKI ADATOK
   · Protected Audience API
   · Topics API
 - Segít kikapcsolni az előzmények szinkronizálását
-
-

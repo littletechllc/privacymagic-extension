@@ -72,5 +72,3 @@ Privacy Magic 由軟體工程師 Arthur Edelstein 打造，他致力於建構捍
   · Protected Audience API
   · Topics API
 - 協助您停用瀏覽記錄同步
-
-

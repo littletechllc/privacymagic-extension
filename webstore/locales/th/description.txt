@@ -72,5 +72,3 @@ Privacy Magic สร้างโดย Arthur Edelstein วิศวกรซอ
   · Protected Audience API
   · Topics API
 - ช่วยให้คุณปิดการซิงค์ประวัติ
-
-

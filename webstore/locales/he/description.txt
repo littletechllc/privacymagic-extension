@@ -72,5 +72,3 @@ Privacy Magic נוצר על ידי Arthur Edelstein, מהנדס תוכנה המ�
   · Protected Audience API
   · Topics API
 - עוזר לך לכבות סנכרון היסטוריה
-
-

@@ -72,5 +72,3 @@ TECHNISCHE SPEZIFIKATIONEN
   · Protected Audience API
   · Topics API
 - Hilft Ihnen, die Verlaufssynchronisierung zu deaktivieren
-
-

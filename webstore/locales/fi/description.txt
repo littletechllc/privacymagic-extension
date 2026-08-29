@@ -72,5 +72,3 @@ TEKNISET TIEDOT
   · Protected Audience API
   · Topics API
 - Auttaa poistamaan historian synkronoinnin käytöstä
-
-

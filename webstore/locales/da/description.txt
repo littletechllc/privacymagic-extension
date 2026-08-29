@@ -72,5 +72,3 @@ TEKNISKE SPECIFIKATIONER
   · Protected Audience API
   · Topics API
 - Hjælper dig med at deaktivere synkronisering af historik
-
-

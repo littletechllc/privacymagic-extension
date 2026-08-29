@@ -72,5 +72,3 @@ TEHNISKĀS SPECIFIKĀCIJAS
   · Reklāmu mērīšana API
   · Topics API
 - Palīdz izslēgt vēstures sinhronizāciju
-
-

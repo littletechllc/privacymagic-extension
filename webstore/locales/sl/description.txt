@@ -72,5 +72,3 @@ TEHNIČNE SPECIFIKACIJE
   · Protected Audience API
   · Topics API
 - Pomaga izklopiti sinhronizacijo zgodovine
-
-

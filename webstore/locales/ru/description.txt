@@ -72,5 +72,3 @@ Privacy Magic создаёт Arthur Edelstein, инженер ПО, посвят
   · Protected Audience API
   · Topics API
 - Помогает отключить синхронизацию истории
-
-

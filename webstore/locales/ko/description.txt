@@ -72,5 +72,3 @@ Privacy Magic은 웹 프라이버시를 지키는 오픈 소스 소프트웨어�
   · Protected Audience API
   · Topics API
 - 기록 동기화를 끄는 데 도움을 줍니다
-
-

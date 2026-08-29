@@ -72,5 +72,3 @@ VIPIMO VYA KIUFUNDI
   · Protected Audience API
   · Topics API
 - Inakusaidia kuzima usawazishaji wa historia
-
-

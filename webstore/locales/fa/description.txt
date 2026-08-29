@@ -72,5 +72,3 @@ Privacy Magic را Arthur Edelstein ساخته است، مهندس نرم‌اف
   · Protected Audience API
   · Topics API
 - به شما کمک می‌کند همگام‌سازی تاریخچه را غیرفعال کنید
-
-

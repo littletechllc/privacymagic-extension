@@ -72,5 +72,3 @@ MGA TEKNIKAL NA DETALYE
   · Protected Audience API
   · Topics API
 - Tumutulong na patayin ang history syncing
-
-

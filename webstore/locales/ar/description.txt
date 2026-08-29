@@ -72,5 +72,3 @@ Privacy Magic من إنشاء Arthur Edelstein، مهندس برمجيات مك�
   · Protected Audience API
   · Topics API
 - يساعدك على تعطيل مزامنة السجل
-
-

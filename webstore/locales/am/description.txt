@@ -72,5 +72,3 @@ Privacy Magic የተፈጠረው በArthur Edelstein ነው — የድር ግላ
   · Protected Audience API
   · Topics API
 - የታሪክ ማመሳሰልን ማጥፋት ይረዳዎታል
-
-

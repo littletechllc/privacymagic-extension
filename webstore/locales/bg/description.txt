@@ -72,5 +72,3 @@ Privacy Magic е създаден от Arthur Edelstein, софтуерен ин
   · Protected Audience API
   · Topics API
 - Помага да изключите синхронизирането на историята
-
-

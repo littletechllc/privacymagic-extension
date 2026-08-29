@@ -72,5 +72,3 @@ Privacy Magic ствара Arthur Edelstein, софтверски инжењер
   · Protected Audience API
   · Topics API
 - Помаже да искључите синхронизацију историје
-
-

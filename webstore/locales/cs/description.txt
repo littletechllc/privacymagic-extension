@@ -72,5 +72,3 @@ TECHNICKÉ SPECIFIKACE
   · Protected Audience API
   · Topics API
 - Pomůže vám vypnout synchronizaci historie
-
-

@@ -72,5 +72,3 @@ TEHNILISED SPETSIFIKATSIOONID
   · Reklaamide mõõtmine API
   · Topics API
 - Aitab ajaloo sünkroonimise välja lülitada
-
-

@@ -72,5 +72,3 @@ THÔNG SỐ KỸ THUẬT
   · Protected Audience API
   · Topics API
 - Giúp bạn tắt đồng bộ lịch sử
-
-
