@@ -65,10 +65,6 @@
     "message": "I-disable ang pagsusukat ng ad",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "I-disable ang related website sets",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "I-disable ang WebRTC non-proxied UDP",
     "description": "Label for the WebRTC IP handling policy pref"

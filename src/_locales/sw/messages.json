@@ -65,10 +65,6 @@
     "message": "Zima Kupima Matangazo",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Zima Seti za Tovuti Zinazohusiana",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Zima WebRTC UDP isiyo-proxy",
     "description": "Label for the WebRTC IP handling policy pref"

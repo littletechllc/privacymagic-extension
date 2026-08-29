@@ -60,7 +60,6 @@ ESPECIFICAÇÕES TÉCNICAS
 - Envia o sinal Global Privacy Control
 - Desativa recursos do navegador que vazam dados
   · Auditoria de hiperlinks
-  · Conjuntos de sites relacionados
   · Cookies de terceiros
   · WebRTC UDP sem proxy
 - Desativa serviços em nuvem invasivos

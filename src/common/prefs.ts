@@ -68,11 +68,6 @@ export const PRIVACY_PREFS_CONFIG = {
     inverted: true,
     locked: true,
     category: 'websites'
-  },
-  relatedWebsiteSetsEnabled: {
-    inverted: true,
-    locked: true,
-    category: 'websites'
   }
 } satisfies { [K in BrowserPrivacyPrefName]?: PrefConfig }
 

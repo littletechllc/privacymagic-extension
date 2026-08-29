@@ -60,7 +60,6 @@ ESPECIFICACIONS TÈCNIQUES
 - Envia el senyal Global Privacy Control
 - Desactiva les funcions del navegador que perden dades
   · Auditoria d'hiperenllaços
-  · Conjunts de llocs relacionats
   · Galetes de tercers
   · WebRTC UDP sense proxy
 - Desactiva els serveis al núvol invasius

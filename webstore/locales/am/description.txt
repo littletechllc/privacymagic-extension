@@ -59,7 +59,6 @@ Privacy Magic የተፈጠረው በArthur Edelstein ነው — የድር ግላ
   · Web Workers
 - Global Privacy Control ምልክት ይላካል
 - የሚሰራጩ የብራውዘር ባህሪያትን ያጥፋል
-  · ተዛማጅ ድር ጣቢያ ስብስቦች
   · የሃይፐሊንክ ኦዲት
   · የሦስተኛ ወገን ኩኪዎች
   · WebRTC ያልተመካ ዩዲፒ

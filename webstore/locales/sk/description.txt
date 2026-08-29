@@ -61,7 +61,6 @@ TECHNICKÉ ŠPECIFIKÁCIE
 - Vypína funkcie prehliadača spôsobujúce úniky
   · Auditovanie odkazov
   · Cookies tretích strán
-  · Súbory súvisiacich webov
   · WebRTC neproxované UDP
 - Vypína invazívne cloudové služby
   · Alternatívne chybové stránky

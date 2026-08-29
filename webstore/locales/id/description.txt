@@ -61,7 +61,6 @@ SPESIFIKASI TEKNIS
 - Menonaktifkan fitur browser yang bocor
   · Audit hyperlink
   · Cookie pihak ketiga
-  · Set situs terkait
   · WebRTC UDP non-proxy
 - Menonaktifkan layanan cloud invasif
   · Halaman error alternatif

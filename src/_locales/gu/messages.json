@@ -65,10 +65,6 @@
     "message": "જાહેરાત માપન અક્ષમ કરો",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "સંબંધિત વેબસાઇટ સેટ અક્ષમ કરો",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC નોન-પ્રોક્સી UDP અક્ષમ કરો",
     "description": "Label for the WebRTC IP handling policy pref"

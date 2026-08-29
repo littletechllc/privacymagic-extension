@@ -65,10 +65,6 @@
     "message": "বিজ্ঞাপন পরিমাপ নিষ্ক্রিয় করুন",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "সম্পর্কিত ওয়েবসাইট সেট নিষ্ক্রিয় করুন",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC নন-প্রক্সি UDP নিষ্ক্রিয় করুন",
     "description": "Label for the WebRTC IP handling policy pref"

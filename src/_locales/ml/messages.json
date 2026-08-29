@@ -65,10 +65,6 @@
     "message": "പരസ്യ അളവ് നിർജ്ജീവമാക്കുക",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "ബന്ധപ്പെട്ട വെബ്സൈറ്റ് സെറ്റുകൾ നിർജ്ജീവമാക്കുക",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC നോൺ-പ്രോക്സി UDP നിർജ്ജീവമാക്കുക",
     "description": "Label for the WebRTC IP handling policy pref"

@@ -65,10 +65,6 @@
     "message": "כבה מדידת פרסומות",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "כבה קבוצות אתרים קשורים",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "כבה WebRTC UDP ללא פרוקסי",
     "description": "Label for the WebRTC IP handling policy pref"

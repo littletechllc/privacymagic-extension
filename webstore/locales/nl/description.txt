@@ -61,7 +61,6 @@ TECHNISCHE SPECIFICATIES
 - Schakelt lekkende browserfuncties uit
   · Controle van hyperlinks
   · Cookies van derden
-  · Gerelateerde websitesets
   · WebRTC niet-proxy UDP
 - Schakelt invasieve clouddiensten uit
   · Alternatieve foutpagina's

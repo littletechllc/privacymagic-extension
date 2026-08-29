@@ -60,7 +60,6 @@ ESPECIFICACIONES TÉCNICAS
 - Envía la señal Global Privacy Control
 - Desactiva funciones del navegador que filtran datos
   · Auditoría de hipervínculos
-  · Conjuntos de sitios relacionados
   · Cookies de terceros
   · WebRTC UDP sin proxy
 - Desactiva servicios en la nube invasivos

@@ -61,7 +61,6 @@ SPECIFICAȚII TEHNICE
 - Dezactivează funcțiile browser care scurg date
   · Auditarea hiperlinkurilor
   · Cookie-uri terțe
-  · Seturi de site-uri înrudite
   · WebRTC UDP neproxiat
 - Dezactivează serviciile cloud invazive
   · Paginile de eroare alternative

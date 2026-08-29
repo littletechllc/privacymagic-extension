@@ -65,10 +65,6 @@
     "message": "Desativar medição de anúncios",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Desativar conjuntos de sites relacionados",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Desativar WebRTC UDP sem proxy",
     "description": "Label for the WebRTC IP handling policy pref"

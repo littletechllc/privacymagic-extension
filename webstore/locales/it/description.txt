@@ -61,7 +61,6 @@ SPECIFICHE TECNICHE
 - Disattiva le funzioni del browser che perdono dati
   · Controllo collegamenti
   · Cookie di terze parti
-  · Set di siti correlati
   · WebRTC UDP senza proxy
 - Disattiva i servizi cloud invasivi
   · Correzione ortografica

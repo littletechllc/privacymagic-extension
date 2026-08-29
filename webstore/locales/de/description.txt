@@ -61,7 +61,6 @@ TECHNISCHE SPEZIFIKATIONEN
 - Deaktiviert undichte Browser-Funktionen
   · Drittanbieter-Cookies
   · Hyperlink-Überwachung
-  · Verwandte Website-Sets
   · WebRTC UDP ohne Proxy
 - Deaktiviert invasive Cloud-Dienste
   · Alternative Fehlerseiten

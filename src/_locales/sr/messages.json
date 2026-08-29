@@ -65,10 +65,6 @@
     "message": "Искључи мерење огласа",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Искључи скупове повезаних веб места",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Искључи WebRTC непроксирани UDP",
     "description": "Label for the WebRTC IP handling policy pref"

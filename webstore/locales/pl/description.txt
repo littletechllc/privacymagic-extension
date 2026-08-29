@@ -61,7 +61,6 @@ SPECYFIKACJA TECHNICZNA
 - Wyłącza funkcje przeglądarki powodujące wycieki
   · Audyt hiperłączy
   · Ciasteczka stron trzecich
-  · Powiązane zestawy witryn
   · WebRTC UDP bez proxy
 - Wyłącza inwazyjne usługi w chmurze
   · Alternatywne strony błędów

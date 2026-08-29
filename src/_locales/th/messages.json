@@ -65,10 +65,6 @@
     "message": "ปิดการวัดโฆษณา",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "ปิดชุดเว็บไซต์ที่เกี่ยวข้อง",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "ปิด WebRTC UDP ที่ไม่ผ่านพร็อกซี",
     "description": "Label for the WebRTC IP handling policy pref"

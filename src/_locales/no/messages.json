@@ -65,10 +65,6 @@
     "message": "Deaktiver annonsemåling",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Deaktiver relaterte nettstedsett",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Deaktiver WebRTC UDP uten proxy",
     "description": "Label for the WebRTC IP handling policy pref"

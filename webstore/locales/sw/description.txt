@@ -59,7 +59,6 @@ VIPIMO VYA KIUFUNDI
   · Web Workers
 - Inatuma ishara ya Global Privacy Control
 - Inazima vipengele vya kivinjari vinavyovuja
-  · Seti za Tovuti Zinazohusiana
   · Ukaguzi wa Viungo
   · Vidakuzi vya Wahusika wa Tatu
   · WebRTC UDP isiyo-proxy

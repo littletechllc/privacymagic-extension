@@ -65,10 +65,6 @@
     "message": "광고 측정 비활성화",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "관련 웹사이트 세트 비활성화",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC 비프록시 UDP 비활성화",
     "description": "Label for the WebRTC IP handling policy pref"

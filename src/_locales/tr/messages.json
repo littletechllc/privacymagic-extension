@@ -65,10 +65,6 @@
     "message": "Reklam Ölçümünü Devre Dışı Bırak",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "İlişkili Web Sitesi Kümelerini Devre Dışı Bırak",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC proxy kullanmayan UDP'yi Devre Dışı Bırak",
     "description": "Label for the WebRTC IP handling policy pref"

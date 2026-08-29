@@ -59,7 +59,6 @@ TEKNİK ÖZELLİKLER
   · Web Workers
 - Global Privacy Control sinyali gönderir
 - Sızdıran tarayıcı özelliklerini devre dışı bırakır
-  · İlişkili web sitesi kümeleri
   · Köprü denetimi
   · Üçüncü taraf çerezleri
   · WebRTC proxy kullanmayan UDP

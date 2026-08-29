@@ -65,10 +65,6 @@
     "message": "விளம்பர் அளவீட்டை முடக்கு",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "தொடர்புடைய இணையதள தொகுப்புகளை முடக்கு",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC ப்ராக்ஸி அல்லாத UDP ஐ முடக்கு",
     "description": "Label for the WebRTC IP handling policy pref"

@@ -60,7 +60,6 @@ TECHNINĖS SPECIFIKACIJOS
 - Siunčia Global Privacy Control (GPC) signalą
 - Išjungia nesandarius naršyklės funkcijas
   · Hipernuorodų auditas
-  · Susijusių svetainių rinkiniai
   · Trečiųjų šalių slapukai
   · WebRTC be proxy UDP
 - Išjungia įsibroviančias debesų paslaugas

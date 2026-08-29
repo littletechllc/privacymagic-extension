@@ -61,7 +61,6 @@ SPÉCIFICATIONS TECHNIQUES
 - Désactive les fonctionnalités du navigateur qui fuient
   · Audit des hyperliens
   · Cookies tiers
-  · Ensembles de sites associés
   · WebRTC UDP sans proxy
 - Désactive les services cloud invasifs
   · Correcteur orthographique

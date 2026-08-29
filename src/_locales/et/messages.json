@@ -65,10 +65,6 @@
     "message": "Keela reklaamide mõõtmine",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Keela seotud veebisaidikogumid",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Keela WebRTC proxyta UDP",
     "description": "Label for the WebRTC IP handling policy pref"

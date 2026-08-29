@@ -65,10 +65,6 @@
     "message": "تعطيل قياس الإعلانات",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "تعطيل مجموعات المواقع ذات الصلة",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "تعطيل WebRTC UDP غير المعتمد على وكيل",
     "description": "Label for the WebRTC IP handling policy pref"

@@ -59,7 +59,6 @@ TEHNIČNE SPECIFIKACIJE
   · Web Workers
 - Pošlje signal Global Privacy Control
 - Onemogoči funkcije brskalnika, ki puščajo
-  · Nizi povezanih spletnih mest
   · Piškotki tretjih strani
   · Revizija hiperpovezav
   · WebRTC neproksirani UDP

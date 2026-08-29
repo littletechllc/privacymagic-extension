@@ -61,7 +61,6 @@ TEKNISET TIEDOT
 - Poistaa vuotavat selaintoiminnot käytöstä
   · Hyperlinkkien tarkastus
   · Kolmannen osapuolen evästeet
-  · Liittyvät verkkosivustojoukot
   · WebRTC-välityspalveluttoman UDP:n
 - Poistaa tungettelevat pilvipalvelut käytöstä
   · Hakuehdotukset

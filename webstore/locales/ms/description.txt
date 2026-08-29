@@ -61,7 +61,6 @@ SPESIFIKASI TEKNIKAL
 - Melumpuhkan ciri pelayar yang bocor
   · Audit hiperpautan
   · Kuki pihak ketiga
-  · Set laman web berkaitan
   · WebRTC UDP tanpa proksi
 - Melumpuhkan perkhidmatan awan yang menceroboh
   · Cadangan carian

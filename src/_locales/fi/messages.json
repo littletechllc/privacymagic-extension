@@ -65,10 +65,6 @@
     "message": "Poista mainosten mittaus käytöstä",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Poista liittyvät verkkosivustojoukot käytöstä",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Poista WebRTC-välityspalveluttoman UDP:n käyttö",
     "description": "Label for the WebRTC IP handling policy pref"

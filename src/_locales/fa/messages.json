@@ -65,10 +65,6 @@
     "message": "غیرفعال کردن اندازه‌گیری تبلیغات",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "غیرفعال کردن مجموعه‌های سایت مرتبط",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "غیرفعال کردن WebRTC UDP بدون پراکسی",
     "description": "Label for the WebRTC IP handling policy pref"

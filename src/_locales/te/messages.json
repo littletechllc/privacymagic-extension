@@ -65,10 +65,6 @@
     "message": "యాడ్ మెజర్‌మెంట్ నిలిపివేయి",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "సంబంధిత వెబ్‌సైట్ సెట్‌లను నిలిపివేయి",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC ప్రాక్సీ లేని UDP నిలిపివేయి",
     "description": "Label for the WebRTC IP handling policy pref"

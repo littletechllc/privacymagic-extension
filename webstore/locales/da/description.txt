@@ -60,7 +60,6 @@ TEKNISKE SPECIFIKATIONER
 - Sender Global Privacy Control-signal
 - Deaktiverer lækkende browserfunktioner
   · Hyperlink-audit
-  · Relaterede websæt
   · Tredjepartscookies
   · WebRTC ikke-proxy UDP
 - Deaktiverer invasive cloudtjenester

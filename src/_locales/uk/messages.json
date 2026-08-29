@@ -65,10 +65,6 @@
     "message": "Вимкнути вимірювання реклами",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Вимкнути набори пов’язаних сайтів",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Вимкнути WebRTC UDP без проксі",
     "description": "Label for the WebRTC IP handling policy pref"

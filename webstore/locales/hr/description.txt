@@ -60,7 +60,6 @@ TEHNIČKE SPECIFIKACIJE
 - Šalje Global Privacy Control signal
 - Onemogućuje funkcije preglednika koje cure
   · Kolačići trećih strana
-  · Povezane skupine web-mjesta
   · Revizija hiperveza
   · WebRTC UDP bez proxyja
 - Onemogućuje nametljive cloud usluge

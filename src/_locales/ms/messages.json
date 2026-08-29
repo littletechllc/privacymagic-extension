@@ -65,10 +65,6 @@
     "message": "Lumpuhkan pengukuran iklan",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Lumpuhkan set laman web berkaitan",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Lumpuhkan WebRTC UDP tanpa proksi",
     "description": "Label for the WebRTC IP handling policy pref"

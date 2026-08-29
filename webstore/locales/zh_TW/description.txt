@@ -59,7 +59,6 @@ Privacy Magic 由軟體工程師 Arthur Edelstein 打造，他致力於建構捍
   · Web Workers
 - 發送 Global Privacy Control 訊號
 - 關閉易洩漏資料的瀏覽器功能
-  · 相關網站集
   · 第三方 Cookie
   · 超連結稽核
   · WebRTC 非代理 UDP

@@ -65,10 +65,6 @@
     "message": "Onemogoči merjenje oglasov",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Onemogoči nize povezanih spletnih mest",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Onemogoči WebRTC neproksirani UDP",
     "description": "Label for the WebRTC IP handling policy pref"

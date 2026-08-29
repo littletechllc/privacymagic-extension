@@ -65,10 +65,6 @@
     "message": "Hirdetésmérés kikapcsolása",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Kapcsolódó webhelycsoportok kikapcsolása",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC proxy nélküli UDP kikapcsolása",
     "description": "Label for the WebRTC IP handling policy pref"

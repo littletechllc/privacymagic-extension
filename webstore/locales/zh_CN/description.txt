@@ -61,7 +61,6 @@ Privacy Magic 由软件工程师 Arthur Edelstein 创建，他致力于构建捍
 - 关闭易泄露数据的浏览器功能
   · 超链接审核
   · 第三方 Cookie
-  · 相关网站集
   · WebRTC 非代理 UDP
 - 关闭侵入式云服务
   · 安全浏览扩展报告

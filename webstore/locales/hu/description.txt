@@ -61,7 +61,6 @@ MŰSZAKI ADATOK
 - Kikapcsolja a szivárgó böngészőfunkciókat
   · Harmadik féltől származó sütik
   · Hiperhivatkozás-naplózás
-  · Kapcsolódó webhelycsoportok
   · WebRTC proxy nélküli UDP
 - Kikapcsolja a tolakodó felhőszolgáltatásokat
   · Alternatív hiboldalak

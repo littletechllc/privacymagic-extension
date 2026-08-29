@@ -65,10 +65,6 @@
     "message": "विज्ञापन मापन अक्षम करें",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "संबंधित वेबसाइट सेट अक्षम करें",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC नॉन-प्रॉक्सी UDP अक्षम करें",
     "description": "Label for the WebRTC IP handling policy pref"

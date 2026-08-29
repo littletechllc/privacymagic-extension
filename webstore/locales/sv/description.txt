@@ -60,7 +60,6 @@ TEKNISKA SPECIFIKATIONER
 - Skickar Global Privacy Control-signal
 - Inaktiverar läckande webbläsarfunktioner
   · Hyperlänksgranskning
-  · Relaterade webbplatsuppsättningar
   · Tredjepartscookies
   · WebRTC icke-proxierad UDP
 - Inaktiverar invasiva molntjänster

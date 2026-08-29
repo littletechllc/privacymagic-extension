@@ -59,7 +59,6 @@ Privacy Magic은 웹 프라이버시를 지키는 오픈 소스 소프트웨어�
   · Web Workers
 - Global Privacy Control 신호 전송
 - 데이터 유출 브라우저 기능 비활성화
-  · 관련 웹사이트 세트
   · 서드 파티 쿠키
   · 하이퍼링크 감사
   · WebRTC 비프록시 UDP

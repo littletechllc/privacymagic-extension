@@ -61,7 +61,6 @@ THÔNG SỐ KỸ THUẬT
 - Tắt các tính năng trình duyệt rò rỉ
   · Cookie bên thứ ba
   · Kiểm tra siêu liên kết
-  · Tập trang web liên quan
   · WebRTC UDP không qua proxy
 - Tắt các dịch vụ đám mây xâm phạm
   · Báo cáo mở rộng duyệt web an toàn

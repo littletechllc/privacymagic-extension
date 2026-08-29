@@ -59,7 +59,6 @@ TEKNISKE SPESIFIKASJONER
   · Web Workers
 - Sender Global Privacy Control-signal
 - Deaktiverer lekkende nettleserfunksjoner
-  · Relaterte nettstedsett
   · Revisjon av hyperlenker
   · Tredjepartsinformasjonskapsler
   · WebRTC UDP uten proxy

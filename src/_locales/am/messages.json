@@ -65,10 +65,6 @@
     "message": "የማስታወቂያ መለኪያን አጥፋ",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "ተዛማጅ ድር ጣቢያ ስብስቦችን አጥፋ",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "WebRTC ያልተመካ ዩዲፒን አጥፋ",
     "description": "Label for the WebRTC IP handling policy pref"

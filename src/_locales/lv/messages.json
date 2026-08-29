@@ -65,10 +65,6 @@
     "message": "Atspējot reklāmu mērīšanu",
     "description": "Label for the Ad Measurement pref"
   },
-  "relatedWebsiteSetsEnabled": {
-    "message": "Atspējot saistītās vietņu kopas",
-    "description": "Label for the Related Website Sets pref"
-  },
   "webRTCIPHandlingPolicy": {
     "message": "Atspējot WebRTC bez starpniekservera UDP",
     "description": "Label for the WebRTC IP handling policy pref"

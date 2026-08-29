@@ -60,7 +60,6 @@ TEHNISKĀS SPECIFIKĀCIJAS
 - Nosūta Global Privacy Control (GPC) signālu
 - Atspējo noplūstošās pārlūka funkcijas
   · Hipersaites audits
-  · Saistītās vietņu kopas
   · Trešo pušu sīkdatnes
   · WebRTC bez starpniekservera UDP
 - Atspējo iejaukšanās mākoņpakalpojumus

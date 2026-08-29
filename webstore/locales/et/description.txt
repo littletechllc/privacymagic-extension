@@ -61,7 +61,6 @@ TEHNILISED SPETSIFIKATSIOONID
 - Keelab lekkivad brauseri funktsioonid
   · Hüperlingi auditeerimine
   · Kolmandate osapoolte küpsised
-  · Seotud veebisaidikogumid
   · WebRTC proxyta UDP
 - Keelab tungival pilveteenused
   · Asendusvea leheküljed

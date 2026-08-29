@@ -60,7 +60,6 @@ MGA TEKNIKAL NA DETALYE
 - Nagpapadala ng Global Privacy Control signal
 - Pinapatay ang mga browser feature na tumatagas
   · Hyperlink Auditing
-  · Related Website Sets
   · Third-Party Cookies
   · WebRTC non-proxied UDP
 - Pinapatay ang mga invasive cloud services
