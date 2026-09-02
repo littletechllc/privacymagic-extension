@@ -1,5 +1,7 @@
 # Privacy Magic browser extension
 
+[Install in Chrome](https://chromewebstore.google.com/detail/privacy-magic/cobojehlalmfnplnblndhofhgeglljkc)
+
 ## Protections
 
 * Blocks ads
