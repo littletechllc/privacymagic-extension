@@ -133,7 +133,7 @@ const checkIfStayedOnUrl = async (tabId: number, targetUrl: string): Promise<boo
       chrome.tabs.get(tabId, (tab) => {
         const onTarget = isOnSettingsUrl(tab.url, targetUrl)
         const leftTarget = tab.url != null && !onTarget
-        const timedOut = Date.now() - start > 500
+        const timedOut = Date.now() - start > 1000
         if (leftTarget || timedOut) {
           clearInterval(interval)
           resolve(onTarget)
