@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "Ja, vis mig",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "(fuldført)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "Historik",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "Synkroniser alt",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "Synkronisering er allerede slået fra, så din historik sendes ikke til Googles servere. Du er klar!",
+    "message": "Synkronisering er allerede slået fra, så din historik sendes ikke til Googles servere. Dernæst justerer vi et par Google-tjenesteindstillinger.",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "Færdig!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "Fortsæt",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "Lad os sikre, at vi ikke sender data til Google.",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "Sørg for, at disse to indstillinger er slået fra:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Vær med til at forbedre Chromes funktioner og ydeevne",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "Gør søgninger og browsing endnu bedre",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "Historik og faner",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "Historik",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

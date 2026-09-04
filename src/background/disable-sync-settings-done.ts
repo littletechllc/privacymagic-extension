@@ -9,9 +9,11 @@ const getWindowIdForTab = async (tabId: number): Promise<number> => {
     return tab.windowId
 }
 
-const isChromeSyncSettingsPage = (url: string | undefined): boolean => {
+const isChromeSettingsHelpTab = (url: string | undefined): boolean => {
   if (url == null) return false
-  return url.startsWith('chrome://settings/syncSetup')
+  return url.startsWith('chrome://settings/account') ||
+    url.startsWith('chrome://settings/syncSetup') ||
+    url.startsWith('chrome://settings/googleServices')
 }
 
 const closeSidePanel = async (tabId: number): Promise<void> => {
@@ -54,7 +56,7 @@ export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
   if (tabId != null) {
     try {
       const tab = await chrome.tabs.get(tabId)
-      if (isChromeSyncSettingsPage(tab.url)) {
+      if (isChromeSettingsHelpTab(tab.url)) {
         await chrome.tabs.remove(tabId)
       }
     } catch (error) {

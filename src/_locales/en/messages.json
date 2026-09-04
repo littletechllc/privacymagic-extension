@@ -344,11 +344,11 @@
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "We'll open the Sync settings page so you can make the necessary adjustments.",
+    "message": "We'll open Chrome settings so you can make the necessary adjustments.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers. We've opened the Sync settings page so you can make the necessary adjustments.",
+    "message": "Let's make sure this browser doesn't send your browsing history to Google's servers.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
@@ -375,7 +375,7 @@
   },
   "welcomeStep3HistoryToggleInstruction": {
     "message": "Next, under <strong>$sync_data$</strong>, click on <strong>$history$</strong> to disable it (grey).",
-    "description": "Instruction for disabling History syncing in step 3",
+    "description": "Instruction for disabling History syncing on legacy chrome://settings/syncSetup/advanced",
     "placeholders": {
       "sync_data": {
         "content": "$1",
@@ -387,16 +387,38 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "Continue",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "Let's tell the browser we don't want it to send data to Google.",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "Please check these two options and disable them (grey) if they're enabled:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
   "welcomeStep3AllDoneCta": {
     "message": "All done!",
-    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+    "description": "Done button on history sync help side panel (Google services phase); same action as Return to setup"
   },
   "syncHelpSyncOffTitle": {
     "message": "Sync is off",
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "Sync is already disabled, so your history isn't being sent to Google's servers. You're all set!",
+    "message": "Sync is already disabled, so your history isn't being sent to Google's servers. Next, we'll adjust a couple of Google services settings.",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -435,9 +457,9 @@
     "message": "(completed)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "History",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  "chromium_1355088659320425659": {
+    "message": "History and tabs",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
   },
   "chromium_4684427112815847243": {
     "message": "Sync everything",
@@ -450,5 +472,17 @@
   "chromium_7044606776288350625": {
     "message": "Sync data",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
+  },
+  "chromium_447252321002412580": {
+    "message": "Help improve Chrome's features and performance",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "Make searches and browsing better",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1644574205037202324": {
+    "message": "History",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

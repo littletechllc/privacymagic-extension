@@ -18,10 +18,14 @@ type SyncTarget = {
 
 const GENERATED_RESOURCES_TEMPLATE = 'chrome/app/resources/generated_resources_%LOCALE%.xtb'
 const GENERATED_RESOURCES_IDS = [
-  '1644574205037202324',
+  '1355088659320425659', // History and tabs (UNO account sync toggle)
+  '1644574205037202324', // History (legacy syncSetup/advanced toggle)
   '4684427112815847243',
   '7399045143794278225',
-  '7044606776288350625'
+  '7044606776288350625',
+  // Google services toggles (chrome://settings/googleServices)
+  '447252321002412580', // Help improve Chrome's features and performance
+  '8438566539970814960' // Make searches and browsing better
 ]
 
 const SYNC_TARGETS: SyncTarget[] = GENERATED_RESOURCES_IDS.map(translationId => ({

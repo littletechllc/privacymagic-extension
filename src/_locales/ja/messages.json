@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "はい、表示する",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "（完了）",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "履歴",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "すべてを同期する",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "同期はすでにオフになっているため、閲覧履歴は Google のサーバーに送信されません。設定は完了です。",
+    "message": "同期はすでに無効になっているため、履歴はGoogleのサーバーに送信されません。次に、いくつかのGoogleサービス設定を調整します。",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "完了",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "続行",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "Googleにデータを送信していないことを確認しましょう。次の2つのオプションがオフになっていることを確認してください:",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "Please check these two options and turn them off if they're enabled:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Chrome の機能と動作の改善に協力する",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "検索とブラウジングを改善する",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "履歴とタブ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "履歴",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "అవును, చూపించండి",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "(పూర్తైంది)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "హిస్టరీ",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "అంతా సింక్ చేయండి",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "సింక్ ఇప్పటికే ఆఫ్‌లో ఉంది, కాబట్టి మీ చరిత్ర Google సర్వర్‌లకు పంపబడదు. మీరు సిద్ధంగా ఉన్నారు!",
+    "message": "సింక్ ఇప్పటికే నిలిపివేయబడింది, కాబట్టి మీ హిస్టరీ Google సర్వర్‌లకు పంపబడదు. తర్వాత కొన్ని Google సేవా సెట్టింగ్‌లను సర్దుబాటు చేస్తాము.",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "పూర్తయింది!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "కొనసాగించు",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "మనం Googleకు డేటా పంపడం లేదని నిర్ధారించుకుందాం.",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "ఈ రెండు ఎంపికలు ఆఫ్‌లో ఉన్నాయని నిర్ధారించుకోండి:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Chrome ఫీచర్‌లు మరియు పనితీరును మెరుగుపరచడంలో సహాయపడండి",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "సెర్చ్‌లను, బ్రౌజింగ్‌ను మెరుగుపరచండి",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "హిస్టరీ, ట్యాబ్‌లు",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "హిస్టరీ",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

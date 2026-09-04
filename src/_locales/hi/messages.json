@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "हाँ, दिखाएँ",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "(पूर्ण)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "इतिहास",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "सब कुछ सिंक करें",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "सिंक पहले से ही बंद है, इसलिए आपका इतिहास Google के सर्वर पर नहीं भेजा जा रहा है। आप तैयार हैं!",
+    "message": "सिंक पहले से बंद है, इसलिए आपका इतिहास Google के सर्वर पर नहीं भेजा जा रहा। आगे हम कुछ Google सेवा सेटिंग समायोजित करेंगे।",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "हो गया!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "जारी रखें",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "सुनिश्चित करें कि हम Google को डेटा नहीं भेज रहे। सुनिश्चित करें कि ये दोनों विकल्प बंद हैं:",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "Please check these two options and turn them off if they're enabled:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Chrome की सुविधाओं और परफ़ॉर्मेंस को बेहतर बनाने में मदद करें",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "खोज और ब्राउज़िंग की सुविधा को बेहतर बनाएं",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "इतिहास और टैब",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "इतिहास",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

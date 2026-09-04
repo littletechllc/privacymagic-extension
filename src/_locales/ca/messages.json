@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "Sí, mostra'm com",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "(completat)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "Historial",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "Sincronitza-ho tot",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "La sincronització ja està desactivada, de manera que l’historial no s’envia als servidors de Google. Tot a punt!",
+    "message": "La sincronització ja està desactivada, així que l’historial no s’envia als servidors de Google. Tot seguit ajustarem un parell de paràmetres dels serveis de Google.",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "Fet!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "Continua",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "Assegurem-nos que no enviem dades a Google.",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "Assegureu-vos que aquestes dues opcions estan desactivades:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Ajuda a millorar les funcions i el rendiment de Chrome",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "Millora les cerques i la navegació",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "Historial i pestanyes",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "Historial",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }

@@ -387,6 +387,16 @@
       }
     }
   },
+  "welcomeStep3HistoryToggleInstructionAccount": {
+    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
+    "placeholders": {
+      "history": {
+        "content": "$1",
+        "example": "History and tabs"
+      }
+    }
+  },
   "welcomeShowMeCta": {
     "message": "അതെ, കാണിക്കൂ",
     "description": "Primary call to action for step 3"
@@ -419,10 +429,6 @@
     "message": "(പൂർത്തിയായി)",
     "description": "Suffix shown on a completed setup step"
   },
-  "chromium_1644574205037202324": {
-    "message": "ചരിത്രം",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
   "chromium_4684427112815847243": {
     "message": "എല്ലാം സമന്വയിപ്പിക്കുക",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -440,7 +446,7 @@
     "description": "Title on sync help side panel when history sync is already disabled"
   },
   "syncHelpSyncOffBody": {
-    "message": "സിങ്ക് ഇതിനകം ഓഫാണ്, അതിനാൽ നിങ്ങളുടെ ചരിത്രം Google സെർവറുകളിലേക്ക് അയയ്ക്കുന്നില്ല. എല്ലാം തയ്യാറാണ്!",
+    "message": "സിങ്ക് ഇതിനകം ഓഫാണ്, അതുകൊണ്ട് നിങ്ങളുടെ ചരിത്രം Google സെർവറുകളിലേക്ക് അയയ്ക്കുന്നില്ല. അടുത്തതായി ചില Google സേവന ക്രമീകരണങ്ങൾ ക്രമീകരിക്കും.",
     "description": "Body text on sync help side panel when history sync is already off"
   },
   "syncHelpReturnToSetupCta": {
@@ -450,5 +456,33 @@
   "welcomeStep3AllDoneCta": {
     "message": "പൂർത്തിയായി!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "welcomeStep3ContinueCta": {
+    "message": "തുടരുക",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpGoogleServicesIntro": {
+    "message": "നമ്മൾ Google-ലേക്ക് ഡാറ്റ അയയ്ക്കുന്നില്ലെന്ന് ഉറപ്പാക്കാം.",
+    "description": "Intro on sync help side panel for the Google services settings substep"
+  },
+  "syncHelpGoogleServicesInstruction": {
+    "message": "ഈ രണ്ട് ഓപ്ഷനുകളും ഓഫാണെന്ന് ഉറപ്പാക്കുക:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+  },
+  "chromium_447252321002412580": {
+    "message": "Chrome-ന്റെ ഫീച്ചറുകളും പ്രകടനവും മെച്ചപ്പെടുത്താൻ സഹായിക്കുക",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
+  },
+  "chromium_8438566539970814960": {
+    "message": "തിരയലുകളും ബ്രൗസിംഗും മികച്ചതാക്കുക",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
+  },
+  "chromium_1355088659320425659": {
+    "message": "ചരിത്രവും ടാബുകളും",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
+  "chromium_1644574205037202324": {
+    "message": "ചരിത്രം",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   }
 }
