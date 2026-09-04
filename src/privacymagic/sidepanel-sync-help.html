@@ -150,6 +150,18 @@
       flex-shrink: 0;
     }
 
+    .history-preview-toggle-rtl {
+      display: none;
+    }
+
+    html[dir="rtl"] .history-preview-toggle-ltr {
+      display: none;
+    }
+
+    html[dir="rtl"] .history-preview-toggle-rtl {
+      display: block;
+    }
+
     .google-services-preview .history-preview-row {
       margin-left: 0;
       gap: 24px;
@@ -219,7 +231,8 @@
         <div class="history-preview-row">
           <span id="syncHelpHistoryLabelLegacy" data-i18n="chromium_1644574205037202324">History</span>
           <span id="syncHelpHistoryLabelAccount" hidden data-i18n="chromium_1355088659320425659">History and tabs</span>
-          <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
         </div>
       </div>
       <div class="btn-row sync-help-actions">
@@ -244,11 +257,13 @@
       <div class="history-preview google-services-preview" role="img" aria-label="Google services toggles preview">
         <div class="history-preview-row">
           <span data-i18n="chromium_447252321002412580">Help improve Chrome's features and performance</span>
-          <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
         </div>
         <div class="history-preview-row">
           <span data-i18n="chromium_8438566539970814960">Make searches and browsing better</span>
-          <img class="history-preview-toggle" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
         </div>
       </div>
       <div class="btn-row sync-help-actions">
