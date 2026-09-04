@@ -54,7 +54,7 @@
   "overrides": {
     "adm-zip": "0.6.0",
     "brace-expansion": "5.0.9",
-    "fast-uri": "3.1.5",
+    "fast-uri": "3.1.7",
     "js-yaml": "4.3.1",
     "shell-quote": "1.10.0",
     "yauzl": "3.3.0",
