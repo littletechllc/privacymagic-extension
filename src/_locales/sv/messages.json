@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Inaktivera synkronisering av webbhistorik",
+    "message": "Justera dina Chrome-inställningar för integritet",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Vill du ha hjälp med att inaktivera synkronisering av historik?",
+    "message": "Vill du ha hjälp med att justera de här inställningarna?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

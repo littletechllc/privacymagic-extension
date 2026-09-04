@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Browsersynchronisatie van geschiedenis uitschakelen",
+    "message": "Pas je Chrome-instellingen aan voor privacy",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Wil je hulp bij het uitschakelen van synchronisatie van geschiedenis?",
+    "message": "Wil je hulp bij het aanpassen van deze instellingen?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

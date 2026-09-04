@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ब्राउझर इतिहास सिंक बंद करा",
+    "message": "गोपनीयतेसाठी तुमची Chrome सेटिंग्ज समायोजित करा",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "इतिहास सिंक बंद करण्यासाठी मदत हवी आहे का?",
+    "message": "ही सेटिंग्ज समायोजित करण्यासाठी मदत हवी आहे का?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

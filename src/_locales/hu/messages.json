@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Kapcsold ki a böngészési előzmények szinkronizálását",
+    "message": "Állítsd be a Chrome-ot a jobb adatvédelemért",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Szeretnél segítséget az előzmények szinkronizálásának kikapcsolásához?",
+    "message": "Szeretnél segítséget ezeknek a beállításoknak a módosításához?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

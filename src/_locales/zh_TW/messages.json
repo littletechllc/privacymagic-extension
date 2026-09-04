@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "停用瀏覽器歷史記錄同步",
+    "message": "調整 Chrome 設定以保護隱私",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "需要協助停用歷史記錄同步嗎？",
+    "message": "需要協助調整這些設定嗎？",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

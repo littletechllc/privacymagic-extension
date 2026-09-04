@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ブラウザ履歴の同期を無効にする",
+    "message": "プライバシーのためにChromeの設定を調整する",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "履歴同期を無効にする手順の案内が必要ですか？",
+    "message": "これらの設定の調整を手伝いましょうか？",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

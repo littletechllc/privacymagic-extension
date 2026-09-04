@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "உலாவி வரலாறு ஒத்திசைப்பை முடக்கவும்",
+    "message": "தனியுரிமைக்காக உங்கள் Chrome அமைப்புகளை சரிசெய்யவும்",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "வரலாறு ஒத்திசைப்பை முடக்க உதவி வேண்டுமா?",
+    "message": "இந்த அமைப்புகளை சரிசெய்ய உதவி வேண்டுமா?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

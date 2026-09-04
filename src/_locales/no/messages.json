@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Deaktiver synkronisering av nettleserhistorikk",
+    "message": "Juster Chrome-innstillingene dine for personvern",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Vil du ha hjelp til å deaktivere historikksynkronisering?",
+    "message": "Vil du ha hjelp til å justere disse innstillingene?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Disattiva la sincronizzazione della cronologia del browser",
+    "message": "Regola le impostazioni di Chrome per la privacy",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Vuoi aiuto per disattivare la sincronizzazione della cronologia?",
+    "message": "Vuoi aiuto per regolare queste impostazioni?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

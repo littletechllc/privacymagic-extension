@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ಬ್ರೌಸರ್ ಇತಿಹಾಸ ಸಿಂಕ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "message": "ಗೌಪ್ಯತೆಗಾಗಿ ನಿಮ್ಮ Chrome ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "ಇತಿಹಾಸ ಸಿಂಕ್ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲು ಸಹಾಯ ಬೇಕೆ?",
+    "message": "ಈ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಲು ಸಹಾಯ ಬೇಕೆ?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

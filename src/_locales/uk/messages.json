@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Вимкніть синхронізацію історії браузера",
+    "message": "Налаштуйте Chrome для кращої конфіденційності",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Хочете допомогу з вимкненням синхронізації історії?",
+    "message": "Хочете допомогу з налаштуванням цих параметрів?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

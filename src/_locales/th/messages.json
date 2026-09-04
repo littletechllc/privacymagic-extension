@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ปิดการซิงค์ประวัติเบราว์เซอร์",
+    "message": "ปรับการตั้งค่า Chrome เพื่อความเป็นส่วนตัว",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "ต้องการความช่วยเหลือในการปิดการซิงค์ประวัติหรือไม่?",
+    "message": "ต้องการความช่วยเหลือในการปรับการตั้งค่าเหล่านี้หรือไม่?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

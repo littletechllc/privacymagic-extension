@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Atspējojiet pārlūkošanas vēstures sinhronizāciju",
+    "message": "Pielāgojiet Chrome iestatījumus privātumam",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Vai vēlaties palīdzību vēstures sinhronizācijas atspējošanā?",
+    "message": "Vai vēlaties palīdzību šo iestatījumu pielāgošanā?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

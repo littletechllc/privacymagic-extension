@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ബ്രൗസർ ചരിത്ര സിങ്ക് പ്രവർത്തനരഹിതമാക്കുക",
+    "message": "സ്വകാര്യതയ്ക്കായി Chrome ക്രമീകരണങ്ങൾ ക്രമീകരിക്കുക",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "ചരിത്ര സിങ്ക് ഓഫ് ചെയ്യാൻ സഹായമോ?",
+    "message": "ഈ ക്രമീകരണങ്ങൾ ക്രമീകരിക്കാൻ സഹായമോ?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Zima usawazishaji wa historia ya kivinjari",
+    "message": "Rekebisha mipangilio yako ya Chrome kwa faragha",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Unataka msaada wa kuzima usawazishaji wa historia?",
+    "message": "Unataka msaada wa kurekebisha mipangilio hii?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

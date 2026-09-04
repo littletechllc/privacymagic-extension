@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "బ్రౌజర్ హిస్టరీ సింక్‌ను నిలిపివేయండి",
+    "message": "గోప్యత కోసం మీ Chrome సెట్టింగ్‌లను సర్దుబాటు చేయండి",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "హిస్టరీ సింక్ నిలిపివేయడానికి సహాయం కావాలా?",
+    "message": "ఈ సెట్టింగ్‌లను సర్దుబాటు చేయడానికి సహాయం కావాలా?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

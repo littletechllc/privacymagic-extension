@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "Desativar a sincronização do histórico do navegador",
+    "message": "Ajuste as definições do Chrome para mais privacidade",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "Gostaria de ajuda para desativar a sincronização do histórico?",
+    "message": "Gostaria de ajuda para ajustar estas definições?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {

@@ -332,7 +332,7 @@
     "description": "Secondary call to action for step 2"
   },
   "welcomeStep3Title": {
-    "message": "ব্রাউজার ইতিহাস সিঙ্ক বন্ধ করুন",
+    "message": "গোপনীয়তার জন্য Chrome সেটিংস সামঞ্জস্য করুন",
     "description": "Step 3 title on the welcome page"
   },
   "welcomeStep3Time": {
@@ -360,7 +360,7 @@
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
-    "message": "ইতিহাস সিঙ্ক বন্ধ করতে সাহায্য চান?",
+    "message": "এই সেটিংস সামঞ্জস্য করতে সাহায্য চান?",
     "description": "Question text in step 3"
   },
   "welcomeStep3SyncOptionInstruction": {
