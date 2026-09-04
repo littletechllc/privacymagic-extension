@@ -50,9 +50,19 @@ const updateStep = (stepId: StepId, completed: boolean) => {
   }
   if (completed) {
     el.classList.add('step-card-completed')
+    el.classList.add('step-card-collapsed')
   } else {
     el.classList.remove('step-card-completed')
+    el.classList.remove('step-card-collapsed')
   }
+}
+
+const toggleStepCollapsed = (stepId: StepId): void => {
+  const el = getStepElement(stepId)
+  if (el == null || !el.classList.contains('step-card-completed')) {
+    return
+  }
+  el.classList.toggle('step-card-collapsed')
 }
 
 chrome.action.onUserSettingsChanged.addListener(
@@ -104,8 +114,8 @@ getStepElement('disableHistorySync')?.querySelector('.btn-secondary')
 })
 
 for (const step of STEP_IDS) {
-  getStepElement(step)?.addEventListener('click', (_event: Event) => {
-    updateStep(step, false)
+  getStepElement(step)?.querySelector('.step-header')?.addEventListener('click', () => {
+    toggleStepCollapsed(step)
   })
 }
 

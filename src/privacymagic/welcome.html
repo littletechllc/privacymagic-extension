@@ -166,6 +166,10 @@
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--border);
     background: white;
+    user-select: none;
+  }
+
+  .step-card-completed .step-header {
     cursor: pointer;
   }
 
@@ -231,10 +235,6 @@
       margin-inline-start: 0.35em;
     }
 
-    .step-body-container {
-      max-height: 0;
-    }
-
     .step-time {
       display: none;
     }
@@ -243,6 +243,14 @@
       background: rgb(244, 244, 244);
       color: lightgray;
     }
+  }
+
+  .step-card-collapsed .step-body-container {
+    max-height: 0;
+  }
+
+  .step-card-collapsed .step-header {
+    border-bottom-color: transparent;
   }
 
   /*
