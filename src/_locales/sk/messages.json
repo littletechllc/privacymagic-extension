@@ -409,9 +409,13 @@
     "message": "To je všetko! Užite si svoje súkromie.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "Dajte nám vedieť, čo si o ňom myslíte!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "Sledujte nás:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "E-mail:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

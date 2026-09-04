@@ -409,9 +409,13 @@
     "message": "Viskas! Mėgaukitės savo privatumu.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "Pasidalinkite savo nuomone!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "Sekite mus:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "El. paštas:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

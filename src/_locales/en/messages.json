@@ -437,9 +437,13 @@
     "message": "That's it! Enjoy your privacy.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "Let us know what you think!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "Follow us:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "Email:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

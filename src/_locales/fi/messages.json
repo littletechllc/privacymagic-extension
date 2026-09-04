@@ -409,9 +409,13 @@
     "message": "Siinä kaikki! Nauti yksityisyydestäsi.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "Kerro meille mitä mieltä olet!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "Seuraa meitä:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "Sähköposti:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

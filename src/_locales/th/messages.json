@@ -409,9 +409,13 @@
     "message": "เรียบร้อย! ขอให้เพลิดเพลินกับความเป็นส่วนตัวของคุณ",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "บอกเราว่าคุณคิดอย่างไร!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "ติดตามเรา:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "อีเมล:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

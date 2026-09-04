@@ -409,9 +409,13 @@
     "message": "Hiyo ndiyo! Furahia faragha yako.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "Tuambie unachofikiria!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "Tufuate:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "Barua pepe:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

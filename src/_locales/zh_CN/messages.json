@@ -409,9 +409,13 @@
     "message": "就这些！尽享您的隐私保护。",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "欢迎告诉我们您的想法！",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "关注我们：",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "邮箱：",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

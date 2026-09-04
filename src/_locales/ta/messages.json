@@ -409,9 +409,13 @@
     "message": "அதுவே! உங்கள் தனியுரிமையை அனுபவிக்கவும்.",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "உங்கள் கருத்தை எங்களுக்கு தெரிவிக்கவும்!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "எங்களைப் பின்தொடரவும்:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "மின்னஞ்சல்:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",

@@ -409,9 +409,13 @@
     "message": "इतकेच! आपल्या गोपनीयतेचा आनंद घ्या।",
     "description": "Closing text on welcome page"
   },
-  "welcomeLetUsKnow": {
-    "message": "तुमचे मत आम्हाला कळवा!",
-    "description": "Message to ask for feedback on the extension"
+  "welcomeFollowUs": {
+    "message": "आम्हाला फॉलो करा:",
+    "description": "Label before social media icons on the welcome page"
+  },
+  "welcomeGetInTouch": {
+    "message": "ईमेल:",
+    "description": "Label before the support email address on the welcome page"
   },
   "welcomeFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
