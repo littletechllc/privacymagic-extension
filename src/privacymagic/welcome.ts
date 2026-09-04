@@ -1,5 +1,6 @@
 import { handleAsync, logError } from '@src/common/util'
-import { getDisableHistorySyncDone, onDisableHistorySyncDoneChanged } from '@src/common/disable-history-sync-done-state'
+import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
+import { welcomeHistorySyncStepDone, welcomeVpnStepDone } from '@src/common/welcome-step-done-state'
 
 const BLANK_TAB_URL = 'about:blank'
 const SYNC_HELP_SIDE_PANEL_PATH = 'privacymagic/sidepanel-sync-help.html'
@@ -81,7 +82,12 @@ chrome.action.getUserSettings().then((userSettings) => {
 getStepElement('vpn')?.querySelector('.btn-secondary')?.addEventListener('click', (event: Event) => {
   event.preventDefault()
   event.stopPropagation()
-  updateStep('vpn', true)
+  handleAsync(async () => {
+    await welcomeVpnStepDone.set(true)
+    updateStep('vpn', true)
+  }, (error) => {
+    logError(error, 'error saving welcome VPN step completion', event)
+  })
 })
 
 getStepElement('disableHistorySync')?.querySelector('.btn-primary')
@@ -110,7 +116,12 @@ getStepElement('disableHistorySync')?.querySelector('.btn-secondary')
  ?.addEventListener('click', (event: Event) => {
   event.preventDefault()
   event.stopPropagation()
-  updateStep('disableHistorySync', true)
+  handleAsync(async () => {
+    await welcomeHistorySyncStepDone.set(true)
+    updateStep('disableHistorySync', true)
+  }, (error) => {
+    logError(error, 'error saving welcome history-sync step completion', event)
+  })
 })
 
 for (const step of STEP_IDS) {
@@ -122,17 +133,30 @@ for (const step of STEP_IDS) {
 applyStep1MessageTokens()
 applyCompletedLabels()
 
-handleAsync(async () => {
-  if (await getDisableHistorySyncDone()) {
-    updateStep('disableHistorySync', true)
-  }
-}, (error) => {
-  logError(error, 'error reading welcome history-sync completion from storage')
-})
+const restorePersistedStep = (
+  flag: BooleanStorageFlag,
+  stepId: StepId,
+  readErrorMessage: string
+): void => {
+  handleAsync(async () => {
+    if (await flag.get()) {
+      updateStep(stepId, true)
+    }
+  }, (error) => {
+    logError(error, readErrorMessage)
+  })
 
-onDisableHistorySyncDoneChanged((done) => {
-  if (!done) {
-    return
-  }
-  updateStep('disableHistorySync', true)
-})
+  flag.onChanged((done) => {
+    if (!done) {
+      return
+    }
+    updateStep(stepId, true)
+  })
+}
+
+restorePersistedStep(welcomeVpnStepDone, 'vpn', 'error reading welcome VPN completion from storage')
+restorePersistedStep(
+  welcomeHistorySyncStepDone,
+  'disableHistorySync',
+  'error reading welcome history-sync completion from storage'
+)

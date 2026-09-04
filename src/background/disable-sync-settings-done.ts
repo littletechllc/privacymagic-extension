@@ -1,5 +1,5 @@
 import { logError } from '@src/common/util'
-import { setDisableHistorySyncDone } from '@src/common/disable-history-sync-done-state'
+import { welcomeHistorySyncStepDone } from '@src/common/welcome-step-done-state'
 
 const getWindowIdForTab = async (tabId: number): Promise<number> => {
     const tab = await chrome.tabs.get(tabId);
@@ -49,7 +49,7 @@ const focusOrOpenWelcomeTab = async (windowId: number): Promise<void> => {
  * Chrome sync settings tab, and focuses or opens the welcome page.
  */
 export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
-  await setDisableHistorySyncDone(true)
+  await welcomeHistorySyncStepDone.set(true)
   const windowId = await getWindowIdForTab(tabId)
   await closeSidePanel(tabId)
 
