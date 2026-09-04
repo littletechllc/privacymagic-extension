@@ -344,11 +344,11 @@
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "Otvoríme stránku nastavení synchronizácie, aby ste mohli urobiť potrebné úpravy.",
+    "message": "Otvoríme nastavenia Chrome, aby ste mohli urobiť potrebné úpravy.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Poďme sa uistiť, že tento prehliadač neposiela vašu históriu prehliadania na servery Google. Otvorili sme stránku nastavení synchronizácie, aby ste mohli urobiť potrebné úpravy.",
+    "message": "Poďme sa uistiť, že tento prehliadač neposiela vašu históriu prehliadania na servery Google.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
@@ -388,7 +388,7 @@
     }
   },
   "welcomeStep3HistoryToggleInstructionAccount": {
-    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Kliknite na <strong>$history$</strong> a vypnite ju (sivo).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
       "history": {
@@ -466,7 +466,7 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Uistite sa, že sú tieto dve možnosti vypnuté:",
+    "message": "Skontrolujte tieto dve možnosti a ak sú zapnuté, vypnite ich (sivo):",
     "description": "Instruction above the Google services toggles preview on the sync help side panel"
   },
   "chromium_447252321002412580": {

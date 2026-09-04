@@ -344,11 +344,11 @@
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "Θα ανοίξουμε τη σελίδα ρυθμίσεων συγχρονισμού ώστε να κάνετε τις απαραίτητες αλλαγές.",
+    "message": "Θα ανοίξουμε τις ρυθμίσεις του Chrome ώστε να κάνετε τις απαραίτητες αλλαγές.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Ας βεβαιωθούμε ότι αυτό το πρόγραμμα περιήγησης δεν στέλνει το ιστορικό περιήγησής σας στους διακομιστές της Google. Ανοίξαμε τη σελίδα ρυθμίσεων συγχρονισμού ώστε να κάνετε τις απαραίτητες αλλαγές.",
+    "message": "Ας βεβαιωθούμε ότι αυτό το πρόγραμμα περιήγησης δεν στέλνει το ιστορικό περιήγησής σας στους διακομιστές της Google.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
@@ -388,7 +388,7 @@
     }
   },
   "welcomeStep3HistoryToggleInstructionAccount": {
-    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Κάντε κλικ στο <strong>$history$</strong> για απενεργοποίηση (γκρι).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
       "history": {
@@ -466,7 +466,7 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Βεβαιωθείτε ότι αυτές οι δύο επιλογές είναι απενεργοποιημένες:",
+    "message": "Ελέγξτε αυτές τις δύο επιλογές και απενεργοποιήστε τις (γκρι) αν είναι ενεργές:",
     "description": "Instruction above the Google services toggles preview on the sync help side panel"
   },
   "chromium_447252321002412580": {

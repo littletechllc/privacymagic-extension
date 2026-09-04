@@ -344,11 +344,11 @@
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "Chúng tôi sẽ mở trang cài đặt đồng bộ để bạn có thể điều chỉnh cần thiết.",
+    "message": "Chúng tôi sẽ mở cài đặt Chrome để bạn có thể điều chỉnh cần thiết.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Hãy đảm bảo trình duyệt này không gửi lịch sử duyệt web của bạn tới máy chủ của Google. Chúng tôi đã mở trang cài đặt đồng bộ để bạn có thể điều chỉnh cần thiết.",
+    "message": "Hãy đảm bảo trình duyệt này không gửi lịch sử duyệt web của bạn tới máy chủ của Google.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
@@ -388,7 +388,7 @@
     }
   },
   "welcomeStep3HistoryToggleInstructionAccount": {
-    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Nhấp vào <strong>$history$</strong> để tắt (màu xám).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
       "history": {
@@ -466,7 +466,7 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Hãy chắc rằng hai tùy chọn này đã tắt:",
+    "message": "Hãy kiểm tra hai tùy chọn này và tắt chúng (màu xám) nếu đang bật:",
     "description": "Instruction above the Google services toggles preview on the sync help side panel"
   },
   "chromium_447252321002412580": {

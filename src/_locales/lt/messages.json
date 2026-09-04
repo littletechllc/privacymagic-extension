@@ -344,11 +344,11 @@
     "description": "Introductory sentence for history sync setup panel (welcome flow)"
   },
   "welcomeStep3IntroSidepanelPending": {
-    "message": "Atversime sinchronizavimo nustatymų puslapį, kad galėtumėte atlikti reikiamus pakeitimus.",
+    "message": "Atidarysime „Chrome“ nustatymus, kad galėtumėte atlikti reikiamus pakeitimus.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
   "welcomeStep3IntroSidepanel": {
-    "message": "Įsitikinkime, kad ši naršyklė nesiųstų jūsų naršymo istorijos į „Google“ serverius. Atvėrėme sinchronizavimo nustatymų puslapį, kad galėtumėte atlikti reikiamus pakeitimus.",
+    "message": "Įsitikinkime, kad ši naršyklė nesiųstų jūsų naršymo istorijos į „Google“ serverius.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
   "welcomeStep3OpenSyncSettingsCta": {
@@ -388,7 +388,7 @@
     }
   },
   "welcomeStep3HistoryToggleInstructionAccount": {
-    "message": "Click on <strong>$history$</strong> to disable it (grey).",
+    "message": "Spustelėkite <strong>$history$</strong>, kad išjungtumėte (pilka).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
       "history": {
@@ -466,7 +466,7 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Įsitikinkite, kad šios dvi parinktys yra išjungtos:",
+    "message": "Patikrinkite šias dvi parinktis ir, jei jos įjungtos, jas išjunkite (pilka):",
     "description": "Instruction above the Google services toggles preview on the sync help side panel"
   },
   "chromium_447252321002412580": {
