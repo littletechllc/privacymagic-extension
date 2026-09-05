@@ -41,6 +41,10 @@
     "message": "Nâng cao",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Tiếp tục thiết lập...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Bật Không theo dõi",
     "description": "Label for the Do Not Track pref"

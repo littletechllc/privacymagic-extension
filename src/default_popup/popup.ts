@@ -19,10 +19,19 @@ const isAdvancedSidePanelOpenForTab = async (tabId: number): Promise<boolean> =>
   })
 }
 
+const setupContinueSetupLink = (): void => {
+  document.getElementById('continueSetupLinkContainer')?.addEventListener('click', (event) => {
+    handleAsync(async () => {
+      await chrome.tabs.create({ url: 'privacymagic/welcome.html' })
+      window.close()
+    }, (error) => {
+      logError(error, 'error opening welcome setup page', event)
+    })
+  })
+}
+
 const setupAdvancedSettingsLink = (): void => {
-  const advancedSettingsLinkContainer = document.getElementById('advancedSettingsLinkContainer') as HTMLElement
-  advancedSettingsLinkContainer.style.display = 'flex'
-  advancedSettingsLinkContainer.addEventListener('click', (event) => {
+  document.getElementById('advancedSettingsLinkContainer')?.addEventListener('click', (event) => {
     handleAsync(async () => {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs[0]
@@ -72,6 +81,9 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   }
   const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
   safeLocalPage.style.display = 'none'
+  document.getElementById('advancedSettingsLinkContainer')!.hidden = false
+  document.getElementById('popupLinks')!.hidden = false
+  setupContinueSetupLink()
   setupAdvancedSettingsLink()
   await Promise.all([updateSiteInfo(domain), setupMasterSwitch(domain)])
 }, (error: unknown) => {

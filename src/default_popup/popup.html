@@ -7,9 +7,44 @@
     <title>Privacy Magic</title>
     <script src="../privacymagic/i18n.js" type="module"></script>
     <style>
-      html {
+      html,
+      body {
         width: 350px;
-        height: 100px;
+        height: 118px;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      .main-container .toggle-box {
+        margin-bottom: 0;
+      }
+      .link-container {
+        padding: 0.5em;
+      }
+      #advancedSettingsLinkContainer {
+        background-color: transparent;
+        margin-bottom: 0.35em;
+      }
+      #advancedSettingsLinkContainer[hidden] {
+        display: none;
+      }
+      #popupLinks {
+        display: flex;
+        margin-top: auto;
+        flex: 1 0 auto;
+        flex-direction: column;
+        justify-content: flex-end;
+        background-color: #f0f0f0;
+        padding-top: 0.55em;
+        padding-bottom: 0.35em;
+      }
+      #popupLinks[hidden] {
+        display: none;
+      }
+      #popupLinks .link-container {
+        background-color: transparent;
       }
     </style>
 </head>
@@ -23,9 +58,15 @@
         <div id="settings" class="toggle-box toggle-container"></div>
     </div>
     <div id="safeLocalPage" data-i18n="safeLocalPage"></div>
-    <div class="link-container" id="advancedSettingsLinkContainer" style="display: none;">
+    <div class="link-container" id="advancedSettingsLinkContainer" hidden>
         <a href="#" id="advancedSettingsLink" data-i18n="advancedSettingsLink"></a>
         <img src="../assets/images/right_panel_open.svg" alt="" id="advancedSettingsIcon" data-i18n-alt="advancedSettingsLink" />
+    </div>
+    <div id="popupLinks" hidden>
+        <div class="link-container" id="continueSetupLinkContainer">
+            <a href="#" id="continueSetupLink" data-i18n="continueSetupLink"></a>
+            <img src="../assets/images/open_in_new.svg" alt="" id="continueSetupIcon" data-i18n-alt="continueSetupLink" />
+        </div>
     </div>
 
     <script defer src="./popup.js" type="module"></script>

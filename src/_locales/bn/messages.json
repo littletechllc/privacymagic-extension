@@ -41,6 +41,10 @@
     "message": "উন্নত",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "সেটআপ চালিয়ে যান...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "ট্র্যাক করবেন না সক্ষম করুন",
     "description": "Label for the Do Not Track pref"

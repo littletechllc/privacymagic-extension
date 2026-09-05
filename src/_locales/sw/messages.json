@@ -41,6 +41,10 @@
     "message": "Hali ya juu",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Endelea usanidi...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Washa Usifuatilie",
     "description": "Label for the Do Not Track pref"

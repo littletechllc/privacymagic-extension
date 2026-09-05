@@ -41,6 +41,10 @@
     "message": "ขั้นสูง",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "ตั้งค่าต่อ...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "เปิดใช้ ไม่ติดตาม",
     "description": "Label for the Do Not Track pref"

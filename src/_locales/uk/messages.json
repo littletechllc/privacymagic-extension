@@ -41,6 +41,10 @@
     "message": "Додатково",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Продовжити налаштування...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Увімкнути «Не відстежувати»",
     "description": "Label for the Do Not Track pref"

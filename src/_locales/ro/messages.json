@@ -41,6 +41,10 @@
     "message": "Avansat",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Continuă configurarea...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Activează Nu urmări",
     "description": "Label for the Do Not Track pref"

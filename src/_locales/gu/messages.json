@@ -41,6 +41,10 @@
     "message": "અદ્યતન",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "સેટઅપ ચાલુ રાખો...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "ટ્રેક ન કરો સક્ષમ કરો",
     "description": "Label for the Do Not Track pref"

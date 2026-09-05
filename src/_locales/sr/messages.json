@@ -41,6 +41,10 @@
     "message": "Напредно",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Nastavi podešavanje...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Омогући Не прати",
     "description": "Label for the Do Not Track pref"

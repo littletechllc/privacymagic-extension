@@ -41,6 +41,10 @@
     "message": "Geavanceerd",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Installatie voortzetten...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Volg mij niet inschakelen",
     "description": "Label for the Do Not Track pref"

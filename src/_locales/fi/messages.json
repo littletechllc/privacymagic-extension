@@ -41,6 +41,10 @@
     "message": "Edistynyt",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Jatka asetusta...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Ota Älä seuraa käyttöön",
     "description": "Label for the Do Not Track pref"

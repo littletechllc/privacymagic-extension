@@ -41,6 +41,10 @@
     "message": "Разширени",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Продължете настройката...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Включи Не ме проследявай",
     "description": "Label for the Do Not Track pref"

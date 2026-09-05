@@ -41,6 +41,10 @@
     "message": "ఉన్నత",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "సెటప్ కొనసాగించండి...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "ట్రాక్ చేయవద్దు ప్రారంభించు",
     "description": "Label for the Do Not Track pref"

@@ -41,6 +41,10 @@
     "message": "የላቀ",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "ማዋቀርን ቀጥል...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "እንዳይከታተል አንቃ",
     "description": "Label for the Do Not Track pref"

@@ -41,6 +41,10 @@
     "message": "詳細",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "セットアップを続ける...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "トラック拒否を有効にする",
     "description": "Label for the Do Not Track pref"

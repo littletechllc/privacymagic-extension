@@ -41,6 +41,10 @@
     "message": "Avanceret",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Fortsæt opsætning...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Aktiver Spor mig ikke",
     "description": "Label for the Do Not Track pref"

@@ -41,6 +41,10 @@
     "message": "Gelişmiş",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Kuruluma devam et...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Takip Etmeyi Etkinleştir",
     "description": "Label for the Do Not Track pref"

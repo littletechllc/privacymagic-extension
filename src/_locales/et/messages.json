@@ -41,6 +41,10 @@
     "message": "Täpsem",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Jätka seadistamist...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Luba Ära jälgi",
     "description": "Label for the Do Not Track pref"

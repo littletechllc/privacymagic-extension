@@ -41,6 +41,10 @@
     "message": "மேம்பட்ட",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "அமைப்பைத் தொடரவும்...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "கண்காணிக்க வேண்டாம் இயக்கு",
     "description": "Label for the Do Not Track pref"

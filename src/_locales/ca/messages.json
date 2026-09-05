@@ -41,6 +41,10 @@
     "message": "Avançat",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Continua la configuració...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Activa No em segueixis",
     "description": "Label for the Do Not Track pref"

@@ -41,6 +41,10 @@
     "message": "Masulong",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Ipagpatuloy ang setup...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Paganahin ang Huwag Sundan",
     "description": "Label for the Do Not Track pref"

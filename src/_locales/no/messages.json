@@ -41,6 +41,10 @@
     "message": "Avansert",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Fortsett oppsett...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Aktiver Ikke spor meg",
     "description": "Label for the Do Not Track pref"

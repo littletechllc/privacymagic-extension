@@ -41,6 +41,10 @@
     "message": "ಉನ್ನತ",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "ಸೆಟಪ್ ಮುಂದುವರಿಸಿ...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "ಟ್ರ್ಯಾಕ್ ಮಾಡಬೇಡಿ ಸಕ್ರಿಯಗೊಳಿಸಿ",
     "description": "Label for the Do Not Track pref"

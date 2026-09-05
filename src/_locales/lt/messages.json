@@ -41,6 +41,10 @@
     "message": "Išplėstinė",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "Tęsti sąranką...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "Įjungti Nesepti",
     "description": "Label for the Do Not Track pref"

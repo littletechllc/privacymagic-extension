@@ -41,6 +41,10 @@
     "message": "高级",
     "description": "Link in the toolbar popup to open the side panel with full site settings"
   },
+  "continueSetupLink": {
+    "message": "继续设置...",
+    "description": "Link in the toolbar popup to open the welcome/setup page"
+  },
   "doNotTrackEnabled": {
     "message": "启用请勿跟踪",
     "description": "Label for the Do Not Track pref"
