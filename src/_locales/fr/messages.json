@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "Continuer la configuration…",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "Activer Ne pas me pister",
@@ -249,15 +249,15 @@
     "message": "Signaux confidentialité",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Configuration de Privacy Magic",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Bienvenue dans Privacy Magic!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "Configuration de $brand$",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "Pour terminer la configuration, suivez ces étapes rapides.",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Épinglez Privacy Magic à votre barre d’outils",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 min",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "icône puzzle",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "icône épingler",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Épinglage de Privacy Magic à la barre d’outils",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "Masquez votre adresse IP avec un VPN",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 min",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic vous protège au niveau du navigateur. Mais chaque site que vous visitez, et chaque traqueur intégré, peut encore voir votre adresse IP, ce qui peut révéler votre identité et votre localisation. <strong>Pour masquer votre adresse IP, vous avez besoin d’un VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "VPN recommandés",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "L’équipe Privacy Guides a examiné et recommande trois VPN open source avec un engagement strict envers la vie privée.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Voir les recommandations VPN de Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/fr/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic n’est pas affilié à Privacy Guides et ne reçoit aucun paiement de leur part.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "J’ai déjà un VPN !",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "Ajustez vos paramètres Chrome pour plus de confidentialité",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "Assurons-nous que ce navigateur n’envoie pas votre historique de navigation aux serveurs de Google.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "Nous allons ouvrir les paramètres de Chrome pour que vous puissiez faire les réglages nécessaires.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "Assurons-nous que ce navigateur n’envoie pas votre historique de navigation aux serveurs de Google.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "Ouvrir les paramètres",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "Vous pouvez empêcher cela dans les paramètres de votre navigateur : cela ne prend qu’une minute.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "Voulez-vous de l’aide pour ajuster ces paramètres ?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "Commencez par cliquer sur <strong>$sync_option$</strong> :",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "Ensuite, sous <strong>$sync_data$</strong>, cliquez sur <strong>$history$</strong> pour le désactiver (gris).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "Cliquez sur <strong>$history$</strong> pour le désactiver (gris).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "Oui, montrez-moi",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "Non, je m’en occuperai moi-même",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "C’est tout ! Profitez de votre vie privée.",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "Suivez-nous :",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "E-mail :",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "Code source",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "Cliquez sur le <strong>puzzle</strong> {puzzleIcon} dans votre barre d’outils Chrome pour voir vos extensions. Trouvez <strong>Privacy Magic</strong> dans la liste et cliquez sur l’icône <strong>épingler</strong> {pinIcon} à côté. Une fois le bouton Privacy Magic {hamsaIcon} épinglé, vous pouvez cliquer dessus à tout moment pour voir comment vous êtes protégé et gérer les protections individuelles.",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(terminé)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "Retour à la configuration",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "Terminé !",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "Continuer",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

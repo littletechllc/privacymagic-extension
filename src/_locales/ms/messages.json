@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "Teruskan persediaan...",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "Dayakan Jangan Jejaki",
@@ -249,15 +249,15 @@
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Privacy Magic Persediaan",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Selamat datang ke Privacy Magic!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "$brand$ Persediaan",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "Untuk melengkapkan persediaan, sila ikuti langkah pantas ini.",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Sematkan Privacy Magic pada bar alat anda",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 min",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "ikon puzzle",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "ikon pin",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Menyemat Privacy Magic pada bar alat",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "Sembunyikan alamat IP anda dengan VPN",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 min",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic melindungi anda di peringkat pelayar. Tetapi setiap laman yang anda lawati, dan setiap penjejak terbenam, masih boleh melihat alamat IP anda, yang mendedahkan identiti dan lokasi. <strong>Untuk menyembunyikan alamat IP, anda memerlukan VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "VPN yang dicadangkan",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "Pasukan Privacy Guides telah menyemak dan mengesyorkan tiga VPN sumber terbuka dengan komitmen teguh terhadap privasi.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Lihat syoran VPN Privacy Guides →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/en/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic tidak berafiliasi dengan Privacy Guides dan tidak menerima sebarang bayaran daripada mereka.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "Saya sudah ada VPN!",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "Laraskan tetapan Chrome untuk privasi",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "Pastikan pelayar ini tidak menghantar sejarah pelayaran anda ke pelayan Google.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "Kami akan membuka tetapan Chrome supaya anda boleh membuat pelarasan yang diperlukan.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "Pastikan pelayar ini tidak menghantar sejarah pelayaran anda ke pelayan Google.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "Buka tetapan",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "Anda boleh menghalangnya dalam tetapan pelayar anda: ia hanya mengambil masa satu minit.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "Mahukan bantuan untuk melaraskan tetapan ini?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "Mula-mula, klik <strong>$sync_option$</strong>:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "Seterusnya, di bawah <strong>$sync_data$</strong>, klik <strong>$history$</strong> untuk melumpuhkan (kelabu).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "Klik <strong>$history$</strong> untuk melumpuhkannya (kelabu).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "Ya, tunjukkan saya",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "Tidak, saya akan urus sendiri",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "Itu sahaja! Nikmati privasi anda.",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "Ikuti kami:",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "E-mel:",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "Kod Sumber",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "Klik <strong>puzzle</strong> {puzzleIcon} pada bar alat Chrome untuk melihat sambungan anda. Cari <strong>Privacy Magic</strong> dalam senarai dan klik <strong>pin</strong> {pinIcon} di sebelahnya. Setelah butang Privacy Magic {hamsaIcon} disematkan, anda boleh klik pada bila-bila masa untuk melihat cara anda dilindungi dan mengawal perlindungan individu.",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(selesai)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "Kembali ke persediaan",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "Siap!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "Teruskan",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

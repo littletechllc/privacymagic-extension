@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="welcomeStep3Title">Adjust your Chrome settings for privacy</title>
+  <title data-i18n="setupStep3Title">Adjust your Chrome settings for privacy</title>
   <script src="./i18n.js" type="module"></script>
   <link href="./shared.css" rel="stylesheet">
   <style>
@@ -182,27 +182,27 @@
   <div class="page">
     <header class="setup-header">
       <img class="logo-icon" src="../logo/logo.svg" alt="Privacy Magic logo" />
-      <h1 data-i18n="welcomeSetupHeading" data-i18n-args="welcomeBrandName" dir="auto">Privacy Magic Setup</h1>
+      <h1 data-i18n="setupPanelHeading" data-i18n-args="setupBrandName" dir="auto">Privacy Magic Setup</h1>
     </header>
     <main class="content">
     <h1 class="step-title" id="syncHelpHeadingDefault" dir="auto">
-      <span data-i18n="welcomeStep3Title">Adjust your Chrome settings for privacy</span><span id="syncHelpHeadingProgress" class="step-title-progress" hidden> (1/2)</span>
+      <span data-i18n="setupStep3Title">Adjust your Chrome settings for privacy</span><span id="syncHelpHeadingProgress" class="step-title-progress" hidden> (1/2)</span>
     </h1>
     <h1 class="step-title" id="syncHelpHeadingSyncOff" hidden data-i18n="syncHelpSyncOffTitle" dir="auto">Sync is off</h1>
     <div id="syncHelpPhasePending">
-      <p data-i18n="welcomeStep3IntroSidepanelPending" dir="auto">
+      <p data-i18n="setupStep3IntroSidepanelPending" dir="auto">
         We'll open Chrome settings so you can make the necessary adjustments.
       </p>
       <div class="btn-row sync-help-pending-actions">
-        <button type="button" class="btn-primary" id="syncHelpOpenSettingsBtn" data-i18n="welcomeStep3OpenSyncSettingsCta">Open settings</button>
+        <button type="button" class="btn-primary" id="syncHelpOpenSettingsBtn" data-i18n="setupStep3OpenSyncSettingsCta">Open settings</button>
       </div>
     </div>
     <div id="syncHelpPhaseReady" hidden>
-      <p data-i18n="welcomeStep3IntroSidepanel" dir="auto">
+      <p data-i18n="setupStep3IntroSidepanel" dir="auto">
         Let's make sure this browser doesn't send your browsing history to Google's servers.
       </p>
       <div id="syncHelpCustomizeSyncSection">
-        <p class="first-instruction" data-i18n-html="welcomeStep3SyncOptionInstruction" data-i18n-args="chromium_7399045143794278225" dir="auto">
+        <p class="first-instruction" data-i18n-html="setupStep3SyncOptionInstruction" data-i18n-args="chromium_7399045143794278225" dir="auto">
           First, click on <strong>Customize Sync</strong>:
         </p>
         <div class="sync-preview" role="img" aria-label="Sync options preview">
@@ -220,10 +220,10 @@
           </div>
         </div>
       </div>
-      <p id="syncHelpHistoryInstructionLegacy" data-i18n-html="welcomeStep3HistoryToggleInstruction" data-i18n-args="chromium_7044606776288350625, chromium_1644574205037202324" dir="auto">
+      <p id="syncHelpHistoryInstructionLegacy" data-i18n-html="setupStep3HistoryToggleInstruction" data-i18n-args="chromium_7044606776288350625, chromium_1644574205037202324" dir="auto">
         Next, under <strong>Sync Data</strong>, click on <strong>History</strong> to disable it (grey).
       </p>
-      <p id="syncHelpHistoryInstructionAccount" hidden data-i18n-html="welcomeStep3HistoryToggleInstructionAccount" data-i18n-args="chromium_1355088659320425659" dir="auto">
+      <p id="syncHelpHistoryInstructionAccount" hidden data-i18n-html="setupStep3HistoryToggleInstructionAccount" data-i18n-args="chromium_1355088659320425659" dir="auto">
         Click on <strong>History and tabs</strong> to disable it (grey).
       </p>
       <div class="history-preview" role="img" aria-label="History sync toggle preview">
@@ -236,7 +236,7 @@
         </div>
       </div>
       <div class="btn-row btn-row--end sync-help-actions">
-        <button type="button" class="btn-primary sync-help-continue-btn" data-i18n="welcomeStep3ContinueCta">Continue</button>
+        <button type="button" class="btn-primary sync-help-continue-btn" data-i18n="setupStep3ContinueCta">Continue</button>
       </div>
     </div>
     <div id="syncHelpPhaseSyncOff" hidden>
@@ -244,7 +244,7 @@
         Sync is already disabled, so your history isn't being sent to Google's servers. Next, we'll adjust a couple of Google services settings.
       </p>
       <div class="btn-row btn-row--end sync-help-pending-actions">
-        <button type="button" class="btn-primary sync-help-continue-btn" data-i18n="welcomeStep3ContinueCta">Continue</button>
+        <button type="button" class="btn-primary sync-help-continue-btn" data-i18n="setupStep3ContinueCta">Continue</button>
       </div>
     </div>
     <div id="syncHelpPhaseGoogleServices" hidden>
@@ -267,7 +267,7 @@
         </div>
       </div>
       <div class="btn-row btn-row--end sync-help-actions">
-        <button type="button" class="btn-primary sync-help-finish-setup-btn" data-i18n="welcomeStep3AllDoneCta">All done!</button>
+        <button type="button" class="btn-primary sync-help-finish-setup-btn" data-i18n="setupStep3AllDoneCta">All done!</button>
       </div>
     </div>
     </main>

@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "Fortsett oppsett...",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "Aktiver Ikke spor meg",
@@ -249,15 +249,15 @@
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Privacy Magic Oppsett",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Velkommen til Privacy Magic!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "$brand$ Oppsett",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "Følg disse raske trinnene for å fullføre oppsettet.",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Fest Privacy Magic til verktøylinjen",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 min",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "puslespillikon",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "nålikon",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Feste Privacy Magic til verktøylinjen",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "Skjul IP-adressen din med en VPN",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 min",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic beskytter deg på nettlesernivå. Men hvert nettsted du besøker, og hver innebygd sporingskode, kan fortsatt se IP-adressen din, som kan avsløre identitet og plassering. <strong>For å skjule IP-adressen trenger du en VPN.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "Foreslåtte VPN-er",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "Privacy Guides-teamet har vurdert og anbefaler tre VPN-tjenester som er åpen kildekode og sterkt forpliktet til personvern.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Se Privacy Guides’ VPN-anbefalinger →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/en/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic er ikke tilknyttet Privacy Guides og mottar ikke betaling fra dem.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "Jeg har VPN!",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "Juster Chrome-innstillingene dine for personvern",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "La oss sørge for at denne nettleseren ikke sender nettleserhistorikken din til Googles servere.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "Vi åpner Chrome-innstillingene slik at du kan gjøre nødvendige endringer.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "La oss sørge for at denne nettleseren ikke sender nettleserhistorikken din til Googles servere.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "Åpne innstillinger",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "Du kan forhindre det i nettleserinnstillingene dine: det tar bare et minutt.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "Vil du ha hjelp til å justere disse innstillingene?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "Klikk først på <strong>$sync_option$</strong>:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "Klikk deretter under <strong>$sync_data$</strong> på <strong>$history$</strong> for å slå det av (grått).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "Klikk på <strong>$history$</strong> for å slå det av (grått).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "Ja, vis meg",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "Nei, jeg ordner det selv",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "Det var alt! Nyt personvernet ditt.",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "Følg oss:",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "E-post:",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "Kildekode",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "Klikk på <strong>puslespillet</strong> {puzzleIcon} i Chrome-verktøylinjen for å se utvidelsene dine. Finn <strong>Privacy Magic</strong> i listen og klikk på <strong>nålen</strong> {pinIcon} ved siden av. Når Privacy Magic-knappen {hamsaIcon} er festet, kan du klikke på den når som helst for å se hvordan du blir beskyttet og styre individuelle beskyttelser.",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(fullført)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "Tilbake til oppsett",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "Ferdig!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "Fortsett",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

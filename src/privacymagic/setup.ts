@@ -1,6 +1,6 @@
 import { handleAsync, logError } from '@src/common/util'
 import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
-import { welcomeHistorySyncStepDone, welcomeVpnStepDone } from '@src/common/welcome-step-done-state'
+import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
 
 const BLANK_TAB_URL = 'about:blank'
 const SYNC_HELP_SIDE_PANEL_PATH = 'privacymagic/sidepanel-sync-help.html'
@@ -16,16 +16,16 @@ const buildWelcomeInlineIconHtml = (altText: string, iconPath: string): string =
   `<span style="unicode-bidi:isolate;display:inline-block;vertical-align:middle;margin:0 3px"><img src="${iconPath}" alt="${altText}" style="width:20px;height:20px;display:block;position:relative;top:-1px" /></span>`
 
 const applyStep1MessageTokens = (): void => {
-  const el = document.getElementById('welcomeStep1Body')
+  const el = document.getElementById('setupStep1Body')
   if (el == null) {
     return
   }
 
-  const raw = chrome.i18n.getMessage('welcomeStep1BodyWithIcons')
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons')
   const source = raw || el.innerHTML
 
-  const puzzleIconAlt = chrome.i18n.getMessage('welcomePuzzleIconAlt') || 'puzzle icon'
-  const pinIconAlt = chrome.i18n.getMessage('welcomePinIconAlt') || 'pin icon'
+  const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'
+  const pinIconAlt = chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon'
 
   const tokenMap: Record<string, string> = {
     puzzleIcon: buildWelcomeInlineIconHtml(puzzleIconAlt, '../assets/images/puzzle.svg'),
@@ -38,7 +38,7 @@ const applyStep1MessageTokens = (): void => {
 }
 
 const applyCompletedLabels = (): void => {
-  const localized = chrome.i18n.getMessage('welcomeCompletedSuffix') || '(completed)'
+  const localized = chrome.i18n.getMessage('setupCompletedSuffix') || '(completed)'
   document.querySelectorAll<HTMLElement>('.step-title').forEach((title) => {
     title.setAttribute('data-completed-label', localized)
   })
@@ -83,10 +83,10 @@ getStepElement('vpn')?.querySelector('.btn-secondary')?.addEventListener('click'
   event.preventDefault()
   event.stopPropagation()
   handleAsync(async () => {
-    await welcomeVpnStepDone.set(true)
+    await setupVpnStepDone.set(true)
     updateStep('vpn', true)
   }, (error) => {
-    logError(error, 'error saving welcome VPN step completion', event)
+    logError(error, 'error saving setup VPN step completion', event)
   })
 })
 
@@ -117,10 +117,10 @@ getStepElement('disableHistorySync')?.querySelector('.btn-secondary')
   event.preventDefault()
   event.stopPropagation()
   handleAsync(async () => {
-    await welcomeHistorySyncStepDone.set(true)
+    await setupHistorySyncStepDone.set(true)
     updateStep('disableHistorySync', true)
   }, (error) => {
-    logError(error, 'error saving welcome history-sync step completion', event)
+    logError(error, 'error saving setup history-sync step completion', event)
   })
 })
 
@@ -154,9 +154,9 @@ const restorePersistedStep = (
   })
 }
 
-restorePersistedStep(welcomeVpnStepDone, 'vpn', 'error reading welcome VPN completion from storage')
+restorePersistedStep(setupVpnStepDone, 'vpn', 'error reading setup VPN completion from storage')
 restorePersistedStep(
-  welcomeHistorySyncStepDone,
+  setupHistorySyncStepDone,
   'disableHistorySync',
-  'error reading welcome history-sync completion from storage'
+  'error reading setup history-sync completion from storage'
 )

@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "அமைப்பைத் தொடரவும்...",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "கண்காணிக்க வேண்டாம் இயக்கு",
@@ -249,15 +249,15 @@
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Privacy Magic அமைப்பு",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Privacy Magic-க்கு வரவேற்கிறோம்!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "$brand$ அமைப்பு",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "அமைப்பை முடிக்க இந்த விரைவு படிகளை பின்பற்றவும்.",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Privacy Magic-ஐ கருவிப்பட்டியில் பின் செய்யவும்",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 நிமிடம்",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "பஸில் ஐகான்",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "பின் ஐகான்",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Privacy Magic-ஐ கருவிப்பட்டியில் பின் செய்வது",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "VPN மூலம் உங்கள் IP முகவரியை மறைக்கவும்",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 நிமிடம்",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic உங்களை உலாவி நிலையில் பாதுகாக்கிறது. ஆனால் நீங்கள் பார்வையிடும் ஒவ்வொரு இணையதளமும் உட்பொதிக்கப்பட்ட ஒவ்வொரு கண்காணிப்பும் உங்கள் IP முகவரியைக் காண முடியும், அது அடையாளத்தையும் இருப்பிடத்தையும் வெளிப்படுத்தும். <strong>IP முகவரியை மறைக்க VPN தேவை.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "பரிந்துரைக்கப்பட்ட VPN கள்",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "Privacy Guides குழு மூன்று VPN களை மதிப்பாய்வு செய்து பரிந்துரைக்கிறது; அவை திறந்த மூலமாகவும் தனியுரிமைக்கு கடுமையாக உறுதியளிக்கின்றன.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Privacy Guides VPN பரிந்துரைகளைக் காண்க →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/en/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic Privacy Guides உடன் இணைக்கப்படவில்லை, அவர்களிடமிருந்து எந்தக் கட்டணமும் பெறுவதில்லை.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "எனக்கு VPN உள்ளது!",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "தனியுரிமைக்காக உங்கள் Chrome அமைப்புகளை சரிசெய்யவும்",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 நிமிடம்",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "இந்த உலாவி Google சேவையகங்களுக்கு உங்கள் உலாவல் வரலாற்றை அனுப்பாது என்பதை உறுதிப்போம்.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "தேவையான மாற்றங்களைச் செய்ய Chrome அமைப்புகளைத் திறப்போம்.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "இந்த உலாவி Google சேவையகங்களுக்கு உங்கள் உலாவல் வரலாற்றை அனுப்பாது என்பதை உறுதிப்போம்.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "அமைப்புகளைத் திறக்கவும்",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "உங்கள் உலாவி அமைப்புகளில் இதைத் தடுக்கலாம்: ஒரு நிமிடம் மட்டுமே ஆகும்.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "இந்த அமைப்புகளை சரிசெய்ய உதவி வேண்டுமா?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "முதலில், <strong>$sync_option$</strong> மீது கிளிக் செய்யவும்:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "பின்னர், <strong>$sync_data$</strong> கீழ், <strong>$history$</strong> மீது கிளிக் செய்து முடக்கவும் (சாம்பல்).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "<strong>$history$</strong> மீது கிளிக் செய்து முடக்கவும் (சாம்பல்).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "ஆம், காண்பிக்கவும்",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "வேண்டாம், நான் செய்வேன்",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "அதுவே! உங்கள் தனியுரிமையை அனுபவிக்கவும்.",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "எங்களைப் பின்தொடரவும்:",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "மின்னஞ்சல்:",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "மூல குறியீடு",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க Chrome கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>பின்</strong> {pinIcon} ஐ கிளிக் செய்யவும். Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(முடிந்தது)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "அமைப்புக்குத் திரும்பு",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "முடிந்தது!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "தொடரவும்",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

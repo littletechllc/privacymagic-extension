@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="welcomePageTitle">Privacy Magic Setup</title>
+<title data-i18n="setupPageTitle">Privacy Magic Setup</title>
 <script src="./i18n.js" type="module"></script>
 <link href="./shared.css" rel="stylesheet">
 <style>
@@ -52,7 +52,7 @@
     pointer-events: none;
   }
 
-  .welcome-msg {
+  .setup-msg {
     position: relative;
     z-index: 2;
     font-family: 'Lora', serif;
@@ -65,12 +65,12 @@
     text-shadow: 0 0 16px #fefcf8, 0 0 24px #fefcf8, 0 0 32px #fefcf8;
   }
 
-  .welcome-msg em {
+  .setup-msg em {
     font-style: italic;
     color: var(--blue);
   }
 
-  .welcome-sub {
+  .setup-sub {
     font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-family: 'Lora', serif;
     position: relative;
@@ -81,7 +81,7 @@
     margin-bottom: 0;
   }
 
-  .welcome-connect {
+  .setup-connect {
     text-align: center;
     padding: 1rem 2rem 1rem;
     font-family: 'Lora', serif;
@@ -89,11 +89,11 @@
     color: var(--text-muted);
   }
 
-  .welcome-follow {
+  .setup-follow {
     margin: 0 0 0.85rem;
   }
 
-  .welcome-follow-links {
+  .setup-follow-links {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
@@ -101,7 +101,7 @@
     vertical-align: middle;
   }
 
-  .welcome-follow-links a {
+  .setup-follow-links a {
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
@@ -109,31 +109,31 @@
     text-decoration: none;
   }
 
-  .welcome-follow-links a:hover {
+  .setup-follow-links a:hover {
     color: var(--blue-dark);
   }
 
-  .welcome-follow-icon {
+  .setup-follow-icon {
     display: inline-flex;
     line-height: 0;
   }
 
-  .welcome-follow-icon svg {
+  .setup-follow-icon svg {
     width: 1.15em;
     height: 1.15em;
   }
 
-  .welcome-get-in-touch {
+  .setup-get-in-touch {
     margin: 0;
   }
 
-  .welcome-support-email {
+  .setup-support-email {
     margin-inline-start: 0.55rem;
     color: var(--blue);
     text-decoration: none;
   }
 
-  .welcome-support-email:hover {
+  .setup-support-email:hover {
     color: var(--blue-dark);
     text-decoration: underline;
   }
@@ -334,8 +334,8 @@
     </span>
   </a>
 
-  <h1 class="welcome-msg" data-i18n="welcomeHeading" dir="auto" style="position:relative; z-index:2; background:transparent;">Welcome to Privacy Magic!</h1>
-  <p class="welcome-sub" data-i18n="welcomeSubheading" dir="auto" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
+  <h1 class="setup-msg" data-i18n="setupHeading" dir="auto" style="position:relative; z-index:2; background:transparent;">Welcome to Privacy Magic!</h1>
+  <p class="setup-sub" data-i18n="setupSubheading" dir="auto" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
 </header>
 <script src="./setup.js" type="module"></script>
 <div class="steps-container">
@@ -343,13 +343,13 @@
 <div class="step-card" id="step_pin">
   <div class="step-header">
     <div class="step-num">1</div>
-    <div class="step-title" data-i18n="welcomeStep1Title">Pin Privacy Magic to your toolbar</div>
-    <div class="step-time" data-i18n="welcomeStep1Time">1 min</div>
+    <div class="step-title" data-i18n="setupStep1Title">Pin Privacy Magic to your toolbar</div>
+    <div class="step-time" data-i18n="setupStep1Time">1 min</div>
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p id="welcomeStep1Body" data-i18n-html="welcomeStep1BodyWithIcons" dir="auto">Click the <strong>puzzle</strong> {puzzleIcon} in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> {pinIcon} next to it. Once the Privacy Magic button {hamsaIcon} is pinned, you can click it anytime to see how you're being protected and to control individual protections.</p>
-      <img src="../assets/images/pin_action_button.gif" data-i18n-alt="welcomePinActionImageAlt" alt="Pinning Privacy Magic to the toolbar"
+      <p id="setupStep1Body" data-i18n-html="setupStep1BodyWithIcons" dir="auto">Click the <strong>puzzle</strong> {puzzleIcon} in your Chrome toolbar to see your extensions. Find <strong>Privacy Magic</strong> in the list and click the <strong>pin</strong> {pinIcon} next to it. Once the Privacy Magic button {hamsaIcon} is pinned, you can click it anytime to see how you're being protected and to control individual protections.</p>
+      <img src="../assets/images/pin_action_button.gif" data-i18n-alt="setupPinActionImageAlt" alt="Pinning Privacy Magic to the toolbar"
         style="border-color:rgb(224, 224, 224); border-radius:30px; border-style:solid; border-width:1px; display:block; margin:auto; margin-top:1rem;" />
     </div>
   </div>
@@ -358,24 +358,24 @@
 <div class="step-card" id="step_vpn">
   <div class="step-header">
     <div class="step-num">2</div>
-    <div class="step-title" data-i18n="welcomeStep2Title">Hide your IP address with a VPN</div>
-    <div class="step-time" data-i18n="welcomeStep2Time">5 min</div>
+    <div class="step-title" data-i18n="setupStep2Title">Hide your IP address with a VPN</div>
+    <div class="step-time" data-i18n="setupStep2Time">5 min</div>
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p data-i18n-html="welcomeStep2Body">Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it,
+      <p data-i18n-html="setupStep2Body">Privacy Magic protects you at the browser level. But every website you visit, and every tracker embedded in it,
         can still see your IP address, which can reveal your identity and location. <strong>To hide your IP address,
           you need a VPN.</strong></p>
       <div class="vpn-box">
-        <div class="vpn-box-label" data-i18n="welcomeSuggestedVpnLabel">Suggested VPNs</div>
-        <p class="vpn-desc" data-i18n="welcomeSuggestedVpnDescription">The Privacy Guides team has reviewed and recommended three VPNs that are open source and have a strict commitment to privacy.</p>
+        <div class="vpn-box-label" data-i18n="setupSuggestedVpnLabel">Suggested VPNs</div>
+        <p class="vpn-desc" data-i18n="setupSuggestedVpnDescription">The Privacy Guides team has reviewed and recommended three VPNs that are open source and have a strict commitment to privacy.</p>
         <a href="https://www.privacyguides.org/en/vpn/" class="btn-primary" target="_blank" rel="noopener noreferrer"
-          style="margin:1rem 0; align-self:flex-start;" data-i18n="welcomeGetProtonVpnCta"
-          data-i18n-href="welcomePrivacyGuidesVpnUrl">See Privacy Guides' VPN recommendations →</a>
-        <p class="privacy-guides-note" data-i18n="welcomePrivacyGuidesNote" style="margin-top:0.5rem;">Privacy Magic is not affiliated with Privacy Guides and receives no payment from them.</p>
+          style="margin:1rem 0; align-self:flex-start;" data-i18n="setupGetProtonVpnCta"
+          data-i18n-href="setupPrivacyGuidesVpnUrl">See Privacy Guides' VPN recommendations →</a>
+        <p class="privacy-guides-note" data-i18n="setupPrivacyGuidesNote" style="margin-top:0.5rem;">Privacy Magic is not affiliated with Privacy Guides and receives no payment from them.</p>
       </div>
       <div class="btn-row" style="justify-content:flex-end;">
-        <a href="#" class="btn-secondary" data-i18n="welcomeGotVpnCta">I've got a VPN!</a>
+        <a href="#" class="btn-secondary" data-i18n="setupGotVpnCta">I've got a VPN!</a>
       </div>
     </div>
   </div>
@@ -385,18 +385,18 @@
 <div class="step-card" id="step_disableHistorySync">
   <div class="step-header">
     <div class="step-num">3</div>
-    <div class="step-title" data-i18n="welcomeStep3Title">Disable history syncing</div>
-    <div class="step-time" data-i18n="welcomeStep3Time">1 min</div>
+    <div class="step-title" data-i18n="setupStep3Title">Disable history syncing</div>
+    <div class="step-time" data-i18n="setupStep3Time">1 min</div>
   </div>
   <div class="step-body-container">
     <div class="step-body">
-      <p data-i18n="welcomeStep3Intro" dir="auto">Let's make sure this browser doesn't leak your browsing history to Google's servers.</p>
-      <p data-i18n-html="welcomeStep3BodyLead" dir="auto">You can prevent that from happening in your browser's settings: it only takes a minute.</p>
-      <p data-i18n="welcomeStep3BodyQuestion" dir="auto">Would you like help disabling history syncing?</p>
+      <p data-i18n="setupStep3Intro" dir="auto">Let's make sure this browser doesn't leak your browsing history to Google's servers.</p>
+      <p data-i18n-html="setupStep3BodyLead" dir="auto">You can prevent that from happening in your browser's settings: it only takes a minute.</p>
+      <p data-i18n="setupStep3BodyQuestion" dir="auto">Would you like help disabling history syncing?</p>
       <div class="btn-row">
-        <a href="#" class="btn-primary" data-i18n="welcomeShowMeCta">Yes, show me</a>
+        <a href="#" class="btn-primary" data-i18n="setupShowMeCta">Yes, show me</a>
         <div style="flex:1;"></div>
-        <a href="#" class="btn-secondary" data-i18n="welcomeHandleMyselfCta">No, I'll handle it myself</a>
+        <a href="#" class="btn-secondary" data-i18n="setupHandleMyselfCta">No, I'll handle it myself</a>
       </div>
     </div>
   </div>
@@ -405,26 +405,26 @@
 </div>
 
 <div style="text-align:center; padding: 3rem 2rem 1rem;">
-  <p data-i18n="welcomeClosing" dir="auto" style="font-family:'Lora',serif; font-size:clamp(1.2rem, 2.5vw, 1.7rem); color:var(--text-muted);">That's it! Enjoy your privacy.</p>
+  <p data-i18n="setupClosing" dir="auto" style="font-family:'Lora',serif; font-size:clamp(1.2rem, 2.5vw, 1.7rem); color:var(--text-muted);">That's it! Enjoy your privacy.</p>
 </div>
 
-<div class="welcome-connect">
-  <p class="welcome-follow">
-    <span data-i18n="welcomeFollowUs">Follow us:</span><span class="welcome-follow-links">
-      <a href="https://x.com/privacymagic" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X"><span class="welcome-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></span></a>
-      <a href="https://bsky.app/profile/privacymagic.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Bluesky"><span class="welcome-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.468 1.948C5.303 3.325 7.276 6.118 8 7.616c.725-1.498 2.698-4.29 4.532-5.668C13.855.955 16 .186 16 2.632c0 .489-.28 4.105-.444 4.692-.572 2.04-2.653 2.561-4.504 2.246 3.236.551 4.06 2.375 2.281 4.2-3.376 3.464-4.852-.87-5.23-1.98-.07-.204-.103-.3-.103-.218 0-.081-.033.014-.102.218-.379 1.11-1.855 5.444-5.231 1.98-1.778-1.825-.955-3.65 2.28-4.2-1.85.315-3.932-.205-4.503-2.246C.28 6.737 0 3.12 0 2.632 0 .186 2.145.955 3.468 1.948"/></svg></span></a>
-      <a href="https://mastodon.social/@privacymagic" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Mastodon"><span class="welcome-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/></svg></span></a>
-      <a href="https://www.linkedin.com/company/privacy-magic/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn"><span class="welcome-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></span></a>
-      <a href="https://github.com/littletechllc/privacymagic-extension" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub"><span class="welcome-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg></span></a>
+<div class="setup-connect">
+  <p class="setup-follow">
+    <span data-i18n="setupFollowUs">Follow us:</span><span class="setup-follow-links">
+      <a href="https://x.com/privacymagic" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X"><span class="setup-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></span></a>
+      <a href="https://bsky.app/profile/privacymagic.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Bluesky"><span class="setup-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.468 1.948C5.303 3.325 7.276 6.118 8 7.616c.725-1.498 2.698-4.29 4.532-5.668C13.855.955 16 .186 16 2.632c0 .489-.28 4.105-.444 4.692-.572 2.04-2.653 2.561-4.504 2.246 3.236.551 4.06 2.375 2.281 4.2-3.376 3.464-4.852-.87-5.23-1.98-.07-.204-.103-.3-.103-.218 0-.081-.033.014-.102.218-.379 1.11-1.855 5.444-5.231 1.98-1.778-1.825-.955-3.65 2.28-4.2-1.85.315-3.932-.205-4.503-2.246C.28 6.737 0 3.12 0 2.632 0 .186 2.145.955 3.468 1.948"/></svg></span></a>
+      <a href="https://mastodon.social/@privacymagic" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Mastodon"><span class="setup-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/></svg></span></a>
+      <a href="https://www.linkedin.com/company/privacy-magic/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn"><span class="setup-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></span></a>
+      <a href="https://github.com/littletechllc/privacymagic-extension" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub"><span class="setup-follow-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg></span></a>
     </span>
   </p>
-  <p class="welcome-get-in-touch">
-    <span data-i18n="welcomeGetInTouch">Email:</span><a class="welcome-support-email" href="mailto:support@privacymagic.com">support@privacymagic.com</a>
+  <p class="setup-get-in-touch">
+    <span data-i18n="setupGetInTouch">Email:</span><a class="setup-support-email" href="mailto:support@privacymagic.com">support@privacymagic.com</a>
   </p>
 </div>
 
 <footer>
-  <span data-i18n-html="welcomeFooterCopyright">&copy; 2026 Little Tech LLC</span> &nbsp;·&nbsp; <a href="https://github.com/littletechllc/privacymagic-extension" style="color:inherit;" target="_blank" rel="noopener noreferrer" data-i18n="welcomeSourceCodeLink">Source Code</a>
+  <span data-i18n-html="setupFooterCopyright">&copy; 2026 Little Tech LLC</span> &nbsp;·&nbsp; <a href="https://github.com/littletechllc/privacymagic-extension" style="color:inherit;" target="_blank" rel="noopener noreferrer" data-i18n="setupSourceCodeLink">Source Code</a>
 </footer>
 
 </body>

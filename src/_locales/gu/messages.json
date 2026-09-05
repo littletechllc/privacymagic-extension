@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "સેટઅપ ચાલુ રાખો...",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "ટ્રેક ન કરો સક્ષમ કરો",
@@ -249,15 +249,15 @@
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Privacy Magic સેટઅપ",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Privacy Magic માં આપનું સ્વાગત છે!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "$brand$ સેટઅપ",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "સેટઅપ પૂર્ણ કરવા માટે કૃપા કરીને આ ઝડપી પગલાં અનુસરો।",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Privacy Magic ને તમારા ટૂલબારમાં પિન કરો",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 મિનિટ",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "પઝલ આઇકન",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "પિન આઇકન",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Privacy Magic ને ટૂલબારમાં પિન કરવું",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "VPN સાથે તમારું IP સરનામું છુપાવો",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 મિનિટ",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic તમને બ્રાઉઝર સ્તરે સુરક્ષા આપે છે. પરંતુ તમે જે વેબસાઇટ્સ જુઓ છો અને તેમાં એમ્બેડ ટ્રેકર્સ હજી પણ તમારું IP સરનામું જોઈ શકે છે, જે ઓળખ અને સ્થાન ખુલ્લું પાડી શકે છે. <strong>તમારું IP સરનામું છુપાવવા તમને VPN જોઈએ.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "સૂચવેલ VPN",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "Privacy Guides ટીમે ત્રણ VPNની સમીક્ષા કરી અને ભલામણ કરી જે ઓપન સોર્સ છે અને ગોપનીયતા પ્રત્યે કડક પ્રતિબદ્ધતા ધરાવે છે.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Privacy Guidesની VPN ભલામણો જુઓ →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/en/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic Privacy Guides સાથે સંલગ્ન નથી અને તેમની પાસેથી કોઈ ચુકવણી મેળવતું નથી.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "મારી પાસે VPN છે!",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "ગોપનીયતા માટે તમારા Chrome સેટિંગ્સ ગોઠવો",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 મિનિટ",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "ચોક્કસો કે આ બ્રાઉજર Google ટે સર્વરો પર તમારો બ્રાઉઝિંગ ઇતિહાસ મોકલતો નથી.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "અમે Chrome સેટિંગ્સ ખોલીશું જેથી તમે જરૂરી ફેરફારો કરી શકો.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "ચોક્કસો કે આ બ્રાઉજર Google ટે સર્વરો પર તમારો બ્રાઉઝિંગ ઇતિહાસ મોકલતો નથી.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "સેટિંગ્સ ખોલો",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "તમે તમારા બ્રાઉઝરની સેટિંગ્સમાં આ અટકાવી શકો છો: માત્ર એક મિનિટ લાગે છે.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "આ સેટિંગ્સ ગોઠવવામાં મદદ જોઈએ?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "પહેલા, <strong>$sync_option$</strong> પર ક્લિક કરો:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "પછી, <strong>$sync_data$</strong> હેઠળ, <strong>$history$</strong> પર ક્લિક કરી બંધ કરો (ઝુંસરો).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "<strong>$history$</strong> પર ક્લિક કરીને બંધ કરો (ભૂખરું).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "હા, બતાવો",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "ના, હું પોતે કરીશ",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "બસ એટલું જ! તમારી ગોપનીયતાનો આનંદ લો।",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "અમને ફોલો કરો:",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "ઈમેઈલ:",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "સોર્સ કોડ",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "તમારા એક્સટેન્શન જોવા માટે Chrome ટૂલબારમાં <strong>પઝલ</strong> {puzzleIcon} પર ક્લિક કરો। યાદીમાં <strong>Privacy Magic</strong> શોધો અને બાજુમાં આવેલા <strong>પિન</strong> {pinIcon} પર ક્લિક કરો। Privacy Magic બટન {hamsaIcon} પિન થયા પછી તમે કોઈપણ સમયે ક્લિક કરીને સુરક્ષા સ્થિતિ જોઈ શકો છો અને વ્યક્તિગત સુરક્ષા નિયંત્રિત કરી શકો છો।",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(પૂર્ણ થયું)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "સેટઅપ પર પાછા ફરો",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "થઈ ગયું!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "ચાલુ રાખો",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

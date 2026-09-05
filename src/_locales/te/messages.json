@@ -43,7 +43,7 @@
   },
   "continueSetupLink": {
     "message": "సెటప్ కొనసాగించండి...",
-    "description": "Link in the toolbar popup to open the welcome/setup page"
+    "description": "Link in the toolbar popup to open the setup page"
   },
   "doNotTrackEnabled": {
     "message": "ట్రాక్ చేయవద్దు ప్రారంభించు",
@@ -249,15 +249,15 @@
     "message": "Privacy Signals",
     "description": "Category for privacy policy protection settings"
   },
-  "welcomePageTitle": {
+  "setupPageTitle": {
     "message": "Privacy Magic సెటప్",
     "description": "Browser tab title for the Privacy Magic setup page"
   },
-  "welcomeHeading": {
+  "setupHeading": {
     "message": "Privacy Magic కు స్వాగతం!",
-    "description": "Main heading on the welcome page"
+    "description": "Main heading on the setup page"
   },
-  "welcomeSetupHeading": {
+  "setupPanelHeading": {
     "message": "$brand$ సెటప్",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
     "placeholders": {
@@ -267,107 +267,107 @@
       }
     }
   },
-  "welcomeSubheading": {
+  "setupSubheading": {
     "message": "సెట్టప్ పూర్తి చేయడానికి ఈ త్వరిత దశలను అనుసరించండి.",
-    "description": "Subheading on the welcome page"
+    "description": "Subheading on the setup page"
   },
-  "welcomeStep1Title": {
+  "setupStep1Title": {
     "message": "Privacy Magic ను టూల్‌బార్‌లో పిన్ చేయండి",
-    "description": "Step 1 title on the welcome page"
+    "description": "Step 1 title on the setup page"
   },
-  "welcomeStep1Time": {
+  "setupStep1Time": {
     "message": "1 నిమి",
     "description": "Estimated time for step 1"
   },
-  "welcomePuzzleIconAlt": {
+  "setupPuzzleIconAlt": {
     "message": "పజిల్ ఐకాన్",
     "description": "Alt text for puzzle icon in step 1"
   },
-  "welcomeBrandName": {
+  "setupBrandName": {
     "message": "Privacy Magic",
-    "description": "Brand name shown in welcome content"
+    "description": "Brand name shown in setup content"
   },
-  "welcomePinIconAlt": {
+  "setupPinIconAlt": {
     "message": "పిన్ ఐకాన్",
     "description": "Alt text for pin icon in step 1"
   },
-  "welcomePinActionImageAlt": {
+  "setupPinActionImageAlt": {
     "message": "Privacy Magic ను టూల్‌బార్‌లో పిన్ చేయడం",
     "description": "Alt text for pinning animation image"
   },
-  "welcomeStep2Title": {
+  "setupStep2Title": {
     "message": "VPN తో మీ IP చిరునామాను దాచండి",
-    "description": "Step 2 title on the welcome page"
+    "description": "Step 2 title on the setup page"
   },
-  "welcomeStep2Time": {
+  "setupStep2Time": {
     "message": "5 నిమి",
     "description": "Estimated time for step 2"
   },
-  "welcomeStep2Body": {
+  "setupStep2Body": {
     "message": "Privacy Magic మిమ్మల్ని బ్రౌజర్ స్థాయిలో రక్షిస్తుంది. కానీ మీరు సందర్శించే ప్రతి వెబ్‌సైట్ మరియు ఎంబెడ్ చేసిన ప్రతి ట్రాకర్ మీ IP చిరునామాను చూడగలదు, గుర్తింపు మరియు స్థానాన్ని బయటపెట్టవచ్చు. <strong>IP చిరునామాను దాచడానికి VPN అవసరం.</strong>",
     "description": "Main explanatory text for step 2"
   },
-  "welcomeSuggestedVpnLabel": {
+  "setupSuggestedVpnLabel": {
     "message": "సూచించిన VPN లు",
     "description": "Label above recommended VPN card"
   },
-  "welcomeSuggestedVpnName": {
+  "setupSuggestedVpnName": {
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
-  "welcomeSuggestedVpnDescription": {
+  "setupSuggestedVpnDescription": {
     "message": "Privacy Guides బృందం మూడు VPN లను సమీక్షించి సిఫార్సు చేసింది; అవి ఓపెన్ సోర్స్ మరియు గోప్యతకు కఠిన ప్రతిబద్ధత కలిగి ఉన్నాయి.",
     "description": "Description of suggested VPN provider"
   },
-  "welcomeGetProtonVpnCta": {
+  "setupGetProtonVpnCta": {
     "message": "Privacy Guides VPN సిఫార్సులను చూడండి →",
     "description": "Primary call to action for suggested VPN"
   },
-  "welcomePrivacyGuidesVpnUrl": {
+  "setupPrivacyGuidesVpnUrl": {
     "message": "https://www.privacyguides.org/en/vpn/",
-    "description": "Localized Privacy Guides VPN recommendations page URL (welcome CTA)"
+    "description": "Localized Privacy Guides VPN recommendations page URL (setup CTA)"
   },
-  "welcomePrivacyGuidesNote": {
+  "setupPrivacyGuidesNote": {
     "message": "Privacy Magic Privacy Guides తో అనుబంధం లేదు మరియు వారి నుండి ఎలాంటి చెల్లింపు అందుకోదు.",
-    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (welcome VPN box)"
+    "description": "Disclosure that Privacy Magic is not affiliated with Privacy Guides and receives no payment from them (setup VPN box)"
   },
-  "welcomeGotVpnCta": {
+  "setupGotVpnCta": {
     "message": "నాకు VPN ఉంది!",
     "description": "Secondary call to action for step 2"
   },
-  "welcomeStep3Title": {
+  "setupStep3Title": {
     "message": "గోప్యత కోసం మీ Chrome సెట్టింగ్‌లను సర్దుబాటు చేయండి",
-    "description": "Step 3 title on the welcome page"
+    "description": "Step 3 title on the setup page"
   },
-  "welcomeStep3Time": {
+  "setupStep3Time": {
     "message": "1 నిమి",
     "description": "Estimated time for step 3"
   },
-  "welcomeStep3Intro": {
+  "setupStep3Intro": {
     "message": "ఈ బ్రౌసర్ మీ బ్రౌసింగ్ చరిత్రను Google సర్వర్లకు పంపకుండా ఉండేలా నిర్ధారించుకుందాం.",
-    "description": "Introductory sentence for history sync setup panel (welcome flow)"
+    "description": "Introductory sentence for history sync setup panel (setup flow)"
   },
-  "welcomeStep3IntroSidepanelPending": {
+  "setupStep3IntroSidepanelPending": {
     "message": "అవసరమైన మార్పులు చేయడానికి Chrome సెట్టింగ్‌లను తెరుస్తాము.",
     "description": "Intro text on sync help side panel before navigating to Chrome settings"
   },
-  "welcomeStep3IntroSidepanel": {
+  "setupStep3IntroSidepanel": {
     "message": "ఈ బ్రౌసర్ మీ బ్రౌసింగ్ చరిత్రను Google సర్వర్లకు పంపకుండా ఉండేలా నిర్ధారించుకుందాం.",
     "description": "Intro paragraph for the history-sync help side panel (sync page open beside it)"
   },
-  "welcomeStep3OpenSyncSettingsCta": {
+  "setupStep3OpenSyncSettingsCta": {
     "message": "సెట్టింగ్లను తెరవండి",
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
-  "welcomeStep3BodyLead": {
+  "setupStep3BodyLead": {
     "message": "మీ బ్రౌజర్ సెట్టింగ్‌లలో దీన్ని నివారించవచ్చు: కేవలం ఒక నిమిషం పడుతుంది.",
     "description": "Main explanatory text for step 3"
   },
-  "welcomeStep3BodyQuestion": {
+  "setupStep3BodyQuestion": {
     "message": "ఈ సెట్టింగ్‌లను సర్దుబాటు చేయడానికి సహాయం కావాలా?",
     "description": "Question text in step 3"
   },
-  "welcomeStep3SyncOptionInstruction": {
+  "setupStep3SyncOptionInstruction": {
     "message": "ముందుగా, <strong>$sync_option$</strong> పైన క్లిక్ చేయండి:",
     "description": "Instruction for selecting a sync option in step 3",
     "placeholders": {
@@ -377,7 +377,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstruction": {
+  "setupStep3HistoryToggleInstruction": {
     "message": "తరువాత, <strong>$sync_data$</strong> క్రింద, <strong>$history$</strong> పైన క్లిక్ చేసి దానిని ఆపండి (బూడిద రంగు).",
     "description": "Instruction for disabling History syncing in step 3",
     "placeholders": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "welcomeStep3HistoryToggleInstructionAccount": {
+  "setupStep3HistoryToggleInstructionAccount": {
     "message": "<strong>$history$</strong> పై క్లిక్ చేసి దాన్ని ఆపండి (బూడిద రంగు).",
     "description": "Instruction for disabling History and tabs on UNO chrome://settings/account (no Customize sync step)",
     "placeholders": {
@@ -401,39 +401,39 @@
       }
     }
   },
-  "welcomeShowMeCta": {
+  "setupShowMeCta": {
     "message": "అవును, చూపించండి",
     "description": "Primary call to action for step 3"
   },
-  "welcomeHandleMyselfCta": {
+  "setupHandleMyselfCta": {
     "message": "లేదు, నేనే చేస్తాను",
     "description": "Secondary call to action for step 3"
   },
-  "welcomeClosing": {
+  "setupClosing": {
     "message": "ఇంతే! మీ గోప్యతను ఆస్వాదించండి.",
-    "description": "Closing text on welcome page"
+    "description": "Closing text on setup page"
   },
-  "welcomeFollowUs": {
+  "setupFollowUs": {
     "message": "మమ్మల్ని అనుసరించండి:",
-    "description": "Label before social media icons on the welcome page"
+    "description": "Label before social media icons on the setup page"
   },
-  "welcomeGetInTouch": {
+  "setupGetInTouch": {
     "message": "ఇమెయిల్:",
-    "description": "Label before the support email address on the welcome page"
+    "description": "Label before the support email address on the setup page"
   },
-  "welcomeFooterCopyright": {
+  "setupFooterCopyright": {
     "message": "&copy; 2026 Little Tech LLC",
-    "description": "Copyright text in welcome page footer"
+    "description": "Copyright text in setup page footer"
   },
-  "welcomeSourceCodeLink": {
+  "setupSourceCodeLink": {
     "message": "మూల కోడ్",
-    "description": "Label for source code link in welcome footer"
+    "description": "Label for source code link in setup footer"
   },
-  "welcomeStep1BodyWithIcons": {
+  "setupStep1BodyWithIcons": {
     "message": "మీ ఎక్స్టెన్షన్లు చూడటానికి Chrome టూల్‌బార్‌లోని <strong>పజిల్</strong> {puzzleIcon} పై క్లిక్ చేయండి. జాబితాలో <strong>Privacy Magic</strong> ను కనుగొని పక్కన ఉన్న <strong>పిన్</strong> {pinIcon} పై క్లిక్ చేయండి. Privacy Magic బటన్ {hamsaIcon} పిన్ అయిన తర్వాత, మీరు ఎప్పుడైనా క్లిక్ చేసి రక్షణ స్థితిని చూసి వ్యక్తిగత రక్షణలను నియంత్రించవచ్చు.",
     "description": "Step 1 body text with named icon tokens for i18n"
   },
-  "welcomeCompletedSuffix": {
+  "setupCompletedSuffix": {
     "message": "(పూర్తైంది)",
     "description": "Suffix shown on a completed setup step"
   },
@@ -459,13 +459,13 @@
   },
   "syncHelpReturnToSetupCta": {
     "message": "సెటప్‌కు తిరిగి వెళ్ళు",
-    "description": "Button on sync help side panel to return to welcome setup (ready and sync-off phases)"
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
   },
-  "welcomeStep3AllDoneCta": {
+  "setupStep3AllDoneCta": {
     "message": "పూర్తయింది!",
     "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
   },
-  "welcomeStep3ContinueCta": {
+  "setupStep3ContinueCta": {
     "message": "కొనసాగించు",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },

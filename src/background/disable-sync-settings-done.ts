@@ -1,5 +1,5 @@
 import { logError } from '@src/common/util'
-import { welcomeHistorySyncStepDone } from '@src/common/welcome-step-done-state'
+import { setupHistorySyncStepDone } from '@src/common/setup-step-done-state'
 
 const getWindowIdForTab = async (tabId: number): Promise<number> => {
     const tab = await chrome.tabs.get(tabId);
@@ -45,11 +45,11 @@ const focusOrOpenSetupTab = async (windowId: number): Promise<void> => {
 }
 
 /**
- * Persists welcome step disableHistorySync completion, closes the sync-help side panel, optionally removes the
+ * Persists setup step disableHistorySync completion, closes the sync-help side panel, optionally removes the
  * Chrome sync settings tab, and focuses or opens the setup page.
  */
 export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
-  await welcomeHistorySyncStepDone.set(true)
+  await setupHistorySyncStepDone.set(true)
   const windowId = await getWindowIdForTab(tabId)
   await closeSidePanel(tabId)
 
