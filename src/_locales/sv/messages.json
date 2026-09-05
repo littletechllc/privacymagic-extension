@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "Tack för att du installerade Privacy Magic!",
+    "message": "Välkommen till Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {

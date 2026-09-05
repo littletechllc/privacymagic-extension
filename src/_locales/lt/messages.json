@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "Ačiū, kad įdiegėte Privacy Magic!",
+    "message": "Sveiki atvykę į Privacy Magic!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {

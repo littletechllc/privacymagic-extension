@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "Köszönjük, hogy telepítetted a Privacy Magicet!",
+    "message": "Üdvözlünk a Privacy Magicben!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {

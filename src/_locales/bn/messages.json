@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "Privacy Magic ইনস্টল করার জন্য ধন্যবাদ!",
+    "message": "Privacy Magic-এ স্বাগতম!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {

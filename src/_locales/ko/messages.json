@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "Privacy Magic을 설치해 주셔서 감사합니다!",
+    "message": "Privacy Magic에 오신 것을 환영합니다!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {

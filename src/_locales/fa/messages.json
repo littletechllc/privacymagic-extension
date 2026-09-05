@@ -254,7 +254,7 @@
     "description": "Title of the welcome page"
   },
   "welcomeHeading": {
-    "message": "از نصب Privacy Magic متشکریم!",
+    "message": "به Privacy Magic خوش آمدید!",
     "description": "Main heading on the welcome page"
   },
   "welcomeSetupHeading": {
