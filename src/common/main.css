@@ -85,9 +85,4 @@ button {
     height: 18px;
     filter: opacity(0.9);
   }
-  img.togglesIcon {
-    width: 16px;
-    height: 16px;
-    filter: opacity(0.8);
-  }
 }

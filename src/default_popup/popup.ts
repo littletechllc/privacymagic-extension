@@ -3,6 +3,22 @@ import { getRegistrableDomainRemote } from '@src/common/messages'
 import { updateSiteInfo } from '@src/common/site-info'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
+const ADVANCED_SIDE_PANEL_PATH = 'privacymagic/sidepanel.html'
+
+const isAdvancedSidePanelOpenForTab = async (tabId: number): Promise<boolean> => {
+  const baseUrl = chrome.runtime.getURL(ADVANCED_SIDE_PANEL_PATH)
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: [chrome.runtime.ContextType.SIDE_PANEL]
+  })
+  return contexts.some((ctx) => {
+    const url = ctx.documentUrl
+    if (url == null || !url.startsWith(baseUrl)) {
+      return false
+    }
+    return new URL(url).searchParams.get('tabId') === String(tabId)
+  })
+}
+
 const setupAdvancedSettingsLink = (): void => {
   const advancedSettingsLinkContainer = document.getElementById('advancedSettingsLinkContainer') as HTMLElement
   advancedSettingsLinkContainer.style.display = 'flex'
@@ -17,15 +33,19 @@ const setupAdvancedSettingsLink = (): void => {
       if (tabId == null) {
         throw new Error('No active tab found')
       }
-      await chrome.sidePanel.setOptions({
-        tabId,
-        path: `privacymagic/sidepanel.html?tabId=${tabId}`,
-        enabled: true
-      });
-      await chrome.sidePanel.open({ tabId })
+      if (await isAdvancedSidePanelOpenForTab(tabId)) {
+        await chrome.sidePanel.close({ tabId })
+      } else {
+        await chrome.sidePanel.setOptions({
+          tabId,
+          path: `${ADVANCED_SIDE_PANEL_PATH}?tabId=${tabId}`,
+          enabled: true
+        })
+        await chrome.sidePanel.open({ tabId })
+      }
       window.close()
     }, (error) => {
-      logError(error, 'error opening advanced settings page', event)
+      logError(error, 'error toggling advanced settings side panel', event)
     })
   })
 }
