@@ -97,14 +97,14 @@ const initializePersistentResources = async (): Promise<void> => {
   await updateRulesForAllSettings(settings)
 }
 
-const showWelcomePage = async (): Promise<void> => {
-  await chrome.tabs.create({ url: 'privacymagic/welcome.html' })
+const showSetupPage = async (): Promise<void> => {
+  await chrome.tabs.create({ url: 'privacymagic/setup.html' })
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
   handleAsync(async () => {
     if (details.reason === 'install') {
-      await showWelcomePage()
+      await showSetupPage()
       await resetAllPrefsToDefaults()
     }
     // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)

@@ -32,21 +32,21 @@ const closeSidePanel = async (tabId: number): Promise<void> => {
   }
 }
 
-const focusOrOpenWelcomeTab = async (windowId: number): Promise<void> => {
-  const welcomeUrl = chrome.runtime.getURL('privacymagic/welcome.html')
-  const tabs = await chrome.tabs.query({ url: welcomeUrl })
+const focusOrOpenSetupTab = async (windowId: number): Promise<void> => {
+  const setupUrl = chrome.runtime.getURL('privacymagic/setup.html')
+  const tabs = await chrome.tabs.query({ url: setupUrl })
   const t = tabs.find((tab) => tab.windowId === windowId) ?? tabs[0]
   if (t?.id != null) {
     await chrome.windows.update(t.windowId, { focused: true })
     await chrome.tabs.update(t.id, { active: true })
     return
   }
-  await chrome.tabs.create({ url: welcomeUrl, active: true, windowId })
+  await chrome.tabs.create({ url: setupUrl, active: true, windowId })
 }
 
 /**
  * Persists welcome step disableHistorySync completion, closes the sync-help side panel, optionally removes the
- * Chrome sync settings tab, and focuses or opens the welcome page.
+ * Chrome sync settings tab, and focuses or opens the setup page.
  */
 export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
   await welcomeHistorySyncStepDone.set(true)
@@ -64,5 +64,5 @@ export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
     }
   }
 
-  await focusOrOpenWelcomeTab(windowId)
+  await focusOrOpenSetupTab(windowId)
 }
