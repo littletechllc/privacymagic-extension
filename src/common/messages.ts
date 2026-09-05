@@ -52,6 +52,10 @@ export const disableSyncSettingsDoneRemote = async (tabId: number): Promise<void
 }
 
 export const getRegistrableDomainRemote = async (url: string): Promise<string | null> => {
+  // about:blank, chrome://, etc. never have a registrable domain
+  if (!url.startsWith('https://') && !url.startsWith('http://')) {
+    return null
+  }
   const message: Message = { type: 'getRegistrableDomain', url }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as RegistrableDomainSuccessResponse | ErrorResponse
   if (!response.success) {
