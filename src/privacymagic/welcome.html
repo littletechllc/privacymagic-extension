@@ -225,9 +225,6 @@
   .step-body p:last-child { margin-bottom: 0; }
 
   .step-card-completed {
-    .step-title {
-      color: lightgray
-    }
     .step-title::after {
       content: attr(data-completed-label);
       font-size: 0.9rem;
@@ -237,6 +234,12 @@
 
     .step-time {
       display: none;
+    }
+  }
+
+  .step-card-completed.step-card-collapsed {
+    .step-title {
+      color: lightgray;
     }
 
     .step-num {
