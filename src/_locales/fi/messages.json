@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Tervetuloa Privacy Magiciin",
-    "description": "Title of the welcome page"
+    "message": "Privacy Magic Määritys",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Tervetuloa Privacy Magiciin!",

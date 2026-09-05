@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Vitajte v Privacy Magic",
-    "description": "Title of the welcome page"
+    "message": "Privacy Magic Nastavenie",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Vitajte v Privacy Magic!",

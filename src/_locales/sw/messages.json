@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Karibu kwenye Privacy Magic",
-    "description": "Title of the welcome page"
+    "message": "Usanidi wa Privacy Magic",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Karibu kwenye Privacy Magic!",

@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Privacy Magic ലേക്ക് സ്വാഗതം",
-    "description": "Title of the welcome page"
+    "message": "Privacy Magic സജ്ജീകരണം",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Privacy Magic ലേക്ക് സ്വാഗതം!",

@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "ברוכים הבאים ל-Privacy Magic",
-    "description": "Title of the welcome page"
+    "message": "הגדרה של Privacy Magic",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "ברוכים הבאים ל-Privacy Magic!",

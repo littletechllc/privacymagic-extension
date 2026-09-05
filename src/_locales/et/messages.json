@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Tere tulemast Privacy Magicusse",
-    "description": "Title of the welcome page"
+    "message": "Privacy Magic Seadistus",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Tere tulemast Privacy Magicusse!",

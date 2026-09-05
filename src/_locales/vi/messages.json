@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Chào mừng đến với Privacy Magic",
-    "description": "Title of the welcome page"
+    "message": "Thiết lập của Privacy Magic",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Chào mừng đến với Privacy Magic!",

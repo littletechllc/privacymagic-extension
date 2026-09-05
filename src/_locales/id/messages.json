@@ -250,8 +250,8 @@
     "description": "Category for privacy policy protection settings"
   },
   "welcomePageTitle": {
-    "message": "Selamat datang di Privacy Magic",
-    "description": "Title of the welcome page"
+    "message": "Privacy Magic Penyiapan",
+    "description": "Browser tab title for the Privacy Magic setup page"
   },
   "welcomeHeading": {
     "message": "Selamat datang di Privacy Magic!",
