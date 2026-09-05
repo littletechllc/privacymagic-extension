@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Geçmiş senkronizasyonu açıksa, <strong>Chrome tarama geçmişinizi Google sunucularına gönderebilir.</strong> Senkronizasyonu kapatmak geçmişinizi daha gizli tutar.",
+    "message": "Bunu tarayıcı ayarlarınızdan engelleyebilirsiniz: yalnızca bir dakika sürer.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

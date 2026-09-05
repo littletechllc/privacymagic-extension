@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Αν ο συγχρονισμός ιστορικού είναι ενεργός, <strong>το Chrome μπορεί να στέλνει το ιστορικό περιήγησής σας στους διακομιστές της Google.</strong> Η απενεργοποίηση του συγχρονισμού διατηρεί το ιστορικό σας πιο ιδιωτικό.",
+    "message": "Μπορείτε να το αποτρέψετε από τις ρυθμίσεις του προγράμματος περιήγησής σας: διαρκεί μόνο ένα λεπτό.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Если синхронизация истории включена, <strong>Chrome может отправлять вашу историю просмотров на серверы Google.</strong> Отключение синхронизации делает вашу историю более приватной.",
+    "message": "Это можно предотвратить в настройках браузера: займёт всего минуту.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

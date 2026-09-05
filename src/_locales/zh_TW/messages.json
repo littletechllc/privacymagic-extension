@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "若啟用歷史記錄同步，<strong>Chrome 可能會將您的瀏覽歷史傳送到 Google 伺服器。</strong>停用同步可讓您的瀏覽歷史更私密。",
+    "message": "你可以在瀏覽器設定中防止這種情況發生：只需一分鐘。",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

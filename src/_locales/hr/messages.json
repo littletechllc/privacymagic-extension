@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Ako je sinkronizacija povijesti uključena, <strong>Chrome može slati vašu povijest pregledavanja na Googleove poslužitelje.</strong> Onemogućavanje sinkronizacije čini vašu povijest privatnijom.",
+    "message": "To možete spriječiti u postavkama preglednika: traje samo minutu.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

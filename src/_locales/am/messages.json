@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "የታሪክ ማመሳሰል ከተነቃ <strong>Chrome የእርስዎን የአሰሳ ታሪክ ወደ Google አገልጋዮች ሊልክ ይችላል።</strong>",
+    "message": "ይህን ከመከሰት በአሳሽዎ ቅንብሮች ውስጥ መከላከል ይችላሉ፦ አንድ ደቂቃ ብቻ ይወስዳል።",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

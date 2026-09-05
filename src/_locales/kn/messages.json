@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "ಇತಿಹಾಸ ಸಿಂಕ್ ಸಕ್ರಿಯವಾಗಿದ್ದರೆ <strong>Chrome ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Google ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸಬಹುದು।</strong>",
+    "message": "ನಿಮ್ಮ ಬ್ರೌಸರ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಇದನ್ನು ತಡೆಯಬಹುದು: ಕೇವಲ ಒಂದು ನಿಮಿಷ ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

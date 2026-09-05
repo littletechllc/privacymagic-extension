@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "אם סנכרון היסטוריה מופעל, <strong>Chrome עשוי לשלוח את היסטוריית הגלישה שלכם לשרתי Google.</strong> השבתת הסנכרון תשמור על ההיסטוריה שלכם פרטית יותר.",
+    "message": "אפשר למנוע את זה בהגדרות הדפדפן: זה לוקח רק דקה.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

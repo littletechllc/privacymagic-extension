@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "जर इतिहास सिंक सक्षम असेल तर <strong>Chrome आपला ब्राउझिंग इतिहास Google सर्व्हरवर पाठवू शकतो।</strong>",
+    "message": "तुम्ही हे तुमच्या ब्राउझर सेटिंग्जमध्ये रोखू शकता: फक्त एक मिनिट लागतो.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

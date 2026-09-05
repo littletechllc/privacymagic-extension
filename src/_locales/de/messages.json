@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Wenn die Verlaufssynchronisierung aktiviert ist, <strong>kann Chrome deinen Browserverlauf an die Server von Google senden.</strong> Wenn du die Synchronisierung deaktivierst, bleibt dein Verlauf privater.",
+    "message": "Das kannst du in den Einstellungen deines Browsers verhindern: es dauert nur eine Minute.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

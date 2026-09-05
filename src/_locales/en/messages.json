@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "You can prevent that from happening in Chrome's sync settings: it only takes a minute.",
+    "message": "You can prevent that from happening in your browser's settings: it only takes a minute.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

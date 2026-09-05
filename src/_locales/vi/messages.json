@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Nếu đồng bộ lịch sử được bật, <strong>Chrome có thể gửi lịch sử duyệt web của bạn đến máy chủ của Google.</strong>",
+    "message": "Bạn có thể ngăn điều đó trong cài đặt trình duyệt: chỉ mất một phút.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

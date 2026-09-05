@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "หากเปิดการซิงค์ประวัติไว้ <strong>Chrome อาจส่งประวัติการท่องเว็บของคุณไปยังเซิร์ฟเวอร์ของ Google</strong>",
+    "message": "คุณสามารถป้องกันได้ในการตั้งค่าเบราว์เซอร์: ใช้เวลาเพียงนาทีเดียว",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

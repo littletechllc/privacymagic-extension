@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "ചരിത്ര സിങ്ക് പ്രവർത്തനക്ഷമമാണെങ്കിൽ <strong>Chrome നിങ്ങളുടെ ബ്രൗസിംഗ് ചരിത്രം Google സർവറുകളിലേക്ക് അയയ്ക്കാം।</strong>",
+    "message": "നിങ്ങളുടെ ബ്രൗസർ ക്രമീകരണങ്ങളിൽ ഇതു തടയാം: ഒരു മിനിറ്റ് മാത്രം മതി.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Jos historian synkronointi on käytössä, <strong>Chrome voi lähettää selaushistoriasi Googlen palvelimille.</strong> Synkronoinnin poistaminen käytöstä pitää selaushistoriasi yksityisempänä.",
+    "message": "Voit estää tämän selaimen asetuksissa: se kestää vain minuutin.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

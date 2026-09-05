@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Pokud je synchronizace historie zapnutá, <strong>Chrome může odesílat vaši historii prohlížení na servery Google.</strong> Vypnutí synchronizace udrží vaši historii soukromější.",
+    "message": "Tomu můžete zabránit v nastavení prohlížeče: zabere to jen minutu.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

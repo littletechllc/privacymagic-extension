@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "如果启用了历史记录同步，<strong>Chrome 可能会将您的浏览历史发送到 Google 服务器。</strong>禁用同步可让您的浏览历史更私密。",
+    "message": "你可以在浏览器设置中防止这种情况发生：只需一分钟。",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "வரலாறு ஒத்திசைப்பு இயக்கப்பட்டிருந்தால் <strong>Chrome உங்கள் உலாவல் வரலாற்றை Google சேவையகங்களுக்கு அனுப்பக்கூடும்.</strong>",
+    "message": "உங்கள் உலாவி அமைப்புகளில் இதைத் தடுக்கலாம்: ஒரு நிமிடம் மட்டுமே ஆகும்.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

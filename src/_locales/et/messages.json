@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Kui ajaloo sünkroonimine on sisse lülitatud, <strong>võib Chrome saata teie sirvimisajaloo Google'i serveritesse.</strong> Sünkroonimise keelamine hoiab teie ajaloo privaatsemana.",
+    "message": "Seda saate vältida oma brauseri seadetes: see võtab vaid minuti.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

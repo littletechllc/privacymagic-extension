@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "જો ઇતિહાસ સિંક ચાલુ હોય તો <strong>Chrome તમારી બ્રાઉઝિંગ હિસ્ટરી Google સર્વર પર મોકલી શકે છે।</strong>",
+    "message": "તમે તમારા બ્રાઉઝરની સેટિંગ્સમાં આ અટકાવી શકો છો: માત્ર એક મિનિટ લાગે છે.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

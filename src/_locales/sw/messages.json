@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Ikiwa usawazishaji wa historia umewashwa, <strong>Chrome inaweza kutuma historia yako ya kuvinjari kwenye seva za Google.</strong>",
+    "message": "Unaweza kuzuia hilo katika mipangilio ya kivinjari chako: inachukua dakika moja tu.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

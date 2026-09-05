@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Jika penyegerakan sejarah diaktifkan, <strong>Chrome mungkin menghantar sejarah pelayaran anda ke pelayan Google.</strong>",
+    "message": "Anda boleh menghalangnya dalam tetapan pelayar anda: ia hanya mengambil masa satu minit.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

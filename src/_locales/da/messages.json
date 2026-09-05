@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Hvis historiksynkronisering er aktiveret, <strong>kan Chrome sende din browserhistorik til Googles servere.</strong> Deaktivering af synkronisering holder din browserhistorik mere privat.",
+    "message": "Du kan forhindre det i din browsers indstillinger: det tager kun et minut.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

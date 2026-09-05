@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Se la sincronizzazione della cronologia è attiva, <strong>Chrome può inviare la tua cronologia di navigazione ai server di Google.</strong> Disattivare la sincronizzazione rende la tua cronologia più privata.",
+    "message": "Puoi impedirselo nelle impostazioni del browser: richiede solo un minuto.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

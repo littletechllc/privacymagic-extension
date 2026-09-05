@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "హిస్టరీ సింక్ ప్రారంభించబడితే <strong>Chrome మీ బ్రౌజింగ్ హిస్టరీని Google సర్వర్లకు పంపవచ్చు.</strong>",
+    "message": "మీ బ్రౌజర్ సెట్టింగ్‌లలో దీన్ని నివారించవచ్చు: కేవలం ఒక నిమిషం పడుతుంది.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

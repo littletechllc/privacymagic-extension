@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Si la sincronització de l'historial està activada, <strong>Chrome pot enviar el teu historial de navegació als servidors de Google.</strong> Desactivar la sincronització fa que el teu historial sigui més privat.",
+    "message": "Pots evitar que això passi a la configuració del navegador: només triga un minut.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

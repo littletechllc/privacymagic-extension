@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Jika sinkronisasi riwayat aktif, <strong>Chrome dapat mengirim riwayat penjelajahan Anda ke server Google.</strong>",
+    "message": "Anda dapat mencegahnya di setelan browser: hanya butuh satu menit.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Als synchronisatie van geschiedenis is ingeschakeld, <strong>kan Chrome je browsegeschiedenis naar de servers van Google sturen.</strong> Door synchronisatie uit te schakelen blijft je geschiedenis privéer.",
+    "message": "Je kunt dit voorkomen in de instellingen van je browser: het duurt maar een minuut.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

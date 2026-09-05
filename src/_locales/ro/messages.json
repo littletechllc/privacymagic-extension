@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Dacă sincronizarea istoricului este activată, <strong>Chrome poate trimite istoricul tău de navigare către serverele Google.</strong> Dezactivarea sincronizării păstrează istoricul tău mai privat.",
+    "message": "Poți preveni asta din setările browserului: durează doar un minut.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

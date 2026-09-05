@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Se a sincronização do histórico estiver ativada, <strong>o Chrome pode enviar seu histórico de navegação para os servidores da Google.</strong> Desativar a sincronização mantém seu histórico mais privado.",
+    "message": "Você pode impedir que isso aconteça nas configurações do seu navegador: leva só um minuto.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

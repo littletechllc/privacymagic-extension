@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "اگر همگام‌سازی تاریخچه فعال باشد، <strong>Chrome ممکن است تاریخچه مرور شما را به سرورهای Google ارسال کند.</strong> غیرفعال کردن همگام‌سازی، تاریخچه شما را خصوصی‌تر نگه می‌دارد.",
+    "message": "می‌توانید از تنظیمات مرورگر خود جلوی این کار را بگیرید: فقط یک دقیقه طول می‌کشد.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

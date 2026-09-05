@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Kung naka-enable ang history syncing, <strong>maaaring ipadala ng Chrome ang iyong browsing history sa mga server ng Google.</strong>",
+    "message": "Mapipigilan mo iyon sa mga setting ng browser mo: isang minuto lang ang aabutin.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

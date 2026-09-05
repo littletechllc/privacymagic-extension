@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Ja vēstures sinhronizācija ir ieslēgta, <strong>Chrome var sūtīt jūsu pārlūkošanas vēsturi uz Google serveriem.</strong> Sinhronizācijas atspējošana saglabā jūsu vēsturi privātāku.",
+    "message": "To var novērst pārlūkprogrammas iestatījumos: tas aizņem tikai minūti.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

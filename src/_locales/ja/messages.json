@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "履歴同期が有効な場合、<strong>Chrome は閲覧履歴を Google のサーバーに送信する可能性があります。</strong>同期を無効にすると、履歴のプライバシーが向上します。",
+    "message": "これはブラウザの設定で防げます。所要時間はわずか1分です。",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

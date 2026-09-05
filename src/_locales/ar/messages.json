@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "إذا كانت مزامنة السجل مفعلة، <strong>قد يرسل Chrome سجل تصفحك إلى خوادم Google.</strong> تعطيل المزامنة يجعل سجل التصفح أكثر خصوصية.",
+    "message": "يمكنك منع حدوث ذلك من إعدادات متصفحك: لا يستغرق الأمر سوى دقيقة واحدة.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Ha az előzmények szinkronizálása be van kapcsolva, <strong>a Chrome elküldheti a böngészési előzményeidet a Google szervereire.</strong> A szinkronizálás kikapcsolása privátabbá teszi az előzményeidet.",
+    "message": "Ezt a böngésző beállításaiban akadályozhatod meg: csak egy percet vesz igénybe.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

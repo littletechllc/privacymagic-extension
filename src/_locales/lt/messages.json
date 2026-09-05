@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "Jei istorijos sinchronizavimas įjungtas, <strong>Chrome gali siųsti jūsų naršymo istoriją į Google serverius.</strong> Išjungus sinchronizavimą jūsų istorija išlieka privatesnė.",
+    "message": "Tai galite užkirsti savo naršyklės nustatymuose: užtrunka tik minutę.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

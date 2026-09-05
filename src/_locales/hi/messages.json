@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "यदि हिस्ट्री सिंक सक्षम है, तो <strong>Chrome आपकी ब्राउज़िंग हिस्ट्री Google के सर्वरों पर भेज सकता है।</strong> सिंक बंद करने से आपकी हिस्ट्री अधिक निजी रहती है।",
+    "message": "आप इसे अपने ब्राउज़र की सेटिंग में रोक सकते हैं: इसमें सिर्फ़ एक मिनट लगता है।",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

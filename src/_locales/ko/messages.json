@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "방문 기록 동기화가 활성화되어 있으면 <strong>Chrome이 방문 기록을 Google 서버로 전송할 수 있습니다.</strong> 동기화를 끄면 방문 기록이 더 비공개로 유지됩니다.",
+    "message": "브라우저 설정에서 이를 막을 수 있습니다. 1분이면 됩니다.",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {

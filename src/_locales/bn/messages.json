@@ -356,7 +356,7 @@
     "description": "Button to navigate the paired tab to Chrome sync settings"
   },
   "welcomeStep3BodyLead": {
-    "message": "ইতিহাস সিঙ্ক চালু থাকলে <strong>Chrome আপনার ব্রাউজিং ইতিহাস Google সার্ভারে পাঠাতে পারে।</strong>",
+    "message": "আপনি আপনার ব্রাউজারের সেটিংসে এটি প্রতিরোধ করতে পারেন: মাত্র এক মিনিট লাগে।",
     "description": "Main explanatory text for step 3"
   },
   "welcomeStep3BodyQuestion": {
