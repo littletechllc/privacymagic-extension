@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Kontrollera dessa två alternativ och stäng av dem (grått) om de är aktiverade:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Hitta dessa två alternativ på inställningssidan till $LEFT$ och inaktivera dem (grå) om de är aktiverade:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "vänster"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Bidra till att förbättra Chromes funktioner och prestanda",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Historik",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "vänster",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "höger",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

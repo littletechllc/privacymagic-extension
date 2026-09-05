@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Lūdzu, pārbaudiet šīs divas opcijas un atspējojiet tās (pelēks), ja tās ir ieslēgtas:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Lūdzu, atrodiet šīs divas opcijas iestatījumu lapā $LEFT$ un atspējojiet tās (pelēkas), ja tās ir iespējotas:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "pa kreisi"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Palīdzēt uzlabot Chrome funkcijas un veiktspēju",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Vēsture",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "pa kreisi",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "pa labi",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "ದಯವಿಟ್ಟು ಈ ಎರಡು ಆಯ್ಕೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ, ಸಕ್ರಿಯವಾಗಿದ್ದರೆ ಅವುಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಬೂದು):",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "ದಯವಿಟ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟದಲ್ಲಿ $LEFT$ ಈ ಎರಡು ಆಯ್ಕೆಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಅವು ಸಕ್ರಿಯವಾಗಿದ್ದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಬೂದು):",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "ಎಡಕ್ಕೆ"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Chrome ನ ವೈಶಿಷ್ಟ್ಯಗಳು ಹಾಗೂ ಕೆಲಸ ನಿರ್ವಹಣೆಯನ್ನು ಸುಧಾರಿಸಲು ಸಹಾಯ ಮಾಡಿ",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "ಇತಿಹಾಸ",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "ಎಡಕ್ಕೆ",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "ಬಲಕ್ಕೆ",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

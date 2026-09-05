@@ -13,13 +13,13 @@ const HISTORY_SYNC_SETTINGS_URLS = [
   SYNC_SETUP_ADVANCED_URL,
 ] as const
 
-/** Second-phase settings URLs: UNO googleServices, then legacy syncSetup (with search deep link). */
+/** Second-phase settings URLs: UNO googleServices, then legacy syncSetup (with text-fragment deep link). */
 const googleServicesSettingsUrls = (): readonly string[] => {
-  // Chrome Settings uses ?search= to highlight/scroll to matching controls on the page.
+  // Text fragments scroll/highlight matching copy on the page (search= often finds nothing on syncSetup).
   const firstToggleLabel = chrome.i18n.getMessage('chromium_447252321002412580')
   const syncSetupUrl = firstToggleLabel === ''
     ? SYNC_SETUP_URL
-    : `${SYNC_SETUP_URL}?search=${encodeURIComponent(firstToggleLabel)}`
+    : `${SYNC_SETUP_URL}#:~:text=${encodeURIComponent(firstToggleLabel)}`
   return [GOOGLE_SERVICES_URL, syncSetupUrl]
 }
 
@@ -76,8 +76,40 @@ const setReadyPhaseVariant = (url: HistorySyncSettingsUrl, dom: SyncHelpDom): vo
   dom.historyLabelAccount.hidden = !isAccountPage
 }
 
+/** Label for the side of the window where Chrome settings sit (opposite the side panel). */
+const settingsPageSideLabel = async (): Promise<string> => {
+  let panelSide: 'left' | 'right' = 'right'
+  try {
+    if (typeof chrome.sidePanel.getLayout === 'function') {
+      const layout = await chrome.sidePanel.getLayout()
+      if (layout.side === 'left' || layout.side === 'right') {
+        panelSide = layout.side
+      }
+    }
+  } catch {
+    // Older Chrome or missing permission: assume default side panel on the right.
+  }
+  const settingsOnLeft = panelSide === 'right'
+  const key = settingsOnLeft ? 'syncHelpDirectionLeft' : 'syncHelpDirectionRight'
+  const fallback = settingsOnLeft ? 'left' : 'right'
+  return chrome.i18n.getMessage(key) || fallback
+}
+
+const applyGoogleServicesInstruction = async (): Promise<void> => {
+  const el = document.getElementById('syncHelpGoogleServicesInstruction')
+  if (el == null) {
+    return
+  }
+  const side = await settingsPageSideLabel()
+  const msg = chrome.i18n.getMessage('syncHelpGoogleServicesInstruction', [side])
+  if (msg !== '') {
+    el.textContent = msg
+  }
+}
+
 const goToGoogleServices = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
   await tryOpenSettingsUrls(tabId, googleServicesSettingsUrls())
+  await applyGoogleServicesInstruction()
   setSyncHelpMode('googleServices', dom)
 }
 
@@ -217,6 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setSyncHelpMode('pending', dom)
+  handleAsync(applyGoogleServicesInstruction, (error) => {
+    logError(error, 'error applying Google services instruction copy')
+  })
 
   openBtn.addEventListener('click', (event: Event) => {
     handleAsync(async () => {

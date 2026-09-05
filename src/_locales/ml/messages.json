@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "ഈ രണ്ട് ഓപ്ഷനുകളും പരിശോധിച്ച് പ്രവർത്തനക്ഷമമാണെങ്കിൽ അവ പ്രവർത്തനരഹിതമാക്കുക (ചാരനിറം):",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "ക്രമീകരണ പേജിൽ $LEFT$ ഈ രണ്ട് ഓപ്ഷനുകൾ കണ്ടെത്തി പ്രവർത്തനക്ഷമമാണെങ്കിൽ അപ്രാപ്തമാക്കുക (ചാരനിറം):",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "ഇടത്ത്"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Chrome-ന്റെ ഫീച്ചറുകളും പ്രകടനവും മെച്ചപ്പെടുത്താൻ സഹായിക്കുക",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "ചരിത്രം",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "ഇടത്ത്",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "വലത്ത്",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

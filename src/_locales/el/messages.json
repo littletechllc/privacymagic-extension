@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Ελέγξτε αυτές τις δύο επιλογές και απενεργοποιήστε τις (γκρι) αν είναι ενεργές:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Βρείτε αυτές τις δύο επιλογές στη σελίδα ρυθμίσεων στα $LEFT$ και απενεργοποιήστε τις (γκρι) αν είναι ενεργές:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "αριστερά"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Συμβάλετε στη βελτίωση των λειτουργιών και της απόδοσης του Chrome",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Ιστορικό",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "αριστερά",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "δεξιά",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

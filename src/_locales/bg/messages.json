@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Моля, проверете тези две опции и ги изключете (сиво), ако са включени:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Моля, намерете тези две опции в страницата с настройки от $LEFT$ и ги изключете (сиви), ако са включени:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "вляво"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Помощ за подобряването на функциите и ефективността на Chrome",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "История",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "вляво",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "вдясно",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

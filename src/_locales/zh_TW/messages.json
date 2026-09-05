@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "請檢查以下兩個選項，如果已開啟，請將其關閉（灰色）：",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "請在設定頁面（$LEFT$）中找到這兩個選項，若已啟用請將其停用（灰色）：",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "左側"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "協助改善 Chrome 的功能與效能",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "歷史記錄",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "左側",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "右側",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Patikrinkite šias dvi parinktis ir, jei jos įjungtos, jas išjunkite (pilka):",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Rasite šias dvi parinktis nustatymų puslapyje $LEFT$ ir išjunkite jas (pilkos), jei jos įjungtos:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "kairėje"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Padėti tobulinti „Chrome“ funkcijas ir našumą",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Istorija",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "kairėje",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "dešinėje",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

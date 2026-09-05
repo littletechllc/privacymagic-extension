@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Controleer deze twee opties en schakel ze uit (grijs) als ze zijn ingeschakeld:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Zoek deze twee opties op de instellingenpagina ($LEFT$) en schakel ze uit (grijs) als ze zijn ingeschakeld:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "links"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Help de functies en prestaties van Chrome verbeteren",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Geschiedenis",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "links",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "rechts",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

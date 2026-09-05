@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "অনুগ্রহ করে এই দুটি বিকল্প পরীক্ষা করুন এবং চালু থাকলে সেগুলি বন্ধ করুন (ধূসর):",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "অনুগ্রহ করে সেটিংস পৃষ্ঠায় $LEFT$ এই দুটি বিকল্প খুঁজে বের করুন এবং চালু থাকলে সেগুলো বন্ধ (ধূসর) করুন:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "বামে"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Chrome-এর বৈশিষ্ট্য এবং পারফরম্যান্স আরও ভালো করতে সাহায্য করুন",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "ইতিহাস",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "বামে",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "ডানে",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Tafadhali angalia chaguo hizi mbili na uzime (kijivu) ikiwa zimewashwa:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Tafadhali pata chaguo hizi mbili kwenye ukurasa wa mipangilio $LEFT$ na uzime (kijivu) ikiwa zimewashwa:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "kushoto"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Tusaidie tuboreshe utendaji na vipengele vya Chrome",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Historia",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "kushoto",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "kulia",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

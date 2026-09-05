@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Hãy kiểm tra hai tùy chọn này và tắt chúng (màu xám) nếu đang bật:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Vui lòng tìm hai tùy chọn này trong trang cài đặt ở $LEFT$ và tắt chúng (xám) nếu đang bật:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "bên trái"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Giúp cải thiện hiệu suất và các tính năng của Chrome",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Nhật ký",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "bên trái",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "bên phải",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }

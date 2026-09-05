@@ -474,8 +474,14 @@
     "description": "Intro on sync help side panel for the Google services settings substep"
   },
   "syncHelpGoogleServicesInstruction": {
-    "message": "Sila semak dua pilihan ini dan lumpuhkannya (kelabu) jika dihidupkan:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel"
+    "message": "Sila cari dua pilihan ini pada halaman tetapan di $LEFT$ dan nyahdayakannya (kelabu) jika diaktifkan:",
+    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "kiri"
+      }
+    }
   },
   "chromium_447252321002412580": {
     "message": "Bantu meningkatkan ciri dan prestasi Chrome",
@@ -492,5 +498,13 @@
   "chromium_1644574205037202324": {
     "message": "Sejarah",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "kiri",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "kanan",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   }
 }
