@@ -88,16 +88,16 @@ export const returnNoisedBlankImageForWebGLContext = (globalObject: GlobalScope)
   }
 
   const bytesPerPixel = (format: number, type: number): number => {
-    const packed = totalBytesPerPixelForPackedType[type];
+    const packed = totalBytesPerPixelForPackedType[type]
     if (packed !== undefined) {
-      return packed;
+      return packed
     }
-    const components = numberOfComponentsPerPixelForFormat[format];
-    const bytesPerComponent = bytesPerComponentForType[type];
+    const components = numberOfComponentsPerPixelForFormat[format]
+    const bytesPerComponent = bytesPerComponentForType[type]
     if (components === undefined || bytesPerComponent === undefined) {
-      throw new Error(`Unsupported format/type combination: ${format}/${type}`);
+      throw new Error(`Unsupported format/type combination: ${format}/${type}`)
     }
-    return components * bytesPerComponent;
+    return components * bytesPerComponent
   }
 
   const arrayBufferViewBytesPerElement = (view: ArrayBufferView): number => {

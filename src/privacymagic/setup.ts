@@ -68,7 +68,7 @@ const toggleStepCollapsed = (stepId: StepId): void => {
 
 chrome.action.onUserSettingsChanged.addListener(
   (details) => {
-    console.log('User settings changed:', details);
+    console.log('User settings changed:', details)
     updateStep('pin', details.isOnToolbar ?? false)
   }
 )

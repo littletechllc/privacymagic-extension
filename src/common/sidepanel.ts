@@ -35,7 +35,7 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
 const watchForTabChanges = (tabId: number): void => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
     if (activeInfo.tabId !== tabId) {
-      void chrome.sidePanel.setOptions({ enabled: false });
+      void chrome.sidePanel.setOptions({ enabled: false })
     }
   })
 }

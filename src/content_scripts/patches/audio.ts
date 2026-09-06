@@ -1,5 +1,5 @@
-import { GlobalScope } from '@src/content_scripts/helpers/globalObject';
-import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields, modifyConstructorArguments } from '../helpers/monkey-patch';
+import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
+import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields, modifyConstructorArguments } from '../helpers/monkey-patch'
 
 const audio = (globalObject: GlobalScope): void => {
   // Constants

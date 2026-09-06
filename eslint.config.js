@@ -59,6 +59,7 @@ export default [
       "no-multiple-empty-lines": "error",
       "no-prototype-builtins": "error",
       "no-trailing-spaces": "error",
+      "semi": ["error", "never"],
       "use-isnan": "error",
     }
   },
@@ -69,4 +70,4 @@ export default [
       "no-restricted-globals": ["error", ...noRestrictedBrowserGlobals]
     }
   }
-];
+]

@@ -25,4 +25,4 @@ export default {
     'src/**/*.ts',
     '!src/**/*.d.ts',
   ],
-};
+}

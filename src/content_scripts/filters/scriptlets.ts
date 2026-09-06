@@ -20,19 +20,19 @@ const constantValueFrom = (value: string): unknown => {
 
 const setConstant = (path: string, value: string): void => {
   const normalizedValue = constantValueFrom(value)
-  const parts = path.split('.');
-  let obj: Record<string, unknown> = self as unknown as Record<string, unknown>;
+  const parts = path.split('.')
+  let obj: Record<string, unknown> = self as unknown as Record<string, unknown>
   for (let i: number = 0; i < parts.length - 1; ++i) {
     if (obj[parts[i]] == null) {
-      obj[parts[i]] = {};
+      obj[parts[i]] = {}
     }
-    obj = obj[parts[i]] as Record<string, unknown>;
+    obj = obj[parts[i]] as Record<string, unknown>
   }
   Object.defineProperty(obj, parts[parts.length - 1], {
     get: () => normalizedValue,
     configurable: false
-  });
-};
+  })
+}
 
 const removeClass = (className: string, selector: string, command?: string): void => {
   const removeClassInTree = (root: Element) => {

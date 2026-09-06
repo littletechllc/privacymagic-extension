@@ -1,6 +1,6 @@
-import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields } from "./monkey-patch";
-import { resolveAbsoluteUrl } from "./safe";
-import { WorkerScriptURL } from "../patches/patch_helpers/worker-types";
+import { createSafeGetter, createSafeMethod, redefineMethods, redefinePrototypeFields } from "./monkey-patch"
+import { resolveAbsoluteUrl } from "./safe"
+import { WorkerScriptURL } from "../patches/patch_helpers/worker-types"
 
 /**
  * Prepare the worker for execution by spoofing the worker's location object and rewriting the Request, Response, Fetch, XMLHttpRequest, EventSource, WebSocket, and importScripts methods to be relative to the spoofed worker location URL.

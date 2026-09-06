@@ -2,7 +2,7 @@ import { logError } from '@src/common/util'
 import { setupHistorySyncStepDone } from '@src/common/setup-step-done-state'
 
 const getWindowIdForTab = async (tabId: number): Promise<number> => {
-    const tab = await chrome.tabs.get(tabId);
+    const tab = await chrome.tabs.get(tabId)
     if (tab.windowId == null) {
       throw new Error('tab has no window id')
     }

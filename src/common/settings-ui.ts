@@ -129,8 +129,8 @@ const createSubswitchesContainer = async (domain: string): Promise<HTMLElement> 
   subswitchesContainer.className = 'subswitches-container'
   const updateOpacity = async () => {
     const masterSwitchDisabled = await getSettingDisabled(domain, 'masterSwitch')
-    subswitchesContainer.style.opacity = masterSwitchDisabled ? '0.4' : '1';
-    subswitchesContainer.style.pointerEvents = masterSwitchDisabled ? 'none' : 'auto';
+    subswitchesContainer.style.opacity = masterSwitchDisabled ? '0.4' : '1'
+    subswitchesContainer.style.pointerEvents = masterSwitchDisabled ? 'none' : 'auto'
   }
   await updateOpacity()
   listenForSettingsChanges(() => handleAsync(updateOpacity))
