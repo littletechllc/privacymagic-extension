@@ -36,7 +36,7 @@ type ExtensionOptions = {
  * so chrome.runtime.onInstalled fires with reason "install".
  */
 export const test = base.extend<ExtensionFixtures, ExtensionOptions>({
-  e2eBrowser: ['chromium', { option: true }],
+  e2eBrowser: ['chromium', { scope: 'worker', option: true }],
 
   // Override default context: fresh profile + unpacked extension from dist/.
   context: async ({ e2eBrowser }, use) => {

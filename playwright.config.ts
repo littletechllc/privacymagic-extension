@@ -1,7 +1,11 @@
 import { defineConfig } from '@playwright/test'
-import { E2E_BROWSERS } from './test/e2e/channels'
+import { E2E_BROWSERS, type E2EBrowser } from './test/e2e/channels'
 
-export default defineConfig({
+type E2EWorkerOptions = {
+  e2eBrowser: E2EBrowser
+}
+
+export default defineConfig<unknown, E2EWorkerOptions>({
   testDir: './test/e2e',
   fullyParallel: false,
   workers: 1,
