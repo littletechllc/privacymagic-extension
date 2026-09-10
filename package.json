@@ -9,6 +9,8 @@
     "format": "eslint . --fix --format eslint-formatter-unix && tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:i18n": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathPatterns=test/i18n/",
+    "test:e2e": "playwright test",
+
     "generate:remote-schema": "npx tsx tools/generate-remote-schema.ts",
     "postinstall": "npm run generate:remote-schema",
     "sync:chrome-locale-strings": "npx tsx tools/sync-chrome-locale-string.ts",
@@ -29,6 +31,7 @@
     "punycode": "2.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.58.2",
     "@types/chrome": "0.1.34",
     "@types/jest": "30.0.0",
     "@types/punycode": "2.1.4",

@@ -25,6 +25,7 @@
     "./tools/**/*",
     "./webstore/**/*.ts",
     "*.config.js",
+    "playwright.config.ts",
     "./test/**/*"
   ]
 }

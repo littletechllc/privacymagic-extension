@@ -21,6 +21,8 @@ export default {
     '^@test/(.*)$': '<rootDir>/test/$1'
   },
   testMatch: ['**/test/**/*.test.ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/test/e2e/'],
+
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',

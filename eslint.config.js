@@ -30,7 +30,8 @@ export default [
       "tools/**/*.ts",
       "test/**/*.ts",
       "webstore/**/*.ts",
-      "*.config.js"
+      "*.config.js",
+      "playwright.config.ts"
     ],
     languageOptions: {
       parserOptions: {

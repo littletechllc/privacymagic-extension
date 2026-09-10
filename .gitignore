@@ -2,3 +2,5 @@ artifacts/
 dist/
 node_modules/
 remote/schema.json
+test-results/
+playwright-report/
