@@ -71,4 +71,7 @@ TECHNISCHE SPECIFICATIES
   · Advertentiemeting API
   · Protected Audience API
   · Topics API
-- Helpt je synchronisatie van geschiedenis uit te schakelen
+- Helpt je Chrome-instellingen bij te werken voor privacy
+  · Schakel synchronisatie van geschiedenis naar Google-servers uit
+  · Schakel telemetrie voor gebruikerservaring uit
+  · Schakel telemetrie voor zoeken en browsen uit

@@ -71,4 +71,7 @@ THÔNG SỐ KỸ THUẬT
   · Đo lường quảng cáo API
   · Protected Audience API
   · Topics API
-- Giúp bạn tắt đồng bộ lịch sử
+- Giúp bạn cập nhật cài đặt Chrome để bảo vệ quyền riêng tư
+  · Tắt đồng bộ lịch sử lên máy chủ Google
+  · Tắt đo từ xa trải nghiệm người dùng
+  · Tắt đo từ xa tìm kiếm và duyệt web

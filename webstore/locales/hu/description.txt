@@ -71,4 +71,7 @@ MŰSZAKI ADATOK
   · Hirdetésmérés API
   · Protected Audience API
   · Topics API
-- Segít kikapcsolni az előzmények szinkronizálását
+- Segít frissíteni a Chrome beállításait a jobb adatvédelemért
+  · Kapcsolja ki az előzmények Google-kiszolgálókra szinkronizálását
+  · Kapcsolja ki a felhasználói élmény telemetriáját
+  · Kapcsolja ki a keresési és böngészési telemetriát

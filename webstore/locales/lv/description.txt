@@ -71,4 +71,7 @@ TEHNISKĀS SPECIFIKĀCIJAS
   · Protected Audience API
   · Reklāmu mērīšana API
   · Topics API
-- Palīdz izslēgt vēstures sinhronizāciju
+- Palīdz atjaunināt Chrome iestatījumus privātumam
+  · Izslēdziet vēstures sinhronizāciju ar Google serveriem
+  · Izslēdziet lietotāja pieredzes telemetriju
+  · Izslēdziet meklēšanas un pārlūkošanas telemetriju

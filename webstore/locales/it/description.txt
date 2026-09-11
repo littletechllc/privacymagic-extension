@@ -71,4 +71,7 @@ SPECIFICHE TECNICHE
   · Misurazione annunci API
   · Protected Audience API
   · Topics API
-- Ti aiuta a disattivare la sincronizzazione della cronologia
+- Ti aiuta ad aggiornare le impostazioni di Chrome per la privacy
+  · Disattiva la sincronizzazione della cronologia sui server di Google
+  · Disattiva la telemetria dell'esperienza utente
+  · Disattiva la telemetria di ricerca e navigazione

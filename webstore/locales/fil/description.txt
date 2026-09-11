@@ -71,4 +71,7 @@ MGA TEKNIKAL NA DETALYE
   · Ad Measurement API
   · Protected Audience API
   · Topics API
-- Tumutulong na patayin ang history syncing
+- Tumutulong i-update ang Chrome settings para sa privacy
+  · I-disable ang history syncing sa Google servers
+  · I-disable ang user experience telemetry
+  · I-disable ang search and browsing telemetry

@@ -71,4 +71,7 @@ TEKNISKA SPECIFIKATIONER
   · Annonsmätning API
   · Protected Audience API
   · Topics API
-- Hjälper dig att stänga av synkronisering av historik
+- Hjälper dig att uppdatera Chrome-inställningarna för integritet
+  · Stäng av synkronisering av historik till Googles servrar
+  · Stäng av telemetri för användarupplevelse
+  · Stäng av telemetri för sökning och surfning

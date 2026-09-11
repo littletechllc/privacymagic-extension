@@ -71,4 +71,7 @@ SPESIFIKASI TEKNIS
   · Pengukuran iklan API
   · Protected Audience API
   · Topics API
-- Membantu Anda menonaktifkan sinkronisasi riwayat
+- Membantu Anda memperbarui pengaturan Chrome untuk privasi
+  · Nonaktifkan sinkronisasi riwayat ke server Google
+  · Nonaktifkan telemetri pengalaman pengguna
+  · Nonaktifkan telemetri penelusuran dan penjelajahan

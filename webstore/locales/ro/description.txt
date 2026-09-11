@@ -71,4 +71,7 @@ SPECIFICAȚII TEHNICE
   · Măsurarea reclamelor API
   · Protected Audience API
   · Topics API
-- Vă ajută să dezactivați sincronizarea istoricului
+- Vă ajută să actualizați setările Chrome pentru confidențialitate
+  · Dezactivați sincronizarea istoricului pe serverele Google
+  · Dezactivați telemetria experienței utilizatorului
+  · Dezactivați telemetria de căutare și navigare

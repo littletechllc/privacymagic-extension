@@ -71,4 +71,7 @@ TECHNISCHE SPEZIFIKATIONEN
   · Anzeigenmessung API
   · Protected Audience API
   · Topics API
-- Hilft Ihnen, die Verlaufssynchronisierung zu deaktivieren
+- Hilft Ihnen, Chrome-Einstellungen für mehr Privatsphäre anzupassen
+  · Verlaufssynchronisierung zu Google-Servern deaktivieren
+  · Telemetrie zur Nutzererfahrung deaktivieren
+  · Telemetrie für Suche und Surfen deaktivieren

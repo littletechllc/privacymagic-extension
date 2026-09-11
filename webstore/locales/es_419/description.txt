@@ -71,4 +71,7 @@ ESPECIFICACIONES TÉCNICAS
   · Medición de anuncios API
   · Protected Audience API
   · Topics API
-- Te ayuda a desactivar la sincronización del historial
+- Te ayuda a actualizar la configuración de Chrome para mayor privacidad
+  · Desactiva la sincronización del historial con los servidores de Google
+  · Desactiva la telemetría de experiencia de usuario
+  · Desactiva la telemetría de búsqueda y navegación

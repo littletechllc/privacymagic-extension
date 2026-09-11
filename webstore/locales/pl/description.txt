@@ -71,4 +71,7 @@ SPECYFIKACJA TECHNICZNA
   · Pomiar reklam API
   · Protected Audience API
   · Topics API
-- Pomaga wyłączyć synchronizację historii
+- Pomaga zaktualizować ustawienia Chrome pod kątem prywatności
+  · Wyłącz synchronizację historii z serwerami Google
+  · Wyłącz telemetrię doświadczenia użytkownika
+  · Wyłącz telemetrię wyszukiwania i przeglądania

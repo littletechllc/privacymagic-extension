@@ -71,4 +71,7 @@ TECHNICKÉ ŠPECIFIKÁCIE
   · Meranie reklám API
   · Protected Audience API
   · Topics API
-- Pomôže vypnúť synchronizáciu histórie
+- Pomôže aktualizovať nastavenia Chrome kvôli súkromiu
+  · Vypnite synchronizáciu histórie na servery Google
+  · Vypnite telemetriu používateľského prostredia
+  · Vypnite telemetriu vyhľadávania a prehliadania

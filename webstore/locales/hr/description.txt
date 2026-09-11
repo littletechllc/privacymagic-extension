@@ -71,4 +71,7 @@ TEHNIČKE SPECIFIKACIJE
   · Mjerenje oglasa API
   · Protected Audience API
   · Topics API
-- Pomaže isključiti sinkronizaciju povijesti
+- Pomaže ažurirati Chrome postavke radi privatnosti
+  · Isključite sinkronizaciju povijesti na Googleove poslužitelje
+  · Isključite telemetriju korisničkog iskustva
+  · Isključite telemetriju pretraživanja i pregledavanja

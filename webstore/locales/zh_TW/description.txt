@@ -71,4 +71,7 @@ Privacy Magic 由軟體工程師 Arthur Edelstein 打造，他致力於建構捍
   · 廣告衡量 API
   · Protected Audience API
   · Topics API
-- 協助您停用瀏覽記錄同步
+- 協助您更新 Chrome 設定以保護隱私
+  · 停用瀏覽記錄同步至 Google 伺服器
+  · 停用使用者體驗遙測
+  · 停用搜尋與瀏覽遙測

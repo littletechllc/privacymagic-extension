@@ -71,4 +71,7 @@ TEHNILISED SPETSIFIKATSIOONID
   · Protected Audience API
   · Reklaamide mõõtmine API
   · Topics API
-- Aitab ajaloo sünkroonimise välja lülitada
+- Aitab Chrome’i seadeid privaatsuse jaoks värskendada
+  · Lülitage ajaloo sünkroonimine Google’i serveritesse välja
+  · Lülitage kasutajakogemuse telemeetria välja
+  · Lülitage otsingu ja sirvimise telemeetria välja

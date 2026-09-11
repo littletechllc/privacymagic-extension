@@ -71,4 +71,7 @@ TEKNİK ÖZELLİKLER
   · Protected Audience API
   · Reklam ölçümü API
   · Topics API
-- Geçmiş senkronizasyonunu kapatmanıza yardımcı olur
+- Gizlilik için Chrome ayarlarını güncellemenize yardımcı olur
+  · Geçmiş senkronizasyonunu Google sunucularına kapatın
+  · Kullanıcı deneyimi telemetrisini kapatın
+  · Arama ve gezinme telemetrisini kapatın

@@ -71,4 +71,7 @@ SPESIFIKASI TEKNIKAL
   · Pengukuran iklan API
   · Protected Audience API
   · Topics API
-- Membantu anda melumpuhkan penyegerakan sejarah
+- Membantu anda mengemas kini tetapan Chrome untuk privasi
+  · Lumpuhkan penyegerakan sejarah ke pelayan Google
+  · Lumpuhkan telemetri pengalaman pengguna
+  · Lumpuhkan telemetri carian dan penyemakan imbas

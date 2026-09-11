@@ -71,4 +71,7 @@ VIPIMO VYA KIUFUNDI
   · Kupima Matangazo API
   · Protected Audience API
   · Topics API
-- Inakusaidia kuzima usawazishaji wa historia
+- Inakusaidia kusasisha mipangilio ya Chrome kwa faragha
+  · Zima usawazishaji wa historia kwa seva za Google
+  · Zima telemetria ya uzoefu wa mtumiaji
+  · Zima telemetria ya utafutaji na kuvinjari

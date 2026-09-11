@@ -71,4 +71,7 @@ TEKNISET TIEDOT
   · Mainosten mittaus API
   · Protected Audience API
   · Topics API
-- Auttaa poistamaan historian synkronoinnin käytöstä
+- Auttaa päivittämään Chromen asetuksia yksityisyyden vuoksi
+  · Poista historian synkronointi Google-palvelimille käytöstä
+  · Poista käyttäjäkokemuksen telemetria käytöstä
+  · Poista haun ja selauksen telemetria käytöstä

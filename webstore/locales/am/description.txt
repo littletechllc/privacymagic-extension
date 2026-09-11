@@ -71,4 +71,7 @@ Privacy Magic የተፈጠረው በArthur Edelstein ነው — የድር ግላ
   · የማስታወቂያ መለኪያ API
   · Protected Audience API
   · Topics API
-- የታሪክ ማመሳሰልን ማጥፋት ይረዳዎታል
+- የChrome ቅንብሮችን ለግላዊነት እንዲያዘምኑ ይረዳዎታል
+  · ወደ Google አገልጋዮች የታሪክ ማመሳሰልን ያሰናክሉ
+  · የተጠቃሚ ተሞክሮ ቴሌሜትሪን ያሰናክሉ
+  · የፍለጋ እና አሰሳ ቴሌሜትሪን ያሰናክሉ
