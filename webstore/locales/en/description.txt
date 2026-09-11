@@ -71,4 +71,8 @@ TECHNICAL SPECIFICATIONS
   · Ad Measurement API
   · Protected Audience API
   · Topics API
-- Helps you disable history syncing
+- Helps you update Chrome settings for privacy
+  · Disable history syncing to Google servers
+  · Disable user experience telemetry
+  · Disable search and browsing telemetry
+  
