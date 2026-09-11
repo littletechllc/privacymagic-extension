@@ -9,8 +9,8 @@
     "format": "eslint . --fix --format eslint-formatter-unix && tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:i18n": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathPatterns=test/i18n/",
-    "test:e2e": "playwright test --project=chromium",
-    "test:e2e:all": "playwright test",
+    "test:e2e": "PW_CHROMIUM_ATTACH_TO_OTHER=1 playwright test --project=chromium",
+    "test:e2e:all": "PW_CHROMIUM_ATTACH_TO_OTHER=1 playwright test",
 
     "generate:remote-schema": "npx tsx tools/generate-remote-schema.ts",
     "postinstall": "npm run generate:remote-schema",

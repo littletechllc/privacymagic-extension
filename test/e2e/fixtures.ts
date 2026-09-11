@@ -41,6 +41,8 @@ export const test = base.extend<ExtensionFixtures, ExtensionOptions>({
   // Override default context: fresh profile + unpacked extension from dist/.
   context: async ({ e2eBrowser }, use) => {
     assertExtensionBuilt()
+    // Required for chrome.sidePanel pages to appear in context.pages().
+    process.env.PW_CHROMIUM_ATTACH_TO_OTHER = '1'
     const userDataDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'pm-e2e-'))
     const executablePath = process.env.PM_E2E_EXECUTABLE_PATH
     const needsExternalBinary = e2eBrowser !== 'chromium'

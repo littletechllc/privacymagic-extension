@@ -75,4 +75,5 @@ jobs:
       - name: Run e2e tests
         env:
           PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          PW_CHROMIUM_ATTACH_TO_OTHER: '1'
         run: xvfb-run --auto-servernum -- npx playwright test --project=${{ matrix.project }}
