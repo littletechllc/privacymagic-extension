@@ -246,7 +246,7 @@
     "description": "Setting to harden stylesheets"
   },
   "policy": {
-    "message": "Privacy Signals",
+    "message": "গোপনীয়তা সংকেত",
     "description": "Category for privacy policy protection settings"
   },
   "setupPageTitle": {

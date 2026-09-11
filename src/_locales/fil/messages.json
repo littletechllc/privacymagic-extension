@@ -222,7 +222,7 @@
     "description": "Setting to block math processing fingerprinting"
   },
   "timezone": {
-    "message": "Time Zone",
+    "message": "Sona ng oras",
     "description": "Setting to block time-zone fingerprinting"
   },
   "touch": {
@@ -246,7 +246,7 @@
     "description": "Setting to harden stylesheets"
   },
   "policy": {
-    "message": "Privacy Signals",
+    "message": "Mga senyas ng privacy",
     "description": "Category for privacy policy protection settings"
   },
   "setupPageTitle": {
@@ -426,7 +426,7 @@
     "description": "Copyright text in setup page footer"
   },
   "setupSourceCodeLink": {
-    "message": "Source Code",
+    "message": "Kodigo ng pinagmulan",
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
@@ -496,7 +496,7 @@
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
   },
   "chromium_1644574205037202324": {
-    "message": "History",
+    "message": "Kasaysayan",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
   },
   "syncHelpDirectionLeft": {

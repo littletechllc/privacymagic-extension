@@ -74,7 +74,7 @@
     "description": "Label for the WebRTC IP handling policy setting"
   },
   "masterSwitch": {
-    "message": "Privacy Protections On",
+    "message": "Protecciones de privacidad activadas",
     "description": "Label for the master switch toggle"
   },
   "blocking": {
@@ -246,7 +246,7 @@
     "description": "Setting to harden stylesheets"
   },
   "policy": {
-    "message": "Privacy Signals",
+    "message": "Señales de privacidad",
     "description": "Category for privacy policy protection settings"
   },
   "setupPageTitle": {
