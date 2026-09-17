@@ -351,13 +351,13 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToDataURL(type, quality)
         }
-        return 'data:,'
+        return originalCanvasToDataURLSafe(this, type, quality)
       },
       toBlob: function (this: HTMLCanvasElement, callback: (blob: Blob | null) => void, type: string, quality: number) {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToBlob(callback, type, quality)
         }
-        globalObject.setTimeout(() => callback(null), 0)
+        return originalCanvasToBlobSafe(this, callback, type, quality)
       }
     })
     objectDefinePropertiesSafe(globalObject.HTMLCanvasElement.prototype, {
@@ -393,13 +393,13 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.offscreenCanvasConvertToBlob(options)
         }
-        return Promise.resolve(null)
+        return originalOffscreenCanvasConvertToBlobSafe(this, options)
       },
       transferToImageBitmap: function (this: OffscreenCanvas) {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.offscreenCanvasTransferToImageBitmap()
         }
-        return null
+        return originalOffscreenCanvasTransferToImageBitmapSafe(this)
       }
     })
     objectDefinePropertiesSafe(globalObject.OffscreenCanvas.prototype, {

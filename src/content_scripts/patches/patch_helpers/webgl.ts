@@ -1,4 +1,4 @@
-import { createSafeMethod, redefineMethods } from '@src/content_scripts/helpers/monkey-patch'
+import { createSafeMethod, redefineMethods, reflectApplySafe } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../../helpers/globalObject'
 
 // Based on results from https://camoufox.com/webgl-research/
@@ -22,72 +22,99 @@ export const webglVendorAndRendererByPlatform: Record<string, { vendor: string, 
   }
 }
 
+const UNMASKED_VENDOR_WEBGL = 37445
+const UNMASKED_RENDERER_WEBGL = 37446
+const CRYPTO_GET_RANDOM_VALUES_MAX_BYTES = 65536
+
+type WebGLContext = WebGLRenderingContext | WebGL2RenderingContext
+type WebGLContextConstructor = {
+  prototype: WebGLContext
+}
+type ReadPixelsArgs = [
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  format: number,
+  type: number,
+  pixels: ArrayBufferView | number | null,
+  dstOffset?: number
+]
+
 export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {
-  if (globalObject.WebGLRenderingContext === undefined) {
+  if (globalObject.navigator.userAgentData == null) {
     return
   }
-  const originalGetParameterSafe = createSafeMethod(globalObject.WebGLRenderingContext, 'getParameter')
-  if (globalObject.navigator.userAgentData != null) {
-    const userAgentData: NavigatorUAData = globalObject.navigator.userAgentData
-    const platform = userAgentData.platform
-    const getParameter = function (this: WebGLRenderingContext, constant: number) {
+  const platform = globalObject.navigator.userAgentData.platform
+
+  const patchGetParameter = (Context: WebGLContextConstructor): void => {
+    const originalGetParameterSafe = createSafeMethod(Context as typeof WebGLRenderingContext, 'getParameter')
+    const getParameter = function (this: WebGLContext, constant: number) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const originalValue = originalGetParameterSafe(this, constant)
       switch (constant) {
-        case 37445: // UNMASKED_VENDOR_WEBGL
+        case UNMASKED_VENDOR_WEBGL:
           return webglVendorAndRendererByPlatform[platform]?.vendor ?? 'Unknown'
-        case 37446: // UNMASKED_RENDERER_WEBGL
+        case UNMASKED_RENDERER_WEBGL:
           return webglVendorAndRendererByPlatform[platform]?.renderer ?? 'Unknown'
         default:
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return originalValue
       }
     }
-    redefineMethods(globalObject.WebGLRenderingContext.prototype, { getParameter })
-    if (globalObject.WebGL2RenderingContext !== undefined) {
-      redefineMethods(globalObject.WebGL2RenderingContext.prototype, { getParameter })
-    }
+    redefineMethods(Context.prototype, { getParameter })
+  }
+
+  if (globalObject.WebGLRenderingContext !== undefined) {
+    patchGetParameter(globalObject.WebGLRenderingContext)
+  }
+  if (globalObject.WebGL2RenderingContext !== undefined) {
+    patchGetParameter(globalObject.WebGL2RenderingContext)
   }
 }
 
-export const returnNoisedBlankImageForWebGLContext = (globalObject: GlobalScope): void => {
-  if (globalObject.WebGLRenderingContext === undefined || globalObject.WebGL2RenderingContext === undefined) {
+export const noiseWebGLReadPixels = (globalObject: GlobalScope): void => {
+  const gl1 = globalObject.WebGLRenderingContext
+  const gl2 = globalObject.WebGL2RenderingContext
+  if (gl1 === undefined && gl2 === undefined) {
     return
   }
 
-  const numberOfComponentsPerPixelForFormat: Record<number, number> = {
-    [globalObject.WebGLRenderingContext.ALPHA]: 1,
-    [globalObject.WebGLRenderingContext.RGB]: 3,
-    [globalObject.WebGLRenderingContext.RGBA]: 4,
-    [globalObject.WebGL2RenderingContext.RED]: 1,
-    [globalObject.WebGL2RenderingContext.RG]: 2,
-    [globalObject.WebGL2RenderingContext.RED_INTEGER]: 1,
-    [globalObject.WebGL2RenderingContext.RG_INTEGER]: 2,
-    [globalObject.WebGL2RenderingContext.RGB_INTEGER]: 3,
-    [globalObject.WebGL2RenderingContext.RGBA_INTEGER]: 4,
+  const numberOfComponentsPerPixelForFormat: Record<number, number> = {}
+  const bytesPerComponentForType: Record<number, number> = {}
+  const totalBytesPerPixelForPackedType: Record<number, number> = {}
+
+  if (gl1 !== undefined) {
+    numberOfComponentsPerPixelForFormat[gl1.ALPHA] = 1
+    numberOfComponentsPerPixelForFormat[gl1.RGB] = 3
+    numberOfComponentsPerPixelForFormat[gl1.RGBA] = 4
+    numberOfComponentsPerPixelForFormat[gl1.LUMINANCE] = 1
+    numberOfComponentsPerPixelForFormat[gl1.LUMINANCE_ALPHA] = 2
+    bytesPerComponentForType[gl1.UNSIGNED_BYTE] = 1
+    bytesPerComponentForType[gl1.FLOAT] = 4
+    totalBytesPerPixelForPackedType[gl1.UNSIGNED_SHORT_5_6_5] = 2
+    totalBytesPerPixelForPackedType[gl1.UNSIGNED_SHORT_4_4_4_4] = 2
+    totalBytesPerPixelForPackedType[gl1.UNSIGNED_SHORT_5_5_5_1] = 2
+  }
+  if (gl2 !== undefined) {
+    numberOfComponentsPerPixelForFormat[gl2.RED] = 1
+    numberOfComponentsPerPixelForFormat[gl2.RG] = 2
+    numberOfComponentsPerPixelForFormat[gl2.RED_INTEGER] = 1
+    numberOfComponentsPerPixelForFormat[gl2.RG_INTEGER] = 2
+    numberOfComponentsPerPixelForFormat[gl2.RGB_INTEGER] = 3
+    numberOfComponentsPerPixelForFormat[gl2.RGBA_INTEGER] = 4
+    bytesPerComponentForType[gl2.BYTE] = 1
+    bytesPerComponentForType[gl2.SHORT] = 2
+    bytesPerComponentForType[gl2.UNSIGNED_SHORT] = 2
+    bytesPerComponentForType[gl2.INT] = 4
+    bytesPerComponentForType[gl2.UNSIGNED_INT] = 4
+    bytesPerComponentForType[gl2.HALF_FLOAT] = 2
+    totalBytesPerPixelForPackedType[gl2.UNSIGNED_INT_2_10_10_10_REV] = 4
+    totalBytesPerPixelForPackedType[gl2.UNSIGNED_INT_10F_11F_11F_REV] = 4
+    totalBytesPerPixelForPackedType[gl2.UNSIGNED_INT_5_9_9_9_REV] = 4
   }
 
-  const bytesPerComponentForType: Record<number, number> = {
-    [globalObject.WebGLRenderingContext.UNSIGNED_BYTE]: 1,
-    [globalObject.WebGLRenderingContext.FLOAT]: 4,
-    [globalObject.WebGL2RenderingContext.BYTE]: 1,
-    [globalObject.WebGL2RenderingContext.SHORT]: 2,
-    [globalObject.WebGL2RenderingContext.UNSIGNED_SHORT]: 2,
-    [globalObject.WebGL2RenderingContext.INT]: 4,
-    [globalObject.WebGL2RenderingContext.UNSIGNED_INT]: 4,
-    [globalObject.WebGL2RenderingContext.HALF_FLOAT]: 2,
-  }
-
-  const totalBytesPerPixelForPackedType: Record<number, number> = {
-    [globalObject.WebGLRenderingContext.UNSIGNED_SHORT_5_6_5]: 2,
-    [globalObject.WebGLRenderingContext.UNSIGNED_SHORT_4_4_4_4]: 2,
-    [globalObject.WebGLRenderingContext.UNSIGNED_SHORT_5_5_5_1]: 2,
-    [globalObject.WebGL2RenderingContext.UNSIGNED_INT_2_10_10_10_REV]: 4,
-    [globalObject.WebGL2RenderingContext.UNSIGNED_INT_10F_11F_11F_REV]: 4,
-    [globalObject.WebGL2RenderingContext.UNSIGNED_INT_5_9_9_9_REV]: 4,
-  }
-
-  const bytesPerPixel = (format: number, type: number): number => {
+  const bytesPerPixel = (format: number, type: number): number | undefined => {
     const packed = totalBytesPerPixelForPackedType[type]
     if (packed !== undefined) {
       return packed
@@ -95,7 +122,7 @@ export const returnNoisedBlankImageForWebGLContext = (globalObject: GlobalScope)
     const components = numberOfComponentsPerPixelForFormat[format]
     const bytesPerComponent = bytesPerComponentForType[type]
     if (components === undefined || bytesPerComponent === undefined) {
-      throw new Error(`Unsupported format/type combination: ${format}/${type}`)
+      return undefined
     }
     return components * bytesPerComponent
   }
@@ -107,44 +134,86 @@ export const returnNoisedBlankImageForWebGLContext = (globalObject: GlobalScope)
     return 1
   }
 
-  const fillWithLsbNoise = (pixels: ArrayBufferView, byteOffset: number, numberOfBytes: number): void => {
-    const noise = new Uint8Array(numberOfBytes)
-    globalObject.crypto.getRandomValues(noise)
-    for (let i = 0; i < noise.length; i++) {
-      noise[i] &= 0x01 // LSB
+  const xorLsbNoise = (pixels: ArrayBufferView, byteOffset: number, numberOfBytes: number): void => {
+    if (numberOfBytes <= 0) {
+      return
     }
-    new Uint8Array(pixels.buffer, pixels.byteOffset + byteOffset, numberOfBytes).set(noise)
+    const view = new Uint8Array(pixels.buffer, pixels.byteOffset + byteOffset, numberOfBytes)
+    const noise = new Uint8Array(Math.min(numberOfBytes, CRYPTO_GET_RANDOM_VALUES_MAX_BYTES))
+    for (let offset = 0; offset < numberOfBytes;) {
+      const chunkSize = Math.min(noise.length, numberOfBytes - offset)
+      const chunk = chunkSize === noise.length ? noise : noise.subarray(0, chunkSize)
+      globalObject.crypto.getRandomValues(chunk)
+      for (let i = 0; i < chunkSize; i++) {
+        view[offset + i] ^= chunk[i] & 0x01
+      }
+      offset += chunkSize
+    }
   }
 
-  const patchedReadPixels = function (
-    this: WebGLRenderingContext | WebGL2RenderingContext,
-    _x: number, _y: number, _width: number, _height: number,
-    format: number, type: number,
+  const noiseReadPixelsDestination = (
+    gl: WebGLContext,
+    width: number,
+    height: number,
+    format: number,
+    type: number,
     pixels: ArrayBufferView | number | null,
-    dstOffset?: number
-  ) {
-    const numberOfBytes = _width * _height * bytesPerPixel(format, type)
+    dstOffset: number | undefined
+  ): void => {
     if (pixels == null) {
       return
     }
-    if (typeof pixels === 'number' && 'bufferSubData' in this) {
-      const gl = this as WebGL2RenderingContext
-      if (gl.getParameter(globalObject.WebGL2RenderingContext.PIXEL_PACK_BUFFER_BINDING) == null) {
+    const bpp = bytesPerPixel(format, type)
+    if (bpp === undefined) {
+      return
+    }
+    const numberOfBytes = width * height * bpp
+    if (!Number.isFinite(numberOfBytes) || numberOfBytes <= 0) {
+      return
+    }
+    if (typeof pixels === 'number') {
+      if (gl2 === undefined || !('getBufferSubData' in gl)) {
+        return
+      }
+      if (gl.getParameter(gl2.PIXEL_PACK_BUFFER_BINDING) == null) {
         return
       }
       const buffer = new Uint8Array(numberOfBytes)
-      fillWithLsbNoise(buffer, 0, numberOfBytes)
-      // 7-arg overload: `pixels` is a byte offset into the bound PIXEL_PACK_BUFFER.
-      gl.bufferSubData(globalObject.WebGL2RenderingContext.PIXEL_PACK_BUFFER, pixels, buffer)
-    } else if (typeof pixels !== 'number') {
-      // 8-arg overload: `dstOffset` is in elements of the destination typed array.
-      const byteOffset = (dstOffset ?? 0) * arrayBufferViewBytesPerElement(pixels)
-      fillWithLsbNoise(pixels, byteOffset, numberOfBytes)
+      gl.getBufferSubData(gl2.PIXEL_PACK_BUFFER, pixels, buffer)
+      xorLsbNoise(buffer, 0, numberOfBytes)
+      gl.bufferSubData(gl2.PIXEL_PACK_BUFFER, pixels, buffer)
+      return
     }
+    const byteOffset = (dstOffset ?? 0) * arrayBufferViewBytesPerElement(pixels)
+    const available = pixels.byteLength - byteOffset
+    if (available <= 0) {
+      return
+    }
+    xorLsbNoise(pixels, byteOffset, Math.min(numberOfBytes, available))
   }
-  redefineMethods(globalObject.WebGLRenderingContext.prototype, { readPixels: patchedReadPixels })
-  if (globalObject.WebGL2RenderingContext !== undefined) {
-    redefineMethods(globalObject.WebGL2RenderingContext.prototype, { readPixels: patchedReadPixels })
+
+  const patchReadPixels = (Context: WebGLContextConstructor): void => {
+    const originalReadPixels = Context.prototype.readPixels
+    const patchedReadPixels = function (this: WebGLContext, ...args: ReadPixelsArgs): void {
+      reflectApplySafe(
+        originalReadPixels as (this: WebGLContext, ...readPixelsArgs: ReadPixelsArgs) => void,
+        this,
+        args
+      )
+      try {
+        const [_x, _y, width, height, format, type, pixels, dstOffset] = args
+        noiseReadPixelsDestination(this, width, height, format, type, pixels, dstOffset)
+      } catch {
+        // Fingerprint noise must not break the page after a successful readback.
+      }
+    }
+    redefineMethods(Context.prototype, { readPixels: patchedReadPixels })
+  }
+
+  if (gl1 !== undefined) {
+    patchReadPixels(gl1)
+  }
+  if (gl2 !== undefined) {
+    patchReadPixels(gl2)
   }
 }
-

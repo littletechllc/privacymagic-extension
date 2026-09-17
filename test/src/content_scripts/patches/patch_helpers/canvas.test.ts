@@ -111,6 +111,49 @@ describe('patch_helpers/canvas', () => {
       })
     })
 
+    describe('non-2d canvas export', () => {
+      const distinctiveDataUrl = 'data:image/png;base64,NATIVE'
+      let originalToDataURL: typeof HTMLCanvasElement.prototype.toDataURL
+      let originalToBlob: typeof HTMLCanvasElement.prototype.toBlob
+
+      beforeAll(() => {
+        if (!canvasSupported) return
+        const proto = HTMLCanvasElement.prototype
+        /* eslint-disable @typescript-eslint/unbound-method */
+        originalToDataURL = proto.toDataURL
+        originalToBlob = proto.toBlob
+        /* eslint-enable @typescript-eslint/unbound-method */
+        proto.toDataURL = function () { return distinctiveDataUrl }
+        proto.toBlob = function (callback: BlobCallback) {
+          callback(new Blob(['native']))
+        }
+      })
+
+      afterAll(() => {
+        if (!canvasSupported) return
+        HTMLCanvasElement.prototype.toDataURL = originalToDataURL
+        HTMLCanvasElement.prototype.toBlob = originalToBlob
+      })
+
+      it('toDataURL without a 2d context should fall through to native', () => {
+        if (!canvasSupported) return
+        const canvas = document.createElement('canvas')
+        expect(canvas.toDataURL()).toBe(distinctiveDataUrl)
+      })
+
+      it('toBlob without a 2d context should fall through to native', (done) => {
+        if (!canvasSupported) {
+          done()
+          return
+        }
+        const canvas = document.createElement('canvas')
+        canvas.toBlob((blob) => {
+          expect(blob).toBeInstanceOf(Blob)
+          done()
+        })
+      })
+    })
+
     describe('drawing methods and two-canvas replay', () => {
       beforeAll(() => {
         if (!canvasSupported) return
@@ -331,6 +374,42 @@ describe('patch_helpers/canvas', () => {
         ctx.fillRect(0, 0, 1, 1)
         const bitmap = canvas.transferToImageBitmap()
         expect(bitmap === null || bitmap instanceof ImageBitmap).toBe(true)
+      })
+
+      describe('non-2d OffscreenCanvas export', () => {
+        const nativeBlob = new Blob(['native-offscreen'])
+        const nativeBitmap = {} as ImageBitmap
+        let originalConvertToBlob: typeof OffscreenCanvas.prototype.convertToBlob
+        let originalTransferToImageBitmap: typeof OffscreenCanvas.prototype.transferToImageBitmap
+
+        beforeAll(() => {
+          if (!offscreenCanvasSupported) return
+          const proto = OffscreenCanvas.prototype
+          /* eslint-disable @typescript-eslint/unbound-method */
+          originalConvertToBlob = proto.convertToBlob
+          originalTransferToImageBitmap = proto.transferToImageBitmap
+          /* eslint-enable @typescript-eslint/unbound-method */
+          proto.convertToBlob = function () { return Promise.resolve(nativeBlob) }
+          proto.transferToImageBitmap = function () { return nativeBitmap }
+        })
+
+        afterAll(() => {
+          if (!offscreenCanvasSupported) return
+          OffscreenCanvas.prototype.convertToBlob = originalConvertToBlob
+          OffscreenCanvas.prototype.transferToImageBitmap = originalTransferToImageBitmap
+        })
+
+        it('convertToBlob without a 2d context should fall through to native', async () => {
+          if (!offscreenCanvasSupported) return
+          const canvas = new OffscreenCanvas(1, 1)
+          await expect(canvas.convertToBlob()).resolves.toBe(nativeBlob)
+        })
+
+        it('transferToImageBitmap without a 2d context should fall through to native', () => {
+          if (!offscreenCanvasSupported) return
+          const canvas = new OffscreenCanvas(1, 1)
+          expect(canvas.transferToImageBitmap()).toBe(nativeBitmap)
+        })
       })
 
       describe('drawing methods and two-canvas replay', () => {
