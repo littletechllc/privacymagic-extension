@@ -18,6 +18,8 @@ const WEBGL1_ENUMS = {
   ALPHA: 0x1906,
   RGB: 0x1907,
   RGBA: 0x1908,
+  LUMINANCE: 0x1909,
+  LUMINANCE_ALPHA: 0x190A,
   UNSIGNED_BYTE: 0x1401,
   FLOAT: 0x1406,
   UNSIGNED_SHORT_5_6_5: 0x8363,
@@ -255,6 +257,24 @@ describe('patch_helpers/webgl', () => {
 
         expect(getParameter(WEBGL2_ENUMS.PIXEL_PACK_BUFFER_BINDING)).toBe('webgl2-pack-binding')
       })
+
+      it('should keep WebGL1 and WebGL2 getParameter originals distinct after one patch call', () => {
+        const selfWith = self as unknown as SelfWithWebGLContexts
+        if (selfWith.WebGLRenderingContext === undefined || selfWith.WebGL2RenderingContext === undefined) return
+
+        const nav = navigator as unknown as NavWithUAData
+        nav.userAgentData = { platform: 'macOS' }
+
+        hideWebGLVendorAndRenderer(self)
+        const getParameterWebGL1 = getPatchedGetParameter(selfWith)
+        const getParameterWebGL2 = getPatchedGetParameter(selfWith, 'WebGL2RenderingContext')
+
+        expect(getParameterWebGL1(UNMASKED_VENDOR_WEBGL)).toBe('Apple')
+        expect(getParameterWebGL2(UNMASKED_VENDOR_WEBGL)).toBe('Apple')
+        expect(getParameterWebGL1(0)).toBe('webgl1-other')
+        expect(getParameterWebGL2(0)).toBe('webgl2-other')
+        expect(getParameterWebGL2(WEBGL2_ENUMS.PIXEL_PACK_BUFFER_BINDING)).toBe('webgl2-pack-binding')
+      })
     })
   })
 
@@ -442,6 +462,218 @@ describe('patch_helpers/webgl', () => {
         ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels
       )
       expect(originalReadPixels).toHaveBeenCalled()
+    })
+
+    it('should no-op when both WebGL constructors are undefined', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      delete selfWith.WebGLRenderingContext
+      delete selfWith.WebGL2RenderingContext
+      expect(() => noiseWebGLReadPixels(self)).not.toThrow()
+    })
+
+    it('should call original readPixels when the destination is null', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      const originalReadPixels = jest.fn()
+      selfWith.WebGLRenderingContext!.prototype.readPixels = originalReadPixels
+      noiseWebGLReadPixels(self)
+
+      const ctx = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
+      ;(selfWith.WebGLRenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, null
+      )
+      expect(originalReadPixels).toHaveBeenCalled()
+    })
+
+    it('should not noise when width and height are zero', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      const originalReadPixels = jest.fn()
+      selfWith.WebGLRenderingContext!.prototype.readPixels = originalReadPixels
+      noiseWebGLReadPixels(self)
+
+      const pixels = new Uint8Array(4).fill(0xaa)
+      const ctx = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
+      ;(selfWith.WebGLRenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 0, 0, RGBA, UNSIGNED_BYTE, pixels
+      )
+
+      expect(originalReadPixels).toHaveBeenCalled()
+      expect(Array.from(pixels)).toEqual([0xaa, 0xaa, 0xaa, 0xaa])
+    })
+
+    it('should clamp LSB noise to the destination byteLength', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      selfWith.WebGLRenderingContext!.prototype.readPixels = function (
+        _x: number, _y: number, _w: number, _h: number,
+        _format: number, _type: number,
+        pixels: ArrayBufferView | null
+      ) {
+        if (pixels == null) return
+        new Uint8Array(pixels.buffer, pixels.byteOffset, pixels.byteLength).fill(0x10)
+      }
+      noiseWebGLReadPixels(self)
+
+      const pixels = new Uint8Array(2)
+      const ctx = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
+      expect(() => {
+        ;(selfWith.WebGLRenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+          ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels
+        )
+      }).not.toThrow()
+      expect(pixels.every((b) => onlyLsbDiffers(b, 0x10))).toBe(true)
+    })
+
+    it('should call original WebGL2 readPixels and only noise the LSB in an ArrayBufferView', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      selfWith.WebGL2RenderingContext!.prototype.readPixels = function (
+        _x: number, _y: number, _w: number, _h: number,
+        _format: number, _type: number,
+        pixels: ArrayBufferView | null
+      ) {
+        if (pixels == null) return
+        new Uint8Array(pixels.buffer, pixels.byteOffset, 4).set([10, 20, 30, 40])
+      } as ReadPixelsFn
+      noiseWebGLReadPixels(self)
+
+      const pixels = new Uint8Array(4)
+      const ctx = Object.create(selfWith.WebGL2RenderingContext!.prototype) as WebGL2RenderingContext
+      ;(selfWith.WebGL2RenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels
+      )
+
+      expect(onlyLsbDiffers(pixels[0], 10)).toBe(true)
+      expect(onlyLsbDiffers(pixels[1], 20)).toBe(true)
+      expect(onlyLsbDiffers(pixels[2], 30)).toBe(true)
+      expect(onlyLsbDiffers(pixels[3], 40)).toBe(true)
+    })
+
+    it('should treat dstOffset as typed-array elements for Float32Array destinations', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      selfWith.WebGLRenderingContext!.prototype.readPixels = function (
+        _x: number, _y: number, _w: number, _h: number,
+        _format: number, _type: number,
+        pixels: ArrayBufferView | null,
+        dstOffset?: number
+      ) {
+        if (pixels == null || !('BYTES_PER_ELEMENT' in pixels) || typeof pixels.BYTES_PER_ELEMENT !== 'number') return
+        const byteOffset = (dstOffset ?? 0) * pixels.BYTES_PER_ELEMENT
+        new Uint8Array(pixels.buffer, pixels.byteOffset + byteOffset, 4).set([10, 20, 30, 40])
+      }
+      noiseWebGLReadPixels(self)
+
+      const pixels = new Float32Array(3)
+      new Uint8Array(pixels.buffer).fill(0xff)
+      const ctx = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
+      ;(selfWith.WebGLRenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels, 1
+      )
+
+      const bytes = new Uint8Array(pixels.buffer)
+      expect(bytes[0]).toBe(0xff)
+      expect(bytes[1]).toBe(0xff)
+      expect(bytes[2]).toBe(0xff)
+      expect(bytes[3]).toBe(0xff)
+      expect(onlyLsbDiffers(bytes[4], 10)).toBe(true)
+      expect(onlyLsbDiffers(bytes[5], 20)).toBe(true)
+      expect(onlyLsbDiffers(bytes[6], 30)).toBe(true)
+      expect(onlyLsbDiffers(bytes[7], 40)).toBe(true)
+      expect(bytes[8]).toBe(0xff)
+      expect(bytes[9]).toBe(0xff)
+      expect(bytes[10]).toBe(0xff)
+      expect(bytes[11]).toBe(0xff)
+    })
+
+    it.each([
+      ['RGBA/UNSIGNED_BYTE', WEBGL1_ENUMS.RGBA, WEBGL1_ENUMS.UNSIGNED_BYTE, 4, 'WebGLRenderingContext' as const],
+      ['RGB/UNSIGNED_BYTE', WEBGL1_ENUMS.RGB, WEBGL1_ENUMS.UNSIGNED_BYTE, 3, 'WebGLRenderingContext' as const],
+      ['ALPHA/UNSIGNED_BYTE', WEBGL1_ENUMS.ALPHA, WEBGL1_ENUMS.UNSIGNED_BYTE, 1, 'WebGLRenderingContext' as const],
+      ['LUMINANCE/UNSIGNED_BYTE', WEBGL1_ENUMS.LUMINANCE, WEBGL1_ENUMS.UNSIGNED_BYTE, 1, 'WebGLRenderingContext' as const],
+      ['LUMINANCE_ALPHA/UNSIGNED_BYTE', WEBGL1_ENUMS.LUMINANCE_ALPHA, WEBGL1_ENUMS.UNSIGNED_BYTE, 2, 'WebGLRenderingContext' as const],
+      ['RGBA/FLOAT', WEBGL1_ENUMS.RGBA, WEBGL1_ENUMS.FLOAT, 16, 'WebGLRenderingContext' as const],
+      ['RGB/UNSIGNED_SHORT_5_6_5', WEBGL1_ENUMS.RGB, WEBGL1_ENUMS.UNSIGNED_SHORT_5_6_5, 2, 'WebGLRenderingContext' as const],
+      ['RED/UNSIGNED_BYTE', WEBGL2_ENUMS.RED, WEBGL1_ENUMS.UNSIGNED_BYTE, 1, 'WebGL2RenderingContext' as const],
+      ['RGBA_INTEGER/UNSIGNED_INT', WEBGL2_ENUMS.RGBA_INTEGER, WEBGL2_ENUMS.UNSIGNED_INT, 16, 'WebGL2RenderingContext' as const]
+    ])('should noise 1x1 %s over the mapped byte count', (_name, format, type, byteCount, context) => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      const ctor = context === 'WebGL2RenderingContext'
+        ? selfWith.WebGL2RenderingContext
+        : selfWith.WebGLRenderingContext
+      ctor!.prototype.readPixels = function (
+        _x: number, _y: number, _w: number, _h: number,
+        _format: number, _type: number,
+        pixels: ArrayBufferView | null
+      ) {
+        if (pixels == null) return
+        new Uint8Array(pixels.buffer, pixels.byteOffset, byteCount).fill(0x20)
+      }
+      noiseWebGLReadPixels(self)
+
+      const pixels = new Uint8Array(byteCount + 1)
+      pixels.fill(0xff)
+      const ctx = Object.create(ctor!.prototype) as WebGLRenderingContext
+      ;(ctor!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 1, 1, format, type, pixels
+      )
+
+      expect(pixels.slice(0, byteCount).every((b) => onlyLsbDiffers(b, 0x20))).toBe(true)
+      expect(pixels[byteCount]).toBe(0xff)
+    })
+
+    it('should keep original pixels if noising throws', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      selfWith.WebGLRenderingContext!.prototype.readPixels = function (
+        _x: number, _y: number, _w: number, _h: number,
+        _format: number, _type: number,
+        pixels: ArrayBufferView | null
+      ) {
+        if (pixels == null) return
+        new Uint8Array(pixels.buffer, pixels.byteOffset, 4).set([10, 20, 30, 40])
+      }
+      noiseWebGLReadPixels(self)
+
+      const spy = jest.spyOn(crypto, 'getRandomValues').mockImplementation(() => {
+        throw new Error('getRandomValues failed')
+      })
+      try {
+        const pixels = new Uint8Array(4)
+        const ctx = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
+        expect(() => {
+          ;(selfWith.WebGLRenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+            ctx, 0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels
+          )
+        }).not.toThrow()
+        expect(Array.from(pixels)).toEqual([10, 20, 30, 40])
+      } finally {
+        spy.mockRestore()
+      }
+    })
+
+    it('should noise PBO readback using the patched WebGL2 getParameter', () => {
+      const selfWith = self as unknown as SelfWithWebGLContexts
+      const nav = navigator as unknown as NavWithUAData
+      nav.userAgentData = { platform: 'macOS' }
+      hideWebGLVendorAndRenderer(self)
+
+      const originalReadPixels = jest.fn()
+      selfWith.WebGL2RenderingContext!.prototype.readPixels = originalReadPixels
+      noiseWebGLReadPixels(self)
+
+      let writtenData: Uint8Array | undefined
+      const ctx = Object.create(selfWith.WebGL2RenderingContext!.prototype) as WebGL2RenderingContext
+      ctx.getBufferSubData = jest.fn((_target: number, _offset: number, dest: ArrayBufferView) => {
+        new Uint8Array(dest.buffer, dest.byteOffset, dest.byteLength).fill(0xaa)
+      })
+      ctx.bufferSubData = jest.fn((_target: number, _offset: number, data: ArrayBufferView) => {
+        writtenData = new Uint8Array(data.buffer, data.byteOffset, data.byteLength)
+      })
+
+      ;(selfWith.WebGL2RenderingContext!.prototype.readPixels as ReadPixelsFn).call(
+        ctx, 0, 0, 2, 2, RGBA, UNSIGNED_BYTE, 4
+      )
+
+      expect(originalReadPixels).toHaveBeenCalled()
+      expect(ctx.getParameter(PIXEL_PACK_BUFFER_BINDING)).toBe('webgl2-pack-binding')
+      expect(writtenData).toHaveLength(16)
+      expect(writtenData!.every((b) => onlyLsbDiffers(b, 0xaa))).toBe(true)
     })
   })
 })
