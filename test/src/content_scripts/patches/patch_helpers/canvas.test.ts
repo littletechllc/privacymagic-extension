@@ -1,6 +1,7 @@
 
-import {describe, it, expect, beforeEach, beforeAll, afterAll} from '@jest/globals'
+import {describe, it, expect, beforeEach, beforeAll, afterAll, jest} from '@jest/globals'
 import { enableCanvasFingerprintSpoofing } from '@src/content_scripts/patches/patch_helpers/canvas'
+import { type GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 // In jsdom without the canvas package, CanvasRenderingContext2D is undefined and enableCanvasFingerprintSpoofing(self) would throw.
 const canvasSupported = typeof globalThis.CanvasRenderingContext2D !== 'undefined'
@@ -19,6 +20,390 @@ let offscreenGetImageDataContexts: OffscreenCanvasRenderingContext2D[] = []
 let offscreenConvertToBlobCanvases: OffscreenCanvas[] = []
 
 describe('patch_helpers/canvas', () => {
+  describe('mocked 2d stack (no rasterizer)', () => {
+    type CanvasMocks = {
+      document: { createElement: (tag: string) => MockHTMLCanvasElement }
+      CanvasRenderingContext2D: typeof MockCanvasRenderingContext2D
+      HTMLCanvasElement: typeof MockHTMLCanvasElement
+      OffscreenCanvas: typeof MockOffscreenCanvas
+      OffscreenCanvasRenderingContext2D: typeof MockOffscreenCanvasRenderingContext2D
+      ImageData: typeof MockImageData
+      console: { error: ReturnType<typeof jest.fn> }
+    }
+
+    class MockImageData {
+      data: Uint8ClampedArray
+      width: number
+      height: number
+      constructor (data: Uint8ClampedArray, width: number, height: number) {
+        this.data = data
+        this.width = width
+        this.height = height
+      }
+    }
+
+    class MockCanvasRenderingContext2D {
+      _canvas: MockHTMLCanvasElement
+      constructor (canvas: MockHTMLCanvasElement) {
+        this._canvas = canvas
+      }
+
+      fillRect (..._args: unknown[]): void {}
+      getImageData (_sx: number, _sy: number, sw: number, sh: number): MockImageData {
+        return new MockImageData(new Uint8ClampedArray(sw * sh * 4), sw, sh)
+      }
+
+      measureText (_text: string): TextMetrics {
+        return {
+          width: 12,
+          actualBoundingBoxLeft: 1,
+          actualBoundingBoxRight: 1,
+          fontBoundingBoxAscent: 1,
+          fontBoundingBoxDescent: 1,
+          actualBoundingBoxAscent: 1,
+          actualBoundingBoxDescent: 1,
+          emHeightAscent: 1,
+          emHeightDescent: 1
+        } as TextMetrics
+      }
+
+      isPointInPath (..._args: unknown[]): boolean { return true }
+      isPointInStroke (..._args: unknown[]): boolean { return true }
+    }
+
+    class MockOffscreenCanvasRenderingContext2D {
+      _canvas: MockOffscreenCanvas
+      constructor (canvas: MockOffscreenCanvas) {
+        this._canvas = canvas
+      }
+
+      fillRect (..._args: unknown[]): void {}
+      getImageData (_sx: number, _sy: number, sw: number, sh: number): MockImageData {
+        return new MockImageData(new Uint8ClampedArray(sw * sh * 4), sw, sh)
+      }
+
+      measureText (_text: string): TextMetrics {
+        return { width: 12 } as TextMetrics
+      }
+
+      isPointInPath (..._args: unknown[]): boolean { return true }
+      isPointInStroke (..._args: unknown[]): boolean { return true }
+    }
+
+    class MockHTMLCanvasElement {
+      _width = 0
+      _height = 0
+      _ctx2d: MockCanvasRenderingContext2D | null = null
+      _webgl: object | null = null
+      get width (): number { return this._width }
+      set width (value: number) { this._width = Number(value) }
+      get height (): number { return this._height }
+      set height (value: number) { this._height = Number(value) }
+      getContext (this: MockHTMLCanvasElement, type: string, _attrs?: unknown): unknown {
+        if (type === '2d') {
+          this._ctx2d ??= new MockCanvasRenderingContext2D(this)
+          return this._ctx2d
+        }
+        if (type === 'webgl' || type === 'webgl2') {
+          this._webgl ??= { isWebGL: true }
+          return this._webgl
+        }
+        return null
+      }
+
+      toDataURL (_type?: string, _quality?: number): string {
+        return 'data:image/png;base64,NATIVE'
+      }
+
+      toBlob (callback: (blob: Blob | null) => void, _type?: string, _quality?: number): void {
+        callback(new Blob(['native']))
+      }
+    }
+
+    class MockOffscreenCanvas {
+      _width = 0
+      _height = 0
+      _ctx2d: MockOffscreenCanvasRenderingContext2D | null = null
+      constructor (width: number, height: number) {
+        this._width = width
+        this._height = height
+      }
+
+      get width (): number { return this._width }
+      set width (value: number) { this._width = Number(value) }
+      get height (): number { return this._height }
+      set height (value: number) { this._height = Number(value) }
+
+      getContext (this: MockOffscreenCanvas, type: string, _attrs?: unknown): unknown {
+        if (type === '2d') {
+          this._ctx2d ??= new MockOffscreenCanvasRenderingContext2D(this)
+          return this._ctx2d
+        }
+        return null
+      }
+
+      convertToBlob (_options?: BlobPropertyBag): Promise<Blob> {
+        return Promise.resolve(new Blob(['native-offscreen']))
+      }
+
+      transferToImageBitmap (): ImageBitmap {
+        return { isBitmap: true } as unknown as ImageBitmap
+      }
+    }
+
+    Object.defineProperty(MockCanvasRenderingContext2D.prototype, 'canvas', {
+      get (this: MockCanvasRenderingContext2D) { return this._canvas },
+      configurable: true
+    })
+    Object.defineProperty(MockOffscreenCanvasRenderingContext2D.prototype, 'canvas', {
+      get (this: MockOffscreenCanvasRenderingContext2D) { return this._canvas },
+      configurable: true
+    })
+
+    /* eslint-disable @typescript-eslint/unbound-method */
+    const nativeHtmlGetContext = MockHTMLCanvasElement.prototype.getContext
+    const nativeOffscreenGetContext = MockOffscreenCanvas.prototype.getContext
+    const nativeHtmlToBlob = MockHTMLCanvasElement.prototype.toBlob
+    const nativeOffscreenTransfer = MockOffscreenCanvas.prototype.transferToImageBitmap
+    const nativeIsPointInPath = MockCanvasRenderingContext2D.prototype.isPointInPath
+    const nativeFillRect = MockCanvasRenderingContext2D.prototype.fillRect
+    const nativeOffscreenFillRect = MockOffscreenCanvasRenderingContext2D.prototype.fillRect
+    /* eslint-enable @typescript-eslint/unbound-method */
+
+    let fillRectContexts: object[] = []
+    let getContextCalls: Array<{ type: unknown, attrs: unknown, canvas: object, width: number, height: number }> = []
+    let toBlobReceivers: object[] = []
+    let transferReceivers: object[] = []
+    let isPointInPathContexts: object[] = []
+    let consoleError: ReturnType<typeof jest.fn>
+    let globalObject: CanvasMocks
+
+    const installAndPatch = (): void => {
+      fillRectContexts = []
+      getContextCalls = []
+      toBlobReceivers = []
+      transferReceivers = []
+      isPointInPathContexts = []
+      consoleError = jest.fn()
+
+      MockCanvasRenderingContext2D.prototype.fillRect = function (this: MockCanvasRenderingContext2D, ...args: unknown[]) {
+        fillRectContexts.push(this)
+        return nativeFillRect.apply(this, args)
+      }
+      MockOffscreenCanvasRenderingContext2D.prototype.fillRect = function (this: MockOffscreenCanvasRenderingContext2D, ...args: unknown[]) {
+        fillRectContexts.push(this)
+        return nativeOffscreenFillRect.apply(this, args)
+      }
+      MockCanvasRenderingContext2D.prototype.isPointInPath = function (this: MockCanvasRenderingContext2D, ...args: unknown[]) {
+        isPointInPathContexts.push(this)
+        return nativeIsPointInPath.apply(this, args)
+      }
+      MockHTMLCanvasElement.prototype.getContext = function (this: MockHTMLCanvasElement, type: string, attrs?: unknown) {
+        getContextCalls.push({ type, attrs, canvas: this, width: this._width, height: this._height })
+        return nativeHtmlGetContext.call(this, type, attrs)
+      }
+      MockOffscreenCanvas.prototype.getContext = function (this: MockOffscreenCanvas, type: string, attrs?: unknown) {
+        getContextCalls.push({ type, attrs, canvas: this, width: this._width, height: this._height })
+        return nativeOffscreenGetContext.call(this, type, attrs)
+      }
+      MockHTMLCanvasElement.prototype.toBlob = function (this: MockHTMLCanvasElement, callback: (blob: Blob | null) => void, type?: string, quality?: number) {
+        toBlobReceivers.push(this)
+        return nativeHtmlToBlob.call(this, callback, type, quality)
+      }
+      MockOffscreenCanvas.prototype.transferToImageBitmap = function (this: MockOffscreenCanvas) {
+        transferReceivers.push(this)
+        return nativeOffscreenTransfer.call(this)
+      }
+
+      globalObject = {
+        document: {
+          createElement: (tag: string) => {
+            if (tag !== 'canvas') throw new Error(`unexpected tag ${tag}`)
+            return new MockHTMLCanvasElement()
+          }
+        },
+        CanvasRenderingContext2D: MockCanvasRenderingContext2D,
+        HTMLCanvasElement: MockHTMLCanvasElement,
+        OffscreenCanvas: MockOffscreenCanvas,
+        OffscreenCanvasRenderingContext2D: MockOffscreenCanvasRenderingContext2D,
+        ImageData: MockImageData,
+        console: { error: consoleError }
+      }
+      enableCanvasFingerprintSpoofing(globalObject as unknown as GlobalScope)
+    }
+
+    beforeEach(() => {
+      installAndPatch()
+    })
+
+    it('should no-op when document is null', () => {
+      expect(() => enableCanvasFingerprintSpoofing({ document: null } as unknown as GlobalScope)).not.toThrow()
+    })
+
+    it('should throw when the canvas getter is missing', () => {
+      class NoCanvasGetter {
+        fillRect (): void {}
+        getImageData (): MockImageData { return new MockImageData(new Uint8ClampedArray(0), 0, 0) }
+        measureText (): TextMetrics { return { width: 0 } as TextMetrics }
+        isPointInPath (): boolean { return false }
+        isPointInStroke (): boolean { return false }
+      }
+      const broken = {
+        document: { createElement: () => new MockHTMLCanvasElement() },
+        CanvasRenderingContext2D: NoCanvasGetter,
+        HTMLCanvasElement: MockHTMLCanvasElement,
+        OffscreenCanvas: MockOffscreenCanvas,
+        OffscreenCanvasRenderingContext2D: MockOffscreenCanvasRenderingContext2D,
+        ImageData: MockImageData,
+        console: { error: jest.fn() }
+      } as unknown as GlobalScope
+      expect(() => enableCanvasFingerprintSpoofing(broken)).toThrow('canvas getter not found')
+    })
+
+    it('should keep HTML canvas width and height getters working and size the shadow canvas', () => {
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 4
+      canvas.height = 4
+      const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 4, 4)
+      canvas.width = 8
+      canvas.height = 6
+      expect(canvas.width).toBe(8)
+      expect(canvas.height).toBe(6)
+      ctx.getImageData(0, 0, 8, 6)
+      const shadowGetContext = getContextCalls.find((call) =>
+        call.canvas !== canvas && call.type === '2d'
+      )
+      expect(shadowGetContext).toBeDefined()
+      expect(shadowGetContext!.width).toBe(8)
+      expect(shadowGetContext!.height).toBe(6)
+    })
+
+    it('should keep OffscreenCanvas height in sync with the recorder', () => {
+      const canvas = new globalObject.OffscreenCanvas(4, 4)
+      const ctx = canvas.getContext('2d') as MockOffscreenCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 4, 4)
+      canvas.height = 8
+      expect(canvas.height).toBe(8)
+      ctx.getImageData(0, 0, 4, 8)
+      const shadowGetContext = getContextCalls.find((call) =>
+        call.canvas !== canvas && call.type === '2d'
+      )
+      expect(shadowGetContext).toBeDefined()
+      expect(shadowGetContext!.height).toBe(8)
+    })
+
+    it('should drop drawing commands older than 250ms before replay', () => {
+      let now = 1_000_000
+      const spy = jest.spyOn(Date, 'now').mockImplementation(() => now)
+      try {
+        const canvas = globalObject.document.createElement('canvas')
+        canvas.width = 10
+        canvas.height = 10
+        const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+        ctx.fillRect(0, 0, 5, 5)
+        now += 251
+        ctx.fillRect(5, 5, 5, 5)
+        ctx.getImageData(0, 0, 10, 10)
+        const shadowFills = fillRectContexts.filter((context) => context !== ctx)
+        expect(shadowFills).toHaveLength(1)
+      } finally {
+        spy.mockRestore()
+      }
+    })
+
+    it('should use empty/zero/false read fallbacks when there is no command recorder', () => {
+      const canvas = new globalObject.HTMLCanvasElement()
+      canvas.width = 4
+      canvas.height = 4
+      const ctx = nativeHtmlGetContext.call(canvas, '2d') as MockCanvasRenderingContext2D
+      const imageData = ctx.getImageData(0, 0, 4, 4)
+      expect(imageData.width).toBe(4)
+      expect(imageData.height).toBe(4)
+      expect(imageData.data.every((byte) => byte === 0)).toBe(true)
+      expect(ctx.measureText('WWWW').width).toBe(0)
+      expect(ctx.isPointInPath(1, 1)).toBe(false)
+      expect(ctx.isPointInStroke(1, 1)).toBe(false)
+    })
+
+    it('should invoke isPointInPath on the shadow context when a recorder exists', () => {
+      const canvas = globalObject.document.createElement('canvas')
+      const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 1, 1)
+      expect(ctx.isPointInPath(0, 0)).toBe(true)
+      expect(isPointInPathContexts).toHaveLength(1)
+      expect(isPointInPathContexts[0]).not.toBe(ctx)
+    })
+
+    it('should read toBlob from the shadow canvas', (done) => {
+      const canvas = globalObject.document.createElement('canvas')
+      const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 1, 1)
+      canvas.toBlob((blob) => {
+        expect(blob).toBeInstanceOf(Blob)
+        expect(toBlobReceivers).toHaveLength(1)
+        expect(toBlobReceivers[0]).not.toBe(canvas)
+        done()
+      })
+    })
+
+    it('should transferToImageBitmap from the shadow OffscreenCanvas', () => {
+      const canvas = new globalObject.OffscreenCanvas(1, 1)
+      const ctx = canvas.getContext('2d') as MockOffscreenCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 1, 1)
+      const bitmap = canvas.transferToImageBitmap()
+      expect(bitmap).toEqual({ isBitmap: true })
+      expect(transferReceivers).toHaveLength(1)
+      expect(transferReceivers[0]).not.toBe(canvas)
+    })
+
+    it('should reuse the command recorder on a second getContext("2d")', () => {
+      const canvas = globalObject.document.createElement('canvas')
+      const ctx1 = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx1.fillRect(0, 0, 1, 1)
+      const ctx2 = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      expect(ctx2).toBe(ctx1)
+      ctx2.getImageData(0, 0, 1, 1)
+      const shadowFills = fillRectContexts.filter((context) => context !== ctx1)
+      expect(shadowFills).toHaveLength(1)
+    })
+
+    it('should fall through to native toDataURL after getContext("webgl")', () => {
+      const canvas = globalObject.document.createElement('canvas')
+      expect(canvas.getContext('webgl')).toEqual({ isWebGL: true })
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,NATIVE')
+    })
+
+    it('should create the shadow 2d context with willReadFrequently', () => {
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.getContext('2d', { alpha: false })
+      const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 1, 1)
+      canvas.toDataURL()
+      const shadowGetContext = getContextCalls.find((call) =>
+        call.canvas !== canvas && call.type === '2d'
+      )
+      expect(shadowGetContext?.attrs).toEqual({ alpha: false, willReadFrequently: true })
+    })
+
+    it('should swallow command replay errors and still return ImageData', () => {
+      MockCanvasRenderingContext2D.prototype.fillRect = function (this: MockCanvasRenderingContext2D) {
+        fillRectContexts.push(this)
+        if (fillRectContexts.length >= 2) {
+          throw new Error('replay fail')
+        }
+      }
+      enableCanvasFingerprintSpoofing(globalObject as unknown as GlobalScope)
+
+      const canvas = globalObject.document.createElement('canvas')
+      const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      ctx.fillRect(0, 0, 1, 1)
+      const imageData = ctx.getImageData(0, 0, 1, 1)
+      expect(imageData).toBeInstanceOf(MockImageData)
+      expect(consoleError).toHaveBeenCalled()
+    })
+  })
+
   const get2dContext = (): CanvasRenderingContext2D | null => {
     try {
       const canvas = document.createElement('canvas')
