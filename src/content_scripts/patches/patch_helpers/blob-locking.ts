@@ -73,3 +73,8 @@ export const enableBlobLockingAndCaching = (globalObject: GlobalScope): { lockOb
 
   return { lockObjectUrl, unlockObjectUrl, getCachedBlob }
 }
+
+/** Reset singleton state so tests can patch a fresh `URL` object. */
+export const resetBlobLockingAndCachingForTests = (): void => {
+  isInitialized = false
+}
