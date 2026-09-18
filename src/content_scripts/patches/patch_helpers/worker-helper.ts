@@ -30,7 +30,10 @@ export const generateCompletionCallbackCode = (
  * Make a sanitized script for a worker. Returns a blob URL
  * in the form of a string or a TrustedScriptURL.
  * If the URL is a blob URL, a completion callback is added to the script
- * to unlock the blob URL when the script finishes importing.
+ * to unlock the blob URL when the script finishes importing. The same
+ * callback is registered on `error` / `unhandledrejection` so a throw in
+ * the imported or inlined worker still unlocks (and is not swallowed, so
+ * the parent Worker `error` event can fire).
  * @returns {string | TrustedScriptURL}
  */
 export const makeSanitizedScriptForWorker = ({
@@ -67,22 +70,31 @@ export const makeSanitizedScriptForWorker = ({
   const importCommand = typeof options === 'object' && options?.type === 'module'
     ? 'await import'
     : 'importScripts'
+  const unlockOnErrorCode = completionCallbackCode === ''
+    ? ''
+    : `
+          ;(() => {
+            const complete = () => {
+              ${completionCallbackCode}
+            };
+            self.addEventListener("error", complete, { once: true });
+            self.addEventListener("unhandledrejection", complete, { once: true });
+          })();`
   // Semicolon separated code to avoid issues with line continuations.
   const prefix = `
           ;self.__PRIVACY_MAGIC_WORKER_URL__ = ${jsonStringifySafe(absoluteUrl)}
+          ${unlockOnErrorCode}
           ;${hardeningCode}
           ;`
   const suffix = `
           ;${completionCallbackCode}`
   let payload: string | Blob | undefined = getCachedBlob(absoluteUrl)
   if (payload == null) {
+    // Do not catch: an uncaught worker error must reach Worker `onerror`
+    // (sites such as hls.js fall back to main-thread work on that event).
     payload = `
             const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
-            try {
-              ${importCommand}(trustedAbsoluteUrl);
-            } catch (error) {
-              console.error("error in importing: ", error);
-            }
+            ${importCommand}(trustedAbsoluteUrl);
           `
   }
   const blobUrl = URLSafe.createObjectURL(new BlobSafe([prefix, payload, suffix], { type: 'text/javascript' }))
