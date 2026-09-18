@@ -42,7 +42,6 @@ export const getDisabledSettings = (): ContentSettingId[] => {
   const result: ContentSettingId[] = []
   // Maybe gather disabled settings from the cookie.
   try {
-
     // We only honor DNR Set-Cookie on https: documents. blob:/data:/about:
     // documents can share a cookie jar with their creator, so honoring cookies
     // there would let a page forge disable flags and location.replace() to them.
