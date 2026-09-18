@@ -39,20 +39,26 @@ export const getDisabledSettings = (): ContentSettingId[] => {
     // __disabledSettings has been set by a parent frame or worker.
     return __disabledSettings
   }
-  // Gather disabled settings from the cookie.
   const result: ContentSettingId[] = []
+  // Maybe gather disabled settings from the cookie.
   try {
-    const cookieItems = document.cookie.split(';')
-    for (const cookie of cookieItems) {
-      const [key, value] = cookie.trim().split('=')
-      if (key.startsWith(SETTING_COOKIE_PREFIX)) {
-        // Clear the cookie.
-        document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
-        // Add the setting ID to the list of disabled settings if the value is '0'.
-        if (value === '0') {
-          const settingId = key.split(SETTING_COOKIE_PREFIX)[1]
-          if (settingId != null && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
-            result.push(settingId as ContentSettingId)
+
+    // We only honor DNR Set-Cookie on https: documents. blob:/data:/about:
+    // documents can share a cookie jar with their creator, so honoring cookies
+    // there would let a page forge disable flags and location.replace() to them.
+    if (globalThis.location?.protocol === 'https:') {
+      const cookieItems = document.cookie.split(';')
+      for (const cookie of cookieItems) {
+        const [key, value] = cookie.trim().split('=')
+        if (key.startsWith(SETTING_COOKIE_PREFIX)) {
+          // Clear the cookie.
+          document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
+          // Add the setting ID to the list of disabled settings if the value is '0'.
+          if (value === '0') {
+            const settingId = key.split(SETTING_COOKIE_PREFIX)[1]
+            if (settingId != null && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
+              result.push(settingId as ContentSettingId)
+            }
           }
         }
       }
