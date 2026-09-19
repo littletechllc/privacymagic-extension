@@ -186,9 +186,9 @@ const patchXhr = (): void => {
   }
 }
 
-const patchGlobalObjectSetter = (propertyName: 'ytInitialPlayerResponse' | 'ytInitialData'): void => {
+const patchInitialPlayerResponseSetter = (): void => {
   let internalValue: unknown = undefined
-  Object.defineProperty(window, propertyName, {
+  Object.defineProperty(window, 'ytInitialPlayerResponse', {
     configurable: true,
     enumerable: true,
     get() {
@@ -208,13 +208,6 @@ const sanitizeInitialPlayerResponse = (): void => {
   }
 }
 
-const sanitizeInitialData = (): void => {
-  const initialData = (window as Window & { ytInitialData?: unknown }).ytInitialData
-  if (initialData) {
-    stripAdsDeep(initialData)
-  }
-}
-
 const isAdsBlockingDisabled = () : boolean => {
   const cookieItems = document.cookie.split(';')
   for (const cookie of cookieItems) {
@@ -229,12 +222,10 @@ const isAdsBlockingDisabled = () : boolean => {
 }
 
 const main = (): void => {
-  patchGlobalObjectSetter('ytInitialPlayerResponse')
-  patchGlobalObjectSetter('ytInitialData')
+  patchInitialPlayerResponseSetter()
   patchFetch()
   patchXhr()
   sanitizeInitialPlayerResponse()
-  sanitizeInitialData()
 }
 
 if (!isAdsBlockingDisabled()) {
