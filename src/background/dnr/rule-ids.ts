@@ -36,6 +36,7 @@ export const CONTENT_RULE_SLOTS: Record<ContentSettingId, number> = {
   windowName: 24,
   worker: 25,
   sharedWorker: 26,
+  ads: 27,
 }
 
 export type NetworkRuleId = Exclude<NetworkSettingId, 'queryParameters' | 'referrerPolicy'> | 'referrerPolicyStrictOriginWhenCrossOrigin' | 'referrerPolicyStrictOrigin'

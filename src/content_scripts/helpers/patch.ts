@@ -34,7 +34,7 @@ type PatchFn<T extends (arg: GlobalScope) => void> =
     ? T
     : never
 
-const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch'>, PatchFn<(globalObject: GlobalScope) => void>> = {
+const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch' | 'ads'>, PatchFn<(globalObject: GlobalScope) => void>> = {
   audio,
   battery,
   cpu,
