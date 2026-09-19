@@ -6,23 +6,13 @@ type UnknownRecord = Record<string, unknown>
 /** Object keys removed from InnerTube / page JSON when present (ad-related API surface). */
 const adKeys = [
   'adPlacements',
-  'adPlacementRenderer',
-  'playerAds',
-  'playerLegacyDesktopWatchAdsRenderer',
   'adSlots',
-  'adSlotMetadata',
-  'adLayoutMetadata',
-  'adSlotAndLayoutMetadata',
-  'adBreakHeartbeatParams',
-  'adSafetyReason',
-  'ad3Module',
-  'adParams',
-  'playerAdParams',
-  'adsControlFlowOpportunityReceivedCommand',
-  'adsEngagementPanelContentRenderer'
-]
+  'playerAds'
+] as const
 
-/** If the URL contains `youtube.com` and any of these substrings, JSON responses may be stripped of `adKeys`. */
+const AD_KEY_RENAME_TO = 'no_ads'
+
+/** If the URL contains `youtube.com` and any of these substrings, JSON responses may have `adKeys` renamed. */
 const SANITIZED_URL_PATH_INCLUDES : string[] = [
   '/youtubei/v1/player',
   '/youtubei/v1/get_watch',
@@ -32,7 +22,7 @@ const SANITIZED_URL_PATH_INCLUDES : string[] = [
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null
 
-/** Walk nested objects/arrays and delete known ad keys.*/
+/** Walk nested objects/arrays and rename known ad keys to `no_ads`. */
 const stripAdsDeep = <T>(value: T): T => {
   if (!isRecord(value)) {
     return value
@@ -47,6 +37,7 @@ const stripAdsDeep = <T>(value: T): T => {
 
     for (const key of adKeys) {
       if (key in node) {
+        node[AD_KEY_RENAME_TO] = node[key]
         delete node[key]
       }
     }
@@ -88,18 +79,20 @@ const shouldSanitizeFetchResponse = (input: RequestInfo | URL): boolean => {
   return shouldSanitizeUrlString(input.url)
 }
 
-/** Avoid substring `"ad"` alone — it matches `adaptiveFormats` and forces a full parse. */
+/** Avoid substring `"ad"` alone — it matches `adaptiveFormats`. */
 const textMayContainAdPayload = (text: string): boolean =>
   adKeys.some((key) => text.includes(`"${key}"`))
 
-/** Parse JSON, strip ad keys in place, re-serialize. Caller should only invoke when `textMayContainAdPayload` is true. */
+/** Rename ad keys in the raw JSON text. Does not parse or re-serialize. */
 const sanitizeJsonText = (text: string): string => {
   if (!textMayContainAdPayload(text)) {
     return text
   }
-  const parsed = JSON.parse(text) as unknown
-  stripAdsDeep(parsed)
-  return JSON.stringify(parsed)
+  let sanitized = text
+  for (const key of adKeys) {
+    sanitized = sanitized.replaceAll(`"${key}"`, `"${AD_KEY_RENAME_TO}"`)
+  }
+  return sanitized
 }
 
 const patchFetch = (): void => {
