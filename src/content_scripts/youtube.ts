@@ -3,18 +3,15 @@ import { SETTING_COOKIE_PREFIX } from '@src/common/setting-ids'
 
 type UnknownRecord = Record<string, unknown>
 
-/** Object keys removed from InnerTube / page JSON when present (ad-related API surface). */
+// Object keys whose array payloads are cleared in InnerTube / page JSON.
 const adKeys = [
   'adPlacements',
   'adSlots',
   'playerAds'
 ] as const
 
-const AD_KEY_RENAME_TO = 'no_ads'
-
-/** If the URL contains `youtube.com` and any of these substrings, JSON responses may have `adKeys` renamed. */
-const SANITIZED_URL_PATH_INCLUDES : string[] = [
-  '/youtubei/v1/player',
+const SANITIZED_URL_PATH_INCLUDES: string[] = [
+  '/youtubei/v1/player?',
   '/youtubei/v1/get_watch',
   '/youtubei/v1/reel/reel_watch_sequence'
 ]
@@ -22,39 +19,120 @@ const SANITIZED_URL_PATH_INCLUDES : string[] = [
 const isRecord = (value: unknown): value is UnknownRecord =>
   typeof value === 'object' && value !== null
 
-/** Walk nested objects/arrays and rename known ad keys to `no_ads`. */
+const VIDEO_ID_RE = /^[\w-]{11}$/
+const PLAYABILITY_STATUS_RE = /^[A-Z][A-Z0-9_]*$/
+const THUMB_VIDEO_ID_RE = /\/vi\/([\w-]{11})\//
+const EXPIRE_PAST_SKEW_SECONDS = 2 * 24 * 60 * 60
+const EXPIRE_FUTURE_SKEW_SECONDS = 30 * 24 * 60 * 60
+
+const hasBooleanAdKey = (node: UnknownRecord): boolean =>
+  adKeys.some((key) => typeof node[key] === 'boolean')
+
+const playerObjects = (value: unknown): UnknownRecord[] => {
+  const out: UnknownRecord[] = []
+  const visit = (node: unknown): void => {
+    if (Array.isArray(node)) {
+      for (const item of node) visit(item)
+      return
+    }
+    if (!isRecord(node)) return
+    if ('playabilityStatus' in node || 'videoDetails' in node || 'streamingData' in node) {
+      out.push(node)
+    }
+    if ('playerResponse' in node) visit(node.playerResponse)
+  }
+  visit(value)
+  return out
+}
+
+const streamingExpireUnix = (player: UnknownRecord): number | undefined => {
+  const streaming = player.streamingData
+  if (!isRecord(streaming)) return undefined
+  for (const list of [streaming.formats, streaming.adaptiveFormats]) {
+    if (!Array.isArray(list)) continue
+    for (const format of list) {
+      if (!isRecord(format) || typeof format.url !== 'string') continue
+      const match = /[?&]expire=(\d+)/.exec(format.url)
+      if (match != null) return Number(match[1])
+    }
+  }
+  return undefined
+}
+
+const collectWatchVideoIds = (player: UnknownRecord): Set<string> => {
+  const ids = new Set<string>()
+  const details = isRecord(player.videoDetails) ? player.videoDetails : undefined
+  if (typeof details?.videoId === 'string' && VIDEO_ID_RE.test(details.videoId)) {
+    ids.add(details.videoId)
+  }
+  if (isRecord(details?.thumbnail) && Array.isArray(details.thumbnail.thumbnails)) {
+    for (const thumb of details.thumbnail.thumbnails) {
+      if (!isRecord(thumb) || typeof thumb.url !== 'string') continue
+      const match = THUMB_VIDEO_ID_RE.exec(thumb.url)
+      if (match != null) ids.add(match[1])
+    }
+  }
+  return ids
+}
+
+const isBaitPlayer = (player: UnknownRecord): boolean => {
+  if (hasBooleanAdKey(player)) return true
+  const details = isRecord(player.videoDetails) ? player.videoDetails : undefined
+  if (typeof details?.videoId === 'string' && !VIDEO_ID_RE.test(details.videoId)) {
+    return true
+  }
+  const playability = isRecord(player.playabilityStatus) ? player.playabilityStatus : undefined
+  if (typeof playability?.status === 'string' && !PLAYABILITY_STATUS_RE.test(playability.status)) {
+    return true
+  }
+  const responseContext = isRecord(player.responseContext) ? player.responseContext : undefined
+  const mainApp = isRecord(responseContext?.mainAppWebResponseContext)
+    ? responseContext.mainAppWebResponseContext
+    : undefined
+  if (mainApp != null && 'loggedOut' in mainApp && typeof mainApp.loggedOut !== 'boolean') {
+    return true
+  }
+  const expire = streamingExpireUnix(player)
+  if (expire != null) {
+    const delta = expire - Date.now() / 1000
+    if (delta < -EXPIRE_PAST_SKEW_SECONDS || delta > EXPIRE_FUTURE_SKEW_SECONDS) {
+      return true
+    }
+  }
+  return collectWatchVideoIds(player).size > 1
+}
+
+const isBaitPayload = (value: unknown): boolean => {
+  if (isRecord(value) && hasBooleanAdKey(value)) return true
+  return playerObjects(value).some(isBaitPlayer)
+}
+
 const stripAdsDeep = <T>(value: T): T => {
-  if (!isRecord(value)) {
+  if (!isRecord(value) || isBaitPayload(value)) {
     return value
   }
 
-  const stack: Array<{ node: UnknownRecord; depth: number }> = [{ node: value, depth: 0 }]
+  const stack: UnknownRecord[] = [value]
 
   while (stack.length > 0) {
-    const current = stack.pop()
-    if (current == null) continue
-    const { node, depth } = current
+    const node = stack.pop()
+    if (node == null) continue
 
     for (const key of adKeys) {
-      if (key in node) {
-        node[AD_KEY_RENAME_TO] = node[key]
-        delete node[key]
+      if (key in node && Array.isArray(node[key])) {
+        node[key] = []
       }
     }
 
     for (const nestedValue of Object.values(node)) {
       if (Array.isArray(nestedValue)) {
-        const nestedItems = nestedValue as unknown[]
-        for (let i = 0; i < nestedItems.length; i += 1) {
-          const item = nestedItems[i]
-          if (isRecord(item)) {
-            stack.push({ node: item, depth: depth + 1 })
-          }
+        for (const item of nestedValue) {
+          if (isRecord(item)) stack.push(item)
         }
         continue
       }
       if (isRecord(nestedValue)) {
-        stack.push({ node: nestedValue, depth: depth + 1 })
+        stack.push(nestedValue)
       }
     }
   }
@@ -63,7 +141,7 @@ const stripAdsDeep = <T>(value: T): T => {
 }
 
 const shouldSanitizeUrlString = (url: string): boolean => {
-  if (!url.includes('youtube.com')) {
+  if (url.includes('://') && !url.includes('youtube.com')) {
     return false
   }
   return SANITIZED_URL_PATH_INCLUDES.some((path) => url.includes(path))
@@ -79,20 +157,23 @@ const shouldSanitizeFetchResponse = (input: RequestInfo | URL): boolean => {
   return shouldSanitizeUrlString(input.url)
 }
 
-/** Avoid substring `"ad"` alone — it matches `adaptiveFormats`. */
 const textMayContainAdPayload = (text: string): boolean =>
   adKeys.some((key) => text.includes(`"${key}"`))
 
-/** Rename ad keys in the raw JSON text. Does not parse or re-serialize. */
 const sanitizeJsonText = (text: string): string => {
   if (!textMayContainAdPayload(text)) {
     return text
   }
-  let sanitized = text
-  for (const key of adKeys) {
-    sanitized = sanitized.replaceAll(`"${key}"`, `"${AD_KEY_RENAME_TO}"`)
+  try {
+    const parsed: unknown = JSON.parse(text)
+    if (isBaitPayload(parsed)) {
+      return text
+    }
+    stripAdsDeep(parsed)
+    return JSON.stringify(parsed)
+  } catch {
+    return text
   }
-  return sanitized
 }
 
 const patchFetch = (): void => {
@@ -158,7 +239,7 @@ const patchXhr = (): void => {
         return
       }
       try {
-        let sanitizedText : string | undefined
+        let sanitizedText: string | undefined
         Object.defineProperty(xhr, 'responseText',
            {
           get(this: XMLHttpRequest) {
@@ -215,7 +296,7 @@ const sanitizeInitialPlayerResponse = (): void => {
   }
 }
 
-const isAdsBlockingDisabled = () : boolean => {
+const isAdsBlockingDisabled = (): boolean => {
   const cookieItems = document.cookie.split(';')
   for (const cookie of cookieItems) {
     const [key, value] = cookie.trim().split('=')
