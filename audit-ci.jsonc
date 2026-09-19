@@ -19,15 +19,6 @@
         "notes": "https://github.com/advisories/GHSA-5p2g-fcmc-qvqq — JXL/HEIF DoS in image-size (via web-ext)",
         "expiry": "2026-12-11"
       }
-    },
-    // adm-zip via web-ext → firefox-profile: latest adm-zip (0.6.0) still flagged.
-    // Remove when adm-zip >0.6.0 ships a fix or firefox-profile/web-ext stops depending on it.
-    {
-      "GHSA-vwc7-r8mq-g2x9": {
-        "active": true,
-        "notes": "https://github.com/advisories/GHSA-vwc7-r8mq-g2x9 — adm-zip symlink overwrite (via web-ext)",
-        "expiry": "2026-12-11"
-      }
     }
   ]
 }
