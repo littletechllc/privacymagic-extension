@@ -108,11 +108,18 @@ const patchFetch = (): void => {
       if (sanitizedText === text) {
         return response
       }
-      return new Response(sanitizedText, {
+      const headers = new Headers(response.headers)
+      headers.delete('content-length')
+      headers.delete('content-encoding')
+      const responseCopy = new Response(sanitizedText, {
         status: response.status,
         statusText: response.statusText,
-        headers: response.headers
+        headers
       })
+      for (const key of ['url', 'type', 'redirected'] as const) {
+        Object.defineProperty(responseCopy, key, { value: response[key] })
+      }
+      return responseCopy
     } catch {
       return response
     }
