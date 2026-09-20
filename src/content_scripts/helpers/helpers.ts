@@ -34,6 +34,14 @@ export const makeBundleForInjection = (disabledSettings: string[]): string => {
   return bundleForInjection
 }
 
+// Expire a settings cookie. The extension sets its cookies as Partitioned, but a
+// page or server can create a same-named cookie without Partitioned. That is a
+// different cookie (the partition key is part of a cookie's identity), so clear both.
+const clearSettingCookie = (key: string): void => {
+  document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
+  document.cookie = `${key}=; max-age=0; Secure; Path=/`
+}
+
 export const getDisabledSettings = (): ContentSettingId[] => {
   if (__disabledSettings !== undefined && Array.isArray(__disabledSettings)) {
     // __disabledSettings has been set by a parent frame or worker.
@@ -46,19 +54,24 @@ export const getDisabledSettings = (): ContentSettingId[] => {
     // documents can share a cookie jar with their creator, so honoring cookies
     // there would let a page forge disable flags and location.replace() to them.
     if (globalThis.location?.protocol === 'https:') {
-      const cookieItems = document.cookie.split(';')
-      for (const cookie of cookieItems) {
+      // The extension emits a "1" (enabled) or "0" (disabled) cookie for every setting
+      // on every response. A page or server can plant lookalike cookies (for example an
+      // unpartitioned twin of our Partitioned cookie), but to make a setting look
+      // disabled it must do so while our own "1" is absent. So a setting counts as
+      // disabled only if every cookie for it says "0"; a single "1" (or any other
+      // value) vetoes it. Forgery can therefore only keep protection on, never turn it off.
+      const allZero = Object.create(null) as Record<string, boolean>
+      for (const cookie of document.cookie.split(';')) {
         const [key, value] = cookie.trim().split('=')
         if (key.startsWith(SETTING_COOKIE_PREFIX)) {
-          // Clear the cookie.
-          document.cookie = `${key}=; max-age=0; Secure; SameSite=None; Path=/; Partitioned`
-          // Add the setting ID to the list of disabled settings if the value is '0'.
-          if (value === '0') {
-            const settingId = key.split(SETTING_COOKIE_PREFIX)[1]
-            if (settingId != null && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
-              result.push(settingId as ContentSettingId)
-            }
-          }
+          clearSettingCookie(key)
+          const settingId = key.slice(SETTING_COOKIE_PREFIX.length)
+          allZero[settingId] = (allZero[settingId] === undefined || allZero[settingId]) && value === '0'
+        }
+      }
+      for (const settingId of Object.keys(allZero)) {
+        if (allZero[settingId] && (CONTENT_SETTING_IDS as readonly string[]).includes(settingId)) {
+          result.push(settingId as ContentSettingId)
         }
       }
     }
