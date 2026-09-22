@@ -1,7 +1,7 @@
 import { createSafeMethod, redefineMethods, reflectApplySafe } from '@src/content_scripts/helpers/monkey-patch'
 import { GlobalScope } from '../../helpers/globalObject'
 
-// Based on results from https://camoufox.com/webgl-research/
+// Based on low-entropy results for Cover Your Tracks
 // navigator.userAgentData.platform is 'MacIntel' on Intel/Apple Silicon Macs
 export const webglVendorAndRendererByPlatform: Record<string, { vendor: string, renderer: string }> = {
   MacIntel: {
@@ -13,12 +13,12 @@ export const webglVendorAndRendererByPlatform: Record<string, { vendor: string, 
     renderer: 'Apple GPU'
   },
   Windows: {
-    vendor: 'NVIDIA',
-    renderer: 'ANGLE (NVIDIA, NVIDIA GeForce GTX 980 Direct3D11 vs_5_0 ps_5_0), or similar'
+    vendor: 'Mozilla',
+    renderer: 'Mozilla'
   },
   Linux: {
-    vendor: 'Intel',
-    renderer: 'Intel(R) HD Graphics'
+    vendor: 'Mozilla',
+    renderer: 'Mozilla'
   }
 }
 
