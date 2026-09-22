@@ -5,12 +5,12 @@ import { GlobalScope } from '../../helpers/globalObject'
 // navigator.userAgentData.platform is 'MacIntel' on Intel/Apple Silicon Macs
 export const webglVendorAndRendererByPlatform: Record<string, { vendor: string, renderer: string }> = {
   MacIntel: {
-    vendor: 'Apple',
-    renderer: 'Apple M1'
+    vendor: 'Apple Inc.',
+    renderer: 'Apple GPU'
   },
   macOS: {
-    vendor: 'Apple',
-    renderer: 'Apple M1'
+    vendor: 'Apple Inc.',
+    renderer: 'Apple GPU'
   },
   Windows: {
     vendor: 'NVIDIA',
