@@ -29,6 +29,7 @@ describe('patch_helpers/canvas', () => {
       OffscreenCanvasRenderingContext2D: typeof MockOffscreenCanvasRenderingContext2D
       ImageData: typeof MockImageData
       console: { error: ReturnType<typeof jest.fn> }
+      crypto: { getRandomValues <T extends ArrayBufferView>(array: T): T }
     }
 
     class MockImageData {
@@ -49,8 +50,26 @@ describe('patch_helpers/canvas', () => {
       }
 
       fillRect (..._args: unknown[]): void {}
+      drawImage (source: MockHTMLCanvasElement): void {
+        const length = source.width * source.height * 4
+        const pixels = new Uint8ClampedArray(length)
+        if (source._bitmap != null) {
+          pixels.set(source._bitmap.subarray(0, length))
+        }
+        this._canvas._bitmap = pixels
+      }
+
+      putImageData (imageData: MockImageData): void {
+        this._canvas._encodedImage = imageData
+      }
+
       getImageData (_sx: number, _sy: number, sw: number, sh: number): MockImageData {
-        return new MockImageData(new Uint8ClampedArray(sw * sh * 4), sw, sh)
+        const length = sw * sh * 4
+        const data = new Uint8ClampedArray(length)
+        if (this._canvas._bitmap != null) {
+          data.set(this._canvas._bitmap.subarray(0, length))
+        }
+        return new MockImageData(data, sw, sh)
       }
 
       measureText (_text: string): TextMetrics {
@@ -94,7 +113,17 @@ describe('patch_helpers/canvas', () => {
       _width = 0
       _height = 0
       _ctx2d: MockCanvasRenderingContext2D | null = null
-      _webgl: object | null = null
+      _encodedImage: MockImageData | null = null
+      _bitmap: Uint8ClampedArray | null = null
+      ownerDocument = {
+        createElement: (tag: string): MockHTMLCanvasElement => {
+          if (tag !== 'canvas') {
+            throw new Error(`unexpected tag ${tag}`)
+          }
+          return new MockHTMLCanvasElement()
+        },
+      }
+
       get width (): number { return this._width }
       set width (value: number) { this._width = Number(value) }
       get height (): number { return this._height }
@@ -104,18 +133,21 @@ describe('patch_helpers/canvas', () => {
           this._ctx2d ??= new MockCanvasRenderingContext2D(this)
           return this._ctx2d
         }
-        if (type === 'webgl' || type === 'webgl2') {
-          this._webgl ??= { isWebGL: true }
-          return this._webgl
-        }
         return null
       }
 
       toDataURL (_type?: string, _quality?: number): string {
+        if (this._encodedImage != null) {
+          return `data:image/png;base64,${[...this._encodedImage.data].join(',')}`
+        }
         return 'data:image/png;base64,NATIVE'
       }
 
       toBlob (callback: (blob: Blob | null) => void, _type?: string, _quality?: number): void {
+        if (this._encodedImage != null) {
+          callback(new Blob([[...this._encodedImage.data].join(',')]))
+          return
+        }
         callback(new Blob(['native']))
       }
     }
@@ -177,6 +209,7 @@ describe('patch_helpers/canvas', () => {
     let isPointInPathContexts: object[] = []
     let consoleError: ReturnType<typeof jest.fn>
     let globalObject: CanvasMocks
+    let patched = false
 
     const installAndPatch = (): void => {
       fillRectContexts = []
@@ -185,6 +218,11 @@ describe('patch_helpers/canvas', () => {
       transferReceivers = []
       isPointInPathContexts = []
       consoleError = jest.fn()
+      if (patched) {
+        globalObject.console.error = consoleError
+        return
+      }
+      patched = true
 
       MockCanvasRenderingContext2D.prototype.fillRect = function (this: MockCanvasRenderingContext2D, ...args: unknown[]) {
         fillRectContexts.push(this)
@@ -227,7 +265,13 @@ describe('patch_helpers/canvas', () => {
         OffscreenCanvas: MockOffscreenCanvas,
         OffscreenCanvasRenderingContext2D: MockOffscreenCanvasRenderingContext2D,
         ImageData: MockImageData,
-        console: { error: consoleError }
+        console: { error: consoleError },
+        crypto: {
+          getRandomValues <T extends ArrayBufferView>(array: T): T {
+            new Uint8Array(array.buffer, array.byteOffset, array.byteLength).fill(1)
+            return array
+          }
+        }
       }
       enableCanvasFingerprintSpoofing(globalObject as unknown as GlobalScope)
     }
@@ -368,10 +412,62 @@ describe('patch_helpers/canvas', () => {
       expect(shadowFills).toHaveLength(1)
     })
 
-    it('should fall through to native toDataURL after getContext("webgl")', () => {
+    it('should noise a WebGL canvas snapshot and encode it with toDataURL', () => {
       const canvas = globalObject.document.createElement('canvas')
-      expect(canvas.getContext('webgl')).toEqual({ isWebGL: true })
-      expect(canvas.toDataURL()).toBe('data:image/png;base64,NATIVE')
+      canvas.width = 1
+      canvas.height = 1
+      canvas._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+    })
+
+    it('should noise a WebGL canvas snapshot and encode it with toBlob', (done) => {
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      canvas._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      canvas.toBlob((blob) => {
+        expect(blob).toBeInstanceOf(Blob)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          expect(reader.result).toBe('11,21,31,254')
+          done()
+        }
+        reader.readAsText(blob!)
+      })
+    })
+
+    it('should noise a 2d canvas and encode it with toDataURL', () => {
+      const source = globalObject.document.createElement('canvas')
+      source.width = 1
+      source.height = 1
+      source._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      context.drawImage(source)
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+    })
+
+    it('should noise a 2d canvas and encode it with toBlob', (done) => {
+      const source = globalObject.document.createElement('canvas')
+      source.width = 1
+      source.height = 1
+      source._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      context.drawImage(source)
+      canvas.toBlob((blob) => {
+        expect(blob).toBeInstanceOf(Blob)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          expect(reader.result).toBe('11,21,31,254')
+          done()
+        }
+        reader.readAsText(blob!)
+      })
     })
 
     it('should create the shadow 2d context with willReadFrequently', () => {

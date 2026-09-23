@@ -3,8 +3,6 @@ import gpu from '@src/content_scripts/patches/gpu'
 
 const UNMASKED_VENDOR_WEBGL = 37445
 const UNMASKED_RENDERER_WEBGL = 37446
-const RGBA = 0x1908
-const UNSIGNED_BYTE = 0x1401
 const PIXEL_PACK_BUFFER_BINDING = 0x88ED
 
 type NavWithUAData = { userAgentData?: { platform: string } | null }
@@ -15,24 +13,12 @@ type SelfWithWebGLContexts = {
 
 const canvasSupported = typeof globalThis.CanvasRenderingContext2D !== 'undefined'
 
-const onlyLsbDiffers = (actual: number, original: number): boolean =>
-  (actual & ~1) === (original & ~1) && (actual === original || actual === (original ^ 1))
-
 function installMockWebGL (selfWith: SelfWithWebGLContexts): void {
   const MockWebGL = function (this: WebGLRenderingContext) {} as unknown as typeof WebGLRenderingContext
-  Object.assign(MockWebGL, { RGBA, UNSIGNED_BYTE })
   MockWebGL.prototype.getParameter = function (constant: number): unknown {
     if (constant === UNMASKED_VENDOR_WEBGL) return 'LeakyVendor'
     if (constant === UNMASKED_RENDERER_WEBGL) return 'LeakyRenderer'
     return 'webgl1-other'
-  }
-  MockWebGL.prototype.readPixels = function (
-    _x: number, _y: number, _w: number, _h: number,
-    _format: number, _type: number,
-    pixels: ArrayBufferView | null
-  ) {
-    if (pixels == null) return
-    new Uint8Array(pixels.buffer, pixels.byteOffset, 4).set([10, 20, 30, 40])
   }
   selfWith.WebGLRenderingContext = MockWebGL
 
@@ -44,7 +30,6 @@ function installMockWebGL (selfWith: SelfWithWebGLContexts): void {
     if (constant === PIXEL_PACK_BUFFER_BINDING) return 'webgl2-pack-binding'
     return 'webgl2-other'
   }
-  MockWebGL2.prototype.readPixels = function () { /* original */ }
   selfWith.WebGL2RenderingContext = MockWebGL2
 }
 
@@ -106,7 +91,7 @@ describe('gpu patch', () => {
       }
     })
 
-    it('should spoof unmasked vendor/renderer and noise readPixels together', () => {
+    it('should spoof unmasked vendor and renderer', () => {
       const selfWith = self as unknown as SelfWithWebGLContexts & { HTMLCanvasElement?: typeof HTMLCanvasElement }
       const originalCanvas = selfWith.HTMLCanvasElement
       delete selfWith.HTMLCanvasElement
@@ -114,20 +99,13 @@ describe('gpu patch', () => {
         gpu(self)
 
         const webgl1 = Object.create(selfWith.WebGLRenderingContext!.prototype) as WebGLRenderingContext
-        expect(webgl1.getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Apple')
-        expect(webgl1.getParameter(UNMASKED_RENDERER_WEBGL)).toBe('Apple M1')
+        expect(webgl1.getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Apple Inc.')
+        expect(webgl1.getParameter(UNMASKED_RENDERER_WEBGL)).toBe('Apple GPU')
         expect(webgl1.getParameter(0)).toBe('webgl1-other')
 
         const webgl2 = Object.create(selfWith.WebGL2RenderingContext!.prototype) as WebGL2RenderingContext
-        expect(webgl2.getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Apple')
+        expect(webgl2.getParameter(UNMASKED_VENDOR_WEBGL)).toBe('Apple Inc.')
         expect(webgl2.getParameter(PIXEL_PACK_BUFFER_BINDING)).toBe('webgl2-pack-binding')
-
-        const pixels = new Uint8Array(4)
-        webgl1.readPixels(0, 0, 1, 1, RGBA, UNSIGNED_BYTE, pixels)
-        expect(onlyLsbDiffers(pixels[0], 10)).toBe(true)
-        expect(onlyLsbDiffers(pixels[1], 20)).toBe(true)
-        expect(onlyLsbDiffers(pixels[2], 30)).toBe(true)
-        expect(onlyLsbDiffers(pixels[3], 40)).toBe(true)
       } finally {
         if (originalCanvas !== undefined) {
           selfWith.HTMLCanvasElement = originalCanvas

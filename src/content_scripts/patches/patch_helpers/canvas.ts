@@ -1,6 +1,7 @@
 import { createSafeSetter, redefineMethods, reflectApplySafe, reflectConstructSafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe } from '@src/content_scripts/helpers/safe'
 import { GlobalScope } from '../../helpers/globalObject'
+import { noiseCanvas } from './webgl'
 
 export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void => {
   const doc = globalObject.document
@@ -184,7 +185,11 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return 'data:,'
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      return originalCanvasToDataURLSafe(shadowCanvas, type, quality)
+      const copy = noiseCanvas(shadowCanvas, globalObject, false)
+      if (copy == null) {
+        return 'data:,'
+      }
+      return originalCanvasToDataURLSafe(copy, type, quality)
     }
 
     canvasToBlob (callback: (blob: Blob | null) => void, type: string, quality: number): void {
@@ -194,7 +199,12 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      return originalCanvasToBlobSafe(shadowCanvas, callback, type, quality)
+      const copy = noiseCanvas(shadowCanvas, globalObject, false)
+      if (copy == null) {
+        callback(null)
+        return
+      }
+      return originalCanvasToBlobSafe(copy, callback, type, quality)
     }
 
     offscreenCanvasConvertToBlob (options: BlobPropertyBag): Promise<Blob | null> {
@@ -351,11 +361,27 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToDataURL(type, quality)
         }
+        try {
+          const copy = noiseCanvas(this, globalObject, true)
+          if (copy != null) {
+            return copy.toDataURL(type, quality)
+          }
+        } catch {
+          // A lost or incomplete WebGL buffer should not break toDataURL.
+        }
         return originalCanvasToDataURLSafe(this, type, quality)
       },
       toBlob: function (this: HTMLCanvasElement, callback: (blob: Blob | null) => void, type: string, quality: number) {
         if (weakMapHasSafe(canvasToCommandRecorder, this)) {
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToBlob(callback, type, quality)
+        }
+        try {
+          const copy = noiseCanvas(this, globalObject, true)
+          if (copy != null) {
+            return copy.toBlob(callback, type, quality)
+          }
+        } catch {
+          // A lost or incomplete WebGL buffer should not break toBlob.
         }
         return originalCanvasToBlobSafe(this, callback, type, quality)
       }
