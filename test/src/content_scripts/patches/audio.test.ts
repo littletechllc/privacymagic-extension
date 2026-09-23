@@ -2,37 +2,39 @@ import { describe, it, expect, beforeEach } from '@jest/globals'
 import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 import audio from '@src/content_scripts/patches/audio'
 
-const NUMBER_OF_FLOAT_BITS_TO_ERASE = 12
-const NUMBER_OF_UINT8_BITS_TO_ERASE = 2
+const NUMBER_OF_FLOAT_BITS_TO_NOISE = 12
+const NUMBER_OF_UINT8_BITS_TO_NOISE = 2
 const SPOOFED_AUDIO_CONTEXT_SAMPLE_RATE = 48000
 
-const FLOAT_MASK = (0xFFFFFFFF << NUMBER_OF_FLOAT_BITS_TO_ERASE) >>> 0
-const UINT8_MASK = (0xFF << NUMBER_OF_UINT8_BITS_TO_ERASE) >>> 0
+const FLOAT_MASK = (0xFFFFFFFF << NUMBER_OF_FLOAT_BITS_TO_NOISE) >>> 0
+const FLOAT_LOW_BITS = (~FLOAT_MASK) >>> 0
+const UINT8_MASK = (0xFF << NUMBER_OF_UINT8_BITS_TO_NOISE) >>> 0
+const UINT8_LOW_BITS = (~UINT8_MASK) & 0xFF
 
 const leakyFloatSamples = new Float32Array([1.23456789, 2.3456789, -3.45678901])
 const leakyUint8Samples = new Uint8Array([1, 17, 33, 255])
 const leakyReduction = -12.3456789
 
-function quantizeFloat32 (float: number): number {
-  const floatData = new Float32Array([float])
-  const uintData = new Uint32Array(floatData.buffer, floatData.byteOffset, floatData.length)
-  uintData[0] &= FLOAT_MASK
-  return floatData[0]
+function noiseFloat32 (float: number): number {
+  return noiseFloat32Array(new Float32Array([float]))[0]
 }
 
-function quantizeFloat32Array (floatData: Float32Array): Float32Array {
+function noiseFloat32Array (floatData: Float32Array): Float32Array {
   const copy = new Float32Array(floatData)
   const uintData = new Uint32Array(copy.buffer, copy.byteOffset, copy.length)
   for (let i = 0; i < uintData.length; i++) {
-    uintData[i] &= FLOAT_MASK
+    if (!Number.isFinite(copy[i])) {
+      continue
+    }
+    uintData[i] = (uintData[i] & FLOAT_MASK) | FLOAT_LOW_BITS
   }
   return copy
 }
 
-function quantizeUint8Array (uintData: Uint8Array): Uint8Array {
+function noiseUint8Array (uintData: Uint8Array): Uint8Array {
   const copy = new Uint8Array(uintData)
   for (let i = 0; i < copy.length; i++) {
-    copy[i] &= UINT8_MASK
+    copy[i] = (copy[i] & UINT8_MASK) | UINT8_LOW_BITS
   }
   return copy
 }
@@ -94,6 +96,12 @@ function makeFakeGlobalScope (overrides?: Partial<{
     AnalyserNode: undefined,
     DynamicsCompressorNode: undefined,
     AudioContext: undefined,
+    crypto: {
+      getRandomValues <T extends ArrayBufferView>(array: T): T {
+        new Uint8Array(array.buffer, array.byteOffset, array.byteLength).fill(0xff)
+        return array
+      }
+    },
     ...overrides
   } as unknown as GlobalScope
 }
@@ -140,20 +148,20 @@ describe('audio patch', () => {
       audio(fakeGlobal)
     })
 
-    it('should quantize AudioBuffer.getChannelData output', () => {
+    it('should noise AudioBuffer.getChannelData output', () => {
       const buffer = new MockAudioBuffer()
       const channelData = buffer.getChannelData(0)
-      expect([...channelData]).toEqual([...quantizeFloat32Array(leakyFloatSamples)])
+      expect([...channelData]).toEqual([...noiseFloat32Array(leakyFloatSamples)])
     })
 
-    it('should quantize AudioBuffer.copyFromChannel output', () => {
+    it('should noise AudioBuffer.copyFromChannel output', () => {
       const buffer = new MockAudioBuffer()
       const destination = new Float32Array(leakyFloatSamples.length)
       buffer.copyFromChannel(destination, 0, 0)
-      expect([...destination]).toEqual([...quantizeFloat32Array(leakyFloatSamples)])
+      expect([...destination]).toEqual([...noiseFloat32Array(leakyFloatSamples)])
     })
 
-    it('should quantize AnalyserNode float read methods', () => {
+    it('should noise AnalyserNode float read methods', () => {
       const analyser = new MockAnalyserNode()
       const floatFrequencyData = new Float32Array(leakyFloatSamples.length)
       const floatTimeDomainData = new Float32Array(leakyFloatSamples.length)
@@ -161,11 +169,11 @@ describe('audio patch', () => {
       analyser.getFloatFrequencyData(floatFrequencyData)
       analyser.getFloatTimeDomainData(floatTimeDomainData)
 
-      expect([...floatFrequencyData]).toEqual([...quantizeFloat32Array(leakyFloatSamples)])
-      expect([...floatTimeDomainData]).toEqual([...quantizeFloat32Array(leakyFloatSamples)])
+      expect([...floatFrequencyData]).toEqual([...noiseFloat32Array(leakyFloatSamples)])
+      expect([...floatTimeDomainData]).toEqual([...noiseFloat32Array(leakyFloatSamples)])
     })
 
-    it('should quantize AnalyserNode byte read methods', () => {
+    it('should noise AnalyserNode byte read methods', () => {
       const analyser = new MockAnalyserNode()
       const byteFrequencyData = new Uint8Array(leakyUint8Samples.length)
       const byteTimeDomainData = new Uint8Array(leakyUint8Samples.length)
@@ -173,13 +181,13 @@ describe('audio patch', () => {
       analyser.getByteFrequencyData(byteFrequencyData)
       analyser.getByteTimeDomainData(byteTimeDomainData)
 
-      expect([...byteFrequencyData]).toEqual([...quantizeUint8Array(leakyUint8Samples)])
-      expect([...byteTimeDomainData]).toEqual([...quantizeUint8Array(leakyUint8Samples)])
+      expect([...byteFrequencyData]).toEqual([...noiseUint8Array(leakyUint8Samples)])
+      expect([...byteTimeDomainData]).toEqual([...noiseUint8Array(leakyUint8Samples)])
     })
 
-    it('should quantize DynamicsCompressorNode.reduction', () => {
+    it('should noise DynamicsCompressorNode.reduction', () => {
       const compressor = new MockDynamicsCompressorNode()
-      expect(compressor.reduction).toBe(quantizeFloat32(leakyReduction))
+      expect(compressor.reduction).toBe(noiseFloat32(leakyReduction))
     })
 
     it('should force AudioContext sampleRate to 48000', () => {
