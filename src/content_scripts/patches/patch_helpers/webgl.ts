@@ -50,22 +50,16 @@ const noiseImageDataBytes = (pixels: Uint8ClampedArray, globalObject: GlobalScop
 
 export const noiseCanvas = (
   webGlCanvas: HTMLCanvasElement,
-  globalObject: GlobalScope,
-  makeCopy: boolean
+  globalObject: GlobalScope
 ): HTMLCanvasElement | undefined => {
-  let dest: HTMLCanvasElement
-  if (makeCopy) {
   const width = webGlCanvas.width
   const height = webGlCanvas.height
   if (width <= 0 || height <= 0) {
     return undefined
   }
-  dest = webGlCanvas.ownerDocument.createElement('canvas')
+  const dest = webGlCanvas.ownerDocument.createElement('canvas')
   dest.width = width
   dest.height = height
-  } else {
-    dest = webGlCanvas
-  }
   const context = dest.getContext('2d')
   if (context == null) {
     return undefined

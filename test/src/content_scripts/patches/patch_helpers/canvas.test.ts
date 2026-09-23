@@ -61,6 +61,7 @@ describe('patch_helpers/canvas', () => {
 
       putImageData (imageData: MockImageData): void {
         this._canvas._encodedImage = imageData
+        this._canvas._bitmap = new Uint8ClampedArray(imageData.data)
       }
 
       getImageData (_sx: number, _sy: number, sw: number, sh: number): MockImageData {
@@ -381,6 +382,8 @@ describe('patch_helpers/canvas', () => {
 
     it('should read toBlob from the shadow canvas', (done) => {
       const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
       const ctx = canvas.getContext('2d') as MockCanvasRenderingContext2D
       ctx.fillRect(0, 0, 1, 1)
       canvas.toBlob((blob) => {
@@ -446,6 +449,20 @@ describe('patch_helpers/canvas', () => {
       canvas.height = 1
       const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
       context.drawImage(source)
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+    })
+
+    it('should noise a 2d canvas only once when toDataURL is called twice', () => {
+      const source = globalObject.document.createElement('canvas')
+      source.width = 1
+      source.height = 1
+      source._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      const canvas = globalObject.document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
+      context.drawImage(source)
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
       expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
     })
 

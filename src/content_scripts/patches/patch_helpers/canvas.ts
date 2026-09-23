@@ -185,7 +185,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return 'data:,'
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      const copy = noiseCanvas(shadowCanvas, globalObject, false)
+      const copy = noiseCanvas(shadowCanvas, globalObject)
       if (copy == null) {
         return 'data:,'
       }
@@ -199,7 +199,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      const copy = noiseCanvas(shadowCanvas, globalObject, false)
+      const copy = noiseCanvas(shadowCanvas, globalObject)
       if (copy == null) {
         callback(null)
         return
@@ -362,9 +362,11 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToDataURL(type, quality)
         }
         try {
-          const copy = noiseCanvas(this, globalObject, true)
+          const copy = noiseCanvas(this, globalObject)
           if (copy != null) {
-            return copy.toDataURL(type, quality)
+            // The copy's 2d context exists only to read and noise pixels. Encoding
+            // through the patched method would replay that context and noise again.
+            return originalCanvasToDataURLSafe(copy, type, quality)
           }
         } catch {
           // A lost or incomplete WebGL buffer should not break toDataURL.
@@ -376,9 +378,9 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToBlob(callback, type, quality)
         }
         try {
-          const copy = noiseCanvas(this, globalObject, true)
+          const copy = noiseCanvas(this, globalObject)
           if (copy != null) {
-            return copy.toBlob(callback, type, quality)
+            return originalCanvasToBlobSafe(copy, callback, type, quality)
           }
         } catch {
           // A lost or incomplete WebGL buffer should not break toBlob.
