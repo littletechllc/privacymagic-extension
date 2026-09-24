@@ -27,25 +27,7 @@ Privacy Magic, web gizliliğini savunan açık kaynak yazılım geliştiren yaz�
 TEKNİK ÖZELLİKLER
 
 - Reklamları, izleyicileri ve rahatsızlıkları engeller
-- Sistem bilgisini korur (parmak izine karşı)
-  · Ağ
-  · Bellek
-  · Cihaz
-  · Dil
-  · Disk
-  · Dokunma
-  · Ekran
-  · Görüntü
-  · Grafik (Canvas, WebGL)
-  · İşlemci
-  · Klavye
-  · Matematik
-  · Pil
-  · Saat dilimi
-  · Ses (AudioContext)
-  · Tarayıcı (User agent)
-  · Yazı tipleri
-  · Zamanlama
+- Sistem bilgisini korur (parmak izi için kullanılan 18+ sistem ve donanım sinyalini sahteleştirir)
 - İzleme izlerini kaldırır
   · İzleme parametreleri
   · Önbellek sızıntıları

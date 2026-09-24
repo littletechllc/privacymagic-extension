@@ -27,25 +27,7 @@ Privacy Magic tworzy Arthur Edelstein, inżynier oprogramowania budujący oprogr
 SPECYFIKACJA TECHNICZNA
 
 - Blokuje reklamy, trackery i uciążliwości
-- Chroni informacje systemowe (przed fingerprintingiem)
-  · Bateria
-  · Czasowanie
-  · Czcionki
-  · Dotyk
-  · Dysk
-  · Dźwięk (AudioContext)
-  · Ekran
-  · Grafika (Canvas, WebGL)
-  · Język
-  · Klawiatura
-  · Matematyka
-  · Pamięć
-  · Procesor
-  · Przeglądarka (User agent)
-  · Sieć
-  · Strefa czasowa
-  · Urządzenie
-  · Wyświetlacz
+- Chroni informacje systemowe (maskuje 18+ sygnałów systemu i sprzętu używanych do fingerprintingu)
 - Usuwa ślady śledzenia
   · Nazwa okna
   · Parametry śledzenia

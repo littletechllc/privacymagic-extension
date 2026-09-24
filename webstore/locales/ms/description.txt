@@ -27,25 +27,7 @@ Privacy Magic dicipta oleh Arthur Edelstein, jurutera perisian yang membina peri
 SPESIFIKASI TEKNIKAL
 
 - Menyekat iklan, penjejak dan gangguan
-- Melindungi maklumat sistem (daripada cap jari)
-  · Audio (AudioContext)
-  · Bahasa
-  · Bateri
-  · Cakera
-  · Fon
-  · Grafik (Canvas, WebGL)
-  · Matematik
-  · Memori
-  · Papan kekunci
-  · Paparan
-  · Pelayar (User agent)
-  · Pemproses
-  · Peranti
-  · Rangkaian
-  · Sentuhan
-  · Skrin
-  · Timing
-  · Zon masa
+- Melindungi maklumat sistem (memalsukan 18+ isyarat sistem dan perkakasan yang digunakan untuk cap jari)
 - Membuang jejak penjejakan
   · Kebocoran cache
   · Nama tetingkap

@@ -27,25 +27,7 @@ Privacy Magic imeundwa na Arthur Edelstein, mhandisi wa programu anayejenga prog
 VIPIMO VYA KIUFUNDI
 
 - Inazuia matangazo, wafuatiliaji na usumbufu
-- Inalinda taarifa za mfumo (dhidi ya uchukuzi wa alama za vidole)
-  · Betri
-  · Diski
-  · Fonti
-  · Graphics (Canvas, WebGL)
-  · Hisabati
-  · Kibodi
-  · Kifaa
-  · Kivinjari (User agent)
-  · Kumbukumbu
-  · Lugha
-  · Mguso
-  · Mtandao
-  · Muda
-  · Onyesho
-  · Processor
-  · Sauti (AudioContext)
-  · Skrini
-  · Ukanda wa Saa
+- Inalinda taarifa za mfumo (huficha ishara 18+ za mfumo na maunzi zinazotumika kuchukua alama za vidole)
 - Inaondoa alama za ufuatiliaji
   · Jina la Dirisha
   · Mrejeshi

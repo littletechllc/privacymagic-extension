@@ -27,25 +27,7 @@ Privacy Magic is created by Arthur Edelstein, a software engineer dedicated to b
 TECHNICAL SPECIFICATIONS
 
 - Blocks ads, trackers, and annoyances
-- Protects system information (to resist fingerprinting)
-  · Audio (AudioContext)
-  · Battery
-  · Browser (User agent)
-  · Device
-  · Disk
-  · Display
-  · Fonts
-  · Graphics (Canvas, WebGL)
-  · Keyboard
-  · Language
-  · Math
-  · Memory
-  · Network
-  · Processor
-  · Screen
-  · Time Zone
-  · Timing
-  · Touch
+- Protects system information (spoofs 18+ system and hardware signals used for fingerprinting)
 - Removes tracking breadcrumbs
   · Cache Leaks
   · Referrer Policy

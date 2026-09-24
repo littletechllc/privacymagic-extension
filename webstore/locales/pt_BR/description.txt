@@ -27,25 +27,7 @@ Privacy Magic é criado por Arthur Edelstein, engenheiro de software dedicado a 
 ESPECIFICAÇÕES TÉCNICAS
 
 - Bloqueia anúncios, rastreadores e incômodos
-- Protege informações do sistema (para resistir à identificação por fingerprinting)
-  · Áudio (AudioContext)
-  · Bateria
-  · Cronometragem
-  · Disco
-  · Dispositivo
-  · Exibição
-  · Fontes
-  · Fuso horário
-  · Gráficos (Canvas, WebGL)
-  · Idioma
-  · Matemática
-  · Memória
-  · Navegador (User agent)
-  · Processador
-  · Rede
-  · Teclado
-  · Tela
-  · Toque
+- Protege informações do sistema (ofusca 18+ sinais de sistema e hardware usados para fingerprinting)
 - Remove rastros de rastreamento
   · Nome da janela
   · Parâmetros de rastreamento

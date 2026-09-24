@@ -27,25 +27,7 @@ Privacy Magic vytvára Arthur Edelstein, softvérový inžinier budujúci open-s
 TECHNICKÉ ŠPECIFIKÁCIE
 
 - Blokuje reklamy, sledovače a obťažovanie
-- Chráni systémové informácie (proti fingerprintingu)
-  · Batéria
-  · Časovanie
-  · Časové pásmo
-  · Disk
-  · Dotyková obrazovka
-  · Grafika (Canvas, WebGL)
-  · Jazyk
-  · Klávesnica
-  · Matematika
-  · Obrazovka
-  · Pamäť
-  · Písma
-  · Prehliadač (User agent)
-  · Procesor
-  · Sieť
-  · Zariadenie
-  · Zobrazenie
-  · Zvuk (AudioContext)
+- Chráni systémové informácie (maskuje 18+ systémových a hardvérových signálov používaných na fingerprinting)
 - Odstraňuje sledovacie stopy
   · Názov okna
   · Parametre sledovania

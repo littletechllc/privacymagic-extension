@@ -27,25 +27,7 @@ Privacy Magic dibuat oleh Arthur Edelstein, insinyur perangkat lunak yang berded
 SPESIFIKASI TEKNIS
 
 - Memblokir iklan, pelacak, dan gangguan
-- Melindungi informasi sistem (dari fingerprinting)
-  · Audio (AudioContext)
-  · Bahasa
-  · Baterai
-  · Browser (User agent)
-  · Disk
-  · Font
-  · Grafis (Canvas, WebGL)
-  · Jaringan
-  · Keyboard
-  · Layar
-  · Matematika
-  · Memori
-  · Perangkat
-  · Prosesor
-  · Sentuh
-  · Tampilan
-  · Timing
-  · Zona waktu
+- Melindungi informasi sistem (memalsukan 18+ sinyal sistem dan perangkat keras yang digunakan untuk fingerprinting)
 - Menghapus jejak pelacakan
   · Kebocoran cache
   · Nama jendela

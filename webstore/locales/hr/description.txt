@@ -27,25 +27,7 @@ Privacy Magic stvara Arthur Edelstein, softverski inženjer posvećen open-sourc
 TEHNIČKE SPECIFIKACIJE
 
 - Blokira oglase, programe za praćenje i smetnje
-- Zaštiti informacije sustava (od otiska prsta)
-  · Baterija
-  · Disk
-  · Dodir
-  · Fontovi
-  · Grafika (Canvas, WebGL)
-  · Jezik
-  · Matematika
-  · Memorija
-  · Mreža
-  · Postavke zaslona
-  · Preglednik (User agent)
-  · Procesor
-  · Tipkovnica
-  · Uređaj
-  · Vremenska zona
-  · Vremensko mjerjenje
-  · Zaslon
-  · Zvuk (AudioContext)
+- Zaštiti informacije sustava (maskira 18+ sistemskih i hardverskih signala koji se koriste za otisak prsta)
 - Uklanja tragove praćenja
   · Curenja predmemorije
   · Naziv prozora

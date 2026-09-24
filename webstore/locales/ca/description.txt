@@ -27,25 +27,7 @@ Privacy Magic el crea Arthur Edelstein, enginyer de programari dedicat a program
 ESPECIFICACIONS TÈCNIQUES
 
 - Bloqueja anuncis, seguidors i molesties
-- Protegeix la informació del sistema (contra la presa d'empremtes)
-  · Àudio (AudioContext)
-  · Bateria
-  · Disc
-  · Dispositiu
-  · Fonts
-  · Gràfics (Canvas, WebGL)
-  · Idioma
-  · Matemàtiques
-  · Memòria
-  · Monitor
-  · Navegador (User agent)
-  · Pantalla
-  · Processador
-  · Tàctil
-  · Teclat
-  · Temps
-  · Xarxa
-  · Zona horària
+- Protegeix la informació del sistema (falsifica 18+ senyals del sistema i del maquinari usats per a la presa d'empremtes)
 - Elimina les restes de seguiment
   · Fuites de memòria cau
   · Nom de la finestra

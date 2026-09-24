@@ -27,25 +27,7 @@ Privacy Magic er skabt af Arthur Edelstein, softwareingeniør der bygger open so
 TEKNISKE SPECIFIKATIONER
 
 - Blokerer annoncer, sporingsværktøjer og gener
-- Beskytter systemoplysninger (mod fingerprinting)
-  · Batteri
-  · Berøring
-  · Browser (User agent)
-  · Disk
-  · Enhed
-  · Grafik (Canvas, WebGL)
-  · Hukommelse
-  · Lyd (AudioContext)
-  · Matematik
-  · Netværk
-  · Processor
-  · Skrifttyper
-  · Skærm
-  · Sprog
-  · Tastatur
-  · Tidszone
-  · Timing
-  · Visning
+- Beskytter systemoplysninger (spoofer 18+ system- og hardwaresignaler, der bruges til fingerprinting)
 - Fjerner sporingsspor
   · Cache-lækager
   · Referrer

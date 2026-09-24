@@ -27,25 +27,7 @@ Privacy Magic kuria Arthur Edelstein, programinės įrangos inžinierius, kurian
 TECHNINĖS SPECIFIKACIJOS
 
 - Blokuoja reklamas, sekiklius ir erzinimus
-- Apsaugo sistemos informaciją (nuo pirštų atspaudų)
-  · Atmintis
-  · Baterija
-  · Diskas
-  · Ekranas
-  · Ekrano nustatymai
-  · Garsas (AudioContext)
-  · Grafika (Canvas, WebGL)
-  · Įrenginys
-  · Kalba
-  · Klaviatūra
-  · Laikmatis
-  · Laiko juosta
-  · Lietimas
-  · Matematika
-  · Naršyklė (User agent)
-  · Procesorius
-  · Šriftai
-  · Tinklas
+- Apsaugo sistemos informaciją (užmaskuoja 18+ sistemos ir aparatinės įrangos signalų, naudojamų pirštų atspaudams)
 - Pašalina sekimo pėdsakus
   · Lango pavadinimas
   · Nurodytojas

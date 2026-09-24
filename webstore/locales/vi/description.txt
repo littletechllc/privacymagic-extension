@@ -27,25 +27,7 @@ Privacy Magic được tạo bởi Arthur Edelstein, kỹ sư phần mềm chuy�
 THÔNG SỐ KỸ THUẬT
 
 - Chặn quảng cáo, trình theo dõi và nội dung phiền nhiễu
-- Bảo vệ thông tin hệ thống (chống lấy dấu vân tay)
-  · Âm thanh (AudioContext)
-  · Bàn phím
-  · Bộ nhớ
-  · Bộ xử lý
-  · Cảm ứng
-  · Đĩa
-  · Đồ họa (Canvas, WebGL)
-  · Hiển thị
-  · Màn hình
-  · Mạng
-  · Múi giờ
-  · Ngôn ngữ
-  · Phông chữ
-  · Pin
-  · Thiết bị
-  · Thời gian
-  · Toán
-  · Trình duyệt (User agent)
+- Bảo vệ thông tin hệ thống (giả mạo 18+ tín hiệu hệ thống và phần cứng dùng để lấy dấu vân tay)
 - Xóa dấu vết theo dõi
   · Người giới thiệu
   · Rò rỉ bộ nhớ đệm

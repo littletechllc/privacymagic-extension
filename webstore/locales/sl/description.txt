@@ -27,25 +27,7 @@ Privacy Magic ustvarja Arthur Edelstein, programski inženir, posvečen odprtoko
 TEHNIČNE SPECIFIKACIJE
 
 - Blokira oglase, sledilce in moteče vsebine
-- Zaščiti sistemske informacije (pred fingerprintingom)
-  · Baterija
-  · Brskalnik (User agent)
-  · Časovni pas
-  · Časovni zamik
-  · Disk
-  · Dotek
-  · Grafika (Canvas, WebGL)
-  · Jezik
-  · Matematika
-  · Naprava
-  · Omrežje
-  · Pisave
-  · Pomnilnik
-  · Prikaz
-  · Procesor
-  · Tipkovnica
-  · Zaslon
-  · Zvok (AudioContext)
+- Zaščiti sistemske informacije (prikriva 18+ sistemskih in strojnih signalov, ki se uporabljajo za fingerprinting)
 - Odstrani sledi sledenja
   · Curejanje predpomnilnika
   · Ime okna

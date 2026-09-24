@@ -27,25 +27,7 @@ Privacy Magic lo crea Arthur Edelstein, ingeniero de software dedicado a constru
 ESPECIFICACIONES TÉCNICAS
 
 - Bloquea anuncios, rastreadores y molestias
-- Protege la información del sistema (contra la huella digital)
-  · Audio (AudioContext)
-  · Batería
-  · Cronometraje
-  · Disco
-  · Dispositivo
-  · Fuentes
-  · Gráficos (Canvas, WebGL)
-  · Idioma
-  · Matemáticas
-  · Memoria
-  · Navegador (User agent)
-  · Pantalla
-  · Procesador
-  · Red
-  · Táctil
-  · Teclado
-  · Visualización
-  · Zona horaria
+- Protege la información del sistema (falsea 18+ señales del sistema y del hardware usadas para la huella digital)
 - Quita rastros de navegación
   · Fugas de caché
   · Nombre de ventana

@@ -27,25 +27,7 @@ A Privacy Magicet Arthur Edelstein készíti, szoftvermérnök, aki a webes adat
 MŰSZAKI ADATOK
 
 - Blokkolja a hirdetéseket, követőket és zaklatásokat
-- Védi a rendszerinformációkat (fingerprinting ellen)
-  · Akkumulátor
-  · Betűtípusok
-  · Billentyűzet
-  · Böngésző (User agent)
-  · Érintés
-  · Eszköz
-  · Grafika (Canvas, WebGL)
-  · Hálózat
-  · Hang (AudioContext)
-  · Időzítés
-  · Időzóna
-  · Képernyő
-  · Kijelző
-  · Lemez
-  · Matematika
-  · Memória
-  · Nyelv
-  · Processzor
+- Védi a rendszerinformációkat (maszkol 18+ rendszer- és hardverjelzést, amelyeket fingerprintingre használnak)
 - Eltávolítja a követési nyomokat
   · Ablak neve
   · Gyorsítótár-szivárgások

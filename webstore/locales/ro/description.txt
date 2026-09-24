@@ -27,25 +27,7 @@ Privacy Magic este creat de Arthur Edelstein, inginer software dedicat software-
 SPECIFICAȚII TEHNICE
 
 - Blochează reclame, trackere și supărări
-- Protejează informațiile de sistem (împotriva fingerprintingului)
-  · Afișaj
-  · Audio (AudioContext)
-  · Baterie
-  · Browser (User agent)
-  · Cronometrare
-  · Disc
-  · Dispozitiv
-  · Ecran
-  · Fonturi
-  · Fus orar
-  · Grafice (Canvas, WebGL)
-  · Limbă
-  · Matematică
-  · Memorie
-  · Procesor
-  · Rețea
-  · Tactil
-  · Tastatură
+- Protejează informațiile de sistem (maschează 18+ semnale de sistem și hardware folosite pentru fingerprinting)
 - Elimină urmele de urmărire
   · Nume fereastră
   · Parametri urmărire

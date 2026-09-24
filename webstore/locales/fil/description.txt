@@ -27,25 +27,7 @@ Ginawa ang Privacy Magic ni Arthur Edelstein, software engineer na nagtatayo ng 
 MGA TEKNIKAL NA DETALYE
 
 - Nagba-block ng ads, trackers at mga abala
-- Pinoprotektahan ang system information (laban sa fingerprinting)
-  · Audio (AudioContext)
-  · Battery
-  · Browser (User agent)
-  · Device
-  · Disk
-  · Display
-  · Fonts
-  · Graphics (Canvas, WebGL)
-  · Keyboard
-  · Language
-  · Matematika
-  · Memory
-  · Network
-  · Processor
-  · Screen
-  · Time Zone
-  · Timing
-  · Touch
+- Pinoprotektahan ang system information (nagsspoof ng 18+ system at hardware signals na ginagamit para sa fingerprinting)
 - Inaalis ang tracking breadcrumbs
   · Mga cache leak
   · Referrer

@@ -27,25 +27,7 @@ Privacy Magicin on luonut Arthur Edelstein, ohjelmistoinsinööri, joka rakentaa
 TEKNISET TIEDOT
 
 - Estää mainokset, seuraimet ja häiriöt
-- Suojaa järjestelmätiedot (fingerprintingia vastaan)
-  · Aikavyöhyke
-  · Ajoitus
-  · Fontit
-  · Grafiikka (Canvas, WebGL)
-  · Kieli
-  · Kosketus
-  · Laite
-  · Levy
-  · Matematiikka
-  · Muisti
-  · Näppäimistö
-  · Näyttö
-  · Näyttöasetukset
-  · Paristi
-  · Prosessori
-  · Selain (User agent)
-  · Verkko
-  · Ääni (AudioContext)
+- Suojaa järjestelmätiedot (peittää 18+ järjestelmä- ja laitesignaalia, joita käytetään fingerprintingiin)
 - Poistaa seurannan jäljet
   · Ikkunan nimi
   · Seurantaparametrit

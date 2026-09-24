@@ -27,25 +27,7 @@ Privacy Magic is gemaakt door Arthur Edelstein, software engineer die open-sourc
 TECHNISCHE SPECIFICATIES
 
 - Blokkeert advertenties, trackers en overlast
-- Beschermt systeeminformatie (tegen fingerprinting)
-  · Aanraking
-  · Apparaat
-  · Audio (AudioContext)
-  · Batterij
-  · Browser (User agent)
-  · Geheugen
-  · Grafisch (Canvas, WebGL)
-  · Lettertypen
-  · Netwerk
-  · Processor
-  · Scherm
-  · Schijf
-  · Taal
-  · Tijdzone
-  · Timing
-  · Toetsenbord
-  · Weergave
-  · Wiskunde
+- Beschermt systeeminformatie (spooft 18+ systeem- en hardwaresignalen die voor fingerprinting worden gebruikt)
 - Verwijdert trackingsporen
   · Cache-lekken
   · Trackingparameters

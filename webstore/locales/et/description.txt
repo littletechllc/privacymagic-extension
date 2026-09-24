@@ -27,25 +27,7 @@ Privacy Magici looja on Arthur Edelstein, tarkvarainsener, kes ehitab veebipriva
 TEHNILISED SPETSIFIKATSIOONID
 
 - Blokeerib reklaame, jälgijaid ja tülikust
-- Kaitseb süsteemi teavet (sõrmejälje võtmise vastu)
-  · Ajastus
-  · Ajavöönd
-  · Brauser (User agent)
-  · Ekraan
-  · Fondid
-  · Graafika (Canvas, WebGL)
-  · Heli (AudioContext)
-  · Keel
-  · Ketas
-  · Klaviatuur
-  · Kuva
-  · Matemaatika
-  · Mälu
-  · Patarei
-  · Protsessor
-  · Puudutus
-  · Seade
-  · Võrk
+- Kaitseb süsteemi teavet (varjab 18+ süsteemi- ja riistvarasignaali, mida kasutatakse sõrmejälje võtmiseks)
 - Eemaldab jälgimise jäljed
   · Akna nimi
   · Jälgimise parameetrid

@@ -27,25 +27,7 @@ Privacy Magic veido Arthur Edelstein, programmatūras inženieris, kas veido atv
 TEHNISKĀS SPECIFIKĀCIJAS
 
 - Bloķē reklāmas, izsekotājus un kaitinājumus
-- Aizsargā sistēmas informāciju (pret pirkstu nospiedumu)
-  · Atmiņa
-  · Audio (AudioContext)
-  · Baterija
-  · Disks
-  · Displejs
-  · Ekrāns
-  · Grafika (Canvas, WebGL)
-  · Ierīce
-  · Laika zona
-  · Laiks
-  · Matemātika
-  · Pārlūks (User agent)
-  · Pieskāriens
-  · Procesors
-  · Šrifti
-  · Tastatūra
-  · Tīkls
-  · Valoda
+- Aizsargā sistēmas informāciju (maskē 18+ sistēmas un aparatūras signālus, ko izmanto pirkstu nospiedumam)
 - Noņem izsekošanas pēdas
   · Atsauce
   · Izsekošanas parametri

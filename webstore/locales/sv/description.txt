@@ -27,25 +27,7 @@ Privacy Magic skapas av Arthur Edelstein, mjukvaruingenjör som bygger öppen k�
 TEKNISKA SPECIFIKATIONER
 
 - Blockerar annonser, spårare och störningar
-- Skyddar systeminformation (mot fingerprinting)
-  · Batteri
-  · Disk
-  · Enhet
-  · Grafik (Canvas, WebGL)
-  · Ljud (AudioContext)
-  · Matematik
-  · Minne
-  · Nätverk
-  · Pek
-  · Processor
-  · Skärm
-  · Språk
-  · Tangentbord
-  · Tidszon
-  · Timing
-  · Typsnitt
-  · Visning
-  · Webbläsare (User agent)
+- Skyddar systeminformation (förvränger 18+ system- och hårdvarusignaler som används för fingerprinting)
 - Tar bort spårningsspår
   · Cache-läckor
   · Fönsternamn
