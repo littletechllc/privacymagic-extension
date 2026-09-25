@@ -1,3 +1,5 @@
+import { isEdgeBrowser } from '@src/common/browser'
+
 type Applicator = (el: HTMLElement, msg: string) => void;
 
 /** BCP 47 base language codes that use right-to-left UI in this extension. */
@@ -22,6 +24,19 @@ const ATTR_MAP: Record<string, Applicator> = {
   'data-i18n-href':        (el, msg) => { el.setAttribute('href', msg) },
 }
 
+/** Chrome and Google by default. Edge and Microsoft when this page is running in Microsoft Edge. */
+const resolveI18nArg = (key: string): string => {
+  const message = chrome.i18n.getMessage(key)
+  const edge = isEdgeBrowser()
+  if (key === 'browserName') {
+    return edge ? 'Edge' : (message || 'Chrome')
+  }
+  if (key === 'companyName') {
+    return edge ? 'Microsoft' : (message || 'Google')
+  }
+  return message || key
+}
+
 function applyI18n(root: Document | HTMLElement = document): void {
   for (const [attr, apply] of Object.entries(ATTR_MAP)) {
     root.querySelectorAll<HTMLElement>(`[${attr}]`).forEach(el => {
@@ -30,7 +45,7 @@ function applyI18n(root: Document | HTMLElement = document): void {
 
       const rawArgs = el.dataset.i18nArgs
       const args: string[] = rawArgs
-        ? rawArgs.split(',').map(k => chrome.i18n.getMessage(k.trim()) || k.trim())
+        ? rawArgs.split(',').map(k => resolveI18nArg(k.trim()))
         : []
 
       const msg = chrome.i18n.getMessage(key, args)

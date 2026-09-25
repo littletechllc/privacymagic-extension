@@ -335,21 +335,47 @@
     "message": "Imam VPN!",
     "description": "Secondary call to action for step 2"
   },
+  "browserName": {
+    "message": "Chrome",
+    "description": "Browser name inserted into setup strings. The default is Chrome; the extension shows Edge when running in Microsoft Edge."
+  },
+  "companyName": {
+    "message": "Google",
+    "description": "Company name inserted into setup strings. The default is Google; the extension shows Microsoft when running in Microsoft Edge."
+  },
   "setupStep3Title": {
-    "message": "Prilagodite nastavitve Chrome za zasebnost",
-    "description": "Step 3 title on the setup page"
+    "message": "Prilagodite nastavitve $BROWSER$ za zasebnost",
+    "description": "Step 3 title on the setup page and sync-help side panel. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3Time": {
     "message": "1 min",
     "description": "Estimated time for step 3"
   },
   "setupStep3Intro": {
-    "message": "Poskrbimo, da ta brskalnik ne pošilja vaše zgodovine brskanja na Googlove strežnike.",
-    "description": "Introductory sentence for history sync setup panel (setup flow)"
+    "message": "Poskrbimo, da ta brskalnik ne pošilja vaše zgodovine brskanja na strežnike $COMPANY$.",
+    "description": "Introductory sentence for history sync setup panel (setup flow). $COMPANY$ is Google or Microsoft.",
+    "placeholders": {
+      "company": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
   },
   "setupStep3IntroSidepanelPending": {
-    "message": "Odprli bomo nastavitve Chroma, da boste lahko naredili potrebne spremembe.",
-    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+    "message": "Odprli bomo nastavitve $BROWSER$, da boste lahko naredili potrebne spremembe.",
+    "description": "Intro text on sync help side panel before navigating to settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3IntroSidepanel": {
     "message": "Poskrbimo, da ta brskalnik ne pošilja vaše zgodovine brskanja na Googlove strežnike.",
@@ -430,8 +456,14 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kliknite na <strong>sestavljanko</strong> {puzzleIcon} v orodni vrstici Chrome, da vidite svoje razširitve. Na seznamu poiščite <strong>Privacy Magic</strong> in kliknite <strong>zatič</strong> {pinIcon} poleg njega. Ko je gumb Privacy Magic {hamsaIcon} pripet, ga lahko kadarkoli kliknete, da vidite, kako ste zaščiteni, in upravljate posamezne zaščite.",
-    "description": "Step 1 body text with named icon tokens for i18n"
+    "message": "Kliknite na <strong>sestavljanko</strong> {puzzleIcon} v orodni vrstici $BROWSER$, da vidite svoje razširitve. Na seznamu poiščite <strong>Privacy Magic</strong> in kliknite <strong>zatič</strong> {pinIcon} poleg njega. Ko je gumb Privacy Magic {hamsaIcon} pripet, ga lahko kadarkoli kliknete, da vidite, kako ste zaščiteni, in upravljate posamezne zaščite.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupCompletedSuffix": {
     "message": "(dokončano)",
@@ -506,18 +538,6 @@
   "syncHelpDirectionRight": {
     "message": "desno",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "setupStep3TitleEdge": {
-    "message": "Prilagodite nastavitve Edge za zasebnost",
-    "description": "Step 3 title when running in Microsoft Edge"
-  },
-  "setupStep3IntroEdge": {
-    "message": "Poskrbimo, da ta brskalnik ne pošilja vaše zgodovine brskanja na Microsoftove strežnike.",
-    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
-  },
-  "setupStep3IntroSidepanelPendingEdge": {
-    "message": "Odprli bomo nastavitve Edgea, da boste lahko naredili potrebne spremembe.",
-    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
   },
   "syncHelpEdgePrivacyIntro": {
     "message": "Prepričajmo se, da ne pošiljamo podatkov Microsoftu.",

@@ -22,15 +22,25 @@ const applyStep1MessageTokens = (): void => {
     return
   }
 
-  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons')
+  const edge = isEdgeBrowser()
+  const browserName = edge
+    ? 'Edge'
+    : (chrome.i18n.getMessage('browserName') || 'Chrome')
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', browserName)
   const source = raw || el.innerHTML
 
   const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'
   const pinIconAlt = chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon'
+  const puzzleIconPath = edge
+    ? '../assets/images/puzzle-edge.png'
+    : '../assets/images/puzzle.svg'
+  const pinIconPath = edge
+    ? '../assets/images/pin-edge.png'
+    : '../assets/images/pin.svg'
 
   const tokenMap: Record<string, string> = {
-    puzzleIcon: buildSetupInlineIconHtml(puzzleIconAlt, '../assets/images/puzzle.svg'),
-    pinIcon: buildSetupInlineIconHtml(pinIconAlt, '../assets/images/pin.svg'),
+    puzzleIcon: buildSetupInlineIconHtml(puzzleIconAlt, puzzleIconPath),
+    pinIcon: buildSetupInlineIconHtml(pinIconAlt, pinIconPath),
     hamsaIcon: buildSetupInlineIconHtml('Privacy Magic icon', '../logo/logo.svg')
   }
 
@@ -131,25 +141,8 @@ for (const step of STEP_IDS) {
   })
 }
 
-/** i18n.js applies messages on DOMContentLoaded; retarget keys before that runs. */
-const useEdgeSetupCopy = (): void => {
-  if (!isEdgeBrowser()) {
-    return
-  }
-  const retarget: Record<string, string> = {
-    setupStep3Title: 'setupStep3TitleEdge',
-    setupStep3Intro: 'setupStep3IntroEdge'
-  }
-  for (const [from, to] of Object.entries(retarget)) {
-    document.querySelectorAll(`[data-i18n="${from}"]`).forEach((el) => {
-      el.setAttribute('data-i18n', to)
-    })
-  }
-}
-
 applyStep1MessageTokens()
 applyCompletedLabels()
-useEdgeSetupCopy()
 
 const restorePersistedStep = (
   flag: BooleanStorageFlag,

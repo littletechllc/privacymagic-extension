@@ -335,21 +335,47 @@
     "message": "יש לי VPN!",
     "description": "Secondary call to action for step 2"
   },
+  "browserName": {
+    "message": "Chrome",
+    "description": "Browser name inserted into setup strings. The default is Chrome; the extension shows Edge when running in Microsoft Edge."
+  },
+  "companyName": {
+    "message": "Google",
+    "description": "Company name inserted into setup strings. The default is Google; the extension shows Microsoft when running in Microsoft Edge."
+  },
   "setupStep3Title": {
-    "message": "התאימו את הגדרות Chrome לפרטיות",
-    "description": "Step 3 title on the setup page"
+    "message": "התאימו את הגדרות $BROWSER$ לפרטיות",
+    "description": "Step 3 title on the setup page and sync-help side panel. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3Time": {
     "message": "דקה",
     "description": "Estimated time for step 3"
   },
   "setupStep3Intro": {
-    "message": "בואו נוודא שדפדפן זה לא שולח את היסטוריית הגלישה שלכם לשרתי Google.",
-    "description": "Introductory sentence for history sync setup panel (setup flow)"
+    "message": "בואו נוודא שדפדפן זה לא שולח את היסטוריית הגלישה שלכם לשרתי $COMPANY$.",
+    "description": "Introductory sentence for history sync setup panel (setup flow). $COMPANY$ is Google or Microsoft.",
+    "placeholders": {
+      "company": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
   },
   "setupStep3IntroSidepanelPending": {
-    "message": "נפתח את הגדרות Chrome כדי שתוכלו לבצע את ההתאמות הנדרשות.",
-    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+    "message": "נפתח את הגדרות $BROWSER$ כדי שתוכלו לבצע את ההתאמות הנדרשות.",
+    "description": "Intro text on sync help side panel before navigating to settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3IntroSidepanel": {
     "message": "בואו נוודא שדפדפן זה לא שולח את היסטוריית הגלישה שלכם לשרתי Google.",
@@ -430,8 +456,14 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של Chrome כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>הנעיצה</strong> {pinIcon} לידו. לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
-    "description": "Step 1 body text with named icon tokens for i18n"
+    "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של $BROWSER$ כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>הנעיצה</strong> {pinIcon} לידו. לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupCompletedSuffix": {
     "message": "(הושלם)",
@@ -506,18 +538,6 @@
   "syncHelpDirectionRight": {
     "message": "ימין",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "setupStep3TitleEdge": {
-    "message": "התאימו את הגדרות Edge לפרטיות",
-    "description": "Step 3 title when running in Microsoft Edge"
-  },
-  "setupStep3IntroEdge": {
-    "message": "בואו נוודא שדפדפן זה לא שולח את היסטוריית הגלישה שלכם לשרתי Microsoft.",
-    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
-  },
-  "setupStep3IntroSidepanelPendingEdge": {
-    "message": "נפתח את הגדרות Edge כדי שתוכלו לבצע את ההתאמות הנדרשות.",
-    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
   },
   "syncHelpEdgePrivacyIntro": {
     "message": "בואו נוודא שאיננו שולחים נתונים ל-Microsoft.",

@@ -335,21 +335,47 @@
     "message": "Saya sudah punya VPN!",
     "description": "Secondary call to action for step 2"
   },
+  "browserName": {
+    "message": "Chrome",
+    "description": "Browser name inserted into setup strings. The default is Chrome; the extension shows Edge when running in Microsoft Edge."
+  },
+  "companyName": {
+    "message": "Google",
+    "description": "Company name inserted into setup strings. The default is Google; the extension shows Microsoft when running in Microsoft Edge."
+  },
   "setupStep3Title": {
-    "message": "Sesuaikan pengaturan Chrome untuk privasi",
-    "description": "Step 3 title on the setup page"
+    "message": "Sesuaikan pengaturan $BROWSER$ untuk privasi",
+    "description": "Step 3 title on the setup page and sync-help side panel. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3Time": {
     "message": "1 mnt",
     "description": "Estimated time for step 3"
   },
   "setupStep3Intro": {
-    "message": "Mari pastikan browser ini tidak mengirim riwayat penelusuran Anda ke server Google.",
-    "description": "Introductory sentence for history sync setup panel (setup flow)"
+    "message": "Mari pastikan browser ini tidak mengirim riwayat penelusuran Anda ke server $COMPANY$.",
+    "description": "Introductory sentence for history sync setup panel (setup flow). $COMPANY$ is Google or Microsoft.",
+    "placeholders": {
+      "company": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
   },
   "setupStep3IntroSidepanelPending": {
-    "message": "Kami akan membuka setelan Chrome agar Anda dapat membuat penyesuaian yang diperlukan.",
-    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+    "message": "Kami akan membuka setelan $BROWSER$ agar Anda dapat membuat penyesuaian yang diperlukan.",
+    "description": "Intro text on sync help side panel before navigating to settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3IntroSidepanel": {
     "message": "Mari pastikan browser ini tidak mengirim riwayat penelusuran Anda ke server Google.",
@@ -430,8 +456,14 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik <strong>puzzle</strong> {puzzleIcon} di toolbar Chrome untuk melihat ekstensi Anda. Temukan <strong>Privacy Magic</strong> di daftar dan klik <strong>pin</strong> {pinIcon} di sampingnya. Setelah tombol Privacy Magic {hamsaIcon} disematkan, Anda dapat mengkliknya kapan saja untuk melihat bagaimana Anda dilindungi dan mengatur perlindungan individual.",
-    "description": "Step 1 body text with named icon tokens for i18n"
+    "message": "Klik <strong>puzzle</strong> {puzzleIcon} di toolbar $BROWSER$ untuk melihat ekstensi Anda. Temukan <strong>Privacy Magic</strong> di daftar dan klik <strong>pin</strong> {pinIcon} di sampingnya. Setelah tombol Privacy Magic {hamsaIcon} disematkan, Anda dapat mengkliknya kapan saja untuk melihat bagaimana Anda dilindungi dan mengatur perlindungan individual.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupCompletedSuffix": {
     "message": "(selesai)",
@@ -506,18 +538,6 @@
   "syncHelpDirectionRight": {
     "message": "kanan",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "setupStep3TitleEdge": {
-    "message": "Sesuaikan pengaturan Edge untuk privasi",
-    "description": "Step 3 title when running in Microsoft Edge"
-  },
-  "setupStep3IntroEdge": {
-    "message": "Mari pastikan browser ini tidak mengirim riwayat penelusuran Anda ke server Microsoft.",
-    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
-  },
-  "setupStep3IntroSidepanelPendingEdge": {
-    "message": "Kami akan membuka setelan Edge agar Anda dapat membuat penyesuaian yang diperlukan.",
-    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
   },
   "syncHelpEdgePrivacyIntro": {
     "message": "Pastikan kita tidak mengirim data ke Microsoft.",

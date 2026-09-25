@@ -335,21 +335,47 @@
     "message": "ನನಗೆ VPN ಇದೆ!",
     "description": "Secondary call to action for step 2"
   },
+  "browserName": {
+    "message": "Chrome",
+    "description": "Browser name inserted into setup strings. The default is Chrome; the extension shows Edge when running in Microsoft Edge."
+  },
+  "companyName": {
+    "message": "Google",
+    "description": "Company name inserted into setup strings. The default is Google; the extension shows Microsoft when running in Microsoft Edge."
+  },
   "setupStep3Title": {
-    "message": "ಗೌಪ್ಯತೆಗಾಗಿ ನಿಮ್ಮ Chrome ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ",
-    "description": "Step 3 title on the setup page"
+    "message": "ಗೌಪ್ಯತೆಗಾಗಿ ನಿಮ್ಮ $BROWSER$ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ",
+    "description": "Step 3 title on the setup page and sync-help side panel. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3Time": {
     "message": "1 ನಿಮಿ",
     "description": "Estimated time for step 3"
   },
   "setupStep3Intro": {
-    "message": "ಈ ಬ್ರೌಸರ್ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Google ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸದಿರಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
-    "description": "Introductory sentence for history sync setup panel (setup flow)"
+    "message": "ಈ ಬ್ರೌಸರ್ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು $COMPANY$ ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸದಿರಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
+    "description": "Introductory sentence for history sync setup panel (setup flow). $COMPANY$ is Google or Microsoft.",
+    "placeholders": {
+      "company": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
   },
   "setupStep3IntroSidepanelPending": {
-    "message": "ನೀವು ಅಗತ್ಯ ಹೊಂದಾಣಿಕೆಗಳನ್ನು ಮಾಡಲು Chrome ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತೇವೆ.",
-    "description": "Intro text on sync help side panel before navigating to Chrome settings"
+    "message": "ನೀವು ಅಗತ್ಯ ಹೊಂದಾಣಿಕೆಗಳನ್ನು ಮಾಡಲು $BROWSER$ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತೇವೆ.",
+    "description": "Intro text on sync help side panel before navigating to settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupStep3IntroSidepanel": {
     "message": "ಈ ಬ್ರೌಸರ್ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Google ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸದಿರಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
@@ -430,8 +456,14 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು Chrome ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>ಪಜಲ್</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>ಪಿನ್</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
-    "description": "Step 1 body text with named icon tokens for i18n"
+    "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು $BROWSER$ ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>ಪಜಲ್</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>ಪಿನ್</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "browser": {
+        "content": "$1",
+        "example": "Chrome"
+      }
+    }
   },
   "setupCompletedSuffix": {
     "message": "(ಪೂರ್ಣಗೊಂಡಿದೆ)",
@@ -506,18 +538,6 @@
   "syncHelpDirectionRight": {
     "message": "ಬಲಕ್ಕೆ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "setupStep3TitleEdge": {
-    "message": "ಗೌಪ್ಯತೆಗಾಗಿ ನಿಮ್ಮ Edge ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ",
-    "description": "Step 3 title when running in Microsoft Edge"
-  },
-  "setupStep3IntroEdge": {
-    "message": "ಈ ಬ್ರೌಸರ್ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Microsoft ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸದಿರಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
-    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
-  },
-  "setupStep3IntroSidepanelPendingEdge": {
-    "message": "ನೀವು ಅಗತ್ಯ ಹೊಂದಾಣಿಕೆಗಳನ್ನು ಮಾಡಲು Edge ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತೇವೆ.",
-    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
   },
   "syncHelpEdgePrivacyIntro": {
     "message": "ನಾವು Microsoftಗೆ ಡೇಟಾ ಕಳುಹಿಸುತ್ತಿಲ್ಲ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",

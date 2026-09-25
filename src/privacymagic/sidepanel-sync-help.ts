@@ -134,22 +134,6 @@ const goToEdgePrivacy = async (tabId: number, dom: SyncHelpDom): Promise<void> =
   setSyncHelpMode('edgePrivacy', dom)
 }
 
-/** i18n.js applies messages on DOMContentLoaded; retarget keys before that runs. */
-const useEdgeCopy = (): void => {
-  if (!isEdgeBrowser()) {
-    return
-  }
-  const retarget: Record<string, string> = {
-    setupStep3Title: 'setupStep3TitleEdge',
-    setupStep3IntroSidepanelPending: 'setupStep3IntroSidepanelPendingEdge'
-  }
-  for (const [from, to] of Object.entries(retarget)) {
-    document.querySelectorAll(`[data-i18n="${from}"]`).forEach((el) => {
-      el.setAttribute('data-i18n', to)
-    })
-  }
-}
-
 const goToGoogleServices = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
   await tryOpenSettingsUrls(tabId, googleServicesSettingsUrls())
   await applyGoogleServicesInstruction()
@@ -238,8 +222,6 @@ const tryOpenHistorySyncSettings = async (
 ): Promise<HistorySyncSettingsUrl | null> => {
   return tryOpenSettingsUrls(tabId, HISTORY_SYNC_SETTINGS_URLS)
 }
-
-useEdgeCopy()
 
 document.addEventListener('DOMContentLoaded', () => {
   const tabId = tabIdFromQuery()
