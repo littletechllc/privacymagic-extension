@@ -507,6 +507,32 @@
     "message": "pa labi",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Pielāgojiet Edge iestatījumus privātumam",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Pārliecināsimies, ka šī pārlūkprogramma nesūta jūsu pārlūkošanas vēsturi uz Microsoft serveriem.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Mēs atvērsim Edge iestatījumus, lai jūs varētu veikt nepieciešamos pielāgojumus.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Pārliecināsimies, ka nesūtām datus Microsoft.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Lūdzu, atrodiet šīs trīs opcijas iestatījumu lapā $LEFT$ un atspējojiet tās (pelēkas), ja tās ir iespējotas:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "pa kreisi"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Nosūtīt neobligātos diagnostikas datus, lai uzlabotu Microsoft produktus",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

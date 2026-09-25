@@ -507,6 +507,32 @@
     "message": "jobbra",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Állítsd be az Edge-et a jobb adatvédelemért",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Győződjünk meg róla, hogy ez a böngésző nem küldi el a böngészési előzményeit a Microsoft szervereire.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Megnyitjuk az Edge beállításait, hogy elvégezhesse a szükséges módosításokat.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Győződjünk meg róla, hogy nem küldünk adatokat a Microsoft-nak.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Kérjük, keresse meg ezt a három lehetőséget a beállítások oldalon $LEFT$, és tiltsa le őket (szürke), ha engedélyezve vannak:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "balra"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Opcionális diagnosztikai adatok küldése a Microsoft-termékek fejlesztéséhez",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

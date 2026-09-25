@@ -507,6 +507,32 @@
     "message": "oikealla",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Säädä Edgen asetuksia yksityisyyden vuoksi",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Varmistetaan, ettei tämä selain lähetä selaushistoriaasi Microsoftn palvelimille.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Avaamme Edgen asetukset, jotta voit tehdä tarvittavat muutokset.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Varmistetaan, ettemme lähetä tietoja Microsoftille.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Etsi nämä kolme vaihtoehtoa asetussivulta $LEFT$ ja poista ne käytöstä (harmaa), jos ne ovat käytössä:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "vasemmalla"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Lähetä valinnaisia diagnostiikkatietoja Microsoft-tuotteiden parantamiseksi",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

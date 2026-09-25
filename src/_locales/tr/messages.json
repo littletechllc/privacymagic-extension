@@ -507,6 +507,32 @@
     "message": "sağ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Gizlilik için Edge ayarlarınızı düzenleyin",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Bu tarayıcının gezinti geçmişinizi Microsoft sunucularına göndermediğinden emin olalım.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Gerekli değişiklikleri yapabilmeniz için Edge ayarlarını açacağız.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Microsoft’a veri göndermediğimizden emin olalım.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Lütfen ayarlar sayfasında $LEFT$ bu üç seçeneği bulun ve açıksa devre dışı bırakın (gri):",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "sol"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft ürünlerini geliştirmek için isteğe bağlı tanılama verilerini gönderin",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

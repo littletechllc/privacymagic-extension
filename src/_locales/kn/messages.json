@@ -507,6 +507,32 @@
     "message": "ಬಲಕ್ಕೆ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "ಗೌಪ್ಯತೆಗಾಗಿ ನಿಮ್ಮ Edge ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "ಈ ಬ್ರೌಸರ್ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಇತಿಹಾಸವನ್ನು Microsoft ಸರ್ವರ್‌ಗಳಿಗೆ ಕಳುಹಿಸದಿರಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "ನೀವು ಅಗತ್ಯ ಹೊಂದಾಣಿಕೆಗಳನ್ನು ಮಾಡಲು Edge ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯುತ್ತೇವೆ.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "ನಾವು Microsoftಗೆ ಡೇಟಾ ಕಳುಹಿಸುತ್ತಿಲ್ಲ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳೋಣ.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "ದಯವಿಟ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟದಲ್ಲಿ $LEFT$ ಈ ಮೂರು ಆಯ್ಕೆಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಅವು ಸಕ್ರಿಯವಾಗಿದ್ದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಬೂದು):",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "ಎಡಕ್ಕೆ"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft ಉತ್ಪನ್ನಗಳನ್ನು ಸುಧಾರಿಸಲು ಐಚ್ಛಿಕ ದೋಷನಿರ್ಣಯ ಡೇಟಾ ಕಳುಹಿಸಿ",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

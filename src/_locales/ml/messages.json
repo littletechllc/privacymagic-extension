@@ -507,6 +507,32 @@
     "message": "വലത്ത്",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "സ്വകാര്യതയ്ക്കായി Edge ക്രമീകരണങ്ങൾ ക്രമീകരിക്കുക",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "ഈ ബ്രൗസർ Microsoft-ന്റെ സെർവറുകളിലേക്ക് നിങ്ങളുടെ ബ്രൗസിംഗ് ചരിത്രം അയക്കുന്നില്ലെയെന്നു ഉറപ്പാക്കുക.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "ആവശ്യമായ ക്രമീകരണങ്ങൾ നടത്താൻ ഞങ്ങൾ Edge ക്രമീകരണങ്ങൾ തുറക്കും.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "നമ്മൾ Microsoft-ലേക്ക് ഡാറ്റ അയയ്ക്കുന്നില്ലെന്ന് ഉറപ്പാക്കാം.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "ക്രമീകരണ പേജിൽ $LEFT$ ഈ മൂന്ന് ഓപ്ഷനുകൾ കണ്ടെത്തി പ്രവർത്തനക്ഷമമാണെങ്കിൽ അപ്രാപ്തമാക്കുക (ചാരനിറം):",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "ഇടത്ത്"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft ഉൽപ്പന്നങ്ങൾ മെച്ചപ്പെടുത്തുന്നതിന് നിർബന്ധമല്ലാത്ത ഡയഗ്നോസ്റ്റിക് ഡാറ്റാ അയയ്ക്കുക",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

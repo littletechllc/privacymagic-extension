@@ -507,6 +507,32 @@
     "message": "la dreta",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Ajusta la configuració d'Edge per a la privadesa",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Assegurem-nos que aquest navegador no enviï el teu historial de navegació als servidors de Microsoft.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Obrirem la configuració d'Edge perquè puguis fer els canvis necessaris.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Assegurem-nos que no enviem dades a Microsoft.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Si us plau, trobeu aquestes tres opcions a la pàgina de configuració a $LEFT$ i desactiveu-les (gris) si estan activades:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "l’esquerra"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Envia dades de diagnòstic opcionals per millorar els productes de Microsoft",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

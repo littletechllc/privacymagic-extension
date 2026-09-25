@@ -507,6 +507,32 @@
     "message": "desno",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Prilagodite Edge postavke radi privatnosti",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Pobrinite se da ovaj preglednik ne šalje vašu povijest pregledavanja na Microsoftove poslužitelje.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Otvorit ćemo Edge postavke kako biste mogli napraviti potrebne promjene.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Provjerimo da ne šaljemo podatke Microsoftu.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Pronađite ove tri opcije na stranici postavki na $LEFT$ i onemogućite ih (sivo) ako su omogućene:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "lijevo"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Pošaljite neobavezne dijagnostičke za poboljšanje proizvoda tvrtke Microsoft",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

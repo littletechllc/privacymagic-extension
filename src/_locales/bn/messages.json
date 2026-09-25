@@ -507,6 +507,32 @@
     "message": "ডানে",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "গোপনীয়তার জন্য Edge সেটিংস সামঞ্জস্য করুন",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "নিশ্চিত করি এই ব্রাউজারটি Microsoft-এর সার্ভারে আপনার ব্রাউজিং ইতিহাস পাঠায়া না।",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "আমরা Edge সেটিংস খুলব যাতে আপনি প্রয়োজনীয় সমন্বয় করতে পারেন।",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "নিশ্চিত করি যে আমরা Microsoft-এ ডেটা পাঠাচ্ছি না। এই তিনটি বিকল্প বন্ধ আছে কিনা দেখুন:",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "অনুগ্রহ করে সেটিংস পৃষ্ঠায় $LEFT$ এই তিনটি বিকল্প খুঁজে বের করুন এবং চালু থাকলে সেগুলো বন্ধ (ধূসর) করুন:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "বামে"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",
     "description": "English fallback; Microsoft Edge has no locale.pak for bn. Resource id 8757"

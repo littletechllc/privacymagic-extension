@@ -507,6 +507,32 @@
     "message": "højre",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Juster dine Edge-indstillinger for privatliv",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Lad os sikre, at denne browser ikke sender din browserhistorik til Microsofts servere.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Vi åbner Edge-indstillingerne, så du kan foretage de nødvendige ændringer.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Lad os sikre, at vi ikke sender data til Microsoft.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Find venligst disse tre indstillinger på indstillingssiden til $LEFT$ og slå dem fra (grå), hvis de er slået til:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "venstre"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Send valgfrie diagnosticeringsdata for at forbedre Microsoft Edge",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

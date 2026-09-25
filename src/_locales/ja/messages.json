@@ -507,6 +507,32 @@
     "message": "右",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "プライバシーのためにEdgeの設定を調整する",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "このブラウザが閲覧履歴を Microsoft のサーバーに送らないようにしましょう。",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "必要な調整ができるよう、Edge の設定を開きます。",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Microsoftにデータを送信していないことを確認しましょう。次の3つのオプションがオフになっていることを確認してください:",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "設定ページ（$LEFT$）にある次の3つのオプションを見つけ、有効になっている場合は無効（グレー）にしてください:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "左"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft 製品を改善するためにオプションの診断データを送信する",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

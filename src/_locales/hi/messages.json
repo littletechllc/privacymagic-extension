@@ -507,6 +507,32 @@
     "message": "दाएँ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "गोपनीयता के लिए अपने Edge सेटिंग समायोजित करें",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "आइए सुनिश्चित करें कि यह ब्राउज़र आपका ब्राउज़िंग इतिहास Microsoft के सर्वरों पर न भेजे।",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "हम Edge सेटिंग्स खोलेंगे ताकि आप ज़रूरी बदलाव कर सकें।",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "सुनिश्चित करें कि हम Microsoft को डेटा नहीं भेज रहे। सुनिश्चित करें कि ये तीनों विकल्प बंद हैं:",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "कृपया सेटिंग्स पेज पर $LEFT$ ये तीन विकल्प खोजें और यदि वे सक्षम हैं तो उन्हें अक्षम (धूसर) करें:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "बाएँ"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft उत्पादों को बेहतर बनाने के लिए वैकल्पिक नैदानिक डेटा भेजें",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

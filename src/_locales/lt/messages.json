@@ -507,6 +507,32 @@
     "message": "dešinėje",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Pritaikykite Edge nustatymus privatumo labui",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Įsitikinkime, kad ši naršyklė nesiųstų jūsų naršymo istorijos į „Microsoft“ serverius.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Atidarysime „Edge“ nustatymus, kad galėtumėte atlikti reikiamus pakeitimus.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Įsitikinkime, kad nesiunčiame duomenų „Microsoft“.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Rasite šias tris parinktis nustatymų puslapyje $LEFT$ ir išjunkite jas (pilkos), jei jos įjungtos:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "kairėje"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Siųskite pasirinktinius diagnostikos duomenis, kad patobulintumėte „Microsoft“ produktus",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

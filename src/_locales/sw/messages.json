@@ -507,6 +507,32 @@
     "message": "kulia",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Rekebisha mipangilio yako ya Edge kwa faragha",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Tuuhakikishe kivinjari hiki hakitumi historia yako ya kuvinjari kwenye seva za Microsoft.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Tutafungua mipangilio ya Edge ili uweze kufanya marekebisho yanayohitajika.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Hakikisha hatutumi data kwa Microsoft.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Tafadhali pata chaguo hizi tatu kwenye ukurasa wa mipangilio $LEFT$ na uzime (kijivu) ikiwa zimewashwa:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "kushoto"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",
     "description": "English fallback; Microsoft Edge has no locale.pak for sw. Resource id 8757"

@@ -1,3 +1,4 @@
+import { isEdgeBrowser } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
 import { disableSyncSettingsDoneRemote } from '@src/common/messages'
 import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
@@ -6,6 +7,7 @@ const ACCOUNT_SETTINGS_URL = 'chrome://settings/account'
 const SYNC_SETUP_URL = 'chrome://settings/syncSetup'
 const SYNC_SETUP_ADVANCED_URL = 'chrome://settings/syncSetup/advanced'
 const GOOGLE_SERVICES_URL = 'chrome://settings/googleServices'
+const EDGE_PRIVACY_URL = 'edge://settings/privacy/privacy'
 
 /** First-phase settings URLs to try, in order (UNO/account, then legacy sync). */
 const HISTORY_SYNC_SETTINGS_URLS = [
@@ -26,13 +28,14 @@ const googleServicesSettingsUrls = (): readonly string[] => {
 type HistorySyncSettingsUrl = (typeof HISTORY_SYNC_SETTINGS_URLS)[number]
 
 /** Which sync-help side panel body is visible. */
-type SyncHelpMode = 'pending' | 'ready' | 'syncOff' | 'googleServices'
+type SyncHelpMode = 'pending' | 'ready' | 'syncOff' | 'googleServices' | 'edgePrivacy'
 
 type SyncHelpDom = {
   pending: HTMLElement
   ready: HTMLElement
   syncOffPhase: HTMLElement
   googleServicesPhase: HTMLElement
+  edgePrivacyPhase: HTMLElement
   headingDefault: HTMLElement
   headingProgress: HTMLElement
   headingSyncOff: HTMLElement
@@ -51,7 +54,8 @@ const setSyncHelpMode = (mode: SyncHelpMode, dom: SyncHelpDom): void => {
   dom.ready.hidden = mode !== 'ready'
   dom.syncOffPhase.hidden = mode !== 'syncOff'
   dom.googleServicesPhase.hidden = mode !== 'googleServices'
-  dom.headingDefault.hidden = mode !== 'pending' && mode !== 'ready' && mode !== 'googleServices'
+  dom.edgePrivacyPhase.hidden = mode !== 'edgePrivacy'
+  dom.headingDefault.hidden = mode !== 'pending' && mode !== 'ready' && mode !== 'googleServices' && mode !== 'edgePrivacy'
   dom.headingSyncOff.hidden = mode !== 'syncOff'
 
   if (mode === 'ready') {
@@ -95,15 +99,54 @@ const settingsPageSideLabel = async (): Promise<string> => {
   return chrome.i18n.getMessage(key) || fallback
 }
 
-const applyGoogleServicesInstruction = async (): Promise<void> => {
-  const el = document.getElementById('syncHelpGoogleServicesInstruction')
+const applySettingsSideInstruction = async (elementId: string, messageKey: string): Promise<void> => {
+  const el = document.getElementById(elementId)
   if (el == null) {
     return
   }
   const side = await settingsPageSideLabel()
-  const msg = chrome.i18n.getMessage('syncHelpGoogleServicesInstruction', [side])
+  const msg = chrome.i18n.getMessage(messageKey, [side])
   if (msg !== '') {
     el.textContent = msg
+  }
+}
+
+const applyGoogleServicesInstruction = async (): Promise<void> => {
+  await applySettingsSideInstruction('syncHelpGoogleServicesInstruction', 'syncHelpGoogleServicesInstruction')
+}
+
+const applyEdgePrivacyInstruction = async (): Promise<void> => {
+  await applySettingsSideInstruction('syncHelpEdgePrivacyInstruction', 'syncHelpEdgePrivacyInstruction')
+}
+
+/** Edge has one privacy-settings step instead of Chrome's history-sync and Google-services steps. */
+const edgePrivacySettingsUrl = (): string => {
+  const firstToggleLabel = chrome.i18n.getMessage('edge_8757')
+  if (firstToggleLabel === '') {
+    return EDGE_PRIVACY_URL
+  }
+  return `${EDGE_PRIVACY_URL}#:~:text=${encodeURIComponent(firstToggleLabel)}`
+}
+
+const goToEdgePrivacy = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
+  await chrome.tabs.update(tabId, { url: edgePrivacySettingsUrl() })
+  await applyEdgePrivacyInstruction()
+  setSyncHelpMode('edgePrivacy', dom)
+}
+
+/** i18n.js applies messages on DOMContentLoaded; retarget keys before that runs. */
+const useEdgeCopy = (): void => {
+  if (!isEdgeBrowser()) {
+    return
+  }
+  const retarget: Record<string, string> = {
+    setupStep3Title: 'setupStep3TitleEdge',
+    setupStep3IntroSidepanelPending: 'setupStep3IntroSidepanelPendingEdge'
+  }
+  for (const [from, to] of Object.entries(retarget)) {
+    document.querySelectorAll(`[data-i18n="${from}"]`).forEach((el) => {
+      el.setAttribute('data-i18n', to)
+    })
   }
 }
 
@@ -196,12 +239,15 @@ const tryOpenHistorySyncSettings = async (
   return tryOpenSettingsUrls(tabId, HISTORY_SYNC_SETTINGS_URLS)
 }
 
+useEdgeCopy()
+
 document.addEventListener('DOMContentLoaded', () => {
   const tabId = tabIdFromQuery()
   const pending = document.getElementById('syncHelpPhasePending')
   const ready = document.getElementById('syncHelpPhaseReady')
   const syncOffPhase = document.getElementById('syncHelpPhaseSyncOff')
   const googleServicesPhase = document.getElementById('syncHelpPhaseGoogleServices')
+  const edgePrivacyPhase = document.getElementById('syncHelpPhaseEdgePrivacy')
   const headingDefault = document.getElementById('syncHelpHeadingDefault')
   const headingProgress = document.getElementById('syncHelpHeadingProgress')
   const headingSyncOff = document.getElementById('syncHelpHeadingSyncOff')
@@ -218,6 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ready == null ||
     syncOffPhase == null ||
     googleServicesPhase == null ||
+    edgePrivacyPhase == null ||
     headingDefault == null ||
     headingProgress == null ||
     headingSyncOff == null ||
@@ -237,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ready,
     syncOffPhase,
     googleServicesPhase,
+    edgePrivacyPhase,
     headingDefault,
     headingProgress,
     headingSyncOff,
@@ -249,12 +297,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setSyncHelpMode('pending', dom)
-  handleAsync(applyGoogleServicesInstruction, (error) => {
-    logError(error, 'error applying Google services instruction copy')
+  handleAsync(async () => {
+    await applyGoogleServicesInstruction()
+    await applyEdgePrivacyInstruction()
+  }, (error) => {
+    logError(error, 'error applying settings instruction copy')
   })
 
   openBtn.addEventListener('click', (event: Event) => {
     handleAsync(async () => {
+      if (isEdgeBrowser()) {
+        await goToEdgePrivacy(tabId, dom)
+        return
+      }
       const historySyncSettingsUrl = await tryOpenHistorySyncSettings(tabId)
       if (historySyncSettingsUrl != null) {
         setReadyPhaseVariant(historySyncSettingsUrl, dom)

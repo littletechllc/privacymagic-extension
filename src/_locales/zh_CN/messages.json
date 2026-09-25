@@ -507,6 +507,32 @@
     "message": "右侧",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "调整 Edge 设置以保护隐私",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "确保此浏览器不会将您的浏览记录发送到 Microsoft 服务器。",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "我们将打开 Edge 设置，以便您进行必要的调整。",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "请确认我们没有向 Microsoft 发送数据。请确保以下三个选项已关闭：",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "请在设置页面（$LEFT$）中找到这三个选项，如果已开启请将其关闭（灰色）：",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "左侧"
+      }
+    }
+  },
   "edge_8757": {
     "message": "发送可选诊断数据以改进Microsoft产品",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

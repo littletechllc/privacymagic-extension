@@ -1,3 +1,4 @@
+import { isEdgeBrowser } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
 import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
 import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
@@ -12,7 +13,7 @@ const getStepElement = (stepId: StepId): HTMLElement | null => {
   return document.getElementById(`step_${stepId}`)
 }
 
-const buildWelcomeInlineIconHtml = (altText: string, iconPath: string): string =>
+const buildSetupInlineIconHtml = (altText: string, iconPath: string): string =>
   `<span style="unicode-bidi:isolate;display:inline-block;vertical-align:middle;margin:0 3px"><img src="${iconPath}" alt="${altText}" style="width:20px;height:20px;display:block;position:relative;top:-1px" /></span>`
 
 const applyStep1MessageTokens = (): void => {
@@ -28,9 +29,9 @@ const applyStep1MessageTokens = (): void => {
   const pinIconAlt = chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon'
 
   const tokenMap: Record<string, string> = {
-    puzzleIcon: buildWelcomeInlineIconHtml(puzzleIconAlt, '../assets/images/puzzle.svg'),
-    pinIcon: buildWelcomeInlineIconHtml(pinIconAlt, '../assets/images/pin.svg'),
-    hamsaIcon: buildWelcomeInlineIconHtml('Privacy Magic icon', '../logo/logo.svg')
+    puzzleIcon: buildSetupInlineIconHtml(puzzleIconAlt, '../assets/images/puzzle.svg'),
+    pinIcon: buildSetupInlineIconHtml(pinIconAlt, '../assets/images/pin.svg'),
+    hamsaIcon: buildSetupInlineIconHtml('Privacy Magic icon', '../logo/logo.svg')
   }
 
   const translated = source.replace(/\{([a-zA-Z0-9_]+)\}/g, (full: string, name: string) => tokenMap[name] ?? full)
@@ -130,8 +131,25 @@ for (const step of STEP_IDS) {
   })
 }
 
+/** i18n.js applies messages on DOMContentLoaded; retarget keys before that runs. */
+const useEdgeSetupCopy = (): void => {
+  if (!isEdgeBrowser()) {
+    return
+  }
+  const retarget: Record<string, string> = {
+    setupStep3Title: 'setupStep3TitleEdge',
+    setupStep3Intro: 'setupStep3IntroEdge'
+  }
+  for (const [from, to] of Object.entries(retarget)) {
+    document.querySelectorAll(`[data-i18n="${from}"]`).forEach((el) => {
+      el.setAttribute('data-i18n', to)
+    })
+  }
+}
+
 applyStep1MessageTokens()
 applyCompletedLabels()
+useEdgeSetupCopy()
 
 const restorePersistedStep = (
   flag: BooleanStorageFlag,

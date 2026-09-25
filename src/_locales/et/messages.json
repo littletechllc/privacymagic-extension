@@ -507,6 +507,32 @@
     "message": "paremal",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "Kohanda Edge’i seadeid privaatsuse jaoks",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "Veendume, et see brauser ei saadaks teie sirvimisajalugu Microsoft'i serveritesse.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "Avame Edge’i seaded, et saaksite vajalikud muudatused teha.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "Veendume, et me ei saada Microsoftile andmeid.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "Palun leidke need kolm valikut seadete lehel $LEFT$ ja keelake need (hall), kui need on lubatud:",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "vasakul"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Saada Microsofti toodete täiustamiseks valikulisi diagnostikaandmeid",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"

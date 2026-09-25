@@ -172,6 +172,14 @@
       margin-top: 18px;
     }
 
+    .edge-privacy-preview .history-preview-row {
+      max-width: none;
+    }
+
+    .edge-privacy-preview .history-preview-row > span {
+      min-width: 0;
+    }
+
     .sync-help-pending-actions,
     .sync-help-actions {
       margin-top: 20px;
@@ -262,6 +270,34 @@
         </div>
         <div class="history-preview-row">
           <span data-i18n="chromium_8438566539970814960">Make searches and browsing better</span>
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
+        </div>
+      </div>
+      <div class="btn-row btn-row--end sync-help-actions">
+        <button type="button" class="btn-primary sync-help-finish-setup-btn" data-i18n="setupStep3AllDoneCta">All done!</button>
+      </div>
+    </div>
+    <div id="syncHelpPhaseEdgePrivacy" hidden>
+      <p data-i18n="syncHelpEdgePrivacyIntro" dir="auto">
+        Let's tell the browser we don't want it to send data to Microsoft.
+      </p>
+      <p id="syncHelpEdgePrivacyInstruction" dir="auto">
+        Please find these three options in the settings page at left and disable them (grey) if they're enabled:
+      </p>
+      <div class="history-preview google-services-preview edge-privacy-preview" role="img" aria-label="Edge privacy toggles preview">
+        <div class="history-preview-row">
+          <span data-i18n="edge_8757">Send optional diagnostic data to improve Microsoft products</span>
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
+        </div>
+        <div class="history-preview-row">
+          <span data-i18n="edge_8834">Help improve Microsoft products by sending the results from searches on the web</span>
+          <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
+          <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
+        </div>
+        <div class="history-preview-row">
+          <span data-i18n="edge_19254">Allow Microsoft to save your browsing activity including history, usage, favorites, web content, and other browsing data to personalize and improve Edge and Microsoft services like ads, search, shopping, news, and Copilot.</span>
           <img class="history-preview-toggle history-preview-toggle-ltr" src="../assets/images/sync-history-toggle-clicked.png" alt="" aria-hidden="true" />
           <img class="history-preview-toggle history-preview-toggle-rtl" src="../assets/images/sync-history-toggle-clicked-rtl.png" alt="" aria-hidden="true" />
         </div>

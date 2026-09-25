@@ -507,6 +507,32 @@
     "message": "కుడి",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
   },
+  "setupStep3TitleEdge": {
+    "message": "గోప్యత కోసం మీ Edge సెట్టింగ్‌లను సర్దుబాటు చేయండి",
+    "description": "Step 3 title when running in Microsoft Edge"
+  },
+  "setupStep3IntroEdge": {
+    "message": "ఈ బ్రౌసర్ మీ బ్రౌసింగ్ చరిత్రను Microsoft సర్వర్లకు పంపకుండా ఉండేలా నిర్ధారించుకుందాం.",
+    "description": "Introductory sentence for setup step 3 when running in Microsoft Edge"
+  },
+  "setupStep3IntroSidepanelPendingEdge": {
+    "message": "అవసరమైన మార్పులు చేయడానికి Edge సెట్టింగ్‌లను తెరుస్తాము.",
+    "description": "Intro text on sync help side panel before navigating to Edge privacy settings"
+  },
+  "syncHelpEdgePrivacyIntro": {
+    "message": "మనం Microsoftకు డేటా పంపడం లేదని నిర్ధారించుకుందాం.",
+    "description": "Intro on sync help side panel for the Edge privacy settings step"
+  },
+  "syncHelpEdgePrivacyInstruction": {
+    "message": "దయచేసి సెట్టింగ్‌ల పేజీలో $LEFT$ ఈ మూడు ఎంపికలను కనుగొని, ప్రారంభించి ఉంటే నిలిపివేయండి (బూడిద):",
+    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "ఎడమ"
+      }
+    }
+  },
   "edge_8757": {
     "message": "Microsoft ఉత్పత్తులను మెరుగుపరచడానికి ఐచ్ఛిక సమస్య విశ్లేషణ డేటాను పంపండి",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"
