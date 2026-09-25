@@ -37,6 +37,12 @@ const resolveI18nArg = (key: string): string => {
   if (key === 'setupPinControl' && isFirefoxBrowser()) {
     return chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button'
   }
+  if (key === 'setupFirefoxPinToToolbar') {
+    if (!isFirefoxBrowser()) {
+      return ''
+    }
+    return message || ' Click <strong>Pin to Toolbar</strong>.'
+  }
   return message || key
 }
 

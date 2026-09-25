@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>Pin to Toolbar</strong>.",
+    "description": "English fallback; Firefox l10n has no unified-extensions-context-menu-pin-to-toolbar for et. Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n et/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magicu kinnitamine tööriistaribale",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klõpsake $BROWSER$'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>$PIN_CONTROL$</strong> {pinIcon}. Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "Klõpsake $BROWSER$'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>$PIN_CONTROL$</strong> {pinIcon}.$FIREFOX_PIN_STEP$ Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

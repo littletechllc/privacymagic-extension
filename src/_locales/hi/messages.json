@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>Pin to Toolbar</strong>.",
+    "description": "English fallback; Firefox l10n has no unified-extensions-context-menu-pin-to-toolbar for hi. Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n hi-IN/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic को टूलबार में पिन करना",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>पज़ल</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>$PIN_CONTROL$</strong> {pinIcon} पर क्लिक करें। जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>पज़ल</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>$PIN_CONTROL$</strong> {pinIcon} पर क्लिक करें।$FIREFOX_PIN_STEP$ जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

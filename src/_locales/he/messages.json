@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>הצמדה לסרגל הכלים</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n he/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "הצמדת Privacy Magic לסרגל הכלים",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של $BROWSER$ כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>$PIN_CONTROL$</strong> {pinIcon} לידו. לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "לחצו על <strong>הפאזל</strong> {puzzleIcon} בסרגל הכלים של $BROWSER$ כדי לראות את ההרחבות שלכם. מצאו את <strong>Privacy Magic</strong> ברשימה ולחצו על <strong>$PIN_CONTROL$</strong> {pinIcon} לידו.$FIREFOX_PIN_STEP$ לאחר שכפתור Privacy Magic {hamsaIcon} מוצמד, תוכלו ללחוץ עליו בכל עת כדי לראות כיצד אתם מוגנים ולשלוט בהגנות בודדות.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

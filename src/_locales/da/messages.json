@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>Fastgør til værktøjslinje</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n da/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Fastgørelse af Privacy Magic til værktøjslinjen",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik på <strong>puslespillet</strong> {puzzleIcon} i din $BROWSER$-værktøjslinje for at se dine udvidelser. Find <strong>Privacy Magic</strong> på listen, og klik på <strong>$PIN_CONTROL$</strong> {pinIcon} ved siden af. Når Privacy Magic-knappen {hamsaIcon} er fastgjort, kan du klikke på den når som helst for at se, hvordan du bliver beskyttet, og styre individuelle beskyttelser.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "Klik på <strong>puslespillet</strong> {puzzleIcon} i din $BROWSER$-værktøjslinje for at se dine udvidelser. Find <strong>Privacy Magic</strong> på listen, og klik på <strong>$PIN_CONTROL$</strong> {pinIcon} ved siden af.$FIREFOX_PIN_STEP$ Når Privacy Magic-knappen {hamsaIcon} er fastgjort, kan du klikke på den når som helst for at se, hvordan du bliver beskyttet, og styre individuelle beskyttelser.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

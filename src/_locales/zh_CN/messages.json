@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>固定到工具栏</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n zh-CN/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "将 Privacy Magic 固定到工具栏",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "点击 $BROWSER$ 工具栏中的<strong>拼图</strong>{puzzleIcon}查看扩展程序。在列表中找到<strong>Privacy Magic</strong>，然后点击旁边的<strong>$PIN_CONTROL$</strong> {pinIcon}。当 Privacy Magic 按钮 {hamsaIcon} 固定后，您可以随时点击它查看保护状态并控制各项保护。",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "点击 $BROWSER$ 工具栏中的<strong>拼图</strong>{puzzleIcon}查看扩展程序。在列表中找到<strong>Privacy Magic</strong>，然后点击旁边的<strong>$PIN_CONTROL$</strong> {pinIcon}。$FIREFOX_PIN_STEP$当 Privacy Magic 按钮 {hamsaIcon} 固定后，您可以随时点击它查看保护状态并控制各项保护。",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

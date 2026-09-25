@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>도구 모음에 고정</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n ko/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic을 도구 모음에 고정",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "$BROWSER$ 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>$PIN_CONTROL$</strong> {pinIcon}을 클릭하세요. Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "$BROWSER$ 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>$PIN_CONTROL$</strong> {pinIcon}을 클릭하세요.$FIREFOX_PIN_STEP$ Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

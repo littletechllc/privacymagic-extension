@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>Fijar a la barra de herramientas</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n es-ES/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Fijar Privacy Magic en la barra de herramientas",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} de tu barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>$PIN_CONTROL$</strong> {pinIcon} junto a ella. Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo te protege y controlar protecciones individuales.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} de tu barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>$PIN_CONTROL$</strong> {pinIcon} junto a ella.$FIREFOX_PIN_STEP$ Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo te protege y controlar protecciones individuales.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

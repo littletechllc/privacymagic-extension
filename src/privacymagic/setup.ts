@@ -30,7 +30,10 @@ const applyStep1MessageTokens = (): void => {
   const pinControl = firefox
     ? (chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button')
     : (chrome.i18n.getMessage('setupPinControl') || 'pin')
-  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserName, pinControl])
+  const firefoxPinToToolbar = firefox
+    ? (chrome.i18n.getMessage('setupFirefoxPinToToolbar') || ' Click <strong>Pin to Toolbar</strong>.')
+    : ''
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserName, pinControl, firefoxPinToToolbar])
   const source = raw || el.innerHTML
 
   const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'

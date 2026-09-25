@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>ปักหมุดในแถบเครื่องมือ</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n th/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "การปักหมุด Privacy Magic ไปที่แถบเครื่องมือ",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "คลิก <strong>จิ๊กซอว์</strong> {puzzleIcon} บนแถบเครื่องมือ $BROWSER$ เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>$PIN_CONTROL$</strong> {pinIcon} ข้างๆ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "คลิก <strong>จิ๊กซอว์</strong> {puzzleIcon} บนแถบเครื่องมือ $BROWSER$ เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>$PIN_CONTROL$</strong> {pinIcon} ข้างๆ$FIREFOX_PIN_STEP$ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },

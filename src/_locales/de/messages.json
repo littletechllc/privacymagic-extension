@@ -299,6 +299,10 @@
     "message": "more options button",
     "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
   },
+  "setupFirefoxPinToToolbar": {
+    "message": " Click <strong>An Symbolleiste anheften</strong>.",
+    "description": "Firefox unified-extensions-context-menu-pin-to-toolbar .label from firefox-l10n de/browser/browser/unifiedExtensions.ftl, wrapped for the step 1 sentence. Includes a leading space."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic an die Symbolleiste anheften",
     "description": "Alt text for pinning animation image"
@@ -464,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klicke auf das <strong>Puzzle</strong> {puzzleIcon} in deiner $BROWSER$-Symbolleiste, um deine Erweiterungen zu sehen. Finde <strong>Privacy Magic</strong> in der Liste und klicke auf die <strong>$PIN_CONTROL$</strong> {pinIcon} daneben. Sobald die Privacy Magic-Schaltfläche {hamsaIcon} angeheftet ist, kannst du sie jederzeit anklicken, um zu sehen, wie du geschützt wirst, und um einzelne Schutzfunktionen zu steuern.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
+    "message": "Klicke auf das <strong>Puzzle</strong> {puzzleIcon} in deiner $BROWSER$-Symbolleiste, um deine Erweiterungen zu sehen. Finde <strong>Privacy Magic</strong> in der Liste und klicke auf die <strong>$PIN_CONTROL$</strong> {pinIcon} daneben.$FIREFOX_PIN_STEP$ Sobald die Privacy Magic-Schaltfläche {hamsaIcon} angeheftet ist, kannst du sie jederzeit anklicken, um zu sehen, wie du geschützt wirst, und um einzelne Schutzfunktionen zu steuern.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -474,6 +478,10 @@
       "pin_control": {
         "content": "$2",
         "example": "pin"
+      },
+      "firefox_pin_step": {
+        "content": "$3",
+        "example": "Click Pin to Toolbar."
       }
     }
   },
