@@ -1,11 +1,12 @@
+import { languagesForFirst } from '@src/common/languages-array'
 import { redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
 import type { GlobalScope } from '../helpers/globalObject'
 
 const language = (globalObject: GlobalScope): void => {
-  const originalLanguage = globalObject.navigator.language
+  const originalLanguages = Array.from(globalObject.navigator.languages)
+  const languages = languagesForFirst(originalLanguages)
   redefineNavigatorFields(globalObject, {
-    // Reduce to a single language to reduce entropy.
-    languages: [originalLanguage]
+    languages: languages.length > 0 ? languages : [globalObject.navigator.language]
   })
 }
 

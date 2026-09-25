@@ -1,3 +1,4 @@
+import { acceptLanguageHeader } from '@src/common/languages-array'
 import { NetworkSettingId } from '@src/common/setting-ids'
 import { networkRuleId, queryParametersRuleId } from './rule-ids'
 
@@ -125,7 +126,9 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     action: {
       type: 'modifyHeaders',
       requestHeaders: setHeaders({
-        'Accept-Language': navigator.language
+        'Accept-Language': acceptLanguageHeader(
+          navigator.languages.length > 0 ? navigator.languages : [navigator.language]
+        )
       })
     },
   }],
