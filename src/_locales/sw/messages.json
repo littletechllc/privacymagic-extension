@@ -291,6 +291,14 @@
     "message": "ikoni ya pini",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pini",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Kubandika Privacy Magic kwenye upau wa zana",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Bofya <strong>fumbo</strong> {puzzleIcon} kwenye upau wa zana wa $BROWSER$ ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>pini</strong> {pinIcon} iliyo kando yake. Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Bofya <strong>fumbo</strong> {puzzleIcon} kwenye upau wa zana wa $BROWSER$ ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>$PIN_CONTROL$</strong> {pinIcon} iliyo kando yake. Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

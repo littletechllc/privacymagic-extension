@@ -22,7 +22,7 @@ const isAdvancedSidePanelOpenForTab = async (tabId: number): Promise<boolean> =>
 const setupContinueSetupLink = (): void => {
   document.getElementById('continueSetupLinkContainer')?.addEventListener('click', (event) => {
     handleAsync(async () => {
-      await chrome.tabs.create({ url: 'privacymagic/setup.html' })
+      await chrome.tabs.create({ url: chrome.runtime.getURL('privacymagic/setup.html') })
       window.close()
     }, (error) => {
       logError(error, 'error opening setup page', event)

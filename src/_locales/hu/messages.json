@@ -291,6 +291,14 @@
     "message": "gombostű ikon",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "gombostűre",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic kitűzése az eszköztárra",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kattints a <strong>kirakó</strong> {puzzleIcon} ikonra a $BROWSER$ eszköztárán a bővítményeid megtekintéséhez. Keresd meg a listában a <strong>Privacy Magicet</strong>, és kattints a mellette lévő <strong>gombostűre</strong> {pinIcon}. Ha a Privacy Magic gomb {hamsaIcon} ki van tűzve, bármikor rákattinthatsz, hogy lásd, hogyan véd, és kezeld az egyes védelmeket.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Kattints a <strong>kirakó</strong> {puzzleIcon} ikonra a $BROWSER$ eszköztárán a bővítményeid megtekintéséhez. Keresd meg a listában a <strong>Privacy Magicet</strong>, és kattints a mellette lévő <strong>$PIN_CONTROL$</strong> {pinIcon}. Ha a Privacy Magic gomb {hamsaIcon} ki van tűzve, bármikor rákattinthatsz, hogy lásd, hogyan véd, és kezeld az egyes védelmeket.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

@@ -6,3 +6,12 @@ export const isEdgeBrowser = (): boolean => {
   }
   return /\bEdg\//.test(navigator.userAgent)
 }
+
+/** True when this extension page is running in Firefox. */
+export const isFirefoxBrowser = (): boolean => {
+  if (/\bFirefox\//.test(navigator.userAgent)) {
+    return true
+  }
+  const brands = navigator.userAgentData?.brands
+  return brands?.some((brand) => brand.brand === 'Firefox') ?? false
+}

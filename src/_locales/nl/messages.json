@@ -291,6 +291,14 @@
     "message": "pinpictogram",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pin",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic vastzetten op de werkbalk",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik op de <strong>puzzel</strong> {puzzleIcon} in je $BROWSER$-werkbalk om je extensies te zien. Zoek <strong>Privacy Magic</strong> in de lijst en klik op de <strong>pin</strong> {pinIcon} ernaast. Zodra de Privacy Magic-knop {hamsaIcon} is vastgezet, kun je er op elk moment op klikken om te zien hoe je beschermd wordt en om individuele beschermingen te beheren.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Klik op de <strong>puzzel</strong> {puzzleIcon} in je $BROWSER$-werkbalk om je extensies te zien. Zoek <strong>Privacy Magic</strong> in de lijst en klik op de <strong>$PIN_CONTROL$</strong> {pinIcon} ernaast. Zodra de Privacy Magic-knop {hamsaIcon} is vastgezet, kun je er op elk moment op klikken om te zien hoe je beschermd wordt en om individuele beschermingen te beheren.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

@@ -291,6 +291,14 @@
     "message": "பின் ஐகான்",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "பின்",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic-ஐ கருவிப்பட்டியில் பின் செய்வது",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க $BROWSER$ கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>பின்</strong> {pinIcon} ஐ கிளிக் செய்யவும். Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க $BROWSER$ கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>$PIN_CONTROL$</strong> {pinIcon} ஐ கிளிக் செய்யவும். Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

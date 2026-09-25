@@ -1,4 +1,4 @@
-import { isEdgeBrowser } from '@src/common/browser'
+import { isEdgeBrowser, isFirefoxBrowser } from '@src/common/browser'
 
 type Applicator = (el: HTMLElement, msg: string) => void;
 
@@ -33,6 +33,9 @@ const resolveI18nArg = (key: string): string => {
   }
   if (key === 'companyName') {
     return edge ? 'Microsoft' : (message || 'Google')
+  }
+  if (key === 'setupPinControl' && isFirefoxBrowser()) {
+    return chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button'
   }
   return message || key
 }

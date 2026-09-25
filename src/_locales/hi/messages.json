@@ -291,6 +291,14 @@
     "message": "पिन आइकन",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "पिन",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic को टूलबार में पिन करना",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>पज़ल</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>पिन</strong> {pinIcon} पर क्लिक करें। जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>पज़ल</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>$PIN_CONTROL$</strong> {pinIcon} पर क्लिक करें। जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

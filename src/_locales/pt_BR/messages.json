@@ -291,6 +291,14 @@
     "message": "ícone de pino",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pino",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Fixando o Privacy Magic na barra de ferramentas",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Clique no <strong>quebra-cabeça</strong> {puzzleIcon} na barra de ferramentas do $BROWSER$ para ver suas extensões. Encontre o <strong>Privacy Magic</strong> na lista e clique no <strong>pino</strong> {pinIcon} ao lado. Quando o botão do Privacy Magic {hamsaIcon} estiver fixado, você poderá clicar nele a qualquer momento para ver como está sendo protegido e controlar proteções individuais.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Clique no <strong>quebra-cabeça</strong> {puzzleIcon} na barra de ferramentas do $BROWSER$ para ver suas extensões. Encontre o <strong>Privacy Magic</strong> na lista e clique no <strong>$PIN_CONTROL$</strong> {pinIcon} ao lado. Quando o botão do Privacy Magic {hamsaIcon} estiver fixado, você poderá clicar nele a qualquer momento para ver como está sendo protegido e controlar proteções individuais.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

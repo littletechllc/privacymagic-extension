@@ -291,6 +291,14 @@
     "message": "icona de xinxeta",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "xinxeta",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Fixació de Privacy Magic a la barra d'eines",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Fes clic al <strong>trencaclosques</strong> {puzzleIcon} de la barra d'eines de $BROWSER$ per veure les teves extensions. Troba <strong>Privacy Magic</strong> a la llista i fes clic a la <strong>xinxeta</strong> {pinIcon} del costat. Quan el botó de Privacy Magic {hamsaIcon} estigui fixat, hi podràs fer clic en qualsevol moment per veure com estàs protegit i controlar les proteccions individuals.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Fes clic al <strong>trencaclosques</strong> {puzzleIcon} de la barra d'eines de $BROWSER$ per veure les teves extensions. Troba <strong>Privacy Magic</strong> a la llista i fes clic a la <strong>$PIN_CONTROL$</strong> {pinIcon} del costat. Quan el botó de Privacy Magic {hamsaIcon} estigui fixat, hi podràs fer clic en qualsevol moment per veure com estàs protegit i controlar les proteccions individuals.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

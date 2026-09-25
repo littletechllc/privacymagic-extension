@@ -291,6 +291,14 @@
     "message": "图钉图标",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "图钉",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "将 Privacy Magic 固定到工具栏",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "点击 $BROWSER$ 工具栏中的<strong>拼图</strong>{puzzleIcon}查看扩展程序。在列表中找到<strong>Privacy Magic</strong>，然后点击旁边的<strong>图钉</strong>{pinIcon}。当 Privacy Magic 按钮 {hamsaIcon} 固定后，您可以随时点击它查看保护状态并控制各项保护。",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "点击 $BROWSER$ 工具栏中的<strong>拼图</strong>{puzzleIcon}查看扩展程序。在列表中找到<strong>Privacy Magic</strong>，然后点击旁边的<strong>$PIN_CONTROL$</strong> {pinIcon}。当 Privacy Magic 按钮 {hamsaIcon} 固定后，您可以随时点击它查看保护状态并控制各项保护。",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

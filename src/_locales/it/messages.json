@@ -291,6 +291,14 @@
     "message": "icona pin",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pin",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Fissaggio di Privacy Magic alla barra degli strumenti",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Fai clic sul <strong>puzzle</strong> {puzzleIcon} nella barra degli strumenti di $BROWSER$ per vedere le tue estensioni. Trova <strong>Privacy Magic</strong> nell'elenco e fai clic sull'icona <strong>pin</strong> {pinIcon} accanto. Una volta che il pulsante di Privacy Magic {hamsaIcon} è fissato, puoi farci clic in qualsiasi momento per vedere come vieni protetto e controllare le singole protezioni.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Fai clic sul <strong>puzzle</strong> {puzzleIcon} nella barra degli strumenti di $BROWSER$ per vedere le tue estensioni. Trova <strong>Privacy Magic</strong> nell'elenco e fai clic sull'icona <strong>$PIN_CONTROL$</strong> {pinIcon} accanto. Una volta che il pulsante di Privacy Magic {hamsaIcon} è fissato, puoi farci clic in qualsiasi momento per vedere come vieni protetto e controllare le singole protezioni.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

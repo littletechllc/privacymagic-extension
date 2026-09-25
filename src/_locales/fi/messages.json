@@ -291,6 +291,14 @@
     "message": "nuppineulakuvake",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "nuppineulaa",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magicin kiinnittäminen työkalupalkkiin",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Napsauta <strong>palapeliä</strong> {puzzleIcon} $BROWSER$n työkalupalkissa nähdäksesi laajennuksesi. Etsi listasta <strong>Privacy Magic</strong> ja napsauta sen vieressä olevaa <strong>nuppineulaa</strong> {pinIcon}. Kun Privacy Magic -painike {hamsaIcon} on kiinnitetty, voit klikata sitä milloin tahansa nähdäksesi, miten sinua suojataan, ja hallitaksesi yksittäisiä suojauksia.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Napsauta <strong>palapeliä</strong> {puzzleIcon} $BROWSER$n työkalupalkissa nähdäksesi laajennuksesi. Etsi listasta <strong>Privacy Magic</strong> ja napsauta sen vieressä olevaa <strong>$PIN_CONTROL$</strong> {pinIcon}. Kun Privacy Magic -painike {hamsaIcon} on kiinnitetty, voit klikata sitä milloin tahansa nähdäksesi, miten sinua suojataan, ja hallitaksesi yksittäisiä suojauksia.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

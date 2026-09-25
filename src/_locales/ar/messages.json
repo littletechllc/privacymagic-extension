@@ -291,6 +291,14 @@
     "message": "أيقونة التثبيت",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "أيقونة التثبيت",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "تثبيت Privacy Magic في شريط الأدوات",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "انقر على <strong>اللغز</strong> {puzzleIcon} في شريط أدوات $BROWSER$ لرؤية الإضافات. ابحث عن <strong>Privacy Magic</strong> في القائمة ثم انقر على <strong>أيقونة التثبيت</strong> {pinIcon} بجانبه. بعد تثبيت زر Privacy Magic {hamsaIcon}، يمكنك النقر عليه في أي وقت لمعرفة كيفية حمايتك والتحكم في وسائل الحماية الفردية.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "انقر على <strong>اللغز</strong> {puzzleIcon} في شريط أدوات $BROWSER$ لرؤية الإضافات. ابحث عن <strong>Privacy Magic</strong> في القائمة ثم انقر على <strong>$PIN_CONTROL$</strong> {pinIcon} بجانبه. بعد تثبيت زر Privacy Magic {hamsaIcon}، يمكنك النقر عليه في أي وقت لمعرفة كيفية حمايتك والتحكم في وسائل الحماية الفردية.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

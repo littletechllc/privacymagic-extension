@@ -291,6 +291,14 @@
     "message": "የፒን ምልክት",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "ፒን",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic ወደ መሳሪያ አሞሌ መጣበቅ",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "ቅጥያዎችዎን ለማየት በ$BROWSER$ መሳሪያ አሞሌ ያለውን <strong>ፓዝል</strong> {puzzleIcon} ጠቅ ያድርጉ። በዝርዝሩ ውስጥ <strong>Privacy Magic</strong> ያግኙ እና ከጎኑ ያለውን <strong>ፒን</strong> {pinIcon} ጠቅ ያድርጉ። የPrivacy Magic አዝራር {hamsaIcon} ከተጣበቀ በኋላ በማንኛውም ጊዜ ጠቅ በማድረግ እንዴት እንደሚጠበቁ ማየት እና ግለሰብ ጥበቃዎችን መቆጣጠር ይችላሉ።",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "ቅጥያዎችዎን ለማየት በ$BROWSER$ መሳሪያ አሞሌ ያለውን <strong>ፓዝል</strong> {puzzleIcon} ጠቅ ያድርጉ። በዝርዝሩ ውስጥ <strong>Privacy Magic</strong> ያግኙ እና ከጎኑ ያለውን <strong>$PIN_CONTROL$</strong> {pinIcon} ጠቅ ያድርጉ። የPrivacy Magic አዝራር {hamsaIcon} ከተጣበቀ በኋላ በማንኛውም ጊዜ ጠቅ በማድረግ እንዴት እንደሚጠበቁ ማየት እና ግለሰብ ጥበቃዎችን መቆጣጠር ይችላሉ።",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

@@ -291,6 +291,14 @@
     "message": "icono de pin",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pin",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Fijar Privacy Magic en la barra de herramientas",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} de tu barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>pin</strong> {pinIcon} junto a ella. Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo te protege y controlar protecciones individuales.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} de tu barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>$PIN_CONTROL$</strong> {pinIcon} junto a ella. Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo te protege y controlar protecciones individuales.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

@@ -1,4 +1,4 @@
-import { isEdgeBrowser } from '@src/common/browser'
+import { isEdgeBrowser, isFirefoxBrowser } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
 import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
 import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
@@ -23,20 +23,30 @@ const applyStep1MessageTokens = (): void => {
   }
 
   const edge = isEdgeBrowser()
+  const firefox = isFirefoxBrowser()
   const browserName = edge
     ? 'Edge'
     : (chrome.i18n.getMessage('browserName') || 'Chrome')
-  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', browserName)
+  const pinControl = firefox
+    ? (chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button')
+    : (chrome.i18n.getMessage('setupPinControl') || 'pin')
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserName, pinControl])
   const source = raw || el.innerHTML
 
   const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'
-  const pinIconAlt = chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon'
+  const pinIconAlt = firefox
+    ? pinControl
+    : (chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon')
   const puzzleIconPath = edge
     ? '../assets/images/puzzle-edge.png'
-    : '../assets/images/puzzle.svg'
+    : firefox
+      ? '../assets/images/puzzle-firefox.png'
+      : '../assets/images/puzzle.svg'
   const pinIconPath = edge
     ? '../assets/images/pin-edge.png'
-    : '../assets/images/pin.svg'
+    : firefox
+      ? '../assets/images/more_options.png'
+      : '../assets/images/pin.svg'
 
   const tokenMap: Record<string, string> = {
     puzzleIcon: buildSetupInlineIconHtml(puzzleIconAlt, puzzleIconPath),

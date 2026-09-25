@@ -291,6 +291,14 @@
     "message": "핀 아이콘",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "핀",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic을 도구 모음에 고정",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "$BROWSER$ 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>핀</strong> {pinIcon}을 클릭하세요. Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "$BROWSER$ 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>$PIN_CONTROL$</strong> {pinIcon}을 클릭하세요. Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

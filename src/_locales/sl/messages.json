@@ -291,6 +291,14 @@
     "message": "ikona zatiča",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "zatič",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Pripenjanje Privacy Magic v orodno vrstico",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kliknite na <strong>sestavljanko</strong> {puzzleIcon} v orodni vrstici $BROWSER$, da vidite svoje razširitve. Na seznamu poiščite <strong>Privacy Magic</strong> in kliknite <strong>zatič</strong> {pinIcon} poleg njega. Ko je gumb Privacy Magic {hamsaIcon} pripet, ga lahko kadarkoli kliknete, da vidite, kako ste zaščiteni, in upravljate posamezne zaščite.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Kliknite na <strong>sestavljanko</strong> {puzzleIcon} v orodni vrstici $BROWSER$, da vidite svoje razširitve. Na seznamu poiščite <strong>Privacy Magic</strong> in kliknite <strong>$PIN_CONTROL$</strong> {pinIcon} poleg njega. Ko je gumb Privacy Magic {hamsaIcon} pripet, ga lahko kadarkoli kliknete, da vidite, kako ste zaščiteni, in upravljate posamezne zaščite.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

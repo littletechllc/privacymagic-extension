@@ -291,6 +291,14 @@
     "message": "ikon pin",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pin",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Menyemat Privacy Magic pada bar alat",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik <strong>puzzle</strong> {puzzleIcon} pada bar alat $BROWSER$ untuk melihat sambungan anda. Cari <strong>Privacy Magic</strong> dalam senarai dan klik <strong>pin</strong> {pinIcon} di sebelahnya. Setelah butang Privacy Magic {hamsaIcon} disematkan, anda boleh klik pada bila-bila masa untuk melihat cara anda dilindungi dan mengawal perlindungan individu.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Klik <strong>puzzle</strong> {puzzleIcon} pada bar alat $BROWSER$ untuk melihat sambungan anda. Cari <strong>Privacy Magic</strong> dalam senarai dan klik <strong>$PIN_CONTROL$</strong> {pinIcon} di sebelahnya. Setelah butang Privacy Magic {hamsaIcon} disematkan, anda boleh klik pada bila-bila masa untuk melihat cara anda dilindungi dan mengawal perlindungan individu.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

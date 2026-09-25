@@ -291,6 +291,14 @@
     "message": "piespraudes ikona",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "piespraudes",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic piespraušana rīkjoslā",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Noklikšķiniet uz <strong>puzles</strong> {puzzleIcon} $BROWSER$ rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>piespraudes</strong> {pinIcon} blakus tam. Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Noklikšķiniet uz <strong>puzles</strong> {puzzleIcon} $BROWSER$ rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>$PIN_CONTROL$</strong> {pinIcon} blakus tam. Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

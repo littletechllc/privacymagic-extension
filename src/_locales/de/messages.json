@@ -291,6 +291,14 @@
     "message": "Anheften-Symbol",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "Anheften-Schaltfläche",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic an die Symbolleiste anheften",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klicke auf das <strong>Puzzle</strong> {puzzleIcon} in deiner $BROWSER$-Symbolleiste, um deine Erweiterungen zu sehen. Finde <strong>Privacy Magic</strong> in der Liste und klicke auf die <strong>Anheften-Schaltfläche</strong> {pinIcon} daneben. Sobald die Privacy Magic-Schaltfläche {hamsaIcon} angeheftet ist, kannst du sie jederzeit anklicken, um zu sehen, wie du geschützt wirst, und um einzelne Schutzfunktionen zu steuern.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Klicke auf das <strong>Puzzle</strong> {puzzleIcon} in deiner $BROWSER$-Symbolleiste, um deine Erweiterungen zu sehen. Finde <strong>Privacy Magic</strong> in der Liste und klicke auf die <strong>$PIN_CONTROL$</strong> {pinIcon} daneben. Sobald die Privacy Magic-Schaltfläche {hamsaIcon} angeheftet ist, kannst du sie jederzeit anklicken, um zu sehen, wie du geschützt wirst, und um einzelne Schutzfunktionen zu steuern.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

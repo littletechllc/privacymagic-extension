@@ -291,6 +291,14 @@
     "message": "nõelaikoon",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "nõela",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magicu kinnitamine tööriistaribale",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klõpsake $BROWSER$'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>nõela</strong> {pinIcon}. Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Klõpsake $BROWSER$'i tööriistaribal <strong>puslel</strong> {puzzleIcon}, et näha oma laiendusi. Leidke loendist <strong>Privacy Magic</strong> ja klõpsake selle kõrval olevat <strong>$PIN_CONTROL$</strong> {pinIcon}. Kui Privacy Magicu nupp {hamsaIcon} on kinnitatud, saate sellel igal ajal klõpsata, et näha, kuidas teid kaitstakse, ja hallata üksikuid kaitseid.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

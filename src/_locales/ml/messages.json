@@ -291,6 +291,14 @@
     "message": "പിൻ ഐക്കൺ",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "പിൻ",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Privacy Magic ടൂൾബാറിൽ പിൻ ചെയ്യൽ",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "നിങ്ങളുടെ എക്സ്റ്റെൻഷനുകൾ കാണാൻ $BROWSER$ ടൂൾബാറിലെ <strong>പസിൽ</strong> {puzzleIcon} ക്ലിക്ക് ചെയ്യുക। ലിസ്റ്റിൽ <strong>Privacy Magic</strong> കണ്ടെത്തി സമീപമുള്ള <strong>പിൻ</strong> {pinIcon} ക്ലിക്ക് ചെയ്യുക। Privacy Magic ബട്ടൺ {hamsaIcon} പിൻ ചെയ്താൽ, നിങ്ങൾക്ക് എപ്പോഴും ക്ലിക്ക് ചെയ്ത് സംരക്ഷണം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് കാണാനും വ്യക്തിഗത സംരക്ഷണങ്ങൾ നിയന്ത്രിക്കാനും കഴിയും।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "നിങ്ങളുടെ എക്സ്റ്റെൻഷനുകൾ കാണാൻ $BROWSER$ ടൂൾബാറിലെ <strong>പസിൽ</strong> {puzzleIcon} ക്ലിക്ക് ചെയ്യുക। ലിസ്റ്റിൽ <strong>Privacy Magic</strong> കണ്ടെത്തി സമീപമുള്ള <strong>$PIN_CONTROL$</strong> {pinIcon} ക്ലിക്ക് ചെയ്യുക। Privacy Magic ബട്ടൺ {hamsaIcon} പിൻ ചെയ്താൽ, നിങ്ങൾക്ക് എപ്പോഴും ക്ലിക്ക് ചെയ്ത് സംരക്ഷണം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് കാണാനും വ്യക്തിഗത സംരക്ഷണങ്ങൾ നിയന്ത്രിക്കാനും കഴിയും।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

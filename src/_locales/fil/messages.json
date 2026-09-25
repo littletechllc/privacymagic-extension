@@ -291,6 +291,14 @@
     "message": "icon ng pin",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "pin",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Pag-pin ng Privacy Magic sa toolbar",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "I-click ang <strong>puzzle</strong> {puzzleIcon} sa $BROWSER$ toolbar para makita ang iyong mga extension. Hanapin ang <strong>Privacy Magic</strong> sa listahan at i-click ang <strong>pin</strong> {pinIcon} sa tabi nito. Kapag na-pin na ang button ng Privacy Magic {hamsaIcon}, maaari mo itong i-click anumang oras para makita kung paano ka pinoprotektahan at kontrolin ang mga indibidwal na proteksyon.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "I-click ang <strong>puzzle</strong> {puzzleIcon} sa $BROWSER$ toolbar para makita ang iyong mga extension. Hanapin ang <strong>Privacy Magic</strong> sa listahan at i-click ang <strong>$PIN_CONTROL$</strong> {pinIcon} sa tabi nito. Kapag na-pin na ang button ng Privacy Magic {hamsaIcon}, maaari mo itong i-click anumang oras para makita kung paano ka pinoprotektahan at kontrolin ang mga indibidwal na proteksyon.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

@@ -291,6 +291,14 @@
     "message": "pictogramă ac",
     "description": "Alt text for pin icon in step 1"
   },
+  "setupPinControl": {
+    "message": "ac",
+    "description": "Label of the toolbar control next to an extension in step 1. Firefox shows the more-options button instead."
+  },
+  "setupMoreOptionsButton": {
+    "message": "more options button",
+    "description": "Firefox label for the three-dot control used to pin an extension to the toolbar."
+  },
   "setupPinActionImageAlt": {
     "message": "Fixarea Privacy Magic în bara de instrumente",
     "description": "Alt text for pinning animation image"
@@ -456,12 +464,16 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Fă clic pe <strong>puzzle</strong> {puzzleIcon} din bara de instrumente $BROWSER$ pentru a-ți vedea extensiile. Găsește <strong>Privacy Magic</strong> în listă și fă clic pe <strong>ac</strong> {pinIcon} de lângă el. După ce butonul Privacy Magic {hamsaIcon} este fixat, poți face clic pe el oricând pentru a vedea cum ești protejat și pentru a controla protecțiile individuale.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name.",
+    "message": "Fă clic pe <strong>puzzle</strong> {puzzleIcon} din bara de instrumente $BROWSER$ pentru a-ți vedea extensiile. Găsește <strong>Privacy Magic</strong> în listă și fă clic pe <strong>$PIN_CONTROL$</strong> {pinIcon} de lângă el. După ce butonul Privacy Magic {hamsaIcon} este fixat, poți face clic pe el oricând pentru a vedea cum ești protejat și pentru a controla protecțiile individuale.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button.",
     "placeholders": {
       "browser": {
         "content": "$1",
         "example": "Chrome"
+      },
+      "pin_control": {
+        "content": "$2",
+        "example": "pin"
       }
     }
   },

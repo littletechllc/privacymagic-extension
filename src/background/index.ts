@@ -98,7 +98,7 @@ const initializePersistentResources = async (): Promise<void> => {
 }
 
 const showSetupPage = async (): Promise<void> => {
-  await chrome.tabs.create({ url: 'privacymagic/setup.html' })
+  await chrome.tabs.create({ url: chrome.runtime.getURL('privacymagic/setup.html') })
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
