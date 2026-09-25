@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "ডানে",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Send optional diagnostic data to improve Microsoft products",
+    "description": "English fallback; Microsoft Edge has no locale.pak for bn. Resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Help improve Microsoft products by sending the results from searches on the web",
+    "description": "English fallback; Microsoft Edge has no locale.pak for bn. Resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Allow Microsoft to save your browsing activity including history, usage, favorites, web content, and other browsing data to personalize and improve Edge and Microsoft services like ads, search, shopping, news, and Copilot.",
+    "description": "English fallback; Microsoft Edge has no locale.pak for bn. Resource id 19254"
   }
 }

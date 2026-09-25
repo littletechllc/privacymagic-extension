@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "destra",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Invia dati di diagnostica facoltativi per migliorare i prodotti Microsoft",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Contribuisci a migliorare i prodotti Microsoft inviando i risultati delle ricerche sul Web",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Consenti a Microsoft di salvare le informazioni sulle tue attività di esplorazione (quali cronologia, utilizzo, preferiti, contenuti Web e altri dati di esplorazione) per personalizzare e migliorare Microsoft Edge e i servizi Microsoft come annunci pubblicitari, ricerca, acquisti, notizie e Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "pa labi",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Nosūtīt neobligātos diagnostikas datus, lai uzlabotu Microsoft produktus",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Palīdziet uzlabot Microsoft produktus, nosūtot rezultātus no meklēšanas tīmeklī",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Ļaut Microsoft saglabāt jūsu pārlūkošanas darbības, tostarp vēsturi, lietojumu, izlasi, tīmekļa saturu un citus pārlūkošanas datus, lai personalizētu un uzlabotu Edge un Microsoft pakalpojumus, piemēram, reklāmas, meklēšanu, iepirkšanos, ziņas un Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

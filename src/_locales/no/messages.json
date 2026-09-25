@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "høyre",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Send valgfrie diagnosedata for å forbedre Microsoft-produkter",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Bidra til å forbedre Microsoft-produkter ved å sende resultatene fra søk på nettet",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "La Microsoft lagre nettlesingsaktiviteten, inkludert logg, bruk, favoritter, nettinnhold og andre nettlesingsdata, for å tilpasse og forbedre Edge og Microsoft-tjenester som annonser, søk, shopping, nyheter og Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

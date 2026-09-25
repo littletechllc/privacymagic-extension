@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "ಬಲಕ್ಕೆ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Microsoft ಉತ್ಪನ್ನಗಳನ್ನು ಸುಧಾರಿಸಲು ಐಚ್ಛಿಕ ದೋಷನಿರ್ಣಯ ಡೇಟಾ ಕಳುಹಿಸಿ",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "ವೆಬ್ ನಲ್ಲಿ ನಡೆಸಿದ ಶೋಧಗಳ ಫಲಿತಾಂಶಗಳನ್ನು ಕಳುಹಿಸುವ ಮೂಲಕ Microsoft ಉತ್ಪನ್ನಗಳನ್ನು ಸುಧಾರಿಸಲು ಸಹಾಯ ಮಾಡಿ",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "ಜಾಹೀರಾತುಗಳು, ಶೋಧ, ಶಾಪಿಂಗ್‌ ಮತ್ತು ಸುದ್ದಿ ಮತ್ತು Copilot ನಂತಹ Edge ಮತ್ತು Microsoft ಸೇವೆಗಳನ್ನು ವೈಯಕ್ತೀಕರಣಗೊಳಿಸಲು ಇತಿಹಾಸ, ಬಳಕೆ, ಮೆಚ್ಚಿನವುಗಳು, ವೆಬ್ ವಿಷಯ ಮತ್ತು ಇತರ ಬ್ರೌಸಿಂಗ್ ಡೇಟಾ ಸೇರಿದಂತೆ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸಲು Microsoft ಗೆ ಅನುಮತಿಸಿ.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

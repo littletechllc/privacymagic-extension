@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "справа",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Отправлять необязательные диагностические данные для улучшения продуктов Майкрософт",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Помогите улучшить продукты Майкрософт, отправляя результаты поиска в Интернете",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Разрешите корпорации Майкрософт сохранять ваши действия в браузере, в том числе журнал, использование, избранное, веб-контент и другие данные, чтобы персонализировать и улучшать службы Майкрософт и Edge, такие как реклама, поиск, покупки, новости и Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

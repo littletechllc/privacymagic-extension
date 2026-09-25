@@ -15,6 +15,7 @@
     "generate:remote-schema": "npx tsx tools/generate-remote-schema.ts",
     "postinstall": "npm run generate:remote-schema",
     "sync:chrome-locale-strings": "npx tsx tools/sync-chrome-locale-string.ts",
+    "sync:edge-locale-strings": "npx tsx tools/sync-edge-locale-string.ts",
     "sync:locale-messages": "npx tsx tools/sync-locale-messages-from-en.ts",
     "webstore:update-listing-descriptions": "npx tsx webstore/update-listing-descriptions.ts",
     "update-filter-lists": "npx tsx tools/update-filter-lists.ts",

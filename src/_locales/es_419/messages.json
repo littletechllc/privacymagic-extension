@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "derecha",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Enviar datos de diagnóstico opcionales para mejorar los productos de Microsoft",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Ayudar a mejorar los productos de Microsoft enviando los resultados de las búsquedas en la web",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Permite que Microsoft guarde tu actividad de exploración, como el historial, el uso, los favoritos, el contenido web y otros datos de exploración para personalizar y mejorar los servicios Microsoft y Edge, como los anuncios, las búsquedas, las compras, las noticias y Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

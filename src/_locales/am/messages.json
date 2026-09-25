@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "ቀኝ",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "የ Microsoft ምርቶችን ለማሻሻል አማራጭ የምርመራ መረጃ መላክ",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "ከ የድር ላይ የፍለጋዎች ውጤቶችን በመላክ የ Microsoft ምርቶችን ለማሻሻል ያግዙ",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Microsoft እንደ ማስታወቂያዎች፣ ፍለጋ፣ ግብይት፣ ዜና እና Copilot ያሉ የ Microsoft አገልግሎቶችን ለግል ለማበጀት እና ለማሻሻል ታሪክን፣ አጠቃቀምን፣ ተወዳጆችን፣ የድር ይዘትን እና ሌላ የአሰሳ ውሂብን ጨምሮ የአሰሳ እንቅስቃሴዎን እንዲያስቀምጥ ይፍቀዱለት።",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

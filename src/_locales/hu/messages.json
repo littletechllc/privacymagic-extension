@@ -506,5 +506,17 @@
   "syncHelpDirectionRight": {
     "message": "jobbra",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "edge_8757": {
+    "message": "Opcionális diagnosztikai adatok küldése a Microsoft-termékek fejlesztéséhez",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Segítsen a Microsoft-termékek fejlesztésében azzal, hogy elküldi a találatokat a webes keresésekből",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Engedélyezheti a Microsoftnak, hogy mentse az Ön böngészési tevékenységeit – egyebek között az előzményeket, a használati adatokat, a kedvenceket, a webes tartalmakat és egyéb böngészési adatokat –, hogy személyre szabja és fejlessze az Edge-et és egyéb Microsoft-szolgáltatásokat, például a hirdetéseket, a keresést, a vásárlást, a híreket és a Copilotot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }

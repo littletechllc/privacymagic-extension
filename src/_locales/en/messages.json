@@ -506,5 +506,17 @@
   "chromium_1644574205037202324": {
     "message": "History",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
+  },
+  "edge_8757": {
+    "message": "Send optional diagnostic data to improve Microsoft products",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8757"
+  },
+  "edge_8834": {
+    "message": "Help improve Microsoft products by sending the results from searches on the web",
+    "description": "Imported from Microsoft Edge locale.pak resource id 8834"
+  },
+  "edge_19254": {
+    "message": "Allow Microsoft to save your browsing activity including history, usage, favorites, web content, and other browsing data to personalize and improve Edge and Microsoft services like ads, search, shopping, news, and Copilot.",
+    "description": "Imported from Microsoft Edge locale.pak resource id 19254"
   }
 }
