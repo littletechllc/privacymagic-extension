@@ -4,7 +4,7 @@ import { computeNetworkRules } from '@src/background/dnr/network-rules'
 import { RULE_DOMAIN_PLACEHOLDER } from '@src/background/dnr/rule-domains'
 import { networkRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
-import { ALL_RESOURCE_TYPES } from '@src/common/util'
+import { ALL_RESOURCE_TYPES } from '@src/background/dnr/resource-types'
 import type { SettingId } from '@src/common/setting-ids'
 import { describe, it, expect } from '@jest/globals'
 

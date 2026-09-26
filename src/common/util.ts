@@ -13,6 +13,3 @@ export const handleAsync = (fn: () => Promise<void>, onError?: (error: unknown) 
     }
   })
 }
-
-export const ALL_RESOURCE_TYPES: chrome.declarativeNetRequest.ResourceType[] =
-  Object.values(chrome.declarativeNetRequest.ResourceType)

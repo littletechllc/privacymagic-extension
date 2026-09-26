@@ -3,7 +3,7 @@
 // except web pages under excluded top domains.
 
 import { isNetworkSetting, SettingId } from '@src/common/setting-ids'
-import { ALL_RESOURCE_TYPES } from '@src/common/util'
+import { ALL_RESOURCE_TYPES } from '@src/background/dnr/resource-types'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { NETWORK_PROTECTION_DEFS, type NetworkPartialRule } from '@src/background/dnr/network-rule-defs'
 import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'

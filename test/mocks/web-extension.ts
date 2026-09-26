@@ -1,5 +1,5 @@
 // Mocks for Chrome WebExtensions APIs
-// Can be imported in any order since ALL_RESOURCE_TYPES now uses lazy evaluation
+// Can be imported in any order. Resource types used by rules live in src/background/dnr/resource-types.ts.
 // This setup is idempotent - safe to import multiple times
 import { jest } from '@jest/globals'
 

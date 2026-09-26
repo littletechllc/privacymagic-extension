@@ -2,7 +2,7 @@
 // Any of the allow rules is applied only to web pages under top domains
 // for which the corresponding setting is disabled.
 
-import { ALL_RESOURCE_TYPES } from "@src/common/util"
+import { ALL_RESOURCE_TYPES } from '@src/background/dnr/resource-types'
 import { allowRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { BlockerSettingId, isBlockerSetting, SettingId } from "@src/common/setting-ids"
