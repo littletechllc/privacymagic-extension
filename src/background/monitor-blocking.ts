@@ -34,5 +34,7 @@ export const showBlockedRequests = (): void => {
   })
 
   void chrome.action.setBadgeBackgroundColor({ color: "#0000AF" })
-  void chrome.action.setBadgeTextColor({ color: "#FFFFFF" })
+  if (typeof chrome.action.setBadgeTextColor === 'function') {
+    void chrome.action.setBadgeTextColor({ color: "#FFFFFF" })
+  }
 }

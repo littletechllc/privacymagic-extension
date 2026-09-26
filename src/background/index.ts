@@ -80,15 +80,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true
 })
 
+// Each setup is isolated so a throw in one does not skip the others.
+const runListenerSetup = (name: string, setup: () => void): void => {
+  try {
+    setup()
+  } catch (error) {
+    logError(error, `error initializing ${name}`)
+  }
+}
+
 // Functions that set up event listeners (need to be re-registered on every background script load)
 const initializeListeners = (): void => {
-  try {
-    injectCssForCosmeticFilters()
-    showBlockedRequests()
-    startWatchingRemoteConfig()
-  } catch (error) {
-    logError(error, 'error initializing listeners')
-  }
+  runListenerSetup('cosmetic filters', injectCssForCosmeticFilters)
+  runListenerSetup('blocked-request badge', showBlockedRequests)
+  runListenerSetup('remote config', startWatchingRemoteConfig)
 }
 
 // Functions that set up persistent resources (dynamic DNR rules persist across sessions)
