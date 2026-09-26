@@ -236,6 +236,18 @@ const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined 
   return { priority, action, condition: { urlFilter: cleanLine } }
 }
 
+const deduplicateNetworkFilters = (rules: NetworkRuleWithoutId[]): NetworkRuleWithoutId[] => {
+  const seen = new Set<string>()
+  return rules.filter(rule => {
+    const key = JSON.stringify(rule)
+    if (seen.has(key)) {
+      return false
+    }
+    seen.add(key)
+    return true
+  })
+}
+
 const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): string => {
   const lines = []
   let id = 0
@@ -249,5 +261,6 @@ const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): stri
 
 export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<void> => {
   const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
-  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(networkFilters))
+  const uniqueNetworkFilters = deduplicateNetworkFilters(networkFilters)
+  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(uniqueNetworkFilters))
 }
