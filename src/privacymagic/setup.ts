@@ -1,4 +1,4 @@
-import { isEdgeBrowser, isFirefoxBrowser } from '@src/common/browser'
+import { browserInfo } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
 import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
 import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
@@ -22,32 +22,27 @@ const applyStep1MessageTokens = (): void => {
     return
   }
 
-  const edge = isEdgeBrowser()
-  const firefox = isFirefoxBrowser()
-  const browserName = edge
-    ? 'Edge'
-    : (chrome.i18n.getMessage('browserName') || 'Chrome')
-  const pinControl = firefox
+  const pinControl = browserInfo.brand === 'Firefox'
     ? (chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button')
     : (chrome.i18n.getMessage('setupPinControl') || 'pin')
-  const firefoxPinToToolbar = firefox
+  const firefoxPinToToolbar = browserInfo.brand === 'Firefox'
     ? (chrome.i18n.getMessage('setupFirefoxPinToToolbar') || ' Click <strong>Pin to Toolbar</strong>.')
     : ''
-  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserName, pinControl, firefoxPinToToolbar])
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserInfo.brand, pinControl, firefoxPinToToolbar])
   const source = raw || el.innerHTML
 
   const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'
-  const pinIconAlt = firefox
+  const pinIconAlt = browserInfo.brand === 'Firefox'
     ? pinControl
     : (chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon')
-  const puzzleIconPath = edge
+  const puzzleIconPath = browserInfo.brand === 'Edge'
     ? '../assets/images/puzzle-edge.png'
-    : firefox
+    : browserInfo.brand === 'Firefox'
       ? '../assets/images/puzzle-firefox.png'
       : '../assets/images/puzzle.svg'
-  const pinIconPath = edge
+  const pinIconPath = browserInfo.brand === 'Edge'
     ? '../assets/images/pin-edge.png'
-    : firefox
+    : browserInfo.brand === 'Firefox'
       ? '../assets/images/more_options.png'
       : '../assets/images/pin.svg'
 

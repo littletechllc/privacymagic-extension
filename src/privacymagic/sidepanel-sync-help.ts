@@ -1,4 +1,4 @@
-import { isEdgeBrowser } from '@src/common/browser'
+import { browserInfo } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
 import { disableSyncSettingsDoneRemote } from '@src/common/messages'
 import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   openBtn.addEventListener('click', (event: Event) => {
     handleAsync(async () => {
-      if (isEdgeBrowser()) {
+      if (browserInfo.brand === 'Edge') {
         await goToEdgePrivacy(tabId, dom)
         return
       }

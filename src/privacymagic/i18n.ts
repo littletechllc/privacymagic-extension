@@ -1,4 +1,4 @@
-import { isEdgeBrowser, isFirefoxBrowser } from '@src/common/browser'
+import { browserInfo } from '@src/common/browser'
 
 type Applicator = (el: HTMLElement, msg: string) => void;
 
@@ -24,21 +24,20 @@ const ATTR_MAP: Record<string, Applicator> = {
   'data-i18n-href':        (el, msg) => { el.setAttribute('href', msg) },
 }
 
-/** Chrome and Google by default. Edge and Microsoft when this page is running in Microsoft Edge. */
+/** Chrome and Google by default. Edge and Microsoft in Edge. Firefox and Mozilla in Firefox. */
 const resolveI18nArg = (key: string): string => {
   const message = chrome.i18n.getMessage(key)
-  const edge = isEdgeBrowser()
   if (key === 'browserName') {
-    return edge ? 'Edge' : (message || 'Chrome')
+    return browserInfo.brand
   }
   if (key === 'companyName') {
-    return edge ? 'Microsoft' : (message || 'Google')
+    return browserInfo.owner
   }
-  if (key === 'setupPinControl' && isFirefoxBrowser()) {
+  if (key === 'setupPinControl' && browserInfo.brand === 'Firefox') {
     return chrome.i18n.getMessage('setupMoreOptionsButton') || 'more options button'
   }
   if (key === 'setupFirefoxPinToToolbar') {
-    if (!isFirefoxBrowser()) {
+    if (browserInfo.brand !== 'Firefox') {
       return ''
     }
     return message || ' Click <strong>Pin to Toolbar</strong>.'
