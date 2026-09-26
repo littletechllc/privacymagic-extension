@@ -248,6 +248,28 @@ const deduplicateNetworkFilters = (rules: NetworkRuleWithoutId[]): NetworkRuleWi
   })
 }
 
+const isUnconditionalBlock = (rule: NetworkRuleWithoutId): boolean => {
+  return rule.action.type === 'block' && rule.condition.urlFilter !== undefined && Object.keys(rule.condition).length === 1
+}
+
+// A block whose only condition is a urlFilter already blocks every request that filter matches,
+// so another block of that same urlFilter with extra conditions adds nothing.
+const removeRedundantNetworkFilters = (rules: NetworkRuleWithoutId[]): NetworkRuleWithoutId[] => {
+  const blockedUrlFilters = new Set<string>()
+  for (const rule of rules) {
+    if (isUnconditionalBlock(rule) && rule.condition.urlFilter !== undefined) {
+      blockedUrlFilters.add(rule.condition.urlFilter)
+    }
+  }
+  return rules.filter(rule => {
+    if (rule.action.type !== 'block' || isUnconditionalBlock(rule)) {
+      return true
+    }
+    const urlFilter = rule.condition.urlFilter
+    return urlFilter === undefined || !blockedUrlFilters.has(urlFilter)
+  })
+}
+
 const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): string => {
   const lines = []
   let id = 0
@@ -262,5 +284,6 @@ const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): stri
 export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<void> => {
   const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
   const uniqueNetworkFilters = deduplicateNetworkFilters(networkFilters)
-  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(uniqueNetworkFilters))
+  const necessaryNetworkFilters = removeRedundantNetworkFilters(uniqueNetworkFilters)
+  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(necessaryNetworkFilters))
 }
