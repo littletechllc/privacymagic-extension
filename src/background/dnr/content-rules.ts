@@ -6,7 +6,7 @@
 import { isContentSetting, ContentSettingId, SettingId, SETTING_COOKIE_PREFIX } from '@src/common/setting-ids'
 import { contentRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
-import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
+import { topDomainCondition, type NonEmptyDomainList } from '@src/background/dnr/rule-domains'
 
 const createContentRule = (settingId: ContentSettingId, domainsWhereSettingIsDisabled: NonEmptyDomainList, enabled: boolean): chrome.declarativeNetRequest.Rule => {
   const cookieKeyVal = `${SETTING_COOKIE_PREFIX}${settingId}=${enabled ? '1' : '0'}`
@@ -24,9 +24,7 @@ const createContentRule = (settingId: ContentSettingId, domainsWhereSettingIsDis
     priority: DNR_RULE_PRIORITIES.CONTENT_SCRIPTS,
     condition: {
       resourceTypes: ["main_frame", "sub_frame"],
-      ...(enabled
-        ? { excludedTopDomains: [...domainsWhereSettingIsDisabled] }
-        : { topDomains: [...domainsWhereSettingIsDisabled] })
+      ...topDomainCondition(domainsWhereSettingIsDisabled, enabled)
     }
   }
 }

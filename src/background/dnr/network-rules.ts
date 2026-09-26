@@ -6,7 +6,7 @@ import { isNetworkSetting, SettingId } from '@src/common/setting-ids'
 import { ALL_RESOURCE_TYPES } from '@src/background/dnr/resource-types'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { NETWORK_PROTECTION_DEFS, type NetworkPartialRule } from '@src/background/dnr/network-rule-defs'
-import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
+import { topDomainCondition, type NonEmptyDomainList } from '@src/background/dnr/rule-domains'
 
 export const computeNetworkRules = (settingId: SettingId, excludedTopDomains: NonEmptyDomainList): chrome.declarativeNetRequest.Rule[] => {
   if (!isNetworkSetting(settingId)) {
@@ -19,7 +19,7 @@ export const computeNetworkRules = (settingId: SettingId, excludedTopDomains: No
     condition: {
       resourceTypes: ALL_RESOURCE_TYPES,
       ...rule.condition,
-      excludedTopDomains: [...excludedTopDomains]
+      ...topDomainCondition(excludedTopDomains, true)
     }
   }))
 }

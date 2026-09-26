@@ -6,20 +6,20 @@ import { ALL_RESOURCE_TYPES } from '@src/background/dnr/resource-types'
 import { allowRuleId } from '@src/background/dnr/rule-ids'
 import { DNR_RULE_PRIORITIES } from '@src/background/dnr/rule-priorities'
 import { BlockerSettingId, isBlockerSetting, SettingId } from "@src/common/setting-ids"
-import type { NonEmptyDomainList } from '@src/background/dnr/rule-domains'
+import { topDomainCondition, type NonEmptyDomainList } from '@src/background/dnr/rule-domains'
 
 const BASE_RULES: Record<BlockerSettingId, (topDomains: NonEmptyDomainList) => chrome.declarativeNetRequest.Rule> = {
   masterSwitch: (topDomains: NonEmptyDomainList) => ({
     id: allowRuleId('masterSwitch'),
     priority: DNR_RULE_PRIORITIES.MASTER_SWITCH,
     action: { type: 'allow' },
-    condition: { topDomains: [...topDomains], resourceTypes: ALL_RESOURCE_TYPES }
+    condition: { ...topDomainCondition(topDomains, false), resourceTypes: ALL_RESOURCE_TYPES }
   }),
   ads: (topDomains: NonEmptyDomainList) => ({
     id: allowRuleId('ads'),
     priority: DNR_RULE_PRIORITIES.BLOCKER_EXCEPTIONS,
     action: { type: 'allow' },
-    condition: { topDomains: [...topDomains], resourceTypes: ALL_RESOURCE_TYPES }
+    condition: { ...topDomainCondition(topDomains, false), resourceTypes: ALL_RESOURCE_TYPES }
   }),
 }
 
