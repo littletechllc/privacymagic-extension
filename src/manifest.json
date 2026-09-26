@@ -8,7 +8,9 @@
   "default_locale": "en",
   "icons": {
     "16": "logo/logo-16.png",
+    "19": "logo/logo-19.png",
     "32": "logo/logo-32.png",
+    "38": "logo/logo-38.png",
     "48": "logo/logo-48.png",
     "128": "logo/logo-128.png"
   },
@@ -18,7 +20,9 @@
     "default_popup": "default_popup/popup.html",
     "default_icon": {
       "16": "logo/logo-16.png",
+      "19": "logo/logo-19.png",
       "32": "logo/logo-32.png",
+      "38": "logo/logo-38.png",
       "48": "logo/logo-48.png",
       "128": "logo/logo-128.png"
     }
