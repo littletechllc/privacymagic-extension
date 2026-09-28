@@ -1,16 +1,19 @@
 import type { BrowserContext } from '@playwright/test'
+import { isEdgeE2EBrowser, type E2EBrowser } from '../channels'
 
 /**
- * Pins the extension via chrome://extensions details ("Pin to toolbar").
+ * Pins the extension via the extensions details page ("Pin to toolbar").
  * This updates chrome.action user settings the same way a real user pin does.
  */
 export const pinExtensionToToolbar = async (
   context: BrowserContext,
-  extensionId: string
+  extensionId: string,
+  e2eBrowser: E2EBrowser
 ): Promise<void> => {
+  const scheme = isEdgeE2EBrowser(e2eBrowser) ? 'edge' : 'chrome'
   const page = await context.newPage()
   try {
-    await page.goto(`chrome://extensions/?id=${extensionId}`)
+    await page.goto(`${scheme}://extensions/?id=${extensionId}`)
     await page.waitForFunction(() => {
       const manager = document.querySelector('extensions-manager')
       const detail = manager?.shadowRoot?.querySelector('extensions-detail-view')
@@ -30,7 +33,7 @@ export const pinExtensionToToolbar = async (
       return true
     })
     if (!toggled) {
-      throw new Error('Pin to toolbar toggle not found on chrome://extensions details')
+      throw new Error(`Pin to toolbar toggle not found on ${scheme}://extensions details`)
     }
 
     // Ensure Chrome reports the extension as pinned before returning.

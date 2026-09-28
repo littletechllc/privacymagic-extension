@@ -27,12 +27,12 @@ type ExtensionFixtures = {
 }
 
 type ExtensionOptions = {
-  /** Which Chrome-for-Testing flavor to launch (see playwright.config projects). */
+  /** Which browser project to launch (see playwright.config projects). */
   e2eBrowser: E2EBrowser
 }
 
 /**
- * Launches Chrome for Testing with the unpacked extension from dist/ in a fresh profile,
+ * Launches the project browser with the unpacked extension from dist/ in a fresh profile,
  * so chrome.runtime.onInstalled fires with reason "install".
  */
 export const test = base.extend<ExtensionFixtures, ExtensionOptions>({
@@ -49,8 +49,7 @@ export const test = base.extend<ExtensionFixtures, ExtensionOptions>({
 
     if (needsExternalBinary && (executablePath == null || executablePath === '')) {
       throw new Error(
-        `PM_E2E_EXECUTABLE_PATH is required for e2eBrowser=${e2eBrowser} ` +
-        '(Chrome for Testing stable/canary binary).'
+        `PM_E2E_EXECUTABLE_PATH is required for e2eBrowser=${e2eBrowser}.`
       )
     }
 

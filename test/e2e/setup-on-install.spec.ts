@@ -1,4 +1,5 @@
 import type { BrowserContext, Page } from '@playwright/test'
+import { isEdgeE2EBrowser } from './channels'
 import { expect, test } from './fixtures'
 import { pinExtensionToToolbar } from './helpers/chrome-extensions'
 
@@ -41,6 +42,9 @@ const isGoogleServicesSettingsUrl = (url: string): boolean =>
   // Legacy fallback when googleServices is unavailable (optional text fragment).
   (url.startsWith('chrome://settings/syncSetup') && !url.includes('/advanced'))
 
+const isEdgePrivacySettingsUrl = (url: string): boolean =>
+  url.startsWith('edge://settings/privacy')
+
 test.describe('first install', () => {
   test('opens the setup page after the extension is installed', async ({ context }) => {
     const setupPage = await waitForSetupPage(context)
@@ -58,14 +62,15 @@ test.describe('first install', () => {
 
   test('completes the pin step when the extension is pinned to the toolbar', async ({
     context,
-    extensionId
+    extensionId,
+    e2eBrowser
   }) => {
     const setupPage = await waitForSetupPage(context)
     const pinCard = setupPage.locator('#step_pin')
     await expect(pinCard).not.toHaveClass(/step-card-completed/)
     await expect(pinCard).not.toHaveClass(/step-card-collapsed/)
 
-    await pinExtensionToToolbar(context, extensionId)
+    await pinExtensionToToolbar(context, extensionId, e2eBrowser)
 
     await expect(pinCard).toHaveClass(/step-card-completed/)
     await expect(pinCard).toHaveClass(/step-card-collapsed/)
@@ -102,15 +107,26 @@ test.describe('first install', () => {
     await expect(historyCard).toHaveClass(/step-card-collapsed/)
   })
 
-  test('Open settings advances the side panel and opens a Chrome settings page', async ({
+  test('Open settings advances the side panel and opens a settings page', async ({
     context,
-    extensionId
+    extensionId,
+    e2eBrowser
   }) => {
     const setupPage = await waitForSetupPage(context)
     const sidePanel = await openSyncHelpSidePanel(context, extensionId, setupPage)
     await expect(sidePanel.locator('#syncHelpPhasePending')).toBeVisible()
 
     await sidePanel.locator('#syncHelpOpenSettingsBtn').click()
+
+    if (isEdgeE2EBrowser(e2eBrowser)) {
+      await expect(sidePanel.locator('#syncHelpPhasePending')).toBeHidden({ timeout: 15_000 })
+      await expect(sidePanel.locator('#syncHelpPhaseEdgePrivacy')).toBeVisible()
+      await expect(sidePanel.locator('#syncHelpFinishSetupBtn')).toBeVisible()
+      await expect.poll(() => {
+        return context.pages().some((page) => isEdgePrivacySettingsUrl(page.url()))
+      }, { timeout: 15_000 }).toBe(true)
+      return
+    }
 
     await expect(sidePanel.locator('#syncHelpPhasePending')).toBeHidden({ timeout: 15_000 })
 

@@ -3,7 +3,7 @@ name: E2E
 on:
   workflow_call:
   workflow_dispatch:
-  # Fresh CfT stable/canary every day (08:00 Pacific / 15:00 UTC).
+  # Fresh browser channels every day (08:00 Pacific / 15:00 UTC).
   schedule:
     - cron: '0 15 * * *'
 
@@ -17,15 +17,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Branded Chrome/Canary cannot --load-extension (Chrome 137+); use Chrome for Testing.
-        # chromium = Playwright-pinned control; cft-* = floating latest channel builds.
+        # Branded Chrome cannot --load-extension (Chrome 137+); use Chrome for Testing.
+        # chromium = Playwright-pinned control; cft-* = floating latest CfT builds.
+        # Edge still honors --load-extension. edge-testing is the Dev channel
+        # (Microsoft does not ship a separate Edge for Testing binary).
         include:
           - project: chromium
             chrome_version: ''
+            edge_version: ''
           - project: cft-stable
             chrome_version: stable
+            edge_version: ''
           - project: cft-canary
             chrome_version: canary
+            edge_version: ''
+          - project: edge-testing
+            chrome_version: ''
+            edge_version: dev
+          - project: edge-release
+            chrome_version: ''
+            edge_version: stable
+          - project: edge-canary
+            chrome_version: ''
+            edge_version: canary
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,16 +64,31 @@ jobs:
         with:
           chrome-version: ${{ matrix.chrome_version }}
           install-dependencies: true
-      - name: Log Chrome version
+      - name: Install browser system dependencies
+        if: matrix.edge_version != ''
+        run: npx playwright install-deps chromium
+      - name: Install Microsoft Edge (${{ matrix.edge_version }})
+        id: setup-edge
+        if: matrix.edge_version != ''
+        uses: browser-actions/setup-edge@v1
+        with:
+          edge-version: ${{ matrix.edge_version }}
+      - name: Log browser version
         env:
-          PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path || steps.setup-edge.outputs.edge-path }}
           SETUP_CHROME_VERSION: ${{ steps.setup-chrome.outputs.chrome-version }}
+          SETUP_EDGE_VERSION: ${{ steps.setup-edge.outputs.edge-version }}
         run: |
           set -euo pipefail
           echo "e2e project: ${{ matrix.project }}"
           if [ -n "${PM_E2E_EXECUTABLE_PATH:-}" ]; then
-            echo "Chrome for Testing channel: ${{ matrix.chrome_version }}"
-            echo "setup-chrome reported version: ${SETUP_CHROME_VERSION:-unknown}"
+            if [ -n "${{ matrix.edge_version }}" ]; then
+              echo "Microsoft Edge channel: ${{ matrix.edge_version }}"
+              echo "setup-edge reported channel: ${SETUP_EDGE_VERSION:-unknown}"
+            else
+              echo "Chrome for Testing channel: ${{ matrix.chrome_version }}"
+              echo "setup-chrome reported version: ${SETUP_CHROME_VERSION:-unknown}"
+            fi
             echo "executable: $PM_E2E_EXECUTABLE_PATH"
             "$PM_E2E_EXECUTABLE_PATH" --version
           else
@@ -74,6 +103,6 @@ jobs:
           fi
       - name: Run e2e tests
         env:
-          PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path || steps.setup-edge.outputs.edge-path }}
           PW_CHROMIUM_ATTACH_TO_OTHER: '1'
         run: xvfb-run --auto-servernum -- npx playwright test --project=${{ matrix.project }}
