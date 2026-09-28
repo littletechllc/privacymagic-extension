@@ -23,7 +23,7 @@ const serviceWorker = (globalObject: GlobalScope): void => {
   void container.getRegistrations().then(async (registrations) => {
     await Promise.all(registrations.map((registration) => registration.unregister()))
   }).catch((error: unknown) => {
-    console.error('error unregistering service workers', error)
+    globalObject.console.error('error unregistering service workers', error)
   })
 }
 
