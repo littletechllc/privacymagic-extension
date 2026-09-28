@@ -13,6 +13,18 @@ const serviceWorker = (globalObject: GlobalScope): void => {
       throw new DOMExceptionSafe('Service workers blocked', 'SecurityError')
     }
   })
+
+  const container = globalObject.navigator.serviceWorker
+  if (container == null || typeof container.getRegistrations !== 'function') {
+    return
+  }
+  // Safari has no browsingData.removeServiceWorkers, so drop workers already
+  // registered for the site being visited.
+  void container.getRegistrations().then(async (registrations) => {
+    await Promise.all(registrations.map((registration) => registration.unregister()))
+  }).catch((error: unknown) => {
+    console.error('error unregistering service workers', error)
+  })
 }
 
 export default serviceWorker

@@ -126,6 +126,9 @@ export const listenForPrefChanges = (prefName: PrefName, callback: (value: boole
 }
 
 export const resetAllPrefsToDefaults = async (): Promise<void> => {
+  if (chrome.privacy == null) {
+    return
+  }
   for (const prefName of PREF_NAMES) {
     await setPref(prefName, !PRIVACY_PREFS_CONFIG[prefName].inverted)
   }

@@ -66,6 +66,9 @@ const handleMessage = async (
 }
 
 const removeAllServiceWorkers = async (): Promise<void> => {
+  if (typeof chrome.browsingData?.removeServiceWorkers !== 'function') {
+    return
+  }
   const excludedDomains = await getDomainsWhereSettingIsDisabled('serviceWorker')
   const excludeOrigins = [...excludedDomains].map(domain => `https://${domain}`)
   chrome.browsingData.removeServiceWorkers({ excludeOrigins }, () => {
@@ -106,14 +109,21 @@ const showSetupPage = async (): Promise<void> => {
   await chrome.tabs.create({ url: chrome.runtime.getURL('privacymagic/setup.html') })
 }
 
+const runInstallStep = async (name: string, step: () => Promise<void>): Promise<void> => {
+  try {
+    await step()
+  } catch (error) {
+    logError(error, `error onInstalled: ${name}`)
+  }
+}
+
 chrome.runtime.onInstalled.addListener((details) => {
   handleAsync(async () => {
     if (details.reason === 'install') {
-      await showSetupPage()
-      await resetAllPrefsToDefaults()
+      await runInstallStep('setup page', showSetupPage)
+      await runInstallStep('privacy prefs', resetAllPrefsToDefaults)
     }
-    // Set up persistent resources (dynamic rules persist, but ensure they're correct on install/update)
-    await initializePersistentResources()
+    await runInstallStep('persistent resources', initializePersistentResources)
   }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
     logError(error, 'error onInstalled', details)
@@ -125,4 +135,6 @@ chrome.runtime.onStartup.addListener(() => {
 })
 
 initializeListeners()
-void removeAllServiceWorkers()
+handleAsync(removeAllServiceWorkers, (error) => {
+  logError(error, 'error removing service workers')
+})

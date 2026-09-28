@@ -2,8 +2,12 @@ import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
 import serviceWorker from '@src/content_scripts/patches/serviceWorker'
 
 class MockServiceWorkerContainer {
+  registrations: ServiceWorkerRegistration[] = []
   register(_scriptURL: string): Promise<ServiceWorkerRegistration> {
     return Promise.resolve({} as ServiceWorkerRegistration)
+  }
+  getRegistrations(): Promise<ServiceWorkerRegistration[]> {
+    return Promise.resolve(this.registrations)
   }
   getRegistration(): Promise<ServiceWorkerRegistration | undefined> {
     return Promise.resolve(undefined)
@@ -60,6 +64,25 @@ describe('serviceWorker patch', () => {
   describe('with patch enabled', () => {
     beforeEach(() => {
       serviceWorker(self)
+    })
+
+    it('unregisters service workers already registered for this site', async () => {
+      let unregistered = false
+      const container = new MockServiceWorkerContainer()
+      container.registrations = [{
+        unregister: () => {
+          unregistered = true
+          return Promise.resolve(true)
+        }
+      } as ServiceWorkerRegistration]
+      Object.defineProperty(navigator, 'serviceWorker', {
+        value: container,
+        configurable: true,
+        enumerable: true
+      })
+      serviceWorker(self)
+      await Promise.resolve()
+      expect(unregistered).toBe(true)
     })
 
     it('should reject with SecurityError when register is called', async () => {
