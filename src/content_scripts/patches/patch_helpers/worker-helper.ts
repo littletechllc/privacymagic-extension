@@ -54,10 +54,8 @@ export const makeSanitizedScriptForWorker = ({
   const jsonStringifySafe = JSON.stringify
 
   let policy: TrustedTypePolicy | undefined
-  let policyNameString: string | undefined
   if (globalObject.TrustedScriptURL != null && url instanceof globalObject.TrustedScriptURL) {
     policy = getTrustedTypePolicyForObject(url)
-    policyNameString = policy ? jsonStringifySafe(policy.name) : undefined
   }
   const absoluteUrl = resolveAbsoluteUrl(url.toString(), globalObject.location.href)
   let completionCallbackCode = ''
@@ -92,9 +90,10 @@ export const makeSanitizedScriptForWorker = ({
   if (payload == null) {
     // Do not catch: an uncaught worker error must reach Worker `onerror`
     // (sites such as hls.js fall back to main-thread work on that event).
+    const workerPolicyName = jsonStringifySafe(globalObject.crypto.randomUUID())
     payload = `
             ${importCommand}(
-              (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)})
+              (${makeTrustedScriptURLFunction.toString()})(self, ${workerPolicyName}, ${jsonStringifySafe(absoluteUrl)})
             );
           `
   }

@@ -72,12 +72,9 @@ export const getTrustedTypePolicyForObject = (object: TrustedObjectType): Truste
  */
 export const makeTrustedScriptURLFunction = (
   workerGlobal: Pick<GlobalScope, 'trustedTypes'>,
-  policyName: string | undefined,
+  policyName: string,
   url: string
 ): TrustedScriptURL | string => {
-  if (policyName == null) {
-    policyName = 'default'
-  }
   if (workerGlobal.trustedTypes == null) {
     return url
   }
