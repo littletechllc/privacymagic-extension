@@ -22,8 +22,12 @@ describe('cpu patch', () => {
       cpu(self)
     })
 
-    it('should set hardwareConcurrency to 4', () => {
-      expect(navigator.hardwareConcurrency).toBe(4)
+    it('should set hardwareConcurrency to a stable integer from 4 to 8', () => {
+      const value = navigator.hardwareConcurrency
+      expect(Number.isInteger(value)).toBe(true)
+      expect(value).toBeGreaterThanOrEqual(4)
+      expect(value).toBeLessThanOrEqual(8)
+      expect(navigator.hardwareConcurrency).toBe(value)
     })
   })
 })

@@ -24,51 +24,10 @@ export const webglVendorAndRendererByPlatform: Record<string, { vendor: string, 
 
 const UNMASKED_VENDOR_WEBGL = 37445
 const UNMASKED_RENDERER_WEBGL = 37446
-const CRYPTO_GET_RANDOM_VALUES_MAX_BYTES = 65536
 
 type WebGLContext = WebGLRenderingContext | WebGL2RenderingContext
 type WebGLContextConstructor = {
   prototype: WebGLContext
-}
-
-const noiseImageDataBytes = (pixels: Uint8ClampedArray, globalObject: GlobalScope): void => {
-  const numberOfBytes = pixels.length
-  if (numberOfBytes <= 0) {
-    return
-  }
-  const noise = new Uint8Array(Math.min(numberOfBytes, CRYPTO_GET_RANDOM_VALUES_MAX_BYTES))
-  for (let offset = 0; offset < numberOfBytes;) {
-    const chunkSize = Math.min(noise.length, numberOfBytes - offset)
-    const chunk = chunkSize === noise.length ? noise : noise.subarray(0, chunkSize)
-    globalObject.crypto.getRandomValues(chunk)
-    for (let i = 0; i < chunkSize; i++) {
-      pixels[offset + i] ^= chunk[i] & 0x01
-    }
-    offset += chunkSize
-  }
-}
-
-export const noiseCanvas = (
-  webGlCanvas: HTMLCanvasElement,
-  globalObject: GlobalScope
-): HTMLCanvasElement | undefined => {
-  const width = webGlCanvas.width
-  const height = webGlCanvas.height
-  if (width <= 0 || height <= 0) {
-    return undefined
-  }
-  const dest = webGlCanvas.ownerDocument.createElement('canvas')
-  dest.width = width
-  dest.height = height
-  const context = dest.getContext('2d')
-  if (context == null) {
-    return undefined
-  }
-  context.drawImage(webGlCanvas, 0, 0)
-  const imageData = context.getImageData(0, 0, dest.width, dest.height)
-  noiseImageDataBytes(imageData.data, globalObject)
-  context.putImageData(imageData, 0, 0)
-  return dest
 }
 
 export const hideWebGLVendorAndRenderer = (globalObject: GlobalScope): void => {

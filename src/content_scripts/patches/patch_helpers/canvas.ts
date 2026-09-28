@@ -1,7 +1,30 @@
 import { createSafeSetter, redefineMethods, reflectApplySafe, reflectConstructSafe, objectDefinePropertiesSafe, createSafeMethod, createSafeGetter, objectGetOwnPropertyDescriptorsSafe } from '@src/content_scripts/helpers/monkey-patch'
 import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe } from '@src/content_scripts/helpers/safe'
 import { GlobalScope } from '../../helpers/globalObject'
-import { noiseCanvas } from './webgl'
+import { noiseImageDataBytes } from './noise'
+
+const noiseCanvas = (
+  source: HTMLCanvasElement,
+  globalObject: GlobalScope
+): HTMLCanvasElement | undefined => {
+  const width = source.width
+  const height = source.height
+  if (width <= 0 || height <= 0) {
+    return undefined
+  }
+  const dest = source.ownerDocument.createElement('canvas')
+  dest.width = width
+  dest.height = height
+  const context = dest.getContext('2d')
+  if (context == null) {
+    return undefined
+  }
+  context.drawImage(source, 0, 0)
+  const imageData = context.getImageData(0, 0, dest.width, dest.height)
+  noiseImageDataBytes(imageData.data, globalObject)
+  context.putImageData(imageData, 0, 0)
+  return dest
+}
 
 export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void => {
   const doc = globalObject.document

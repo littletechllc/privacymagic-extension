@@ -269,7 +269,7 @@ describe('patch_helpers/canvas', () => {
         console: { error: consoleError },
         crypto: {
           getRandomValues <T extends ArrayBufferView>(array: T): T {
-            new Uint8Array(array.buffer, array.byteOffset, array.byteLength).fill(1)
+            new Uint8Array(array.buffer, array.byteOffset, array.byteLength).fill(2)
             return array
           }
         }
@@ -420,7 +420,7 @@ describe('patch_helpers/canvas', () => {
       canvas.width = 1
       canvas.height = 1
       canvas._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
-      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,10,20,30,254')
     })
 
     it('should noise a WebGL canvas snapshot and encode it with toBlob', (done) => {
@@ -432,7 +432,7 @@ describe('patch_helpers/canvas', () => {
         expect(blob).toBeInstanceOf(Blob)
         const reader = new FileReader()
         reader.onloadend = () => {
-          expect(reader.result).toBe('11,21,31,254')
+          expect(reader.result).toBe('10,20,30,254')
           done()
         }
         reader.readAsText(blob!)
@@ -449,7 +449,7 @@ describe('patch_helpers/canvas', () => {
       canvas.height = 1
       const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
       context.drawImage(source)
-      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,10,20,30,254')
     })
 
     it('should noise a 2d canvas only once when toDataURL is called twice', () => {
@@ -462,8 +462,21 @@ describe('patch_helpers/canvas', () => {
       canvas.height = 1
       const context = canvas.getContext('2d') as MockCanvasRenderingContext2D
       context.drawImage(source)
-      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
-      expect(canvas.toDataURL()).toBe('data:image/png;base64,11,21,31,254')
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,10,20,30,254')
+      expect(canvas.toDataURL()).toBe('data:image/png;base64,10,20,30,254')
+    })
+
+    it('should noise two canvases with the same pixels to the same value', () => {
+      const first = globalObject.document.createElement('canvas')
+      first.width = 1
+      first.height = 1
+      first._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      const second = globalObject.document.createElement('canvas')
+      second.width = 1
+      second.height = 1
+      second._bitmap = new Uint8ClampedArray([10, 20, 30, 255])
+      expect(first.toDataURL()).toBe(second.toDataURL())
+      expect(first.toDataURL()).toBe('data:image/png;base64,10,20,30,254')
     })
 
     it('should noise a 2d canvas and encode it with toBlob', (done) => {
@@ -480,7 +493,7 @@ describe('patch_helpers/canvas', () => {
         expect(blob).toBeInstanceOf(Blob)
         const reader = new FileReader()
         reader.onloadend = () => {
-          expect(reader.result).toBe('11,21,31,254')
+          expect(reader.result).toBe('10,20,30,254')
           done()
         }
         reader.readAsText(blob!)
