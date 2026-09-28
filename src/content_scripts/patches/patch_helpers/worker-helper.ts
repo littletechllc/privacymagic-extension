@@ -93,8 +93,9 @@ export const makeSanitizedScriptForWorker = ({
     // Do not catch: an uncaught worker error must reach Worker `onerror`
     // (sites such as hls.js fall back to main-thread work on that event).
     payload = `
-            const trustedAbsoluteUrl = (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)});
-            ${importCommand}(trustedAbsoluteUrl);
+            ${importCommand}(
+              (${makeTrustedScriptURLFunction.toString()})(self, ${policyNameString}, ${jsonStringifySafe(absoluteUrl)})
+            );
           `
   }
   const blobUrl = URLSafe.createObjectURL(new BlobSafe([prefix, payload, suffix], { type: 'text/javascript' }))
