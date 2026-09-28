@@ -60,7 +60,7 @@ describe('useragent patch', () => {
     const proto = Object.getPrototypeOf(navigator) as object
     originalPlatformDescriptor = Object.getOwnPropertyDescriptor(proto, 'platform')
     Object.defineProperty(proto, 'platform', {
-      value: leakyPlatform,
+      get: () => leakyPlatform,
       configurable: true,
       enumerable: true
     })
@@ -124,6 +124,12 @@ describe('useragent patch', () => {
     it('should spoof userAgentData.platform and mobile', () => {
       expect(navigator.userAgentData?.platform).toBe('Win32')
       expect(navigator.userAgentData?.mobile).toBe(false)
+    })
+
+    it('keeps navigator.platform when the patch runs again', () => {
+      useragent(self)
+      expect(navigator.platform).toBe('Win32')
+      expect(navigator.userAgentData?.platform).toBe('Win32')
     })
   })
 })

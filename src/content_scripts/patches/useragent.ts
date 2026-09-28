@@ -1,5 +1,5 @@
-import { redefinePrototypeFields, redefineMethods, redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
-import { GlobalScope } from '@src/content_scripts/helpers/globalObject'
+import { createSafeGetter, redefinePrototypeFields, redefineMethods, redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-patch'
+import { getNavigatorConstructor, GlobalScope } from '@src/content_scripts/helpers/globalObject'
 
 const spoofPlatforms: Record<string, string> = {
   macOS: 'MacIntel',
@@ -11,7 +11,9 @@ const spoofPlatforms: Record<string, string> = {
 
 const useragent = (globalObject: GlobalScope): void => {
   if (globalObject.NavigatorUAData === undefined) return
-  const platform = spoofPlatforms[globalObject.navigator.userAgentData?.platform ?? 'Win32']
+  const getPlatformSafe = createSafeGetter(getNavigatorConstructor(globalObject), 'platform')
+  const originalPlatform = getPlatformSafe(globalObject.navigator)
+  const platform = spoofPlatforms[globalObject.navigator.userAgentData?.platform ?? 'Win32'] ?? originalPlatform
   redefineNavigatorFields(globalObject, {
     platform,
   })
