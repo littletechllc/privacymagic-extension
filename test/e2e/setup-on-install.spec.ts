@@ -141,7 +141,7 @@ test.describe('first install', () => {
       expect(isGoogleServicesSettingsUrl(settingsPage!.url())).toBe(true)
       await expect(googleServices).toBeVisible()
       await expect(sidePanel.locator('#syncHelpHeadingProgress')).toHaveText(' (2/2)')
-      await expect(sidePanel.locator('.sync-help-finish-setup-btn')).toBeVisible()
+      await expect(sidePanel.locator('#syncHelpFinishSetupBtn')).toBeVisible()
     }
   })
 })

@@ -45,6 +45,7 @@ type SyncHelpDom = {
   historyPreviewHeading: HTMLElement
   historyLabelLegacy: HTMLElement
   historyLabelAccount: HTMLElement
+  finishSetup: HTMLElement
 }
 
 const SYNC_HELP_PHASE_COUNT = 2
@@ -55,6 +56,7 @@ const setSyncHelpMode = (mode: SyncHelpMode, dom: SyncHelpDom): void => {
   dom.syncOffPhase.hidden = mode !== 'syncOff'
   dom.googleServicesPhase.hidden = mode !== 'googleServices'
   dom.edgePrivacyPhase.hidden = mode !== 'edgePrivacy'
+  dom.finishSetup.hidden = mode !== 'googleServices' && mode !== 'edgePrivacy'
   dom.headingDefault.hidden = mode !== 'pending' && mode !== 'ready' && mode !== 'googleServices' && mode !== 'edgePrivacy'
   dom.headingSyncOff.hidden = mode !== 'syncOff'
 
@@ -153,15 +155,13 @@ const wireContinueToGoogleServicesButtons = (tabId: number, dom: SyncHelpDom): v
   })
 }
 
-const wireFinishSetupButtons = (): void => {
-  document.querySelectorAll<HTMLButtonElement>('.sync-help-finish-setup-btn').forEach((btn) => {
-    btn.addEventListener('click', (event: Event) => {
-      event.preventDefault()
-      handleAsync(async () => {
-        await disableSyncSettingsDoneRemote(tabIdFromQuery())
-      }, (error) => {
-        logError(error, 'error finishing sync help side panel (all done)', event)
-      })
+const wireFinishSetupButton = (finishSetupBtn: HTMLButtonElement): void => {
+  finishSetupBtn.addEventListener('click', (event: Event) => {
+    event.preventDefault()
+    handleAsync(async () => {
+      await disableSyncSettingsDoneRemote(tabIdFromQuery())
+    }, (error) => {
+      logError(error, 'error finishing sync help side panel (all done)', event)
     })
   })
 }
@@ -240,6 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const historyLabelLegacy = document.getElementById('syncHelpHistoryLabelLegacy')
   const historyLabelAccount = document.getElementById('syncHelpHistoryLabelAccount')
   const openBtn = document.getElementById('syncHelpOpenSettingsBtn')
+  const finishSetup = document.getElementById('syncHelpFinishSetup')
+  const finishSetupBtn = document.getElementById('syncHelpFinishSetupBtn')
 
   if (
     pending == null ||
@@ -256,7 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     historyPreviewHeading == null ||
     historyLabelLegacy == null ||
     historyLabelAccount == null ||
-    openBtn == null
+    openBtn == null ||
+    finishSetup == null ||
+    !(finishSetupBtn instanceof HTMLButtonElement)
   ) {
     return
   }
@@ -275,7 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
     historyInstructionAccount,
     historyPreviewHeading,
     historyLabelLegacy,
-    historyLabelAccount
+    historyLabelAccount,
+    finishSetup
   }
 
   setSyncHelpMode('pending', dom)
@@ -305,6 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   wireContinueToGoogleServicesButtons(tabId, dom)
-  wireFinishSetupButtons()
+  wireFinishSetupButton(finishSetupBtn)
   prepareToCloseSidePanel(tabId, null)
 })
