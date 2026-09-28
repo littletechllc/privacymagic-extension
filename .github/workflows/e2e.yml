@@ -70,7 +70,22 @@ jobs:
       - name: Install Microsoft Edge (${{ matrix.edge_version }})
         id: setup-edge
         if: matrix.edge_version != ''
-        run: node .github/scripts/install-microsoft-edge.mjs ${{ matrix.edge_version }}
+        run: |
+          set -euxo pipefail
+          curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+            | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-edge.gpg >/dev/null
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main" \
+            | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
+          sudo apt-get update
+          case "${{ matrix.edge_version }}" in
+            stable) package=microsoft-edge-stable; bin=/opt/microsoft/msedge/msedge ;;
+            dev) package=microsoft-edge-dev; bin=/opt/microsoft/msedge-dev/msedge ;;
+            canary) package=microsoft-edge-canary; bin=/opt/microsoft/msedge-canary/msedge ;;
+            *) echo "ERROR: unsupported Edge channel ${{ matrix.edge_version }}"; exit 1 ;;
+          esac
+          sudo apt-get install -y "$package"
+          echo "edge-path=$bin" >> "$GITHUB_OUTPUT"
+          echo "edge-version=$("$bin" --version)" >> "$GITHUB_OUTPUT"
       - name: Log browser version
         env:
           PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path || steps.setup-edge.outputs.edge-path }}
