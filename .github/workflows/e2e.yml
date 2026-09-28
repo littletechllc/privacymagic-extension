@@ -70,9 +70,7 @@ jobs:
       - name: Install Microsoft Edge (${{ matrix.edge_version }})
         id: setup-edge
         if: matrix.edge_version != ''
-        uses: browser-actions/setup-edge@v1
-        with:
-          edge-version: ${{ matrix.edge_version }}
+        run: node .github/scripts/install-microsoft-edge.mjs ${{ matrix.edge_version }}
       - name: Log browser version
         env:
           PM_E2E_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path || steps.setup-edge.outputs.edge-path }}
@@ -84,7 +82,7 @@ jobs:
           if [ -n "${PM_E2E_EXECUTABLE_PATH:-}" ]; then
             if [ -n "${{ matrix.edge_version }}" ]; then
               echo "Microsoft Edge channel: ${{ matrix.edge_version }}"
-              echo "setup-edge reported channel: ${SETUP_EDGE_VERSION:-unknown}"
+              echo "installed version: ${SETUP_EDGE_VERSION:-unknown}"
             else
               echo "Chrome for Testing channel: ${{ matrix.chrome_version }}"
               echo "setup-chrome reported version: ${SETUP_CHROME_VERSION:-unknown}"
