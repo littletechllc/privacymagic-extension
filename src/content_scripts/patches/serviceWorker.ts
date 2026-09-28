@@ -23,6 +23,11 @@ const serviceWorker = (globalObject: GlobalScope): void => {
   void container.getRegistrations().then(async (registrations) => {
     await Promise.all(registrations.map((registration) => registration.unregister()))
   }).catch((error: unknown) => {
+    // No service-worker provider (about:blank, opaque sandbox, detached frame).
+    // That document has no registrations.
+    if (error instanceof DOMExceptionSafe && error.name === 'InvalidStateError') {
+      return
+    }
     globalObject.console.error('error unregistering service workers', error)
   })
 }

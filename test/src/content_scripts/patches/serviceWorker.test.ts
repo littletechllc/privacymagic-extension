@@ -1,4 +1,4 @@
-import {describe, it, expect, beforeEach, afterEach} from '@jest/globals'
+import {describe, it, expect, beforeEach, afterEach, jest} from '@jest/globals'
 import serviceWorker from '@src/content_scripts/patches/serviceWorker'
 
 class MockServiceWorkerContainer {
@@ -83,6 +83,43 @@ describe('serviceWorker patch', () => {
       serviceWorker(self)
       await Promise.resolve()
       expect(unregistered).toBe(true)
+    })
+
+    it('ignores InvalidStateError when the document cannot have service workers', async () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+      const container = new MockServiceWorkerContainer()
+      container.getRegistrations = () => Promise.reject(new DOMException('The document is in an invalid state.', 'InvalidStateError'))
+      Object.defineProperty(navigator, 'serviceWorker', {
+        value: container,
+        configurable: true,
+        enumerable: true
+      })
+      serviceWorker(self)
+      // getRegistrations() is already rejected. One turn lets that rejection
+      // pass through .then(); the next turn runs .catch().
+      await Promise.resolve()
+      await Promise.resolve()
+      expect(errorSpy).not.toHaveBeenCalled()
+      errorSpy.mockRestore()
+    })
+
+    it('logs other errors while unregistering service workers', async () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+      const failure = new DOMException('The operation is insecure.', 'SecurityError')
+      const container = new MockServiceWorkerContainer()
+      container.getRegistrations = () => Promise.reject(failure)
+      Object.defineProperty(navigator, 'serviceWorker', {
+        value: container,
+        configurable: true,
+        enumerable: true
+      })
+      serviceWorker(self)
+      // getRegistrations() is already rejected. One turn lets that rejection
+      // pass through .then(); the next turn runs .catch().
+      await Promise.resolve()
+      await Promise.resolve()
+      expect(errorSpy).toHaveBeenCalledWith('error unregistering service workers', failure)
+      errorSpy.mockRestore()
     })
 
     it('should reject with SecurityError when register is called', async () => {
