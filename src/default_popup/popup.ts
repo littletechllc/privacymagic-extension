@@ -76,14 +76,15 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
     throw new Error('No active tab found')
   }
   const domain = await getRegistrableDomainRemote(tab.url ?? '')
+  setupContinueSetupLink()
+  document.getElementById('popupLinks')!.hidden = false
   if (domain == null) {
+    document.querySelector('.main-container')?.setAttribute('hidden', '')
     return
   }
   const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
-  safeLocalPage.style.display = 'none'
+  safeLocalPage.hidden = true
   document.getElementById('advancedSettingsLinkContainer')!.hidden = false
-  document.getElementById('popupLinks')!.hidden = false
-  setupContinueSetupLink()
   setupAdvancedSettingsLink()
   await Promise.all([updateSiteInfo(domain), setupMasterSwitch(domain)])
 }, (error: unknown) => {

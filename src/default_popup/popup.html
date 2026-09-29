@@ -10,7 +10,7 @@
       html,
       body {
         width: 350px;
-        height: 118px;
+        min-height: 118px;
         margin: 0;
       }
       body {
@@ -19,6 +19,9 @@
       }
       .main-container .toggle-box {
         margin-bottom: 0;
+      }
+      .main-container[hidden] {
+        display: none;
       }
       .link-container {
         padding: 0.5em;
@@ -30,10 +33,24 @@
       #advancedSettingsLinkContainer[hidden] {
         display: none;
       }
+      #safeLocalPage {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 4.5rem;
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+      }
+      #safeLocalPage[hidden] {
+        display: none;
+      }
       #popupLinks {
         display: flex;
         margin-top: auto;
-        flex: 1 0 auto;
+        flex: 0 0 auto;
         flex-direction: column;
         justify-content: flex-end;
         background-color: #f0f0f0;
