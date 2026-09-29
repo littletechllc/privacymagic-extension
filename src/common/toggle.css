@@ -2,8 +2,8 @@
 
 .toggle-outer {
   --height: 16px;
-  --checked-color: rgba(63,158,58,1);
-  --unchecked-color: rgb(200, 11, 11);
+  --checked-color: var(--toggle-checked, #3f9e3a);
+  --unchecked-color: var(--toggle-unchecked-icon, #c80b0b);
   
   height: var(--height);
   display: flex;
@@ -44,7 +44,7 @@
     display: inline-block;
     height: var(--height);
     width: calc(2 * var(--height));
-    background: #810707;
+    background: var(--toggle-unchecked, #810707);
     position: relative;
     cursor: pointer;
     &:hover {
@@ -55,7 +55,7 @@
   .switch {
     height: calc(0.8 * var(--height));
     width: calc(0.8 * var(--height));
-    background: rgba(255, 255, 255, 1);
+    background: var(--toggle-knob, #ffffff);
     position: relative;
     top: calc(0.1 * var(--height));
     inset-inline-start: calc(0.1 * var(--height));

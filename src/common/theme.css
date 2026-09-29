@@ -13,6 +13,10 @@
   --bg-muted: #f0f0f0;
   --link: #1f1f1f;
   --link-hover-bg: #eeeeee;
+  --toggle-knob: #ffffff;
+  --toggle-checked: #3f9e3a;
+  --toggle-unchecked: #810707;
+  --toggle-unchecked-icon: #c80b0b;
   --border: rgba(26, 92, 168, 0.1);
   --step-num-bg: #e8f0fb;
   --radius: 16px;
@@ -32,9 +36,13 @@
     --text-hint: #8492a6;
     --bg: #0b1018;
     --bg-card: #131c29;
-    --bg-muted: #131c29;
+    --bg-muted: #243447;
     --link: #d5dde8;
     --link-hover-bg: #1a2433;
+    --toggle-knob: var(--bg);
+    --toggle-checked: #6ec86a;
+    --toggle-unchecked: #c45c5c;
+    --toggle-unchecked-icon: #e88888;
     --border: rgba(142, 192, 245, 0.2);
     --step-num-bg: #243447;
     color-scheme: dark;
