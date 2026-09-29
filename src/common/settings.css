@@ -1,8 +1,8 @@
 @import url('./main.css');
 
 html {
-    background-color: #f7f7f7;
-    color: #000000;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 #extensionNameContainer {
@@ -56,5 +56,5 @@ html {
 #safeLocalPage {
   text-align: center;
   font-size: 14px;
-  color: #888;
+  color: var(--text-hint);
 }

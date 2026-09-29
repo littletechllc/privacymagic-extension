@@ -1,41 +1,5 @@
 @import url("../assets/fonts/fonts.css");
-
-:root {
-  --blue: #1a5ca8;
-  --blue-dark: #0f3d72;
-  --blue-light: #e8f0fb;
-  --blue-mid: #8ab0e0;
-  --btn: #1a5ca8;
-  --btn-hover: #0f3d72;
-  --text: #0d1f3c;
-  --text-muted: #3a5070;
-  --text-hint: #7a96b8;
-  --bg: #fdfcfa;
-  --bg-card: #ffffff;
-  --border: rgba(26, 92, 168, 0.1);
-  --step-num-bg: #e8f0fb;
-  --radius: 16px;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --blue: #7eb0ea;
-    --blue-dark: #c8d9ec;
-    --blue-light: #162033;
-    --blue-mid: #6aa0d8;
-    --btn: #1a5ca8;
-    --btn-hover: #154a8a;
-    --text: #d5dde8;
-    --text-muted: #a8b4c4;
-    --text-hint: #8492a6;
-    --bg: #0b1018;
-    --bg-card: #131c29;
-    --border: rgba(142, 192, 245, 0.2);
-    --step-num-bg: #243447;
-    color-scheme: dark;
-  }
-}
+@import url("../common/theme.css");
 
 body {
   font-family: 'Nunito', sans-serif;

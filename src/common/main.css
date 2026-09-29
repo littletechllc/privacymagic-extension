@@ -1,3 +1,4 @@
+@import url('./theme.css');
 @import url('./toggle.css');
 
 * {
@@ -72,18 +73,24 @@ button {
   font-size: 14px;
   height: fit-content;
   padding: 0.35em 0.75em;
-  background-color: #f0f0f0;
+  background-color: var(--bg-muted);
   a {
     text-decoration: none;
-    color: #1f1f1f;
+    color: var(--link);
   }
   &:hover {
-    background-color: #eee;
+    background-color: var(--link-hover-bg);
     text-decoration: underline;
   }
   img {
     width: 18px;
     height: 18px;
     filter: opacity(0.9);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .link-container img {
+    filter: invert(1) opacity(0.9);
   }
 }
