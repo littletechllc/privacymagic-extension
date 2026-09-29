@@ -9,8 +9,28 @@
   --text-muted: #3a5070;
   --text-hint: #7a96b8;
   --bg: #fdfcfa;
+  --bg-card: #ffffff;
   --border: rgba(26, 92, 168, 0.1);
+  --step-num-bg: #e8f0fb;
   --radius: 16px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue: #7eb0ea;
+    --blue-dark: #c8d9ec;
+    --blue-light: #162033;
+    --blue-mid: #6aa0d8;
+    --text: #d5dde8;
+    --text-muted: #a8b4c4;
+    --text-hint: #8492a6;
+    --bg: #0b1018;
+    --bg-card: #131c29;
+    --border: rgba(142, 192, 245, 0.2);
+    --step-num-bg: #243447;
+    color-scheme: dark;
+  }
 }
 
 body {

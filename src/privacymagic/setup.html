@@ -22,6 +22,12 @@
     margin: 0;
   }
 
+  @media (prefers-color-scheme: dark) {
+    header {
+      background: radial-gradient(ellipse 70% 120% at 50% 40%, #121820 0%, var(--bg) 65%);
+    }
+  }
+
   .logo {
     display: inline-flex;
     align-items: center;
@@ -79,6 +85,24 @@
     text-shadow: 0 0 16px #fefcf8, 0 0 24px #fefcf8;
     margin-top: 2rem;
     margin-bottom: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .setup-msg {
+      text-shadow: 0 0 8px var(--bg), 0 0 14px var(--bg);
+    }
+
+    .setup-sub {
+      text-shadow: 0 0 8px var(--bg);
+    }
+
+    img[src$="puzzle.svg"] {
+      content: url("../assets/images/puzzle-dark.png");
+    }
+
+    img[src$="pin.svg"] {
+      content: url("../assets/images/pin-dark.png");
+    }
   }
 
   .setup-connect {
@@ -149,7 +173,7 @@
   }
 
   .step-card {
-    background: white;
+    background: var(--bg-card);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow:
@@ -165,7 +189,7 @@
     gap: 1rem;
     padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--border);
-    background: white;
+    background: var(--bg-card);
     user-select: none;
   }
 
@@ -175,7 +199,7 @@
 
   .step-num {
     width: 36px; height: 36px;
-    background: var(--blue-light);
+    background: var(--step-num-bg);
     color: var(--blue-dark);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -239,12 +263,12 @@
 
   .step-card-completed.step-card-collapsed {
     .step-title {
-      color: lightgray;
+      color: var(--text-hint);
     }
 
     .step-num {
-      background: rgb(244, 244, 244);
-      color: lightgray;
+      background: color-mix(in srgb, var(--step-num-bg) 55%, var(--bg-card));
+      color: var(--text-hint);
     }
   }
 
@@ -282,7 +306,7 @@
 
   .vpn-logo-placeholder {
     width: 48px; height: 48px;
-    background: white;
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
