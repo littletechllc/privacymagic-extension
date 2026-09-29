@@ -5,6 +5,8 @@
   --blue-dark: #0f3d72;
   --blue-light: #e8f0fb;
   --blue-mid: #8ab0e0;
+  --btn: #1a5ca8;
+  --btn-hover: #0f3d72;
   --text: #0d1f3c;
   --text-muted: #3a5070;
   --text-hint: #7a96b8;
@@ -22,6 +24,8 @@
     --blue-dark: #c8d9ec;
     --blue-light: #162033;
     --blue-mid: #6aa0d8;
+    --btn: #1a5ca8;
+    --btn-hover: #154a8a;
     --text: #d5dde8;
     --text-muted: #a8b4c4;
     --text-hint: #8492a6;
@@ -50,7 +54,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--blue);
+  background: var(--btn);
   color: white;
   font-family: 'Nunito', sans-serif;
   font-size: 0.95rem;
@@ -64,7 +68,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: var(--blue-dark);
+  background: var(--btn-hover);
   transform: translateY(-1px);
 }
 
