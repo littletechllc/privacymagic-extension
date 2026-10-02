@@ -3,5 +3,16 @@
   "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
   // Match previous `npm audit --audit-level=low` behavior.
   "low": true,
-  "allowlist": []
+  "allowlist": [
+    // Dev-only: web-ext > @devicefarmer/adbkit > node-forge (Android ADB tooling).
+    // Not bundled into the extension, so RSA signature forgery here cannot affect
+    // extension users or the shipped product. Revisit when node-forge >1.4.0 ships.
+    {
+      "GHSA-86w9-cpqp-85rv": {
+        "active": true,
+        "notes": "Dev-only transitive dep via web-ext/adbkit; not shipped in the extension. No patched node-forge release yet.",
+        "expiry": "2026-11-01"
+      }
+    }
+  ]
 }
