@@ -7,7 +7,7 @@
     "cpu": ["godaddy.com", "petco.com"],
     "screen": ["petco.com"],
     "ads": ["reddit.com", "youtube.com"],
-    "worker": ["ianonymous3000.github.io", "github.com"],
+    "worker": ["ianonymous3000.github.io", "github.com", "live.com"],
     "gpu": ["bloxd.io", "crazygames.com", "miniblox.io", "orangetheory.com", "weather.com"]
   }
 }
