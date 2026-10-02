@@ -27,11 +27,16 @@ const isAdvancedSidePanelVisibleForTab = async (tabId: number): Promise<boolean>
     return false
   }
   try {
-    const response = await chrome.runtime.sendMessage({
+    const response: unknown = await chrome.runtime.sendMessage({
       type: SIDE_PANEL_VISIBILITY_MESSAGE,
       tabId
-    }) as { visible?: boolean }
-    return response?.visible === true
+    })
+    return (
+      typeof response === 'object' &&
+      response !== null &&
+      'visible' in response &&
+      response.visible === true
+    )
   } catch {
     return false
   }
@@ -104,7 +109,8 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   safeLocalPage.hidden = true
   document.getElementById('advancedSettingsLinkContainer')!.hidden = false
   setupAdvancedSettingsLink()
-  await Promise.all([updateSiteInfo(domain), setupMasterSwitch(domain)])
+  updateSiteInfo(domain, tab.url ?? '')
+  await setupMasterSwitch(domain)
 }, (error: unknown) => {
   logError(error, 'error responding to DOMContentLoaded on current tab', event)
 }))

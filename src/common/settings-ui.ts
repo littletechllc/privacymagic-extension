@@ -142,6 +142,7 @@ export const setupSettingsUI = async (domain: string): Promise<void> => {
   if (settingsContainer == null) {
     throw new Error('Settings container not found')
   }
+  settingsContainer.replaceChildren()
   const masterSwitchToggle = await createMasterSwitch(domain)
   settingsContainer.appendChild(masterSwitchToggle)
   const subswitchesContainer = await createSubswitchesContainer(domain)

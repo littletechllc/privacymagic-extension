@@ -14,13 +14,19 @@ export const tabIdFromQuery = (): number => {
   return n
 }
 
-/** Responds to popup/SW queries with whether this panel page is currently visible. */
+/** Responds to popup queries with whether this panel page is currently visible. */
 const listenForSidePanelVisibilityQueries = (tabId: number): void => {
-  chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-    if (message?.type !== SIDE_PANEL_VISIBILITY_MESSAGE) {
+  chrome.runtime.onMessage.addListener((message: unknown, _sender, sendResponse) => {
+    if (
+      typeof message !== 'object' ||
+      message === null ||
+      !('type' in message) ||
+      message.type !== SIDE_PANEL_VISIBILITY_MESSAGE
+    ) {
       return
     }
-    if (message.tabId !== tabId) {
+    const tabIdInMessage = 'tabId' in message ? message.tabId : undefined
+    if (tabIdInMessage !== tabId) {
       return
     }
     sendResponse({ visible: document.visibilityState === 'visible' })
@@ -49,7 +55,7 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
 const watchForTabChanges = (tabId: number): void => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
     if (activeInfo.tabId !== tabId) {
-      void chrome.sidePanel.setOptions({ enabled: false })
+      void chrome.sidePanel.setOptions({ enabled: false, tabId })
     }
   })
 }
