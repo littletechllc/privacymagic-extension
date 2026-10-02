@@ -76,6 +76,14 @@ const specialFiles: Record<string, (json: Record<string, unknown>) => Record<str
     if (Array.isArray(permissions) && isProduction()) {
       cloned['permissions'] = permissions.filter((p) => p !== 'declarativeNetRequestFeedback')
     }
+    // Microsoft Add-on store rejects background.scripts on MV3. Keep it in
+    // development so Firefox can use event-page scripts alongside service_worker.
+    if (isProduction()) {
+      const background = cloned['background'] as Record<string, unknown> | undefined
+      if (background != null) {
+        delete background['scripts']
+      }
+    }
     return cloned
   }
 }
