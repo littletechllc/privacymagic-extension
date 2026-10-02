@@ -1,22 +1,40 @@
 import { handleAsync, logError } from '@src/common/util'
-import { getRegistrableDomainRemote } from '@src/common/messages'
+import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
+import { SIDE_PANEL_VISIBILITY_MESSAGE } from '@src/common/sidepanel-visibility-message'
 import { updateSiteInfo } from '@src/common/site-info'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const ADVANCED_SIDE_PANEL_PATH = 'privacymagic/sidepanel.html'
 
-const isAdvancedSidePanelOpenForTab = async (tabId: number): Promise<boolean> => {
+/**
+ * True only if a side panel context for this tab exists and reports
+ * document.visibilityState === 'visible'. Needed because Edge can keep a
+ * hidden SIDE_PANEL context after tab switches.
+ */
+const isAdvancedSidePanelVisibleForTab = async (tabId: number): Promise<boolean> => {
   const baseUrl = chrome.runtime.getURL(ADVANCED_SIDE_PANEL_PATH)
   const contexts = await chrome.runtime.getContexts({
     contextTypes: [chrome.runtime.ContextType.SIDE_PANEL]
   })
-  return contexts.some((ctx) => {
+  const hasContext = contexts.some((ctx) => {
     const url = ctx.documentUrl
     if (url == null || !url.startsWith(baseUrl)) {
       return false
     }
     return new URL(url).searchParams.get('tabId') === String(tabId)
   })
+  if (!hasContext) {
+    return false
+  }
+  try {
+    const response = await chrome.runtime.sendMessage({
+      type: SIDE_PANEL_VISIBILITY_MESSAGE,
+      tabId
+    }) as { visible?: boolean }
+    return response?.visible === true
+  } catch {
+    return false
+  }
 }
 
 const setupContinueSetupLink = (): void => {
@@ -42,7 +60,7 @@ const setupAdvancedSettingsLink = (): void => {
       if (tabId == null) {
         throw new Error('No active tab found')
       }
-      if (await isAdvancedSidePanelOpenForTab(tabId)) {
+      if (await isAdvancedSidePanelVisibleForTab(tabId)) {
         await chrome.sidePanel.close({ tabId })
       } else {
         await chrome.sidePanel.setOptions({

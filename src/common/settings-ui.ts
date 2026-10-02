@@ -4,7 +4,7 @@ import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'
 import { objectEntries } from '@src/common/data-structures'
 import { SettingId } from '@src/common/setting-ids'
-import { updateSettingRemote, reloadTabRemote } from '@src/common/messages'
+import { updateSettingRemote, reloadTabRemote } from '@src/common/messages-to-background'
 
 type SettingsCategory =
   'masterSwitch' |

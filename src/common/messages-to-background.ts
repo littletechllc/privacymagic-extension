@@ -7,6 +7,19 @@ export type Message =
   | { type: 'disableSyncSettingsDone', tabId: number }
   | { type: 'getRegistrableDomain', url: string }
 
+/** Keeps in sync with `Message` — add a key when adding a background message type. */
+const BACKGROUND_MESSAGE_TYPES = {
+  updateSetting: true,
+  reloadTab: true,
+  disableSyncSettingsDone: true,
+  getRegistrableDomain: true
+} as const satisfies Record<Message['type'], true>
+
+export const isBackgroundMessage = (message: unknown): message is Message => {
+  const type = (message as { type?: string } | null)?.type
+  return type != null && type in BACKGROUND_MESSAGE_TYPES
+}
+
 // Response types for each message type
 export type SuccessResponse = { success: true }
 export type RegistrableDomainSuccessResponse = { success: true, domain: string | null }

@@ -1,8 +1,8 @@
 import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
-import { getRegistrableDomainRemote } from '@src/common/messages'
+import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
 import { updateSiteInfo } from '@src/common/site-info'
-import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
+import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/privacymagic/sidepanel-helpers'
 
 const updateUI = async (domain: string): Promise<void> => {
   await setupSettingsUI(domain)

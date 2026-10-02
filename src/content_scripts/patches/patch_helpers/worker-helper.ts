@@ -90,7 +90,7 @@ export const makeSanitizedScriptForWorker = ({
   if (payload == null) {
     // Do not catch: an uncaught worker error must reach Worker `onerror`
     // (sites such as hls.js fall back to main-thread work on that event).
-    // Prefer the page's policy name (CSP trusted-types allowlists) over a random UUID.
+    // Prefer the worker script's policy name (CSP trusted-types allowlists) over a random UUID.
     const workerPolicyName = jsonStringifySafe(policy?.name ?? globalObject.crypto.randomUUID())
     payload = `
             ${importCommand}(

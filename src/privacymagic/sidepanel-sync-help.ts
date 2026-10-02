@@ -1,7 +1,7 @@
 import { browserInfo } from '@src/common/browser'
 import { handleAsync, logError } from '@src/common/util'
-import { disableSyncSettingsDoneRemote } from '@src/common/messages'
-import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/common/sidepanel'
+import { disableSyncSettingsDoneRemote } from '@src/common/messages-to-background'
+import { prepareToCloseSidePanel, tabIdFromQuery } from '@src/privacymagic/sidepanel-helpers'
 
 const ACCOUNT_SETTINGS_URL = 'chrome://settings/account'
 const SYNC_SETUP_URL = 'chrome://settings/syncSetup'

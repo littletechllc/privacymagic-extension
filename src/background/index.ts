@@ -2,7 +2,7 @@ import { getDomainsWhereSettingIsDisabled } from '@src/common/settings-read'
 import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from './settings-write'
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
-import { type Message, type ResponseSendFunction } from '@src/common/messages'
+import { type Message, type ResponseSendFunction, isBackgroundMessage } from '@src/common/messages-to-background'
 import { registrableDomainFromUrl } from './registrable-domain'
 import { disableSyncSettingsDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
@@ -77,8 +77,12 @@ const removeAllServiceWorkers = async (): Promise<void> => {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Don't claim the channel for non-background messages (e.g. popup ↔ side panel).
+  if (!isBackgroundMessage(message)) {
+    return
+  }
   // Asynchronously handle the message. We ignore the returned Promise of handleMessage.
-  void handleMessage(message as Message, sender, sendResponse)
+  void handleMessage(message, sender, sendResponse)
   // Return true to indicate that handleMessage will send a response asynchronously.
   return true
 })
