@@ -210,7 +210,11 @@ const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined 
   const cleanLine = line.startsWith('@@') ? line.substring(2) : line
   const isRegexFilter = cleanLine.startsWith('/') && cleanLine.endsWith('/')
   if (isRegexFilter) {
-    return { priority, action, condition: { regexFilter: cleanLine } }
+    return {
+      priority,
+      action,
+      condition: { regexFilter: cleanLine.slice(1, -1) }
+    }
   }
   if (cleanLine.includes('$')) {
     const [rawUrlFilter, typeOptionsString] = splitAtFirst(cleanLine, '$')
