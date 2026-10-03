@@ -43,7 +43,6 @@ const ALLOWED_RESOURCE_TYPES: string[] = [
   'websocket',
   'xhr',
   'method',
-  'csp',
   'other'
 ]
 
@@ -51,7 +50,8 @@ const ALLOWED_RESOURCE_TYPES: string[] = [
 const SKIPPED_RESOURCE_TYPES = new Set([
   'popup',
   'generichide',
-  'webrtc'
+  'webrtc',
+  'csp'
 ])
 
 const RESOURCE_TYPE_EQUIVALENCES: Record<string, ResourceTypeValue> = {
