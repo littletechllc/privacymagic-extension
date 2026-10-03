@@ -210,11 +210,12 @@ const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined 
   const cleanLine = line.startsWith('@@') ? line.substring(2) : line
   const isRegexFilter = cleanLine.startsWith('/') && cleanLine.endsWith('/')
   if (isRegexFilter) {
-    return {
-      priority,
-      action,
-      condition: { regexFilter: cleanLine.slice(1, -1) }
+    const regexFilter = cleanLine.slice(1, -1)
+    // Open-ended counts like .{100,} exceed Chrome's 2KB RE2 compile limit.
+    if (/\{\d+,\}/.test(regexFilter)) {
+      return undefined
     }
+    return { priority, action, condition: { regexFilter } }
   }
   if (cleanLine.includes('$')) {
     const [rawUrlFilter, typeOptionsString] = splitAtFirst(cleanLine, '$')
