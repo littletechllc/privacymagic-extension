@@ -608,5 +608,57 @@
   "setupCubeIconAlt": {
     "message": "kuutio",
     "description": "Alt text for Opera cube icon in step 1"
+  },
+  "opera_55329": {
+    "message": "Lähetä kaatumisraportit automaattisesti Operalle",
+    "description": "Imported from Opera locale.pak resource id 55329"
+  },
+  "opera_55330": {
+    "message": "Auta parantamaan Operaa lähettämällä toimintojen käyttötietoja",
+    "description": "Imported from Opera locale.pak resource id 55330"
+  },
+  "opera_49792": {
+    "message": "Hae ehdotettujen lähteiden kuvat Uutiset-osioon historian perusteella",
+    "description": "Imported from Opera locale.pak resource id 49792"
+  },
+  "opera_52872": {
+    "message": "Näytä ilmoitukset tarjouksista",
+    "description": "Imported from Opera locale.pak resource id 52872"
+  },
+  "opera_48081": {
+    "message": "Vastaanota mainospikavalintoja, -kirjanmerkkejä ja -kampanjoita",
+    "description": "Imported from Opera locale.pak resource id 48081"
+  },
+  "opera_51904": {
+    "message": "Enable VPN",
+    "description": "English fallback; Opera locale.pak for fi missing resource id 51904"
+  },
+  "syncHelpOperaPrivacyIntro": {
+    "message": "Let's tell the browser we don't want it to send data to Opera.",
+    "description": "Intro on sync help side panel for the Opera privacy settings step"
+  },
+  "syncHelpOperaPrivacyInstruction": {
+    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
+    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "left"
+      }
+    }
+  },
+  "syncHelpOperaPrivacyInstructionNeutral": {
+    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
+  },
+  "setupOperaVpnHelpInstruction": {
+    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
+    "placeholders": {
+      "toggle": {
+        "content": "$1",
+        "example": "Enable VPN"
+      }
+    }
   }
 }

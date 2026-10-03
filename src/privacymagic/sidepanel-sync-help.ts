@@ -8,6 +8,7 @@ const SYNC_SETUP_URL = 'chrome://settings/syncSetup'
 const SYNC_SETUP_ADVANCED_URL = 'chrome://settings/syncSetup/advanced'
 const GOOGLE_SERVICES_URL = 'chrome://settings/googleServices'
 const EDGE_PRIVACY_URL = 'edge://settings/privacy/privacy'
+const OPERA_PRIVACY_URL = 'opera://settings/privacy'
 
 /** First-phase settings URLs to try, in order (UNO/account, then legacy sync). */
 const HISTORY_SYNC_SETTINGS_URLS = [
@@ -28,7 +29,7 @@ const googleServicesSettingsUrls = (): readonly string[] => {
 type HistorySyncSettingsUrl = (typeof HISTORY_SYNC_SETTINGS_URLS)[number]
 
 /** Which sync-help side panel body is visible. */
-type SyncHelpMode = 'pending' | 'ready' | 'syncOff' | 'googleServices' | 'edgePrivacy'
+type SyncHelpMode = 'pending' | 'ready' | 'syncOff' | 'googleServices' | 'edgePrivacy' | 'operaPrivacy'
 
 type SyncHelpDom = {
   pending: HTMLElement
@@ -36,6 +37,7 @@ type SyncHelpDom = {
   syncOffPhase: HTMLElement
   googleServicesPhase: HTMLElement
   edgePrivacyPhase: HTMLElement
+  operaPrivacyPhase: HTMLElement
   headingDefault: HTMLElement
   headingProgress: HTMLElement
   headingSyncOff: HTMLElement
@@ -56,8 +58,15 @@ const setSyncHelpMode = (mode: SyncHelpMode, dom: SyncHelpDom): void => {
   dom.syncOffPhase.hidden = mode !== 'syncOff'
   dom.googleServicesPhase.hidden = mode !== 'googleServices'
   dom.edgePrivacyPhase.hidden = mode !== 'edgePrivacy'
-  dom.finishSetup.hidden = mode !== 'googleServices' && mode !== 'edgePrivacy'
-  dom.headingDefault.hidden = mode !== 'pending' && mode !== 'ready' && mode !== 'googleServices' && mode !== 'edgePrivacy'
+  dom.operaPrivacyPhase.hidden = mode !== 'operaPrivacy'
+  dom.finishSetup.hidden =
+    mode !== 'googleServices' && mode !== 'edgePrivacy' && mode !== 'operaPrivacy'
+  dom.headingDefault.hidden =
+    mode !== 'pending' &&
+    mode !== 'ready' &&
+    mode !== 'googleServices' &&
+    mode !== 'edgePrivacy' &&
+    mode !== 'operaPrivacy'
   dom.headingSyncOff.hidden = mode !== 'syncOff'
 
   if (mode === 'ready') {
@@ -126,6 +135,10 @@ const applyEdgePrivacyInstruction = async (): Promise<void> => {
   await applySettingsSideInstruction('syncHelpEdgePrivacyInstruction', 'syncHelpEdgePrivacyInstruction')
 }
 
+const applyOperaPrivacyInstruction = async (): Promise<void> => {
+  await applySettingsSideInstruction('syncHelpOperaPrivacyInstruction', 'syncHelpOperaPrivacyInstruction')
+}
+
 /** Edge has one privacy-settings step instead of Chrome's history-sync and Google-services steps. */
 const edgePrivacySettingsUrl = (): string => {
   const firstToggleLabel = chrome.i18n.getMessage('edge_8757')
@@ -135,10 +148,28 @@ const edgePrivacySettingsUrl = (): string => {
   return `${EDGE_PRIVACY_URL}#:~:text=${encodeURIComponent(firstToggleLabel)}`
 }
 
+/** Opera has one privacy-settings step instead of Chrome's history-sync and Google-services steps. */
+const operaPrivacySettingsUrl = (): string => {
+  const firstToggleLabel = chrome.i18n.getMessage('opera_55329')
+  if (firstToggleLabel === '') {
+    return OPERA_PRIVACY_URL
+  }
+  return `${OPERA_PRIVACY_URL}#:~:text=${encodeURIComponent(firstToggleLabel)}`
+}
+
 const goToEdgePrivacy = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
   await chrome.tabs.update(tabId, { url: edgePrivacySettingsUrl() })
   await applyEdgePrivacyInstruction()
   setSyncHelpMode('edgePrivacy', dom)
+}
+
+const goToOperaPrivacy = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
+  const tab = await chrome.tabs.get(tabId)
+  if (tab.url == null || !tab.url.startsWith(OPERA_PRIVACY_URL)) {
+    await chrome.tabs.update(tabId, { url: operaPrivacySettingsUrl() })
+  }
+  await applyOperaPrivacyInstruction()
+  setSyncHelpMode('operaPrivacy', dom)
 }
 
 const goToGoogleServices = async (tabId: number, dom: SyncHelpDom): Promise<void> => {
@@ -235,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const syncOffPhase = document.getElementById('syncHelpPhaseSyncOff')
   const googleServicesPhase = document.getElementById('syncHelpPhaseGoogleServices')
   const edgePrivacyPhase = document.getElementById('syncHelpPhaseEdgePrivacy')
+  const operaPrivacyPhase = document.getElementById('syncHelpPhaseOperaPrivacy')
   const headingDefault = document.getElementById('syncHelpHeadingDefault')
   const headingProgress = document.getElementById('syncHelpHeadingProgress')
   const headingSyncOff = document.getElementById('syncHelpHeadingSyncOff')
@@ -254,6 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncOffPhase == null ||
     googleServicesPhase == null ||
     edgePrivacyPhase == null ||
+    operaPrivacyPhase == null ||
     headingDefault == null ||
     headingProgress == null ||
     headingSyncOff == null ||
@@ -276,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncOffPhase,
     googleServicesPhase,
     edgePrivacyPhase,
+    operaPrivacyPhase,
     headingDefault,
     headingProgress,
     headingSyncOff,
@@ -288,10 +322,16 @@ document.addEventListener('DOMContentLoaded', () => {
     finishSetup
   }
 
-  setSyncHelpMode('pending', dom)
   handleAsync(async () => {
     await applyGoogleServicesInstruction()
     await applyEdgePrivacyInstruction()
+    await applyOperaPrivacyInstruction()
+    // Opera opens opera://settings/privacy from setup in one step; show that phase immediately.
+    if (browserInfo.brand === 'Opera') {
+      await goToOperaPrivacy(tabId, dom)
+      return
+    }
+    setSyncHelpMode('pending', dom)
   }, (error) => {
     logError(error, 'error applying settings instruction copy')
   })
@@ -300,6 +340,10 @@ document.addEventListener('DOMContentLoaded', () => {
     handleAsync(async () => {
       if (browserInfo.brand === 'Edge') {
         await goToEdgePrivacy(tabId, dom)
+        return
+      }
+      if (browserInfo.brand === 'Opera') {
+        await goToOperaPrivacy(tabId, dom)
         return
       }
       const historySyncSettingsUrl = await tryOpenHistorySyncSettings(tabId)

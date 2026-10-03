@@ -5,6 +5,7 @@ export type Message =
   | { type: 'updateSetting', domain: string, settingId: SettingId, value: boolean }
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
+  | { type: 'operaVpnHelpDone', tabId: number }
   | { type: 'getRegistrableDomain', url: string }
 
 /** Keeps in sync with `Message` — add a key when adding a background message type. */
@@ -12,6 +13,7 @@ const BACKGROUND_MESSAGE_TYPES = {
   updateSetting: true,
   reloadTab: true,
   disableSyncSettingsDone: true,
+  operaVpnHelpDone: true,
   getRegistrableDomain: true
 } as const satisfies Record<Message['type'], true>
 
@@ -58,6 +60,14 @@ export const reloadTabRemote = async (tabId: number): Promise<void> => {
 
 export const disableSyncSettingsDoneRemote = async (tabId: number): Promise<void> => {
   const message: Message = { type: 'disableSyncSettingsDone', tabId }
+  const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
+  if (!response.success) {
+    throw new Error(response.error)
+  }
+}
+
+export const operaVpnHelpDoneRemote = async (tabId: number): Promise<void> => {
+  const message: Message = { type: 'operaVpnHelpDone', tabId }
   const response = (await chrome.runtime.sendMessage(message)) as unknown as SuccessResponse | ErrorResponse
   if (!response.success) {
     throw new Error(response.error)

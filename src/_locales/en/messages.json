@@ -327,6 +327,36 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera browser has a free, built-in VPN you can enable with one click. Opera states it has a no-logs policy.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Help me enable the Opera VPN",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "OR",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Enable Opera VPN",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
+  "setupOperaVpnHelpInstruction": {
+    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
+    "placeholders": {
+      "toggle": {
+        "content": "$1",
+        "example": "Enable VPN"
+      }
+    }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "Enable VPN toggle preview",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
+  },
   "setupSuggestedVpnDescription": {
     "message": "The Privacy Guides team has reviewed and recommended three VPNs that are open source and have a strict commitment to privacy.",
     "description": "Intro text for Privacy Guides VPN recommendations on setup step 2"
@@ -585,6 +615,24 @@
     "message": "Please find these three options in the settings page and disable them (grey) if they're enabled:",
     "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
+  "syncHelpOperaPrivacyIntro": {
+    "message": "Let's tell the browser we don't want it to send data to Opera.",
+    "description": "Intro on sync help side panel for the Opera privacy settings step"
+  },
+  "syncHelpOperaPrivacyInstruction": {
+    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
+    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "left"
+      }
+    }
+  },
+  "syncHelpOperaPrivacyInstructionNeutral": {
+    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
+  },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",
     "description": "Imported from Microsoft Edge locale.pak resource id 8757"
@@ -608,5 +656,29 @@
   "setupCubeIconAlt": {
     "message": "cube icon",
     "description": "Alt text for Opera cube icon in step 1"
+  },
+  "opera_55329": {
+    "message": "Automatically send crash reports to Opera",
+    "description": "Imported from Opera locale.pak resource id 55329"
+  },
+  "opera_55330": {
+    "message": "Help improve Opera by sending feature usage information",
+    "description": "Imported from Opera locale.pak resource id 55330"
+  },
+  "opera_49792": {
+    "message": "Fetch images for suggested sources in News, based on history",
+    "description": "Imported from Opera locale.pak resource id 49792"
+  },
+  "opera_52872": {
+    "message": "Display promotional notifications",
+    "description": "Imported from Opera locale.pak resource id 52872"
+  },
+  "opera_48081": {
+    "message": "Receive promotional Speed Dials, bookmarks and campaigns",
+    "description": "Imported from Opera locale.pak resource id 48081"
+  },
+  "opera_51904": {
+    "message": "Enable VPN",
+    "description": "Imported from Opera locale.pak resource id 51904"
   }
 }

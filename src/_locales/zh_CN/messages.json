@@ -608,5 +608,57 @@
   "setupCubeIconAlt": {
     "message": "立方体图标",
     "description": "Alt text for Opera cube icon in step 1"
+  },
+  "opera_55329": {
+    "message": "自动将故障报告发送到 Opera",
+    "description": "Imported from Opera locale.pak resource id 55329"
+  },
+  "opera_55330": {
+    "message": "发送功能使用情况信息，帮助我们改进 Opera",
+    "description": "Imported from Opera locale.pak resource id 55330"
+  },
+  "opera_49792": {
+    "message": "根据历史记录，为新闻中推荐的源文件获取的图片",
+    "description": "Imported from Opera locale.pak resource id 49792"
+  },
+  "opera_52872": {
+    "message": "显示促销通知",
+    "description": "Imported from Opera locale.pak resource id 52872"
+  },
+  "opera_48081": {
+    "message": "接收促销性快速拨号、书签和活动",
+    "description": "Imported from Opera locale.pak resource id 48081"
+  },
+  "opera_51904": {
+    "message": "启用 VPN",
+    "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "syncHelpOperaPrivacyIntro": {
+    "message": "Let's tell the browser we don't want it to send data to Opera.",
+    "description": "Intro on sync help side panel for the Opera privacy settings step"
+  },
+  "syncHelpOperaPrivacyInstruction": {
+    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
+    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+    "placeholders": {
+      "LEFT": {
+        "content": "$1",
+        "example": "left"
+      }
+    }
+  },
+  "syncHelpOperaPrivacyInstructionNeutral": {
+    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
+  },
+  "setupOperaVpnHelpInstruction": {
+    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
+    "placeholders": {
+      "toggle": {
+        "content": "$1",
+        "example": "Enable VPN"
+      }
+    }
   }
 }

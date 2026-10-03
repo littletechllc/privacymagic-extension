@@ -4,7 +4,7 @@ import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, isBackgroundMessage } from '@src/common/messages-to-background'
 import { registrableDomainFromUrl } from './registrable-domain'
-import { disableSyncSettingsDone } from './disable-sync-settings-done'
+import { disableSyncSettingsDone, operaVpnHelpDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
@@ -39,6 +39,9 @@ const handleMessage = async (
       sendResponse({ success: true })
     } else if (message.type === 'disableSyncSettingsDone') {
       await disableSyncSettingsDone(message.tabId)
+      sendResponse({ success: true })
+    } else if (message.type === 'operaVpnHelpDone') {
+      await operaVpnHelpDone(message.tabId)
       sendResponse({ success: true })
     } else if (message.type === 'getRegistrableDomain') {
       let domain: string | null = null

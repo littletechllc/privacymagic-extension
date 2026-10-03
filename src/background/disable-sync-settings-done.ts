@@ -1,12 +1,12 @@
 import { logError } from '@src/common/util'
-import { setupHistorySyncStepDone } from '@src/common/setup-step-done-state'
+import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
 
 const getWindowIdForTab = async (tabId: number): Promise<number> => {
-    const tab = await chrome.tabs.get(tabId)
-    if (tab.windowId == null) {
-      throw new Error('tab has no window id')
-    }
-    return tab.windowId
+  const tab = await chrome.tabs.get(tabId)
+  if (tab.windowId == null) {
+    throw new Error('tab has no window id')
+  }
+  return tab.windowId
 }
 
 const isChromeSettingsHelpTab = (url: string | undefined): boolean => {
@@ -14,7 +14,13 @@ const isChromeSettingsHelpTab = (url: string | undefined): boolean => {
   return url.startsWith('chrome://settings/account') ||
     url.startsWith('chrome://settings/syncSetup') ||
     url.startsWith('chrome://settings/googleServices') ||
+    url.startsWith('opera://settings/privacy') ||
     url.startsWith('edge://settings/privacy')
+}
+
+const isOperaVpnSettingsHelpTab = (url: string | undefined): boolean => {
+  if (url == null) return false
+  return url.startsWith('chrome://settings/vpn')
 }
 
 const closeSidePanel = async (tabId: number): Promise<void> => {
@@ -45,25 +51,47 @@ const focusOrOpenSetupTab = async (windowId: number): Promise<void> => {
   await chrome.tabs.create({ url: setupUrl, active: true, windowId })
 }
 
+const finishSetupSidePanelHelp = async (
+  tabId: number,
+  markStepDone: () => Promise<void>,
+  shouldCloseTab: (url: string | undefined) => boolean
+): Promise<void> => {
+  await markStepDone()
+  const windowId = await getWindowIdForTab(tabId)
+  await closeSidePanel(tabId)
+
+  try {
+    const tab = await chrome.tabs.get(tabId)
+    if (shouldCloseTab(tab.url)) {
+      await chrome.tabs.remove(tabId)
+    }
+  } catch (error) {
+    logError(error, 'error removing settings tab after setup side panel done')
+  }
+
+  await focusOrOpenSetupTab(windowId)
+}
+
 /**
  * Persists setup step disableHistorySync completion, closes the sync-help side panel, optionally removes the
  * settings tab, and focuses or opens the setup page.
  */
 export const disableSyncSettingsDone = async (tabId: number): Promise<void> => {
-  await setupHistorySyncStepDone.set(true)
-  const windowId = await getWindowIdForTab(tabId)
-  await closeSidePanel(tabId)
+  await finishSetupSidePanelHelp(
+    tabId,
+    async () => { await setupHistorySyncStepDone.set(true) },
+    isChromeSettingsHelpTab
+  )
+}
 
-  if (tabId != null) {
-    try {
-      const tab = await chrome.tabs.get(tabId)
-      if (isChromeSettingsHelpTab(tab.url)) {
-        await chrome.tabs.remove(tabId)
-      }
-    } catch (error) {
-      logError(error, 'error removing settings tab after disable sync settings done')
-    }
-  }
-
-  await focusOrOpenSetupTab(windowId)
+/**
+ * Persists setup VPN step completion, closes the Opera VPN help side panel, removes the VPN settings tab,
+ * and focuses or opens the setup page.
+ */
+export const operaVpnHelpDone = async (tabId: number): Promise<void> => {
+  await finishSetupSidePanelHelp(
+    tabId,
+    async () => { await setupVpnStepDone.set(true) },
+    isOperaVpnSettingsHelpTab
+  )
 }

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="setupOperaVpnHelpTitle">Enable Opera VPN</title>
+  <script src="./i18n.js" type="module"></script>
+  <link href="./shared.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    .setup-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+    }
+
+    .setup-header h1 {
+      margin: 0;
+      font-family: 'Lora', serif;
+      font-size: clamp(1.4rem, 3.4vw, 2rem);
+      font-weight: 600;
+      color: var(--blue-dark);
+      line-height: 1.2;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      margin: 0 0 14px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .vpn-preview {
+      width: fit-content;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 8px 0 0;
+      padding: 24px;
+    }
+
+    .vpn-preview-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .vpn-preview-toggle {
+      width: 48px;
+      height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .opera-vpn-actions {
+      margin-top: 20px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .vpn-preview-toggle {
+        content: url("../assets/images/opera-vpn-toggle-dark.png");
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="setup-header">
+      <img class="logo-icon" src="../logo/logo.svg" alt="Privacy Magic logo" />
+      <h1 data-i18n="setupPanelHeading" data-i18n-args="setupBrandName" dir="auto">Privacy Magic Setup</h1>
+    </header>
+    <main class="content">
+      <h1 class="step-title" data-i18n="setupOperaVpnHelpTitle" dir="auto">Enable Opera VPN</h1>
+      <p data-i18n-html="setupOperaVpnHelpInstruction" data-i18n-args="opera_51904" dir="auto">
+        To enable the in-browser VPN, make sure the <strong>Enable VPN</strong> toggle is enabled.
+      </p>
+      <div class="vpn-preview" role="img" data-i18n-aria-label="setupOperaVpnHelpPreviewAriaLabel" aria-label="Enable VPN toggle preview">
+        <div class="vpn-preview-row">
+          <span data-i18n="opera_51904">Enable VPN</span>
+          <img class="vpn-preview-toggle" src="../assets/images/opera-vpn-toggle.png" alt="" aria-hidden="true" />
+        </div>
+      </div>
+      <div class="btn-row btn-row--end opera-vpn-actions">
+        <button type="button" class="btn-primary" id="operaVpnHelpDoneBtn" data-i18n="setupStep3AllDoneCta">All done!</button>
+      </div>
+    </main>
+  </div>
+  <script src="./sidepanel-opera-vpn.js" type="module"></script>
+</body>
+</html>

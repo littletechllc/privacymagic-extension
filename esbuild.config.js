@@ -78,6 +78,10 @@ const builds = [
     outfile: 'dist/privacymagic/sidepanel-sync-help.js'
   },
   {
+    entryPoints: ['src/privacymagic/sidepanel-opera-vpn.ts'],
+    outfile: 'dist/privacymagic/sidepanel-opera-vpn.js'
+  },
+  {
     entryPoints: ['src/privacymagic/i18n.ts'],
     outfile: 'dist/privacymagic/i18n.js'
   }
