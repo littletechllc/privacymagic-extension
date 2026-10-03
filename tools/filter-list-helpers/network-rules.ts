@@ -40,15 +40,19 @@ const ALLOWED_RESOURCE_TYPES: string[] = [
   'xmlhttprequest',
   'ping',
   'media',
-  'popup',
-  'generichide',
-  'webrtc',
   'websocket',
   'xhr',
   'method',
   'csp',
   'other'
 ]
+
+/** Adblock options with no DNR resourceType equivalent. */
+const SKIPPED_RESOURCE_TYPES = new Set([
+  'popup',
+  'generichide',
+  'webrtc'
+])
 
 const RESOURCE_TYPE_EQUIVALENCES: Record<string, ResourceTypeValue> = {
   subdocument: 'sub_frame',
@@ -96,15 +100,17 @@ type ParsedTypeOptions = {
 /**
  * Parse the given type options string into an object with the following keys:
  * - domainType: the type of domain (firstParty or thirdParty)
- * - resourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
- * - excludedResourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, popup, generichide, webrtc, websocket, other)
+ * - resourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, websocket, other)
+ * - excludedResourceTypes: one or more of the resource types (sub_frame, stylesheet, image, script, object, xmlhttprequest, ping, media, websocket, other)
  * - requestMethods: one or more of the request methods (get, post, put, delete, options, head, patch, other)
  * - excludedRequestMethods: one or more of the request methods (get, post, put, delete, options, head, patch, other)
  * - initiatorDomains: one or more of the initiator domains
  * - excludedInitiatorDomains: one or more of the initiator domains
  * - cspLine: the CSP line
+ *
+ * Returns undefined if the filter only specified skipped resource types (e.g. $popup).
  */
-const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions => {
+const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions | undefined => {
   const requestMethods: RequestMethodValue[] = []
   const excludedRequestMethods: RequestMethodValue[] = []
   let domainType : 'firstParty' | 'thirdParty' | undefined = undefined
@@ -116,6 +122,7 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
   const resourceTypes: ResourceTypeValue[] = []
   const excludedResourceTypes: ResourceTypeValue[] = []
   let cspLine: string | undefined = undefined
+  let skippedInclude = false
   const items = typeOptionsString.split(',')
   for (const item of items) {
     if (item.startsWith('domain=')) {
@@ -152,7 +159,7 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
     } else if (item.startsWith('~')) {
       if (item === '~third-party') {
         domainType = 'firstParty'
-      } else {
+      } else if (!SKIPPED_RESOURCE_TYPES.has(item.substring(1))) {
         excludedResourceTypes.push(toEquivalentResourceType(item.substring(1)))
       }
     } else if (item === 'third-party') {
@@ -165,9 +172,14 @@ const parseTypeOptionsString = (typeOptionsString: string): ParsedTypeOptions =>
       console.log('important filter')
       // TODO: handle important filters
       continue
+    } else if (SKIPPED_RESOURCE_TYPES.has(item)) {
+      skippedInclude = true
     } else {
       resourceTypes.push(toEquivalentResourceType(item))
     }
+  }
+  if (skippedInclude && resourceTypes.length === 0) {
+    return undefined
   }
   const condition = removeEmptyProperties({
     domainType,
@@ -202,7 +214,11 @@ const parseNetworkFilterLine = (line: string): NetworkRuleWithoutId | undefined 
   }
   if (cleanLine.includes('$')) {
     const [rawUrlFilter, typeOptionsString] = splitAtFirst(cleanLine, '$')
-    const { condition, options } = parseTypeOptionsString(typeOptionsString)
+    const parsed = parseTypeOptionsString(typeOptionsString)
+    if (parsed === undefined) {
+      return undefined
+    }
+    const { condition, options } = parsed
     const urlFilter = rawUrlFilter.trim()
     if (urlFilter.length > 0) {
       condition.urlFilter = urlFilter
