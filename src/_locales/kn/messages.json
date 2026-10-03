@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು $BROWSER$ ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>ಪಜಲ್</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>$PIN_CONTROL$</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ।$FIREFOX_PIN_STEP$ Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "ನಿಮ್ಮ ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು ನೋಡಲು $BROWSER$ ಟೂಲ್‌ಬಾರ್‌ನಲ್ಲಿರುವ <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} ಕ್ಲಿಕ್ ಮಾಡಿ। ಪಟ್ಟಿಯಲ್ಲಿ <strong>Privacy Magic</strong> ಅನ್ನು ಕಂಡು ಅದರ ಪಕ್ಕದ <strong>$PIN_CONTROL$</strong> {pinIcon} ಕ್ಲಿಕ್ ಮಾಡಿ।$FIREFOX_PIN_STEP$ Privacy Magic ಬಟನ್ {hamsaIcon} ಪಿನ್ ಆದ ನಂತರ, ನೀವು ಯಾವಾಗ ಬೇಕಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ ರಕ್ಷಣೆಯ ಸ್ಥಿತಿಯನ್ನು ನೋಡಿ ಪ್ರತ್ಯೇಕ ರಕ್ಷಣೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "ಪಜಲ್"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "ಜಾಹೀರಾತುಗಳು, ಶೋಧ, ಶಾಪಿಂಗ್‌ ಮತ್ತು ಸುದ್ದಿ ಮತ್ತು Copilot ನಂತಹ Edge ಮತ್ತು Microsoft ಸೇವೆಗಳನ್ನು ವೈಯಕ್ತೀಕರಣಗೊಳಿಸಲು ಇತಿಹಾಸ, ಬಳಕೆ, ಮೆಚ್ಚಿನವುಗಳು, ವೆಬ್ ವಿಷಯ ಮತ್ತು ಇತರ ಬ್ರೌಸಿಂಗ್ ಡೇಟಾ ಸೇರಿದಂತೆ ನಿಮ್ಮ ಬ್ರೌಸಿಂಗ್ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸಲು Microsoft ಗೆ ಅನುಮತಿಸಿ.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "ಪಜಲ್",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube ಐಕಾನ್",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

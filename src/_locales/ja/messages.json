@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "$BROWSER$ のツールバーにある<strong>パズル</strong>{puzzleIcon}をクリックして拡張機能を表示します。一覧で<strong>Privacy Magic</strong>を見つけ、横の<strong>$PIN_CONTROL$</strong> {pinIcon}をクリックします。$FIREFOX_PIN_STEP$Privacy Magic ボタン{hamsaIcon}が固定されたら、いつでもクリックして保護状況を確認し、個別の保護設定を管理できます。",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "$BROWSER$ のツールバーにある<strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon}をクリックして拡張機能を表示します。一覧で<strong>Privacy Magic</strong>を見つけ、横の<strong>$PIN_CONTROL$</strong> {pinIcon}をクリックします。$FIREFOX_PIN_STEP$Privacy Magic ボタン{hamsaIcon}が固定されたら、いつでもクリックして保護状況を確認し、個別の保護設定を管理できます。",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "パズル"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Edge や広告、検索、ショッピング、ニュース、Copilot などの Microsoft サービスをカスタマイズして改善するために、Microsoft が、履歴、使用状況、お気に入り、Web コンテンツ、その他の閲覧データを含む閲覧アクティビティを保存できるようにします。",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "パズル",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "キューブ",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "キューブアイコン",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

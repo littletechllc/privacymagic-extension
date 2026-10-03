@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kliknite na <strong>puzzle</strong> {puzzleIcon} na paneli nástrojov $BROWSER$, aby ste videli svoje rozšírenia. Nájdite v zozname <strong>Privacy Magic</strong> a kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} vedľa neho.$FIREFOX_PIN_STEP$ Keď bude tlačidlo Privacy Magic {hamsaIcon} pripnuté, môžete naň kliknúť kedykoľvek, aby ste videli, ako ste chránení, a spravovali jednotlivé ochrany.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Kliknite na <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} na paneli nástrojov $BROWSER$, aby ste videli svoje rozšírenia. Nájdite v zozname <strong>Privacy Magic</strong> a kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} vedľa neho.$FIREFOX_PIN_STEP$ Keď bude tlačidlo Privacy Magic {hamsaIcon} pripnuté, môžete naň kliknúť kedykoľvek, aby ste videli, ako ste chránení, a spravovali jednotlivé ochrany.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "puzzle"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Povoľte spoločnosti Microsoft ukladať vašu aktivitu prehľadávania vrátane histórie, používania, obľúbených položiek, webového obsahu a ďalších údajov prehľadávania na prispôsobenie a zlepšenie prehliadača Edge a služieb Microsoft, ako sú reklamy, vyhľadávanie, nakupovanie, správy a Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "puzzle",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "kocka",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "ikona kocka",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

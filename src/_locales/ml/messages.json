@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "നിങ്ങളുടെ എക്സ്റ്റെൻഷനുകൾ കാണാൻ $BROWSER$ ടൂൾബാറിലെ <strong>പസിൽ</strong> {puzzleIcon} ക്ലിക്ക് ചെയ്യുക। ലിസ്റ്റിൽ <strong>Privacy Magic</strong> കണ്ടെത്തി സമീപമുള്ള <strong>$PIN_CONTROL$</strong> {pinIcon} ക്ലിക്ക് ചെയ്യുക।$FIREFOX_PIN_STEP$ Privacy Magic ബട്ടൺ {hamsaIcon} പിൻ ചെയ്താൽ, നിങ്ങൾക്ക് എപ്പോഴും ക്ലിക്ക് ചെയ്ത് സംരക്ഷണം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് കാണാനും വ്യക്തിഗത സംരക്ഷണങ്ങൾ നിയന്ത്രിക്കാനും കഴിയും।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "നിങ്ങളുടെ എക്സ്റ്റെൻഷനുകൾ കാണാൻ $BROWSER$ ടൂൾബാറിലെ <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} ക്ലിക്ക് ചെയ്യുക। ലിസ്റ്റിൽ <strong>Privacy Magic</strong> കണ്ടെത്തി സമീപമുള്ള <strong>$PIN_CONTROL$</strong> {pinIcon} ക്ലിക്ക് ചെയ്യുക।$FIREFOX_PIN_STEP$ Privacy Magic ബട്ടൺ {hamsaIcon} പിൻ ചെയ്താൽ, നിങ്ങൾക്ക് എപ്പോഴും ക്ലിക്ക് ചെയ്ത് സംരക്ഷണം എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് കാണാനും വ്യക്തിഗത സംരക്ഷണങ്ങൾ നിയന്ത്രിക്കാനും കഴിയും।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "പസിൽ"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "പരസ്യങ്ങൾ, തിരയൽ, ഷോപ്പിംഗ്, വാർത്ത, Copilot തുടങ്ങിയ Edge, Microsoft സേവനങ്ങൾ വ്യക്തിഗതമാക്കുന്നതിനും മെച്ചപ്പെടുത്തുന്നതിനും ചരിത്രം, ഉപയോഗം, പ്രിയങ്കരങ്ങൾ, വെബ് ഉള്ളടക്കം, മറ്റ് ബ്രൗസിംഗ് ഡാറ്റാ എന്നിവ ഉൾപ്പെടെയുള്ള നിങ്ങളുടെ ബ്രൗസിംഗ് പ്രവർത്തനം സംരക്ഷിക്കാൻ Microsoft-നെ അനുവദിക്കുക.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "പസിൽ",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube ഐക്കൺ",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

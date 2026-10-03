@@ -28,10 +28,20 @@ const applyStep1MessageTokens = (): void => {
   const firefoxPinToToolbar = browserInfo.brand === 'Firefox'
     ? (chrome.i18n.getMessage('setupFirefoxPinToToolbar') || ' Click <strong>Pin to Toolbar</strong>.')
     : ''
-  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [browserInfo.brand, pinControl, firefoxPinToToolbar])
+  const extensionsControl = browserInfo.brand === 'Opera'
+    ? (chrome.i18n.getMessage('setupCubeControl') || 'cube')
+    : (chrome.i18n.getMessage('setupPuzzleControl') || 'puzzle')
+  const raw = chrome.i18n.getMessage('setupStep1BodyWithIcons', [
+    browserInfo.brand,
+    pinControl,
+    firefoxPinToToolbar,
+    extensionsControl
+  ])
   const source = raw || el.innerHTML
 
-  const puzzleIconAlt = chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon'
+  const puzzleIconAlt = browserInfo.brand === 'Opera'
+    ? (chrome.i18n.getMessage('setupCubeIconAlt') || 'cube icon')
+    : (chrome.i18n.getMessage('setupPuzzleIconAlt') || 'puzzle icon')
   const pinIconAlt = browserInfo.brand === 'Firefox'
     ? pinControl
     : (chrome.i18n.getMessage('setupPinIconAlt') || 'pin icon')
@@ -39,12 +49,16 @@ const applyStep1MessageTokens = (): void => {
     ? '../assets/images/puzzle-edge.png'
     : browserInfo.brand === 'Firefox'
       ? '../assets/images/puzzle-firefox.png'
-      : '../assets/images/puzzle.svg'
+      : browserInfo.brand === 'Opera'
+        ? '../assets/images/cube-opera.png'
+        : '../assets/images/puzzle.svg'
   const pinIconPath = browserInfo.brand === 'Edge'
     ? '../assets/images/pin-edge.png'
     : browserInfo.brand === 'Firefox'
       ? '../assets/images/more_options.png'
-      : '../assets/images/pin.svg'
+      : browserInfo.brand === 'Opera'
+        ? '../assets/images/pin-opera.png'
+        : '../assets/images/pin.svg'
 
   const tokenMap: Record<string, string> = {
     puzzleIcon: buildSetupInlineIconHtml(puzzleIconAlt, puzzleIconPath),

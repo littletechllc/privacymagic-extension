@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க $BROWSER$ கருவிப்பட்டியிலுள்ள <strong>பஸில்</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>$PIN_CONTROL$</strong> {pinIcon} ஐ கிளிக் செய்யவும்.$FIREFOX_PIN_STEP$ Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "உங்கள் நீட்டிப்புகளைப் பார்க்க $BROWSER$ கருவிப்பட்டியிலுள்ள <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} ஐ கிளிக் செய்யவும். பட்டியலில் <strong>Privacy Magic</strong> ஐ கண்டுபிடித்து அதற்குப் பக்கத்தில் உள்ள <strong>$PIN_CONTROL$</strong> {pinIcon} ஐ கிளிக் செய்யவும்.$FIREFOX_PIN_STEP$ Privacy Magic பொத்தான் {hamsaIcon} பின் செய்யப்பட்டவுடன், நீங்கள் எந்த நேரத்திலும் கிளிக் செய்து பாதுகாப்பு நிலையைப் பார்த்து தனிப்பட்ட பாதுகாப்புகளை கட்டுப்படுத்தலாம்.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "பஸில்"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "விளம்பரங்கள், தேடல், ஷாப்பிங், செய்திகள், Copilot போன்ற Edge மற்றும் Microsoft சேவைகளைத் தனிப்பயனாக்குவதற்கும் மேம்படுத்துவதற்கும், வரலாறு, உபயோகம், பிடித்தவை, வலை உள்ளடக்கம் மற்றும் பிற உலாவல் தரவு உட்பட உங்கள் உலாவல் செயல்பாட்டைச் சேமிக்க, Microsoft-ஐ அனுமதியுங்கள்.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "பஸில்",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube ஐகான்",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

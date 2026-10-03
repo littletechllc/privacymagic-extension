@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "I-click ang <strong>puzzle</strong> {puzzleIcon} sa $BROWSER$ toolbar para makita ang iyong mga extension. Hanapin ang <strong>Privacy Magic</strong> sa listahan at i-click ang <strong>$PIN_CONTROL$</strong> {pinIcon} sa tabi nito.$FIREFOX_PIN_STEP$ Kapag na-pin na ang button ng Privacy Magic {hamsaIcon}, maaari mo itong i-click anumang oras para makita kung paano ka pinoprotektahan at kontrolin ang mga indibidwal na proteksyon.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "I-click ang <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} sa $BROWSER$ toolbar para makita ang iyong mga extension. Hanapin ang <strong>Privacy Magic</strong> sa listahan at i-click ang <strong>$PIN_CONTROL$</strong> {pinIcon} sa tabi nito.$FIREFOX_PIN_STEP$ Kapag na-pin na ang button ng Privacy Magic {hamsaIcon}, maaari mo itong i-click anumang oras para makita kung paano ka pinoprotektahan at kontrolin ang mga indibidwal na proteksyon.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "puzzle"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Payagan ang Microsoft na i-save ang aktibidad mo sa pagba-browse kasama ang kasaysayan, paggamit, mga paborito, nilalaman sa web, at iba pang data sa pagba-browse para ma-personalize at mapahusay ang Edge at mga serbisyo ng Microsoft gaya ng mga ad, paghahanap, pamimili, balita, at Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "puzzle",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "icon ng cube",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

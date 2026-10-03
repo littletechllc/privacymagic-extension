@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Noklikšķiniet uz <strong>puzles</strong> {puzzleIcon} $BROWSER$ rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>$PIN_CONTROL$</strong> {pinIcon} blakus tam.$FIREFOX_PIN_STEP$ Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Noklikšķiniet uz <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} $BROWSER$ rīkjoslā, lai redzētu savus paplašinājumus. Sarakstā atrodiet <strong>Privacy Magic</strong> un noklikšķiniet uz <strong>$PIN_CONTROL$</strong> {pinIcon} blakus tam.$FIREFOX_PIN_STEP$ Kad Privacy Magic poga {hamsaIcon} ir piesprausta, varat uz tās klikšķināt jebkurā laikā, lai redzētu, kā jūs tiekat aizsargāts, un pārvaldītu atsevišķas aizsardzības.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "puzles"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Ļaut Microsoft saglabāt jūsu pārlūkošanas darbības, tostarp vēsturi, lietojumu, izlasi, tīmekļa saturu un citus pārlūkošanas datus, lai personalizētu un uzlabotu Edge un Microsoft pakalpojumus, piemēram, reklāmas, meklēšanu, iepirkšanos, ziņas un Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "puzles",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube ikona",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

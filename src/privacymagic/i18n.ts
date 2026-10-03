@@ -42,6 +42,9 @@ const resolveI18nArg = (key: string): string => {
     }
     return message || ' Click <strong>Pin to Toolbar</strong>.'
   }
+  if (key === 'setupPuzzleControl' && browserInfo.brand === 'Opera') {
+    return chrome.i18n.getMessage('setupCubeControl') || 'cube'
+  }
   return message || key
 }
 

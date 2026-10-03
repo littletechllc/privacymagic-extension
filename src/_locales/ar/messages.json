@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "انقر على <strong>اللغز</strong> {puzzleIcon} في شريط أدوات $BROWSER$ لرؤية الإضافات. ابحث عن <strong>Privacy Magic</strong> في القائمة ثم انقر على <strong>$PIN_CONTROL$</strong> {pinIcon} بجانبه.$FIREFOX_PIN_STEP$ بعد تثبيت زر Privacy Magic {hamsaIcon}، يمكنك النقر عليه في أي وقت لمعرفة كيفية حمايتك والتحكم في وسائل الحماية الفردية.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "انقر على <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} في شريط أدوات $BROWSER$ لرؤية الإضافات. ابحث عن <strong>Privacy Magic</strong> في القائمة ثم انقر على <strong>$PIN_CONTROL$</strong> {pinIcon} بجانبه.$FIREFOX_PIN_STEP$ بعد تثبيت زر Privacy Magic {hamsaIcon}، يمكنك النقر عليه في أي وقت لمعرفة كيفية حمايتك والتحكم في وسائل الحماية الفردية.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "اللغز"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "اسمح لـ Microsoft بحفظ نشاط الاستعراض الخاص بك بما في ذلك السجل والاستخدام والمفضلة ومحتوى الويب وبيانات الاستعراض الأخرى لتخصيص مستعرض Edge وخدمات Microsoft وتحسينها مثل الإعلانات والبحث والتسوق والأخبار وخدمة Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "اللغز",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "مكعب",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "أيقونة مكعب",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

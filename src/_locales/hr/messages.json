@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kliknite na <strong>slagalicu</strong> {puzzleIcon} na alatnoj traci $BROWSER$a kako biste vidjeli svoja proširenja. Pronađite <strong>Privacy Magic</strong> na popisu i kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} pored njega.$FIREFOX_PIN_STEP$ Kada je gumb Privacy Magic {hamsaIcon} prikvačen, možete ga kliknuti bilo kada kako biste vidjeli kako ste zaštićeni i upravljali pojedinačnim zaštitama.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Kliknite na <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} na alatnoj traci $BROWSER$a kako biste vidjeli svoja proširenja. Pronađite <strong>Privacy Magic</strong> na popisu i kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} pored njega.$FIREFOX_PIN_STEP$ Kada je gumb Privacy Magic {hamsaIcon} prikvačen, možete ga kliknuti bilo kada kako biste vidjeli kako ste zaštićeni i upravljali pojedinačnim zaštitama.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "slagalicu"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Dopustite Microsoftu spremanje vaših aktivnosti pregledavanja, uključujući povijest, korištenje, favorite, web-sadržaj i druge podatke o pregledavanju da biste personalizirali i poboljšali Edge i Microsoftove servise kao što su oglasi, pretraživanje, kupovina, vijesti i Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "slagalicu",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

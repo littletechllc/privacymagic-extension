@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik <strong>puzzle</strong> {puzzleIcon} di toolbar $BROWSER$ untuk melihat ekstensi Anda. Temukan <strong>Privacy Magic</strong> di daftar dan klik <strong>$PIN_CONTROL$</strong> {pinIcon} di sampingnya.$FIREFOX_PIN_STEP$ Setelah tombol Privacy Magic {hamsaIcon} disematkan, Anda dapat mengkliknya kapan saja untuk melihat bagaimana Anda dilindungi dan mengatur perlindungan individual.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Klik <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} di toolbar $BROWSER$ untuk melihat ekstensi Anda. Temukan <strong>Privacy Magic</strong> di daftar dan klik <strong>$PIN_CONTROL$</strong> {pinIcon} di sampingnya.$FIREFOX_PIN_STEP$ Setelah tombol Privacy Magic {hamsaIcon} disematkan, Anda dapat mengkliknya kapan saja untuk melihat bagaimana Anda dilindungi dan mengatur perlindungan individual.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "puzzle"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Izinkan Microsoft menyimpan aktivitas penjelajahan Anda termasuk riwayat, penggunaan, favorit, konten web, dan data penjelajahan lainnya untuk mempersonalisasikan dan meningkatkan Edge dan layanan Microsoft seperti iklan, pencarian, belanja, berita, dan Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "puzzle",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "kubus",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "ikon kubus",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

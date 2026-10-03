@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Haz clic en el <strong>rompecabezas</strong> {puzzleIcon} en la barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>$PIN_CONTROL$</strong> {pinIcon} junto a él.$FIREFOX_PIN_STEP$ Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo estás protegido y controlar protecciones individuales.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Haz clic en el <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} en la barra de herramientas de $BROWSER$ para ver tus extensiones. Busca <strong>Privacy Magic</strong> en la lista y haz clic en el <strong>$PIN_CONTROL$</strong> {pinIcon} junto a él.$FIREFOX_PIN_STEP$ Una vez que el botón de Privacy Magic {hamsaIcon} esté fijado, puedes hacer clic en él en cualquier momento para ver cómo estás protegido y controlar protecciones individuales.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "rompecabezas"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Permite que Microsoft guarde tu actividad de exploración, como el historial, el uso, los favoritos, el contenido web y otros datos de exploración para personalizar y mejorar los servicios Microsoft y Edge, como los anuncios, las búsquedas, las compras, las noticias y Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "rompecabezas",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cubo",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "icono de cubo",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

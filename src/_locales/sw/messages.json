@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Bofya <strong>fumbo</strong> {puzzleIcon} kwenye upau wa zana wa $BROWSER$ ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>$PIN_CONTROL$</strong> {pinIcon} iliyo kando yake.$FIREFOX_PIN_STEP$ Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Bofya <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} kwenye upau wa zana wa $BROWSER$ ili kuona viendelezi vyako. Tafuta <strong>Privacy Magic</strong> kwenye orodha na ubofye <strong>$PIN_CONTROL$</strong> {pinIcon} iliyo kando yake.$FIREFOX_PIN_STEP$ Mara tu kitufe cha Privacy Magic {hamsaIcon} kinapobandikwa, unaweza kubofya wakati wowote kuona jinsi unavyolindwa na kudhibiti ulinzi wa kila kipengele.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "fumbo"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Allow Microsoft to save your browsing activity including history, usage, favorites, web content, and other browsing data to personalize and improve Edge and Microsoft services like ads, search, shopping, news, and Copilot.",
     "description": "English fallback; Microsoft Edge has no locale.pak for sw. Resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "fumbo",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "ikoni ya cube",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

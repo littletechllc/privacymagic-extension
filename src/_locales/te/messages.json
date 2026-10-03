@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "మీ ఎక్స్టెన్షన్లు చూడటానికి $BROWSER$ టూల్‌బార్‌లోని <strong>పజిల్</strong> {puzzleIcon} పై క్లిక్ చేయండి. జాబితాలో <strong>Privacy Magic</strong> ను కనుగొని పక్కన ఉన్న <strong>$PIN_CONTROL$</strong> {pinIcon} పై క్లిక్ చేయండి.$FIREFOX_PIN_STEP$ Privacy Magic బటన్ {hamsaIcon} పిన్ అయిన తర్వాత, మీరు ఎప్పుడైనా క్లిక్ చేసి రక్షణ స్థితిని చూసి వ్యక్తిగత రక్షణలను నియంత్రించవచ్చు.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "మీ ఎక్స్టెన్షన్లు చూడటానికి $BROWSER$ టూల్‌బార్‌లోని <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} పై క్లిక్ చేయండి. జాబితాలో <strong>Privacy Magic</strong> ను కనుగొని పక్కన ఉన్న <strong>$PIN_CONTROL$</strong> {pinIcon} పై క్లిక్ చేయండి.$FIREFOX_PIN_STEP$ Privacy Magic బటన్ {hamsaIcon} పిన్ అయిన తర్వాత, మీరు ఎప్పుడైనా క్లిక్ చేసి రక్షణ స్థితిని చూసి వ్యక్తిగత రక్షణలను నియంత్రించవచ్చు.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "పజిల్"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "మీ చరిత్ర, వినియోగం, ఇష్టమైనవి, వెబ్ కంటెంట్ మరియు ఇతర బ్రౌజింగ్ డేటాతో సహా మీ బ్రౌజింగ్ కార్యకలాపాలను సేవ్ చేయడానికి Microsoft ను అనుమతించండి, తద్వారా Edge మరియు Microsoft సేవలు అయిన ప్రకటనలు, శోధన, షాపింగ్, వార్తలు మరియు Copilot వంటి వాటిని మీ అభిరుచులకు అనుగుణంగా మార్చడానికి మరియు మెరుగుపరచడానికి వీలవుతుంది.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "పజిల్",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube ఐకాన్",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

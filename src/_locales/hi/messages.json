@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>पज़ल</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>$PIN_CONTROL$</strong> {pinIcon} पर क्लिक करें।$FIREFOX_PIN_STEP$ जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "अपने एक्सटेंशन देखने के लिए $BROWSER$ टूलबार में <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} पर क्लिक करें। सूची में <strong>Privacy Magic</strong> ढूँढें और उसके बगल में <strong>$PIN_CONTROL$</strong> {pinIcon} पर क्लिक करें।$FIREFOX_PIN_STEP$ जब Privacy Magic बटन {hamsaIcon} पिन हो जाए, तो आप किसी भी समय उस पर क्लिक करके देख सकते हैं कि आपकी सुरक्षा कैसे हो रही है और अलग-अलग सुरक्षा नियंत्रित कर सकते हैं।",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "पज़ल"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Microsoft को अपनी ब्राउज़िंग गतिविधि, जिसमें इतिहास, उपयोग, पसंदीदा, वेब सामग्री और अन्य ब्राउज़िंग डेटा शामिल हैं, को सहेजने की अनुमति दें, ताकि Edge और Microsoft की सेवाओं (जैसे विज्ञापन, खोज, शॉपिंग, समाचार और Copilot) को आपके लिए वैयक्तिकृत और बेहतर बनाया जा सके.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "पज़ल",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "घन",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "घन आइकन",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "點選 $BROWSER$ 工具列中的<strong>拼圖</strong>{puzzleIcon}以查看擴充功能。在清單中找到<strong>Privacy Magic</strong>，然後點選旁邊的<strong>$PIN_CONTROL$</strong> {pinIcon}。$FIREFOX_PIN_STEP$當 Privacy Magic 按鈕 {hamsaIcon} 已釘選後，您可隨時點擊查看保護狀態並管理各項保護。",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "點選 $BROWSER$ 工具列中的<strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon}以查看擴充功能。在清單中找到<strong>Privacy Magic</strong>，然後點選旁邊的<strong>$PIN_CONTROL$</strong> {pinIcon}。$FIREFOX_PIN_STEP$當 Privacy Magic 按鈕 {hamsaIcon} 已釘選後，您可隨時點擊查看保護狀態並管理各項保護。",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "拼圖"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "允許 Microsoft 儲存您的瀏覽活動，包括歷程記錄、使用方式、我的最愛、Web 內容和其他瀏覽資料，以個人化並改善 Edge 和 Microsoft 服務，例如廣告、搜尋、購物、新聞和 Copilot。",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "拼圖",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "立方體",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "立方體圖示",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

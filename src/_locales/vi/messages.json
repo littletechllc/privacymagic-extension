@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Nhấp vào <strong>mảnh ghép</strong> {puzzleIcon} trên thanh công cụ $BROWSER$ để xem các tiện ích mở rộng. Tìm <strong>Privacy Magic</strong> trong danh sách và nhấp vào <strong>$PIN_CONTROL$</strong> {pinIcon} bên cạnh.$FIREFOX_PIN_STEP$ Khi nút Privacy Magic {hamsaIcon} đã được ghim, bạn có thể nhấp bất cứ lúc nào để xem cách bạn được bảo vệ và kiểm soát từng biện pháp bảo vệ.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Nhấp vào <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} trên thanh công cụ $BROWSER$ để xem các tiện ích mở rộng. Tìm <strong>Privacy Magic</strong> trong danh sách và nhấp vào <strong>$PIN_CONTROL$</strong> {pinIcon} bên cạnh.$FIREFOX_PIN_STEP$ Khi nút Privacy Magic {hamsaIcon} đã được ghim, bạn có thể nhấp bất cứ lúc nào để xem cách bạn được bảo vệ và kiểm soát từng biện pháp bảo vệ.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "mảnh ghép"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Cho phép Microsoft lưu hoạt động duyệt web của bạn bao gồm lịch sử, mức sử dụng, mục yêu thích, nội dung web và dữ liệu duyệt web khác để cá nhân hóa và cải thiện Edge cũng như các dịch vụ Microsoft như quảng cáo, tìm kiếm, mua sắm, tin tức và Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "mảnh ghép",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "khối lập phương",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "biểu tượng khối lập phương",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

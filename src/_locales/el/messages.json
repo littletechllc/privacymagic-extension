@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Κάντε κλικ στο <strong>παζλ</strong> {puzzleIcon} στη γραμμή εργαλείων του $BROWSER$ για να δείτε τις επεκτάσεις σας. Βρείτε το <strong>Privacy Magic</strong> στη λίστα και κάντε κλικ στην <strong>$PIN_CONTROL$</strong> {pinIcon} δίπλα του.$FIREFOX_PIN_STEP$ Μόλις το κουμπί Privacy Magic {hamsaIcon} καρφιτσωθεί, μπορείτε να το πατάτε οποιαδήποτε στιγμή για να δείτε πώς προστατεύεστε και να ελέγχετε επιμέρους προστασίες.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Κάντε κλικ στο <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} στη γραμμή εργαλείων του $BROWSER$ για να δείτε τις επεκτάσεις σας. Βρείτε το <strong>Privacy Magic</strong> στη λίστα και κάντε κλικ στην <strong>$PIN_CONTROL$</strong> {pinIcon} δίπλα του.$FIREFOX_PIN_STEP$ Μόλις το κουμπί Privacy Magic {hamsaIcon} καρφιτσωθεί, μπορείτε να το πατάτε οποιαδήποτε στιγμή για να δείτε πώς προστατεύεστε και να ελέγχετε επιμέρους προστασίες.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "παζλ"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Επιτρέψτε στη Microsoft να αποθηκεύει τη δραστηριότητα περιήγησής σας, όπως το ιστορικό, τη χρήση, τα αγαπημένα, το περιεχόμενο web και άλλα δεδομένα περιήγησης, για να εξατομικεύει και να βελτιώνει το Edge και τις Υπηρεσίες της Microsoft, όπως διαφημίσεις, αναζήτηση, αγορές, ειδήσεις και το Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "παζλ",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "κύβος",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "εικονίδιο κύβος",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

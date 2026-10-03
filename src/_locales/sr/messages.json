@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Kliknite na <strong>slagalicu</strong> {puzzleIcon} na traci sa alatkama $BROWSER$-а da biste videli proširenja. Pronađite <strong>Privacy Magic</strong> na listi i kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} pored njega.$FIREFOX_PIN_STEP$ Kada je dugme Privacy Magic {hamsaIcon} zakačeno, možete da ga kliknete bilo kada da vidite kako ste zaštićeni i upravljate pojedinačnim zaštitama.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Kliknite na <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} na traci sa alatkama $BROWSER$-а da biste videli proširenja. Pronađite <strong>Privacy Magic</strong> na listi i kliknite na <strong>$PIN_CONTROL$</strong> {pinIcon} pored njega.$FIREFOX_PIN_STEP$ Kada je dugme Privacy Magic {hamsaIcon} zakačeno, možete da ga kliknete bilo kada da vidite kako ste zaštićeni i upravljate pojedinačnim zaštitama.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "slagalicu"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Дозволите да Microsoft сачува вашу активност прегледања, укључујући историју, употребу, омиљене локације, веб садржај и друге податке о прегледању ради персонализације и побољшања прегледача Edge и Microsoft услуга попут огласа, претраге, куповине, вести и функције Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "slagalicu",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "cube",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "cube",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

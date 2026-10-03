@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "$BROWSER$ 도구 모음의 <strong>퍼즐</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>$PIN_CONTROL$</strong> {pinIcon}을 클릭하세요.$FIREFOX_PIN_STEP$ Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "$BROWSER$ 도구 모음의 <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon}을 클릭해 확장 프로그램을 확인하세요. 목록에서 <strong>Privacy Magic</strong>을 찾고 옆의 <strong>$PIN_CONTROL$</strong> {pinIcon}을 클릭하세요.$FIREFOX_PIN_STEP$ Privacy Magic 버튼 {hamsaIcon}이 고정되면 언제든 클릭해 보호 상태를 확인하고 개별 보호 기능을 제어할 수 있습니다.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "퍼즐"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Microsoft가 검색 기록, 사용 정보, 즐겨찾기, 웹 콘텐츠 및 기타 검색 데이터를 포함한 사용자의 검색 활동을 저장하여 Edge와 광고, 검색, 쇼핑, 뉴스, Copilot과 같은 Microsoft 서비스를 개인화하고 개선하도록 허용합니다.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "퍼즐",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "큐브",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "큐브 아이콘",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

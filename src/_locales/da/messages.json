@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "Klik på <strong>puslespillet</strong> {puzzleIcon} i din $BROWSER$-værktøjslinje for at se dine udvidelser. Find <strong>Privacy Magic</strong> på listen, og klik på <strong>$PIN_CONTROL$</strong> {pinIcon} ved siden af.$FIREFOX_PIN_STEP$ Når Privacy Magic-knappen {hamsaIcon} er fastgjort, kan du klikke på den når som helst for at se, hvordan du bliver beskyttet, og styre individuelle beskyttelser.",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "Klik på <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} i din $BROWSER$-værktøjslinje for at se dine udvidelser. Find <strong>Privacy Magic</strong> på listen, og klik på <strong>$PIN_CONTROL$</strong> {pinIcon} ved siden af.$FIREFOX_PIN_STEP$ Når Privacy Magic-knappen {hamsaIcon} er fastgjort, kan du klikke på den når som helst for at se, hvordan du bliver beskyttet, og styre individuelle beskyttelser.",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "puslespillet"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "Tillad, at Microsoft gemmer din browseraktivitet, herunder oversigt, brug, favoritter, webindhold og andre browserdata, for at tilpasse og forbedre Edge og Microsoft-tjenester som f.eks. reklamer, søgning, shopping, nyheder og Copilot.",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "puslespillet",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "terning",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "terning",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }

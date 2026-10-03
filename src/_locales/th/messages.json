@@ -468,8 +468,8 @@
     "description": "Label for source code link in setup footer"
   },
   "setupStep1BodyWithIcons": {
-    "message": "คลิก <strong>จิ๊กซอว์</strong> {puzzleIcon} บนแถบเครื่องมือ $BROWSER$ เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>$PIN_CONTROL$</strong> {pinIcon} ข้างๆ$FIREFOX_PIN_STEP$ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
-    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge.",
+    "message": "คลิก <strong>$EXTENSIONS_CONTROL$</strong> {puzzleIcon} บนแถบเครื่องมือ $BROWSER$ เพื่อดูส่วนขยายของคุณ ค้นหา <strong>Privacy Magic</strong> ในรายการ แล้วคลิก <strong>$PIN_CONTROL$</strong> {pinIcon} ข้างๆ$FIREFOX_PIN_STEP$ เมื่อปุ่ม Privacy Magic {hamsaIcon} ถูกปักหมุดแล้ว คุณสามารถคลิกได้ทุกเมื่อเพื่อดูว่าคุณได้รับการปกป้องอย่างไรและควบคุมการป้องกันแต่ละรายการ",
+    "description": "Step 1 body text with named icon tokens for i18n. $BROWSER$ is the browser name. $PIN_CONTROL$ is \"pin\" or, in Firefox, the more-options button. $FIREFOX_PIN_STEP$ is a Firefox-only sentence, empty in Chrome and Edge. $EXTENSIONS_CONTROL$ is \"puzzle\" or, in Opera, \"cube\".",
     "placeholders": {
       "browser": {
         "content": "$1",
@@ -482,6 +482,10 @@
       "firefox_pin_step": {
         "content": "$3",
         "example": "Click Pin to Toolbar."
+      },
+      "extensions_control": {
+        "content": "$4",
+        "example": "จิ๊กซอว์"
       }
     }
   },
@@ -592,5 +596,17 @@
   "edge_19254": {
     "message": "อนุญาตให้ Microsoft บันทึกกิจกรรมการเรียกดูของคุณ รวมถึงประวัติ การใช้งาน รายการโปรด เนื้อหาเว็บ และข้อมูลการเรียกดูอื่นๆ เพื่อปรับแต่งและปรับปรุง Edge และบริการของ Microsoft ให้เป็นแบบส่วนตัว เช่น โฆษณา การค้นหา ช้อปปิ้ง ข่าวสาร และ Copilot",
     "description": "Imported from Microsoft Edge locale.pak resource id 19254"
+  },
+  "setupPuzzleControl": {
+    "message": "จิ๊กซอว์",
+    "description": "Name of the extensions-menu toolbar control in step 1 (puzzle piece) for non-Opera browsers."
+  },
+  "setupCubeControl": {
+    "message": "ลูกบาศก์",
+    "description": "Name of the extensions-menu toolbar control in step 1 for Opera (cube icon)."
+  },
+  "setupCubeIconAlt": {
+    "message": "ไอคอนลูกบาศก์",
+    "description": "Alt text for Opera cube icon in step 1"
   }
 }
