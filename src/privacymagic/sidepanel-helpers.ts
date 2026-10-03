@@ -1,3 +1,4 @@
+import { browserInfo } from '@src/common/browser'
 import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
 import { SIDE_PANEL_VISIBILITY_MESSAGE } from '@src/common/sidepanel-visibility-message'
 import { handleAsync, logError } from '@src/common/util'
@@ -52,6 +53,7 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
   })
 }
 
+/** Edge does not restore the side panel across tab switches; close it when leaving this tab. */
 const watchForTabChanges = (tabId: number): void => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
     if (activeInfo.tabId !== tabId) {
@@ -63,5 +65,7 @@ const watchForTabChanges = (tabId: number): void => {
 export const prepareToCloseSidePanel = (tabId: number, domain: string | null): void => {
   listenForSidePanelVisibilityQueries(tabId)
   watchForNavigations(tabId, domain)
-  watchForTabChanges(tabId)
+  if (browserInfo.brand === 'Edge') {
+    watchForTabChanges(tabId)
+  }
 }
