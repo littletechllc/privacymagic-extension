@@ -1,6 +1,8 @@
+import { browserInfo, type BrowserInfo } from './browser'
 import { logError } from './util'
 
 type PrefCategory = keyof typeof chrome.privacy
+type BrowserBrand = BrowserInfo['brand']
 
 // Union of all pref keys across all categories (websites, network, services, etc.)
 export type BrowserPrivacyPrefName = {
@@ -14,6 +16,8 @@ interface PrefConfig {
   category: PrefCategory
   onValue?: string
   offValue?: string
+  /** Do not read/set/show this pref on these browsers (native crash or missing feature). */
+  unsupportedBrowsers?: readonly BrowserBrand[]
 }
 
 export const PRIVACY_PREFS_CONFIG = {
@@ -44,10 +48,12 @@ export const PRIVACY_PREFS_CONFIG = {
     locked: false,
     category: 'services'
   },
+  // Opera exposes this API but has no Google spelling service; set() crashes the browser.
   spellingServiceEnabled: {
     inverted: true,
     locked: false,
-    category: 'services'
+    category: 'services',
+    unsupportedBrowsers: ['Opera'] as const
   },
   searchSuggestEnabled: {
     inverted: true,
@@ -75,6 +81,14 @@ export type PrefName = keyof typeof PRIVACY_PREFS_CONFIG
 
 const PREF_NAMES = Object.keys(PRIVACY_PREFS_CONFIG) as PrefName[]
 
+export const isPrefSupported = (prefName: PrefName): boolean => {
+  const unsupported = (PRIVACY_PREFS_CONFIG[prefName] as PrefConfig).unsupportedBrowsers
+  return unsupported == null || !unsupported.includes(browserInfo.brand)
+}
+
+export const supportedPrefNames = (): PrefName[] =>
+  PREF_NAMES.filter(isPrefSupported)
+
 const getPrivacyPrefObject = (prefName: PrefName): chrome.types.ChromeSetting<boolean | string> => {
   const category = PRIVACY_PREFS_CONFIG[prefName].category
   const categoryObj = chrome.privacy[category]
@@ -82,6 +96,9 @@ const getPrivacyPrefObject = (prefName: PrefName): chrome.types.ChromeSetting<bo
 }
 
 export const getPref = async (prefName: PrefName): Promise<boolean> => {
+  if (!isPrefSupported(prefName)) {
+    throw new Error(`Pref ${prefName} is not supported on ${browserInfo.brand}`)
+  }
   const config = PRIVACY_PREFS_CONFIG[prefName] as PrefConfig
   const prefObject = getPrivacyPrefObject(prefName)
   const result = await prefObject.get({})
@@ -98,6 +115,10 @@ export const getPref = async (prefName: PrefName): Promise<boolean> => {
 }
 
 export const setPref = async (prefName: PrefName, value: boolean): Promise<void> => {
+  if (!isPrefSupported(prefName)) {
+    console.log(`Skipping unsupported pref ${prefName} on ${browserInfo.brand}`)
+    return
+  }
   const config = PRIVACY_PREFS_CONFIG[prefName] as PrefConfig
   const pref = getPrivacyPrefObject(prefName)
   let nativeValue: string | boolean = value
@@ -109,6 +130,9 @@ export const setPref = async (prefName: PrefName, value: boolean): Promise<void>
 }
 
 export const listenForPrefChanges = (prefName: PrefName, callback: (value: boolean) => void): void => {
+  if (!isPrefSupported(prefName)) {
+    return
+  }
   const config = PRIVACY_PREFS_CONFIG[prefName] as PrefConfig
   const pref = getPrivacyPrefObject(prefName)
   pref.onChange.addListener((details: { value: unknown }) => {
@@ -129,7 +153,7 @@ export const resetAllPrefsToDefaults = async (): Promise<void> => {
   if (chrome.privacy == null) {
     return
   }
-  for (const prefName of PREF_NAMES) {
+  for (const prefName of supportedPrefNames()) {
     await setPref(prefName, !PRIVACY_PREFS_CONFIG[prefName].inverted)
   }
 }

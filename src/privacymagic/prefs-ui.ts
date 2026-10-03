@@ -1,4 +1,4 @@
-import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, type PrefName } from '@src/common/prefs'
+import { PRIVACY_PREFS_CONFIG, getPref, setPref, listenForPrefChanges, isPrefSupported, type PrefName } from '@src/common/prefs'
 import { createToggle } from '@src/common/toggle'
 import { logError, handleAsync } from '@src/common/util'
 import { objectEntries } from '@src/common/data-structures'
@@ -31,6 +31,9 @@ export const setupPrefsUI = async (): Promise<void> => {
   // Title comes from options.html (data-i18n="browserPreferences"); append toggles only.
   // Create toggles for each preference
   for (const [prefName, { locked, inverted }] of objectEntries(PRIVACY_PREFS_CONFIG)) {
+    if (!isPrefSupported(prefName)) {
+      continue
+    }
     const toggle = createToggle(prefName, locked)
     await bindPrefToCheckbox(toggle, prefName, inverted)
     prefsContainer.appendChild(toggle)
