@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "請在設定頁面中找到這兩個選項，若已啟用請將其停用（灰色）：",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "協助改善 Chrome 的功能與效能",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "左側"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "請在設定頁面中找到這三個選項，若已啟用請將其停用（灰色）：",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "傳送選擇性診斷數據以改善Microsoft產品",

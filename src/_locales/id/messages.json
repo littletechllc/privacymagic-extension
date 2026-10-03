@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Silakan temukan dua opsi ini di halaman setelan dan nonaktifkan (abu-abu) jika diaktifkan:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Bantu tingkatkan fitur dan performa Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "kiri"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Silakan temukan tiga opsi ini di halaman setelan dan nonaktifkan (abu-abu) jika diaktifkan:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Kirim data diagnostik opsional untuk meningkatkan produk Microsoft",

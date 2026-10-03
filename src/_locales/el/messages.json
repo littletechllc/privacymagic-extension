@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Βρείτε αυτές τις δύο επιλογές στη σελίδα ρυθμίσεων στα και απενεργοποιήστε τις (γκρι) αν είναι ενεργές:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Συμβάλετε στη βελτίωση των λειτουργιών και της απόδοσης του Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "αριστερά"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Βρείτε αυτές τις τρεις επιλογές στη σελίδα ρυθμίσεων στα και απενεργοποιήστε τις (γκρι) αν είναι ενεργές:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Αποστολή προαιρετικών διαγνωστικών δεδομένων για τη βελτίωση των προϊόντων της Microsoft",

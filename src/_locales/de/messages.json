@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Bitte finde diese beiden Optionen auf der Einstellungsseite und deaktiviere sie (grau), falls sie aktiviert sind:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Helfen, die Funktionen und die Leistung von Chrome zu verbessern",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "links"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Bitte finde diese drei Optionen auf der Einstellungsseite und deaktiviere sie (grau), falls sie aktiviert sind:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Senden optionaler Diagnosedaten zur Verbesserung von Microsoft-Produkten",

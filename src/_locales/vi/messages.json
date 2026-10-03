@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Vui lòng tìm hai tùy chọn này trong trang cài đặt và tắt chúng (xám) nếu đang bật:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Giúp cải thiện hiệu suất và các tính năng của Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "bên trái"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Vui lòng tìm ba tùy chọn này trong trang cài đặt và tắt chúng (xám) nếu đang bật:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Gửi dữ liệu chẩn đoán tùy chọn để cải thiện các sản phẩm của Microsoft",

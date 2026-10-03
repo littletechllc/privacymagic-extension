@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Знайдіть ці два параметри на сторінці налаштувань і вимкніть їх (сірі), якщо вони ввімкнені:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Допоможіть покращити функції і ефективність Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ліворуч"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Знайдіть ці три параметри на сторінці налаштувань і вимкніть їх (сірі), якщо вони ввімкнені:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Надсилати необов’язкові діагностичні дані, щоб покращити продукти Microsoft",

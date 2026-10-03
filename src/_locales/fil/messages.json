@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Pakishanap ang dalawang opsyong ito sa settings page at i-disable ang mga ito (grey) kung naka-enable:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Tumulong sa pagpapahusay sa mga feature at performance ng Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "kaliwa"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Pakishanap ang tatlong opsyong ito sa settings page at i-disable ang mga ito (grey) kung naka-enable:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Magpadala ng opsyonal na diagnostic data para mapahusay ang mga produkto ng Microsoft",

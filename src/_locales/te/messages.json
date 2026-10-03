@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "దయచేసి సెట్టింగ్‌ల పేజీలో ఈ రెండు ఎంపికలను కనుగొని, ప్రారంభించి ఉంటే నిలిపివేయండి (బూడిద):",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome ఫీచర్‌లు మరియు పనితీరును మెరుగుపరచడంలో సహాయపడండి",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ఎడమ"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "దయచేసి సెట్టింగ్‌ల పేజీలో ఈ మూడు ఎంపికలను కనుగొని, ప్రారంభించి ఉంటే నిలిపివేయండి (బూడిద):",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft ఉత్పత్తులను మెరుగుపరచడానికి ఐచ్ఛిక సమస్య విశ్లేషణ డేటాను పంపండి",

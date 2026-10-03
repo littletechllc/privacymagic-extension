@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "অনুগ্রহ করে সেটিংস পৃষ্ঠায় এই দুটি বিকল্প খুঁজে বের করুন এবং চালু থাকলে সেগুলো বন্ধ (ধূসর) করুন:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome-এর বৈশিষ্ট্য এবং পারফরম্যান্স আরও ভালো করতে সাহায্য করুন",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "বামে"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "অনুগ্রহ করে সেটিংস পৃষ্ঠায় এই তিনটি বিকল্প খুঁজে বের করুন এবং চালু থাকলে সেগুলো বন্ধ (ধূসর) করুন:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",

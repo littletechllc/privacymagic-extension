@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Nájdite prosím tieto dve možnosti na stránke nastavení a vypnite ich (sivé), ak sú zapnuté:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Pomáhať s vylepšovaním funkcií a výkonu Chromu",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "vľavo"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Nájdite prosím tieto tri možnosti na stránke nastavení a vypnite ich (sivé), ak sú zapnuté:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Odosielať voliteľné diagnostické údaje na zlepšenie produktov spoločnosti Microsoft",

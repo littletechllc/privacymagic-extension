@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Lūdzu, atrodiet šīs divas opcijas iestatījumu lapā un atspējojiet tās (pelēkas), ja tās ir iespējotas:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Palīdzēt uzlabot Chrome funkcijas un veiktspēju",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "pa kreisi"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Lūdzu, atrodiet šīs trīs opcijas iestatījumu lapā un atspējojiet tās (pelēkas), ja tās ir iespējotas:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Nosūtīt neobligātos diagnostikas datus, lai uzlabotu Microsoft produktus",

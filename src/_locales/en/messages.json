@@ -457,6 +457,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Please find these two options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "syncHelpDirectionLeft": {
     "message": "left",
     "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
@@ -572,6 +576,10 @@
         "example": "left"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Please find these three options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",

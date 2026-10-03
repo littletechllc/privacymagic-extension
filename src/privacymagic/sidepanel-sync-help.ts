@@ -82,7 +82,7 @@ const setReadyPhaseVariant = (url: HistorySyncSettingsUrl, dom: SyncHelpDom): vo
   dom.historyLabelAccount.hidden = !isAccountPage
 }
 
-/** Label for the side of the window where Chrome settings sit (opposite the side panel). */
+/** Label for the side of the window where settings sit (opposite the side panel). */
 const settingsPageSideLabel = async (): Promise<string> => {
   let panelSide: 'left' | 'right' = 'right'
   try {
@@ -101,13 +101,18 @@ const settingsPageSideLabel = async (): Promise<string> => {
   return chrome.i18n.getMessage(key) || fallback
 }
 
+/**
+ * Chrome/Edge: "…settings page at left/right…".
+ * Opera: getLayout() can crash the browser, so use direction-free copy.
+ */
 const applySettingsSideInstruction = async (elementId: string, messageKey: string): Promise<void> => {
   const el = document.getElementById(elementId)
   if (el == null) {
     return
   }
-  const side = await settingsPageSideLabel()
-  const msg = chrome.i18n.getMessage(messageKey, [side])
+  const msg = browserInfo.brand === 'Opera'
+    ? chrome.i18n.getMessage(`${messageKey}Neutral`)
+    : chrome.i18n.getMessage(messageKey, [await settingsPageSideLabel()])
   if (msg !== '') {
     el.textContent = msg
   }

@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "કૃપા કરીને સેટિંગ્સ પેજમાં આ બે વિકલ્પો શોધો અને જો તે સક્ષમ હોય તો તેને અક્ષમ (ભૂખરા) કરો:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chromeની સુવિધાઓ અને પ્રદર્શનને સુધારવામાં સહાય કરો",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ડાબે"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "કૃપા કરીને સેટિંગ્સ પેજમાં આ ત્રણ વિકલ્પો શોધો અને જો તે સક્ષમ હોય તો તેને અક્ષમ (ભૂખરા) કરો:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft ઉત્પાદનોને બહેતર બનાવવા માટે વૈકલ્પિક ડાયગ્નોસ્ટિક ડેટા મોકલો",

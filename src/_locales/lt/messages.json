@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Rasite šias dvi parinktis nustatymų puslapyje ir išjunkite jas (pilkos), jei jos įjungtos:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Padėti tobulinti „Chrome“ funkcijas ir našumą",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "kairėje"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Rasite šias tris parinktis nustatymų puslapyje ir išjunkite jas (pilkos), jei jos įjungtos:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Siųskite pasirinktinius diagnostikos duomenis, kad patobulintumėte „Microsoft“ produktus",

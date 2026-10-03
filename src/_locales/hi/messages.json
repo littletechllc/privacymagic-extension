@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "कृपया सेटिंग्स पेज पर ये दो विकल्प खोजें और यदि वे सक्षम हैं तो उन्हें अक्षम (धूसर) करें:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome की सुविधाओं और परफ़ॉर्मेंस को बेहतर बनाने में मदद करें",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "बाएँ"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "कृपया सेटिंग्स पेज पर ये तीन विकल्प खोजें और यदि वे सक्षम हैं तो उन्हें अक्षम (धूसर) करें:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft उत्पादों को बेहतर बनाने के लिए वैकल्पिक नैदानिक डेटा भेजें",

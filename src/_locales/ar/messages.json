@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "يُرجى العثور على هذين الخيارين في صفحة الإعدادات وتعطيلهما (رمادي) إذا كانا مفعّلين:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "‏المساعدة في تحسين ميزات Chrome وأدائه",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "اليسار"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "يُرجى العثور على هذه الخيارات الثلاثة في صفحة الإعدادات وتعطيلها (رمادي) إذا كانت مفعّلة:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "إرسال بيانات التشخيص الاختيارية لتحسين منتجات Microsoft",

@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "Prosimo, poiščite ti dve možnosti na strani z nastavitvami in ju onemogočite (sivi), če sta omogočeni:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Pomagajte izboljšati funkcije in delovanje Chroma",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "levo"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "Prosimo, poiščite te tri možnosti na strani z nastavitvami in jih onemogočite (sive), če so omogočene:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Pošlji izbirne diagnostične podatke za izboljšavo Microsoftovih izdelkov",

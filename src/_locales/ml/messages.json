@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "ക്രമീകരണ പേജിൽ ഈ രണ്ട് ഓപ്ഷനുകൾ കണ്ടെത്തി പ്രവർത്തനക്ഷമമാണെങ്കിൽ അപ്രാപ്തമാക്കുക (ചാരനിറം):",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome-ന്റെ ഫീച്ചറുകളും പ്രകടനവും മെച്ചപ്പെടുത്താൻ സഹായിക്കുക",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ഇടത്ത്"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "ക്രമീകരണ പേജിൽ ഈ മൂന്ന് ഓപ്ഷനുകൾ കണ്ടെത്തി പ്രവർത്തനക്ഷമമാണെങ്കിൽ അപ്രാപ്തമാക്കുക (ചാരനിറം):",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft ഉൽപ്പന്നങ്ങൾ മെച്ചപ്പെടുത്തുന്നതിന് നിർബന്ധമല്ലാത്ത ഡയഗ്നോസ്റ്റിക് ഡാറ്റാ അയയ്ക്കുക",

@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "እባክዎ በቅንብሮች ገጽ ላይ በ ያሉትን እነዚህን ሁለት አማራጮች ያግኙ እና ከነቁ (ግራጫ) ያቦዙዋቸው:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "የChrome ባህሪያት እና አፈጻጸም እንዲሻሻል ያግዙ",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ግራ"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "እባክዎ በቅንብሮች ገጽ ላይ በ ያሉትን እነዚህን ሶስት አማራጮች ያግኙ እና ከነቁ (ግራጫ) ያቦዙዋቸው:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "የ Microsoft ምርቶችን ለማሻሻል አማራጭ የምርመራ መረጃ መላክ",

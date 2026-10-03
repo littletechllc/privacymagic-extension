@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "โปรดค้นหาตัวเลือกทั้งสองนี้ในหน้าการตั้งค่า และปิดใช้ (สีเทา) หากเปิดอยู่:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "ช่วยปรับปรุงฟีเจอร์และประสิทธิภาพของ Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ซ้าย"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "โปรดค้นหาตัวเลือกทั้งสามนี้ในหน้าการตั้งค่า และปิดใช้ (สีเทา) หากเปิดอยู่:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "ส่งข้อมูลการวินิจฉัยเพิ่มเติมเพื่อปรับปรุงผลิตภัณฑ์ของ Microsoft",

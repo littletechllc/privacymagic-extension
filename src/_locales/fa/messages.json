@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "لطفاً این دو گزینه را در صفحه تنظیمات پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "‏کمک به بهبود ویژگی‌ها و عملکرد Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "چپ"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "لطفاً این سه گزینه را در صفحه تنظیمات پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "ارسال داده های عیب یابی اختیاری برای بهبود محصولات Microsoft",

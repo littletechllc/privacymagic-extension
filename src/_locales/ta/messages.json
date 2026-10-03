@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "அமைப்புகள் பக்கத்தில் இந்த இரு விருப்பங்களையும் கண்டுபிடித்து, இயக்கப்பட்டிருந்தால் முடக்கவும் (சாம்பல்):",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome இன் அம்சங்களையும் செயல்திறனையும் மேம்படுத்த உதவுக",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "இடது"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "அமைப்புகள் பக்கத்தில் இந்த மூன்று விருப்பங்களையும் கண்டுபிடித்து, இயக்கப்பட்டிருந்தால் முடக்கவும் (சாம்பல்):",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft தயாரிப்புகளை மேம்படுத்த விருப்பத்தேர்வுப் பகுப்பாய்வுத் தரவை அனுப்பு",

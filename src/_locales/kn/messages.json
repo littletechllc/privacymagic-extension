@@ -535,6 +535,10 @@
       }
     }
   },
+  "syncHelpGoogleServicesInstructionNeutral": {
+    "message": "ದಯವಿಟ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟದಲ್ಲಿ ಈ ಎರಡು ಆಯ್ಕೆಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಅವು ಸಕ್ರಿಯವಾಗಿದ್ದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಬೂದು):",
+    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  },
   "chromium_447252321002412580": {
     "message": "Chrome ನ ವೈಶಿಷ್ಟ್ಯಗಳು ಹಾಗೂ ಕೆಲಸ ನಿರ್ವಹಣೆಯನ್ನು ಸುಧಾರಿಸಲು ಸಹಾಯ ಮಾಡಿ",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -572,6 +576,10 @@
         "example": "ಎಡಕ್ಕೆ"
       }
     }
+  },
+  "syncHelpEdgePrivacyInstructionNeutral": {
+    "message": "ದಯವಿಟ್ಟು ಸೆಟ್ಟಿಂಗ್‌ಗಳ ಪುಟದಲ್ಲಿ ಈ ಮೂರು ಆಯ್ಕೆಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಅವು ಸಕ್ರಿಯವಾಗಿದ್ದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಬೂದು):",
+    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "Microsoft ಉತ್ಪನ್ನಗಳನ್ನು ಸುಧಾರಿಸಲು ಐಚ್ಛಿಕ ದೋಷನಿರ್ಣಯ ಡೇಟಾ ಕಳುಹಿಸಿ",
