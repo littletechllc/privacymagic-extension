@@ -3,10 +3,6 @@
     "message": "Privacy Magic - 封鎖指紋、追蹤器和廣告",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic 對抗監控：指紋追蹤、廣告、追蹤器、第三方 Cookie、追蹤連結、WebRTC 洩漏、Topics API。",
     "description": "The description of the extension"

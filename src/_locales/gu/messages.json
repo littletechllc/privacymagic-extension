@@ -3,10 +3,6 @@
     "message": "Privacy Magic - fingerprint, trackers અને જાહેરાતો અવરોધો",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic નિરીક્ષણ સામે: fingerprinting, જાહેરાતો, trackers, તૃતીય-પક્ષ cookies, ટ્રેકિંગ લિંક્સ, WebRTC, Topics API.",
     "description": "The description of the extension"

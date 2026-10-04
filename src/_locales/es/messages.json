@@ -3,10 +3,6 @@
     "message": "Privacy Magic - bloquear fingerprint, trackers y anuncios",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic contra la vigilancia: fingerprinting, anuncios, trackers, cookies de terceros, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"

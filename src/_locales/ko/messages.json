@@ -3,10 +3,6 @@
     "message": "Privacy Magic - 핑거프린트, 추적기, 광고 차단",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic은 감시에 맞서 싸웁니다: 핑거프린팅, 광고, 추적기, 타사 쿠키, 추적 링크, WebRTC 유출, Topics API.",
     "description": "The description of the extension"

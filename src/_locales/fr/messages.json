@@ -3,10 +3,6 @@
     "message": "Privacy Magic - bloquer empreinte, traceurs et pubs",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic contre la surveillance : fingerprinting, pubs, traceurs, cookies tiers, liens de suivi, fuites WebRTC, Topics API.",
     "description": "The description of the extension"

@@ -3,10 +3,6 @@
     "message": "Privacy Magic - บล็อกลายนิ้วมือ ตัวติดตาม และโฆษณา",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic ต่อสู้การสอดแนม: ลายนิ้วมือดิจิทัล โฆษณา ตัวติดตาม คุกกี้บุคคลที่สาม ลิงก์ติดตาม WebRTC Topics API",
     "description": "The description of the extension"

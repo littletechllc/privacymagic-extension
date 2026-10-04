@@ -3,10 +3,6 @@
     "message": "Privacy Magic - blokir fingerprint, pelacak, dan iklan",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic melawan pengawasan: fingerprinting, iklan, pelacak, cookie pihak ketiga, tautan pelacakan, WebRTC, Topics API.",
     "description": "The description of the extension"

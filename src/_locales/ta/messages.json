@@ -3,10 +3,6 @@
     "message": "Privacy Magic - fingerprint, trackers மற்றும் விளம்பரங்களைத் தடு",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic கண்காணிப்புக்கு எதிராக: fingerprinting, விளம்பரங்கள், trackers, 3rd-party cookies, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"

@@ -3,10 +3,6 @@
     "message": "Privacy Magic - مسدود کردن اثرانگشت، ردیاب‌ها و تبلیغات",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic علیه نظارت: اثرانگشت، تبلیغات، ردیاب‌ها، کوکی شخص ثالث، پیوند ردیابی، نشت WebRTC، Topics API.",
     "description": "The description of the extension"

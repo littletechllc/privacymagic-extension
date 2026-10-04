@@ -3,10 +3,6 @@
     "message": "Privacy Magic - blokovať fingerprint, trackery a reklamy",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic proti sledovaniu: fingerprinting, reklamy, trackery, cookies tretích strán, sledovacie odkazy, WebRTC, Topics API.",
     "description": "The description of the extension"

@@ -3,10 +3,6 @@
     "message": "Privacy Magic - حظر البصمة والمتتبعات والإعلانات",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic يحارب المراقبة: البصمات، الإعلانات، المتعقّبات، كوكيز الطرف الثالث، روابط التتبع، تسريبات WebRTC، Topics API.",
     "description": "The description of the extension"

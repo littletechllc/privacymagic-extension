@@ -3,10 +3,6 @@
     "message": "Privacy Magic - zuia fingerprint, vifuatiliaji na matangazo",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic dhidi ya ufuatiliaji: fingerprinting, matangazo, vifuatiliaji, cookies za wengine, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"

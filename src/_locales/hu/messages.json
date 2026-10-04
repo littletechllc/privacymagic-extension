@@ -3,10 +3,6 @@
     "message": "Privacy Magic - fingerprint, trackerek és hirdetések tiltása",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic a megfigyelés ellen: fingerprinting, hirdetések, trackerek, 3rd-party cookie-k, tracking linkek, WebRTC, Topics API.",
     "description": "The description of the extension"

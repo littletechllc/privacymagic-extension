@@ -3,10 +3,6 @@
     "message": "Privacy Magic - חסום fingerprint, trackers ופרסומות",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic נלחם במעקב: fingerprinting, פרסומות, trackers, עוגיות צד ג׳, קישורי מעקב, דליפות WebRTC, Topics API.",
     "description": "The description of the extension"

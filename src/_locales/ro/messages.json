@@ -3,10 +3,6 @@
     "message": "Privacy Magic - blochează fingerprint, trackere și reclame",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic împotriva supravegherii: fingerprinting, reclame, trackere, cookie-uri terțe, linkuri de urmărire, WebRTC, Topics API.",
     "description": "The description of the extension"

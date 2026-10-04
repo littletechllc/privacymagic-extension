@@ -3,10 +3,6 @@
     "message": "Privacy Magic - fingerprint, ట్రాకర్లు మరియు ప్రకటనలను నిరోధించండి",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic నిఘా వ్యతిరేకంగా: fingerprinting, ప్రకటనలు, ట్రాకర్లు, మూడవ-పక్ష కుకీలు, ట్రాకింగ్ లింకులు, WebRTC, Topics API.",
     "description": "The description of the extension"

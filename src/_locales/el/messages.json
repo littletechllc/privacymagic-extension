@@ -3,10 +3,6 @@
     "message": "Privacy Magic - αποκλεισμός fingerprint, trackers και διαφημίσεων",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Το Privacy Magic κατά της παρακολούθησης: fingerprinting, διαφημίσεις, trackers, cookies τρίτων, tracking links, WebRTC, Topics API.",
     "description": "The description of the extension"

@@ -3,10 +3,6 @@
     "message": "Privacy Magic - fingerprint፣ trackers እና ads ይከለክሉ",
     "description": "The name of the extension"
   },
-  "shortExtensionName": {
-    "message": "PrivacyMagic",
-    "description": "The short name of the extension"
-  },
   "extensionDescription": {
     "message": "Privacy Magic ከስለላ ጋር ይታገላል፦ fingerprinting፣ ማስታወቂያ፣ trackers፣ 3ኛ ወገን cookies፣ ትራክሊንኮች፣ WebRTC leaks፣ Topics API።",
     "description": "The description of the extension"
