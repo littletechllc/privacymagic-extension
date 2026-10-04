@@ -343,6 +343,16 @@
     "message": "Enable Opera VPN",
     "description": "Title of the Opera VPN help side panel opened from setup step 2."
   },
+  "setupOperaVpnHelpPendingIntro": {
+    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "BROWSER": {
+        "content": "$1",
+        "example": "Opera"
+      }
+    }
+  },
   "setupOperaVpnHelpInstruction": {
     "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
@@ -473,31 +483,59 @@
     "message": "Continue",
     "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
   },
-  "syncHelpGoogleServicesIntro": {
-    "message": "Let's tell the browser we don't want it to send data to Google.",
-    "description": "Intro on sync help side panel for the Google services settings substep"
-  },
-  "syncHelpGoogleServicesInstruction": {
-    "message": "Please find these two options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
+  "syncHelpSendDataIntro": {
+    "message": "Let's tell the browser we don't want it to send data to $COMPANY$.",
+    "description": "Intro on sync help side panel before privacy/telemetry toggles. $COMPANY$ is Google, Microsoft, or Opera.",
     "placeholders": {
-      "LEFT": {
+      "COMPANY": {
         "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "syncHelpDisableOptionsInstruction": {
+    "message": "Please find these $OPTIONS$ options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
+    "description": "Instruction above settings toggle previews; $OPTIONS$ is syncHelpOptionsCount*; $LEFT$ is left/right for the settings side.",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      },
+      "LEFT": {
+        "content": "$2",
         "example": "left"
       }
     }
   },
-  "syncHelpGoogleServicesInstructionNeutral": {
-    "message": "Please find these two options in the settings page and disable them (grey) if they're enabled:",
-    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
+  "syncHelpDisableOptionsInstructionNeutral": {
+    "message": "Please find these $OPTIONS$ options in the settings page and disable them (grey) if they're enabled:",
+    "description": "Same as syncHelpDisableOptionsInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera).",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      }
+    }
+  },
+  "syncHelpOptionsCountTwo": {
+    "message": "two",
+    "description": "Phrase substituted for $OPTIONS$ when two settings toggles are listed"
+  },
+  "syncHelpOptionsCountThree": {
+    "message": "three",
+    "description": "Phrase substituted for $OPTIONS$ when three settings toggles are listed"
+  },
+  "syncHelpOptionsCountFive": {
+    "message": "five",
+    "description": "Phrase substituted for $OPTIONS$ when five settings toggles are listed"
   },
   "syncHelpDirectionLeft": {
     "message": "left",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+    "description": "Horizontal direction word used in syncHelpDisableOptionsInstruction when settings are to the left of the side panel"
   },
   "syncHelpDirectionRight": {
     "message": "right",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+    "description": "Horizontal direction word used in syncHelpDisableOptionsInstruction when settings are to the right of the side panel"
   },
   "setupStep3AllDoneCta": {
     "message": "All done!",
@@ -596,42 +634,6 @@
   "chromium_1644574205037202324": {
     "message": "History",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
-  "syncHelpEdgePrivacyIntro": {
-    "message": "Let's tell the browser we don't want it to send data to Microsoft.",
-    "description": "Intro on sync help side panel for the Edge privacy settings step"
-  },
-  "syncHelpEdgePrivacyInstruction": {
-    "message": "Please find these three options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
-    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "left"
-      }
-    }
-  },
-  "syncHelpEdgePrivacyInstructionNeutral": {
-    "message": "Please find these three options in the settings page and disable them (grey) if they're enabled:",
-    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
-  },
-  "syncHelpOperaPrivacyIntro": {
-    "message": "Let's tell the browser we don't want it to send data to Opera.",
-    "description": "Intro on sync help side panel for the Opera privacy settings step"
-  },
-  "syncHelpOperaPrivacyInstruction": {
-    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
-    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "left"
-      }
-    }
-  },
-  "syncHelpOperaPrivacyInstructionNeutral": {
-    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
-    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
   },
   "edge_8757": {
     "message": "Send optional diagnostic data to improve Microsoft products",

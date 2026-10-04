@@ -84,6 +84,7 @@
       flex-shrink: 0;
     }
 
+    .opera-vpn-pending-actions,
     .opera-vpn-actions {
       margin-top: 20px;
     }
@@ -103,17 +104,27 @@
     </header>
     <main class="content">
       <h1 class="step-title" data-i18n="setupOperaVpnHelpTitle" dir="auto">Enable Opera VPN</h1>
-      <p data-i18n-html="setupOperaVpnHelpInstruction" data-i18n-args="opera_51904" dir="auto">
-        To enable the in-browser VPN, make sure the <strong>Enable VPN</strong> toggle is enabled.
-      </p>
-      <div class="vpn-preview" role="img" data-i18n-aria-label="setupOperaVpnHelpPreviewAriaLabel" aria-label="Enable VPN toggle preview">
-        <div class="vpn-preview-row">
-          <span data-i18n="opera_51904">Enable VPN</span>
-          <img class="vpn-preview-toggle" src="../assets/images/opera-vpn-toggle.png" alt="" aria-hidden="true" />
+      <div id="operaVpnHelpPhasePending">
+        <p data-i18n="setupOperaVpnHelpPendingIntro" data-i18n-args="browserName" dir="auto">
+          We'll open Opera settings so you can enable the VPN to protect your IP address.
+        </p>
+        <div class="btn-row opera-vpn-pending-actions">
+          <button type="button" class="btn-primary" id="operaVpnHelpOpenSettingsBtn" data-i18n="setupStep3OpenSyncSettingsCta">Open settings</button>
         </div>
       </div>
-      <div class="btn-row btn-row--end opera-vpn-actions">
-        <button type="button" class="btn-primary" id="operaVpnHelpDoneBtn" data-i18n="setupStep3AllDoneCta">All done!</button>
+      <div id="operaVpnHelpPhaseReady" hidden>
+        <p data-i18n-html="setupOperaVpnHelpInstruction" data-i18n-args="opera_51904" dir="auto">
+          To enable the in-browser VPN, make sure the <strong>Enable VPN</strong> toggle is enabled.
+        </p>
+        <div class="vpn-preview" role="img" data-i18n-aria-label="setupOperaVpnHelpPreviewAriaLabel" aria-label="Enable VPN toggle preview">
+          <div class="vpn-preview-row">
+            <span data-i18n="opera_51904">Enable VPN</span>
+            <img class="vpn-preview-toggle" src="../assets/images/opera-vpn-toggle.png" alt="" aria-hidden="true" />
+          </div>
+        </div>
+        <div class="btn-row btn-row--end opera-vpn-actions">
+          <button type="button" class="btn-primary" id="operaVpnHelpDoneBtn" data-i18n="setupStep3AllDoneCta">All done!</button>
+        </div>
       </div>
     </main>
   </div>

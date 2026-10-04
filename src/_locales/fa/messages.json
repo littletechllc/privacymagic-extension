@@ -327,6 +327,26 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnHelpPendingIntro": {
+    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "BROWSER": {
+        "content": "$1",
+        "example": "Opera"
+      }
+    }
+  },
+  "setupOperaVpnHelpInstruction": {
+    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
+    "placeholders": {
+      "toggle": {
+        "content": "$1",
+        "example": "Enable VPN"
+      }
+    }
+  },
   "setupSuggestedVpnDescription": {
     "message": "تیم Privacy Guides سه VPN متن‌باز را بررسی و توصیه کرده که تعهد جدی به حریم خصوصی دارند.",
     "description": "Description of suggested VPN provider"
@@ -439,6 +459,80 @@
       }
     }
   },
+  "setupStep3ContinueCta": {
+    "message": "ادامه",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpSendDataIntro": {
+    "message": "مطمئن شویم که داده‌ای به $COMPANY$ ارسال نمی‌کنیم.",
+    "description": "Intro on sync help side panel before privacy/telemetry toggles. $COMPANY$ is Google, Microsoft, or Opera.",
+    "placeholders": {
+      "COMPANY": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "syncHelpDisableOptionsInstruction": {
+    "message": "لطفاً این $OPTIONS$ گزینه را در صفحه تنظیمات در $LEFT$ پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
+    "description": "Instruction above settings toggle previews; $OPTIONS$ is syncHelpOptionsCount*; $LEFT$ is left/right for the settings side.",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      },
+      "LEFT": {
+        "content": "$2",
+        "example": "left"
+      }
+    }
+  },
+  "syncHelpDisableOptionsInstructionNeutral": {
+    "message": "لطفاً این $OPTIONS$ گزینه را در صفحه تنظیمات پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
+    "description": "Same as syncHelpDisableOptionsInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera).",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      }
+    }
+  },
+  "syncHelpOptionsCountTwo": {
+    "message": "دو",
+    "description": "Phrase substituted for $OPTIONS$ when two settings toggles are listed"
+  },
+  "syncHelpOptionsCountThree": {
+    "message": "سه",
+    "description": "Phrase substituted for $OPTIONS$ when three settings toggles are listed"
+  },
+  "syncHelpOptionsCountFive": {
+    "message": "پنج",
+    "description": "Phrase substituted for $OPTIONS$ when five settings toggles are listed"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "چپ",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "راست",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "setupStep3AllDoneCta": {
+    "message": "انجام شد!",
+    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "همگام‌سازی خاموش است",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "همگام‌سازی از قبل غیرفعال است، بنابراین تاریخچه شما به سرورهای Google ارسال نمی‌شود. سپس چند تنظیمات سرویس Google را تنظیم می‌کنیم.",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "بازگشت به راه‌اندازی",
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
+  },
   "setupShowMeCta": {
     "message": "بله، نشانم بده",
     "description": "Primary call to action for step 3"
@@ -493,6 +587,10 @@
     "message": "(تکمیل شد)",
     "description": "Suffix shown on a completed setup step"
   },
+  "chromium_1355088659320425659": {
+    "message": "سابقه و زبانه‌ها",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
   "chromium_4684427112815847243": {
     "message": "همگام‌سازی همه",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -505,44 +603,6 @@
     "message": "همگام‌سازی داده‌ها",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   },
-  "syncHelpSyncOffTitle": {
-    "message": "همگام‌سازی خاموش است",
-    "description": "Title on sync help side panel when history sync is already disabled"
-  },
-  "syncHelpSyncOffBody": {
-    "message": "همگام‌سازی از قبل غیرفعال است، بنابراین تاریخچه شما به سرورهای Google ارسال نمی‌شود. سپس چند تنظیمات سرویس Google را تنظیم می‌کنیم.",
-    "description": "Body text on sync help side panel when history sync is already off"
-  },
-  "syncHelpReturnToSetupCta": {
-    "message": "بازگشت به راه‌اندازی",
-    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
-  },
-  "setupStep3AllDoneCta": {
-    "message": "انجام شد!",
-    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
-  },
-  "setupStep3ContinueCta": {
-    "message": "ادامه",
-    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
-  },
-  "syncHelpGoogleServicesIntro": {
-    "message": "مطمئن شویم که داده‌ای به Google ارسال نمی‌کنیم.",
-    "description": "Intro on sync help side panel for the Google services settings substep"
-  },
-  "syncHelpGoogleServicesInstruction": {
-    "message": "لطفاً این دو گزینه را در صفحه تنظیمات در $LEFT$ پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "چپ"
-      }
-    }
-  },
-  "syncHelpGoogleServicesInstructionNeutral": {
-    "message": "لطفاً این دو گزینه را در صفحه تنظیمات پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
-    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
-  },
   "chromium_447252321002412580": {
     "message": "‏کمک به بهبود ویژگی‌ها و عملکرد Chrome",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -551,39 +611,9 @@
     "message": "بهبود جستجوها و مرور",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
   },
-  "chromium_1355088659320425659": {
-    "message": "سابقه و زبانه‌ها",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
-  },
   "chromium_1644574205037202324": {
     "message": "سابقه",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
-  "syncHelpDirectionLeft": {
-    "message": "چپ",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
-  },
-  "syncHelpDirectionRight": {
-    "message": "راست",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "syncHelpEdgePrivacyIntro": {
-    "message": "مطمئن شویم که داده‌ای به Microsoft ارسال نمی‌کنیم.",
-    "description": "Intro on sync help side panel for the Edge privacy settings step"
-  },
-  "syncHelpEdgePrivacyInstruction": {
-    "message": "لطفاً این سه گزینه را در صفحه تنظیمات در $LEFT$ پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
-    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "چپ"
-      }
-    }
-  },
-  "syncHelpEdgePrivacyInstructionNeutral": {
-    "message": "لطفاً این سه گزینه را در صفحه تنظیمات پیدا کنید و در صورت فعال بودن، آن‌ها را غیرفعال (خاکستری) کنید:",
-    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "ارسال داده های عیب یابی اختیاری برای بهبود محصولات Microsoft",
@@ -632,33 +662,5 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for fa missing resource id 51904"
-  },
-  "syncHelpOperaPrivacyIntro": {
-    "message": "Let's tell the browser we don't want it to send data to Opera.",
-    "description": "Intro on sync help side panel for the Opera privacy settings step"
-  },
-  "syncHelpOperaPrivacyInstruction": {
-    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
-    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "left"
-      }
-    }
-  },
-  "syncHelpOperaPrivacyInstructionNeutral": {
-    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
-    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
-  },
-  "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
-    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
-    "placeholders": {
-      "toggle": {
-        "content": "$1",
-        "example": "Enable VPN"
-      }
-    }
   }
 }

@@ -114,29 +114,33 @@ const settingsPageSideLabel = async (): Promise<string> => {
  * Chrome/Edge: "…settings page at left/right…".
  * Opera: getLayout() can crash the browser, so use direction-free copy.
  */
-const applySettingsSideInstruction = async (elementId: string, messageKey: string): Promise<void> => {
+const applyDisableOptionsInstruction = async (
+  elementId: string,
+  optionsCountKey: 'syncHelpOptionsCountTwo' | 'syncHelpOptionsCountThree' | 'syncHelpOptionsCountFive'
+): Promise<void> => {
   const el = document.getElementById(elementId)
   if (el == null) {
     return
   }
+  const optionsPhrase = chrome.i18n.getMessage(optionsCountKey)
   const msg = browserInfo.brand === 'Opera'
-    ? chrome.i18n.getMessage(`${messageKey}Neutral`)
-    : chrome.i18n.getMessage(messageKey, [await settingsPageSideLabel()])
+    ? chrome.i18n.getMessage('syncHelpDisableOptionsInstructionNeutral', [optionsPhrase])
+    : chrome.i18n.getMessage('syncHelpDisableOptionsInstruction', [optionsPhrase, await settingsPageSideLabel()])
   if (msg !== '') {
     el.textContent = msg
   }
 }
 
 const applyGoogleServicesInstruction = async (): Promise<void> => {
-  await applySettingsSideInstruction('syncHelpGoogleServicesInstruction', 'syncHelpGoogleServicesInstruction')
+  await applyDisableOptionsInstruction('syncHelpGoogleServicesInstruction', 'syncHelpOptionsCountTwo')
 }
 
 const applyEdgePrivacyInstruction = async (): Promise<void> => {
-  await applySettingsSideInstruction('syncHelpEdgePrivacyInstruction', 'syncHelpEdgePrivacyInstruction')
+  await applyDisableOptionsInstruction('syncHelpEdgePrivacyInstruction', 'syncHelpOptionsCountThree')
 }
 
 const applyOperaPrivacyInstruction = async (): Promise<void> => {
-  await applySettingsSideInstruction('syncHelpOperaPrivacyInstruction', 'syncHelpOperaPrivacyInstruction')
+  await applyDisableOptionsInstruction('syncHelpOperaPrivacyInstruction', 'syncHelpOptionsCountFive')
 }
 
 /** Edge has one privacy-settings step instead of Chrome's history-sync and Google-services steps. */
@@ -326,11 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
     await applyGoogleServicesInstruction()
     await applyEdgePrivacyInstruction()
     await applyOperaPrivacyInstruction()
-    // Opera opens opera://settings/privacy from setup in one step; show that phase immediately.
-    if (browserInfo.brand === 'Opera') {
-      await goToOperaPrivacy(tabId, dom)
-      return
-    }
     setSyncHelpMode('pending', dom)
   }, (error) => {
     logError(error, 'error applying settings instruction copy')

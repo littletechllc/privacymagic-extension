@@ -4,8 +4,6 @@ import type { BooleanStorageFlag } from '@src/common/boolean-storage-flag'
 import { setupHistorySyncStepDone, setupVpnStepDone } from '@src/common/setup-step-done-state'
 
 const BLANK_TAB_URL = 'about:blank'
-const OPERA_VPN_SETTINGS_URL = 'chrome://settings/vpn'
-const OPERA_PRIVACY_SETTINGS_URL = 'opera://settings/privacy'
 const SYNC_HELP_SIDE_PANEL_PATH = 'privacymagic/sidepanel-sync-help.html'
 const OPERA_VPN_HELP_SIDE_PANEL_PATH = 'privacymagic/sidepanel-opera-vpn.html'
 
@@ -123,7 +121,7 @@ document.getElementById('operaVpnHelpCta')?.addEventListener('click', (event: Ev
   event.preventDefault()
   event.stopPropagation()
   handleAsync(async () => {
-    const tab = await chrome.tabs.create({ url: OPERA_VPN_SETTINGS_URL, active: true })
+    const tab = await chrome.tabs.create({ url: BLANK_TAB_URL, active: true })
     const tabId = tab.id
     if (tabId == null) {
       throw new Error('New tab has no id')
@@ -155,10 +153,7 @@ getStepElement('disableHistorySync')?.querySelector('.btn-primary')
     event.preventDefault()
     event.stopPropagation()
     handleAsync(async () => {
-      const settingsTabUrl = browserInfo.brand === 'Opera'
-        ? OPERA_PRIVACY_SETTINGS_URL
-        : BLANK_TAB_URL
-      const tab = await chrome.tabs.create({ url: settingsTabUrl, active: true })
+      const tab = await chrome.tabs.create({ url: BLANK_TAB_URL, active: true })
       const tabId = tab.id
       if (tabId == null) {
         throw new Error('New tab has no id')

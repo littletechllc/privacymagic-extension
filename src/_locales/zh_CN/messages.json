@@ -327,6 +327,26 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnHelpPendingIntro": {
+    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
+    "placeholders": {
+      "BROWSER": {
+        "content": "$1",
+        "example": "Opera"
+      }
+    }
+  },
+  "setupOperaVpnHelpInstruction": {
+    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
+    "placeholders": {
+      "toggle": {
+        "content": "$1",
+        "example": "Enable VPN"
+      }
+    }
+  },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides 团队审核并推荐了三个开源且坚定致力于隐私的 VPN。",
     "description": "Description of suggested VPN provider"
@@ -439,6 +459,80 @@
       }
     }
   },
+  "setupStep3ContinueCta": {
+    "message": "继续",
+    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
+  },
+  "syncHelpSendDataIntro": {
+    "message": "请确认我们没有向 $COMPANY$ 发送数据。",
+    "description": "Intro on sync help side panel before privacy/telemetry toggles. $COMPANY$ is Google, Microsoft, or Opera.",
+    "placeholders": {
+      "COMPANY": {
+        "content": "$1",
+        "example": "Google"
+      }
+    }
+  },
+  "syncHelpDisableOptionsInstruction": {
+    "message": "请在设置页面（$LEFT$）中找到这$OPTIONS$个选项，如果已开启请将其关闭（灰色）：",
+    "description": "Instruction above settings toggle previews; $OPTIONS$ is syncHelpOptionsCount*; $LEFT$ is left/right for the settings side.",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      },
+      "LEFT": {
+        "content": "$2",
+        "example": "left"
+      }
+    }
+  },
+  "syncHelpDisableOptionsInstructionNeutral": {
+    "message": "请在设置页面中找到这$OPTIONS$个选项，如果已开启请将其关闭（灰色）：",
+    "description": "Same as syncHelpDisableOptionsInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera).",
+    "placeholders": {
+      "OPTIONS": {
+        "content": "$1",
+        "example": "two"
+      }
+    }
+  },
+  "syncHelpOptionsCountTwo": {
+    "message": "两",
+    "description": "Phrase substituted for $OPTIONS$ when two settings toggles are listed"
+  },
+  "syncHelpOptionsCountThree": {
+    "message": "三",
+    "description": "Phrase substituted for $OPTIONS$ when three settings toggles are listed"
+  },
+  "syncHelpOptionsCountFive": {
+    "message": "五",
+    "description": "Phrase substituted for $OPTIONS$ when five settings toggles are listed"
+  },
+  "syncHelpDirectionLeft": {
+    "message": "左侧",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
+  },
+  "syncHelpDirectionRight": {
+    "message": "右侧",
+    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
+  },
+  "setupStep3AllDoneCta": {
+    "message": "完成！",
+    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
+  },
+  "syncHelpSyncOffTitle": {
+    "message": "同步已关闭",
+    "description": "Title on sync help side panel when history sync is already disabled"
+  },
+  "syncHelpSyncOffBody": {
+    "message": "同步已关闭，因此您的历史记录不会发送到 Google 服务器。接下来我们将调整几项 Google 服务设置。",
+    "description": "Body text on sync help side panel when history sync is already off"
+  },
+  "syncHelpReturnToSetupCta": {
+    "message": "返回设置",
+    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
+  },
   "setupShowMeCta": {
     "message": "是的，告诉我怎么做",
     "description": "Primary call to action for step 3"
@@ -493,6 +587,10 @@
     "message": "（已完成）",
     "description": "Suffix shown on a completed setup step"
   },
+  "chromium_1355088659320425659": {
+    "message": "历史记录和标签页",
+    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
+  },
   "chromium_4684427112815847243": {
     "message": "同步所有数据",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 4684427112815847243"
@@ -505,44 +603,6 @@
     "message": "同步数据",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 7044606776288350625"
   },
-  "syncHelpSyncOffTitle": {
-    "message": "同步已关闭",
-    "description": "Title on sync help side panel when history sync is already disabled"
-  },
-  "syncHelpSyncOffBody": {
-    "message": "同步已关闭，因此您的历史记录不会发送到 Google 服务器。接下来我们将调整几项 Google 服务设置。",
-    "description": "Body text on sync help side panel when history sync is already off"
-  },
-  "syncHelpReturnToSetupCta": {
-    "message": "返回设置",
-    "description": "Button on sync help side panel to return to setup (ready and sync-off phases)"
-  },
-  "setupStep3AllDoneCta": {
-    "message": "完成！",
-    "description": "Done button on history sync help side panel (ready phase); same action as Return to setup"
-  },
-  "setupStep3ContinueCta": {
-    "message": "继续",
-    "description": "Advances sync-help side panel from history-sync (or sync-off) to Google services settings"
-  },
-  "syncHelpGoogleServicesIntro": {
-    "message": "请确认我们没有向 Google 发送数据。请确保以下两个选项已关闭：",
-    "description": "Intro on sync help side panel for the Google services settings substep"
-  },
-  "syncHelpGoogleServicesInstruction": {
-    "message": "请在设置页面（$LEFT$）中找到这两个选项，如果已开启请将其关闭（灰色）：",
-    "description": "Instruction above the Google services toggles preview on the sync help side panel; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "左侧"
-      }
-    }
-  },
-  "syncHelpGoogleServicesInstructionNeutral": {
-    "message": "请在设置页面中找到这两个选项，如果已开启请将其关闭（灰色）：",
-    "description": "Same as syncHelpGoogleServicesInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
-  },
   "chromium_447252321002412580": {
     "message": "帮助我们改进 Chrome 的功能和性能",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 447252321002412580"
@@ -551,39 +611,9 @@
     "message": "改善搜索和浏览体验",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 8438566539970814960"
   },
-  "chromium_1355088659320425659": {
-    "message": "历史记录和标签页",
-    "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1355088659320425659"
-  },
   "chromium_1644574205037202324": {
     "message": "历史记录",
     "description": "Imported from Chromium chrome/app/resources/generated_resources_%LOCALE%.xtb id 1644574205037202324"
-  },
-  "syncHelpDirectionLeft": {
-    "message": "左侧",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the left of the side panel"
-  },
-  "syncHelpDirectionRight": {
-    "message": "右侧",
-    "description": "Horizontal direction word used in syncHelpGoogleServicesInstruction when Chrome settings are to the right of the side panel"
-  },
-  "syncHelpEdgePrivacyIntro": {
-    "message": "请确认我们没有向 Microsoft 发送数据。请确保以下三个选项已关闭：",
-    "description": "Intro on sync help side panel for the Edge privacy settings step"
-  },
-  "syncHelpEdgePrivacyInstruction": {
-    "message": "请在设置页面（$LEFT$）中找到这三个选项，如果已开启请将其关闭（灰色）：",
-    "description": "Instruction above the Edge privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "左侧"
-      }
-    }
-  },
-  "syncHelpEdgePrivacyInstructionNeutral": {
-    "message": "请在设置页面中找到这三个选项，如果已开启请将其关闭（灰色）：",
-    "description": "Same as syncHelpEdgePrivacyInstruction without left/right; used when side-panel dock side cannot be queried (e.g. Opera)."
   },
   "edge_8757": {
     "message": "发送可选诊断数据以改进Microsoft产品",
@@ -632,33 +662,5 @@
   "opera_51904": {
     "message": "启用 VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
-  },
-  "syncHelpOperaPrivacyIntro": {
-    "message": "Let's tell the browser we don't want it to send data to Opera.",
-    "description": "Intro on sync help side panel for the Opera privacy settings step"
-  },
-  "syncHelpOperaPrivacyInstruction": {
-    "message": "Please find these five options in the settings page at $LEFT$ and disable them (grey) if they're enabled:",
-    "description": "Instruction above the Opera privacy toggles preview; $LEFT$ is left or right depending on where the side panel is docked (settings are on the opposite side).",
-    "placeholders": {
-      "LEFT": {
-        "content": "$1",
-        "example": "left"
-      }
-    }
-  },
-  "syncHelpOperaPrivacyInstructionNeutral": {
-    "message": "Please find these five options in the settings page and disable them (grey) if they're enabled:",
-    "description": "Same as syncHelpOperaPrivacyInstruction without left/right; used when side-panel dock side cannot be queried (Opera)."
-  },
-  "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
-    "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
-    "placeholders": {
-      "toggle": {
-        "content": "$1",
-        "example": "Enable VPN"
-      }
-    }
   }
 }
