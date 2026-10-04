@@ -14,6 +14,35 @@ body {
   color: var(--blue-dark);
 }
 
+/* Page titles shared by setup.html and options.html */
+.setup-msg,
+div.title,
+h1,
+h2 {
+  color: var(--blue-dark);
+}
+
+.setup-msg,
+.setup-sub,
+div.title {
+  font-family: 'Lora', serif;
+}
+
+.setup-sub {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  .setup-msg,
+  .setup-sub,
+  .step-title,
+  div.title,
+  h1,
+  h2 {
+    color: #ffffff;
+  }
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
