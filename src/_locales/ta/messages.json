@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera உலாவியில் ஒரு கிளிக்கில் இயக்கக்கூடிய இலவச உள்ளமைக்கப்பட்ட VPN உள்ளது. Opera பதிவுகள் இல்லாத கொள்கை கொண்டதாகக் கூறுகிறது.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Opera VPN-ஐ இயக்க உதவுங்கள்",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "அல்லது",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Opera VPN-ஐ இயக்கு",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "VPN-ஐ இயக்கி உங்கள் IP முகவரியைப் பாதுகாக்க $BROWSER$ அமைப்புகளைத் திறப்போம்.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "உலாவியில் உள்ளமைக்கப்பட்ட VPN-ஐ இயக்க <strong>$TOGGLE$</strong> மாற்றி இயக்கத்தில் உள்ளதா என உறுதிசெய்யவும்.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "VPN-ஐ இயக்கு மாற்றியின் முன்னோட்டம்",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides குழு மூன்று VPN களை மதிப்பாய்வு செய்து பரிந்துரைக்கிறது; அவை திறந்த மூலமாகவும் தனியுரிமைக்கு கடுமையாக உறுதியளிக்கின்றன.",

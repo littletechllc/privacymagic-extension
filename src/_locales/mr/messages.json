@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera ब्राउझरमध्ये एका क्लिकने सुरू करता येणारे मोफत, अंगभूत VPN आहे. Opera म्हणते की त्यांचे नो-लॉग्स धोरण आहे.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Opera VPN सुरू करण्यात मदत करा",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "किंवा",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Opera VPN सुरू करा",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "VPN सुरू करून तुमचा IP पत्ता संरक्षित करण्यासाठी आम्ही $BROWSER$ सेटिंग्ज उघडू.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "ब्राउझरमधील अंगभूत VPN सुरू करण्यासाठी <strong>$TOGGLE$</strong> टॉगल सुरू असल्याची खात्री करा.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "VPN सुरू करा टॉगलचे पूर्वावलोकन",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides संघाने तीन VPNचे पुनरावलोकन केले आणि शिफारस केली जे ओपन सोर्स आहेत आणि गोपनीयतेसाठी कठोर बांधिलकी दाखवतात.",

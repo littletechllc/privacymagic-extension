@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera 瀏覽器內建免費 VPN，只要一鍵即可啟用。Opera 表示採用無日誌政策。",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "幫我啟用 Opera VPN",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "或",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "啟用 Opera VPN",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "我們將開啟 $BROWSER$ 設定，以便您啟用 VPN 並保護您的 IP 位址。",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "若要啟用瀏覽器內建 VPN，請確認 <strong>$TOGGLE$</strong> 開關已開啟。",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "啟用 VPN 開關預覽",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides 團隊已審閱並推薦三個開放原始碼且嚴格重視隱私的 VPN。",

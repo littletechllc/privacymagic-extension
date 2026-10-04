@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Przeglądarka Opera ma darmową, wbudowaną sieć VPN, którą możesz włączyć jednym kliknięciem. Opera deklaruje politykę braku logów.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Pomóż mi włączyć VPN Opery",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "LUB",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Włącz VPN Opery",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "Otworzymy ustawienia $BROWSER$, abyś mógł włączyć VPN i chronić swój adres IP.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "Aby włączyć wbudowaną sieć VPN, upewnij się, że przełącznik <strong>$TOGGLE$</strong> jest włączony.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "Podgląd przełącznika Włącz VPN",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Zespół Privacy Guides ocenił i poleca trzy VPN o otwartym kodzie źródłowym z mocnym zaangażowaniem w prywatność.",

@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera બ્રાઉઝરમાં મફત, બિલ્ટ-ઇન VPN છે જે તમે એક ક્લિકથી ચાલુ કરી શકો છો. Opera કહે છે કે તેની નો-લૉગ્સ નીતિ છે.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Opera VPN ચાલુ કરવામાં મદદ કરો",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "અથવા",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Opera VPN ચાલુ કરો",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "અમે $BROWSER$ સેટિંગ્સ ખોલીશું જેથી તમે VPN ચાલુ કરીને તમારું IP સરનામું સુરક્ષિત કરી શકો.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "બ્રાઉઝરમાં બિલ્ટ-ઇન VPN ચાલુ કરવા માટે ખાતરી કરો કે <strong>$TOGGLE$</strong> ટૉગલ ચાલુ છે.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "VPN ચાલુ કરો ટૉગલનું પૂર્વાવલોકન",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides ટીમે ત્રણ VPNની સમીક્ષા કરી અને ભલામણ કરી જે ઓપન સોર્સ છે અને ગોપનીયતા પ્રત્યે કડક પ્રતિબદ્ધતા ધરાવે છે.",

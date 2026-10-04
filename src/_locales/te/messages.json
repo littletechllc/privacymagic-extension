@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera బ్రౌజర్‌లో ఒక్క క్లిక్‌తో ఆన్ చేయగల ఉచిత, అంతర్నిర్మిత VPN ఉంది. Opera నో-లాగ్స్ విధానం ఉందని చెబుతోంది.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Opera VPNను ఆన్ చేయడంలో సహాయం చేయండి",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "లేదా",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Opera VPNను ఆన్ చేయండి",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "VPNను ఆన్ చేసి మీ IP చిరునామాను రక్షించుకోవడానికి $BROWSER$ సెట్టింగ్‌లను తెరుస్తాము.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "బ్రౌజర్‌లోని అంతర్నిర్మిత VPNను ఆన్ చేయడానికి <strong>$TOGGLE$</strong> టాగుల్ ఆన్‌లో ఉందని నిర్ధారించుకోండి.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "VPNను ఆన్ చేయండి టాగుల్ ప్రివ్యూ",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides బృందం మూడు VPN లను సమీక్షించి సిఫార్సు చేసింది; అవి ఓపెన్ సోర్స్ మరియు గోప్యతకు కఠిన ప్రతిబద్ధత కలిగి ఉన్నాయి.",

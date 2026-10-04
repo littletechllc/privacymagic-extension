@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Opera ബ്രൗസറില് ഒരു ക്ലിക്കില് ഓണാക്കാവുന്ന സൗജന്യ ബിൽട്ട്-ഇൻ VPN ഉണ്ട്. Opera നോ-ലോഗ്‌സ് നയം പിന്തുടരുന്നതായി പറയുന്നു.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Opera VPN ഓണാക്കാൻ സഹായിക്കൂ",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "അല്ലെങ്കിൽ",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Opera VPN ഓണാക്കുക",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "VPN ഓണാക്കി നിങ്ങളുടെ IP വിലാസം സംരക്ഷിക്കാൻ ഞങ്ങൾ $BROWSER$ ക്രമീകരണങ്ങൾ തുറക്കും.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "ബ്രൗസറിലെ ബിൽട്ട്-ഇൻ VPN ഓണാക്കാൻ <strong>$TOGGLE$</strong> ടോഗിൾ ഓണാണെന്ന് ഉറപ്പാക്കുക.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "VPN ഓണാക്കുക ടോഗിൾ പ്രിവ്യൂ",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Privacy Guides ടീം മൂന്ന് VPN-കൾ അവലോകനം ചെയ്ത് ശുപാർശ ചെയ്തു; അവ ഓപ്പൺ സോഴ്സാണ്, സ്വകാര്യതയോട് കർശന പ്രതിബദ്ധതയുണ്ട്.",

@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "Το πρόγραμμα περιήγησης Opera διαθέτει δωρεάν ενσωματωμένο VPN που μπορείτε να ενεργοποιήσετε με ένα κλικ. Η Opera δηλώνει ότι έχει πολιτική χωρίς αρχεία καταγραφής.",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "Βοηθήστε με να ενεργοποιήσω το VPN της Opera",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "Ή",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "Ενεργοποίηση VPN της Opera",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "Θα ανοίξουμε τις ρυθμίσεις του $BROWSER$ ώστε να ενεργοποιήσετε το VPN και να προστατεύσετε τη διεύθυνση IP σας.",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "Για να ενεργοποιήσετε το ενσωματωμένο VPN, βεβαιωθείτε ότι ο διακόπτης <strong>$TOGGLE$</strong> είναι ενεργοποιημένος.",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "Προεπισκόπηση διακόπτη Ενεργοποίηση VPN",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "Η ομάδα Privacy Guides έχει αξιολογήσει και προτείνει τρία VPN ανοιχτού κώδικα με αυστηρή δέσμευση στην ιδιωτικότητα.",

@@ -327,8 +327,24 @@
     "message": "Proton VPN",
     "description": "Name of suggested VPN provider"
   },
+  "setupOperaVpnDescription": {
+    "message": "เบราว์เซอร์ Opera มี VPN ในตัวฟรีที่คุณเปิดใช้ได้ด้วยคลิกเดียว Opera ระบุว่ามีนโยบายไม่เก็บบันทึก",
+    "description": "Opera-only intro under Suggested VPNs on setup step 2, before Privacy Guides copy."
+  },
+  "setupOperaVpnHelpCta": {
+    "message": "ช่วยฉันเปิดใช้ Opera VPN",
+    "description": "Opera-only button on setup step 2 that opens a side panel to enable Opera's built-in VPN."
+  },
+  "setupVpnOrLabel": {
+    "message": "หรือ",
+    "description": "Opera-only separator between the built-in Opera VPN option and Privacy Guides VPN recommendations on setup step 2."
+  },
+  "setupOperaVpnHelpTitle": {
+    "message": "เปิดใช้ Opera VPN",
+    "description": "Title of the Opera VPN help side panel opened from setup step 2."
+  },
   "setupOperaVpnHelpPendingIntro": {
-    "message": "We'll open $BROWSER$ settings so you can enable the VPN to protect your IP address.",
+    "message": "เราจะเปิดการตั้งค่า $BROWSER$ เพื่อให้คุณเปิดใช้ VPN และปกป้องที่อยู่ IP ของคุณ",
     "description": "Intro on Opera VPN help side panel before navigating to VPN settings. $BROWSER$ is the browser name.",
     "placeholders": {
       "BROWSER": {
@@ -338,7 +354,7 @@
     }
   },
   "setupOperaVpnHelpInstruction": {
-    "message": "To enable the in-browser VPN, make sure the <strong>$TOGGLE$</strong> toggle is enabled.",
+    "message": "หากต้องการเปิดใช้ VPN ในเบราว์เซอร์ ให้ตรวจสอบว่าสวิตช์ <strong>$TOGGLE$</strong> เปิดอยู่",
     "description": "Instruction body in the Opera VPN help side panel. $TOGGLE$ is Opera's Enable VPN label (opera_*).",
     "placeholders": {
       "toggle": {
@@ -346,6 +362,10 @@
         "example": "Enable VPN"
       }
     }
+  },
+  "setupOperaVpnHelpPreviewAriaLabel": {
+    "message": "ตัวอย่างสวิตช์เปิดใช้ VPN",
+    "description": "Accessible label for the Opera VPN toggle preview diagram."
   },
   "setupSuggestedVpnDescription": {
     "message": "ทีม Privacy Guides ได้ตรวจสอบและแนะนำ VPN สามรายการที่เป็นโอเพนซอร์สและมุ่งมั่นกับความเป็นส่วนตัวอย่างจริงจัง",
