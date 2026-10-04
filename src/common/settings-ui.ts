@@ -142,13 +142,12 @@ export const setupSettingsUI = async (domain: string): Promise<void> => {
   if (settingsContainer == null) {
     throw new Error('Settings container not found')
   }
-  settingsContainer.replaceChildren()
   const masterSwitchToggle = await createMasterSwitch(domain)
-  settingsContainer.appendChild(masterSwitchToggle)
   const subswitchesContainer = await createSubswitchesContainer(domain)
-  settingsContainer.appendChild(subswitchesContainer)
   for (const [categoryId, settingIds] of objectEntries(PRIVACY_SETTINGS_CONFIG)) {
     const toggleCategory = await createToggleCategory(domain, settingIds, categoryId)
     subswitchesContainer.appendChild(toggleCategory)
   }
+  // Replace in one step so overlapping setup runs cannot interleave appends.
+  settingsContainer.replaceChildren(masterSwitchToggle, subswitchesContainer)
 }
