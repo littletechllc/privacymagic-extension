@@ -10,12 +10,14 @@ import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
 import { injectCssForCosmeticFilters } from './css-filters'
 import blockedHostnames from '@blocked-hostnames'
+import { startFirefoxHostnameBlocking } from './firefox-hostname-blocking'
 
 /** Firefox-only: in-memory Set for webRequest hostname blocking (bundled at build time). */
-let blockedHostnameSet: Set<string> | null = null
 if (process.env.EXTENSION_TARGET === 'firefox') {
-  blockedHostnameSet = new Set(blockedHostnames)
+  const blockedHostnameSet = new Set(blockedHostnames)
   console.log(`Firefox hostname blocklist loaded (${blockedHostnameSet.size} hostnames)`)
+  // Register synchronously at top level so the listener is ready before queued requests.
+  startFirefoxHostnameBlocking(blockedHostnameSet)
 }
 
 const isExtensionPageMessageSender = (sender: chrome.runtime.MessageSender): boolean => {

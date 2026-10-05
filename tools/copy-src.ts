@@ -91,6 +91,10 @@ const specialFiles: Record<string, (json: Record<string, unknown>) => Record<str
       }
       if (isFirefoxTarget()) {
         next = next.filter((p) => p !== 'sidePanel' && p !== 'favicon')
+        // MV3 Chromium forbids this for store extensions; Firefox still allows it for hostname blocking.
+        if (!next.includes('webRequestBlocking')) {
+          next = [...next, 'webRequestBlocking']
+        }
       }
       cloned['permissions'] = next
     }
