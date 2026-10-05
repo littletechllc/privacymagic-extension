@@ -104,6 +104,13 @@ const specialFiles: Record<string, (json: Record<string, unknown>) => Record<str
       }
       // Chromium-only / ignored-with-warning on Firefox.
       delete cloned['version_name']
+      // Hostname static ruleset exceeds Firefox's DNR budget; omit it entirely.
+      const dnr = cloned['declarative_net_request'] as
+        | { rule_resources?: Array<{ id?: string }> }
+        | undefined
+      if (Array.isArray(dnr?.rule_resources)) {
+        dnr.rule_resources = dnr.rule_resources.filter((r) => r.id !== 'ruleset_hostnames')
+      }
     }
     return cloned
   }

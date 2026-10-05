@@ -52,6 +52,11 @@
   "declarative_net_request": {
     "rule_resources": [
       {
+        "id": "ruleset_hostnames",
+        "enabled": true,
+        "path": "filter_list/hostname_rules.json"
+      },
+      {
         "id": "ruleset_network",
         "enabled": true,
         "path": "filter_list/network_rules.json"

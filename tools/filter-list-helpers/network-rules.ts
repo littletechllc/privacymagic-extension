@@ -1,4 +1,4 @@
-import { FILTER_LIST_DIR, NETWORK_RULES_FILE } from '@src/common/filter-list-paths'
+import { FILTER_LIST_DIR, NETWORK_RULES_FILE, HOSTNAME_RULES_FILE } from '@src/common/filter-list-paths'
 import { writeFile, logLineErrors } from './util'
 
 type Rule = chrome.declarativeNetRequest.Rule
@@ -273,6 +273,15 @@ const isUnconditionalBlock = (rule: NetworkRuleWithoutId): boolean => {
   return rule.action.type === 'block' && rule.condition.urlFilter !== undefined && Object.keys(rule.condition).length === 1
 }
 
+/** Plain hostname block: block + only urlFilter of the form ||hostname^ */
+const isHostnameBlock = (rule: NetworkRuleWithoutId): boolean => {
+  if (!isUnconditionalBlock(rule) || rule.condition.urlFilter === undefined) {
+    return false
+  }
+  // Hostname labels: alnum, hyphen, dot (incl. punycode xn--…). No path/query.
+  return /^\|\|[a-z0-9.-]+\^$/i.test(rule.condition.urlFilter)
+}
+
 // A block whose only condition is a urlFilter already blocks every request that filter matches,
 // so another block of that same urlFilter with extra conditions adds nothing.
 const removeRedundantNetworkFilters = (rules: NetworkRuleWithoutId[]): NetworkRuleWithoutId[] => {
@@ -306,5 +315,23 @@ export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<v
   const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
   const uniqueNetworkFilters = deduplicateNetworkFilters(networkFilters)
   const necessaryNetworkFilters = removeRedundantNetworkFilters(uniqueNetworkFilters)
-  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(necessaryNetworkFilters))
+  const hostnameFilters: NetworkRuleWithoutId[] = []
+  const remainingFilters: NetworkRuleWithoutId[] = []
+  for (const rule of necessaryNetworkFilters) {
+    if (isHostnameBlock(rule)) {
+      hostnameFilters.push(rule)
+    } else {
+      remainingFilters.push(rule)
+    }
+  }
+  await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(remainingFilters))
+  // Hostname ruleset is Chromium-oriented (over Firefox's static DNR budget). Skip the
+  // file on Firefox builds; the manifest entry is stripped in copy-src as well.
+  if (process.env.EXTENSION_TARGET !== 'firefox') {
+    await writeFile(FILTER_LIST_DIR, HOSTNAME_RULES_FILE, generateNetworkFilterFile(hostnameFilters))
+  }
+  console.log(
+    `network rules: ${remainingFilters.length} general, ${hostnameFilters.length} hostname-only` +
+      (process.env.EXTENSION_TARGET === 'firefox' ? ' (hostname file skipped for Firefox)' : '')
+  )
 }
