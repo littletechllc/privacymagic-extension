@@ -1,5 +1,8 @@
-import { FILTER_LIST_DIR, NETWORK_RULES_FILE, HOSTNAME_RULES_FILE } from '@src/common/filter-list-paths'
+import { FILTER_LIST_DIR, NETWORK_RULES_FILE, HOSTNAME_RULES_FILE, BLOCKED_HOSTNAMES_JSON_PATH } from '@src/common/filter-list-paths'
 import { writeFile, logLineErrors } from './util'
+import { mkdir, writeFile as writeFileNode } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 type Rule = chrome.declarativeNetRequest.Rule
 type RuleAction = chrome.declarativeNetRequest.RuleAction
@@ -311,6 +314,19 @@ const generateNetworkFilterFile = (networkFilters: NetworkRuleWithoutId[]): stri
   return '[\n' + lines.join(',\n') + ']'
 }
 
+/** Strip ||hostname^ → hostname (lowercase). */
+const hostnameFromUrlFilter = (urlFilter: string): string => {
+  return urlFilter.slice(2, -1).toLowerCase()
+}
+
+const writeBlockedHostnamesJson = async (hostnameFilters: NetworkRuleWithoutId[]): Promise<void> => {
+  const hostnames = hostnameFilters.map((rule) => hostnameFromUrlFilter(rule.condition.urlFilter!))
+  const repoRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '../..')
+  const outPath = path.join(repoRoot, BLOCKED_HOSTNAMES_JSON_PATH)
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await writeFileNode(outPath, `${JSON.stringify(hostnames)}\n`, 'utf8')
+}
+
 export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<void> => {
   const networkFilters = lines.map(logLineErrors(parseNetworkFilterLine)).filter(networkFilter => networkFilter !== undefined)
   const uniqueNetworkFilters = deduplicateNetworkFilters(networkFilters)
@@ -325,13 +341,18 @@ export const parseAndGenerateNetworkFilters = async (lines: string[]): Promise<v
     }
   }
   await writeFile(FILTER_LIST_DIR, NETWORK_RULES_FILE, generateNetworkFilterFile(remainingFilters))
-  // Hostname ruleset is Chromium-oriented (over Firefox's static DNR budget). Skip the
-  // file on Firefox builds; the manifest entry is stripped in copy-src as well.
+  // Hostname DNR ruleset is Chromium-oriented (over Firefox's static DNR budget).
+  // Skip the JSON ruleset on Firefox builds; the manifest entry is stripped in copy-src.
   if (process.env.EXTENSION_TARGET !== 'firefox') {
     await writeFile(FILTER_LIST_DIR, HOSTNAME_RULES_FILE, generateNetworkFilterFile(hostnameFilters))
   }
+  // Compact hostname string list for Firefox webRequest experiments (bundle or fetch).
+  await writeBlockedHostnamesJson(hostnameFilters)
   console.log(
     `network rules: ${remainingFilters.length} general, ${hostnameFilters.length} hostname-only` +
-      (process.env.EXTENSION_TARGET === 'firefox' ? ' (hostname file skipped for Firefox)' : '')
+      (process.env.EXTENSION_TARGET === 'firefox' ? ' (hostname DNR file skipped for Firefox)' : '')
+  )
+  console.log(
+    `compact hostname string list generated for Firefox (${hostnameFilters.length} hostnames → ${BLOCKED_HOSTNAMES_JSON_PATH})`
   )
 }
