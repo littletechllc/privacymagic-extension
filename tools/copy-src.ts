@@ -9,7 +9,17 @@ const srcDir: string = process.argv[2] ?? 'src'
 const distDir: string = process.argv[3] ?? 'dist'
 const watchMode: boolean = process.argv.includes('--watch')
 
-const isExcluded = (file: string): boolean => /\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.')
+const isExcluded = (file: string): boolean => {
+  if (/\.(js|ts|mjs)$/.test(file) || path.parse(file).base.startsWith('.')) {
+    return true
+  }
+  // Build-time only (esbuild bundles the hostname list into background/index.js).
+  if (file.includes(`${path.sep}background${path.sep}generated${path.sep}`) ||
+      file.endsWith(`${path.sep}background${path.sep}generated`)) {
+    return true
+  }
+  return false
+}
 
 const gitOpts : ExecSyncOptionsWithStringEncoding = {
   encoding: 'utf8' as const,

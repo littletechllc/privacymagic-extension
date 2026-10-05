@@ -3,7 +3,8 @@ import { mkdir } from 'fs/promises'
 import { dirname } from 'path'
 
 const isProduction = process.env.NODE_ENV === 'production'
-const distRoot = process.env.EXTENSION_TARGET === 'firefox' ? 'dist-firefox' : 'dist'
+const isFirefoxTarget = process.env.EXTENSION_TARGET === 'firefox'
+const distRoot = isFirefoxTarget ? 'dist-firefox' : 'dist'
 
 /** @type {esbuild.BuildOptions} */
 const baseBuildOptions = {
@@ -24,11 +25,19 @@ const baseBuildOptions = {
   packages: /** @type {const} */ ('bundle'),
   mainFields: ['browser', 'module', 'main'],
   conditions: ['browser'],
+  // Build-time target so Firefox-only branches (and their imports) DCE out of Chromium.
+  define: {
+    'process.env.EXTENSION_TARGET': JSON.stringify(process.env.EXTENSION_TARGET ?? '')
+  },
   alias: {
     '@src': './src',
     '@math': './math',
     '@tools': './tools',
-    '@test': './test'
+    '@test': './test',
+    // Full list only for Firefox builds; Chromium gets an empty array module.
+    '@blocked-hostnames': isFirefoxTarget
+      ? './src/background/generated/blocked-hostnames.json'
+      : './src/background/generated/blocked-hostnames-empty.json'
   },
   loader: {
     '.wasm': 'base64'

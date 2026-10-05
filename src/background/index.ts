@@ -9,6 +9,14 @@ import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
 import { startWatchingRemoteConfig } from './remote'
 import { injectCssForCosmeticFilters } from './css-filters'
+import blockedHostnames from '@blocked-hostnames'
+
+/** Firefox-only: in-memory Set for webRequest hostname blocking (bundled at build time). */
+let blockedHostnameSet: Set<string> | null = null
+if (process.env.EXTENSION_TARGET === 'firefox') {
+  blockedHostnameSet = new Set(blockedHostnames)
+  console.log(`Firefox hostname blocklist loaded (${blockedHostnameSet.size} hostnames)`)
+}
 
 const isExtensionPageMessageSender = (sender: chrome.runtime.MessageSender): boolean => {
   if (sender.id !== chrome.runtime.id) {
