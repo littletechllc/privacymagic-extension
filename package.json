@@ -25,12 +25,15 @@
     "update-filter-lists": "npx tsx tools/update-filter-lists.ts",
     "copy": "node tools/copy-src.ts src dist",
     "copy:watch": "npm run copy -- --watch",
+    "copy:firefox": "EXTENSION_TARGET=firefox node tools/copy-src.ts src dist-firefox",
+    "copy:firefox:watch": "EXTENSION_TARGET=firefox node tools/copy-src.ts src dist-firefox --watch",
     "build:math": "bash math/build.sh",
     "build": "npm run build:math && rm -rf dist && npx tsx tools/filter-list-processor.ts && NODE_ENV=production npm run copy && NODE_ENV=production node esbuild.config.js && web-ext build --source-dir dist --overwrite-dest --artifacts-dir artifacts --filename privacymagic.zip",
+    "build-firefox": "npm run build:math && rm -rf dist-firefox && EXTENSION_TARGET=firefox npx tsx tools/filter-list-processor.ts && NODE_ENV=production EXTENSION_TARGET=firefox npm run copy:firefox && NODE_ENV=production EXTENSION_TARGET=firefox node esbuild.config.js && web-ext build --source-dir dist-firefox --overwrite-dest --artifacts-dir artifacts --filename privacymagic-firefox.zip",
     "dev": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t chromium --source-dir dist --ignore-files _metadata _metadata/** privacymagic/**\"",
     "dev:edge": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t chromium --chromium-binary \\\"/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge\\\" --source-dir dist --ignore-files _metadata _metadata/** privacymagic/**\"",
     "dev:opera": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t chromium --chromium-binary \\\"/Applications/Opera.app/Contents/MacOS/Opera\\\" --source-dir dist --ignore-files _metadata _metadata/** privacymagic/**\"",
-    "dev:firefox": "concurrently \"npm run copy:watch\" \"NODE_ENV=development node esbuild.config.js watch\" \"web-ext run -t firefox-desktop --source-dir dist --ignore-files _metadata _metadata/** privacymagic/**\""
+    "dev:firefox": "concurrently \"npm run copy:firefox:watch\" \"NODE_ENV=development EXTENSION_TARGET=firefox node esbuild.config.js watch\" \"web-ext run -t firefox-desktop --source-dir dist-firefox --ignore-files _metadata _metadata/** privacymagic/**\""
   },
   "author": "Arthur Edelstein",
   "license": "GPL-3.0-or-later",

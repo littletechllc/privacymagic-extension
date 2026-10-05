@@ -35,11 +35,13 @@ export const isNetworkFilterLine = (line: string): boolean => {
 }
 
 const ensureDirectoryInDist = async (localDir: string): Promise<string> => {
-  const dir = path.join(__dirname, '../../dist/', localDir)
-  if (ensuredDirectories.has(localDir)) {
-    return ensuredDirectories.get(localDir)!
+  const distRoot = process.env.EXTENSION_TARGET === 'firefox' ? 'dist-firefox' : 'dist'
+  const cacheKey = `${distRoot}/${localDir}`
+  const dir = path.join(__dirname, '../../', distRoot, localDir)
+  if (ensuredDirectories.has(cacheKey)) {
+    return ensuredDirectories.get(cacheKey)!
   }
-  ensuredDirectories.set(localDir, dir)
+  ensuredDirectories.set(cacheKey, dir)
   await fs.mkdir(dir, { recursive: true })
   return dir
 }

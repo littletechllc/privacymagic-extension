@@ -3,6 +3,7 @@ import { mkdir } from 'fs/promises'
 import { dirname } from 'path'
 
 const isProduction = process.env.NODE_ENV === 'production'
+const distRoot = process.env.EXTENSION_TARGET === 'firefox' ? 'dist-firefox' : 'dist'
 
 /** @type {esbuild.BuildOptions} */
 const baseBuildOptions = {
@@ -37,7 +38,7 @@ const baseBuildOptions = {
 const builds = [
   {
     entryPoints: ['src/content_scripts/main.ts'],
-    outfile: 'dist/content_scripts/main.js',
+    outfile: `${distRoot}/content_scripts/main.js`,
     banner: {
       js: 'const __PRIVACY_MAGIC_INJECT__ = function(__disabledSettings) {'
     },
@@ -47,43 +48,43 @@ const builds = [
   },
   {
     entryPoints: ['src/background/index.ts'],
-    outfile: 'dist/background/index.js'
+    outfile: `${distRoot}/background/index.js`
   },
   {
     entryPoints: ['src/content_scripts/youtube.ts'],
-    outfile: 'dist/content_scripts/youtube.js'
+    outfile: `${distRoot}/content_scripts/youtube.js`
   },
   {
     entryPoints: ['src/content_scripts/filters.ts'],
-    outfile: 'dist/content_scripts/filters.js'
+    outfile: `${distRoot}/content_scripts/filters.js`
   },
   {
     entryPoints: ['src/default_popup/popup.ts'],
-    outfile: 'dist/default_popup/popup.js'
+    outfile: `${distRoot}/default_popup/popup.js`
   },
   {
     entryPoints: ['src/privacymagic/options.ts'],
-    outfile: 'dist/privacymagic/options.js'
+    outfile: `${distRoot}/privacymagic/options.js`
   },
   {
     entryPoints: ['src/privacymagic/sidepanel.ts'],
-    outfile: 'dist/privacymagic/sidepanel.js'
+    outfile: `${distRoot}/privacymagic/sidepanel.js`
   },
   {
     entryPoints: ['src/privacymagic/setup.ts'],
-    outfile: 'dist/privacymagic/setup.js'
+    outfile: `${distRoot}/privacymagic/setup.js`
   },
   {
     entryPoints: ['src/privacymagic/sidepanel-sync-help.ts'],
-    outfile: 'dist/privacymagic/sidepanel-sync-help.js'
+    outfile: `${distRoot}/privacymagic/sidepanel-sync-help.js`
   },
   {
     entryPoints: ['src/privacymagic/sidepanel-opera-vpn.ts'],
-    outfile: 'dist/privacymagic/sidepanel-opera-vpn.js'
+    outfile: `${distRoot}/privacymagic/sidepanel-opera-vpn.js`
   },
   {
     entryPoints: ['src/privacymagic/i18n.ts'],
-    outfile: 'dist/privacymagic/i18n.js'
+    outfile: `${distRoot}/privacymagic/i18n.js`
   }
 ]
 

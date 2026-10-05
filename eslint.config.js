@@ -15,6 +15,7 @@ export default [
     ignores: [
       "artifacts/**",
       "dist/**",
+      "dist-firefox/**",
       "node_modules/**",
       // Generated wasm2js — huge, not typed as TS; keep sibling math.min.d.ts in the program instead.
       "math/math.js",

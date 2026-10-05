@@ -66,6 +66,7 @@ const fileChanged = async (srcPath: string, destPath: string): Promise<boolean> 
 }
 
 const isProduction = (): boolean => process.env.NODE_ENV === 'production'
+const isFirefoxTarget = (): boolean => process.env.EXTENSION_TARGET === 'firefox'
 
 const specialFiles: Record<string, (json: Record<string, unknown>) => Record<string, unknown>> = {
   'manifest.json': (json: Record<string, unknown>) => {
@@ -73,16 +74,36 @@ const specialFiles: Record<string, (json: Record<string, unknown>) => Record<str
     cloned['version'] = getLatestVersionNumber()
     cloned['version_name'] = getBuildVersion()
     const permissions = cloned['permissions'] as string[] | undefined
-    if (Array.isArray(permissions) && isProduction()) {
-      cloned['permissions'] = permissions.filter((p) => p !== 'declarativeNetRequestFeedback')
+    if (Array.isArray(permissions)) {
+      let next = permissions
+      if (isProduction()) {
+        next = next.filter((p) => p !== 'declarativeNetRequestFeedback')
+      }
+      if (isFirefoxTarget()) {
+        next = next.filter((p) => p !== 'sidePanel' && p !== 'favicon')
+      }
+      cloned['permissions'] = next
     }
-    // Microsoft Add-on store rejects background.scripts on MV3. Keep it in
-    // development so Firefox can use event-page scripts alongside service_worker.
-    if (isProduction()) {
-      const background = cloned['background'] as Record<string, unknown> | undefined
-      if (background != null) {
+    const background = cloned['background'] as Record<string, unknown> | undefined
+    if (background != null) {
+      if (isFirefoxTarget()) {
+        // Firefox MV3 uses an event page (background.scripts), not a service worker.
+        delete background['service_worker']
+      } else {
+        // Chromium/Edge/Opera MV3 use a service worker; Edge store rejects scripts.
         delete background['scripts']
       }
+    }
+    if (isFirefoxTarget()) {
+      // Required for XPI identity; without it Firefox reports the package as corrupt.
+      cloned['browser_specific_settings'] = {
+        gecko: {
+          id: 'privacy-magic@privacymagic.com',
+          strict_min_version: '128.0'
+        }
+      }
+      // Chromium-only / ignored-with-warning on Firefox.
+      delete cloned['version_name']
     }
     return cloned
   }
