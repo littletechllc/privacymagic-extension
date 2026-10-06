@@ -174,7 +174,11 @@ await copyAll(srcDir)
 
 if (watchMode) {
   const watcher = chokidar.watch(srcDir, {
-    ignored: /\.(js|ts)$/,
+    ignored: [
+      /\.(js|ts)$/,
+      // Build-time only; also skipped in copyOne via isExcluded.
+      /(?:^|[/\\])background[/\\]generated(?:[/\\]|$)/
+    ],
     ignoreInitial: true
   })
 
