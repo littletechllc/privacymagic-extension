@@ -2,6 +2,10 @@ import { redefineNavigatorFields } from '@src/content_scripts/helpers/monkey-pat
 import type { GlobalScope } from '../helpers/globalObject'
 
 const memory = (globalObject: GlobalScope): void => {
+  // Chromium-only; Firefox has no navigator.deviceMemory.
+  if (!('deviceMemory' in globalObject.navigator)) {
+    return
+  }
   redefineNavigatorFields(globalObject, {
     // Cover Your Tracks: 1 in 1.93 browsers have this value:
     deviceMemory: undefined
