@@ -17,12 +17,7 @@ Privacy Magic sedang dikembangkan secara aktif. Masukan atau pertanyaan? Tulis k
 
 TENTANG PENULIS
 
-Privacy Magic dibuat oleh Arthur Edelstein, insinyur perangkat lunak yang berdedikasi membangun perangkat lunak open source untuk melindungi privasi web:
-
-• Di Tor, ia memperkenalkan isolasi aliran di Tor Browser.
-• Di Firefox, ia adalah manajer produk tim Total Cookie Protection dan HTTPS-Only Mode.
-• Di Brave, ia memperkenalkan HTTPS by Default dan ikut menulis penelitian tentang kerentanan privasi browser.
-• Pencipta PrivacyTests.org, inisiatif open source yang menguji kebocoran privasi browser.
+Privacy Magic dibuat oleh Arthur Edelstein, insinyur perangkat lunak yang berdedikasi membangun perangkat lunak open source untuk melindungi privasi web. Ia bekerja di tim privasi pada tiga peramban web berbeda dan berkontribusi pada pengembangan beberapa inovasi besar dalam privasi peramban. Ia juga pencipta PrivacyTests.org, inisiatif open source yang menguji peramban web untuk kebocoran privasi.
 
 SPESIFIKASI TEKNIS
 

@@ -17,12 +17,7 @@ Privacy Magic on aktiivses arenduses. Tagasiside või küsimused? Kirjutage aadr
 
 AUTORIST
 
-Privacy Magici looja on Arthur Edelstein, tarkvarainsener, kes ehitab veebiprivaatsust kaitsvat avatud lähtekoodiga tarkvara:
-
-• Toris tõi ta Tor Browserisse voogude isolatsiooni.
-• Firefoxis oli ta Total Cookie Protectioni ja HTTPS-Only Mode meeskondade tootijuht.
-• Braves tõi ta HTTPS by Defaulti ning oli kaasaautor brausererite privaatsuse haavatavuste uuringutes.
-• PrivacyTests.org looja — avatud lähtekoodiga algatus, mis testib brausereid privaatsuslekkete suhtes.
+Privacy Magici looja on Arthur Edelstein, tarkvarainsener, kes ehitab veebiprivaatsust kaitsvat avatud lähtekoodiga tarkvara. Ta töötas kolme erineva veebibrauseri privaatsusmeeskondades ning aitas kaasa mitme olulise brauseriprivaatsuse innovatsiooni arendamisele. Ta on ka PrivacyTests.org looja — avatud lähtekoodiga algatus, mis testib veebibrausereid privaatsuslekkete suhtes.
 
 TEHNILISED SPETSIFIKATSIOONID
 

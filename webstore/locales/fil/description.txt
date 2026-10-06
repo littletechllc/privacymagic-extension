@@ -17,12 +17,7 @@ Aktibong ginagawa ang Privacy Magic. May feedback o tanong? Sumulat sa contact@l
 
 TUNGKOL SA MAY-AKDA
 
-Ginawa ang Privacy Magic ni Arthur Edelstein, software engineer na nagtatayo ng open-source software na nagtatanggol sa web privacy:
-
-• Sa Tor, ipinakilala niya ang stream isolation sa Tor Browser.
-• Sa Firefox, siya ang product manager ng mga team ng Total Cookie Protection at HTTPS-Only Mode.
-• Sa Brave, ipinakilala niya ang HTTPS by Default at tumulong magsulat ng pananaliksik sa mga kahinaan sa privacy ng browser.
-• Tagalikha ng PrivacyTests.org, open-source na inisyatiba na sumusubok ng privacy leaks ng mga browser.
+Ginawa ang Privacy Magic ni Arthur Edelstein, software engineer na nagtatayo ng open-source software na nagtatanggol sa web privacy. Nagtrabaho siya sa privacy teams ng tatlong magkakaibang web browser, at tumulong sa pagbuo ng ilang pangunahing inobasyon sa privacy ng browser. Siya rin ang lumikha ng PrivacyTests.org, isang open-source na inisyatiba na sumusubok sa mga web browser para sa privacy leaks.
 
 MGA TEKNIKAL NA DETALYE
 

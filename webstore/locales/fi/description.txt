@@ -17,12 +17,7 @@ Privacy Magicia kehitetään aktiivisesti. Palautetta tai kysymyksiä? Kirjoita 
 
 TEKIJÄSTÄ
 
-Privacy Magicin on luonut Arthur Edelstein, ohjelmistoinsinööri, joka rakentaa avoimen lähdekoodin ohjelmistoa verkon yksityisyyden puolustamiseksi:
-
-• Torissa hän toi stream-eristyksen Tor Browseriin.
-• Firefoxissa hän oli Total Cookie Protectionin ja HTTPS-Only Mode -tiimien tuotejohtaja.
-• Bravessa hän toi HTTPS by Defaultin ja oli mukana selainten yksityisyyshaavoittuvuuksia koskevassa tutkimuksessa.
-• PrivacyTests.orgin luoja — avoimen lähdekoodin hanke, joka testaa selaimia yksityisyysvuotojen varalta.
+Privacy Magicin on luonut Arthur Edelstein, ohjelmistoinsinööri, joka rakentaa avoimen lähdekoodin ohjelmistoa verkon yksityisyyden puolustamiseksi. Hän työskenteli kolmen eri verkkoselaimen yksityisyystiimeissä ja osallistui useiden merkittävien selainyksityisyyden innovaatioiden kehittämiseen. Hän on myös PrivacyTests.orgin luoja, avoimen lähdekoodin hanke, joka testaa verkkoselaimia yksityisyysvuotojen varalta.
 
 TEKNISET TIEDOT
 

@@ -17,12 +17,7 @@ A Privacy Magic aktív fejlesztés alatt áll. Visszajelzés vagy kérdés? Írj
 
 A SZERZŐRŐL
 
-A Privacy Magicet Arthur Edelstein készíti, szoftvermérnök, aki a webes adatvédelmet szolgáló nyílt forráskódú szoftvert épít:
-
-• A Tornál bevezette a stream izolációt a Tor Browserben.
-• A Firefoxnál a Total Cookie Protection és HTTPS-Only Mode csapatok termékmenedzsere volt.
-• A Bravenél bevezette a HTTPS by Defaultot, és társszerzője volt böngésző-adatvédelmi sebezhetőségekről szóló kutatásnak.
-• A PrivacyTests.org létrehozója — nyílt forráskódú kezdeményezés böngészők adatvédelmi szivárgásainak tesztelésére.
+A Privacy Magicet Arthur Edelstein készíti, szoftvermérnök, aki a webes adatvédelmet szolgáló nyílt forráskódú szoftvert épít. Három különböző webböngésző adatvédelmi csapatában dolgozott, és hozzájárult több jelentős böngésző-adatvédelmi innováció fejlesztéséhez. Ő a PrivacyTests.org megalkotója is, egy nyílt forráskódú kezdeményezés, amely webböngészőket tesztel adatvédelmi szivárgásokra.
 
 MŰSZAKI ADATOK
 

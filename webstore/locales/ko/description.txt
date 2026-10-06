@@ -17,12 +17,7 @@ Privacy Magic은 활발히 개발 중입니다. 피드백이나 질문이 있으
 
 작성자 소개
 
-Privacy Magic은 웹 프라이버시를 지키는 오픈 소스 소프트웨어를 만드는 소프트웨어 엔지니어 Arthur Edelstein이 만들었습니다:
-
-• Tor에서는 Tor Browser에 스트림 격리를 도입했습니다.
-• Firefox에서는 Total Cookie Protection과 HTTPS-Only Mode 팀의 제품 관리자였습니다.
-• Brave에서는 HTTPS by Default를 도입하고 브라우저 프라이버시 취약점 연구를 공동 저술했습니다.
-• 브라우저 프라이버시 유출을 점검하는 오픈 소스 이니셔티브 PrivacyTests.org의 창시자입니다.
+Privacy Magic은 웹 프라이버시를 지키는 오픈 소스 소프트웨어를 만드는 소프트웨어 엔지니어 Arthur Edelstein이 만들었습니다. 그는 세 가지 서로 다른 웹 브라우저의 프라이버시 팀에서 일했으며, 브라우저 프라이버시의 여러 주요 혁신 개발에 기여했습니다. 또한 브라우저 프라이버시 유출을 점검하는 오픈 소스 이니셔티브 PrivacyTests.org의 창시자이기도 합니다.
 
 기술 사양
 

@@ -17,12 +17,7 @@ Privacy Magic đang được phát triển tích cực. Góp ý hoặc câu hỏ
 
 VỀ TÁC GIẢ
 
-Privacy Magic được tạo bởi Arthur Edelstein, kỹ sư phần mềm chuyên xây dựng phần mềm nguồn mở bảo vệ quyền riêng tư trên web:
-
-• Tại Tor, ông đưa cách ly luồng vào Tor Browser.
-• Tại Firefox, ông là quản lý sản phẩm của các nhóm Total Cookie Protection và HTTPS-Only Mode.
-• Tại Brave, ông đưa HTTPS by Default và đồng tác giả nghiên cứu về lỗ hổng quyền riêng tư trình duyệt.
-• Người tạo PrivacyTests.org — sáng kiến nguồn mở kiểm tra rò rỉ quyền riêng tư trình duyệt.
+Privacy Magic được tạo bởi Arthur Edelstein, kỹ sư phần mềm chuyên xây dựng phần mềm nguồn mở bảo vệ quyền riêng tư trên web. Ông đã làm việc trong các nhóm quyền riêng tư của ba trình duyệt web khác nhau và đóng góp vào việc phát triển một số đổi mới quan trọng về quyền riêng tư trình duyệt. Ông cũng là người tạo ra PrivacyTests.org, một sáng kiến nguồn mở kiểm tra trình duyệt web về rò rỉ quyền riêng tư.
 
 THÔNG SỐ KỸ THUẬT
 

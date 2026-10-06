@@ -17,12 +17,7 @@ Privacy Magic inatengenezwa kikamilifu. Maoni au maswali? Andika kwa contact@lit
 
 Kuhusu mwandishi
 
-Privacy Magic imeundwa na Arthur Edelstein, mhandisi wa programu anayejenga programu huria inayotetea faragha ya wavuti:
-
-• Katika Tor, alianzisha utengano wa mtiririko katika Tor Browser.
-• Katika Firefox, alikuwa meneja wa bidhaa wa timu za Total Cookie Protection na HTTPS-Only Mode.
-• Katika Brave, alianzisha HTTPS by Default na kuandika pamoja utafiti kuhusu udhaifu wa faragha ya vivinjari.
-• Muundaji wa PrivacyTests.org, mpango wa chanzo huria unaojaribu uvujaji wa faragha ya vivinjari.
+Privacy Magic imeundwa na Arthur Edelstein, mhandisi wa programu anayejenga programu huria inayotetea faragha ya wavuti. Amefanya kazi katika timu za faragha za vivinjari vitatu tofauti vya wavuti, na kuchangia katika uundaji wa ubunifu kadhaa muhimu katika faragha ya kivinjari. Pia ndiye muundaji wa PrivacyTests.org, mpango wa chanzo huria unaojaribu vivinjari vya wavuti kwa uvujaji wa faragha.
 
 VIPIMO VYA KIUFUNDI
 

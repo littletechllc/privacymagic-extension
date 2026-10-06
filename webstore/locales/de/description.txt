@@ -17,12 +17,7 @@ Privacy Magic wird aktiv weiterentwickelt. Haben Sie Feedback oder Fragen? Wir f
 
 ÜBER DEN AUTOR
 
-Privacy Magic wurde von Arthur Edelstein entwickelt, einem Softwareingenieur, der Open-Source-Software zum Schutz der Web-Privatsphäre baut:
-
-• Bei Tor führte er Stream Isolation in Tor Browser ein.
-• Bei Firefox war er Product Manager der Teams hinter Total Cookie Protection und HTTPS-Only Mode.
-• Bei Brave führte er HTTPS by Default ein und war Mitautor von Forschung zu Browser-Privatsphäre-Schwachstellen.
-• Gründer von PrivacyTests.org, einer Open-Source-Initiative, die Browser auf Datenschutzlecks testet.
+Privacy Magic wurde von Arthur Edelstein entwickelt, einem Softwareingenieur, der Open-Source-Software zum Schutz der Web-Privatsphäre baut. Er arbeitete in Privacy-Teams bei drei verschiedenen Webbrowsern und trug zur Entwicklung mehrerer wichtiger Innovationen in der Browser-Privatsphäre bei. Er ist außerdem der Gründer von PrivacyTests.org, einer Open-Source-Initiative, die Browser auf Datenschutzlecks testet.
 
 TECHNISCHE SPEZIFIKATIONEN
 

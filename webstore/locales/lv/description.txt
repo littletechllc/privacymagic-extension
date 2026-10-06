@@ -17,12 +17,7 @@ Privacy Magic tiek aktīvi izstrādāts. Atsauksmes vai jautājumi? Rakstiet uz 
 
 PAR AUTORU
 
-Privacy Magic veido Arthur Edelstein, programmatūras inženieris, kas veido atvērtā pirmkoda programmatūru tīmekļa privātuma aizsardzībai:
-
-• Tor ieviesa plūsmu izolāciju Tor Browser.
-• Firefox bija Total Cookie Protection un HTTPS-Only Mode komandu produktu vadītājs.
-• Brave ieviesa HTTPS by Default un bija līdzautors pētījumiem par pārlūku privātuma ievainojamībām.
-• PrivacyTests.org veidotājs — atvērtā pirmkoda iniciatīva, kas testē pārlūku privātuma noplūdes.
+Privacy Magic veido Arthur Edelstein, programmatūras inženieris, kas veido atvērtā pirmkoda programmatūru tīmekļa privātuma aizsardzībai. Viņš strādāja trīs dažādu tīmekļa pārlūkprogrammu privātuma komandās un sniedza ieguldījumu vairāku nozīmīgu pārlūkprogrammu privātuma inovāciju izstrādē. Viņš ir arī PrivacyTests.org veidotājs — atvērtā pirmkoda iniciatīva, kas testē tīmekļa pārlūkprogrammas uz privātuma noplūdēm.
 
 TEHNISKĀS SPECIFIKĀCIJAS
 

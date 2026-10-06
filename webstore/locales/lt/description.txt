@@ -17,12 +17,7 @@ Privacy Magic aktyviai kuriamas. Atsiliepimai ar klausimai? Rašykite contact@li
 
 APIE AUTORIŲ
 
-Privacy Magic kuria Arthur Edelstein, programinės įrangos inžinierius, kuriantis atvirojo kodo programinę įrangą interneto privatumui ginti:
-
-• Tor įdiegė srautų izoliaciją Tor Browser.
-• Firefox buvo Total Cookie Protection ir HTTPS-Only Mode komandų produktų vadovas.
-• Brave įdiegė HTTPS by Default ir buvo bendraautoris tyrimų apie naršyklių privatumo pažeidžiamumus.
-• PrivacyTests.org kūrėjas — atvirojo kodo iniciatyva, testuojanti naršyklių privatumo nutekėjimus.
+Privacy Magic kuria Arthur Edelstein, programinės įrangos inžinierius, kuriantis atvirojo kodo programinę įrangą interneto privatumui ginti. Jis dirbo trijų skirtingų žiniatinklio naršyklių privatumo komandose ir prisidėjo prie kelių svarbių naršyklių privatumo inovacijų kūrimo. Jis taip pat yra PrivacyTests.org kūrėjas – atvirojo kodo iniciatyva, kuri testuoja žiniatinklio naršykles dėl privatumo nutekėjimų.
 
 TECHNINĖS SPECIFIKACIJOS
 

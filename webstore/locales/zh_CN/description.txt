@@ -17,12 +17,7 @@ Privacy Magic 正在积极开发中。如有反馈或问题，请发信至 conta
 
 关于作者
 
-Privacy Magic 由软件工程师 Arthur Edelstein 创建，他致力于构建捍卫网络隐私的开源软件：
-
-• 在 Tor，他为 Tor Browser 引入了流隔离。
-• 在 Firefox，他曾任 Total Cookie Protection 与 HTTPS-Only Mode 团队的产品经理。
-• 在 Brave，他引入了 HTTPS by Default，并参与撰写浏览器隐私漏洞相关研究。
-• PrivacyTests.org 的创建者——一个检测浏览器隐私泄漏的开源项目。
+Privacy Magic 由软件工程师 Arthur Edelstein 创建，他致力于构建捍卫网络隐私的开源软件。他曾在三款不同网络浏览器的隐私团队工作，并为多项浏览器隐私重大创新的开发做出了贡献。他还是 PrivacyTests.org 的创建者——一个检测浏览器隐私泄漏的开源项目。
 
 技术规格
 

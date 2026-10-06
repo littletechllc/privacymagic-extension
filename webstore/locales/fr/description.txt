@@ -17,12 +17,7 @@ Privacy Magic est en développement actif. Des retours ou des questions ? Écriv
 
 À PROPOS DE L'AUTEUR
 
-Privacy Magic est créé par Arthur Edelstein, ingénieur logiciel dédié aux logiciels open source qui défendent la confidentialité sur le web :
-
-• Chez Tor, il a introduit l'isolation des flux dans Tor Browser.
-• Chez Firefox, il était chef de produit des équipes derrière Total Cookie Protection et HTTPS-Only Mode.
-• Chez Brave, il a introduit HTTPS by Default et coécrit des recherches sur les failles de confidentialité des navigateurs.
-• Créateur de PrivacyTests.org, une initiative open source qui teste les fuites de confidentialité des navigateurs.
+Privacy Magic est créé par Arthur Edelstein, ingénieur logiciel dédié aux logiciels open source qui défendent la confidentialité sur le web. Il a travaillé dans les équipes confidentialité de trois navigateurs web différents et a contribué au développement de plusieurs innovations majeures en matière de confidentialité des navigateurs. Il est aussi le créateur de PrivacyTests.org, une initiative open source qui teste les fuites de confidentialité des navigateurs.
 
 SPÉCIFICATIONS TECHNIQUES
 

@@ -17,12 +17,7 @@ Privacy Magic aktif geliştirme aşamasındadır. Geri bildirim veya soruların�
 
 YAZAR HAKKINDA
 
-Privacy Magic, web gizliliğini savunan açık kaynak yazılım geliştiren yazılım mühendisi Arthur Edelstein tarafından oluşturulmuştur:
-
-• Tor’da Tor Browser’a akış yalıtımını getirdi.
-• Firefox’ta Total Cookie Protection ve HTTPS-Only Mode ekiplerinin ürün yöneticisiydi.
-• Brave’de HTTPS by Default’u getirdi ve tarayıcı gizlilik açıklarına dair araştırmaya ortak yazar oldu.
-• PrivacyTests.org’un yaratıcısı — tarayıcı gizlilik sızıntılarını test eden açık kaynak bir girişim.
+Privacy Magic, web gizliliğini savunan açık kaynak yazılım geliştiren yazılım mühendisi Arthur Edelstein tarafından oluşturulmuştur. Üç farklı web tarayıcısının gizlilik ekiplerinde çalışmış ve tarayıcı gizliliğindeki birkaç önemli yeniliğin geliştirilmesine katkıda bulunmuştur. Ayrıca web tarayıcılarını gizlilik sızıntıları açısından test eden açık kaynak girişimi PrivacyTests.org’un da yaratıcısıdır.
 
 TEKNİK ÖZELLİKLER
 

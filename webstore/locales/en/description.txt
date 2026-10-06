@@ -17,7 +17,7 @@ Privacy Magic is in active development. Do you have feedback or questions? We'd 
 
 ABOUT THE AUTHOR
 
-Privacy Magic is created by Arthur Edelstein, a software engineer dedicated to building open-source software that defends web privacy. He work at privacy teams for three different web browsers, and contributed to the development of several major innovations in browser privacy. He is also the creator of PrivacyTests.org, an open-source initiative that tests web browsers for privacy leaks.
+Privacy Magic is created by Arthur Edelstein, a software engineer dedicated to building open-source software that defends web privacy. He worked at privacy teams for three different web browsers, and contributed to the development of several major innovations in browser privacy. He is also the creator of PrivacyTests.org, an open-source initiative that tests web browsers for privacy leaks.
 
 TECHNICAL SPECIFICATIONS
 
