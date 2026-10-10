@@ -192,7 +192,7 @@ async function clickAccept(page: Page, field: ReturnType<Page['locator']>): Prom
         if (/[↺↻⟲⟳×]/.test(el.innerText || '')) continue
         const m = style.backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
         if (!m) continue
-        const R = +m[1], G = +m[2], B = +m[3]
+        const R = Number(m[1]), G = Number(m[2]), B = Number(m[3])
         if (R > 150 && R > G) continue // orange/red reset
         if (!(G > 120 && G >= R && G > B + 30)) continue // need green
         const score = G + (cx < b.x + b.width / 2 ? 50 : 0) // prefer left (accept)
@@ -202,8 +202,8 @@ async function clickAccept(page: Page, field: ReturnType<Page['locator']>): Prom
         }
       }
       if (best == null) return false
-      ;(best.closest('button, a, [role="button"]') as HTMLElement | null ?? best)
-        .setAttribute(markerAttr, '1')
+      const target = best.closest('button, a, [role="button"]') ?? best
+      target.setAttribute(markerAttr, '1')
       return true
     }, { box, markerAttr: marker })
 
@@ -250,7 +250,7 @@ async function main(): Promise<void> {
   const context = await chromium.launchPersistentContext(userDataDir, { headless: false })
   try {
     const page = context.pages()[0] ?? await context.newPage()
-    await page.goto(translationsUrl(listings[0]!.locale), { waitUntil: 'domcontentloaded' })
+    await page.goto(translationsUrl(listings[0].locale), { waitUntil: 'domcontentloaded' })
     await waitForSignedIn(page)
 
     for (const listing of listings) {

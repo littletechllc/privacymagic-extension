@@ -162,7 +162,7 @@ async function fetchStoreListings (page: Page): Promise<StoreListing[]> {
     await page.reload({ waitUntil: 'domcontentloaded' })
   }
 
-  const json = await (await wait).json()
+  const json: unknown = await (await wait).json()
   const list = Array.isArray(json) ? json as StoreListing[] : []
   process.stdout.write(`[api] GET storeListings → ${list.length} items\n`)
   if (list.length === 0) throw new Error('storeListings list was empty')

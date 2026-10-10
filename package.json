@@ -21,6 +21,7 @@
     "sync:firefox-locale-strings": "npx tsx tools/sync-firefox-locale-string.ts",
     "sync:locale-messages": "npx tsx tools/sync-locale-messages-from-en.ts",
     "webstore:update-listing-descriptions": "npx tsx webstore/update-listing-descriptions.playwright.ts",
+    "webstore:update-edge-listing-descriptions": "npx tsx webstore/update-edge-listing-descriptions.playwright.ts",
     "webstore:update-opera-listing-descriptions": "npx tsx webstore/update-opera-listing-descriptions.playwright.ts",
     "update-filter-lists": "npx tsx tools/update-filter-lists.ts",
     "copy": "node tools/copy-src.ts src dist",
