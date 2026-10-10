@@ -13,6 +13,15 @@
         "notes": "Dev-only transitive dep via web-ext/adbkit; not shipped in the extension. No patched node-forge release yet.",
         "expiry": "2026-11-01"
       }
+    },
+    // Dev-only: jest/ts-jest → babel-plugin-istanbul → js-yaml → argparse → sprintf-js.
+    // No patched sprintf-js release yet (latest still <=1.1.3). Not shipped in the extension.
+    {
+      "GHSA-hp3w-g68c-fv3c": {
+        "active": true,
+        "notes": "Dev-only transitive via jest coverage tooling; no fixed sprintf-js on npm yet.",
+        "expiry": "2026-11-01"
+      }
     }
   ]
 }
