@@ -100,18 +100,30 @@ const toggleStepCollapsed = (stepId: StepId): void => {
   el.classList.toggle('step-card-collapsed')
 }
 
-chrome.action.onUserSettingsChanged.addListener(
-  (details) => {
-    console.log('User settings changed:', details)
-    updateStep('pin', details.isOnToolbar ?? false)
-  }
-)
+if (browserInfo.brand === 'Safari') {
+  // Safari has no pin/unpin API or Chromium-style toolbar pin UX; hide the step.
+  getStepElement('pin')?.setAttribute('hidden', '')
+  const remainingSteps = STEP_IDS.filter((stepId) => stepId !== 'pin')
+  remainingSteps.forEach((stepId, index) => {
+    const num = getStepElement(stepId)?.querySelector('.step-num')
+    if (num != null) {
+      num.textContent = String(index + 1)
+    }
+  })
+} else {
+  chrome.action.onUserSettingsChanged.addListener(
+    (details) => {
+      console.log('User settings changed:', details)
+      updateStep('pin', details.isOnToolbar ?? false)
+    }
+  )
 
-chrome.action.getUserSettings().then((userSettings) => {
-  updateStep('pin', userSettings.isOnToolbar ?? false)
-}).catch((error) => {
-  console.error('Error getting user settings:', error)
-})
+  chrome.action.getUserSettings().then((userSettings) => {
+    updateStep('pin', userSettings.isOnToolbar ?? false)
+  }).catch((error) => {
+    console.error('Error getting user settings:', error)
+  })
+}
 
 if (browserInfo.brand === 'Opera') {
   document.getElementById('operaVpnSuggestion')?.removeAttribute('hidden')
