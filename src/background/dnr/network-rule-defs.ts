@@ -1,4 +1,5 @@
 import { acceptLanguageHeader } from '@src/common/languages-array'
+import { browserInfo } from '@src/common/browser'
 import { NetworkSettingId } from '@src/common/setting-ids'
 import { networkRuleId, queryParametersRuleId } from './rule-ids'
 
@@ -43,16 +44,12 @@ export type NetworkPartialRule = {
   id: number
 }
 
-export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRule[]> = {
-  gpc: [{
-    id: networkRuleId('gpc'),
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: [
-        { operation: 'set', header: 'Sec-GPC', value: '1' }
-      ]
-    },
-  }],
+/**
+ * Chromium-only Client Hint / related header removals.
+ * Safari and Firefox do not send these; Safari also rejects unrecognized Sec-CH-*
+ * names and fails the whole updateDynamicRules batch.
+ */
+export const CLIENT_HINT_HIDING_NETWORK_DEFS = {
   useragent: [{
     id: networkRuleId('useragent'),
     action: {
@@ -63,25 +60,6 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       ])
     },
   }],
-  // Only match URLs that actually have at least one removable param. Otherwise the redirect
-  // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
-  // so "ads off" per-site would never unblock requests that were already redirected.
-  queryParameters: disallowedQueryParams.map(param => ({
-    id: queryParametersRuleId(param),
-    action: {
-      type: 'redirect',
-      redirect: {
-        transform: {
-          queryTransform: {
-            removeParams: disallowedQueryParams
-          }
-        }
-      }
-    },
-    condition: {
-      regexFilter: `[\\?&]${param}=`
-    }
-  })),
   network: [{
     id: networkRuleId('network'),
     action: {
@@ -121,6 +99,70 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       ])
     },
   }],
+  memory: [{
+    id: networkRuleId('memory'),
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Device-Memory',
+        'Sec-CH-Device-Memory'
+      ])
+    },
+  }],
+  cpu: [{
+    id: networkRuleId('cpu'),
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Sec-CH-UA-Architecture',
+        'Sec-CH-UA-Bitness'
+      ])
+    },
+  }],
+  device: [{
+    id: networkRuleId('device'),
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: removeHeaders([
+        'Sec-CH-UA-Form-Factors',
+        'Sec-CH-UA-Mobile',
+        'Sec-CH-UA-Model',
+        'Sec-CH-UA-Platform-Version',
+        'Sec-CH-UA-WoW64'
+      ])
+    },
+  }]
+} satisfies Partial<Record<NetworkSettingId, NetworkPartialRule[]>>
+
+export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRule[]> = {
+  gpc: [{
+    id: networkRuleId('gpc'),
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: [
+        { operation: 'set', header: 'Sec-GPC', value: '1' }
+      ]
+    },
+  }],
+  // Only match URLs that actually have at least one removable param. Otherwise the redirect
+  // rule would match clean URLs too (priority 4) and always win over the allow rule (3),
+  // so "ads off" per-site would never unblock requests that were already redirected.
+  queryParameters: disallowedQueryParams.map(param => ({
+    id: queryParametersRuleId(param),
+    action: {
+      type: 'redirect',
+      redirect: {
+        transform: {
+          queryTransform: {
+            removeParams: disallowedQueryParams
+          }
+        }
+      }
+    },
+    condition: {
+      regexFilter: `[\\?&]${param}=`
+    }
+  })),
   language: [{
     id: networkRuleId('language'),
     action: {
@@ -130,16 +172,6 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
           navigator.languages.length > 0 ? navigator.languages : [navigator.language]
         )
       })
-    },
-  }],
-  memory: [{
-    id: networkRuleId('memory'),
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: removeHeaders([
-        'Device-Memory',
-        'Sec-CH-Device-Memory'
-      ])
     },
   }],
   /* css: [{
@@ -194,29 +226,6 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       }]
     }
   }],
-  cpu: [{
-    id: networkRuleId('cpu'),
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: removeHeaders([
-        'Sec-CH-UA-Architecture',
-        'Sec-CH-UA-Bitness'
-      ])
-    },
-  }],
-  device: [{
-    id: networkRuleId('device'),
-    action: {
-      type: 'modifyHeaders',
-      requestHeaders: removeHeaders([
-        'Sec-CH-UA-Form-Factors',
-        'Sec-CH-UA-Mobile',
-        'Sec-CH-UA-Model',
-        'Sec-CH-UA-Platform-Version',
-        'Sec-CH-UA-WoW64'
-      ])
-    },
-  }],
   // Prevent cache leaks from stylesheets, scripts, images, fonts, and media
   // observed in Chromium-based browsers.
   cache: [{
@@ -232,5 +241,16 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
     condition: {
       resourceTypes: ['stylesheet', 'script', 'image', 'font', 'media', 'other']
     }
-  }]
+  }],
+  ...(browserInfo.isChromium
+    ? CLIENT_HINT_HIDING_NETWORK_DEFS
+    : {
+        useragent: [],
+        network: [],
+        screen: [],
+        display: [],
+        memory: [],
+        cpu: [],
+        device: []
+      })
 }

@@ -13,13 +13,15 @@ type BrowserBrand = keyof typeof BROWSER_OWNERS
 type BrowserInfoFor<Brand extends BrowserBrand> = {
   brand: Brand
   owner: (typeof BROWSER_OWNERS)[Brand]
+  isChromium: Brand extends 'Firefox' | 'Safari' ? false : true
 }
 
 export type BrowserInfo = { [Brand in BrowserBrand]: BrowserInfoFor<Brand> }[BrowserBrand]
 
 const browserInfoFor = <Brand extends BrowserBrand>(brand: Brand): BrowserInfoFor<Brand> => ({
   brand,
-  owner: BROWSER_OWNERS[brand]
+  owner: BROWSER_OWNERS[brand],
+  isChromium: (brand !== 'Firefox' && brand !== 'Safari') as Brand extends 'Firefox' | 'Safari' ? false : true
 })
 
 const brands = navigator.userAgentData?.brands?.map((entry) => entry.brand) ?? []
