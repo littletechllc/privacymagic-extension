@@ -65,6 +65,15 @@ const expectedSpoofedValues = {
       bare: { matches: false, media: 'not all' }
     }
   },
+  // Linux allows every font, so the patch adds no faces there.
+  fonts: {
+    page: {
+      arial: false,
+      gillSans: process.platform === 'win32',
+      helveticaNeue: process.platform === 'win32',
+      menlo: process.platform !== 'linux'
+    }
+  },
   gpc: inEveryRealm({
     present: true,
     globalPrivacyControl: true
@@ -207,6 +216,7 @@ const expectProbeResult = async (result: Locator, expected: unknown): Promise<vo
 for (const name of Object.keys(expectedSpoofedValues) as Array<keyof typeof expectedSpoofedValues>) {
   for (const surface of surfaces) {
     test(`${surface.label} running the ${name} probe sees the spoofed value`, async ({ context, serviceWorker }) => {
+      test.skip(name === 'fonts' && process.platform === 'linux', 'font filtering is not applied on Linux')
       await serviceWorker.evaluate(() => chrome.runtime.id)
 
       const page = await context.newPage()
