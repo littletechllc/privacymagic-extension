@@ -6,6 +6,7 @@ import { makeBundleForInjection, getDisabledSettings } from "../helpers/helpers"
 import { resolveAbsoluteUrl } from "../helpers/safe"
 import type { SharedWorkerConstructor, WorkerScriptURL } from "./patch_helpers/worker-types"
 import { getTrustedTypePolicyForObject, prepareInjectionForTrustedTypes } from "../helpers/trusted-types"
+import { enableBlobLockingAndCaching, type BlobLocking } from "./patch_helpers/blob-locking"
 
 export type SharedWorkerPatchDeps = {
   makeBundleForInjection?: (disabledSettings: string[]) => string
@@ -41,6 +42,8 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
   const hardeningCode = makeBundle(getDisabled())
   prepareTrustedTypesInjection(globalObject, hardeningCode)
 
+  const blobLocking: BlobLocking = enableBlobLockingAndCaching(globalObject)
+
   const getOrCreateHardenedUrlForSharedWorker = (url: string | URL | TrustedScriptURL, options: WorkerOptions | string | undefined): string | TrustedScriptURL => {
     const absoluteUrl = resolveAbsoluteUrl(url.toString(), globalObject.location.href)
     const name = typeof options === 'string' ? options : options?.name
@@ -63,7 +66,7 @@ const sharedWorker = (globalObject: GlobalScope, deps?: SharedWorkerPatchDeps): 
       return stored
     }
     const sanitizedBlobUrl = makeSanitizedScriptForWorker({
-      url, options, globalObject, hardeningCode
+      url, options, globalObject, hardeningCode, blobLocking
     })
     try {
       globalObject.localStorage.setItem(KEY, sanitizedBlobUrl.toString())

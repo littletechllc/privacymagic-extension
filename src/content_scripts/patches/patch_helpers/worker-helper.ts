@@ -2,7 +2,7 @@ import type { GlobalScope } from '@src/content_scripts/helpers/globalObject'
 import { createSafeMethod } from '@src/content_scripts/helpers/monkey-patch'
 import { resolveAbsoluteUrl } from '@src/content_scripts/helpers/safe'
 import { getTrustedTypePolicyForObject, makeTrustedScriptURLFunction } from '@src/content_scripts/helpers/trusted-types'
-import { enableBlobLockingAndCaching } from './blob-locking'
+import { type BlobLocking } from './blob-locking'
 import { WorkerScriptURL } from './worker-types'
 
 export const generateCompletionCallbackCode = (
@@ -41,13 +41,14 @@ export const makeSanitizedScriptForWorker = ({
   options,
   globalObject,
   hardeningCode,
+  blobLocking,
 }: {
   url: WorkerScriptURL
   options: WorkerOptions | string | undefined
   globalObject: GlobalScope
   hardeningCode: string
+  blobLocking: BlobLocking
 }): string | TrustedScriptURL => {
-  const { lockObjectUrl, unlockObjectUrl, getCachedBlob } = enableBlobLockingAndCaching(globalObject)
   const BlobSafe = globalObject.Blob
   const URLSafe = globalObject.URL
   const stringStartsWithSafe = createSafeMethod(String, 'startsWith')
@@ -61,9 +62,9 @@ export const makeSanitizedScriptForWorker = ({
   let completionCallbackCode = ''
   if (stringStartsWithSafe(absoluteUrl, 'blob:')) {
     completionCallbackCode = generateCompletionCallbackCode(globalObject, () => {
-      unlockObjectUrl(absoluteUrl)
+      blobLocking.unlockObjectUrl(absoluteUrl)
     })
-    lockObjectUrl(absoluteUrl)
+    blobLocking.lockObjectUrl(absoluteUrl)
   }
   const importCommand = typeof options === 'object' && options?.type === 'module'
     ? 'await import'
@@ -86,7 +87,7 @@ export const makeSanitizedScriptForWorker = ({
           ;`
   const suffix = `
           ;${completionCallbackCode}`
-  let payload: string | Blob | undefined = getCachedBlob(absoluteUrl)
+  let payload: string | Blob | undefined = blobLocking.getCachedBlob(absoluteUrl)
   if (payload == null) {
     // Do not catch: an uncaught worker error must reach Worker `onerror`
     // (sites such as hls.js fall back to main-thread work on that event).

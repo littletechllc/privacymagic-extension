@@ -4,6 +4,7 @@ import { makeBundleForInjection, getDisabledSettings } from '@src/content_script
 import { prepareInjectionForTrustedTypes } from '@src/content_scripts/helpers/trusted-types'
 import { makeSanitizedScriptForWorker } from './patch_helpers/worker-helper'
 import type { WorkerConstructor, WorkerScriptURL } from './patch_helpers/worker-types'
+import { BlobLocking, enableBlobLockingAndCaching } from './patch_helpers/blob-locking'
 
 /** Optional overrides for tests (avoids `makeBundleForInjection` needing esbuild’s `__PRIVACY_MAGIC_INJECT__`). */
 export type WorkerPatchDeps = {
@@ -19,6 +20,9 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
   const makeBundle = deps?.makeBundleForInjection ?? makeBundleForInjection
   const getDisabled = deps?.getDisabledSettings ?? getDisabledSettings
   const prepareTrustedTypesInjection = deps?.prepareInjectionForTrustedTypes ?? prepareInjectionForTrustedTypes
+
+  const blobLocking: BlobLocking = enableBlobLockingAndCaching(globalObject)
+
   // Run hardening code in workers before they are executed.
   // TODO: Do we need to worry about module blobs with relative imports?
   const prepareInjectionForWorker = (hardeningCode: string): void => {
@@ -33,12 +37,12 @@ const worker = (globalObject: GlobalScope, deps?: WorkerPatchDeps): void => {
           options,
           globalObject,
           hardeningCode,
+          blobLocking,
         })
         return new Target(sanitizedBlobUrl, options)
       }
     })
   }
-
   const hardeningCode = makeBundle(getDisabled())
   prepareTrustedTypesInjection(globalObject, hardeningCode)
   prepareInjectionForWorker(hardeningCode)

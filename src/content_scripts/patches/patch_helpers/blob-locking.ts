@@ -1,16 +1,18 @@
 import { MapSafe, SetSafe, mapDeleteSafe, mapGetSafe, mapSetSafe, setAddSafe, setDeleteSafe, setHasSafe } from "@src/content_scripts/helpers/safe"
 import type { GlobalScope } from "@src/content_scripts/helpers/globalObject"
 
-let isInitialized = false
-let lockObjectUrl: (url: string) => void
-let unlockObjectUrl: (url: string) => void
-let getCachedBlob: (url: string) => Blob | undefined
+export type BlobLocking = {
+  lockObjectUrl: (url: string) => void
+  unlockObjectUrl: (url: string) => void
+  getCachedBlob: (url: string) => Blob | undefined
+}
 
-export const enableBlobLockingAndCaching = (globalObject: GlobalScope): { lockObjectUrl: (url: string) => void, unlockObjectUrl: (url: string) => void, getCachedBlob: (url: string) => Blob | undefined } => {
-  if (isInitialized) {
-    return { lockObjectUrl, unlockObjectUrl, getCachedBlob }
+let blobLocking: BlobLocking | undefined
+
+export const enableBlobLockingAndCaching = (globalObject: GlobalScope): BlobLocking => {
+  if (blobLocking) {
+    return blobLocking
   }
-  isInitialized = true
   const originalRevokeObjectURL = globalObject.URL.revokeObjectURL.bind(globalObject.URL)
 
   const pendingRevocations = new SetSafe<string>()
@@ -30,7 +32,7 @@ export const enableBlobLockingAndCaching = (globalObject: GlobalScope): { lockOb
     }
   }
 
-  unlockObjectUrl = (url: string): void => {
+  const unlockObjectUrl = (url: string): void => {
     if (!isLockedObjectUrl(url)) {
       return
     }
@@ -47,7 +49,7 @@ export const enableBlobLockingAndCaching = (globalObject: GlobalScope): { lockOb
     }
   }
 
-  lockObjectUrl = (url: string): void => {
+  const lockObjectUrl = (url: string): void => {
     const lockCount = lockedUrls.get(url) ?? 0
     lockedUrls.set(url, lockCount + 1)
   }
@@ -67,14 +69,19 @@ export const enableBlobLockingAndCaching = (globalObject: GlobalScope): { lockOb
     requestToRevokeObjectUrl(url)
   }
 
-  getCachedBlob = (url: string): Blob | undefined => {
+  const getCachedBlob = (url: string): Blob | undefined => {
     return mapGetSafe(blobURLCache, url)
   }
 
-  return { lockObjectUrl, unlockObjectUrl, getCachedBlob }
+  blobLocking = {
+    lockObjectUrl,
+    unlockObjectUrl,
+    getCachedBlob,
+  }
+  return blobLocking
 }
 
 /** Reset singleton state so tests can patch a fresh `URL` object. */
 export const resetBlobLockingAndCachingForTests = (): void => {
-  isInitialized = false
+  blobLocking = undefined
 }
