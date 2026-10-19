@@ -134,6 +134,18 @@ const expectedSpoofedValues = {
       p3: { matches: false, media: 'not all' }
     }
   },
+  sharedStorage: {
+    page: {
+      SharedStorage: false,
+      SharedStorageAppendMethod: false,
+      SharedStorageClearMethod: false,
+      SharedStorageDeleteMethod: false,
+      SharedStorageModifierMethod: false,
+      SharedStorageSetMethod: false,
+      SharedStorageWorklet: false,
+      sharedStorage: false
+    }
+  },
   timer: inEveryRealm({
     nowInteger: true,
     nowAdvanced: true,
