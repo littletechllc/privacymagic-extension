@@ -29,6 +29,16 @@ const userAgentPlatform = process.platform === 'win32'
     ? 'Linux x86_64'
     : 'MacIntel'
 
+const gpuIdentity = process.platform === 'darwin'
+  ? { vendor: 'Apple Inc.', renderer: 'Apple GPU' }
+  : { vendor: 'Mozilla', renderer: 'Mozilla' }
+
+const gpuReading = (canvasNoised: boolean | null): unknown => ({
+  webgl1: gpuIdentity,
+  webgl2: gpuIdentity,
+  canvasNoised
+})
+
 const expectedSpoofedValues = {
   audio: {
     page: {
@@ -84,6 +94,12 @@ const expectedSpoofedValues = {
     present: true,
     globalPrivacyControl: true
   }),
+  gpu: {
+    page: gpuReading(true),
+    worker: gpuReading(null),
+    workerInWorker: gpuReading(null),
+    sharedWorker: gpuReading(null)
+  },
   keyboard: {
     page: {
       present: true,
