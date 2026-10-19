@@ -1,6 +1,6 @@
 /**
  * Runs runProbe() from the surrounding probe page in the page, a dedicated worker,
- * and a shared worker. Both workers load this same script.
+ * a worker nested in that worker, and a shared worker.
  */
 const resultElement = document.getElementById('probe-result')
 if (resultElement == null) {
@@ -8,9 +8,11 @@ if (resultElement == null) {
 }
 const result = resultElement
 
+const realms = ['page', 'worker', 'workerInWorker', 'sharedWorker']
+
 /** @type {Record<string, unknown>} */
 const readings = {}
-const pending = new Set(['page', 'worker', 'sharedWorker'])
+const pending = new Set(realms)
 
 const finishIfReady = () => {
   if (pending.size > 0) {
@@ -34,10 +36,31 @@ const record = (key, value) => {
 }
 
 setTimeout(() => {
-  for (const key of ['page', 'worker', 'sharedWorker']) {
+  for (const key of realms) {
     record(key, { error: 'timed out' })
   }
-}, 10000)
+}, 15000)
+
+/**
+ * @param {string} workerKey
+ * @param {string} nestedKey
+ * @param {unknown} data
+ */
+const recordWorkerReport = (workerKey, nestedKey, data) => {
+  if (
+    data != null &&
+    typeof data === 'object' &&
+    'reading' in data &&
+    'nestedWorker' in data
+  ) {
+    const report = /** @type {{ reading: unknown, nestedWorker: unknown }} */ (data)
+    record(workerKey, report.reading)
+    record(nestedKey, report.nestedWorker)
+    return
+  }
+  record(workerKey, data)
+  record(nestedKey, { error: 'missing nested worker result' })
+}
 
 const runPageProbe = async () => {
   const runProbe = /** @type {{ runProbe?: () => Promise<unknown> }} */ (
@@ -67,10 +90,12 @@ const workerUrl = `probe-worker.js?src=${encodeURIComponent(location.pathname)}`
 
 const worker = new Worker(workerUrl)
 worker.onmessage = (/** @type {MessageEvent} */ event) => {
-  record('worker', event.data)
+  recordWorkerReport('worker', 'workerInWorker', event.data)
 }
 worker.onerror = (/** @type {ErrorEvent} */ event) => {
-  record('worker', { error: event.message || 'worker error' })
+  const error = { error: event.message || 'worker error' }
+  record('worker', error)
+  record('workerInWorker', error)
 }
 
 const sharedWorker = new SharedWorker(workerUrl)

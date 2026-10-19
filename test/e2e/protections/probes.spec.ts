@@ -30,6 +30,7 @@ const spoofedDisk = {
 const inEveryRealm = (reading: unknown): unknown => ({
   page: reading,
   worker: reading,
+  workerInWorker: reading,
   sharedWorker: reading
 })
 
