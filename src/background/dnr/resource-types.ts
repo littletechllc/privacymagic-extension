@@ -2,10 +2,11 @@ import { browserInfo } from '@src/common/browser'
 
 type ResourceTypeName = `${chrome.declarativeNetRequest.ResourceType}`
 
-// Fails to compile — and names the missing type(s) — if any ResourceType is left out
+// Fails to compile (and names the missing types) if any ResourceType is left out
 const allResourceTypes = <const T extends readonly ResourceTypeName[]>(
   types: Exclude<ResourceTypeName, T[number]> extends never ? T : Exclude<ResourceTypeName, T[number]>[]
-) => [...types] as chrome.declarativeNetRequest.ResourceType[]
+): chrome.declarativeNetRequest.ResourceType[] =>
+  [...types] as chrome.declarativeNetRequest.ResourceType[]
 
 const CHROME_ALL_RESOURCE_TYPES = allResourceTypes([
   'main_frame',
@@ -29,10 +30,10 @@ const CHROME_ALL_RESOURCE_TYPES = allResourceTypes([
  * Firefox and Safari reject these names and fail the whole updateDynamicRules batch.
  * Neither browser classifies requests as these types.
  */
-const NON_CHROMIUM_UNSUPPORTED_RESOURCE_TYPES = new Set<chrome.declarativeNetRequest.ResourceType>([
+const NON_CHROMIUM_UNSUPPORTED_RESOURCE_TYPES = new Set<string>([
   'webtransport',
-  'webbundle'
-])
+  'webbundle',
+] satisfies readonly ResourceTypeName[])
 
 export const resourceTypesForBrowser = (isChromium: boolean): chrome.declarativeNetRequest.ResourceType[] =>
   isChromium
