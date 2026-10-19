@@ -47,6 +47,12 @@ const expectedSpoofedValues = {
     hardwareConcurrency: { min: 4, max: 8 },
     stable: true
   }),
+  device: {
+    page: {
+      type: 'continuous',
+      onchange: null
+    }
+  },
   disk: inEveryRealm({
     usage: 0,
     quota: 2_147_483_648,
