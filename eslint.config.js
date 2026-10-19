@@ -20,7 +20,10 @@ export default [
       // Generated wasm2js — huge, not typed as TS; keep sibling math.min.d.ts in the program instead.
       "math/math.js",
       "math/math.min.js",
-      "math/math.wasm"
+      "math/math.wasm",
+      // Classic browser scripts. tsc checkJs typechecks them. Typed ESLint rules
+      // need projectService, which is only enabled for the files list below.
+      "test/e2e/pages/**"
     ]
   },
   ...tseslint.configs.recommendedTypeChecked,
