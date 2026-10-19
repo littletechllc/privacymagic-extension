@@ -23,6 +23,12 @@ const inEveryRealm = (reading: unknown): unknown => ({
   sharedWorker: reading
 })
 
+const userAgentPlatform = process.platform === 'win32'
+  ? 'Win32'
+  : process.platform === 'linux'
+    ? 'Linux x86_64'
+    : 'MacIntel'
+
 const expectedSpoofedValues = {
   audio: {
     page: {
@@ -143,7 +149,18 @@ const expectedSpoofedValues = {
       present: true,
       maxTouchPoints: 0
     }
-  }
+  },
+  useragent: inEveryRealm({
+    platform: userAgentPlatform,
+    uaPlatform: userAgentPlatform,
+    mobile: false,
+    json: {
+      mobile: false,
+      platform: userAgentPlatform
+    },
+    fullVersionsReduced: true,
+    uaFullVersionReduced: true
+  })
 }
 
 const surfaces = [
