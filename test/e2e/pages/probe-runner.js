@@ -86,7 +86,12 @@ void runPageProbe().then(
   recordProbeError
 )
 
-const workerUrl = `probe-worker.js?src=${encodeURIComponent(location.pathname)}`
+const probeScript = new URLSearchParams(location.search).get('src')
+if (probeScript == null) {
+  throw new Error('probe page missing src')
+}
+
+const workerUrl = `probe-worker.js?src=${encodeURIComponent(probeScript)}`
 
 const worker = new Worker(workerUrl)
 worker.onmessage = (/** @type {MessageEvent} */ event) => {

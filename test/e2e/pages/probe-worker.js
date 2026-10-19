@@ -1,7 +1,7 @@
 /**
- * Dedicated-worker and shared-worker entry for every probe page.
- * The page passes the probe document as ?src=/disk-probe.html. This script
- * fetches that document and evaluates its inline scripts, which define runProbe().
+ * Dedicated-worker and shared-worker entry for every probe.
+ * The page passes the probe script as ?src=memory-probe.js. This script
+ * importScripts that file, which defines runProbe().
  * A dedicated worker also starts one nested dedicated worker and reports that
  * reading alongside its own. A nested worker is marked ?leaf=1 so it does not
  * start another worker. Shared workers cannot construct Worker.
@@ -11,34 +11,13 @@ const workerLocation = new URL(self.location.href)
 const probeSource = workerLocation.searchParams.get('src')
 const isLeaf = workerLocation.searchParams.get('leaf') === '1'
 
-/**
- * @param {string} html
- * @returns {string[]}
- */
-const inlineScripts = (html) => {
-  /** @type {string[]} */
-  const scripts = []
-  const pattern = /<script>([\s\S]*?)<\/script>/g
-  for (const match of html.matchAll(pattern)) {
-    scripts.push(match[1] ?? '')
-  }
-  return scripts
+if (probeSource == null) {
+  throw new Error('probe worker missing src')
 }
 
+importScripts(probeSource)
+
 const loadProbe = async () => {
-  if (probeSource == null || probeSource === '') {
-    throw new Error('probe worker missing src')
-  }
-  const response = await fetch(probeSource)
-  const html = await response.text()
-  const scripts = inlineScripts(html)
-  if (scripts.length === 0) {
-    throw new Error(`no inline script in ${probeSource}`)
-  }
-  for (const script of scripts) {
-    const evaluate = eval
-    evaluate(script)
-  }
   const runProbe = /** @type {{ runProbe?: () => Promise<unknown> }} */ (
     /** @type {unknown} */ (self)
   ).runProbe

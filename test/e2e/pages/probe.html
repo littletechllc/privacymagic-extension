@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Probe</title>
+</head>
+<body>
+  <pre id="probe-result" data-status="pending">pending</pre>
+  <script>
+    (() => {
+      const src = new URLSearchParams(location.search).get('src')
+      const probeResult = document.getElementById('probe-result')
+      if (src == null || probeResult == null) {
+        throw new Error('probe page is missing src')
+      }
+      const probe = document.createElement('script')
+      probe.src = src
+      probe.onerror = () => {
+        probeResult.dataset.status = 'error'
+        probeResult.textContent = `failed to load ${src}`
+      }
+      probe.onload = () => {
+        const runner = document.createElement('script')
+        runner.src = 'probe-runner.js'
+        document.body.appendChild(runner)
+      }
+      document.body.appendChild(probe)
+    })()
+  </script>
+</body>
+</html>
