@@ -6,25 +6,57 @@
 </head>
 <body>
   <h1>Memory API probe</h1>
-  <p>This page reads <code>navigator.deviceMemory</code> and records what it gets back.</p>
+  <p>This page reads <code>navigator.deviceMemory</code> in the page, a dedicated worker, and a shared worker.</p>
   <pre id="memory-result" data-status="pending">pending</pre>
+  <script src="memory-probe.js"></script>
   <script>
     const result = document.getElementById('memory-result')
+    const readings = {}
+    const pending = new Set(['page', 'worker', 'sharedWorker'])
 
-    const finish = (status, payload) => {
-      result.dataset.status = status
-      result.textContent = JSON.stringify(payload, null, 2)
+    const finishIfReady = () => {
+      if (pending.size > 0) {
+        return
+      }
+      result.dataset.status = 'done'
+      result.textContent = JSON.stringify(readings, null, 2)
     }
 
+    const record = (key, value) => {
+      if (!pending.has(key)) {
+        return
+      }
+      readings[key] = value
+      pending.delete(key)
+      finishIfReady()
+    }
+
+    setTimeout(() => {
+      for (const key of ['page', 'worker', 'sharedWorker']) {
+        record(key, { error: 'timed out' })
+      }
+    }, 10000)
+
     try {
-      const present = 'deviceMemory' in navigator
-      const value = navigator.deviceMemory
-      finish('done', {
-        present,
-        deviceMemory: value === undefined ? 'undefined' : value
-      })
+      record('page', readDeviceMemory())
     } catch (error) {
-      finish('error', { error: String(error) })
+      record('page', { error: String(error) })
+    }
+
+    const worker = new Worker('memory-worker.js')
+    worker.onmessage = (event) => {
+      record('worker', event.data)
+    }
+    worker.onerror = (event) => {
+      record('worker', { error: event.message || 'worker error' })
+    }
+
+    const sharedWorker = new SharedWorker('memory-shared-worker.js')
+    sharedWorker.port.onmessage = (event) => {
+      record('sharedWorker', event.data)
+    }
+    sharedWorker.onerror = (event) => {
+      record('sharedWorker', { error: event.message || 'shared worker error' })
     }
   </script>
 </body>

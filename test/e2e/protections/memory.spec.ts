@@ -1,5 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { Locator } from '@playwright/test'
 import { expect, test } from '../fixtures'
 import { startStaticServer, type StaticServer } from '../helpers/static-server'
 
@@ -15,24 +16,59 @@ test.afterAll(async () => {
   await server.close()
 })
 
-test('a page reading navigator.deviceMemory sees the spoofed value', async ({ context, serviceWorker }) => {
+const spoofedDeviceMemory = {
+  present: true,
+  deviceMemory: 'undefined'
+}
+
+const expectSpoofedDeviceMemory = async (result: Locator): Promise<void> => {
+  await expect(result).not.toHaveAttribute('data-status', 'pending')
+
+  const status = await result.getAttribute('data-status')
+  const text = await result.textContent()
+  const reading: unknown = JSON.parse(text ?? '')
+  expect(status, text ?? '').toBe('done')
+  // The property stays present; its getter returns undefined.
+  expect(reading).toEqual({
+    page: spoofedDeviceMemory,
+    worker: spoofedDeviceMemory,
+    sharedWorker: spoofedDeviceMemory
+  })
+}
+
+test('a page, worker, and shared worker reading navigator.deviceMemory see the spoofed value', async ({ context, serviceWorker }) => {
   await serviceWorker.evaluate(() => chrome.runtime.id)
 
   const page = await context.newPage()
   try {
     await page.goto(`${server.url}/memory.html`)
-    const result = page.locator('#memory-result')
-    await expect(result).not.toHaveAttribute('data-status', 'pending')
+    await expectSpoofedDeviceMemory(page.locator('#memory-result'))
+  } finally {
+    await page.close()
+  }
+})
 
-    const status = await result.getAttribute('data-status')
-    const text = await result.textContent()
-    const reading: unknown = JSON.parse(text ?? '')
-    expect(status, text ?? '').toBe('done')
-    // The property stays present; its getter returns undefined.
-    expect(reading).toEqual({
-      present: true,
-      deviceMemory: 'undefined'
-    })
+test('an iframe loading the memory probe sees the spoofed value', async ({ context, serviceWorker }) => {
+  await serviceWorker.evaluate(() => chrome.runtime.id)
+
+  const page = await context.newPage()
+  try {
+    await page.goto(`${server.url}/memory-iframe.html`)
+    const result = page.frameLocator('#memory-frame').locator('#memory-result')
+    await expectSpoofedDeviceMemory(result)
+  } finally {
+    await page.close()
+  }
+})
+
+test('a twice-nested iframe loading the memory probe sees the spoofed value', async ({ context, serviceWorker }) => {
+  await serviceWorker.evaluate(() => chrome.runtime.id)
+
+  const page = await context.newPage()
+  try {
+    await page.goto(`${server.url}/memory-iframe-nested.html`)
+    const result = page.frameLocator('#memory-outer-frame').frameLocator('#memory-frame').locator('#memory-result')
+    await expectSpoofedDeviceMemory(result)
   } finally {
     await page.close()
   }
