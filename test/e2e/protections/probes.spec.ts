@@ -65,10 +65,76 @@ const expectedSpoofedValues = {
       bare: { matches: false, media: 'not all' }
     }
   },
+  gpc: inEveryRealm({
+    present: true,
+    globalPrivacyControl: true
+  }),
+  keyboard: {
+    page: {
+      present: true,
+      keyboard: 'undefined'
+    }
+  },
+  language: inEveryRealm({
+    language: 'en-US',
+    first: 'en-US',
+    count: { min: 1, max: 2 },
+    onlyFirstBase: true
+  }),
+  math: inEveryRealm({
+    cos: -0.4067775970251724,
+    pow: 1.9275814160560204e-50,
+    tan: -3.3537128705376014
+  }),
   memory: inEveryRealm({
     present: true,
     deviceMemory: 'undefined'
-  })
+  }),
+  network: {
+    page: {
+      downlink: 100,
+      effectiveType: '4g',
+      rtt: 100,
+      saveData: false
+    }
+  },
+  screen: {
+    page: {
+      width: 1920,
+      height: 1080,
+      availWidth: 1920,
+      availHeight: 1080,
+      availLeft: 0,
+      availTop: 0,
+      colorDepth: 24,
+      pixelDepth: 24,
+      devicePixelRatio: 2,
+      screenX: 0,
+      screenY: 0,
+      screenLeft: 0,
+      screenTop: 0,
+      outerMatchesInner: true,
+      sizeMatchesViewport: true,
+      srgb: { matches: true, media: 'all' },
+      p3: { matches: false, media: 'not all' }
+    }
+  },
+  timer: inEveryRealm({
+    nowInteger: true,
+    nowAdvanced: true,
+    timeOriginInteger: true
+  }),
+  timezone: inEveryRealm({
+    vancouver: 'America/Los_Angeles',
+    paris: 'Europe/Berlin',
+    london: 'Europe/London'
+  }),
+  touch: {
+    page: {
+      present: true,
+      maxTouchPoints: 0
+    }
+  }
 }
 
 const surfaces = [
