@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Memory API probe</title>
+</head>
+<body>
+  <h1>Memory API probe</h1>
+  <p>This page reads <code>navigator.deviceMemory</code>.</p>
+  <pre id="probe-result" data-status="pending">pending</pre>
+  <script>
+    function runProbe () {
+      const present = 'deviceMemory' in navigator
+      const value = navigator.deviceMemory
+      return {
+        present,
+        deviceMemory: value === undefined ? 'undefined' : value
+      }
+    }
+  </script>
+  <script src="probe-runner.js"></script>
+</body>
+</html>

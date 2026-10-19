@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Probe iframe</title>
+</head>
+<body>
+  <iframe id="probe-frame"></iframe>
+  <script>
+    const src = new URLSearchParams(location.search).get('src')
+    if (src == null || src === '' || src.includes('://') || src.startsWith('//') || src.startsWith('/')) {
+      throw new Error('iframe src must be a relative probe path')
+    }
+    const frame = document.getElementById('probe-frame')
+    if (frame == null) {
+      throw new Error('probe iframe is missing')
+    }
+    frame.src = src
+  </script>
+</body>
+</html>

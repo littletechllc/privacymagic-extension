@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Disk API probe</title>
+</head>
+<body>
+  <h1>Disk API probe</h1>
+  <p>This page calls <code>navigator.storage.estimate()</code>.</p>
+  <pre id="probe-result" data-status="pending">pending</pre>
+  <script>
+    async function runProbe () {
+      if (navigator.storage == null || typeof navigator.storage.estimate !== 'function') {
+        throw new Error('navigator.storage.estimate is unavailable')
+      }
+      const estimate = await navigator.storage.estimate()
+      return {
+        usage: estimate.usage,
+        quota: estimate.quota,
+        usageDetails: estimate.usageDetails ?? null
+      }
+    }
+  </script>
+  <script src="probe-runner.js"></script>
+</body>
+</html>
