@@ -23,7 +23,6 @@ function readWebGL (name) {
   }
 }
 
-/** @returns {Promise<boolean>} */
 function canvasWasNoised () {
   const canvas = document.createElement('canvas')
   canvas.width = 16
@@ -34,40 +33,19 @@ function canvasWasNoised () {
   }
   context.fillStyle = '#ff0000'
   context.fillRect(0, 0, 16, 16)
-  const original = context.getImageData(0, 0, 16, 16).data
-  const url = canvas.toDataURL()
-  return new Promise((/** @type {(value: boolean) => void} */ resolve, /** @type {(reason: Error) => void} */ reject) => {
-    const image = new Image()
-    image.onload = () => {
-      const copy = document.createElement('canvas')
-      copy.width = 16
-      copy.height = 16
-      const copyContext = copy.getContext('2d')
-      if (copyContext == null) {
-        reject(new Error('2d canvas is unavailable'))
-        return
-      }
-      copyContext.drawImage(image, 0, 0)
-      const readBack = copyContext.getImageData(0, 0, 16, 16).data
-      for (let i = 0; i < original.length; i += 1) {
-        if (original[i] !== readBack[i]) {
-          resolve(true)
-          return
-        }
-      }
-      resolve(false)
+  const pixels = context.getImageData(0, 0, 16, 16).data
+  for (let i = 0; i < pixels.length; i += 4) {
+    if (pixels[i] !== 255 || pixels[i + 1] !== 0 || pixels[i + 2] !== 0 || pixels[i + 3] !== 255) {
+      return true
     }
-    image.onerror = () => {
-      reject(new Error('canvas data URL failed to load'))
-    }
-    image.src = url
-  })
+  }
+  return false
 }
 
-async function runProbe () {
+function runProbe () {
   return {
     webgl1: readWebGL('webgl'),
     webgl2: readWebGL('webgl2'),
-    canvasNoised: typeof document === 'undefined' ? null : await canvasWasNoised()
+    canvasNoised: typeof document === 'undefined' ? null : canvasWasNoised()
   }
 }

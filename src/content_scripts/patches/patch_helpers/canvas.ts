@@ -3,9 +3,9 @@ import { weakMapGetSafe, weakMapHasSafe, weakMapSetSafe } from '@src/content_scr
 import { GlobalScope } from '../../helpers/globalObject'
 import { noiseImageDataBytes } from './noise'
 
+// getImageData already noises its returned copy. Paint that copy so encoding reads it once.
 const noiseCanvas = (
-  source: HTMLCanvasElement,
-  globalObject: GlobalScope
+  source: HTMLCanvasElement
 ): HTMLCanvasElement | undefined => {
   const width = source.width
   const height = source.height
@@ -21,7 +21,6 @@ const noiseCanvas = (
   }
   context.drawImage(source, 0, 0)
   const imageData = context.getImageData(0, 0, dest.width, dest.height)
-  noiseImageDataBytes(imageData.data, globalObject)
   context.putImageData(imageData, 0, 0)
   return dest
 }
@@ -85,6 +84,11 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
     | [path: Path2D, x: number, y: number]
 
   type CommandType = 'call' | 'set'
+
+  const noiseReturnedImageData = (imageData: ImageData): ImageData => {
+    noiseImageDataBytes(imageData.data, globalObject)
+    return imageData
+  }
 
   interface Command {
     name: string
@@ -161,10 +165,10 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
     context2dGetImageData (...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.getImageData>): ImageData {
       const context = this.replayCommands()
       if (context instanceof globalObject.CanvasRenderingContext2D) {
-        return originalContextGetImageDataSafe(context, ...args)
+        return noiseReturnedImageData(originalContextGetImageDataSafe(context, ...args))
       }
       if (context instanceof globalObject.OffscreenCanvasRenderingContext2D) {
-        return originalOffscreenCanvasContextGetImageDataSafe(context, ...args)
+        return noiseReturnedImageData(originalOffscreenCanvasContextGetImageDataSafe(context, ...args))
       }
       return new globalObject.ImageData(new Uint8ClampedArray(0), 0, 0)
     }
@@ -208,7 +212,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return 'data:,'
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      const copy = noiseCanvas(shadowCanvas, globalObject)
+      const copy = noiseCanvas(shadowCanvas)
       if (copy == null) {
         return 'data:,'
       }
@@ -222,7 +226,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         return
       }
       const shadowCanvas = originalCanvasFromContextSafe(shadowContext)
-      const copy = noiseCanvas(shadowCanvas, globalObject)
+      const copy = noiseCanvas(shadowCanvas)
       if (copy == null) {
         callback(null)
         return
@@ -325,10 +329,8 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
         const commandRecorder = getCommandRecorderForContext(this)
         if (commandRecorder !== undefined) {
           return commandRecorder.context2dGetImageData(sx, sy, sw, sh, settings)
-        } else {
-          const data = new Uint8ClampedArray(sw * sh * 4)
-          return new globalObject.ImageData(data, sw, sh)
         }
+        return noiseReturnedImageData(new globalObject.ImageData(new Uint8ClampedArray(sw * sh * 4), sw, sh))
       },
       measureText: function (this: Context2D, ...args: Parameters<typeof globalObject.CanvasRenderingContext2D.prototype.measureText>) {
         const commandRecorder = getCommandRecorderForContext(this)
@@ -385,7 +387,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToDataURL(type, quality)
         }
         try {
-          const copy = noiseCanvas(this, globalObject)
+          const copy = noiseCanvas(this)
           if (copy != null) {
             // The copy's 2d context exists only to read and noise pixels. Encoding
             // through the patched method would replay that context and noise again.
@@ -401,7 +403,7 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           return weakMapGetSafe(canvasToCommandRecorder, this)!.canvasToBlob(callback, type, quality)
         }
         try {
-          const copy = noiseCanvas(this, globalObject)
+          const copy = noiseCanvas(this)
           if (copy != null) {
             return originalCanvasToBlobSafe(copy, callback, type, quality)
           }
