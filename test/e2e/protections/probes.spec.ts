@@ -48,17 +48,17 @@ const inEveryRealm = (reading: unknown): unknown => ({
 const probes = [
   {
     name: 'memory',
-    path: 'probe.html?src=memory-probe.js',
+    path: 'probe.html?src=probes/memory.js',
     expected: inEveryRealm(spoofedDeviceMemory)
   },
   {
     name: 'disk',
-    path: 'probe.html?src=disk-probe.js',
+    path: 'probe.html?src=probes/disk.js',
     expected: inEveryRealm(spoofedDisk)
   },
   {
     name: 'battery',
-    path: 'probe.html?src=battery-probe.js',
+    path: 'probe.html?src=probes/battery.js',
     expected: { page: spoofedBattery }
   }
 ]

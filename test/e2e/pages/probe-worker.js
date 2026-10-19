@@ -1,6 +1,6 @@
 /**
  * Dedicated-worker and shared-worker entry for every probe.
- * The page passes the probe script as ?src=memory-probe.js. This script
+ * The page passes the probe script as ?src=probes/memory.js. This script
  * importScripts that file, which defines runProbe().
  * A dedicated worker also starts one nested dedicated worker and reports that
  * reading alongside its own. A nested worker is marked ?leaf=1 so it does not
