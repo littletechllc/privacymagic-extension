@@ -1,6 +1,7 @@
 /**
  * Runs runProbe() from the surrounding probe page in the page, a dedicated worker,
- * a worker nested in that worker, and a shared worker.
+ * a worker nested in that worker, and a shared worker. A probe script may set
+ * `const pageOnly = true` to run only in the page. Iframes are pages.
  */
 const resultElement = document.getElementById('probe-result')
 if (resultElement == null) {
@@ -8,7 +9,10 @@ if (resultElement == null) {
 }
 const result = resultElement
 
-const realms = ['page', 'worker', 'workerInWorker', 'sharedWorker']
+const allRealms = ['page', 'worker', 'workerInWorker', 'sharedWorker']
+const realms = typeof pageOnly !== 'undefined' && pageOnly
+  ? ['page']
+  : allRealms
 
 /** @type {Record<string, unknown>} */
 const readings = {}
@@ -91,22 +95,28 @@ if (probeScript == null) {
   throw new Error('probe page missing src')
 }
 
-const workerUrl = `probe-worker.js?src=${encodeURIComponent(probeScript)}`
+if (realms.includes('worker') || realms.includes('sharedWorker')) {
+  const workerUrl = `probe-worker.js?src=${encodeURIComponent(probeScript)}`
 
-const worker = new Worker(workerUrl)
-worker.onmessage = (/** @type {MessageEvent} */ event) => {
-  recordWorkerReport('worker', 'workerInWorker', event.data)
-}
-worker.onerror = (/** @type {ErrorEvent} */ event) => {
-  const error = { error: event.message || 'worker error' }
-  record('worker', error)
-  record('workerInWorker', error)
-}
+  if (realms.includes('worker')) {
+    const worker = new Worker(workerUrl)
+    worker.onmessage = (/** @type {MessageEvent} */ event) => {
+      recordWorkerReport('worker', 'workerInWorker', event.data)
+    }
+    worker.onerror = (/** @type {ErrorEvent} */ event) => {
+      const error = { error: event.message || 'worker error' }
+      record('worker', error)
+      record('workerInWorker', error)
+    }
+  }
 
-const sharedWorker = new SharedWorker(workerUrl)
-sharedWorker.port.onmessage = (/** @type {MessageEvent} */ event) => {
-  record('sharedWorker', event.data)
-}
-sharedWorker.onerror = (/** @type {ErrorEvent} */ event) => {
-  record('sharedWorker', { error: event.message || 'shared worker error' })
+  if (realms.includes('sharedWorker')) {
+    const sharedWorker = new SharedWorker(workerUrl)
+    sharedWorker.port.onmessage = (/** @type {MessageEvent} */ event) => {
+      record('sharedWorker', event.data)
+    }
+    sharedWorker.onerror = (/** @type {ErrorEvent} */ event) => {
+      record('sharedWorker', { error: event.message || 'shared worker error' })
+    }
+  }
 }

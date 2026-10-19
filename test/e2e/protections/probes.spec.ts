@@ -27,6 +27,17 @@ const spoofedDisk = {
   usageDetails: {}
 }
 
+const spoofedBattery = {
+  charging: true,
+  chargingTime: 0,
+  dischargingTime: 'Infinity',
+  level: 1,
+  onchargingchange: null,
+  onchargingtimechange: null,
+  ondischargingtimechange: null,
+  onlevelchange: null
+}
+
 const inEveryRealm = (reading: unknown): unknown => ({
   page: reading,
   worker: reading,
@@ -44,6 +55,11 @@ const probes = [
     name: 'disk',
     path: 'probe.html?src=disk-probe.js',
     expected: inEveryRealm(spoofedDisk)
+  },
+  {
+    name: 'battery',
+    path: 'probe.html?src=battery-probe.js',
+    expected: { page: spoofedBattery }
   }
 ]
 
