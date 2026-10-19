@@ -30,7 +30,6 @@
   * touch support status
 * Removes tracking query parameters
 * Caps Referrer-Policy
-* Blocks insecure HTTP connections
 * Blocks window.name tracking
 * Sanitizes IFrames
 * Sanitizes Web Workers
