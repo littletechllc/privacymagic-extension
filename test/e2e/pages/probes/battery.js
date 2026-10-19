@@ -1,4 +1,4 @@
-const pageOnly = true
+/** @type {{ pageOnly?: boolean }} */ (globalThis).pageOnly = true
 
 /**
  * JSON has no Infinity, and JSON.stringify turns functions into null.

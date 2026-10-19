@@ -1,7 +1,7 @@
 /**
  * Runs runProbe() from the surrounding probe page in the page, a dedicated worker,
  * a worker nested in that worker, and a shared worker. A probe script may set
- * `const pageOnly = true` to run only in the page. Iframes are pages.
+ * `globalThis.pageOnly = true` to run only in the page. Iframes are pages.
  */
 const resultElement = document.getElementById('probe-result')
 if (resultElement == null) {
@@ -10,9 +10,10 @@ if (resultElement == null) {
 const result = resultElement
 
 const allRealms = ['page', 'worker', 'workerInWorker', 'sharedWorker']
-const realms = typeof pageOnly !== 'undefined' && pageOnly
-  ? ['page']
-  : allRealms
+const pageOnly = /** @type {{ pageOnly?: boolean }} */ (
+  /** @type {unknown} */ (globalThis)
+).pageOnly === true
+const realms = pageOnly ? ['page'] : allRealms
 
 /** @type {Record<string, unknown>} */
 const readings = {}

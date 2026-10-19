@@ -16,28 +16,6 @@ test.afterAll(async () => {
   await server.close()
 })
 
-const spoofedDeviceMemory = {
-  present: true,
-  deviceMemory: 'undefined'
-}
-
-const spoofedDisk = {
-  usage: 0,
-  quota: 2_147_483_648,
-  usageDetails: {}
-}
-
-const spoofedBattery = {
-  charging: true,
-  chargingTime: 0,
-  dischargingTime: 'Infinity',
-  level: 1,
-  onchargingchange: null,
-  onchargingtimechange: null,
-  ondischargingtimechange: null,
-  onlevelchange: null
-}
-
 const inEveryRealm = (reading: unknown): unknown => ({
   page: reading,
   worker: reading,
@@ -45,23 +23,40 @@ const inEveryRealm = (reading: unknown): unknown => ({
   sharedWorker: reading
 })
 
-const probes = [
-  {
-    name: 'memory',
-    path: 'probe.html?src=probes/memory.js',
-    expected: inEveryRealm(spoofedDeviceMemory)
+const expectedSpoofedValues = {
+  audio: {
+    page: {
+      sampleRate: 48000,
+      channelDataNoised: true,
+      channelDataHighBitsPreserved: true
+    }
   },
-  {
-    name: 'disk',
-    path: 'probe.html?src=probes/disk.js',
-    expected: inEveryRealm(spoofedDisk)
+  battery: {
+    page: {
+      charging: true,
+      chargingTime: 0,
+      dischargingTime: 'Infinity',
+      level: 1,
+      onchargingchange: null,
+      onchargingtimechange: null,
+      ondischargingtimechange: null,
+      onlevelchange: null
+    }
   },
-  {
-    name: 'battery',
-    path: 'probe.html?src=probes/battery.js',
-    expected: { page: spoofedBattery }
-  }
-]
+  cpu: inEveryRealm({
+    hardwareConcurrency: { min: 4, max: 8 },
+    stable: true
+  }),
+  disk: inEveryRealm({
+    usage: 0,
+    quota: 2_147_483_648,
+    usageDetails: {}
+  }),
+  memory: inEveryRealm({
+    present: true,
+    deviceMemory: 'undefined'
+  })
+}
 
 const surfaces = [
   { depth: 0, label: 'a top-level page' },
@@ -85,23 +80,60 @@ const probeResult = (page: Page, depth: number): Locator => {
   return scope.locator('#probe-result')
 }
 
+const isIntegerRange = (value: unknown): value is { min: number, max: number } => {
+  if (value == null || typeof value !== 'object' || Array.isArray(value)) {
+    return false
+  }
+  const record = value as Record<string, unknown>
+  return Object.keys(record).length === 2
+    && typeof record.min === 'number'
+    && typeof record.max === 'number'
+}
+
+const expectSpoofedValue = (actual: unknown, expected: unknown): void => {
+  if (isIntegerRange(expected)) {
+    expect(typeof actual).toBe('number')
+    expect(Number.isInteger(actual)).toBe(true)
+    expect(actual).toBeGreaterThanOrEqual(expected.min)
+    expect(actual).toBeLessThanOrEqual(expected.max)
+    return
+  }
+  if (
+    actual != null
+    && expected != null
+    && typeof actual === 'object'
+    && typeof expected === 'object'
+    && !Array.isArray(actual)
+    && !Array.isArray(expected)
+  ) {
+    const actualRecord = actual as Record<string, unknown>
+    const expectedRecord = expected as Record<string, unknown>
+    expect(Object.keys(actualRecord).sort()).toEqual(Object.keys(expectedRecord).sort())
+    for (const key of Object.keys(expectedRecord)) {
+      expectSpoofedValue(actualRecord[key], expectedRecord[key])
+    }
+    return
+  }
+  expect(actual).toEqual(expected)
+}
+
 const expectProbeResult = async (result: Locator, expected: unknown): Promise<void> => {
   await expect(result).not.toHaveAttribute('data-status', 'pending')
   const status = await result.getAttribute('data-status')
   const text = await result.textContent()
   expect(status, text ?? '').toBe('done')
-  expect(JSON.parse(text ?? '')).toEqual(expected)
+  expectSpoofedValue(JSON.parse(text ?? ''), expected)
 }
 
-for (const probe of probes) {
+for (const name of Object.keys(expectedSpoofedValues) as Array<keyof typeof expectedSpoofedValues>) {
   for (const surface of surfaces) {
-    test(`${surface.label} running the ${probe.name} probe sees the spoofed value`, async ({ context, serviceWorker }) => {
+    test(`${surface.label} running the ${name} probe sees the spoofed value`, async ({ context, serviceWorker }) => {
       await serviceWorker.evaluate(() => chrome.runtime.id)
 
       const page = await context.newPage()
       try {
-        await page.goto(`${server.url}/${nestedProbePath(probe.path, surface.depth)}`)
-        await expectProbeResult(probeResult(page, surface.depth), probe.expected)
+        await page.goto(`${server.url}/${nestedProbePath(`probe.html?src=probes/${name}.js`, surface.depth)}`)
+        await expectProbeResult(probeResult(page, surface.depth), expectedSpoofedValues[name])
       } finally {
         await page.close()
       }
