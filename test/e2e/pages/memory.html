@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Memory API probe</title>
+</head>
+<body>
+  <h1>Memory API probe</h1>
+  <p>This page reads <code>navigator.deviceMemory</code> and records what it gets back.</p>
+  <pre id="memory-result" data-status="pending">pending</pre>
+  <script>
+    const result = document.getElementById('memory-result')
+
+    const finish = (status, payload) => {
+      result.dataset.status = status
+      result.textContent = JSON.stringify(payload, null, 2)
+    }
+
+    try {
+      const present = 'deviceMemory' in navigator
+      const value = navigator.deviceMemory
+      finish('done', {
+        present,
+        deviceMemory: value === undefined ? 'undefined' : value
+      })
+    } catch (error) {
+      finish('error', { error: String(error) })
+    }
+  </script>
+</body>
+</html>
