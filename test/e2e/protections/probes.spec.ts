@@ -58,6 +58,13 @@ const expectedSpoofedValues = {
     quota: 2_147_483_648,
     usageDetails: {}
   }),
+  display: {
+    page: {
+      noPreference: { matches: true, media: 'all' },
+      reduce: { matches: false, media: 'not all' },
+      bare: { matches: false, media: 'not all' }
+    }
+  },
   memory: inEveryRealm({
     present: true,
     deviceMemory: 'undefined'
