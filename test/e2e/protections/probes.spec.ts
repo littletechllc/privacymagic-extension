@@ -134,6 +134,12 @@ const expectedSpoofedValues = {
       p3: { matches: false, media: 'not all' }
     }
   },
+  serviceWorker: {
+    page: {
+      name: 'SecurityError',
+      message: 'Service workers blocked'
+    }
+  },
   sharedStorage: {
     page: {
       SharedStorage: false,
