@@ -237,10 +237,6 @@
     "message": "നെറ്റ്‌വർക്ക്",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "സ്റ്റൈൽഷീറ്റുകൾ",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "സ്വകാര്യതാ സിഗ്നലുകൾ",
     "description": "Category for privacy policy protection settings"

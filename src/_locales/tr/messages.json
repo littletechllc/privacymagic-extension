@@ -237,10 +237,6 @@
     "message": "Ağ",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Stil Sayfaları",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Gizlilik Sinyalleri",
     "description": "Category for privacy policy protection settings"

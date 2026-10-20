@@ -174,25 +174,6 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
       })
     },
   }],
-  /* css: [{
-    action: {
-      type: 'modifyHeaders',
-      responseHeaders: [{
-        operation: 'append',
-        header: 'Content-Security-Policy',
-        // value: "style-src-elem 'none';"
-        value: 'style-src-elem https:;'
-        // value: "style-src-elem 'unsafe-inline';"
-      }]
-    },
-  }, {
-    action: {
-      type: 'block'
-    },
-    condition: {
-      resourceTypes: ['stylesheet']
-    }
-  }], */
   referrerPolicy: [{
     id: networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin'),
     action: {

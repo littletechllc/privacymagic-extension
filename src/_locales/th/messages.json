@@ -237,10 +237,6 @@
     "message": "เครือข่าย",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "สไตล์ชีต",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "สัญญาณความเป็นส่วนตัว",
     "description": "Category for privacy policy protection settings"

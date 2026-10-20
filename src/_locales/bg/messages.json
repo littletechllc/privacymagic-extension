@@ -237,10 +237,6 @@
     "message": "Мрежа",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Таблици със стилове",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Сигнали за поверителност",
     "description": "Category for privacy policy protection settings"

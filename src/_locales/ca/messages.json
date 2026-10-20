@@ -237,10 +237,6 @@
     "message": "Xarxa",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Fulls d'estil",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Senyals de privadesa",
     "description": "Category for privacy policy protection settings"

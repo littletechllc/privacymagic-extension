@@ -237,10 +237,6 @@
     "message": "Tinklas",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Stilių lapai",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Privatumo signalai",
     "description": "Category for privacy policy protection settings"

@@ -237,10 +237,6 @@
     "message": "Δίκτυο",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Φύλλα στυλ",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Σήματα απορρήτου",
     "description": "Category for privacy policy protection settings"

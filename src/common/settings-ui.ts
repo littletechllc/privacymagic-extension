@@ -45,7 +45,6 @@ const PRIVACY_SETTINGS_CONFIG: Record<Exclude<SettingsCategory, 'masterSwitch'>,
     'windowName'
   ],
   leakyFeatures: [
-    //'css',
     'iframe',
     'serviceWorker',
     'sharedStorage',

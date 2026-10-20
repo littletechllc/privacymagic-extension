@@ -237,10 +237,6 @@
     "message": "Sieć",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Arkusze stylów",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Sygnały prywatności",
     "description": "Category for privacy policy protection settings"

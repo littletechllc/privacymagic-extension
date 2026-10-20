@@ -237,10 +237,6 @@
     "message": "Verkko",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Tyylitiedostot",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Tietosuojasignaalit",
     "description": "Category for privacy policy protection settings"

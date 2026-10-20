@@ -1,5 +1,4 @@
 export const NETWORK_SETTING_IDS = [
-  //'css',
   'cache',
   'cpu',
   'device',
@@ -24,7 +23,6 @@ export const CONTENT_SETTING_IDS = [
   'audio',
   'battery',
   'cpu',
-  //'css',
   'device',
   'disk',
   'display',

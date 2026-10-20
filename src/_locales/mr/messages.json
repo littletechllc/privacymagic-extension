@@ -237,10 +237,6 @@
     "message": "नेटवर्क",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "स्टाइलशीट",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "गोपनीयता संकेत",
     "description": "Category for privacy policy protection settings"

@@ -237,10 +237,6 @@
     "message": "பிணையம்",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "பாணி தாள்கள்",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "தனியுரிமை சமிக்ஞைகள்",
     "description": "Category for privacy policy protection settings"

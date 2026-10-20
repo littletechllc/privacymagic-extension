@@ -237,10 +237,6 @@
     "message": "Mtandao",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Stylesheets",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Ishara za faragha",
     "description": "Category for privacy policy protection settings"

@@ -237,10 +237,6 @@
     "message": "Mạng",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Biểu định kiểu",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Tín hiệu quyền riêng tư",
     "description": "Category for privacy policy protection settings"

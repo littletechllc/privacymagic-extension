@@ -4,7 +4,7 @@
 // Returns the same shape as remote/remote.json so getAllSettingsDisabledByRemoteConfig works.
 export const REMOTE_CONFIG_MOCK = {
   version: '1',
-  setting_exceptions: { 'google.com': ['css', 'iframe'] }
+  setting_exceptions: { 'google.com': ['worker', 'iframe'] }
 }
 
 /** What chrome.storage.local holds after a successful fetch — getSettingDisabledByRemoteConfig reads from storage, not fetch. */

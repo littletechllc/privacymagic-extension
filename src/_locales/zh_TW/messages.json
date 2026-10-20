@@ -237,10 +237,6 @@
     "message": "網路",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "樣式表",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "隱私訊號",
     "description": "Category for privacy policy protection settings"

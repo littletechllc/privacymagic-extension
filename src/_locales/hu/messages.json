@@ -237,10 +237,6 @@
     "message": "Hálózat",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Stíluslapok",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Adatvédelmi jelek",
     "description": "Category for privacy policy protection settings"

@@ -237,10 +237,6 @@
     "message": "ኔትወርክ",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "ቅጥ ገጾች",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "የግላዊነት ምልክቶች",
     "description": "Category for privacy policy protection settings"

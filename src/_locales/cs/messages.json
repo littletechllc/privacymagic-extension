@@ -237,10 +237,6 @@
     "message": "Síť",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Stylové předlohy",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Signály soukromí",
     "description": "Category for privacy policy protection settings"

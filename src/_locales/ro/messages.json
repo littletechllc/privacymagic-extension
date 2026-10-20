@@ -237,10 +237,6 @@
     "message": "Rețea",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "Foile de stil",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "Semnale de confidențialitate",
     "description": "Category for privacy policy protection settings"

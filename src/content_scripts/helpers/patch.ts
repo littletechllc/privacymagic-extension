@@ -38,7 +38,6 @@ const privacyMagicPatches: Record<Exclude<ContentSettingId, 'masterSwitch' | 'ad
   audio,
   battery,
   cpu,
-  //css,
   device,
   display,
   disk,

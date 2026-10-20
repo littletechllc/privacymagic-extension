@@ -237,10 +237,6 @@
     "message": "నెట్‌వర్క్",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "స్టైల్ షీట్లు",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "గోప్యత సంకేతాలు",
     "description": "Category for privacy policy protection settings"

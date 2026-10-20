@@ -237,10 +237,6 @@
     "message": "الشبكة",
     "description": "Setting to block network information fingerprinting"
   },
-  "css": {
-    "message": "صفحات الأنماط",
-    "description": "Setting to harden stylesheets"
-  },
   "policy": {
     "message": "إشارات الخصوصية",
     "description": "Category for privacy policy protection settings"
