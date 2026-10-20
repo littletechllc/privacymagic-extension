@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN সক্ষম করুন",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "সমস্যা জানান",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: সমস্যা জানান",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "এমন কোনো ওয়েবসাইট পেয়েছেন যা Privacy Magic চালু থাকলে ঠিকমতো কাজ করে না? আমাদের জানান, আমরা সেটি ঠিক করার চেষ্টা করব।",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "ওয়েবসাইট অন্তর্ভুক্ত করুন:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "অনুগ্রহ করে সমস্যাটি বর্ণনা করুন:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "ইমেইল ঠিকানা (ঐচ্ছিক, আপডেট চাইলে):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "বাতিল",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "সমস্যার প্রতিবেদন পাঠান",
+    "description": "Submit button on the report-a-problem page"
   }
 }

@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Aktivera VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Rapportera ett problem",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Rapportera ett problem",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Har du stött på en webbplats som inte fungerar som den ska med Privacy Magic? Berätta för oss så ska vi försöka åtgärda det.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "inkludera webbplats:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Beskriv problemet:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "E-postadress (valfritt, om du vill ha uppdateringar):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Avbryt",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Skicka problemrapport",
+    "description": "Submit button on the report-a-problem page"
   }
 }

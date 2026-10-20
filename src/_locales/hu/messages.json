@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN engedélyezése",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Probléma bejelentése",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Probléma bejelentése",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Olyan webhelyre bukkantál, amely nem működik megfelelően, amikor a Privacy Magic be van kapcsolva? Szólj nekünk, és igyekszünk kijavítani.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "webhely feltüntetése:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Írd le a problémát:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "E-mail-cím (nem kötelező, ha szeretnél híreket kapni):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Mégse",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Probléma bejelentésének küldése",
+    "description": "Submit button on the report-a-problem page"
   }
 }

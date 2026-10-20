@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for fi missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Ilmoita ongelmasta",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Ilmoita ongelmasta",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Oletko törmännyt sivustoon, joka ei toimi oikein, kun Privacy Magic on käytössä? Kerro meille, niin yritämme korjata asian.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "sisällytä sivusto:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Kuvaile ongelma:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Sähköpostiosoite (valinnainen, jos haluat päivityksiä):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Peruuta",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Lähetä ongelmailmoitus",
+    "description": "Submit button on the report-a-problem page"
   }
 }

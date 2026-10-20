@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Activează VPN-ul",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Raportează o problemă",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Raportează o problemă",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Ai întâlnit un site care nu funcționează corect cu Privacy Magic? Spune-ne și vom încerca să îl remediem.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "include site-ul:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Descrie problema:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Adresă de email (opțional, dacă vrei noutăți):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Anulează",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Trimite raportul problemei",
+    "description": "Submit button on the report-a-problem page"
   }
 }

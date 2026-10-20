@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Aktifkan VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Laporkan masalah",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Laporkan masalah",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Pernah menemukan situs yang tidak berfungsi dengan benar bersama Privacy Magic? Beri tahu kami, dan kami akan berusaha memperbaikinya.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "sertakan situs:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Jelaskan masalahnya:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Alamat email (opsional, jika kamu ingin kabar terbaru):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Batal",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Kirim laporan masalah",
+    "description": "Submit button on the report-a-problem page"
   }
 }

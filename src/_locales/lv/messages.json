@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Iespējot VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Ziņot par problēmu",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Ziņot par problēmu",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Vai jums ir gadījusies vietne, kas nedarbojas pareizi ar Privacy Magic? Pastāstiet mums, un mēs centīsimies to novērst.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "iekļaut vietni:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Aprakstiet problēmu:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "E-pasta adrese (neobligāti, ja vēlaties saņemt jaunumus):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Atcelt",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Nosūtīt problēmas ziņojumu",
+    "description": "Submit button on the report-a-problem page"
   }
 }

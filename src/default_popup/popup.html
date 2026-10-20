@@ -26,10 +26,12 @@
       .link-container {
         padding: 0.5em;
       }
+      #reportProblemLinkContainer,
       #advancedSettingsLinkContainer {
         background-color: transparent;
         margin-bottom: 0.35em;
       }
+      #reportProblemLinkContainer[hidden],
       #advancedSettingsLinkContainer[hidden] {
         display: none;
       }
@@ -75,6 +77,10 @@
         <div id="settings" class="toggle-box toggle-container"></div>
     </div>
     <div id="safeLocalPage" data-i18n="safeLocalPage"></div>
+    <div class="link-container" id="reportProblemLinkContainer" hidden>
+        <a href="#" id="reportProblemLink" data-i18n="reportProblemLink"></a>
+        <img src="../assets/images/open_in_new.svg" alt="" id="reportProblemIcon" data-i18n-alt="reportProblemLink" />
+    </div>
     <div class="link-container" id="advancedSettingsLinkContainer" hidden>
         <a href="#" id="advancedSettingsLink" data-i18n="advancedSettingsLink"></a>
         <img src="../assets/images/right_panel_open.svg" alt="" id="advancedSettingsIcon" data-i18n-alt="advancedSettingsLink" />

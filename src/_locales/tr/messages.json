@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN'i etkinleştir",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Sorun bildir",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Sorun bildir",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Privacy Magic ile düzgün çalışmayan bir web sitesiyle karşılaştın mı? Bize bildir, düzeltmek için çaba göstereceğiz.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "web sitesini ekle:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Sorunu açıkla:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "E-posta adresi (isteğe bağlı, güncelleme istiyorsan):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "İptal",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Sorun raporunu gönder",
+    "description": "Submit button on the report-a-problem page"
   }
 }

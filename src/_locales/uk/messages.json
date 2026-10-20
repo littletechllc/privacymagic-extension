@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for uk missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Повідомити про проблему",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Повідомити про проблему",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Вам трапився сайт, який працює некоректно з Privacy Magic? Повідомте нас, і ми постараємося це виправити.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "включити сайт:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Опишіть проблему:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Адреса електронної пошти (необов’язково, якщо хочете отримувати оновлення):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Скасувати",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Надіслати звіт про проблему",
+    "description": "Submit button on the report-a-problem page"
   }
 }

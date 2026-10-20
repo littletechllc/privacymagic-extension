@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for kn missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "ಸಮಸ್ಯೆಯನ್ನು ವರದಿ ಮಾಡಿ",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: ಸಮಸ್ಯೆಯನ್ನು ವರದಿ ಮಾಡಿ",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Privacy Magic ಜೊತೆ ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡದ ವೆಬ್‌ಸೈಟ್ ಕಂಡುಬಂದಿದೆಯೇ? ನಮಗೆ ತಿಳಿಸಿ, ಅದನ್ನು ಸರಿಪಡಿಸಲು ನಾವು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "ವೆಬ್‌ಸೈಟ್ ಸೇರಿಸಿ:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "ದಯವಿಟ್ಟು ಸಮಸ್ಯೆಯನ್ನು ವಿವರಿಸಿ:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "ಇಮೇಲ್ ವಿಳಾಸ (ಐಚ್ಛಿಕ, ನವೀಕರಣಗಳು ಬೇಕಿದ್ದರೆ):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "ರದ್ದುಮಾಡಿ",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "ಸಮಸ್ಯೆಯ ವರದಿಯನ್ನು ಕಳುಹಿಸಿ",
+    "description": "Submit button on the report-a-problem page"
   }
 }

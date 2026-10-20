@@ -41,6 +41,38 @@
     "message": "Continue Setup...",
     "description": "Link in the toolbar popup to open the setup page"
   },
+  "reportProblemLink": {
+    "message": "Report a problem",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Report a problem",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Have you encountered a website that isn't working correctly with Privacy Magic? Please let us know and we will endeavor to fix it!",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "include website:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Please describe the problem:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Email address (optional, if you would like updates):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Cancel",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Submit problem report",
+    "description": "Submit button on the report-a-problem page"
+  },
   "doNotTrackEnabled": {
     "message": "Enable Do Not Track",
     "description": "Label for the Do Not Track pref"

@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN 사용",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "문제 신고",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: 문제 신고",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Privacy Magic과 함께 사용할 때 제대로 작동하지 않는 웹사이트를 보셨나요? 알려 주시면 고치도록 노력하겠습니다.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "웹사이트 포함:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "문제를 설명해 주세요:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "이메일 주소 (선택 사항, 업데이트를 받으려면):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "취소",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "문제 신고 보내기",
+    "description": "Submit button on the report-a-problem page"
   }
 }

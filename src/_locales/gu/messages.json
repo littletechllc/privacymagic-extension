@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for gu missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "સમસ્યાની જાણ કરો",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: સમસ્યાની જાણ કરો",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "શું તમને એવી વેબસાઇટ મળી છે જે Privacy Magic સાથે બરાબર કામ નથી કરતી? અમને જણાવો અને અમે તેને ઠીક કરવાનો પ્રયાસ કરીશું.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "વેબસાઇટ શામેલ કરો:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "કૃપા કરીને સમસ્યા વર્ણવો:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "ઈમેઈલ સરનામું (વૈકલ્પિક, જો અપડેટ જોઈતા હોય):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "રદ કરો",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "સમસ્યાનો અહેવાલ મોકલો",
+    "description": "Submit button on the report-a-problem page"
   }
 }

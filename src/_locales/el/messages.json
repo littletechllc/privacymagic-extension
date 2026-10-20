@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for el missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Αναφορά προβλήματος",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Αναφορά προβλήματος",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Συναντήσατε έναν ιστότοπο που δεν λειτουργεί σωστά με το Privacy Magic; Πείτε μας και θα προσπαθήσουμε να το διορθώσουμε.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "συμπερίληψη ιστότοπου:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Περιγράψτε το πρόβλημα:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Διεύθυνση email (προαιρετικά, αν θέλετε ενημερώσεις):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Ακύρωση",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Υποβολή αναφοράς προβλήματος",
+    "description": "Submit button on the report-a-problem page"
   }
 }

@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for lt missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Pranešti apie problemą",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Pranešti apie problemą",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Ar radote svetainę, kuri su Privacy Magic veikia netinkamai? Praneškite mums ir pasistengsime tai ištaisyti.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "įtraukti svetainę:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Aprašykite problemą:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "El. pašto adresas (neprivaloma, jei norite gauti naujienas):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Atšaukti",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Siųsti pranešimą apie problemą",
+    "description": "Submit button on the report-a-problem page"
   }
 }

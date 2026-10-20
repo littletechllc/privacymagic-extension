@@ -5,6 +5,7 @@ import { updateSiteInfo } from '@src/common/site-info'
 import { createMasterSwitch } from '@src/common/settings-ui'
 
 const ADVANCED_SIDE_PANEL_PATH = 'privacymagic/sidepanel.html'
+const REPORT_PROBLEM_PATH = 'privacymagic/report.html'
 
 /**
  * True only if a side panel context for this tab exists and reports
@@ -40,6 +41,19 @@ const isAdvancedSidePanelVisibleForTab = async (tabId: number): Promise<boolean>
   } catch {
     return false
   }
+}
+
+const setupReportProblemLink = (domain: string): void => {
+  document.getElementById('reportProblemLinkContainer')?.addEventListener('click', (event) => {
+    handleAsync(async () => {
+      const url = new URL(chrome.runtime.getURL(REPORT_PROBLEM_PATH))
+      url.searchParams.set('domain', domain)
+      await chrome.tabs.create({ url: url.href })
+      window.close()
+    }, (error) => {
+      logError(error, 'error opening report problem page', event)
+    })
+  })
 }
 
 const setupContinueSetupLink = (): void => {
@@ -107,7 +121,9 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   }
   const safeLocalPage = document.getElementById('safeLocalPage') as HTMLElement
   safeLocalPage.hidden = true
+  document.getElementById('reportProblemLinkContainer')!.hidden = false
   document.getElementById('advancedSettingsLinkContainer')!.hidden = false
+  setupReportProblemLink(domain)
   setupAdvancedSettingsLink()
   updateSiteInfo(domain, tab.url ?? '')
   await setupMasterSwitch(domain)

@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN ప్రారంభించు",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "సమస్యను నివేదించండి",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: సమస్యను నివేదించండి",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Privacy Magic ఉన్నప్పుడు సరిగ్గా పని చేయని వెబ్‌సైట్ ఎదురైందా? మాకు చెప్పండి, దాన్ని సరిచేయడానికి మేము ప్రయత్నిస్తాం.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "వెబ్‌సైట్‌ను చేర్చండి:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "దయచేసి సమస్యను వివరించండి:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "ఇమెయిల్ చిరునామా (ఐచ్ఛికం, అప్‌డేట్‌లు కావాలంటే):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "రద్దు చేయండి",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "సమస్య నివేదికను పంపండి",
+    "description": "Submit button on the report-a-problem page"
   }
 }

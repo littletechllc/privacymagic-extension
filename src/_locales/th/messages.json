@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "เปิดใช้ VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "รายงานปัญหา",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: รายงานปัญหา",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "คุณเจอเว็บไซต์ที่ทำงานไม่ถูกต้องเมื่อใช้ Privacy Magic หรือไม่? บอกเรา แล้วเราจะพยายามแก้ไข",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "รวมเว็บไซต์:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "โปรดอธิบายปัญหา:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "ที่อยู่อีเมล (ไม่บังคับ หากต้องการรับข่าวอัปเดต):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "ยกเลิก",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "ส่งรายงานปัญหา",
+    "description": "Submit button on the report-a-problem page"
   }
 }

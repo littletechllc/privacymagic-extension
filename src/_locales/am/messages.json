@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for am missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "ችግር ሪፖርት አድርግ",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: ችግር ሪፖርት አድርግ",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "ከ Privacy Magic ጋር በትክክል የማይሠራ ድረ-ገጽ አጋጥሞሃል? እባክህ ንገረን፣ ለማስተካከል እንጥራለን!",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "ድረ-ገጹን አካትት:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "እባክህ ችግሩን ግለጽ:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "የኢሜይል አድራሻ (አማራጭ፣ ዝማኔዎችን ከፈለግህ):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "ሰርዝ",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "የችግር ሪፖርት ላክ",
+    "description": "Submit button on the report-a-problem page"
   }
 }

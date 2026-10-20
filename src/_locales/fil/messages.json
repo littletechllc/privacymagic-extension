@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Paganahin ang VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Mag-ulat ng problema",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Mag-ulat ng problema",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "May website ka bang hindi gumagana nang tama sa Privacy Magic? Sabihin mo sa amin at sisikapin naming ayusin ito.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "isama ang website:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Pakilarawan ang problema:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Email address (opsyonal, kung gusto mo ng mga update):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Kanselahin",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Ipadala ang ulat ng problema",
+    "description": "Submit button on the report-a-problem page"
   }
 }

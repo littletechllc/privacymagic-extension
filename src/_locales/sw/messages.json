@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Wezesha VPN",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Ripoti tatizo",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Ripoti tatizo",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Umekutana na tovuti ambayo haifanyi kazi vizuri na Privacy Magic? Tuambie na tutajitahidi kuirekebisha.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "jumuisha tovuti:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Tafadhali eleza tatizo:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "Anwani ya barua pepe (si lazima, ikiwa unataka taarifa):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Ghairi",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Tuma ripoti ya tatizo",
+    "description": "Submit button on the report-a-problem page"
   }
 }

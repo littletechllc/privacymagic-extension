@@ -84,6 +84,10 @@ const builds = [
     outfile: `${distRoot}/privacymagic/setup.js`
   },
   {
+    entryPoints: ['src/privacymagic/report.ts'],
+    outfile: `${distRoot}/privacymagic/report.js`
+  },
+  {
     entryPoints: ['src/privacymagic/sidepanel-sync-help.ts'],
     outfile: `${distRoot}/privacymagic/sidepanel-sync-help.js`
   },

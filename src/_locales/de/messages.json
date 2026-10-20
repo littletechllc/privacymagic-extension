@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN aktivieren",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "Problem melden",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: Problem melden",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Hast du eine Website gefunden, die mit Privacy Magic nicht richtig funktioniert? Sag uns Bescheid, wir werden uns bemühen, das zu beheben!",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "Website einbeziehen:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "Bitte beschreibe das Problem:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "E-Mail-Adresse (optional, wenn du Updates möchtest):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "Abbrechen",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "Problembericht senden",
+    "description": "Submit button on the report-a-problem page"
   }
 }

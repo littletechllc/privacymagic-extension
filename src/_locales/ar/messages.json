@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "Enable VPN",
     "description": "English fallback; Opera locale.pak for ar missing resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "الإبلاغ عن مشكلة",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: الإبلاغ عن مشكلة",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "هل صادفت موقعًا لا يعمل بشكل صحيح مع Privacy Magic؟ أخبرنا وسنسعى لإصلاحه.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "تضمين الموقع:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "يُرجى وصف المشكلة:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "عنوان البريد الإلكتروني (اختياري، إذا أردت تلقّي التحديثات):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "إلغاء",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "إرسال بلاغ المشكلة",
+    "description": "Submit button on the report-a-problem page"
   }
 }

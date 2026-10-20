@@ -674,5 +674,37 @@
   "opera_51904": {
     "message": "VPN-ஐ இயக்கு",
     "description": "Imported from Opera locale.pak resource id 51904"
+  },
+  "reportProblemLink": {
+    "message": "சிக்கலைப் புகாரளி",
+    "description": "Link in the toolbar popup that opens the report-a-problem page"
+  },
+  "reportProblemHeading": {
+    "message": "Privacy Magic: சிக்கலைப் புகாரளி",
+    "description": "Document title and heading on the report-a-problem page"
+  },
+  "reportProblemIntro": {
+    "message": "Privacy Magic உடன் சரியாக வேலை செய்யாத ஒரு வலைத்தளத்தைப் பார்த்தீர்களா? எங்களிடம் சொல்லுங்கள், அதைச் சரிசெய்ய முயல்வோம்.",
+    "description": "Introductory sentence under the title on the report-a-problem page"
+  },
+  "reportProblemSendWebsiteName": {
+    "message": "வலைத்தளத்தைச் சேர்க்கவும்:",
+    "description": "Checkbox label on the report-a-problem page, followed by the website name"
+  },
+  "reportProblemDescriptionLabel": {
+    "message": "சிக்கலை விவரிக்கவும்:",
+    "description": "Label for the problem description field on the report-a-problem page"
+  },
+  "reportProblemEmailLabel": {
+    "message": "மின்னஞ்சல் முகவரி (விருப்பம், புதுப்பிப்புகள் வேண்டுமானால்):",
+    "description": "Label for the optional email field on the report-a-problem page"
+  },
+  "reportProblemCancel": {
+    "message": "ரத்துசெய்",
+    "description": "Cancel button on the report-a-problem page"
+  },
+  "reportProblemSubmit": {
+    "message": "சிக்கல் அறிக்கையை அனுப்பு",
+    "description": "Submit button on the report-a-problem page"
   }
 }
