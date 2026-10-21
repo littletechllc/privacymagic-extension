@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Send problemrapport",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Indsendelsen mislykkedes",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Mange tak for rapporten! Vi ser på problemet.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Mange tak for rapporten! Vi ser på problemet og giver dig besked, når vi har en rettelse.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Luk fanen",
+    "description": "Button shown after a problem report is sent"
   }
 }

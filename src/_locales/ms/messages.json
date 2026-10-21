@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Hantar laporan masalah",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Penghantaran gagal",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Terima kasih banyak atas laporan ini! Kami akan meneliti masalah tersebut.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Terima kasih banyak atas laporan ini! Kami akan meneliti masalah tersebut dan memberitahu anda apabila kami mempunyai pembetulan.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Tutup tab",
+    "description": "Button shown after a problem report is sent"
   }
 }

@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "問題レポートを送信",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "送信に失敗しました",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "ご報告ありがとうございます。問題を確認します。",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "ご報告ありがとうございます。問題を確認し、修正ができたらお知らせします。",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "タブを閉じる",
+    "description": "Button shown after a problem report is sent"
   }
 }

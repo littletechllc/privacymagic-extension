@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Invia la segnalazione",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Invio non riuscito",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Grazie mille per la segnalazione! Esamineremo il problema.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Grazie mille per la segnalazione! Esamineremo il problema e ti faremo sapere quando avremo una correzione.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Chiudi scheda",
+    "description": "Button shown after a problem report is sent"
   }
 }

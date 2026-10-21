@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Pošalji prijavu problema",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Slanje nije uspjelo",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Hvala vam puno na prijavi! Pogledat ćemo problem.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Hvala vam puno na prijavi! Pogledat ćemo problem i javit ćemo vam kad budemo imali ispravak.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Zatvori karticu",
+    "description": "Button shown after a problem report is sent"
   }
 }

@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "સમસ્યાનો અહેવાલ મોકલો",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "સબમિશન નિષ્ફળ રહ્યું",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "અહેવાલ બદલ ખૂબ આભાર! અમે સમસ્યા તપાસીશું.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "અહેવાલ બદલ ખૂબ આભાર! અમે સમસ્યા તપાસીશું અને ઉકેલ મળે ત્યારે તમને જણાવીશું.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "ટૅબ બંધ કરો",
+    "description": "Button shown after a problem report is sent"
   }
 }

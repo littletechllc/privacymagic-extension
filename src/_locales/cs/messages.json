@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Odeslat hlášení problému",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Odeslání se nezdařilo",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Moc děkujeme za hlášení! Podíváme se na ten problém.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Moc děkujeme za hlášení! Podíváme se na ten problém a dáme vám vědět, až budeme mít opravu.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Zavřít kartu",
+    "description": "Button shown after a problem report is sent"
   }
 }

@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Gửi báo cáo sự cố",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Gửi không thành công",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Cảm ơn bạn rất nhiều vì báo cáo! Chúng tôi sẽ xem xét vấn đề.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Cảm ơn bạn rất nhiều vì báo cáo! Chúng tôi sẽ xem xét vấn đề và cho bạn biết khi đã có bản sửa.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Đóng tab",
+    "description": "Button shown after a problem report is sent"
   }
 }

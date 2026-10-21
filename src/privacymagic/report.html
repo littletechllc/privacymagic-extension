@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="reportProblemHeading">Privacy Magic: Report a problem</title>
+<script src="./i18n.js" type="module"></script>
+<link href="./shared.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .report-page,
+  #reportProblemForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  #reportProblemForm[hidden],
+  #reportProblemThanks[hidden] {
+    display: none;
+  }
+
+  #reportProblemThanks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .report-page {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .report-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-family: 'Lora', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .report-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .report-intro p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .report-logo {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
+    /* Sit on the first line, even when the heading wraps. */
+    margin-top: calc((1.3em - 1.15em) / 2);
+  }
+
+  .report-check {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .report-domain-name {
+    font-weight: 700;
+  }
+
+  .report-check input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0;
+    accent-color: var(--blue);
+  }
+
+  .report-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 1.05rem;
+    font-weight: 400;
+  }
+
+  .report-field textarea,
+  .report-field input {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--bg-card);
+    border: 1px solid var(--blue-mid);
+    border-radius: 10px;
+    padding: 0.7rem 0.85rem;
+    width: 100%;
+  }
+
+  .report-page .btn-row {
+    margin-top: 0.65rem;
+  }
+
+  #reportProblemSubmit {
+    justify-content: center;
+  }
+
+  #reportProblemSubmit:disabled,
+  #reportProblemSubmit:disabled:hover {
+    cursor: default;
+    pointer-events: none;
+    transform: none;
+  }
+
+  #reportProblemSubmit:disabled:not([aria-busy="true"]),
+  #reportProblemSubmit:disabled:not([aria-busy="true"]):hover {
+    opacity: 0.45;
+  }
+
+  .report-submit-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    height: 1em;
+  }
+
+  .report-submit-dots[hidden] {
+    display: none;
+  }
+
+  .report-submit-dots span {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    animation: report-submit-dot 0.6s infinite linear;
+  }
+
+  .report-submit-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .report-submit-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes report-submit-dot {
+    0%, 33.333% {
+      background-color: #fff;
+    }
+    33.334%, 100% {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .report-error {
+    margin: 0;
+    color: var(--toggle-unchecked-icon);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: end;
+  }
+
+  .report-thanks {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<main class="report-page">
+  <div class="report-intro">
+    <h1 class="report-title">
+      <img class="report-logo" src="../logo/logo.svg" alt="">
+      <span data-i18n="reportProblemHeading">Privacy Magic: Report a problem</span>
+    </h1>
+    <p id="reportProblemIntro" data-i18n="reportProblemIntro">Have you encountered a website that isn't working correctly with Privacy Magic? Please let us know and we will endeavor to fix it!</p>
+  </div>
+  <div id="reportProblemForm">
+    <label class="report-check" for="sendWebsiteName">
+      <input type="checkbox" id="sendWebsiteName" checked>
+      <span><span data-i18n="reportProblemSendWebsiteName">include website:</span> <span id="reportProblemDomain" class="report-domain-name"></span></span>
+    </label>
+    <label class="report-field" for="problemDescription">
+      <span data-i18n="reportProblemDescriptionLabel">Please describe the problem:</span>
+      <textarea id="problemDescription" rows="6" maxlength="10000"></textarea>
+    </label>
+    <label class="report-field" for="emailAddress">
+      <span data-i18n="reportProblemEmailLabel">Email address (optional, if you would like updates):</span>
+      <input id="emailAddress" type="text" autocomplete="email" maxlength="254">
+    </label>
+    <div class="btn-row btn-row--end">
+      <button type="button" class="btn-secondary" id="reportProblemCancel" data-i18n="reportProblemCancel">Cancel</button>
+      <button type="button" class="btn-primary" id="reportProblemSubmit" disabled>
+        <span class="report-submit-label" data-i18n="reportProblemSubmit">Submit problem report</span>
+        <span class="report-submit-dots" hidden aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+    <p id="reportProblemError" class="report-error" hidden role="alert" data-i18n="reportProblemSubmissionFailed">Submission failed</p>
+  </div>
+  <div id="reportProblemThanks" hidden>
+    <p id="reportProblemThanksMessage" class="report-thanks" role="status"></p>
+    <div class="btn-row btn-row--end">
+      <button type="button" class="btn-primary" id="reportProblemCloseTab" data-i18n="reportProblemCloseTab">Close tab</button>
+    </div>
+  </div>
+</main>
+<script src="./report.js" type="module"></script>
+</body>
+</html>

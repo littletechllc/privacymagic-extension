@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Tuma ripoti ya tatizo",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Uwasilishaji umeshindwa",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Asante sana kwa ripoti! Tutaangalia tatizo.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Asante sana kwa ripoti! Tutaangalia tatizo na kukujulisha tutakapokuwa na suluhisho.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Funga kichupo",
+    "description": "Button shown after a problem report is sent"
   }
 }

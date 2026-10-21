@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Enviar relato do problema",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "O envio falhou",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Muito obrigado pelo relato! Vamos analisar o problema.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Muito obrigado pelo relato! Vamos analisar o problema e avisar quando tivermos uma correção.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Fechar aba",
+    "description": "Button shown after a problem report is sent"
   }
 }

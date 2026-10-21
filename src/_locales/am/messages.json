@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "የችግር ሪፖርት ላክ",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "ማስገባት አልተሳካም",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "ስለ ሪፖርቱ በጣም እናመሰግናለን! ችግሩን እንመለከታለን።",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "ስለ ሪፖርቱ በጣም እናመሰግናለን! ችግሩን እንመለከታለን እና መፍትሄ ሲኖረን እናሳውቅዎታለን።",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "ትርን ዝጋ",
+    "description": "Button shown after a problem report is sent"
   }
 }

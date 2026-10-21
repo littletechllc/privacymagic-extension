@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "提交問題回報",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "提交失敗",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "非常感謝你的回報！我們會查看這個問題。",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "非常感謝你的回報！我們會查看這個問題，並在有修復時告訴你。",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "關閉分頁",
+    "description": "Button shown after a problem report is sent"
   }
 }

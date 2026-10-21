@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Отправить отчёт о проблеме",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Не удалось отправить",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Большое спасибо за сообщение! Мы разберёмся с проблемой.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Большое спасибо за сообщение! Мы разберёмся с проблемой и сообщим, когда будет исправление.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Закрыть вкладку",
+    "description": "Button shown after a problem report is sent"
   }
 }

@@ -706,5 +706,21 @@
   "reportProblemSubmit": {
     "message": "Υποβολή αναφοράς προβλήματος",
     "description": "Submit button on the report-a-problem page"
+  },
+  "reportProblemSubmissionFailed": {
+    "message": "Η υποβολή απέτυχε",
+    "description": "Error shown under the submit button when a problem report could not be sent"
+  },
+  "reportProblemThanks": {
+    "message": "Σε ευχαριστούμε πολύ για την αναφορά! Θα εξετάσουμε το πρόβλημα.",
+    "description": "Message shown after a problem report is sent, when no email address was provided"
+  },
+  "reportProblemThanksWithEmail": {
+    "message": "Σε ευχαριστούμε πολύ για την αναφορά! Θα εξετάσουμε το πρόβλημα και θα σου πούμε όταν έχουμε μια διόρθωση.",
+    "description": "Message shown after a problem report is sent, when an email address was provided"
+  },
+  "reportProblemCloseTab": {
+    "message": "Κλείσιμο καρτέλας",
+    "description": "Button shown after a problem report is sent"
   }
 }
