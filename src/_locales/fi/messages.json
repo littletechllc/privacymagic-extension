@@ -699,6 +699,10 @@
     "message": "Sähköpostiosoite (valinnainen, jos haluat päivityksiä):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Anna kelvollinen sähköpostiosoite.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Peruuta",
     "description": "Cancel button on the report-a-problem page"

@@ -699,6 +699,10 @@
     "message": "E-postadresse (valgfritt, hvis du vil ha oppdateringer):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Skriv inn en gyldig e-postadresse.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Avbryt",
     "description": "Cancel button on the report-a-problem page"

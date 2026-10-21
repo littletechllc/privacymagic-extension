@@ -699,6 +699,10 @@
     "message": "E-posti aadress (valikuline, kui soovid uudiseid):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Palun sisesta kehtiv e-posti aadress.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Tühista",
     "description": "Cancel button on the report-a-problem page"

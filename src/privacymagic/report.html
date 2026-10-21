@@ -113,7 +113,7 @@
   }
 
   .report-page .btn-row {
-    margin-top: 0.65rem;
+    margin-top: 1.4rem;
   }
 
   #reportProblemSubmit {
@@ -168,6 +168,26 @@
     }
   }
 
+  .report-field--email {
+    position: relative;
+  }
+
+  .report-field-error {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    right: 0;
+    margin: 0;
+    color: var(--toggle-unchecked-icon);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .report-field-error[hidden] {
+    display: none;
+  }
+
   .report-error {
     margin: 0;
     color: var(--toggle-unchecked-icon);
@@ -203,9 +223,10 @@
       <span data-i18n="reportProblemDescriptionLabel">Please describe the problem:</span>
       <textarea id="problemDescription" rows="6" maxlength="10000"></textarea>
     </label>
-    <label class="report-field" for="emailAddress">
+    <label class="report-field report-field--email" for="emailAddress">
       <span data-i18n="reportProblemEmailLabel">Email address (optional, if you would like updates):</span>
-      <input id="emailAddress" type="text" autocomplete="email" maxlength="254">
+      <input id="emailAddress" type="text" autocomplete="email" maxlength="254" aria-describedby="reportProblemEmailError">
+      <p id="reportProblemEmailError" class="report-field-error" hidden role="alert" data-i18n="reportProblemEmailInvalid">Please enter a valid email address.</p>
     </label>
     <div class="btn-row btn-row--end">
       <button type="button" class="btn-secondary" id="reportProblemCancel" data-i18n="reportProblemCancel">Cancel</button>

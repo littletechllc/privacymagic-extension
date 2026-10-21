@@ -699,6 +699,10 @@
     "message": "ที่อยู่อีเมล (ไม่บังคับ หากต้องการรับข่าวอัปเดต):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "โปรดป้อนที่อยู่อีเมลที่ถูกต้อง",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "ยกเลิก",
     "description": "Cancel button on the report-a-problem page"

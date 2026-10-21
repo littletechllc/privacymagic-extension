@@ -699,6 +699,10 @@
     "message": "ईमेल पता (वैकल्पिक, अगर अपडेट चाहिए):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "कृपया एक मान्य ईमेल पता दर्ज करें।",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "रद्द करें",
     "description": "Cancel button on the report-a-problem page"

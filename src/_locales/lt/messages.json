@@ -699,6 +699,10 @@
     "message": "El. pašto adresas (neprivaloma, jei norite gauti naujienas):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Įveskite galiojantį el. pašto adresą.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Atšaukti",
     "description": "Cancel button on the report-a-problem page"

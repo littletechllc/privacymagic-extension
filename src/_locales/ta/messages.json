@@ -699,6 +699,10 @@
     "message": "மின்னஞ்சல் முகவரி (விருப்பம், புதுப்பிப்புகள் வேண்டுமானால்):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "ரத்துசெய்",
     "description": "Cancel button on the report-a-problem page"

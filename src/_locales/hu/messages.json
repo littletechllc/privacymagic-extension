@@ -699,6 +699,10 @@
     "message": "E-mail-cím (nem kötelező, ha szeretnél híreket kapni):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Kérjük, adj meg egy érvényes e-mail-címet.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Mégse",
     "description": "Cancel button on the report-a-problem page"

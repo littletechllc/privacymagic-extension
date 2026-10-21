@@ -699,6 +699,10 @@
     "message": "Адреса електронної пошти (необов’язково, якщо хочете отримувати оновлення):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Введіть дійсну адресу електронної пошти.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Скасувати",
     "description": "Cancel button on the report-a-problem page"

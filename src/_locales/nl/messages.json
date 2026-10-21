@@ -699,6 +699,10 @@
     "message": "E-mailadres (optioneel, als je updates wilt):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Voer een geldig e-mailadres in.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Annuleren",
     "description": "Cancel button on the report-a-problem page"

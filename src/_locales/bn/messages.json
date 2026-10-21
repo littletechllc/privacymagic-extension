@@ -699,6 +699,10 @@
     "message": "ইমেইল ঠিকানা (ঐচ্ছিক, আপডেট চাইলে):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "অনুগ্রহ করে একটি বৈধ ইমেল ঠিকানা লিখুন।",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "বাতিল",
     "description": "Cancel button on the report-a-problem page"

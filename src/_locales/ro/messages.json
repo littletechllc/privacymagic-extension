@@ -699,6 +699,10 @@
     "message": "Adresă de email (opțional, dacă vrei noutăți):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Introduceți o adresă de e-mail validă.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Anulează",
     "description": "Cancel button on the report-a-problem page"

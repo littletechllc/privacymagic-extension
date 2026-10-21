@@ -65,6 +65,10 @@
     "message": "Email address (optional, if you would like updates):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Please enter a valid email address.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Cancel",
     "description": "Cancel button on the report-a-problem page"

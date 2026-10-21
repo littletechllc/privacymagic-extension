@@ -699,6 +699,10 @@
     "message": "Adreça electrònica (opcional, si vols rebre novetats):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Si us plau, introdueix una adreça electrònica vàlida.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Cancel·la",
     "description": "Cancel button on the report-a-problem page"

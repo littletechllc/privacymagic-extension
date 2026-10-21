@@ -699,6 +699,10 @@
     "message": "Địa chỉ email (không bắt buộc, nếu bạn muốn nhận tin cập nhật):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Hủy",
     "description": "Cancel button on the report-a-problem page"

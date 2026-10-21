@@ -699,6 +699,10 @@
     "message": "ఇమెయిల్ చిరునామా (ఐచ్ఛికం, అప్‌డేట్‌లు కావాలంటే):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "దయచేసి చెల్లుబాటు అయ్యే ఇమెయిల్ చిరునామాను నమోదు చేయండి.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "రద్దు చేయండి",
     "description": "Cancel button on the report-a-problem page"

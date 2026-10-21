@@ -29,6 +29,21 @@ const closeReportTab = async (): Promise<void> => {
 
 const localized = (key: string, fallback: string): string => chrome.i18n.getMessage(key) || fallback
 
+const EMAIL_MAX_LENGTH = 254
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u
+const CONTROL_CHARS = /[\u0000-\u001F\u007F]/u
+
+/** Blank is allowed. A non-blank address must match the Worker's rule. */
+const isAcceptableEmail = (value: string): boolean => {
+  if (value === '') {
+    return true
+  }
+  if (value.length > EMAIL_MAX_LENGTH || CONTROL_CHARS.test(value)) {
+    return false
+  }
+  return EMAIL_PATTERN.test(value)
+}
+
 const postReport = async (description: string, email: string, website: string): Promise<void> => {
   const body: { description: string, email?: string, website?: string } = { description }
   if (email !== '') {
@@ -70,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitButton = document.getElementById('reportProblemSubmit')
   const submitLabel = submitButton?.querySelector('.report-submit-label')
   const submitDots = submitButton?.querySelector('.report-submit-dots')
+  const emailError = document.getElementById('reportProblemEmailError')
   const errorElement = document.getElementById('reportProblemError')
   const introElement = document.getElementById('reportProblemIntro')
   const thanksPanel = document.getElementById('reportProblemThanks')
@@ -84,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     !(submitLabel instanceof HTMLElement) ||
     !(submitDots instanceof HTMLElement) ||
     !(closeButton instanceof HTMLButtonElement) ||
+    emailError == null ||
     errorElement == null ||
     introElement == null ||
     thanksPanel == null ||
@@ -102,6 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const hasDescription = (): boolean => descriptionInput.value.trim() !== ''
 
+  const hideEmailError = (): void => {
+    emailError.hidden = true
+    emailInput.setAttribute('aria-invalid', 'false')
+  }
+
+  const showEmailError = (): void => {
+    emailError.hidden = false
+    emailInput.setAttribute('aria-invalid', 'true')
+  }
+
   const setSubmitWaiting = (waiting: boolean): void => {
     if (waiting) {
       submitButton.style.minWidth = `${submitButton.offsetWidth}px`
@@ -114,23 +141,31 @@ document.addEventListener('DOMContentLoaded', () => {
     submitDots.hidden = !waiting
   }
 
-  descriptionInput.addEventListener('input', () => {
+  const syncSubmitEnabled = (): void => {
     if (submitButton.getAttribute('aria-busy') === 'true') {
       return
     }
     submitButton.disabled = !hasDescription()
-  })
+  }
+
+  descriptionInput.addEventListener('input', syncSubmitEnabled)
+  emailInput.addEventListener('input', hideEmailError)
   setSubmitWaiting(false)
 
   submitButton.addEventListener('click', (event) => {
     const description = descriptionInput.value.trim()
+    const email = emailInput.value.trim()
     if (submitButton.disabled || description === '') {
       return
     }
+    if (!isAcceptableEmail(email)) {
+      showEmailError()
+      return
+    }
+    hideEmailError()
     errorElement.hidden = true
     setSubmitWaiting(true)
     handleAsync(async () => {
-      const email = emailInput.value.trim()
       const website = websiteCheckbox.checked ? domain : ''
       try {
         await postReport(description, email, website)

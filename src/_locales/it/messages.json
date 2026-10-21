@@ -699,6 +699,10 @@
     "message": "Indirizzo email (facoltativo, se vuoi ricevere aggiornamenti):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Inserisci un indirizzo email valido.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Annulla",
     "description": "Cancel button on the report-a-problem page"

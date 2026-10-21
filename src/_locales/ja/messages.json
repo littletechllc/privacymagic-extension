@@ -699,6 +699,10 @@
     "message": "メールアドレス（任意。更新情報を受け取る場合）:",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "有効なメールアドレスを入力してください。",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "キャンセル",
     "description": "Cancel button on the report-a-problem page"

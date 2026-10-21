@@ -699,6 +699,10 @@
     "message": "ഇമെയിൽ വിലാസം (ഓപ്ഷണൽ, അപ്ഡേറ്റുകൾ വേണമെങ്കിൽ):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "ദയവായി സാധുവായ ഒരു ഇമെയിൽ വിലാസം നൽകുക.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "റദ്ദാക്കുക",
     "description": "Cancel button on the report-a-problem page"

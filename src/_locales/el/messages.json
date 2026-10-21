@@ -699,6 +699,10 @@
     "message": "Διεύθυνση email (προαιρετικά, αν θέλετε ενημερώσεις):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Συμπλήρωσε μια έγκυρη διεύθυνση email.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Ακύρωση",
     "description": "Cancel button on the report-a-problem page"

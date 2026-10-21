@@ -699,6 +699,10 @@
     "message": "ઈમેઈલ સરનામું (વૈકલ્પિક, જો અપડેટ જોઈતા હોય):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "કૃપા કરીને માન્ય ઈમેલ સરનામું દાખલ કરો.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "રદ કરો",
     "description": "Cancel button on the report-a-problem page"

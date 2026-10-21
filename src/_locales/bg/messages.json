@@ -699,6 +699,10 @@
     "message": "Имейл адрес (по избор, ако искате да получавате новини):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Моля, въведете валиден имейл адрес.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Отказ",
     "description": "Cancel button on the report-a-problem page"

@@ -699,6 +699,10 @@
     "message": "Anwani ya barua pepe (si lazima, ikiwa unataka taarifa):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Tafadhali weka anwani sahihi ya barua pepe.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Ghairi",
     "description": "Cancel button on the report-a-problem page"

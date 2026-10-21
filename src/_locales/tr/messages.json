@@ -699,6 +699,10 @@
     "message": "E-posta adresi (isteğe bağlı, güncelleme istiyorsan):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Lütfen geçerli bir e-posta adresi girin.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "İptal",
     "description": "Cancel button on the report-a-problem page"

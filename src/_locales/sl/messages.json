@@ -699,6 +699,10 @@
     "message": "E-poštni naslov (neobvezno, če želite prejemati novice):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Vnesite veljaven e-poštni naslov.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Prekliči",
     "description": "Cancel button on the report-a-problem page"

@@ -699,6 +699,10 @@
     "message": "Alamat e-mel (pilihan, jika anda mahu kemas kini):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Sila masukkan alamat e-mel yang sah.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Batal",
     "description": "Cancel button on the report-a-problem page"

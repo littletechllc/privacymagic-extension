@@ -699,6 +699,10 @@
     "message": "የኢሜይል አድራሻ (አማራጭ፣ ዝማኔዎችን ከፈለግህ):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "እባክዎ ትክክለኛ የኢሜይል አድራሻ ያስገቡ።",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "ሰርዝ",
     "description": "Cancel button on the report-a-problem page"

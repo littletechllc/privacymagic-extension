@@ -699,6 +699,10 @@
     "message": "ಇಮೇಲ್ ವಿಳಾಸ (ಐಚ್ಛಿಕ, ನವೀಕರಣಗಳು ಬೇಕಿದ್ದರೆ):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "ದಯವಿಟ್ಟು ಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "ರದ್ದುಮಾಡಿ",
     "description": "Cancel button on the report-a-problem page"

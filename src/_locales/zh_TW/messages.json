@@ -699,6 +699,10 @@
     "message": "電子郵件地址（選填，若希望收到處理進度）：",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "請輸入有效的電子郵件地址。",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "取消",
     "description": "Cancel button on the report-a-problem page"

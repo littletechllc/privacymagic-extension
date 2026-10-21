@@ -699,6 +699,10 @@
     "message": "Email address (opsyonal, kung gusto mo ng mga update):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Maglagay ng wastong email address.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Kanselahin",
     "description": "Cancel button on the report-a-problem page"

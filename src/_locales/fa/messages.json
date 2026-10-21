@@ -699,6 +699,10 @@
     "message": "نشانی ایمیل (اختیاری، اگر می‌خواهید به‌روزرسانی دریافت کنید):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "لطفاً یک نشانی ایمیل معتبر وارد کنید.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "لغو",
     "description": "Cancel button on the report-a-problem page"

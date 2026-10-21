@@ -699,6 +699,10 @@
     "message": "E-pasta adrese (neobligāti, ja vēlaties saņemt jaunumus):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Lūdzu, ievadiet derīgu e-pasta adresi.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Atcelt",
     "description": "Cancel button on the report-a-problem page"

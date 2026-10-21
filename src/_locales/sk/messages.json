@@ -699,6 +699,10 @@
     "message": "E-mailová adresa (voliteľné, ak chcete dostávať novinky):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "Zadajte platnú e-mailovú adresu.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "Zrušiť",
     "description": "Cancel button on the report-a-problem page"

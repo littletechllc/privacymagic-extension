@@ -699,6 +699,10 @@
     "message": "عنوان البريد الإلكتروني (اختياري، إذا أردت تلقّي التحديثات):",
     "description": "Label for the optional email field on the report-a-problem page"
   },
+  "reportProblemEmailInvalid": {
+    "message": "يرجى إدخال عنوان بريد إلكتروني صالح.",
+    "description": "Error shown under the optional email field when the address is not valid"
+  },
   "reportProblemCancel": {
     "message": "إلغاء",
     "description": "Cancel button on the report-a-problem page"
