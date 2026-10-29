@@ -122,8 +122,14 @@ const initializePersistentResources = async (): Promise<void> => {
   await updateRulesForAllSettings(settings)
 }
 
+const UNINSTALL_URL = 'https://reports.privacymagic.com/uninstall'
+
 const showSetupPage = async (): Promise<void> => {
   await chrome.tabs.create({ url: chrome.runtime.getURL('privacymagic/setup.html') })
+}
+
+const setUninstallPage = async (): Promise<void> => {
+  await chrome.runtime.setUninstallURL(UNINSTALL_URL)
 }
 
 const runInstallStep = async (name: string, step: () => Promise<void>): Promise<void> => {
@@ -140,6 +146,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       await runInstallStep('setup page', showSetupPage)
       await runInstallStep('privacy prefs', resetAllPrefsToDefaults)
     }
+    await runInstallStep('uninstall URL', setUninstallPage)
     await runInstallStep('persistent resources', initializePersistentResources)
   }, (error) => {
     // TODO: Show user a notification that the extension failed to install.
@@ -149,6 +156,9 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 chrome.runtime.onStartup.addListener(() => {
   console.log('onStartup')
+  handleAsync(setUninstallPage, (error) => {
+    logError(error, 'error setting uninstall URL on startup')
+  })
 })
 
 initializeListeners()
