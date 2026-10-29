@@ -67,6 +67,34 @@ describe('display patch', () => {
       expect(calls).toEqual(['not all'])
       expect(list.matches).toBe(false)
     })
+
+    it.each([
+      ['(prefers-contrast: no-preference)', 'all', true],
+      ['(prefers-contrast: more)', 'not all', false],
+      ['(prefers-contrast: less)', 'not all', false],
+      ['(prefers-contrast: custom)', 'not all', false],
+      ['(prefers-contrast)', 'not all', false],
+      ['( prefers-contrast : MORE )', 'not all', false],
+      ['(prefers-reduced-transparency: no-preference)', 'all', true],
+      ['(prefers-reduced-transparency: reduce)', 'not all', false],
+      ['(prefers-reduced-transparency)', 'not all', false]
+    ])('should spoof %s as %s', (query, rewritten, matches) => {
+      const list = self.matchMedia(query) as MQList
+      expect(calls).toEqual([rewritten])
+      expect(list.matches).toBe(matches)
+    })
+
+    it('should spoof every display feature in one query', () => {
+      self.matchMedia(
+        '(prefers-reduced-motion: no-preference) and (prefers-contrast: more) and (prefers-reduced-transparency: reduce)'
+      )
+      expect(calls).toEqual(['all and not all and not all'])
+    })
+
+    it('should leave unrelated media queries unchanged', () => {
+      self.matchMedia('(prefers-color-scheme: dark) and (min-width: 600px)')
+      expect(calls).toEqual(['(prefers-color-scheme: dark) and (min-width: 600px)'])
+    })
   })
 })
 

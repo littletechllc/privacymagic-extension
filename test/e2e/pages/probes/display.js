@@ -1,15 +1,25 @@
 /** @type {{ pageOnly?: boolean }} */ (globalThis).pageOnly = true
 
+function readQuery (query) {
+  const list = matchMedia(query)
+  return { matches: list.matches, media: list.media }
+}
+
 function runProbe () {
   if (typeof matchMedia !== 'function') {
     throw new Error('matchMedia is unavailable')
   }
-  const noPreference = matchMedia('(prefers-reduced-motion: no-preference)')
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)')
-  const bare = matchMedia('(prefers-reduced-motion)')
   return {
-    noPreference: { matches: noPreference.matches, media: noPreference.media },
-    reduce: { matches: reduce.matches, media: reduce.media },
-    bare: { matches: bare.matches, media: bare.media }
+    noPreference: readQuery('(prefers-reduced-motion: no-preference)'),
+    reduce: readQuery('(prefers-reduced-motion: reduce)'),
+    bare: readQuery('(prefers-reduced-motion)'),
+    contrastNoPreference: readQuery('(prefers-contrast: no-preference)'),
+    contrastMore: readQuery('(prefers-contrast: more)'),
+    contrastLess: readQuery('(prefers-contrast: less)'),
+    contrastCustom: readQuery('(prefers-contrast: custom)'),
+    contrastBare: readQuery('(prefers-contrast)'),
+    transparencyNoPreference: readQuery('(prefers-reduced-transparency: no-preference)'),
+    transparencyReduce: readQuery('(prefers-reduced-transparency: reduce)'),
+    transparencyBare: readQuery('(prefers-reduced-transparency)')
   }
 }

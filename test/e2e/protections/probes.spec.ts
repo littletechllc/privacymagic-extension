@@ -78,7 +78,15 @@ const expectedSpoofedValues = {
     page: {
       noPreference: { matches: true, media: 'all' },
       reduce: { matches: false, media: 'not all' },
-      bare: { matches: false, media: 'not all' }
+      bare: { matches: false, media: 'not all' },
+      contrastNoPreference: { matches: true, media: 'all' },
+      contrastMore: { matches: false, media: 'not all' },
+      contrastLess: { matches: false, media: 'not all' },
+      contrastCustom: { matches: false, media: 'not all' },
+      contrastBare: { matches: false, media: 'not all' },
+      transparencyNoPreference: { matches: true, media: 'all' },
+      transparencyReduce: { matches: false, media: 'not all' },
+      transparencyBare: { matches: false, media: 'not all' }
     }
   },
   // Linux allows every font, so the patch adds no faces there.

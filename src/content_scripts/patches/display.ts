@@ -6,6 +6,8 @@ const display = (globalObject: GlobalScope): void => {
     return
   }
   spoofMediaQuery(globalObject, 'prefers-reduced-motion', 'no-preference')
+  spoofMediaQuery(globalObject, 'prefers-contrast', 'no-preference')
+  spoofMediaQuery(globalObject, 'prefers-reduced-transparency', 'no-preference')
 }
 
 export default display
