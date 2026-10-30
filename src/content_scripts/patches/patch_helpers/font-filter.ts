@@ -246,7 +246,8 @@ const ALLOWED_FONTS_WINDOWS: Set<string> = makeLowerCaseSet([
 
 /** List of fonts that are allowed on macOS.
  * Based on the list of fonts installed by default on macOS 26.0.1,
- * measured on 2026-02-18.
+ * measured on 2026-02-18, then checked against Apple's
+ * "Fonts included with macOS Tahoe" list (support.apple.com/en-us/122869).
  */
 const ALLOWED_FONTS_MACOS: Set<string> = makeLowerCaseSet([
   'Academy Engraved LET Plain:1.0',
@@ -554,7 +555,6 @@ const ALLOWED_FONTS_MACOS: Set<string> = makeLowerCaseSet([
   'Menlo Regular',
   'Microsoft Sans Serif',
   'Monaco',
-  'Monoton',
   'Gurmukhi MT',
   'Mshtakan',
   'Mshtakan Bold',
