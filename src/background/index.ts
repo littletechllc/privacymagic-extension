@@ -129,7 +129,8 @@ const showSetupPage = async (): Promise<void> => {
 }
 
 const setUninstallPage = async (): Promise<void> => {
-  await chrome.runtime.setUninstallURL(UNINSTALL_URL)
+  const hl = encodeURIComponent(chrome.i18n.getUILanguage())
+  await chrome.runtime.setUninstallURL(`${UNINSTALL_URL}?hl=${hl}`)
 }
 
 const runInstallStep = async (name: string, step: () => Promise<void>): Promise<void> => {
