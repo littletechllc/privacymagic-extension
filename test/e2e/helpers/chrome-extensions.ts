@@ -1,4 +1,4 @@
-import type { BrowserContext, Page } from '@playwright/test'
+import type { BrowserContext, Page, Worker } from '@playwright/test'
 import { isEdgeE2EBrowser, type E2EBrowser } from '../channels'
 
 type DeveloperPrivatePin = {
@@ -91,4 +91,48 @@ export const pinExtensionToToolbar = async (
   } finally {
     await page.close()
   }
+}
+
+/** Closes the first-run setup tab so it does not steal active-tab focus. */
+export const closeSetupPages = async (context: BrowserContext): Promise<void> => {
+  for (const page of context.pages()) {
+    if (page.url().includes('privacymagic/setup.html')) {
+      await page.close()
+    }
+  }
+}
+
+/**
+ * Opens the action popup as an extension page for a specific tab.
+ * Prefer this over chrome.action.openPopup() in Playwright: openPopup is
+ * unreliable without a focused browser UI, and navigating to popup.html
+ * would otherwise make the popup itself the active tab.
+ */
+export const openExtensionPopupForTab = async (
+  context: BrowserContext,
+  extensionId: string,
+  tabId: number
+): Promise<Page> => {
+  const popup = await context.newPage()
+  await popup.goto(
+    `chrome-extension://${extensionId}/default_popup/popup.html?tabId=${tabId}`
+  )
+  await popup.waitForLoadState('domcontentloaded')
+  return popup
+}
+
+/** Resolves the Chrome tab id for a page URL (exact match). */
+export const tabIdForUrl = async (
+  serviceWorker: Worker,
+  url: string
+): Promise<number> => {
+  const tabId = await serviceWorker.evaluate(async (pageUrl: string) => {
+    const tabs = await chrome.tabs.query({ url: pageUrl })
+    const id = tabs[0]?.id
+    if (id == null) {
+      throw new Error(`No tab found for url ${pageUrl}`)
+    }
+    return id
+  }, url)
+  return tabId
 }

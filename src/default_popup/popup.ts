@@ -102,12 +102,25 @@ const setupMasterSwitch = async (domain: string): Promise<void> => {
   toggleContainer?.appendChild(masterSwitchToggle)
 }
 
-document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
+const tabFromPopupContext = async (): Promise<chrome.tabs.Tab> => {
+  const rawTabId = new URLSearchParams(window.location.search).get('tabId')
+  if (rawTabId != null) {
+    const tabId = parseInt(rawTabId, 10)
+    if (Number.isNaN(tabId)) {
+      throw new Error('tabId is not a number')
+    }
+    return await chrome.tabs.get(tabId)
+  }
   const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
   const tab = tabs[0]
   if (tab == null) {
     throw new Error('No active tab found')
   }
+  return tab
+}
+
+document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(async () => {
+  const tab = await tabFromPopupContext()
   const tabId = tab.id
   if (tabId == null) {
     throw new Error('No active tab found')

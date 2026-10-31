@@ -62,6 +62,8 @@ export const test = base.extend<ExtensionFixtures, ExtensionOptions>({
         '--no-first-run',
         '--no-default-browser-check',
         '--disable-default-apps',
+        // Fake hosts for offline eTLD+1 / IDN popup tests (served by 127.0.0.1).
+        '--host-resolver-rules=MAP www.example.co.uk 127.0.0.1, MAP example.co.uk 127.0.0.1, MAP www.xn--bcher-kva.de 127.0.0.1, MAP xn--bcher-kva.de 127.0.0.1, EXCLUDE localhost',
         `--disable-extensions-except=${extensionDistPath}`,
         `--load-extension=${extensionDistPath}`
       ]
