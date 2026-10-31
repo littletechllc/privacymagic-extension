@@ -84,4 +84,25 @@ if (global.chrome?.declarativeNetRequest?.ResourceType === undefined) {
       session: mockStorageSession
     } as unknown as typeof chrome.storage
   }
+
+  // Node stand-in for chrome.publicSuffix. Covers the multi-label suffixes
+  // remote.json actually uses (co.uk, github.io); other names use the last label.
+  if (global.chrome.publicSuffix === undefined) {
+    const multiLabelSuffixes = ['co.uk', 'github.io']
+    global.chrome.publicSuffix = {
+      getDomain: (hostname: string): string | null => {
+        const labels = hostname.split('.').filter((label) => label.length > 0)
+        if (labels.length < 2) {
+          return null
+        }
+        const suffixLength = multiLabelSuffixes.some((suffix) => hostname === suffix || hostname.endsWith(`.${suffix}`)) ? 2 : 1
+        if (labels.length <= suffixLength) {
+          return null
+        }
+        return labels.slice(-(suffixLength + 1)).join('.')
+      },
+      getKnownSuffix: (): string | null => null,
+      isKnownSuffix: (): boolean => false
+    } as unknown as typeof chrome.publicSuffix
+  }
 }

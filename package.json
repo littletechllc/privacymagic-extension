@@ -40,12 +40,11 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "dependencies": {
-    "psl": "1.15.0",
     "punycode": "2.3.1"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
-    "@types/chrome": "0.1.34",
+    "@types/chrome": "0.3.7",
     "@types/jest": "30.0.0",
     "@types/punycode": "2.1.4",
     "chokidar": "5.0.0",

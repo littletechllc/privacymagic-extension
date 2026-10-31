@@ -1,5 +1,9 @@
 /** @type {{ pageOnly?: boolean }} */ (globalThis).pageOnly = true
 
+/**
+ * @param {string} query
+ * @returns {{ matches: boolean, media: string }}
+ */
 function readQuery (query) {
   const list = matchMedia(query)
   return { matches: list.matches, media: list.media }

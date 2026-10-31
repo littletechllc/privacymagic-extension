@@ -1,7 +1,6 @@
 import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import { handleAsync, logError } from '@src/common/util'
 import { updateRemoteConfig } from './settings-write'
-import { get as getRegistrableDomain } from 'psl'
 
 const REMOTE_CONFIG_URL = "https://raw.githubusercontent.com/littletechllc/privacymagic-extension/refs/heads/main/remote/remote.json"
 const ALARM_NAME = "remote-config-refresh"
@@ -40,7 +39,7 @@ export const isValidRemoteConfig = (receivedRemoteConfig: RemoteConfig): boolean
       return false
     }
     for (const domain of domains) {
-      if (typeof domain !== 'string' || getRegistrableDomain(domain) !== domain) {
+      if (typeof domain !== 'string' || chrome.publicSuffix.getDomain(domain) !== domain) {
         return false
       }
     }

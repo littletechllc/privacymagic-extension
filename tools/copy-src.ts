@@ -113,7 +113,8 @@ const specialFiles: Record<string, (json: Record<string, unknown>) => Record<str
       cloned['browser_specific_settings'] = {
         gecko: {
           id: 'privacy-magic@privacymagic.com',
-          strict_min_version: '128.0'
+          // publicSuffix shipped in Firefox 153.
+          strict_min_version: '153.0'
         }
       }
       // Chromium-only / ignored-with-warning on Firefox.
