@@ -1,5 +1,5 @@
-import punycode from 'punycode'
 import { browserInfo } from '@src/common/browser'
+import { registrableDomainDisplay } from '@src/common/registrable-domain'
 
 const faviconURL = (pageUrl: string): string => {
   const url = new URL(chrome.runtime.getURL('/_favicon/'))
@@ -13,7 +13,7 @@ export const updateSiteInfo = (domain: string, pageUrl: string): void => {
   if (domainElement === null) {
     throw new Error('domain element not found')
   }
-  domainElement.textContent = punycode.toUnicode(domain)
+  domainElement.textContent = registrableDomainDisplay(domain) ?? domain
   const favicon = document.getElementById('favicon') as HTMLImageElement | null
   if (favicon == null) {
     return

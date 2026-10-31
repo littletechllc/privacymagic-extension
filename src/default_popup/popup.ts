@@ -1,5 +1,5 @@
+import { registrableDomainAsciiFromUrl } from '@src/common/registrable-domain'
 import { handleAsync, logError } from '@src/common/util'
-import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
 import { SIDE_PANEL_VISIBILITY_MESSAGE } from '@src/common/sidepanel-visibility-message'
 import { updateSiteInfo } from '@src/common/site-info'
 import { createMasterSwitch } from '@src/common/settings-ui'
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', (event: Event) => handleAsync(asyn
   if (tabId == null) {
     throw new Error('No active tab found')
   }
-  const domain = await getRegistrableDomainRemote(tab.url ?? '')
+  const domain = registrableDomainAsciiFromUrl(tab.url ?? '')
   setupContinueSetupLink()
   document.getElementById('popupLinks')!.hidden = false
   if (domain == null) {

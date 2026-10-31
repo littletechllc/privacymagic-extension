@@ -1,5 +1,5 @@
 import { logError, handleAsync } from '@src/common/util'
-import { registrableDomainFromUrl } from './registrable-domain'
+import { registrableDomainAsciiFromUrl } from '@src/common/registrable-domain'
 import { getSettingDisabled } from '@src/common/settings-read'
 import { COSMETIC_FILTERS_DIR } from '@src/common/filter-list-paths'
 import {
@@ -16,7 +16,7 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
       url = tab.url
     }
   }
-  const topLevelDomain = registrableDomainFromUrl(url)
+  const topLevelDomain = registrableDomainAsciiFromUrl(url)
   if (topLevelDomain === null) {
     return
   }
@@ -36,7 +36,7 @@ const cosmeticFiltersListener = (details: chrome.webNavigation.WebNavigationTran
     },
     files: [defaultPath]
   })
-  const frameDomain = registrableDomainFromUrl(details.url)
+  const frameDomain = registrableDomainAsciiFromUrl(details.url)
   if (frameDomain === null) {
     return
   }

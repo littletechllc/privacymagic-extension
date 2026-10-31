@@ -3,7 +3,6 @@ import { copySettingsFromLocalToSessionStorage, setUserDisabledSetting } from '.
 import { resetAllPrefsToDefaults } from '@src/common/prefs'
 import { logError, handleAsync } from '@src/common/util'
 import { type Message, type ResponseSendFunction, isBackgroundMessage } from '@src/common/messages-to-background'
-import { registrableDomainFromUrl } from './registrable-domain'
 import { disableSyncSettingsDone, operaVpnHelpDone } from './disable-sync-settings-done'
 import { updateRulesForAllSettings } from './dnr/rule-manager'
 import { showBlockedRequests } from './monitor-blocking'
@@ -53,14 +52,6 @@ const handleMessage = async (
     } else if (message.type === 'operaVpnHelpDone') {
       await operaVpnHelpDone(message.tabId)
       sendResponse({ success: true })
-    } else if (message.type === 'getRegistrableDomain') {
-      let domain: string | null = null
-      try {
-        domain = registrableDomainFromUrl(message.url)
-      } catch {
-        domain = null
-      }
-      sendResponse({ success: true, domain })
     } else {
       // Exhaustive check: all message types should be handled above
       // If this code runs, a new message type was added but not handled

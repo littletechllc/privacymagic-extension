@@ -1,6 +1,6 @@
+import { registrableDomainAsciiFromUrl } from '@src/common/registrable-domain'
 import { setupSettingsUI } from '@src/common/settings-ui'
 import { handleAsync, logError } from '@src/common/util'
-import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
 import { updateSiteInfo } from '@src/common/site-info'
 import { prepareToCloseSidePanel } from '@src/privacymagic/sidepanel-helpers'
 
@@ -37,7 +37,7 @@ const setupSidePanel = async (): Promise<void> => {
     throw new Error('No active tab found')
   }
   const pageUrl = tab.url ?? ''
-  const domain = await getRegistrableDomainRemote(pageUrl)
+  const domain = registrableDomainAsciiFromUrl(pageUrl)
   if (domain == null) {
     makeSiteSettingsVisible(false)
     return
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (tabId == null) {
       throw new Error('No active tab found')
     }
-    const domain = await getRegistrableDomainRemote(tab.url ?? '')
+    const domain = registrableDomainAsciiFromUrl(tab.url ?? '')
     prepareToCloseSidePanel(tabId, domain)
     await setupSidePanel()
   }, (error: unknown) => {

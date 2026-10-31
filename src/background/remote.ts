@@ -1,5 +1,6 @@
 import { ALL_SETTING_IDS, SettingId } from '@src/common/setting-ids'
 import { handleAsync, logError } from '@src/common/util'
+import { registrableDomainAscii } from '@src/common/registrable-domain'
 import { updateRemoteConfig } from './settings-write'
 
 const REMOTE_CONFIG_URL = "https://raw.githubusercontent.com/littletechllc/privacymagic-extension/refs/heads/main/remote/remote.json"
@@ -39,7 +40,7 @@ export const isValidRemoteConfig = (receivedRemoteConfig: RemoteConfig): boolean
       return false
     }
     for (const domain of domains) {
-      if (typeof domain !== 'string' || chrome.publicSuffix.getDomain(domain) !== domain) {
+      if (typeof domain !== 'string' || registrableDomainAscii(domain) !== domain) {
         return false
       }
     }

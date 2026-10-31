@@ -1,7 +1,6 @@
 import { browserInfo } from '@src/common/browser'
-import { getRegistrableDomainRemote } from '@src/common/messages-to-background'
+import { registrableDomainAsciiFromUrl } from '@src/common/registrable-domain'
 import { SIDE_PANEL_VISIBILITY_MESSAGE } from '@src/common/sidepanel-visibility-message'
-import { handleAsync, logError } from '@src/common/util'
 
 export const tabIdFromQuery = (): number => {
   const raw = new URLSearchParams(window.location.search).get('tabId')
@@ -42,14 +41,10 @@ const watchForNavigations = (tabId: number, originalDomain: string | null): void
     if (details.frameId !== 0 && details.frameId !== undefined) {
       return
     }
-    handleAsync(async () => {
-      const latestDomain = await getRegistrableDomainRemote(details.url)
-      if (latestDomain !== originalDomain) {
-        void chrome.sidePanel.setOptions({ enabled: false, tabId })
-      }
-    }, (error) => {
-      logError(error, 'getRegistrableDomainRemote in watchForNavigations', details)
-    })
+    const latestDomain = registrableDomainAsciiFromUrl(details.url)
+    if (latestDomain !== originalDomain) {
+      void chrome.sidePanel.setOptions({ enabled: false, tabId })
+    }
   })
 }
 

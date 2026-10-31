@@ -6,15 +6,13 @@ export type Message =
   | { type: 'reloadTab', tabId: number }
   | { type: 'disableSyncSettingsDone', tabId: number }
   | { type: 'operaVpnHelpDone', tabId: number }
-  | { type: 'getRegistrableDomain', url: string }
 
 /** Keeps in sync with `Message` — add a key when adding a background message type. */
 const BACKGROUND_MESSAGE_TYPES = {
   updateSetting: true,
   reloadTab: true,
   disableSyncSettingsDone: true,
-  operaVpnHelpDone: true,
-  getRegistrableDomain: true
+  operaVpnHelpDone: true
 } as const satisfies Record<Message['type'], true>
 
 export const isBackgroundMessage = (message: unknown): message is Message => {
@@ -24,14 +22,9 @@ export const isBackgroundMessage = (message: unknown): message is Message => {
 
 // Response types for each message type
 export type SuccessResponse = { success: true }
-export type RegistrableDomainSuccessResponse = { success: true, domain: string | null }
 export type ErrorResponse = { success: false, error: string }
 
-// Helper type for the sendResponse function
-export type MessageResponse =
-  | SuccessResponse
-  | RegistrableDomainSuccessResponse
-  | ErrorResponse
+export type MessageResponse = SuccessResponse | ErrorResponse
 
 // Helper type for the sendResponse function
 export type ResponseSendFunction = (response: MessageResponse) => void
@@ -72,17 +65,4 @@ export const operaVpnHelpDoneRemote = async (tabId: number): Promise<void> => {
   if (!response.success) {
     throw new Error(response.error)
   }
-}
-
-export const getRegistrableDomainRemote = async (url: string): Promise<string | null> => {
-  // about:blank, chrome://, etc. never have a registrable domain
-  if (!url.startsWith('https://') && !url.startsWith('http://')) {
-    return null
-  }
-  const message: Message = { type: 'getRegistrableDomain', url }
-  const response = (await chrome.runtime.sendMessage(message)) as unknown as RegistrableDomainSuccessResponse | ErrorResponse
-  if (!response.success) {
-    throw new Error(response.error)
-  }
-  return response.domain
 }

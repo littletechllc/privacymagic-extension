@@ -45,16 +45,6 @@
 ## Additional planned fingerprinting protections:
   * AudioWorklet
 
-## Third-party libraries
-
-Third-party libraries imported using the npm package manager
-
-### punycode
-* Copyright Mathias Bynens <https://mathiasbynens.be/>
-* License: MIT
-* Source: https://www.npmjs.com/package/punycode
-* Converts punycode domains to unicode.
-
 ## Third-party lists
 
 Filter subscriptions downloaded at build time (`tools/filter-list-processor.ts`) and converted into network, cosmetic, procedural, and scriptlet rules shipped in the extension.
