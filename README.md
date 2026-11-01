@@ -4,6 +4,8 @@
 
 ## Protections
 
+([More details](https://privacymagic.com/protections/))
+
 * Blocks ads
 * Blocks tracking scripts
 * Blocks annoyances
