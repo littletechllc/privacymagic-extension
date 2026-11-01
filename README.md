@@ -1,6 +1,6 @@
 # Privacy Magic browser extension
 
-[Install in Chrome](https://chromewebstore.google.com/detail/privacy-magic/cobojehlalmfnplnblndhofhgeglljkc) | [Product website](https://privacymagic.com)
+[Install in Chrome](https://chromewebstore.google.com/detail/privacy-magic/cobojehlalmfnplnblndhofhgeglljkc) | [Install in Edge](https://microsoftedge.microsoft.com/addons/detail/privacy-magic-block-fin/djhgnieikdmcobgpmmppjpddcghdogdn) | [Product website](https://privacymagic.com)
 
 ## Protections
 
