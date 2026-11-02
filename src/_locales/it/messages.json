@@ -249,6 +249,14 @@
     "message": "Benvenuto in Privacy Magic!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Le protezioni sono attive.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Scopri di più",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Configurazione",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

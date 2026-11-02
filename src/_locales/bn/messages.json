@@ -249,6 +249,14 @@
     "message": "Privacy Magic-এ স্বাগতম!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "সুরক্ষা সক্রিয় আছে।",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "আরও জানুন",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ সেটআপ",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

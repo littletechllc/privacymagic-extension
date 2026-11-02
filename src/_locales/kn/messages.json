@@ -249,6 +249,14 @@
     "message": "Privacy Magic ಗೆ ಸ್ವಾಗತ!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "ರಕ್ಷಣೆಗಳು ಸಕ್ರಿಯವಾಗಿವೆ.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ ಸೆಟಪ್",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

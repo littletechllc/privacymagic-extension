@@ -74,6 +74,32 @@
     color: var(--blue);
   }
 
+  .setup-protections-active {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Lora', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0.75rem 0 0;
+  }
+
+  .setup-protections-check {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 0.9em;
+    height: 0.72em;
+  }
+
+  .setup-protections-active a {
+    color: var(--blue);
+    font-size: 0.9em;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   .setup-sub {
     font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     position: relative;
@@ -387,6 +413,14 @@
   </a>
 
   <h1 class="setup-msg" data-i18n="setupHeading" dir="auto" style="position:relative; z-index:2; background:transparent;">Welcome to Privacy Magic!</h1>
+  <p class="setup-protections-active" style="position:relative; z-index:2;">
+    <img class="setup-protections-check" src="../assets/images/check.svg" alt="" aria-hidden="true" />
+    <span data-i18n="setupProtectionsActive">Protections are active.</span>
+    <a href="https://privacymagic.com/protections"
+       target="_blank"
+       rel="noopener noreferrer"
+       data-i18n="setupProtectionsLearnMore">Learn more</a>
+  </p>
   <p class="setup-sub" data-i18n="setupSubheading" dir="auto" style="position:relative; z-index:2;">To finish setting up, please follow these quick steps.</p>
 </header>
 <script src="./setup.js" type="module"></script>

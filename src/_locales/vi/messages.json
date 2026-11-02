@@ -249,6 +249,14 @@
     "message": "Chào mừng đến với Privacy Magic!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Các biện pháp bảo vệ đang hoạt động.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Tìm hiểu thêm",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "Thiết lập của $brand$",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

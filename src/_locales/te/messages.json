@@ -249,6 +249,14 @@
     "message": "Privacy Magic కు స్వాగతం!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "రక్షణలు చురుకుగా ఉన్నాయి.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "మరింత తెలుసుకోండి",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ సెటప్",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

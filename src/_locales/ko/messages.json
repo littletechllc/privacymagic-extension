@@ -249,6 +249,14 @@
     "message": "Privacy Magic에 오신 것을 환영합니다!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "보호 기능이 활성화되어 있습니다.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "자세히 알아보기",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ 설정",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

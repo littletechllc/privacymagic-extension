@@ -249,6 +249,14 @@
     "message": "Välkommen till Privacy Magic!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Skydden är aktiva.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Läs mer",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Konfiguration",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

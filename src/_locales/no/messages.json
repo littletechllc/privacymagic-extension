@@ -249,6 +249,14 @@
     "message": "Velkommen til Privacy Magic!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Beskyttelsene er aktive.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Les mer",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Oppsett",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

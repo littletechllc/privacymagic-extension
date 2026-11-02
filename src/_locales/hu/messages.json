@@ -249,6 +249,14 @@
     "message": "Üdvözlünk a Privacy Magicben!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "A védelmek aktívak.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Tudjon meg többet",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Beállítás",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

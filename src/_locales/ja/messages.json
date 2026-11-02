@@ -249,6 +249,14 @@
     "message": "Privacy Magic へようこそ！",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "保護機能は有効です。",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "詳細",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ セットアップ",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

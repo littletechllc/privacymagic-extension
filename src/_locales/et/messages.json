@@ -249,6 +249,14 @@
     "message": "Tere tulemast Privacy Magicusse!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Kaitse on aktiivne.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Lisateave",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Seadistus",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

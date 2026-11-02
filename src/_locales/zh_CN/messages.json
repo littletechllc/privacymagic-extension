@@ -249,6 +249,14 @@
     "message": "欢迎使用 Privacy Magic！",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "保护功能已启用。",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "了解更多",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ 设置",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",

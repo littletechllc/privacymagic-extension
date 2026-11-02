@@ -249,6 +249,14 @@
     "message": "Ласкаво просимо до Privacy Magic!",
     "description": "Main heading on the setup page"
   },
+  "setupProtectionsActive": {
+    "message": "Захист активний.",
+    "description": "Status line on the setup page indicating protections are enabled"
+  },
+  "setupProtectionsLearnMore": {
+    "message": "Дізнатися більше",
+    "description": "Link text to the protections explainer page"
+  },
   "setupPanelHeading": {
     "message": "$brand$ Налаштування",
     "description": "Heading shown at the top of the setup side panel; $brand$ is the English product name.",
