@@ -39,7 +39,7 @@ export const CONTENT_RULE_SLOTS: Record<ContentSettingId, number> = {
   ads: 27,
 }
 
-export type NetworkRuleId = Exclude<NetworkSettingId, 'queryParameters' | 'referrerPolicy'> | 'referrerPolicyStrictOriginWhenCrossOrigin' | 'referrerPolicyStrictOrigin'
+export type NetworkRuleId = Exclude<NetworkSettingId, 'queryParameters' | 'referrerPolicy'> | 'referrerPolicyStrictOriginWhenCrossOrigin' | 'referrerPolicyStrictOrigin' | 'stripCdnReferrer'
 
 export const NETWORK_RULE_SLOTS: Record<NetworkRuleId, number> = {
   gpc: 1,
@@ -54,6 +54,7 @@ export const NETWORK_RULE_SLOTS: Record<NetworkRuleId, number> = {
   referrerPolicyStrictOriginWhenCrossOrigin: 10,
   referrerPolicyStrictOrigin: 11,
   cache: 12,
+  stripCdnReferrer: 13,
 }
 
 export const ALLOW_RULE_SLOTS: Record<BlockerSettingId, number> = {

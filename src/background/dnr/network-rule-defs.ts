@@ -206,6 +206,30 @@ export const NETWORK_PROTECTION_DEFS: Record<NetworkSettingId, NetworkPartialRul
         values: ['origin']
       }]
     }
+  }, {
+    id: networkRuleId('stripCdnReferrer'),
+    action: {
+      type: 'modifyHeaders',
+      requestHeaders: [{
+        operation: 'remove',
+        header: 'referer'
+      }]
+    },
+    condition: {
+      requestDomains: [
+        // fonts
+        'fonts.bunny.net',
+        'fonts.googleapis.com',
+        'fonts.gstatic.com',
+        // scripts
+        'ajax.googleapis.com',
+        'cdnjs.cloudflare.com',
+        'cdn.jsdelivr.net',
+        'code.jquery.com',
+        'esm.sh',
+        'unpkg.com',
+      ],
+    }
   }],
   // Prevent cache leaks from stylesheets, scripts, images, fonts, and media
   // observed in Chromium-based browsers.
