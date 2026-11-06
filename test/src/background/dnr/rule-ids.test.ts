@@ -135,6 +135,12 @@ describe('NETWORK_RULE_IDS and networkRuleId', () => {
     expect(networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin')).not.toBe(
       networkRuleId('referrerPolicyStrictOrigin')
     )
+    expect(networkRuleId('stripCdnReferrer')).not.toBe(
+      networkRuleId('referrerPolicyStrictOrigin')
+    )
+    expect(networkRuleId('stripCdnReferrer')).not.toBe(
+      networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin')
+    )
   })
 
   it('matches network band plus NETWORK_RULE_IDS', () => {

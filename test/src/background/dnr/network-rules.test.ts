@@ -71,8 +71,21 @@ describe('computeNetworkRules', () => {
     const setting: SettingId = 'referrerPolicy'
     const ruleId0 = networkRuleId('referrerPolicyStrictOriginWhenCrossOrigin')
     const ruleId1 = networkRuleId('referrerPolicyStrictOrigin')
+    const ruleId2 = networkRuleId('stripCdnReferrer')
 
-    it('should emit both rules with shared excludedTopDomains', () => {
+    const cdnRequestDomains = [
+      'fonts.bunny.net',
+      'fonts.googleapis.com',
+      'fonts.gstatic.com',
+      'ajax.googleapis.com',
+      'cdnjs.cloudflare.com',
+      'cdn.jsdelivr.net',
+      'code.jquery.com',
+      'esm.sh',
+      'unpkg.com',
+    ]
+
+    it('should emit policy-tightening and CDN Referer-strip rules with shared excludedTopDomains', () => {
       const result = computeNetworkRules(setting, [RULE_DOMAIN_PLACEHOLDER])
 
       expect(result).toEqual([
@@ -115,8 +128,51 @@ describe('computeNetworkRules', () => {
               values: ['origin']
             }]
           }
+        },
+        {
+          id: ruleId2,
+          priority: DNR_RULE_PRIORITIES.NETWORK,
+          action: {
+            type: 'modifyHeaders',
+            requestHeaders: [{
+              operation: 'remove',
+              header: 'referer'
+            }]
+          },
+          condition: {
+            resourceTypes: ALL_RESOURCE_TYPES,
+            excludedTopDomains: [RULE_DOMAIN_PLACEHOLDER],
+            requestDomains: cdnRequestDomains
+          }
         }
       ])
+    })
+
+    it('should strip request Referer only for known public CDN hosts', () => {
+      const result = computeNetworkRules(setting, [domain])
+      const stripRule = result.find(rule => rule.id === ruleId2)
+
+      expect(stripRule).toEqual({
+        id: ruleId2,
+        priority: DNR_RULE_PRIORITIES.NETWORK,
+        action: {
+          type: 'modifyHeaders',
+          requestHeaders: [{
+            operation: 'remove',
+            header: 'referer'
+          }]
+        },
+        condition: {
+          resourceTypes: ALL_RESOURCE_TYPES,
+          excludedTopDomains: [domain],
+          requestDomains: cdnRequestDomains
+        }
+      })
+      expect(stripRule?.action).not.toHaveProperty('responseHeaders')
+      expect(cdnRequestDomains).toContain('fonts.googleapis.com')
+      expect(cdnRequestDomains).toContain('cdn.jsdelivr.net')
+      expect(cdnRequestDomains).not.toContain('googleapis.com')
+      expect(cdnRequestDomains).not.toContain('gstatic.com')
     })
   })
 })
