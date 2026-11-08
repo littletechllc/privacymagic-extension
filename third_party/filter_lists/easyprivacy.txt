@@ -1,9 +1,9 @@
 [Adblock Plus 1.1]
-! Version: 202611061831
+! Version: 202611080230
 ! Title: EasyPrivacy
-! Last modified: 06 Nov 2026 18:31 UTC
+! Last modified: 08 Nov 2026 02:30 UTC
 ! Expires: 4 days (update frequency)
-! Commit: ce9d30bb45efe4bdb9f5b370dc19e8925d3323b1
+! Commit: 5867d6d61b0a14dee336fd3c95199bfadad8b91a
 ! *** easylist:template_header.txt ***
 ! 
 ! Please report any unblocked adverts or problems
@@ -7717,6 +7717,7 @@ omni.soundestlink.com$image
 ||getbendyyoga.com^
 ||getwagtail.com^
 ||ghostgenie.com^
+||ghostscholars.com^
 ||ghostwoodalbum.com^
 ||gianthypes.com^
 ||giantsvessel.com^
@@ -8514,6 +8515,7 @@ omni.soundestlink.com$image
 ||puppiesart.com^
 ||purebloom.net^
 ||purposepipe.com^
+||pursuitwomen.com^
 ||q20jqurls0y7gk8.info^
 ||quadquality.com^
 ||quantumlagoon.com^
