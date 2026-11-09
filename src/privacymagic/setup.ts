@@ -200,8 +200,32 @@ for (const step of STEP_IDS) {
   })
 }
 
+const PROTECTIONS_PAGE_BASE = 'https://privacymagic.com'
+const EXTENSION_PROTECTIONS_LOCALES = new Set([
+  'am', 'ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'es', 'es_419', 'et', 'fa',
+  'fi', 'fil', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko',
+  'lt', 'lv', 'ml', 'mr', 'ms', 'nl', 'no', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru',
+  'sk', 'sl', 'sr', 'sv', 'sw', 'ta', 'te', 'th', 'tr', 'uk', 'vi', 'zh_CN', 'zh_TW',
+])
+
+const protectionsLearnMoreUrl = (): string => {
+  const locale = chrome.i18n.getMessage('@@ui_locale')
+  if (locale && locale !== 'en' && EXTENSION_PROTECTIONS_LOCALES.has(locale)) {
+    return `${PROTECTIONS_PAGE_BASE}/${locale}/protections/`
+  }
+  return `${PROTECTIONS_PAGE_BASE}/protections/`
+}
+
+const applyProtectionsLearnMoreLink = (): void => {
+  const link = document.getElementById('setupProtectionsLearnMore')
+  if (link instanceof HTMLAnchorElement) {
+    link.href = protectionsLearnMoreUrl()
+  }
+}
+
 applyStep1MessageTokens()
 applyCompletedLabels()
+applyProtectionsLearnMoreLink()
 
 const restorePersistedStep = (
   flag: BooleanStorageFlag,
