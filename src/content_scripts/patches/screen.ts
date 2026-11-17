@@ -40,7 +40,7 @@ const screen = (globalObject: GlobalScope): void => {
     screenX: 0,
     screenY: 0
   })
-  const oldMatchMedia = globalObject.matchMedia
+  const oldMatchMedia = globalObject.matchMedia.bind(globalObject)
   const mediaDeviceToViewport = (mediaQueryString: string): string => {
     return mediaQueryString
       ?.replaceAll('device-width', 'width')

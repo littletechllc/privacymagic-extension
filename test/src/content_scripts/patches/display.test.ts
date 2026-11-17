@@ -26,6 +26,8 @@ describe('display patch', () => {
   }
 
   beforeEach(() => {
+    // Preserve the original function reference for restore in afterEach.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     originalMatchMedia = self.matchMedia
     installMatchMediaSpy()
   })

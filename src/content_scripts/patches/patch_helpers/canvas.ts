@@ -132,6 +132,8 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
       for (const command of this.commands) {
         const descriptor = this.offscreen ? originalOffscreenContextDescriptors[command.name] : originalContextDescriptors[command.name]
         const property = command.type === 'call' ? 'value' : 'set'
+        // Called via reflectApplySafe with shadowContext as thisArg.
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         const fn: unknown = descriptor?.[property]
         if (typeof fn !== 'function') {
           continue
@@ -310,6 +312,8 @@ export const enableCanvasFingerprintSpoofing = (globalObject: GlobalScope): void
           return reflectApplySafe(originalValue, this, args)
         }
       } else if (descriptor.set !== undefined) {
+        // Called via reflectApplySafe with the context as thisArg.
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         const originalSet = descriptor.set as (...a: unknown[]) => void
         newDescriptor.set = function (this: Context2D, ...args: Parameters<typeof descriptor.set>) {
           const commandRecorder = getCommandRecorderForContext(this)
