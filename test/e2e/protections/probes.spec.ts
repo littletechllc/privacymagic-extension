@@ -129,11 +129,29 @@ const expectedSpoofedValues = {
     pow: 1.9275814160560204e-50,
     tan: -3.3537128705376014
   }),
-  memory: inEveryRealm({
-    present: true,
-    deviceMemory: 'undefined',
-    jsHeapSizeLimit
-  }),
+  // performance.memory is window-only in Chromium; workers expose deviceMemory but not MemoryInfo.
+  memory: {
+    page: {
+      present: true,
+      deviceMemory: 'undefined',
+      jsHeapSizeLimit
+    },
+    worker: {
+      present: true,
+      deviceMemory: 'undefined',
+      jsHeapSizeLimit: null
+    },
+    workerInWorker: {
+      present: true,
+      deviceMemory: 'undefined',
+      jsHeapSizeLimit: null
+    },
+    sharedWorker: {
+      present: true,
+      deviceMemory: 'undefined',
+      jsHeapSizeLimit: null
+    }
+  },
   network: {
     page: {
       downlink: 100,
