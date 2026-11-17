@@ -223,8 +223,8 @@ const expectedSpoofedValues = {
       mobile: false,
       platform: userAgentPlatform
     },
-    fullVersionsReduced: true,
-    uaFullVersionReduced: true
+    fullVersionListAbsent: true,
+    uaFullVersionAbsent: true
   })
 }
 

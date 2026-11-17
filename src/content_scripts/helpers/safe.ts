@@ -8,6 +8,15 @@ export const weakMapSetSafe = createSafeMethod(WeakMap, 'set')
 export const weakSetHasSafe = createSafeMethod(WeakSet, 'has')
 export const weakSetAddSafe = createSafeMethod(WeakSet, 'add')
 
+export const objectKeysSafe = Object.keys
+
+const arrayIncludes = Array.prototype.includes
+export const arrayIncludesSafe = <T>(
+  array: readonly T[],
+  searchElement: T,
+  fromIndex?: number
+): boolean => arrayIncludes.call(array, searchElement, fromIndex)
+
 export const MapSafe = self.Map
 export const mapGetSafe = createSafeMethod(Map, 'get')
 export const mapSetSafe = createSafeMethod(Map, 'set')
