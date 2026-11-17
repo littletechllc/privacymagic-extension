@@ -22,6 +22,13 @@ declare global {
     readonly lastInputTime: number
   }
 
+  // Chromium-only; constructor is not exposed on window (use performance.memory).
+  interface MemoryInfo {
+    readonly jsHeapSizeLimit: number
+    readonly totalJSHeapSize: number
+    readonly usedJSHeapSize: number
+  }
+
   type HighEntropyValues = {
     brands: Array<{ brand: string, version: string }>
     mobile: boolean
@@ -156,6 +163,10 @@ declare global {
     XMLHttpRequest: typeof XMLHttpRequest
     EventSource: typeof EventSource
     WebSocket: typeof WebSocket
+  }
+
+  interface Performance {
+    readonly memory?: MemoryInfo
   }
 
   interface Navigator {

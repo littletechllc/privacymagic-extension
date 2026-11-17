@@ -33,6 +33,10 @@ const gpuIdentity = process.platform === 'darwin'
   ? { vendor: 'Apple Inc.', renderer: 'Apple GPU' }
   : { vendor: 'Mozilla', renderer: 'Mozilla' }
 
+const jsHeapSizeLimit = process.platform === 'darwin'
+  ? 4395630592
+  : 4294705152
+
 const gpuReading = (canvasNoised: boolean | null): unknown => ({
   webgl1: gpuIdentity,
   webgl2: gpuIdentity,
@@ -127,7 +131,8 @@ const expectedSpoofedValues = {
   }),
   memory: inEveryRealm({
     present: true,
-    deviceMemory: 'undefined'
+    deviceMemory: 'undefined',
+    jsHeapSizeLimit
   }),
   network: {
     page: {
