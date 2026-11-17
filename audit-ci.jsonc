@@ -22,15 +22,6 @@
         "notes": "Dev-only via jest. Latest glob 10 is still vulnerable; 14.x is an incompatible major.",
         "expiry": "2026-12-01"
       }
-    },
-    // Dev-only. deepmerge >=4.2.0 <=4.3.1 (GHSA-gcqx-w48m-w2h4). 4.3.1 is the
-    // newest release and is still vulnerable. Not shipped in the extension.
-    {
-      "GHSA-gcqx-w48m-w2h4": {
-        "active": true,
-        "notes": "Dev-only via jest and web-ext. No patched deepmerge release on npm yet.",
-        "expiry": "2026-12-01"
-      }
     }
   ]
 }
