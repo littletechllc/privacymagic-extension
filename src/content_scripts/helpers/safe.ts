@@ -1,5 +1,4 @@
-
-import { createSafeGetter, createSafeMethod } from "./monkey-patch"
+import { createSafeGetter, createSafeMethod, reflectApplySafe, MethodOf } from "./monkey-patch"
 
 export const weakMapGetSafe = createSafeMethod(WeakMap, 'get')
 export const weakMapHasSafe = createSafeMethod(WeakMap, 'has')
@@ -15,7 +14,12 @@ export const arrayIncludesSafe = <T>(
   array: readonly T[],
   searchElement: T,
   fromIndex?: number
-): boolean => arrayIncludes.call(array, searchElement, fromIndex)
+): boolean =>
+  reflectApplySafe(
+    arrayIncludes as MethodOf<readonly T[]>,
+    array,
+    [searchElement, fromIndex] as Parameters<MethodOf<readonly T[]>>
+  ) as boolean
 
 export const MapSafe = self.Map
 export const mapGetSafe = createSafeMethod(Map, 'get')
