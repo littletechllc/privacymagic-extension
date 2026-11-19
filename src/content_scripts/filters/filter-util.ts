@@ -18,31 +18,3 @@ export const splitAtFirst = (s: string, separator: string): [string, string] => 
   }
   return [s.substring(0, index), s.substring(index + separator.length)]
 }
-
-export function observeSubtreeMutations (
-  onElement: (element: Element) => void,
-  root: Element = document.documentElement
-): MutationObserver {
-  const observer = new MutationObserver((mutations: MutationRecord[]) => {
-    for (const mutation of mutations) {
-      if (mutation.type === 'childList') {
-        for (const node of Array.from(mutation.addedNodes)) {
-          if (node instanceof Element) {
-            onElement(node)
-          }
-        }
-      } else if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        onElement(mutation.target as Element)
-      }
-    }
-  })
-  observer.observe(root, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    // TODO: Consider using a longer list of attributes
-    // that might change on the page.
-    attributeFilter: ['class'],
-  })
-  return observer
-}

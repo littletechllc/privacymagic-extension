@@ -1,6 +1,6 @@
 import { jsonFromBase64 } from "@src/common/base64"
 import { PROCEDURAL_FILTERS_COOKIE_KEY } from "@src/common/setting-ids"
-import { observeSubtreeMutations, queryCssSelectorAll, splitAtFirst } from './filter-util'
+import { queryCssSelectorAll, splitAtFirst } from './filter-util'
 
 /** OUTER:has(INNER:has-text(text)) */
 const nestedHasHasTextMatch =
@@ -96,6 +96,34 @@ const getProceduralFilters = (): string[][] | undefined => {
     }
   }
   return undefined
+}
+
+const observeSubtreeMutations = (
+  onElement: (element: Element) => void,
+  root: Element = document.documentElement
+): MutationObserver => {
+  const observer = new MutationObserver((mutations: MutationRecord[]) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        for (const node of Array.from(mutation.addedNodes)) {
+          if (node instanceof Element) {
+            onElement(node)
+          }
+        }
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        onElement(mutation.target as Element)
+      }
+    }
+  })
+  observer.observe(root, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    // TODO: Consider using a longer list of attributes
+    // that might change on the page.
+    attributeFilter: ['class'],
+  })
+  return observer
 }
 
 const clearCookieProceduralFilters = (): void => {
