@@ -1,7 +1,7 @@
 import { SCRIPTLET_COOKIE_KEY } from '@src/common/setting-ids'
 import { jsonFromBase64 } from '@src/common/base64'
 import { ScriptletCommand } from '@src/common/scriptlet-names'
-import { observeSubtreeMutations, queryCssSelectorAll, splitAtFirst } from './filter-util'
+import { queryCssSelectorAll, splitAtFirst } from './filter-util'
 
 const constantValueFrom = (value: string): unknown => {
   switch (value) {
@@ -34,18 +34,59 @@ const setConstant = (path: string, value: string): void => {
   })
 }
 
+const removeClassFromElement = (element: Element, className: string) => {
+  // Check if the class is present before removing it to avoid unnecessary mutations.
+  if (element.classList.contains(className)) {
+    element.classList.remove(className)
+  }
+}
+
+const removeClassInTree = (root: Element, selector: string, className: string) => {
+  for (const element of queryCssSelectorAll(root, selector)) {
+    removeClassFromElement(element, className)
+  }
+}
+
+const matchesSelector = (element: Element, selector: string): boolean => {
+  try {
+    return element.matches(selector)
+  } catch {
+    return false
+  }
+}
+
 const removeClass = (className: string, selector: string, command?: string): void => {
-  const removeClassInTree = (root: Element) => {
-    for (const element of queryCssSelectorAll(root, selector)) {
-      element.classList.remove(className)
+  // A blank selector means the class token itself: every element that has it.
+  if (selector === '') {
+    selector = `.${CSS.escape(className)}`
+  }
+  if (document.documentElement === null) {
+    return
+  }
+  removeClassInTree(document.documentElement, selector, className)
+  if (!command?.includes('stay')) {
+    return
+  }
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') {
+        for (const node of mutation.addedNodes) {
+          if (node instanceof Element) {
+            removeClassInTree(node, selector, className)
+          }
+        }
+      } else if (mutation.type === 'attributes' &&
+                 mutation.target instanceof Element &&
+                 matchesSelector(mutation.target, selector)) {
+        removeClassFromElement(mutation.target, className)
+      }
     }
-  }
-  removeClassInTree(document.documentElement)
-  if (command?.includes('stay')) {
-    observeSubtreeMutations((node: Element) => {
-      removeClassInTree(node)
-    })
-  }
+  }).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['class'],
+  })
 }
 
 const setLocalStorageItem = (key: string, value: unknown): void => {
