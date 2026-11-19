@@ -40,6 +40,8 @@ export function observeSubtreeMutations (
     childList: true,
     subtree: true,
     attributes: true,
+    // TODO: Consider using a longer list of attributes
+    // that might change on the page.
     attributeFilter: ['class'],
   })
   return observer
